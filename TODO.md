@@ -15,6 +15,7 @@
 - Get rid and eliminate the `output` directory.
 - Move `resources` directory in the root and add various better paths.
 - Move  `plugins`, `sdk` and `wxFbTest` in `src`.
+- Handle own project files adding mimetype.
 
 ## Controls
 
