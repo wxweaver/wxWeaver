@@ -3,7 +3,7 @@ add_subdirectory(subprojects/ticpp)
 add_library(wxfb::ticpp ALIAS ticpp)
 
 # Plugin Interface
-set(wxFB_PLUGIN_INTERFACE_SOURCE_FILES
+set(wxWEAVER_PLUGIN_INTERFACE_SOURCE_FILES
     sdk/plugin_interface/component.h
     sdk/plugin_interface/fontcontainer.h
     sdk/plugin_interface/plugin.h
@@ -13,7 +13,7 @@ set(wxFB_PLUGIN_INTERFACE_SOURCE_FILES
     sdk/plugin_interface/forms/wizard.cpp
     sdk/plugin_interface/forms/wizard.fbp
 )
-add_library(plugin_interface STATIC ${wxFB_PLUGIN_INTERFACE_SOURCE_FILES})
+add_library(plugin_interface STATIC ${wxWEAVER_PLUGIN_INTERFACE_SOURCE_FILES})
 add_library(wxfb::plugin_interface ALIAS plugin_interface)
 if(MSVC)
     # Workaround to unwanted build-type directory added by MSVC
@@ -25,9 +25,9 @@ endif()
 target_link_libraries(plugin_interface wxfb::ticpp ${wxWidgets_LIBRARIES})
 
 # Plugins
-set(wxFBPlugins additional common containers forms layout)
+set(wxWeaverPlugins additional common containers forms layout)
 function(wxfb_add_plugins)
-    foreach(_plugin IN LISTS wxFBPlugins)
+    foreach(_plugin IN LISTS wxWeaverPlugins)
         add_library(${_plugin} MODULE "plugins/${_plugin}/${_plugin}.cpp")
         add_library(wxfb::${_plugin} ALIAS ${_plugin})
         if(WIN32)
@@ -39,8 +39,8 @@ function(wxfb_add_plugins)
             )
         else()
             set_target_properties(${_plugin} PROPERTIES
-#               LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/wxformbuilder"
-                LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/output/lib/wxformbuilder"
+#               LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/wxweaver"
+                LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/output/lib/wxweaver"
             )
         endif()
         target_compile_definitions(${_plugin} PRIVATE BUILD_DLL)

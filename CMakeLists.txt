@@ -1,23 +1,23 @@
 cmake_minimum_required(VERSION 3.15)
-project(wxFormBuilder
+project(wxWeaver
     VERSION 3.9.1
     LANGUAGES CXX C
-    DESCRIPTION "An Open Source GUI Builder for wxWidgets"
-    HOMEPAGE_URL "http://wxformbuilder.org"
+    DESCRIPTION "GUI Designer for wxWidgets"
+    HOMEPAGE_URL "http://wxweaver.github.io.org"
 )
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/scripts/cmake)
 
-option(wxFB_DISABLE_MEDIACTRL "Disable wxMediaCtrl / wxMedia library. [Default: OFF]" OFF)
+option(wxWEAVER_DISABLE_MEDIACTRL "Disable wxMediaCtrl / wxMedia library. [Default: OFF]" OFF)
 
 # TODO: Custom wxWidgets build
-#option(wxFB_DISABLE_SHARED    "Use static wxWidgets build instead of shared libraries. [Default: OFF]" OFF)
-#set(wxFB_WX_ROOT "" CACHE STRING "Install destination for VST bundle [Default: Empty]")
+#option(wxWeaver_DISABLE_SHARED    "Use static wxWidgets build instead of shared libraries. [Default: OFF]" OFF)
+#set(wxWeaver_WX_ROOT "" CACHE STRING "Install destination for VST bundle [Default: Empty]")
 
-include(wxFBConfig)
+include(wxWeaverConfig)
 
 if(${wxWidgets_FOUND})
-    include(wxFBLibs)
-    include(wxFormBuilder)
+    include(wxWeaverLibs)
+    include(wxWeaver)
 
     message(STATUS "
 CMake Generator:             ${CMAKE_GENERATOR}
@@ -25,11 +25,11 @@ CMake Generator:             ${CMAKE_GENERATOR}
 Project name:                ${PROJECT_NAME}
 Project version:             ${PROJECT_VERSION}
 Build type:                  ${CMAKE_BUILD_TYPE}
-Build processor:             ${wxFB_SYSTEM_PROCESSOR}
-Use clang libc++:            ${wxFB_USE_LIBCPP}
+Build processor:             ${wxWEAVER_SYSTEM_PROCESSOR}
+Use clang libc++:            ${wxWEAVER_USE_LIBCPP}
 Install prefix:              ${CMAKE_INSTALL_PREFIX}
 Output directory:            ${CMAKE_BINARY_DIR}
-Disable wxMediaCtrl:         ${wxFB_DISABLE_MEDIACTRL}
+Disable wxMediaCtrl:         ${wxWEAVER_DISABLE_MEDIACTRL}
 
 wxWidgets version:           ${wxWidgets_VERSION_STRING}
 wxWidgets static:            ${wxWidgets_DEFAULT_STATIC}

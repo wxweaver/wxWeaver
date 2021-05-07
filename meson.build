@@ -1,4 +1,4 @@
-project('wxformbuilder', 'cpp', default_options : ['cpp_std=c++17'])
+project('wxweaver', 'cpp', default_options : ['cpp_std=c++17'])
 
 cxx = meson.get_compiler('cpp')
 add_project_arguments(cxx.get_supported_arguments([
@@ -21,7 +21,7 @@ add_project_arguments(cxx.get_supported_arguments([
 ]), language : 'cpp')
 
 if get_option('buildtype') == 'debug'
-	add_project_arguments('-D__WXFB_DEBUG__', language : 'cpp')
+	add_project_arguments('-D__wxWEAVER_DEBUG__', language : 'cpp')
 endif
 if get_option('buildtype') == 'release'
 	add_project_arguments('-DNDEBUG', language : 'cpp')
@@ -43,7 +43,7 @@ plugin_interface = static_library('plugin_interface', [
 		'sdk/plugin_interface/forms/wizard.cpp',
 	], dependencies : [ticpp_dep, wx_dep, media_dep])
 
-executable('wxformbuilder', [
+executable('wxweaver', [
 		'src/codegen/codegen.cpp',
 		'src/codegen/codeparser.cpp',
 		'src/codegen/codewriter.cpp',
@@ -97,9 +97,9 @@ executable('wxformbuilder', [
 foreach plugin : ['common', 'containers', 'forms', 'layout', 'additional']
 	shared_library(plugin, 'plugins/@0@/@0@.cpp'.format(plugin), dependencies : [ticpp_dep, wx_dep],
 		include_directories : inc, link_with : plugin_interface, install : true,
-		install_dir : '@0@/wxformbuilder'.format(get_option('libdir')))
+		install_dir : '@0@/wxweaver'.format(get_option('libdir')))
 endforeach
 
-install_subdir('output/xml', install_dir : 'share/wxformbuilder')
-install_subdir('output/resources', install_dir : 'share/wxformbuilder')
-install_subdir('output/plugins', install_dir : 'share/wxformbuilder')
+install_subdir('output/xml', install_dir : 'share/wxweaver')
+install_subdir('output/resources', install_dir : 'share/wxweaver')
+install_subdir('output/plugins', install_dir : 'share/wxweaver')

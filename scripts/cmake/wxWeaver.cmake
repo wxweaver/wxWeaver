@@ -1,4 +1,4 @@
-set(wxFB_INCLUDE_FILES
+set(wxWEAVER_INCLUDE_FILES
     src/codegen/codegen.h
     src/codegen/codeparser.h
     src/codegen/codewriter.h
@@ -58,7 +58,7 @@ set(wxFB_INCLUDE_FILES
     src/pch.h
     src/rad/geninheritclass/GenInheritedDlg.fbp
 )
-set(wxFB_SOURCE_FILES
+set(wxWEAVER_SOURCE_FILES
     src/codegen/codegen.cpp
     src/codegen/codeparser.cpp
     src/codegen/codewriter.cpp
@@ -115,18 +115,18 @@ set(wxFB_SOURCE_FILES
 if(APPLE)
     add_executable(${CMAKE_PROJECT_NAME}
         MACOSX_BUNDLE
-        ${wxFB_INCLUDE_FILES}
-        ${wxFB_SOURCE_FILES}
-        ${wxFB_RESOURCE_FILES}
+        ${wxWEAVER_INCLUDE_FILES}
+        ${wxWEAVER_SOURCE_FILES}
+        ${wxWEAVER_RESOURCE_FILES}
     )
 elseif(WIN32)
-    list(APPEND wxFB_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/wxFormBuilder.rc")
+    list(APPEND wxWEAVER_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/wxWeaver.rc")
 
     add_executable(${CMAKE_PROJECT_NAME}
         WIN32
-        ${wxFB_INCLUDE_FILES}
-        ${wxFB_SOURCE_FILES}
-        ${wxFB_RESOURCE_FILES}
+        ${wxWEAVER_INCLUDE_FILES}
+        ${wxWEAVER_SOURCE_FILES}
+        ${wxWEAVER_RESOURCE_FILES}
     )
     set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
         SUFFIX ".exe"
@@ -153,12 +153,12 @@ elseif(WIN32)
     endif()
 else()
     add_executable(${CMAKE_PROJECT_NAME}
-        ${wxFB_INCLUDE_FILES}
-        ${wxFB_SOURCE_FILES}
-        ${wxFB_RESOURCE_FILES}
+        ${wxWEAVER_INCLUDE_FILES}
+        ${wxWEAVER_SOURCE_FILES}
+        ${wxWEAVER_RESOURCE_FILES}
     )
     set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
-        OUTPUT_NAME "wxformbuilder"
+        OUTPUT_NAME "wxweaver"
 #       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/output/bin"
     )
@@ -190,27 +190,27 @@ if (UNIX AND NOT APPLE)
     install(TARGETS ${PROJECT_NAME}
         DESTINATION "${CMAKE_INSTALL_BINDIR}"
     )
-    install(TARGETS ${wxFBPlugins}
-        DESTINATION "${CMAKE_INSTALL_LIBDIR}/wxformbuilder"
+    install(TARGETS ${wxWeaverPlugins}
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/wxweaver"
     )
     install(DIRECTORY
-        "${CMAKE_CURRENT_SOURCE_DIR}/install/linux/data/gnome/usr/share/appdata"
-        "${CMAKE_CURRENT_SOURCE_DIR}/install/linux/data/gnome/usr/share/applications"
-        "${CMAKE_CURRENT_SOURCE_DIR}/install/linux/data/gnome/usr/share/icons"
-        "${CMAKE_CURRENT_SOURCE_DIR}/install/linux/data/gnome/usr/share/pixmaps"
+        "${CMAKE_CURRENT_SOURCE_DIR}/scripts/install/linux/data/gnome/usr/share/appdata"
+        "${CMAKE_CURRENT_SOURCE_DIR}/scripts/install/linux/data/gnome/usr/share/applications"
+        "${CMAKE_CURRENT_SOURCE_DIR}/scripts/install/linux/data/gnome/usr/share/icons"
+        "${CMAKE_CURRENT_SOURCE_DIR}/scripts/install/linux/data/gnome/usr/share/pixmaps"
         DESTINATION "${CMAKE_INSTALL_DATADIR}"
     )
-    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/install/linux/debian/wxformbuilder.sharedmimeinfo"
+    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/install/linux/debian/wxweaver.sharedmimeinfo"
         DESTINATION "${CMAKE_INSTALL_DATADIR}/mime/packages"
-        RENAME "wxformbuilder.xml"
+        RENAME "wxweaver.xml"
     )
     install(DIRECTORY
         "${CMAKE_CURRENT_SOURCE_DIR}/output/plugins"
         "${CMAKE_CURRENT_SOURCE_DIR}/output/resources"
         "${CMAKE_CURRENT_SOURCE_DIR}/output/xml"
-        DESTINATION "${CMAKE_INSTALL_DATADIR}/wxformbuilder"
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/wxweaver"
     )
-    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/output/license.txt"
-        DESTINATION "${CMAKE_INSTALL_DATADIR}/licenses/wxformbuilder"
+    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/COPYING"
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/licenses/wxweaver"
     )
 endif()
