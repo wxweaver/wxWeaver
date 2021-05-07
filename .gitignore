@@ -24,3 +24,6 @@ install/windows/*.exe
 /_install/
 /compile_commands.json
 /.ccls-cache/
+/native*.ini
+/*.diff
+/*.user
