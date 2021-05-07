@@ -29,7 +29,7 @@ jobs:
         ln -s /mingw32/lib/binutils/libiberty.a /mingw32/lib/libiberty.a
     - name: Create build files
       shell: cmd
-      run: create_build_files4.bat --wx-root=/mingw32/bin --force-wx-config --disable-mediactrl
+      run: create_build_files.bat --wx-root=/mingw32/bin --force-wx-config --disable-mediactrl
     - name: Patch build files
       shell: msys2 {0}
       run: |
@@ -42,9 +42,9 @@ jobs:
         make config=release
     - name: Create installer
       shell: cmd
-      run: '"C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe" install/windows/wxFormBuilder.iss'
+      run: '"C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe" install/windows/wxWeaver.iss'
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: Windows
-        path: install\windows\wxFormBuilder-*.exe
+        path: install\windows\wxWeaver-*.exe
