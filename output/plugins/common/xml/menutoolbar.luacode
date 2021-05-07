@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!--
-wxFormBuilder - A Visual Dialog Editor for wxWidgets.
+wxWeaver - A Visual Dialog Editor for wxWidgets.
 Copyright (C) 2005 José Antonio Hurtado
 
 This program is free software; you can redistribute it and/or
@@ -178,10 +178,10 @@ Lua code generation written by
 				@{:Hide()@}#ifequal $moveable "0"
 				@{:Movable( $moveable )@}#ifnotnull $dock
 				@{:$dock()#ifequal $dock "Float"
-				@{:FloatingPosition( $pane_position )@}	
+				@{:FloatingPosition( $pane_position )@}
 				@}#ifnotnull $resize
 				@{:$resize()#ifequal $resize "Resizable"
-				@{:FloatingSize( $pane_size )@}	
+				@{:FloatingSize( $pane_size )@}
 				@}#ifequal $dock_fixed "1"
 				@{:Fixed( $dock_fixed )@}#ifequal $BottomDockable "0"
 				@{:BottomDockable( $BottomDockable )@}#ifequal $TopDockable "0"
@@ -243,10 +243,10 @@ Lua code generation written by
 				@{.Hide()@}#ifequal $moveable "0"
 				@{.Movable( $moveable )@}#ifnotnull $dock
 				@{.$dock()#ifequal $dock "Float"
-				@{.FloatingPosition( $pane_position )@}	
+				@{.FloatingPosition( $pane_position )@}
 				@}#ifnotnull $resize
 				@{.$resize()#ifequal $resize "Resizable"
-				@{.FloatingSize( $pane_size )@}	
+				@{.FloatingSize( $pane_size )@}
 				@}#ifequal $dock_fixed "1"
 				@{.DockFixed( $dock_fixed )@}#ifequal $BottomDockable "0"
 				@{.BottomDockable( $BottomDockable )@}#ifequal $TopDockable "0"

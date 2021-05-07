@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!--
-wxFormBuilder - A Visual Dialog Editor for wxWidgets.
+wxWeaver - A Visual Dialog Editor for wxWidgets.
 Copyright (C) 2005 José Antonio Hurtado
 
 This program is free software; you can redistribute it and/or
@@ -265,7 +265,7 @@ PHP code generation written by
 		</template>
 		<template name="evt_connect_OnTimer">#wxparent $name->Connect( $id, wxEVT_TIMER, #handler );</template>
 	</templates>
-	
+
 	<templates class="wxStyledTextCtrl">
 		<template name="construction">
 			@/* WARNING: PHP code generation isn't supported for this widget yet. */#nl

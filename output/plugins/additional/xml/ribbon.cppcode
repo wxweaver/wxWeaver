@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!--
-wxFormBuilder - A Visual Dialog Editor for wxWidgets.
+wxWeaver - A Visual Dialog Editor for wxWidgets.
 Copyright (C) 2005 José Antonio Hurtado
 
 This program is free software; you can redistribute it and/or
@@ -66,7 +66,7 @@ Written by
 	</templates>
 
 	<templates class="wxRibbonPage">
-		<template name="declaration">wxRibbonPage* $name;</template>		
+		<template name="declaration">wxRibbonPage* $name;</template>
 		<template name="construction">
 			$name = new #class( #parent $name,  $id, $label , $bitmap , 0 );
 		</template>
@@ -80,7 +80,7 @@ Written by
 	</templates>
 
 	<templates class="wxRibbonPanel">
-		<template name="declaration">wxRibbonPanel* $name;</template>		
+		<template name="declaration">wxRibbonPanel* $name;</template>
 		<template name="construction">
 			$name = new #class( #parent $name,  $id, $label , $bitmap , $pos, $size, $style #ifnotnull $window_style @{ |$window_style @} #ifnotnull $window_name @{, $window_name @} );
 		</template>
@@ -141,7 +141,7 @@ Written by
 	</templates>
 
 	<templates class="wxRibbonToolBar">
-		<template name="declaration">wxRibbonToolBar* $name;</template>		
+		<template name="declaration">wxRibbonToolBar* $name;</template>
 		<template name="construction">
 			$name = new #class( #parent $name,  $id, $pos, $size, 0 );
 		</template>
@@ -189,7 +189,7 @@ Written by
 	</templates>
 
 	<templates class="wxRibbonGallery">
-		<template name="declaration">wxRibbonGallery* $name;</template>		
+		<template name="declaration">wxRibbonGallery* $name;</template>
 		<template name="construction">
 			$name = new #class( #parent $name, $id, $pos, $size, 0);
 		</template>
