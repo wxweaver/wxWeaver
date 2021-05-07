@@ -40,7 +40,7 @@
   <icon name="cpp" file="cpp.png"/>
   <icon name="h" file="h.png"/>
   <icon name="designer" file="designer.png"/>
-  <icon name="c++" file="c++.png"/>
+  <icon name="c++" file="cpp.png"/>
   <icon name="python" file="python.png"/>
   <icon name="php" file="php.png"/>
   <icon name="lua" file="lua.png"/>

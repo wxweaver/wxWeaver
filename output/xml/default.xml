@@ -70,7 +70,7 @@
       </property>
     </category>
   </objectinfo>
-  <objectinfo class="C++" smallIcon="c++.png" type="interface">
+  <objectinfo class="C++" smallIcon="cpp.png" type="interface">
     <property name="permission" type="option" hidden="1">
       <option name="none"/>
       <option name="private"/>
