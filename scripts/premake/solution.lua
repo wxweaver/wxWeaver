@@ -3,16 +3,17 @@
 --  Purpose:     Generic Premake 4 solution defining common configurations
 --               for all projects it contains.
 --  Author:      Andrea Zanellato
---  Modified by: 
+--  Modified by:
 --  Created:     19/10/2011
 --  Copyright:   (c) 2011 wxFormBuilder Team
+--               (c) 2021 wxWeaver Team
 --  Licence:     GNU General Public License Version 2
 -----------------------------------------------------------------------------
-solution "wxFormBuilder-Solution"
+solution "wxWeaver-Solution"
     language "C++"
     configurations      {"Debug", "Release"}
     if (startproject ~= nil) then
-        startproject    "wxFormBuilder"
+        startproject    "wxWeaver"
     end
 
     local scriptDir     = os.getcwd()
@@ -95,9 +96,9 @@ solution "wxFormBuilder-Solution"
     dofile(scriptDir .. "/plugins/layout.lua")
 
     -- The MacOS postbuild commands require that the plugins are already compiled,
-    -- with PreMake 4.x it is not possible to define a build order dependency for
+    -- with Premake 4.x it is not possible to define a build order dependency for
     -- libraries without linking to them.
-    -- Processing the wxformbuilder script after the plugin scripts results in a Makefile
-    -- that does process wxformbuilder after the plugin projects without defining a dependency between them.
+    -- Processing the wxweaver script after the plugin scripts results in a Makefile
+    -- that does process wxWeaver after the plugin projects without defining a dependency between them.
     -- This will break when using parallel builds because of the missing dependencies.
-    dofile(scriptDir .. "/wxformbuilder.lua")
+    dofile(scriptDir .. "/wxweaver.lua")

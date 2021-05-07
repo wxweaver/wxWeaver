@@ -1,14 +1,15 @@
 -----------------------------------------------------------------------------
---  Name:        wxformbuilder.lua
+--  Name:        wxweaver.lua
 --  Purpose:     Main application project
 --  Author:      Andrea Zanellato
 --  Modified by:
 --  Created:     19/10/2011
 --  Copyright:   (c) 2011 wxFormBuilder Team
+--               (c) 2021 wxWeaver Team
 --  Licence:     GNU General Public License Version 2
 -----------------------------------------------------------------------------
-project "wxFormBuilder"
-    kind                "WindowedApp"
+project "wxWeaver"
+    kind "WindowedApp"
     files
     {
         "../../src/**.h", "../../src/**.hpp", "../../src/**.hh",
@@ -48,7 +49,7 @@ project "wxFormBuilder"
         -- Set rpath
         local useRpath = true
         local rpath= _ACTION == "codeblocks" and "$" or "$$"
-        rpath = rpath .. "``ORIGIN/../lib/wxformbuilder"
+        rpath = rpath .. "``ORIGIN/../lib/wxweaver"
         local rpathOption = _OPTIONS["rpath"]
 
         if rpathOption then
@@ -81,7 +82,7 @@ project "wxFormBuilder"
     configuration "not windows"
         excludes        {"../../src/*.rc"}
         targetdir       "../../output/bin"
-        targetname      "wxformbuilder"
+        targetname      "wxweaver"
         links           {"dl"}
 
     configuration "windows"
@@ -94,7 +95,7 @@ project "wxFormBuilder"
 
     configuration "Debug"
         wx_config       {Libs=libs, Debug="yes"}
-        defines         {"__WXFB_DEBUG__"}
+        defines         {"__wxWEAVER_DEBUG__"}
         targetsuffix    (DebugSuffix)
 
     configuration "Release"

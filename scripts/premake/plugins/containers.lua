@@ -5,6 +5,7 @@
 --  Modified by:
 --  Created:     21/10/2011
 --  Copyright:   (c) 2011 wxFormBuilder Team
+--               (c) 2021 wxWeaver Team
 --  Licence:     GNU General Public License Version 2
 -----------------------------------------------------------------------------
 project "containers-components-plugin"
@@ -27,7 +28,7 @@ project "containers-components-plugin"
         buildoptions    "/std:c++17"
 
     configuration "not windows"
-        targetdir       "../../../output/lib/wxformbuilder"
+        targetdir       "../../../output/lib/wxweaver"
 
     configuration "windows"
         targetprefix    "lib"

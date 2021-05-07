@@ -3,12 +3,13 @@
 --  Purpose:     Plugin Interface library project script.
 --  Author:      Andrea Zanellato zanellato.andrea@gmail.com
 --  Modified by:
---  Created:     2011/10/20
---  Copyright:   (c) wxFormBuilder Team
+--  Created:     20/10/2011
+--  Copyright:   (c) 2011 wxFormBuilder Team
+--               (c) 2021 wxWeaver Team
 --  Licence:     GNU General Public License Version 2
 -----------------------------------------------------------------------------
 project "plugin-interface"
-    kind                "StaticLib"
+    kind "StaticLib"
     files
     {
         "../../sdk/plugin_interface/**.h",
