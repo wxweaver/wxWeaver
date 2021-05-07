@@ -18,6 +18,7 @@ set(wxFB_INCLUDE_FILES
     src/rad/dataobject/dataobject.h
     src/rad/designer/innerframe.h
     src/rad/designer/menubar.h
+#   src/rad/designer/resizablepanel.h
     src/rad/designer/visualeditor.h
     src/rad/designer/visualobj.h
     src/rad/designer/window_buttons.h
@@ -33,6 +34,7 @@ set(wxFB_INCLUDE_FILES
     src/rad/xrcpreview/xrcpreview.h
     src/rad/about.h
     src/rad/appdata.h
+    src/rad/auitabart.h
     src/rad/bitmaps.h
     src/rad/cmdproc.h
     src/rad/customkeys.h
@@ -91,6 +93,7 @@ set(wxFB_SOURCE_FILES
     src/rad/xrcpreview/xrcpreview.cpp
     src/rad/about.cpp
     src/rad/appdata.cpp
+    src/rad/auitabart.cpp
     src/rad/bitmaps.cpp
     src/rad/cmdproc.cpp
     src/rad/customkeys.cpp
