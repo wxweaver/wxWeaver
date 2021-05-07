@@ -17,8 +17,8 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef WXFBDEFS_H
-#define WXFBDEFS_H
+#ifndef wxWEAVERDEFS_H
+#define wxWEAVERDEFS_H
 
 #include <map>
 #include <memory>
@@ -35,7 +35,7 @@ class CodeInfo;
 class EventInfo;
 class Event;
 class PropertyCategory;
-class wxFBManager;
+class wxWeaverManager;
 class CodeWriter;
 class TemplateParser;
 class TCCodeWriter;
@@ -68,7 +68,7 @@ typedef std::map<wxString, PEvent>        EventMap;
 typedef std::vector<PObjectBase> ObjectBaseVector;
 typedef std::vector<PEvent>      EventVector;
 
-typedef std::shared_ptr<wxFBManager> PwxFBManager;
+typedef std::shared_ptr<wxWeaverManager> PwxWeaverManager;
 typedef std::shared_ptr<CodeWriter> PCodeWriter;
 typedef std::shared_ptr<TemplateParser> PTemplateParser;
 typedef std::shared_ptr<TCCodeWriter> PTCCodeWriter;
@@ -77,4 +77,4 @@ typedef std::shared_ptr<StringCodeWriter> PStringCodeWriter;
 // Flatnotebook styles are stored in config, if style #defines change, or config is manually modified, these style overrides still apply
 #define FNB_STYLE_OVERRIDES( x ) ( x | wxFNB_CUSTOM_DLG | wxFNB_NO_X_BUTTON ) & ( ~wxFNB_X_ON_TAB & ~wxFNB_MOUSE_MIDDLE_CLOSES_TABS & ~wxFNB_DCLICK_CLOSES_TABS & ~wxFNB_ALLOW_FOREIGN_DND )
 
-#endif //WXFBDEFS_H
+#endif //wxWEAVERDEFS_H

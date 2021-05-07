@@ -87,9 +87,9 @@ namespace XMLUtils
 	{
 		if ( NULL == declaration )
 		{
-			// Ask user to all wxFB to convert the file to UTF-8 and add the XML declaration
+			// Ask user to all wxWeaver to convert the file to UTF-8 and add the XML declaration
 			wxString msg = _("This xml file has no declaration.\n");
-			msg 		+= _("Would you like wxFormBuilder to backup the file and convert it to UTF-8\?\n");
+			msg 		+= _("Would you like wxWeaver to backup the file and convert it to UTF-8\?\n");
 			msg			+= _("You will be prompted for an encoding.\n\n");
 			msg			+= _("Path: ");
 			msg			+= path;
@@ -97,14 +97,14 @@ namespace XMLUtils
 			if ( wxNO == result )
 			{
 				// User declined, give up
-				THROW_WXFBEX( _("Missing Declaration on XML File: ") << path );
+				THROW_wxWEAVEREX( _("Missing Declaration on XML File: ") << path );
 			}
 
 			// User accepted, convert the file
 			wxFontEncoding chosenEncoding = StringUtils::GetEncodingFromUser( _("Please choose the original encoding.") );
 			if ( wxFONTENCODING_MAX == chosenEncoding )
 			{
-				THROW_WXFBEX( _("Missing Declaration on XML File: ") << path );
+				THROW_wxWEAVEREX( _("Missing Declaration on XML File: ") << path );
 			}
 
 			ConvertAndAddDeclaration( path, chosenEncoding );
@@ -130,23 +130,23 @@ namespace XMLUtils
 		wxString encodingName = _WXSTR( declaration->Encoding() );
 		if ( encodingName.empty() )
 		{
-			// Ask user to all wxFB to convert the file to UTF-8 and add the XML declaration
+			// Ask user to all wxWeaver to convert the file to UTF-8 and add the XML declaration
 			wxString msg = _("This xml file has no encoding specified.\n");
-			msg 		+= _("Would you like wxFormBuilder to backup the file and convert it to UTF-8\?\n");
+			msg 		+= _("Would you like wxWeaver to backup the file and convert it to UTF-8\?\n");
 			msg			+= _("You will be prompted for an encoding.\n\n");
 			msg			+= _("Path: ");
 			msg			+= path;
 			if ( wxNO == wxMessageBox( msg, _("Unknown Encoding"), wxICON_QUESTION | wxYES_NO | wxYES_DEFAULT, wxTheApp->GetTopWindow() ) )
 			{
 				// User declined, give up
-				THROW_WXFBEX( _("Unknown Encoding for XML File: ") << path );
+				THROW_wxWEAVEREX( _("Unknown Encoding for XML File: ") << path );
 			}
 
 			// User accepted, convert the file
 			wxFontEncoding chosenEncoding = StringUtils::GetEncodingFromUser( _("Please choose the original encoding.") );
 			if ( wxFONTENCODING_MAX == chosenEncoding )
 			{
-				THROW_WXFBEX( _("Unknown Encoding for XML File: ") << path );
+				THROW_wxWEAVEREX( _("Unknown Encoding for XML File: ") << path );
 			}
 			ConvertAndChangeDeclaration( path, version, standalone, chosenEncoding );
 
@@ -169,20 +169,20 @@ namespace XMLUtils
 							encodingName.c_str(),
 							StringUtils::GetSupportedEncodings().c_str() );
 			wxMessageBox( msg, wxString::Format( _("Unsupported Encoding: %s"), encodingName.c_str() ) );
-			THROW_WXFBEX( _("Unsupported encoding for XML File: ") << path );
+			THROW_wxWEAVEREX( _("Unsupported encoding for XML File: ") << path );
 		}
 		else
 		{
-			// Ask user to all wxFB to convert the file to UTF-8 and add the XML declaration
-			wxString msg = wxString::Format( _("This xml file has specified encoding %s. wxFormBuilder only works with UTF-8.\n"),
+			// Ask user to all wxWeaver to convert the file to UTF-8 and add the XML declaration
+			wxString msg = wxString::Format( _("This xml file has specified encoding %s. wxWeaver only works with UTF-8.\n"),
 							wxFontMapper::GetEncodingDescription( encoding ).c_str() );
-			msg 		+= _("Would you like wxFormBuilder to backup the file and convert it to UTF-8\?\n\n");
+			msg 		+= _("Would you like wxWeaver to backup the file and convert it to UTF-8\?\n\n");
 			msg			+= _("Path: ");
 			msg			+= path;
 			if ( wxNO == wxMessageBox( msg, _("Not UTF-8"), wxICON_QUESTION | wxYES_NO | wxYES_DEFAULT, wxTheApp->GetTopWindow() ) )
 			{
 				// User declined, give up
-				THROW_WXFBEX( _("Wrong Encoding for XML File: ") << path );
+				THROW_wxWEAVEREX( _("Wrong Encoding for XML File: ") << path );
 			}
 
 			// User accepted, convert the file
@@ -201,12 +201,12 @@ void XMLUtils::LoadXMLFile( ticpp::Document& doc, bool condenseWhiteSpace, const
 	{
 		if ( path.empty() )
 		{
-			THROW_WXFBEX( _("LoadXMLFile needs a path") )
+			THROW_wxWEAVEREX( _("LoadXMLFile needs a path") )
 		}
 
 		if ( !::wxFileExists( path ) )
 		{
-			THROW_WXFBEX( _("The file does not exist.\nFile: ") << path )
+			THROW_wxWEAVEREX( _("The file does not exist.\nFile: ") << path )
 		}
 		TiXmlBase::SetCondenseWhiteSpace( condenseWhiteSpace );
 		doc.SetValue( std::string( path.mb_str( wxConvFile ) ) );
@@ -214,23 +214,23 @@ void XMLUtils::LoadXMLFile( ticpp::Document& doc, bool condenseWhiteSpace, const
 	}
 	catch ( ticpp::Exception& )
 	{
-		// Ask user to all wxFB to convert the file to UTF-8 and add the XML declaration
+		// Ask user to all wxWeaver to convert the file to UTF-8 and add the XML declaration
 		wxString msg = _("This xml file could not be loaded. This could be the result of an unsupported encoding.\n");
-		msg 		+= _("Would you like wxFormBuilder to backup the file and convert it to UTF-8\?\n");
+		msg 		+= _("Would you like wxWeaver to backup the file and convert it to UTF-8\?\n");
 		msg			+= _("You will be prompted for the original encoding.\n\n");
 		msg			+= _("Path: ");
 		msg			+= path;
 		if ( wxNO == wxMessageBox( msg, _("Unable to load file"), wxICON_QUESTION | wxYES_NO | wxYES_DEFAULT, wxTheApp->GetTopWindow() ) )
 		{
 			// User declined, give up
-			THROW_WXFBEX( _("Unable to load file: ") << path );
+			THROW_wxWEAVEREX( _("Unable to load file: ") << path );
 		}
 
 		// User accepted, convert the file
 		wxFontEncoding chosenEncoding = StringUtils::GetEncodingFromUser( _("Please choose the original encoding.") );
 		if ( wxFONTENCODING_MAX == chosenEncoding )
 		{
-			THROW_WXFBEX( _("Unable to load file: ") << path );
+			THROW_wxWEAVEREX( _("Unable to load file: ") << path );
 		}
 
 		ConvertAndAddDeclaration( path, chosenEncoding );
@@ -256,35 +256,35 @@ void XMLUtils::LoadXMLFile( TiXmlDocument& doc, bool condenseWhiteSpace, const w
 {
 	if ( path.empty() )
 	{
-		THROW_WXFBEX( _("LoadXMLFile needs a path") )
+		THROW_wxWEAVEREX( _("LoadXMLFile needs a path") )
 	}
 
 	if ( !::wxFileExists( path ) )
 	{
-		THROW_WXFBEX( _("The file does not exist.\nFile: ") << path )
+		THROW_wxWEAVEREX( _("The file does not exist.\nFile: ") << path )
 	}
 
 	TiXmlBase::SetCondenseWhiteSpace( condenseWhiteSpace );
 	doc.SetValue( std::string( path.mb_str( wxConvFile ) ) );
 	if ( !doc.LoadFile() )
 	{
-		// Ask user to all wxFB to convert the file to UTF-8 and add the XML declaration
+		// Ask user to all wxWeaver to convert the file to UTF-8 and add the XML declaration
 		wxString msg = _("This xml file could not be loaded. This could be the result of an unsupported encoding.\n");
-		msg 		+= _("Would you like wxFormBuilder to backup the file and convert it to UTF-8\?\n");
+		msg 		+= _("Would you like wxWeaver to backup the file and convert it to UTF-8\?\n");
 		msg			+= _("You will be prompted for the original encoding.\n\n");
 		msg			+= _("Path: ");
 		msg			+= path;
 		if ( wxNO == wxMessageBox( msg, _("Unable to load file"), wxICON_QUESTION | wxYES_NO | wxYES_DEFAULT, wxTheApp->GetTopWindow() ) )
 		{
 			// User declined, give up
-			THROW_WXFBEX( _("Unable to load file: ") << path );
+			THROW_wxWEAVEREX( _("Unable to load file: ") << path );
 		}
 
 		// User accepted, convert the file
 		wxFontEncoding chosenEncoding = StringUtils::GetEncodingFromUser( _("Please choose the original encoding.") );
 		if ( wxFONTENCODING_MAX == chosenEncoding )
 		{
-			THROW_WXFBEX( _("Unable to load file: ") << path );
+			THROW_wxWEAVEREX( _("Unable to load file: ") << path );
 		}
 
 		ConvertAndAddDeclaration( path, chosenEncoding );
@@ -316,7 +316,7 @@ void XMLUtils::ConvertAndChangeDeclaration( const wxString& path, const wxString
 		if ( !::wxCopyFile( path, path + wxT(".bak") ) )
 		{
 			wxString msg = wxString::Format( _("Unable to backup file.\nFile: %s\nBackup: %s.bak"), path.c_str(), path.c_str() );
-			THROW_WXFBEX( msg )
+			THROW_wxWEAVEREX( msg )
 		}
 	}
 
@@ -327,19 +327,19 @@ void XMLUtils::ConvertAndChangeDeclaration( const wxString& path, const wxString
 	if ( !oldEncoding.ReadAll( &contents, encodingConv ) )
 	{
 		wxString msg = wxString::Format( _("Unable to read the file in the specified encoding.\nFile: %s\nEncoding: %s"), path.c_str(), wxFontMapper::GetEncodingDescription( encoding ).c_str() );
-		THROW_WXFBEX( msg );
+		THROW_wxWEAVEREX( msg );
 	}
 
 	if ( contents.empty() )
 	{
 		wxString msg = wxString::Format( _("The file is either empty or read with the wrong encoding.\nFile: %s\nEncoding: %s"), path.c_str(), wxFontMapper::GetEncodingDescription( encoding ).c_str() );
-		THROW_WXFBEX( msg );
+		THROW_wxWEAVEREX( msg );
 	}
 
 	if ( !oldEncoding.Close() )
 	{
 		wxString msg = wxString::Format( _("Unable to close original file.\nFile: %s"), path.c_str() );
-		THROW_WXFBEX( msg );
+		THROW_wxWEAVEREX( msg );
 	}
 
 	// Modify the declaration, so TinyXML correctly determines the new encoding
@@ -359,13 +359,13 @@ void XMLUtils::ConvertAndChangeDeclaration( const wxString& path, const wxString
 		if ( wxNOT_FOUND == declStart )
 		{
 			wxString msg = wxString::Format( _("Found a declaration end tag \"\?>\" but could not find the start \"<\?\".\nFile: %s"), path.c_str() );
-			THROW_WXFBEX( msg );
+			THROW_wxWEAVEREX( msg );
 		}
 
 		if ( wxNOT_FOUND == declEnd )
 		{
 			wxString msg = wxString::Format( _("Found a declaration start tag \"<\?\" but could not find the end \"\?>\".\nFile: %s"), path.c_str() );
-			THROW_WXFBEX( msg );
+			THROW_wxWEAVEREX( msg );
 		}
 
 		// declStart and declEnd are both valid, replace that section with a new declaration
@@ -379,7 +379,7 @@ void XMLUtils::ConvertAndChangeDeclaration( const wxString& path, const wxString
 	if ( !::wxRemoveFile( path ) )
 	{
 		wxString msg = wxString::Format( _("Unable to delete original file.\nFile: %s"), path.c_str() );
-		THROW_WXFBEX( msg );
+		THROW_wxWEAVEREX( msg );
 	}
 
 	// Write the new file
@@ -387,7 +387,7 @@ void XMLUtils::ConvertAndChangeDeclaration( const wxString& path, const wxString
 	if ( !newEncoding.Write( contents, wxConvUTF8 ) )
 	{
 		wxString msg = wxString::Format( _("Unable to write file in its new encoding.\nFile: %s\nEncoding: %s"), path.c_str(), wxFontMapper::GetEncodingDescription( wxFONTENCODING_UTF8 ).c_str() );
-		THROW_WXFBEX( msg );
+		THROW_wxWEAVEREX( msg );
 	}
 
 	if ( !newEncoding.Close() )
@@ -396,6 +396,6 @@ void XMLUtils::ConvertAndChangeDeclaration( const wxString& path, const wxString
 											path.c_str(),
 											wxFontMapper::GetEncodingDescription( encoding ).c_str(),
 											wxFontMapper::GetEncodingDescription( wxFONTENCODING_UTF8 ).c_str() );
-		THROW_WXFBEX( msg );
+		THROW_wxWEAVEREX( msg );
 	}
 }

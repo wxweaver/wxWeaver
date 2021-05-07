@@ -77,10 +77,10 @@ end
 -- Set debug flags
 if ( options["disable-wx-debug"] and ( not windows ) ) then
 	debug_option = "--debug=no"
-	debug_macro = { "NDEBUG", "__WXFB_DEBUG__" }
+	debug_macro = { "NDEBUG", "__wxWEAVER_DEBUG__" }
 else
 	debug_option = "--debug=yes"
-	debug_macro = { "DEBUG", "_DEBUG", "__WXDEBUG__", "__WXFB_DEBUG__"}
+	debug_macro = { "DEBUG", "_DEBUG", "__WXDEBUG__", "__wxWEAVER_DEBUG__"}
 end
 
 -- Set the default targetName if none is specified.

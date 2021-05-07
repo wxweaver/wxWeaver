@@ -30,15 +30,15 @@
 #error "wxUSE_PROPGRID must be set to 1 in your wxWidgets library."
 #endif
 
-class wxFBEventHandlerEvent;
-class wxFBPropertyEvent;
-class wxFBObjectEvent;
-class wxFBEvent;
+class wxWeaverEventHandlerEvent;
+class wxWeaverPropertyEvent;
+class wxWeaverObjectEvent;
+class wxWeaverEvent;
 
 enum {
-    wxFB_OI_DEFAULT_STYLE,
-    wxFB_OI_MULTIPAGE_STYLE,
-    wxFB_OI_SINGLE_PAGE_STYLE
+    wxWEAVER_OI_DEFAULT_STYLE,
+    wxWEAVER_OI_MULTIPAGE_STYLE,
+    wxWEAVER_OI_SINGLE_PAGE_STYLE
 };
 
 class ObjectInspector : public wxPanel
@@ -86,7 +86,7 @@ private:
 
         wxString pageName;
 
-        if ( m_style == wxFB_OI_MULTIPAGE_STYLE )
+        if ( m_style == wxWEAVER_OI_MULTIPAGE_STYLE )
             pageName = name;
         else
             pageName = wxT("default");
@@ -145,13 +145,13 @@ private:
 	void OnChildFocus( wxChildFocusEvent& event );
 
 public:
-    ObjectInspector(wxWindow *parent, int id, int style = wxFB_OI_DEFAULT_STYLE);
+    ObjectInspector(wxWindow *parent, int id, int style = wxWEAVER_OI_DEFAULT_STYLE);
 	~ObjectInspector() override;
 
-    void OnObjectSelected( wxFBObjectEvent& event );
-    void OnProjectRefresh( wxFBEvent& event );
-    void OnPropertyModified( wxFBPropertyEvent& event );
-    void OnEventHandlerModified( wxFBEventHandlerEvent& event );
+    void OnObjectSelected( wxWeaverObjectEvent& event );
+    void OnProjectRefresh( wxWeaverEvent& event );
+    void OnPropertyModified( wxWeaverPropertyEvent& event );
+    void OnEventHandlerModified( wxWeaverEventHandlerEvent& event );
 
     void AutoGenerateId( PObjectBase objectChanged, PProperty propChanged, wxString reason );
     wxPropertyGridManager* CreatePropertyGridManager( wxWindow *parent, wxWindowID id );

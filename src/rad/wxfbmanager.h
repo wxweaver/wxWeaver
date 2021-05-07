@@ -17,8 +17,8 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef WXFBMANAGER
-#define WXFBMANAGER
+#ifndef wxWEAVERMANAGER
+#define wxWEAVERMANAGER
 
 #include "../utils/wxfbdefs.h"
 
@@ -27,13 +27,13 @@
 class VisualEditor;
 class ObjectBase;
 
-class wxFBManager : public IManager
+class wxWeaverManager : public IManager
 {
 private:
 	VisualEditor* m_visualEdit;
 
 public:
-	wxFBManager();
+	wxWeaverManager();
 	void SetVisualEditor( VisualEditor* visualEdit );
 	size_t GetChildCount(wxObject* wxobject) override;
 	wxObject* GetChild(wxObject* wxobject, size_t childIndex) override;
@@ -50,4 +50,4 @@ public:
 	bool SelectObject(wxObject* wxobject) override;
 };
 
-#endif //WXFBMANAGER
+#endif //wxWEAVERMANAGER

@@ -4,10 +4,10 @@
 #include "../rad/appdata.h"
 
 
-FORCE_LINK_ME(m_wxfb)
+FORCE_LINK_ME(m_wxweaver)
 
 
-TAG_HANDLER_BEGIN(wxFBVersion, "WXFB-VERSION")
+TAG_HANDLER_BEGIN(wxWeaverVersion, "WXWEAVER-VERSION")
 
 TAG_HANDLER_PROC(WXUNUSED(tag))
 {
@@ -18,10 +18,10 @@ TAG_HANDLER_PROC(WXUNUSED(tag))
 	return false;
 }
 
-TAG_HANDLER_END(wxFBVersion)
+TAG_HANDLER_END(wxWeaverVersion)
 
 
-TAG_HANDLER_BEGIN(wxFBRevision, "WXFB-REVISION")
+TAG_HANDLER_BEGIN(wxWeaverRevision, "WXWEAVER-REVISION")
 
 TAG_HANDLER_PROC(WXUNUSED(tag))
 {
@@ -32,12 +32,12 @@ TAG_HANDLER_PROC(WXUNUSED(tag))
 	return false;
 }
 
-TAG_HANDLER_END(wxFBRevision)
+TAG_HANDLER_END(wxWeaverRevision)
 
 
-TAGS_MODULE_BEGIN(wxFB)
+TAGS_MODULE_BEGIN(wxWeaver)
 
-TAGS_MODULE_ADD(wxFBVersion)
-TAGS_MODULE_ADD(wxFBRevision)
+TAGS_MODULE_ADD(wxWeaverVersion)
+TAGS_MODULE_ADD(wxWeaverRevision)
 
-TAGS_MODULE_END(wxFB)
+TAGS_MODULE_END(wxWeaver)

@@ -2306,7 +2306,7 @@ public:
 
 		if ( !( obj && treeList ) )
 		{
-			wxLogError( _("wxcoreTreeListCtrlColumnComponent is missing its wxFormBuilder object(%i) or its parent(%i)"), obj,treeList );
+			wxLogError( _("wxcoreTreeListCtrlColumnComponent is missing its wxWeaver object(%i) or its parent(%i)"), obj,treeList );
 			return;
 		}
 

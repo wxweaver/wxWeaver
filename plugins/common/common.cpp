@@ -35,7 +35,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 // Custom status bar class for windows to prevent the status bar gripper from
-// moving the entire wxFB window
+// moving the entire wxWeaver window
 #if defined(__WIN32__) && wxUSE_NATIVE_STATUSBAR
 class wxIndependentStatusBar : public wxStatusBar
 {
@@ -1289,7 +1289,7 @@ void AuiToolBar::OnDropDownMenu( wxAuiToolBarEvent& event )
 
 			// TODO: For some strange reason, this event is occasionally propagated upwards even though it's been handled here
 			// and there's a clash of IDs between that given a tool by wxAui and the IDs in mainframe.cpp
-			// which sometimes results in a wxFormBuilder dialog being fired.
+			// which sometimes results in a wxWeaver dialog being fired.
 			// So StopPropagation() now, but those IDs need changing to avoid clashes.
 			//event.StopPropagation();
 		}

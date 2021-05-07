@@ -29,7 +29,7 @@ The value of all properties that are file or a directory paths must be absolute,
 #ifndef _PYTHON_CODE_GEN_
 #define _PYTHON_CODE_GEN_
 
-// wxFormBuilder flags (fbfXXX)
+// wxWeaver flags (fbfXXX)
 #define fbfSILENT true
 #define fbfMESSAGE false
 

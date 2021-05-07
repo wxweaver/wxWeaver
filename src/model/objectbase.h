@@ -266,7 +266,7 @@ namespace ticpp
 
 class ObjectBase : public IObject, public std::enable_shared_from_this<ObjectBase>
 {
-	friend class wxFBDataObject;
+	friend class wxWeaverDataObject;
 private:
 	wxString     m_class;  // class name
 	wxString     m_type;   // type of object

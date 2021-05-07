@@ -25,13 +25,13 @@
 
 #include <ticpp.h>
 
-wxFBDataObject::wxFBDataObject(PObjectBase obj) {
+wxWeaverDataObject::wxWeaverDataObject(PObjectBase obj) {
 	if (obj) {
 		// create xml representation of ObjectBase
 		ticpp::Element element;
 		obj->SerializeObject( &element );
 
-		// add version info to xml data, just in case it is pasted into a different version of wxFB
+		// add version info to xml data, just in case it is pasted into a different version of wxWeaver
 		element.SetAttribute( "fbp_version_major", AppData()->m_fbpVerMajor );
 		element.SetAttribute( "fbp_version_minor", AppData()->m_fbpVerMinor );
 
@@ -47,23 +47,23 @@ wxFBDataObject::wxFBDataObject(PObjectBase obj) {
 	}
 }
 
-void wxFBDataObject::GetAllFormats( wxDataFormat* formats, Direction dir ) const
+void wxWeaverDataObject::GetAllFormats( wxDataFormat* formats, Direction dir ) const
 {
 	switch ( dir )
 	{
 		case Get:
-			formats[0] = wxFBDataObjectFormat;
+			formats[0] = wxWeaverDataObjectFormat;
 			formats[1] = wxDF_TEXT;
 			break;
 		case Set:
-			formats[0] = wxFBDataObjectFormat;
+			formats[0] = wxWeaverDataObjectFormat;
 			break;
 		default:
 			break;
 	}
 }
 
-bool wxFBDataObject::GetDataHere( const wxDataFormat&, void* buf ) const
+bool wxWeaverDataObject::GetDataHere( const wxDataFormat&, void* buf ) const
 {
 	if ( NULL == buf )
 	{
@@ -75,12 +75,12 @@ bool wxFBDataObject::GetDataHere( const wxDataFormat&, void* buf ) const
 	return true;
 }
 
-size_t wxFBDataObject::GetDataSize( const wxDataFormat& /*format*/ ) const
+size_t wxWeaverDataObject::GetDataSize( const wxDataFormat& /*format*/ ) const
 {
 	return m_data.length();
 }
 
-size_t wxFBDataObject::GetFormatCount( Direction dir ) const
+size_t wxWeaverDataObject::GetFormatCount( Direction dir ) const
 {
 	switch ( dir )
 	{
@@ -93,14 +93,14 @@ size_t wxFBDataObject::GetFormatCount( Direction dir ) const
 	}
 }
 
-wxDataFormat wxFBDataObject::GetPreferredFormat( Direction /*dir*/ ) const
+wxDataFormat wxWeaverDataObject::GetPreferredFormat( Direction /*dir*/ ) const
 {
-	return wxFBDataObjectFormat;
+	return wxWeaverDataObjectFormat;
 }
 
-bool wxFBDataObject::SetData( const wxDataFormat& format, size_t len, const void *buf )
+bool wxWeaverDataObject::SetData( const wxDataFormat& format, size_t len, const void *buf )
 {
-	if ( format != wxFBDataObjectFormat )
+	if ( format != wxWeaverDataObjectFormat )
 	{
 		return false;
 	}
@@ -109,7 +109,7 @@ bool wxFBDataObject::SetData( const wxDataFormat& format, size_t len, const void
 	return true;
 }
 
-PObjectBase wxFBDataObject::GetObj()
+PObjectBase wxWeaverDataObject::GetObj()
 {
 	if ( m_data.empty() )
 	{
@@ -130,7 +130,7 @@ PObjectBase wxFBDataObject::GetObj()
 
 		if ( major > AppData()->m_fbpVerMajor || ( AppData()->m_fbpVerMajor == major && minor > AppData()->m_fbpVerMinor ) )
 		{
-			wxLogError( _("This object cannot be pasted because it is from a newer version of wxFormBuilder") );
+			wxLogError( _("This object cannot be pasted because it is from a newer version of wxWeaver") );
 		}
 
 		if ( major < AppData()->m_fbpVerMajor || ( AppData()->m_fbpVerMajor == major && minor < AppData()->m_fbpVerMinor ) )

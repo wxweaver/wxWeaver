@@ -26,10 +26,10 @@
 #include <wx/aui/auibook.h>
 #include <wx/fdrepdlg.h>
 
-class wxFBEvent;
-class wxFBObjectEvent;
-class wxFBPropertyEvent;
-class wxFBEventHandlerEvent;
+class wxWeaverEvent;
+class wxWeaverObjectEvent;
+class wxWeaverPropertyEvent;
+class wxWeaverEventHandlerEvent;
 
 class CppPanel;
 class PythonPanel;
@@ -42,13 +42,13 @@ class wxFbPalette;
 class VisualEditor;
 
 /**
- * wxFormBuilder GUI styles.
+ * wxWeaver GUI styles.
  */
 enum {
-  wxFB_DEFAULT_GUI,
-  wxFB_DOCKABLE_GUI,
-	wxFB_CLASSIC_GUI,
-	wxFB_WIDE_GUI
+  wxWEAVER_DEFAULT_GUI,
+  wxWEAVER_DOCKABLE_GUI,
+	wxWEAVER_CLASSIC_GUI,
+	wxWEAVER_WIDE_GUI
 };
 
 class MainFrame : public wxFrame
@@ -103,7 +103,7 @@ class MainFrame : public wxFrame
 
   DECLARE_EVENT_TABLE()
  public:
-  MainFrame(wxWindow *parent, int id = wxID_ANY, int style = wxFB_DEFAULT_GUI, wxPoint pos = wxDefaultPosition, wxSize size = wxSize( 1000, 800 ) );
+  MainFrame(wxWindow *parent, int id = wxID_ANY, int style = wxWEAVER_DEFAULT_GUI, wxPoint pos = wxDefaultPosition, wxSize size = wxSize( 1000, 800 ) );
 	~MainFrame() override;
   void RestorePosition(const wxString &name);
   void SavePosition(const wxString &name);
@@ -139,16 +139,16 @@ class MainFrame : public wxFrame
 
   void OnAuiNotebookPageChanged( wxAuiNotebookEvent& event );
 
-  void OnProjectLoaded( wxFBEvent& event );
-  void OnProjectSaved( wxFBEvent& event );
-  void OnObjectExpanded( wxFBObjectEvent& event );
-  void OnObjectSelected( wxFBObjectEvent& event );
-  void OnObjectCreated( wxFBObjectEvent& event );
-  void OnObjectRemoved( wxFBObjectEvent& event );
-  void OnPropertyModified( wxFBPropertyEvent& event );
-  void OnEventHandlerModified( wxFBEventHandlerEvent& event );
-  void OnCodeGeneration( wxFBEvent& event );
-  void OnProjectRefresh( wxFBEvent& event );
+  void OnProjectLoaded( wxWeaverEvent& event );
+  void OnProjectSaved( wxWeaverEvent& event );
+  void OnObjectExpanded( wxWeaverObjectEvent& event );
+  void OnObjectSelected( wxWeaverObjectEvent& event );
+  void OnObjectCreated( wxWeaverObjectEvent& event );
+  void OnObjectRemoved( wxWeaverObjectEvent& event );
+  void OnPropertyModified( wxWeaverPropertyEvent& event );
+  void OnEventHandlerModified( wxWeaverEventHandlerEvent& event );
+  void OnCodeGeneration( wxWeaverEvent& event );
+  void OnProjectRefresh( wxWeaverEvent& event );
 
   void OnSplitterChanged( wxSplitterEvent &event );
 

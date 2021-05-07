@@ -17,8 +17,8 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef WXFBIPC_H
-#define WXFBIPC_H
+#ifndef wxWEAVERIPC_H
+#define wxWEAVERIPC_H
 
 #include <wx/ipc.h>
 #include <memory>
@@ -28,7 +28,7 @@
 
 class AppServer;
 
-class wxFBIPC
+class wxWEAVERIPC
 {
 	private:
 		std::unique_ptr<wxSingleInstanceChecker> m_checker;
@@ -38,7 +38,7 @@ class wxFBIPC
 		bool CreateServer( const wxString& name );
 
 	public:
-		wxFBIPC()
+		wxWEAVERIPC()
 		:
 		m_port( 4242 )
 		{
@@ -76,4 +76,4 @@ public:
 	wxConnectionBase* OnMakeConnection() override;
 };
 
-#endif //WXFBIPC_H
+#endif //wxWEAVERIPC_H

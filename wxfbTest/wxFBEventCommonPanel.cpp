@@ -17,9 +17,9 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "wxFBEventCommonPanel.h"
+#include "wxWeaverEventCommonPanel.h"
 
-wxFBEventCommonPanel::wxFBEventCommonPanel( wxWindow* parent )
+wxWeaverEventCommonPanel::wxWeaverEventCommonPanel( wxWindow* parent )
 :
 CommonPanel( parent )
 {

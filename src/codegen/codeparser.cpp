@@ -181,7 +181,7 @@ void CCodeParser::ParseSourceFunctions(wxString code) {
 			wxMessageBox(wxT("Brackets Missing in Source File!"));
 			code.insert(functionEnd + 1,
 			            wxT("//The Following Block is missing a closing bracket\n//and has been "
-			                "set aside by wxFormbuilder\n"));
+                            "set aside by wxWeaver\n"));
 			func->SetContents(wxT(""));
 		}
 

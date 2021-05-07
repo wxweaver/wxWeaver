@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!--
-wxFormBuilder - A Visual Dialog Editor for wxWidgets.
-Copyright (C) 2005 José Antonio Hurtado
+wxWeaver - A Visual Dialog Editor for wxWidgets.
+Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+Copyright (C) 2021 Andrea Zanellato
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -16,10 +17,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
-Created with wxFormBuilder by:
-  RJP Computing - rjpcomputing@gmail.com
-  Ryan Mulder - rjmyst3@gmail.com
 -->
 <wxFormBuilder_Project>
     <FileVersion major="1" minor="6" />
@@ -55,7 +52,7 @@ Created with wxFormBuilder by:
             <property name="size">500,300</property>
             <property name="style">wxDEFAULT_FRAME_STYLE</property>
             <property name="subclass"></property>
-            <property name="title">wxFormBuilder Test App</property>
+            <property name="title">wxWeaver Test App</property>
             <property name="tooltip"></property>
             <property name="window_extra_style"></property>
             <property name="window_style">wxTAB_TRAVERSAL</property>

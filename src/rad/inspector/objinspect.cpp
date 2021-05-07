@@ -37,25 +37,25 @@
 static int wxEVT_FB_PROP_BITMAP_CHANGED = wxNewEventType();
 
 enum {
-	WXFB_PROPERTY_GRID = wxID_HIGHEST + 1000,
-	WXFB_EVENT_GRID,
+	wxWEAVER_PROPERTY_GRID = wxID_HIGHEST + 1000,
+	wxWEAVER_EVENT_GRID,
 };
 
 // -----------------------------------------------------------------------
 // ObjectInspector
 // -----------------------------------------------------------------------
 BEGIN_EVENT_TABLE(ObjectInspector, wxPanel)
-	EVT_PG_CHANGING(WXFB_PROPERTY_GRID, ObjectInspector::OnPropertyGridChanging)
-	EVT_PG_CHANGED(WXFB_PROPERTY_GRID, ObjectInspector::OnPropertyGridChanged)
-	EVT_PG_CHANGED(WXFB_EVENT_GRID, ObjectInspector::OnEventGridChanged)
-	EVT_PG_DOUBLE_CLICK(WXFB_EVENT_GRID, ObjectInspector::OnEventGridDblClick)
-	EVT_PG_DOUBLE_CLICK(WXFB_PROPERTY_GRID, ObjectInspector::OnPropertyGridDblClick)
-	EVT_PG_ITEM_COLLAPSED(WXFB_PROPERTY_GRID, ObjectInspector::OnPropertyGridExpand)
-	EVT_PG_ITEM_EXPANDED(WXFB_PROPERTY_GRID, ObjectInspector::OnPropertyGridExpand)
-	EVT_PG_ITEM_COLLAPSED(WXFB_EVENT_GRID, ObjectInspector::OnEventGridExpand)
-	EVT_PG_ITEM_EXPANDED(WXFB_EVENT_GRID, ObjectInspector::OnEventGridExpand)
-	EVT_PG_SELECTED(WXFB_PROPERTY_GRID, ObjectInspector::OnPropertyGridItemSelected)
-	EVT_PG_SELECTED(WXFB_EVENT_GRID, ObjectInspector::OnPropertyGridItemSelected)
+	EVT_PG_CHANGING(wxWEAVER_PROPERTY_GRID, ObjectInspector::OnPropertyGridChanging)
+	EVT_PG_CHANGED(wxWEAVER_PROPERTY_GRID, ObjectInspector::OnPropertyGridChanged)
+	EVT_PG_CHANGED(wxWEAVER_EVENT_GRID, ObjectInspector::OnEventGridChanged)
+	EVT_PG_DOUBLE_CLICK(wxWEAVER_EVENT_GRID, ObjectInspector::OnEventGridDblClick)
+	EVT_PG_DOUBLE_CLICK(wxWEAVER_PROPERTY_GRID, ObjectInspector::OnPropertyGridDblClick)
+	EVT_PG_ITEM_COLLAPSED(wxWEAVER_PROPERTY_GRID, ObjectInspector::OnPropertyGridExpand)
+	EVT_PG_ITEM_EXPANDED(wxWEAVER_PROPERTY_GRID, ObjectInspector::OnPropertyGridExpand)
+	EVT_PG_ITEM_COLLAPSED(wxWEAVER_EVENT_GRID, ObjectInspector::OnEventGridExpand)
+	EVT_PG_ITEM_EXPANDED(wxWEAVER_EVENT_GRID, ObjectInspector::OnEventGridExpand)
+	EVT_PG_SELECTED(wxWEAVER_PROPERTY_GRID, ObjectInspector::OnPropertyGridItemSelected)
+	EVT_PG_SELECTED(wxWEAVER_EVENT_GRID, ObjectInspector::OnPropertyGridItemSelected)
 
 	EVT_FB_OBJECT_SELECTED( ObjectInspector::OnObjectSelected )
 	EVT_FB_PROJECT_REFRESH( ObjectInspector::OnProjectRefresh )
@@ -80,8 +80,8 @@ ObjectInspector::ObjectInspector( wxWindow* parent, int id, int style )
 #if wxUSE_SLIDER
 	// TODO
 #endif
-	m_pg = CreatePropertyGridManager(m_nb, WXFB_PROPERTY_GRID);
-	m_eg = CreatePropertyGridManager(m_nb, WXFB_EVENT_GRID);
+	m_pg = CreatePropertyGridManager(m_nb, wxWEAVER_PROPERTY_GRID);
+	m_eg = CreatePropertyGridManager(m_nb, wxWEAVER_EVENT_GRID);
 
 	m_nb->AddPage( m_pg, _("Properties"), false, 0 );
 	m_nb->AddPage( m_eg, _("Events"),     false, 1 );
@@ -333,15 +333,15 @@ wxPGProperty* ObjectInspector::GetProperty( PProperty prop )
 	}
 	else if (type == PT_WXPOINT)
 	{
-		result = new wxFBPointProperty( name, wxPG_LABEL, prop->GetValueAsPoint() );
+		result = new wxWeaverPointProperty( name, wxPG_LABEL, prop->GetValueAsPoint() );
 	}
 	else if (type == PT_WXSIZE)
 	{
-		result = new wxFBSizeProperty( name, wxPG_LABEL, prop->GetValueAsSize() );
+		result = new wxWeaverSizeProperty( name, wxPG_LABEL, prop->GetValueAsSize() );
 	}
 	else if (type == PT_WXFONT)
 	{
-		result = new wxFBFontProperty( name, wxPG_LABEL, TypeConv::StringToFont( prop->GetValueAsString() ) );
+		result = new wxWeaverFontProperty( name, wxPG_LABEL, TypeConv::StringToFont( prop->GetValueAsString() ) );
 	}
 	else if (type == PT_WXCOLOUR)
 	{
@@ -379,7 +379,7 @@ wxPGProperty* ObjectInspector::GetProperty( PProperty prop )
 	{
 		wxLogDebug( wxT("OI::GetProperty: prop:%s"), prop->GetValueAsString().c_str() );
 
-		result = new wxFBBitmapProperty( name, wxPG_LABEL, prop->GetValueAsString() );
+		result = new wxWeaverBitmapProperty( name, wxPG_LABEL, prop->GetValueAsString() );
 	}
 	else if (type == PT_STRINGLIST)
 	{
@@ -451,7 +451,7 @@ void ObjectInspector::AddItems( const wxString& name, PObjectBase obj,
 
 				if ( propType == PT_BITMAP )
 				{
-					wxFBBitmapProperty *bp = wxDynamicCast( id, wxFBBitmapProperty );
+					wxWeaverBitmapProperty *bp = wxDynamicCast( id, wxWeaverBitmapProperty );
 					if ( bp )
 					{
 						bp->CreateChildren();
@@ -497,7 +497,7 @@ void ObjectInspector::AddItems( const wxString& name, PObjectBase obj,
 						}
 						else
 						{
-							THROW_WXFBEX( wxT("Invalid Child Property Type: ") << it->m_type );
+							THROW_wxWEAVEREX( wxT("Invalid Child Property Type: ") << it->m_type );
 						}
 
 						id->AppendChild( child );
@@ -516,7 +516,7 @@ void ObjectInspector::AddItems( const wxString& name, PObjectBase obj,
 				}
 			}
 
-			if (m_style != wxFB_OI_MULTIPAGE_STYLE)
+			if (m_style != wxWEAVER_OI_MULTIPAGE_STYLE)
 			{
 				// Most common classes will be showed with a slightly different colour.
 				if (!AppData()->IsDarkMode())
@@ -606,7 +606,7 @@ void ObjectInspector::AddItems( const wxString& name, PObjectBase obj,
 
 			m_eg->SetPropertyHelpString( id, wxGetTranslation( eventInfo->GetDescription() ) );
 
-			if (m_style != wxFB_OI_MULTIPAGE_STYLE)
+			if (m_style != wxWEAVER_OI_MULTIPAGE_STYLE)
 			{
 				// Most common classes will be showed with a slightly different colour.
 				if (!AppData()->IsDarkMode())
@@ -681,7 +681,7 @@ void ObjectInspector::OnPropertyGridChanging( wxPropertyGridEvent& event )
 	if ( imgFileProp )
 	{
 		// GetValue() returns the pending value, but is only supported by wxEVT_PG_CHANGING.
-		wxFBBitmapProperty *bmpProp = wxDynamicCast( imgFileProp->GetParent(), wxFBBitmapProperty );
+		wxWeaverBitmapProperty *bmpProp = wxDynamicCast( imgFileProp->GetParent(), wxWeaverBitmapProperty );
 
 		if ( bmpProp )
 		{
@@ -933,26 +933,26 @@ void ObjectInspector::OnEventGridExpand( wxPropertyGridEvent& event )
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-void ObjectInspector::OnObjectSelected( wxFBObjectEvent& event)
+void ObjectInspector::OnObjectSelected( wxWeaverObjectEvent& event)
 {
 	bool isForced = ( event.GetString() == wxT("force") );
 
 	Create( isForced );
 }
 
-void ObjectInspector::OnProjectRefresh( wxFBEvent& )
+void ObjectInspector::OnProjectRefresh( wxWeaverEvent& )
 {
 	Create( true );
 }
 
-void ObjectInspector::OnEventHandlerModified( wxFBEventHandlerEvent& event )
+void ObjectInspector::OnEventHandlerModified( wxWeaverEventHandlerEvent& event )
 {
 	PEvent e = event.GetFBEventHandler();
 	m_eg->SetPropertyValue( e->GetName(), e->GetValue() );
 	m_eg->Refresh();
 }
 
-void ObjectInspector::OnPropertyModified( wxFBPropertyEvent& event )
+void ObjectInspector::OnPropertyModified( wxWeaverPropertyEvent& event )
 {
 	LogDebug("");
 	PProperty prop = event.GetFBProperty();
@@ -1084,13 +1084,13 @@ wxPropertyGridManager* ObjectInspector::CreatePropertyGridManager(wxWindow *pare
 
 	switch (m_style)
 	{
-		case wxFB_OI_MULTIPAGE_STYLE:
+		case wxWEAVER_OI_MULTIPAGE_STYLE:
 			pgStyle = wxPG_BOLD_MODIFIED | wxPG_SPLITTER_AUTO_CENTER | wxPG_TOOLBAR | wxPG_DESCRIPTION | wxPGMAN_DEFAULT_STYLE;
 			defaultDescBoxHeight = 50;
 			break;
 
-		case wxFB_OI_DEFAULT_STYLE:
-		case wxFB_OI_SINGLE_PAGE_STYLE:
+		case wxWEAVER_OI_DEFAULT_STYLE:
+		case wxWEAVER_OI_SINGLE_PAGE_STYLE:
 		default:
 			pgStyle = wxPG_BOLD_MODIFIED | wxPG_SPLITTER_AUTO_CENTER | wxPG_DESCRIPTION | wxPGMAN_DEFAULT_STYLE;
 			defaultDescBoxHeight = 150;
@@ -1201,7 +1201,7 @@ void ObjectInspector::OnBitmapPropertyChanged( wxCommandEvent& event )
 
 	if( !propVal.IsEmpty() )
 	{
-		wxFBBitmapProperty *bp = wxDynamicCast( m_pg->GetPropertyByLabel( propName ), wxFBBitmapProperty );
+		wxWeaverBitmapProperty *bp = wxDynamicCast( m_pg->GetPropertyByLabel( propName ), wxWeaverBitmapProperty );
 		if( bp )
 		{
 			bp->UpdateChildValues( propVal );

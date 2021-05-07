@@ -78,7 +78,7 @@ void AppBitmaps::LoadBitmaps( wxString filepath, wxString iconpath )
 	{
 		wxLogError( _("Error loading images: %s"), _WXSTR( ex.m_details ).c_str() );
 	}
-	catch ( wxFBException& ex )
+	catch ( wxWeaverException& ex )
 	{
 		wxLogError( _("Error loading images: %s"), ex.what() );
 	}

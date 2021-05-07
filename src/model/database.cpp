@@ -96,7 +96,7 @@ ObjectDatabase::~ObjectDatabase()
 
     for ( LibraryVector::iterator lib = m_libs.begin(); lib != m_libs.end(); ++lib )
     {
-        #ifdef __WXFB_DEBUG__
+        #ifdef __wxWEAVER_DEBUG__
 			// Only unload in release - can't get a good stack trace if the library is unloaded
 			#ifdef __WXMAC__
 				dlclose( *lib );
@@ -259,9 +259,9 @@ PObjectBase ObjectDatabase::CreateObject( std::string classname, PObjectBase par
 
 	if (!objInfo)
 	{
-		THROW_WXFBEX( 	wxT("Unknown Object Type: ") << _WXSTR(classname) << wxT("\n")
-						wxT("The most likely causes are that this copy of wxFormBuilder is out of date, or that there is a plugin missing.\n")
-						wxT("Please check at http://www.wxFormBuilder.org") << wxT("\n") )
+		THROW_wxWEAVEREX( 	wxT("Unknown Object Type: ") << _WXSTR(classname) << wxT("\n")
+						wxT("The most likely causes are that this copy of wxWeaver is out of date, or that there is a plugin missing.\n")
+						wxT("Please check at http://www.wxWeaver.org") << wxT("\n") )
 	}
 
 	PObjectType objType = objInfo->GetObjectType();
@@ -546,9 +546,9 @@ PObjectBase ObjectDatabase::CreateObject( ticpp::Element* xml_obj, PObjectBase p
 					std::string value = xml_prop->GetText( false );
 					if ( !value.empty() )
 					{
-						wxLogError( wxT("The property named \"%s\" of class \"%s\" is not supported by this version of wxFormBuilder.\n")
+						wxLogError( wxT("The property named \"%s\" of class \"%s\" is not supported by this version of wxWeaver.\n")
 									wxT("If your project file was just converted from an older version, then the conversion was not complete.\n")
-									wxT("Otherwise, this project is from a newer version of wxFormBuilder.\n\n")
+									wxT("Otherwise, this project is from a newer version of wxWeaver.\n\n")
 									wxT("The property's value is: %s\n")
 									wxT("If you save this project, YOU WILL LOSE DATA"), _WXSTR(prop_name).c_str(), _WXSTR(class_name).c_str(), _WXSTR(value).c_str() );
 					}
@@ -603,7 +603,7 @@ bool IncludeInPalette(wxString /*type*/) {
 	return true;
 }
 
-void ObjectDatabase::LoadPlugins( PwxFBManager manager )
+void ObjectDatabase::LoadPlugins( PwxWeaverManager manager )
 {
 	// Load some default templates
 	LoadCodeGen( m_xmlPath + wxT("properties.cppcode") );
@@ -670,7 +670,7 @@ void ObjectDatabase::LoadPlugins( PwxFBManager manager )
 								packagesToSetup[ nextXmlFile.GetFullPath() ] = package;
 							}
 						}
-						catch ( wxFBException& ex )
+						catch ( wxWeaverException& ex )
 						{
 							wxLogError( ex.what() );
 						}
@@ -715,7 +715,7 @@ void ObjectDatabase::LoadPlugins( PwxFBManager manager )
 							}
 
 						}
-						catch ( wxFBException& ex )
+						catch ( wxWeaverException& ex )
 						{
 							wxLogError( ex.what() );
 						}
@@ -741,13 +741,13 @@ void ObjectDatabase::SetupPackage(const wxString& file,
 #else
                                   const wxString& /*path*/,
 #endif
-                                  PwxFBManager manager) {
+                                  PwxWeaverManager manager) {
 	#ifdef __WXMSW__
 		wxString libPath = path;
 	#else
 		wxStandardPathsBase& stdpaths = wxStandardPaths::Get();
 		wxString libPath = stdpaths.GetPluginsDir();
-		libPath.Replace( wxTheApp->GetAppName().c_str(), wxT("wxformbuilder") );
+        libPath.Replace( wxTheApp->GetAppName().c_str(), wxT("wxweaver") );
 	#endif
 
     // Renamed libraries for convenience in debug using a "-xx" wx version as suffix.
@@ -863,7 +863,7 @@ void ObjectDatabase::SetupPackage(const wxString& file,
 	}
 	catch ( ticpp::Exception& ex )
 	{
-		THROW_WXFBEX( _WXSTR(ex.m_details) );
+		THROW_wxWEAVEREX( _WXSTR(ex.m_details) );
 	}
 }
 
@@ -985,7 +985,7 @@ void ObjectDatabase::LoadCodeGen( const wxString& file )
 	{
 		wxLogError( _WXSTR(ex.m_details) );
 	}
-	catch( wxFBException& ex )
+	catch( wxWeaverException& ex )
 	{
 		wxLogError( ex.what() );
 	}
@@ -1105,7 +1105,7 @@ PObjectPackage ObjectDatabase::LoadPackage( const wxString& file, const wxString
 	}
 	catch ( ticpp::Exception& ex )
 	{
-		THROW_WXFBEX( _WXSTR(ex.m_details) );
+		THROW_wxWEAVEREX( _WXSTR(ex.m_details) );
 	}
 
 	return package;
@@ -1151,7 +1151,7 @@ void ObjectDatabase::ParseProperties( ticpp::Element* elem_obj, PObjectInfo obj_
 		{
 			ptype = ParsePropertyType( _WXSTR( prop_type ) );
 		}
-		catch( wxFBException& ex )
+		catch( wxWeaverException& ex )
 		{
 			wxLogError( wxT("Error: %s\nWhile parsing property \"%s\" of class \"%s\""), ex.what(), _WXSTR(pname).c_str(), obj_info->GetClassName().c_str() );
 			elem_prop = elem_prop->NextSiblingElement( PROPERTY_TAG, false );
@@ -1396,7 +1396,7 @@ bool ObjectDatabase::ShowInPalette(wxString type)
 }
 
 
-void ObjectDatabase::ImportComponentLibrary( wxString libfile, PwxFBManager manager )
+void ObjectDatabase::ImportComponentLibrary( wxString libfile, PwxWeaverManager manager )
 {
 	wxString path = libfile;
 
@@ -1413,7 +1413,7 @@ void ObjectDatabase::ImportComponentLibrary( wxString libfile, PwxFBManager mana
 		{
 			wxString error = wxString( dlerror(), wxConvUTF8 );
 
-			THROW_WXFBEX( wxT("Error loading library ") << path << wxT(" ") << error )
+			THROW_wxWEAVEREX( wxT("Error loading library ") << path << wxT(" ") << error )
 		}
 		dlerror(); // reset errors
 
@@ -1426,7 +1426,7 @@ void ObjectDatabase::ImportComponentLibrary( wxString libfile, PwxFBManager mana
 		if (dlsym_error)
 		{
 			wxString error = wxString( dlsym_error, wxConvUTF8 );
-            THROW_WXFBEX( path << " is not a valid component library: " << error )
+            THROW_wxWEAVEREX( path << " is not a valid component library: " << error )
 			dlclose( handle );
 		}
 		else
@@ -1439,7 +1439,7 @@ void ObjectDatabase::ImportComponentLibrary( wxString libfile, PwxFBManager mana
 		wxDynamicLibrary* library = new wxDynamicLibrary( path );
 		if ( !library->IsLoaded() )
 		{
-			THROW_WXFBEX( wxT("Error loading library ") << path )
+			THROW_wxWEAVEREX( wxT("Error loading library ") << path )
 		}
 
 		m_libs.push_back( library );
@@ -1449,7 +1449,7 @@ void ObjectDatabase::ImportComponentLibrary( wxString libfile, PwxFBManager mana
 
 		if ( !(GetComponentLibrary && FreeComponentLibrary) )
 		{
-            THROW_WXFBEX( path << " is not a valid component library" )
+            THROW_wxWEAVEREX( path << " is not a valid component library" )
 		}
 
 #endif
@@ -1497,7 +1497,7 @@ PropertyType ObjectDatabase::ParsePropertyType( wxString str )
 		result = it->second;
 	else
 	{
-		THROW_WXFBEX( wxString::Format( wxT("Unknown property type \"%s\""), str.c_str() ) );
+		THROW_wxWEAVEREX( wxString::Format( wxT("Unknown property type \"%s\""), str.c_str() ) );
 	}
 
 	return result;

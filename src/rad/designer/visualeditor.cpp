@@ -389,7 +389,7 @@ void VisualEditor::ClearWizard()
 {
 	if ( m_wizard )
 	{
-		m_wizard->Disconnect( wxID_ANY, wxFB_EVT_WIZARD_PAGE_CHANGED, WizardEventHandler( VisualEditor::OnWizardPageChanged ) );
+		m_wizard->Disconnect( wxID_ANY, wxWEAVER_EVT_WIZARD_PAGE_CHANGED, WizardEventHandler( VisualEditor::OnWizardPageChanged ) );
         m_wizard->Destroy();
 		m_wizard = NULL;
 	}
@@ -612,7 +612,7 @@ void VisualEditor::Create()
 							Generate( child, m_back->GetFrameContentPanel(), m_back->GetFrameContentPanel() );
 
 					}
-					catch ( wxFBException& ex )
+					catch ( wxWeaverException& ex )
 					{
 						wxLogError ( ex.what() );
 					}
@@ -718,7 +718,7 @@ void VisualEditor::Generate( PObjectBase obj, wxWindow* wxparent, wxObject* pare
 
 	if ( NULL == comp )
 	{
-		THROW_WXFBEX( wxString::Format( wxT("Component for %s not found!"), obj->GetClassName().c_str() ) );
+		THROW_wxWEAVEREX( wxString::Format( wxT("Component for %s not found!"), obj->GetClassName().c_str() ) );
 	}
 
 	// Create Object
@@ -734,7 +734,7 @@ void VisualEditor::Generate( PObjectBase obj, wxWindow* wxparent, wxObject* pare
 			createdWindow = wxDynamicCast( createdObject, wxWindow );
 			if ( NULL == createdWindow )
 			{
-				THROW_WXFBEX( wxString::Format( wxT("Component for %s was registered as a window component, but this is not a wxWindow!"), obj->GetClassName().c_str() ) );
+				THROW_wxWEAVEREX( wxString::Format( wxT("Component for %s was registered as a window component, but this is not a wxWindow!"), obj->GetClassName().c_str() ) );
 			}
 			SetupWindow( obj, createdWindow );
 
@@ -758,7 +758,7 @@ void VisualEditor::Generate( PObjectBase obj, wxWindow* wxparent, wxObject* pare
 			}
 			if ( NULL == createdSizer )
 			{
-				THROW_WXFBEX( wxString::Format( wxT("Component for %s was registered as a sizer component, but this is not a wxSizer!"), obj->GetClassName().c_str() ) );
+				THROW_wxWEAVEREX( wxString::Format( wxT("Component for %s was registered as a sizer component, but this is not a wxSizer!"), obj->GetClassName().c_str() ) );
 			}
 			SetupSizer( obj, createdSizer );
 
@@ -834,7 +834,7 @@ void VisualEditor::SetupWindow( PObjectBase obj, wxWindow* window )
 	// All of the properties of the wxWindow object are applied in this function
 
 	// Position
-	/* Position does nothing in wxFB - this is pointless
+	/* Position does nothing in wxWeaver - this is pointless
 	wxPoint pos;
 	PProperty ppos = obj->GetProperty( wxT("pos") );
 	if ( ppos )
@@ -1031,11 +1031,11 @@ void VisualEditor::SetupWizard( PObjectBase obj, wxWindow *window, bool pageAddi
     if ( pageAdding )
     {
         m_wizard->AddPage( wizpage );
-        m_wizard->Connect( wxID_ANY, wxFB_EVT_WIZARD_PAGE_CHANGED, WizardEventHandler( VisualEditor::OnWizardPageChanged ) );
+        m_wizard->Connect( wxID_ANY, wxWEAVER_EVT_WIZARD_PAGE_CHANGED, WizardEventHandler( VisualEditor::OnWizardPageChanged ) );
     }
     else
     {
-        WizardEvent eventChanged( wxFB_EVT_WIZARD_PAGE_CHANGED, m_wizard->GetId(), false, wizpage );
+        WizardEvent eventChanged( wxWEAVER_EVT_WIZARD_PAGE_CHANGED, m_wizard->GetId(), false, wizpage );
         eventChanged.SetInt( 1 );
         wizpage->GetEventHandler()->ProcessEvent( eventChanged );
 
@@ -1068,17 +1068,17 @@ void VisualEditor::PreventOnModified( bool prevent )
 	m_stopModifiedEvent = prevent;
 }
 
-void VisualEditor::OnProjectLoaded ( wxFBEvent &)
+void VisualEditor::OnProjectLoaded ( wxWeaverEvent &)
 {
   Create();
 }
 
-void VisualEditor::OnProjectSaved  ( wxFBEvent & )
+void VisualEditor::OnProjectSaved  ( wxWeaverEvent & )
 {
   //Create();
 }
 
-void VisualEditor::OnObjectSelected( wxFBObjectEvent &event )
+void VisualEditor::OnObjectSelected( wxWeaverObjectEvent &event )
 {
 	// It is only necessary to Create() if the selected object is on a different form
 	if ( AppData()->GetSelectedForm() != m_form )
@@ -1257,17 +1257,17 @@ void VisualEditor::OnObjectSelected( wxFBObjectEvent &event )
 	m_back->Refresh();
 }
 
-void VisualEditor::OnObjectCreated( wxFBObjectEvent &)
+void VisualEditor::OnObjectCreated( wxWeaverObjectEvent &)
 {
 	Create();
 }
 
-void VisualEditor::OnObjectRemoved( wxFBObjectEvent & )
+void VisualEditor::OnObjectRemoved( wxWeaverObjectEvent & )
 {
 	Create();
 }
 
-void VisualEditor::OnPropertyModified( wxFBPropertyEvent &)
+void VisualEditor::OnPropertyModified( wxWeaverPropertyEvent &)
 {
 	if ( !m_stopModifiedEvent )
 	{
@@ -1275,14 +1275,14 @@ void VisualEditor::OnPropertyModified( wxFBPropertyEvent &)
 		Create();
 		if ( aux )
 		{
-			wxFBObjectEvent objEvent( wxEVT_FB_OBJECT_SELECTED, aux );
+			wxWeaverObjectEvent objEvent( wxEVT_FB_OBJECT_SELECTED, aux );
 			this->ProcessEvent( objEvent );
 		}
 		UpdateVirtualSize();
 	}
 }
 
-void VisualEditor::OnProjectRefresh( wxFBEvent &)
+void VisualEditor::OnProjectRefresh( wxWeaverEvent &)
 {
 	Create();
 }

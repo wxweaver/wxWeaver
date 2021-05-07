@@ -18,8 +18,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
-// C++ code generated with wxFormBuilder (version Sep  5 2007)
-// http://www.wxformbuilder.org/
+// C++ code generated with wxWeaver (version Sep  5 2007)
+// https://wxweaver.github.io/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////

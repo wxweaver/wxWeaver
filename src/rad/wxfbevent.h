@@ -18,22 +18,22 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef __WXFBEVENT__
-#define __WXFBEVENT__
+#ifndef __wxWEAVEREVENT__
+#define __wxWEAVEREVENT__
 
 #include "../utils/wxfbdefs.h"
 
 #include <wx/event.h>
 
-class wxFBEvent : public wxEvent
+class wxWeaverEvent : public wxEvent
 {
 	private:
 		wxString m_string;
 
 	public:
-		wxFBEvent( wxEventType commandType = wxEVT_NULL );
-		wxFBEvent( const wxFBEvent& event );
-	~wxFBEvent() override;
+		wxWeaverEvent( wxEventType commandType = wxEVT_NULL );
+		wxWeaverEvent( const wxWeaverEvent& event );
+	~wxWeaverEvent() override;
 
 		wxString GetEventName();
 
@@ -44,33 +44,33 @@ class wxFBEvent : public wxEvent
 	wxEvent* Clone() const override;
 };
 
-class wxFBPropertyEvent : public wxFBEvent
+class wxWeaverPropertyEvent : public wxWeaverEvent
 {
 public:
-  wxFBPropertyEvent(wxEventType commandType, PProperty property);
-  wxFBPropertyEvent( const wxFBPropertyEvent& event );
+  wxWeaverPropertyEvent(wxEventType commandType, PProperty property);
+  wxWeaverPropertyEvent( const wxWeaverPropertyEvent& event );
 	wxEvent* Clone() const override;
   PProperty GetFBProperty() { return m_property; }
 private:
   PProperty m_property;
 };
 
-class wxFBEventHandlerEvent : public wxFBEvent
+class wxWeaverEventHandlerEvent : public wxWeaverEvent
 {
 public:
-  wxFBEventHandlerEvent (wxEventType commandType, PEvent event);
-  wxFBEventHandlerEvent( const wxFBEventHandlerEvent& event );
+  wxWeaverEventHandlerEvent (wxEventType commandType, PEvent event);
+  wxWeaverEventHandlerEvent( const wxWeaverEventHandlerEvent& event );
 	wxEvent* Clone() const override;
   PEvent GetFBEventHandler() { return m_event; }
 private:
   PEvent m_event;
 };
 
-class wxFBObjectEvent : public wxFBEvent
+class wxWeaverObjectEvent : public wxWeaverEvent
 {
 public:
-  wxFBObjectEvent(wxEventType commandType, PObjectBase object);
-  wxFBObjectEvent( const wxFBObjectEvent& event );
+  wxWeaverObjectEvent(wxEventType commandType, PObjectBase object);
+  wxWeaverObjectEvent( const wxWeaverObjectEvent& event );
 	wxEvent* Clone() const override;
   PObjectBase GetFBObject() { return m_object; }
 
@@ -79,22 +79,22 @@ private:
 };
 
 
-typedef void (wxEvtHandler::*wxFBEventFunction)        (wxFBEvent&);
-typedef void (wxEvtHandler::*wxFBPropertyEventFunction)(wxFBPropertyEvent&);
-typedef void (wxEvtHandler::*wxFBObjectEventFunction)  (wxFBObjectEvent&);
-typedef void (wxEvtHandler::*wxFBEventHandlerEventFunction)  (wxFBEventHandlerEvent&);
+typedef void (wxEvtHandler::*wxWeaverEventFunction)        (wxWeaverEvent&);
+typedef void (wxEvtHandler::*wxWeaverPropertyEventFunction)(wxWeaverPropertyEvent&);
+typedef void (wxEvtHandler::*wxWeaverObjectEventFunction)  (wxWeaverObjectEvent&);
+typedef void (wxEvtHandler::*wxWeaverEventHandlerEventFunction)  (wxWeaverEventHandlerEvent&);
 
-#define wxFBEventHandler(fn) \
-  (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxFBEventFunction, &fn)
+#define wxWeaverEventHandler(fn) \
+  (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxWeaverEventFunction, &fn)
 
-#define wxFBPropertyEventHandler(fn) \
-  (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxFBPropertyEventFunction, &fn)
+#define wxWeaverPropertyEventHandler(fn) \
+  (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxWeaverPropertyEventFunction, &fn)
 
-#define wxFBObjectEventHandler(fn) \
-  (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxFBObjectEventFunction, &fn)
+#define wxWeaverObjectEventHandler(fn) \
+  (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxWeaverObjectEventFunction, &fn)
 
-#define wxFBEventEventHandler(fn) \
-  (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxFBEventHandlerEventFunction, &fn)
+#define wxWeaverEventEventHandler(fn) \
+  (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxWeaverEventHandlerEventFunction, &fn)
 
 
 BEGIN_DECLARE_EVENT_TYPES()
@@ -111,33 +111,33 @@ BEGIN_DECLARE_EVENT_TYPES()
 END_DECLARE_EVENT_TYPES()
 
 #define EVT_FB_PROJECT_LOADED(fn) \
-  wx__DECLARE_EVT0(wxEVT_FB_PROJECT_LOADED,wxFBEventHandler(fn))
+  wx__DECLARE_EVT0(wxEVT_FB_PROJECT_LOADED,wxWeaverEventHandler(fn))
 
 #define EVT_FB_PROJECT_SAVED(fn) \
-  wx__DECLARE_EVT0(wxEVT_FB_PROJECT_SAVED,wxFBEventHandler(fn))
+  wx__DECLARE_EVT0(wxEVT_FB_PROJECT_SAVED,wxWeaverEventHandler(fn))
 
 #define EVT_FB_OBJECT_EXPANDED(fn) \
-  wx__DECLARE_EVT0(wxEVT_FB_OBJECT_EXPANDED,wxFBObjectEventHandler(fn))
+  wx__DECLARE_EVT0(wxEVT_FB_OBJECT_EXPANDED,wxWeaverObjectEventHandler(fn))
 
 #define EVT_FB_OBJECT_SELECTED(fn) \
-  wx__DECLARE_EVT0(wxEVT_FB_OBJECT_SELECTED,wxFBObjectEventHandler(fn))
+  wx__DECLARE_EVT0(wxEVT_FB_OBJECT_SELECTED,wxWeaverObjectEventHandler(fn))
 
 #define EVT_FB_OBJECT_CREATED(fn) \
-  wx__DECLARE_EVT0(wxEVT_FB_OBJECT_CREATED,wxFBObjectEventHandler(fn))
+  wx__DECLARE_EVT0(wxEVT_FB_OBJECT_CREATED,wxWeaverObjectEventHandler(fn))
 
 #define EVT_FB_OBJECT_REMOVED(fn) \
-  wx__DECLARE_EVT0(wxEVT_FB_OBJECT_REMOVED,wxFBObjectEventHandler(fn))
+  wx__DECLARE_EVT0(wxEVT_FB_OBJECT_REMOVED,wxWeaverObjectEventHandler(fn))
 
 #define EVT_FB_PROPERTY_MODIFIED(fn) \
-  wx__DECLARE_EVT0(wxEVT_FB_PROPERTY_MODIFIED,wxFBPropertyEventHandler(fn))
+  wx__DECLARE_EVT0(wxEVT_FB_PROPERTY_MODIFIED,wxWeaverPropertyEventHandler(fn))
 
 #define EVT_FB_EVENT_HANDLER_MODIFIED(fn) \
-  wx__DECLARE_EVT0(wxEVT_FB_EVENT_HANDLER_MODIFIED,wxFBEventEventHandler(fn))
+  wx__DECLARE_EVT0(wxEVT_FB_EVENT_HANDLER_MODIFIED,wxWeaverEventEventHandler(fn))
 
 #define EVT_FB_PROJECT_REFRESH(fn) \
-  wx__DECLARE_EVT0(wxEVT_FB_PROJECT_REFRESH,wxFBEventHandler(fn))
+  wx__DECLARE_EVT0(wxEVT_FB_PROJECT_REFRESH,wxWeaverEventHandler(fn))
 
 #define EVT_FB_CODE_GENERATION(fn) \
-    wx__DECLARE_EVT0(wxEVT_FB_CODE_GENERATION,wxFBEventHandler(fn))
+    wx__DECLARE_EVT0(wxEVT_FB_CODE_GENERATION,wxWeaverEventHandler(fn))
 
-#endif // __WXFBEVENT__
+#endif // __wxWEAVEREVENT__

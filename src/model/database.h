@@ -168,15 +168,15 @@ class ObjectDatabase
 
   /**
    * Importa una librería de componentes y lo asocia a cada clase.
-   * @throw wxFBException If the library could not be imported.
+   * @throw wxWeaverException If the library could not be imported.
    */
-  void ImportComponentLibrary( wxString libfile, PwxFBManager manager );
+  void ImportComponentLibrary( wxString libfile, PwxWeaverManager manager );
 
   /**
    * Incluye la información heredada de los objetos de un paquete.
    * En la segunda pasada configura cada paquete con sus objetos base.
    */
-  void SetupPackage( const wxString& file, const wxString& path, PwxFBManager manager );
+  void SetupPackage( const wxString& file, const wxString& path, PwxWeaverManager manager );
 
   /**
    * Determina si el tipo de objeto hay que incluirlo en la paleta de
@@ -234,7 +234,7 @@ class ObjectDatabase
   /**
    * Find and load plugins from the plugins directory
    */
-  void LoadPlugins( PwxFBManager manager );
+  void LoadPlugins( PwxWeaverManager manager );
 
   /**
    * Fabrica de objetos.

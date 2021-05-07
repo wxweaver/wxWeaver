@@ -23,11 +23,11 @@
 
 #include <wx/dnd.h>
 
-#define wxFBDataObjectFormat wxDataFormat(wxT("wxFormBuilderDataFormat"))
+#define wxWeaverDataObjectFormat wxDataFormat(wxT("wxWeaverDataFormat"))
 
-class wxFBDataObject : public wxDataObject {
+class wxWeaverDataObject : public wxDataObject {
 public:
-	wxFBDataObject(PObjectBase obj = PObjectBase());
+	wxWeaverDataObject(PObjectBase obj = PObjectBase());
 	void GetAllFormats(wxDataFormat* formats, Direction dir = Get) const override;
 	bool GetDataHere(const wxDataFormat& format, void* buf) const override;
 	size_t GetDataSize(const wxDataFormat& format) const override;

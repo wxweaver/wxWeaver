@@ -91,7 +91,7 @@ m_style( style )
 	b = wxMin( 255, m_colour1.Blue() + 30 );
 
 	m_colour2 = wxColour( r, g, b );
-	m_titleText = wxT( "wxFormBuilder rocks!" );
+	m_titleText = wxT( "wxWeaver rocks!" );
 	SetMinSize( wxSize( 100, 19 ) );
 }
 

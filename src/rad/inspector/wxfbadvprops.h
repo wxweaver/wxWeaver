@@ -17,8 +17,8 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef __WXFBADVPROPS_H__
-#define __WXFBADVPROPS_H__
+#ifndef __wxWEAVERADVPROPS_H__
+#define __wxWEAVERADVPROPS_H__
 
 #include "fontcontainer.h"
 
@@ -26,14 +26,14 @@
 #include <wx/propgrid/advprops.h>
 
 // -----------------------------------------------------------------------
-// wxFBSizeProperty
+// wxWeaverSizeProperty
 // -----------------------------------------------------------------------
 
-class wxFBSizeProperty : public wxPGProperty
+class wxWeaverSizeProperty : public wxPGProperty
 {
-    WX_PG_DECLARE_PROPERTY_CLASS( wxFBSizeProperty )
+    WX_PG_DECLARE_PROPERTY_CLASS( wxWeaverSizeProperty )
 public:
-    wxFBSizeProperty( const wxString& label = wxPG_LABEL,
+    wxWeaverSizeProperty( const wxString& label = wxPG_LABEL,
                       const wxString& name  = wxPG_LABEL,
                       const wxSize&   value = wxSize() );
 
@@ -47,17 +47,17 @@ protected:
 };
 
 // -----------------------------------------------------------------------
-// wxFBPointProperty
+// wxWeaverPointProperty
 // -----------------------------------------------------------------------
 
-class wxFBPointProperty : public wxPGProperty
+class wxWeaverPointProperty : public wxPGProperty
 {
-    WX_PG_DECLARE_PROPERTY_CLASS( wxFBPointProperty )
+    WX_PG_DECLARE_PROPERTY_CLASS( wxWeaverPointProperty )
 public:
-    wxFBPointProperty( const wxString& label = wxPG_LABEL,
+    wxWeaverPointProperty( const wxString& label = wxPG_LABEL,
                        const wxString& name  = wxPG_LABEL,
                        const wxPoint&  value = wxPoint() );
-	~wxFBPointProperty() override;
+	~wxWeaverPointProperty() override;
 
 	wxVariant ChildChanged(wxVariant& thisValue, int childIndex,
 	                       wxVariant& childValue) const override;
@@ -69,19 +69,19 @@ protected:
 };
 
 // -----------------------------------------------------------------------
-// wxFBBitmapProperty
+// wxWeaverBitmapProperty
 // -----------------------------------------------------------------------
 
-class wxFBBitmapProperty : public wxPGProperty
+class wxWeaverBitmapProperty : public wxPGProperty
 {
-    WX_PG_DECLARE_PROPERTY_CLASS( wxFBBitmapProperty )
+    WX_PG_DECLARE_PROPERTY_CLASS( wxWeaverBitmapProperty )
 
 public:
-    wxFBBitmapProperty( const wxString& label = wxPG_LABEL,
+    wxWeaverBitmapProperty( const wxString& label = wxPG_LABEL,
                         const wxString& name  = wxPG_LABEL,
                         const wxString& value = wxString() );
 
-	~wxFBBitmapProperty() override;
+	~wxWeaverBitmapProperty() override;
 
     wxPGProperty *CreatePropertySource( int sourceIndex = 0 );
     wxPGProperty *CreatePropertyFilePath() ;
@@ -156,16 +156,16 @@ private:
 #endif // wxUSE_SLIDER
 
 // -----------------------------------------------------------------------
-// wxFBFontProperty
+// wxWeaverFontProperty
 // -----------------------------------------------------------------------
 
-class wxFBFontProperty : public wxPGProperty
+class wxWeaverFontProperty : public wxPGProperty
 {
-    WX_PG_DECLARE_PROPERTY_CLASS(wxFBFontProperty)
+    WX_PG_DECLARE_PROPERTY_CLASS(wxWeaverFontProperty)
 public:
 
-    wxFBFontProperty( const wxString& label = wxPG_LABEL, const wxString& name = wxPG_LABEL, const wxFontContainer& value = *wxNORMAL_FONT);
-	~wxFBFontProperty() override;
+    wxWeaverFontProperty( const wxString& label = wxPG_LABEL, const wxString& name = wxPG_LABEL, const wxFontContainer& value = *wxNORMAL_FONT);
+	~wxWeaverFontProperty() override;
 
 	wxVariant ChildChanged(wxVariant& thisValue, int childIndex,
 	                       wxVariant& childValue) const override;
@@ -178,4 +178,4 @@ public:
 	bool OnEvent(wxPropertyGrid* propgrid, wxWindow* primary, wxEvent& event) override;
 };
 
-#endif //__WXFBADVPROPS_H__
+#endif //__wxWEAVERADVPROPS_H__

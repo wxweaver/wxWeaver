@@ -90,7 +90,7 @@ class IComponentLibrary
   virtual void RegisterMacro(const wxString &text, const int value) = 0;
   virtual void RegisterMacroSynonymous(const wxString &text, const wxString &name) = 0;
 
-  // Used by wxFormBuilder for recovering components and macros
+  // Used by wxWeaver for recovering components and macros
   virtual IComponent* GetComponent(unsigned int idx) = 0;
   virtual wxString    GetComponentName(unsigned int idx) = 0;
   virtual wxString    GetMacroName(unsigned int i) = 0;
@@ -143,7 +143,7 @@ class IComponent
   virtual ticpp::Element* ExportToXrc( IObject* obj ) = 0;
 
   /**
-   * Converts from an XRC element to a wxFormBuilder project file XML element
+   * Converts from an XRC element to a wxWeaver project file XML element
    */
   virtual ticpp::Element* ImportFromXrc( ticpp::Element* xrcObj ) = 0;
 

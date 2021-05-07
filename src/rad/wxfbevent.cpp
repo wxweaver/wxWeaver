@@ -31,7 +31,7 @@ DEFINE_EVENT_TYPE( wxEVT_FB_PROJECT_REFRESH )
 DEFINE_EVENT_TYPE( wxEVT_FB_CODE_GENERATION )
 DEFINE_EVENT_TYPE( wxEVT_FB_EVENT_HANDLER_MODIFIED )
 
-wxFBEvent::wxFBEvent( wxEventType commandType )
+wxWeaverEvent::wxWeaverEvent( wxEventType commandType )
 :
 wxEvent( 0, commandType )
 {
@@ -39,19 +39,19 @@ wxEvent( 0, commandType )
 }
 
 // required for sending with wxPostEvent()
-wxEvent* wxFBEvent::Clone() const
+wxEvent* wxWeaverEvent::Clone() const
 {
-	return new wxFBEvent( *this );
+	return new wxWeaverEvent( *this );
 }
 
-wxFBEvent::wxFBEvent( const wxFBEvent& event )
+wxWeaverEvent::wxWeaverEvent( const wxWeaverEvent& event )
 :
 wxEvent( event ),
 m_string( event.m_string )
 {
 }
 
-wxFBEvent::~wxFBEvent()
+wxWeaverEvent::~wxWeaverEvent()
 {
 	//dtor
 }
@@ -62,7 +62,7 @@ wxFBEvent::~wxFBEvent()
 		return wxT( #EVENT );							\
 	}
 
-wxString wxFBEvent::GetEventName()
+wxString wxWeaverEvent::GetEventName()
 {
 	CASE( wxEVT_FB_PROJECT_LOADED )
 	CASE( wxEVT_FB_PROJECT_SAVED )
@@ -78,63 +78,63 @@ wxString wxFBEvent::GetEventName()
 	return wxT( "Unknown Type" );
 }
 
-void wxFBEvent::SetString( const wxString& newString )
+void wxWeaverEvent::SetString( const wxString& newString )
 {
 	m_string = newString;
 }
 
-wxString wxFBEvent::GetString()
+wxString wxWeaverEvent::GetString()
 {
 	return m_string;
 }
 
-wxFBPropertyEvent::wxFBPropertyEvent(wxEventType commandType, PProperty property)
- : wxFBEvent(commandType), m_property(property)
+wxWeaverPropertyEvent::wxWeaverPropertyEvent(wxEventType commandType, PProperty property)
+ : wxWeaverEvent(commandType), m_property(property)
 {
 }
 
-wxFBPropertyEvent::wxFBPropertyEvent( const wxFBPropertyEvent& event )
+wxWeaverPropertyEvent::wxWeaverPropertyEvent( const wxWeaverPropertyEvent& event )
 :
-wxFBEvent( event ),
+wxWeaverEvent( event ),
 m_property( event.m_property )
 {
 }
 
-wxEvent* wxFBPropertyEvent::Clone() const
+wxEvent* wxWeaverPropertyEvent::Clone() const
 {
-	return new wxFBPropertyEvent( *this );
+	return new wxWeaverPropertyEvent( *this );
 }
 
-wxFBObjectEvent::wxFBObjectEvent(wxEventType commandType, PObjectBase object)
- : wxFBEvent(commandType), m_object(object)
+wxWeaverObjectEvent::wxWeaverObjectEvent(wxEventType commandType, PObjectBase object)
+ : wxWeaverEvent(commandType), m_object(object)
 {
 }
 
-wxFBObjectEvent::wxFBObjectEvent( const wxFBObjectEvent& event )
+wxWeaverObjectEvent::wxWeaverObjectEvent( const wxWeaverObjectEvent& event )
 :
-wxFBEvent( event ),
+wxWeaverEvent( event ),
 m_object( event.m_object )
 {
 }
 
-wxEvent* wxFBObjectEvent::Clone() const
+wxEvent* wxWeaverObjectEvent::Clone() const
 {
-	return new wxFBObjectEvent( *this );
+	return new wxWeaverObjectEvent( *this );
 }
 
-wxFBEventHandlerEvent::wxFBEventHandlerEvent(wxEventType commandType, PEvent event)
- : wxFBEvent(commandType), m_event(event)
+wxWeaverEventHandlerEvent::wxWeaverEventHandlerEvent(wxEventType commandType, PEvent event)
+ : wxWeaverEvent(commandType), m_event(event)
 {
 }
 
-wxFBEventHandlerEvent::wxFBEventHandlerEvent( const wxFBEventHandlerEvent& event )
+wxWeaverEventHandlerEvent::wxWeaverEventHandlerEvent( const wxWeaverEventHandlerEvent& event )
 :
-wxFBEvent( event ),
+wxWeaverEvent( event ),
 m_event( event.m_event )
 {
 }
 
-wxEvent* wxFBEventHandlerEvent::Clone() const
+wxEvent* wxWeaverEventHandlerEvent::Clone() const
 {
-	return new wxFBEventHandlerEvent( *this );
+	return new wxWeaverEventHandlerEvent( *this );
 }

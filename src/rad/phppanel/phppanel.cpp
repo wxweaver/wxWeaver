@@ -144,35 +144,35 @@ void PHPPanel::OnFind( wxFindDialogEvent& event )
 	m_phpPanel->GetEventHandler()->ProcessEvent( event );
 }
 
-void PHPPanel::OnPropertyModified( wxFBPropertyEvent& event )
+void PHPPanel::OnPropertyModified( wxWeaverPropertyEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void PHPPanel::OnProjectRefresh( wxFBEvent& event )
+void PHPPanel::OnProjectRefresh( wxWeaverEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void PHPPanel::OnObjectChange( wxFBObjectEvent& event )
+void PHPPanel::OnObjectChange( wxWeaverObjectEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void PHPPanel::OnEventHandlerModified( wxFBEventHandlerEvent& event )
+void PHPPanel::OnEventHandlerModified( wxWeaverEventHandlerEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void PHPPanel::OnCodeGeneration( wxFBEvent& event )
+void PHPPanel::OnCodeGeneration( wxWeaverEvent& event )
 {
     PObjectBase objectToGenerate;
 
@@ -275,7 +275,7 @@ void PHPPanel::OnCodeGeneration( wxFBEvent& event )
 	{
 		path = AppData()->GetOutputPath();
 	}
-	catch ( wxFBException& ex )
+	catch ( wxWeaverException& ex )
 	{
 		if ( doFile )
 		{
@@ -354,7 +354,7 @@ void PHPPanel::OnCodeGeneration( wxFBEvent& event )
 			codegen.GenerateCode( project );
 			wxLogStatus( wxT( "Code generated on \'%s\'." ), path.c_str() );
 		}
-		catch ( wxFBException& ex )
+		catch ( wxWeaverException& ex )
 		{
 			wxLogError( ex.what() );
 		}

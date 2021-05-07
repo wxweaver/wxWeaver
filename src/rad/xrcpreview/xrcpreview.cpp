@@ -151,7 +151,7 @@ void XRCPreview::Show( PObjectBase form, const wxString& projectPath )
 		codegen.SetWriter( cw );
 		codegen.GenerateCode( form );
 	}
-	catch ( wxFBException& ex )
+	catch ( wxWeaverException& ex )
 	{
 		wxLogError( ex.what() );
 		return;
@@ -172,7 +172,7 @@ void XRCPreview::Show( PObjectBase form, const wxString& projectPath )
 	{
 		wxFrame* frame = new wxFrame();
 		res->LoadFrame( frame, wxTheApp->GetTopWindow(), form->GetPropertyAsString( wxT( "name" ) ) );
-		// Prevent events from propagating up to wxFB's frame
+		// Prevent events from propagating up to wxWeaver's frame
 		frame->SetExtraStyle( frame->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS );
 		frame->Show();
 		window = frame;
@@ -181,7 +181,7 @@ void XRCPreview::Show( PObjectBase form, const wxString& projectPath )
 	{
 		wxDialog* dialog = new wxDialog;
 		res->LoadDialog( dialog, wxTheApp->GetTopWindow(), form->GetPropertyAsString( wxT( "name" ) ) );
-		// Prevent events from propagating up to wxFB's frame
+		// Prevent events from propagating up to wxWeaver's frame
 		dialog->SetExtraStyle( dialog->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS );
 		dialog->Show();
 		window = dialog;
@@ -216,7 +216,7 @@ void XRCPreview::Show( PObjectBase form, const wxString& projectPath )
 	{
 		wxDialog* dialog = new wxDialog( wxTheApp->GetTopWindow(), wxID_ANY, wxT( "Dialog" ), wxDefaultPosition,
 		                 wxDefaultSize, wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER );
-		// Prevent events from propagating up to wxFB's frame
+		// Prevent events from propagating up to wxWeaver's frame
 		dialog->SetExtraStyle( wxWS_EX_BLOCK_EVENTS );
 		wxPanel *panel = new wxPanel();
 		res->LoadPanel( panel, dialog, form->GetPropertyAsString( wxT( "name" ) ) );
@@ -229,7 +229,7 @@ void XRCPreview::Show( PObjectBase form, const wxString& projectPath )
 	else if ( className == wxT( "MenuBar" ) )
 	{
 		wxFrame* frame = new wxFrame( NULL, wxID_ANY, form->GetPropertyAsString( wxT( "name" ) ) );
-		// Prevent events from propagating up to wxFB's frame
+		// Prevent events from propagating up to wxWeaver's frame
 		frame->SetExtraStyle( frame->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS );
 		frame->SetMenuBar( res->LoadMenuBar( form->GetPropertyAsString( wxT( "name" ) ) ) );
 		frame->CenterOnScreen();
@@ -239,7 +239,7 @@ void XRCPreview::Show( PObjectBase form, const wxString& projectPath )
 	else if ( className == wxT( "ToolBar" ) )
 	{
 		wxFrame* frame = new wxFrame( NULL, wxID_ANY, form->GetPropertyAsString( wxT( "name" ) ) );
-		// Prevent events from propagating up to wxFB's frame
+		// Prevent events from propagating up to wxWeaver's frame
 		frame->SetExtraStyle( frame->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS );
 		frame->SetToolBar( res->LoadToolBar( frame, form->GetPropertyAsString( wxT( "name" ) ) ) );
 		frame->CenterOnScreen();

@@ -21,7 +21,7 @@
 #ifndef _LUA_CODE_GEN_
 #define _LUA_CODE_GEN_
 
-// wxFormBuilder flags (fbfXXX)
+// wxWeaver flags (fbfXXX)
 #define fbfSILENT true
 #define fbfMESSAGE false
 

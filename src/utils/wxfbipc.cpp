@@ -29,7 +29,7 @@
 #include <wx/filename.h>
 #include <wx/wx.h>
 
-bool wxFBIPC::VerifySingleInstance( const wxString& file, bool switchTo )
+bool wxWEAVERIPC::VerifySingleInstance( const wxString& file, bool switchTo )
 {
 	// Possible send a message to the running instance through this string later, for now it is left empty
 	wxString expression = wxEmptyString;
@@ -54,7 +54,7 @@ bool wxFBIPC::VerifySingleInstance( const wxString& file, bool switchTo )
 	// Check for single instance
 
 	// Create lockfile/mutex name
-	wxString name = wxString::Format( wxT("wxFormBuilder-%s-%s"), wxGetUserId().c_str(), path.GetFullPath().c_str() );
+	wxString name = wxString::Format( wxT("wxWeaver-%s-%s"), wxGetUserId().c_str(), path.GetFullPath().c_str() );
 
 	// Get forbidden characters
 	wxString forbidden = wxFileName::GetForbiddenChars();
@@ -88,7 +88,7 @@ bool wxFBIPC::VerifySingleInstance( const wxString& file, bool switchTo )
 	std::unique_ptr<wxSingleInstanceChecker> checker;
     {
         // Suspend logging, because error messages here are not useful
-        #ifndef __WXFB_DEBUG__
+        #ifndef __wxWEAVER_DEBUG__
         wxLogNull stopLogging;
         #endif
         checker.reset( new wxSingleInstanceChecker( name ) );
@@ -110,7 +110,7 @@ bool wxFBIPC::VerifySingleInstance( const wxString& file, bool switchTo )
 	else if ( switchTo )
     {
 		// Suspend logging, because error messages here are not useful
-		#ifndef __WXFB_DEBUG__
+		#ifndef __wxWEAVER_DEBUG__
 		wxLogNull stopLogging;
 		#endif
 
@@ -168,10 +168,10 @@ bool wxFBIPC::VerifySingleInstance( const wxString& file, bool switchTo )
     return false;
 }
 
-bool wxFBIPC::CreateServer( const wxString& name )
+bool wxWEAVERIPC::CreateServer( const wxString& name )
 {
 	// Suspend logging, because error messages here are not useful
-	#ifndef __WXFB_DEBUG__
+	#ifndef __wxWEAVER_DEBUG__
 	wxLogNull stopLogging;
 	#endif
 
@@ -205,7 +205,7 @@ bool wxFBIPC::CreateServer( const wxString& name )
 	return false;
 }
 
-void wxFBIPC::Reset()
+void wxWEAVERIPC::Reset()
 {
 	m_server.reset();
 	m_checker.reset();

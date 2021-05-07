@@ -26,9 +26,9 @@
 
 #include <wx/treectrl.h>
 
-class wxFBEvent;
-class wxFBPropertyEvent;
-class wxFBObjectEvent;
+class wxWeaverEvent;
+class wxWeaverPropertyEvent;
+class wxWeaverObjectEvent;
 
 class ObjectTree : public wxPanel
 {
@@ -74,14 +74,14 @@ public:
   void OnEndDrag(wxTreeEvent &event);
   void OnExpansionChange(wxTreeEvent &event);
 
-  void OnProjectLoaded ( wxFBEvent &event );
-  void OnProjectSaved  ( wxFBEvent &event );
-  void OnObjectExpanded( wxFBObjectEvent& event );
-  void OnObjectSelected( wxFBObjectEvent &event );
-  void OnObjectCreated ( wxFBObjectEvent &event );
-  void OnObjectRemoved ( wxFBObjectEvent &event );
-  void OnPropertyModified ( wxFBPropertyEvent &event );
-  void OnProjectRefresh ( wxFBEvent &event);
+  void OnProjectLoaded ( wxWeaverEvent &event );
+  void OnProjectSaved  ( wxWeaverEvent &event );
+  void OnObjectExpanded( wxWeaverObjectEvent& event );
+  void OnObjectSelected( wxWeaverObjectEvent &event );
+  void OnObjectCreated ( wxWeaverObjectEvent &event );
+  void OnObjectRemoved ( wxWeaverObjectEvent &event );
+  void OnPropertyModified ( wxWeaverPropertyEvent &event );
+  void OnProjectRefresh ( wxWeaverEvent &event);
   void OnKeyDown ( wxTreeEvent &event);
 
   void AddCustomKeysHandler(CustomKeysEvtHandler *h) { m_tcObjects->PushEventHandler(h); }

@@ -290,7 +290,7 @@ wxString LuaTemplateParser::ValueToCode( PropertyType type, wxString value )
 				{
 					absPath = TypeConv::MakeAbsolutePath( path, AppData()->GetProjectPath() );
 				}
-				catch( wxFBException& ex )
+				catch( wxWeaverException& ex )
 				{
 					wxLogError( ex.what() );
 					result = wxT( "wx.wxNullBitmap" );
@@ -562,8 +562,8 @@ bool LuaCodeGenerator::GenerateCode( PObjectBase project )
 
 	code = wxString::Format(
 		wxT("----------------------------------------------------------------------------\n")
-		wxT("-- Lua code generated with wxFormBuilder (version %s%s ") wxT(__DATE__) wxT(")\n")
-		wxT("-- http://www.wxformbuilder.org/\n")
+		wxT("-- Lua code generated with wxWeaver (version %s%s ") wxT(__DATE__) wxT(")\n")
+        wxT("-- https://wxweaver.github.io/\n")
 		wxT("----------------------------------------------------------------------------\n"),
 		VERSION, REVISION
 	);

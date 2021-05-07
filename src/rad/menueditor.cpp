@@ -479,7 +479,7 @@ void MenuEditor::OnRemoveMenuItem(wxCommandEvent& )
         {
             int res = wxMessageBox(
                 wxT("The children of the selected item will be eliminated too. Are you sure you want to continue?"),
-                wxT("wxFormBuilder"), wxYES_NO);
+                wxT("wxWeaver"), wxYES_NO);
             if (res == wxYES)
             {
                 long item = sel + 1;

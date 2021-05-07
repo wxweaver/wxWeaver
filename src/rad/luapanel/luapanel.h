@@ -31,10 +31,10 @@ class wxStyledTextCtrl;
 
 class wxFindDialogEvent;
 
-class wxFBEvent;
-class wxFBPropertyEvent;
-class wxFBObjectEvent;
-class wxFBEventHandlerEvent;
+class wxWeaverEvent;
+class wxWeaverPropertyEvent;
+class wxWeaverObjectEvent;
+class wxWeaverEventHandlerEvent;
 
 class LuaPanel : public wxPanel
 {
@@ -48,11 +48,11 @@ public:
 	LuaPanel( wxWindow *parent, int id );
 	~LuaPanel() override;
 
-	void OnPropertyModified( wxFBPropertyEvent& event );
-	void OnProjectRefresh( wxFBEvent& event );
-	void OnCodeGeneration( wxFBEvent& event );
-	void OnObjectChange( wxFBObjectEvent& event );
-	void OnEventHandlerModified( wxFBEventHandlerEvent& event );
+	void OnPropertyModified( wxWeaverPropertyEvent& event );
+	void OnProjectRefresh( wxWeaverEvent& event );
+	void OnCodeGeneration( wxWeaverEvent& event );
+	void OnObjectChange( wxWeaverObjectEvent& event );
+	void OnEventHandlerModified( wxWeaverEventHandlerEvent& event );
 
 	void OnFind( wxFindDialogEvent& event );
 

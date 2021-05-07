@@ -25,15 +25,15 @@
 #include <wx/regex.h>
 
 // -----------------------------------------------------------------------
-// wxFBSizeProperty
+// wxWeaverSizeProperty
 // -----------------------------------------------------------------------
 #if wxCHECK_VERSION(3, 1, 0)
-wxPG_IMPLEMENT_PROPERTY_CLASS(wxFBSizeProperty, wxPGProperty, TextCtrl)
+wxPG_IMPLEMENT_PROPERTY_CLASS(wxWeaverSizeProperty, wxPGProperty, TextCtrl)
 #else
-WX_PG_IMPLEMENT_PROPERTY_CLASS( wxFBSizeProperty, wxPGProperty, wxSize, const wxSize&, TextCtrl )
+WX_PG_IMPLEMENT_PROPERTY_CLASS( wxWeaverSizeProperty, wxPGProperty, wxSize, const wxSize&, TextCtrl )
 #endif
 
-wxFBSizeProperty::wxFBSizeProperty( const wxString& label,
+wxWeaverSizeProperty::wxWeaverSizeProperty( const wxString& label,
                                     const wxString& name,
                                     const wxSize&   value ) : wxPGProperty( label, name )
 {
@@ -42,7 +42,7 @@ wxFBSizeProperty::wxFBSizeProperty( const wxString& label,
     AddPrivateChild( new wxIntProperty( wxT("Height"), wxPG_LABEL, value.y ) );
 }
 
-void wxFBSizeProperty::RefreshChildren()
+void wxWeaverSizeProperty::RefreshChildren()
 {
     if ( GetChildCount() < 2 ) return;
 
@@ -52,7 +52,7 @@ void wxFBSizeProperty::RefreshChildren()
 	Item(1)->SetValue( (long)size.y );
 }
 
-wxVariant wxFBSizeProperty::ChildChanged(wxVariant& thisValue, const int childIndex,
+wxVariant wxWeaverSizeProperty::ChildChanged(wxVariant& thisValue, const int childIndex,
                                          wxVariant& childValue) const {
 	wxSize& size = wxSizeRefFromVariant( thisValue );
 
@@ -75,16 +75,16 @@ wxVariant wxFBSizeProperty::ChildChanged(wxVariant& thisValue, const int childIn
 }
 
 // -----------------------------------------------------------------------
-// wxFBPointProperty
+// wxWeaverPointProperty
 // -----------------------------------------------------------------------
 
 #if wxCHECK_VERSION(3, 1, 0)
-wxPG_IMPLEMENT_PROPERTY_CLASS(wxFBPointProperty, wxPGProperty, TextCtrl)
+wxPG_IMPLEMENT_PROPERTY_CLASS(wxWeaverPointProperty, wxPGProperty, TextCtrl)
 #else
-WX_PG_IMPLEMENT_PROPERTY_CLASS( wxFBPointProperty, wxPGProperty, wxPoint, const wxPoint&, TextCtrl )
+WX_PG_IMPLEMENT_PROPERTY_CLASS( wxWeaverPointProperty, wxPGProperty, wxPoint, const wxPoint&, TextCtrl )
 #endif
 
-wxFBPointProperty::wxFBPointProperty( const wxString& label,
+wxWeaverPointProperty::wxWeaverPointProperty( const wxString& label,
                                       const wxString& name,
                                       const wxPoint&  value ) : wxPGProperty( label, name )
 {
@@ -93,9 +93,9 @@ wxFBPointProperty::wxFBPointProperty( const wxString& label,
     AddPrivateChild( new wxIntProperty( wxT("Y"), wxPG_LABEL, value.y ) );
 }
 
-wxFBPointProperty::~wxFBPointProperty() { }
+wxWeaverPointProperty::~wxWeaverPointProperty() { }
 
-void wxFBPointProperty::RefreshChildren()
+void wxWeaverPointProperty::RefreshChildren()
 {
     if ( GetChildCount() < 2 ) return;
 
@@ -105,7 +105,7 @@ void wxFBPointProperty::RefreshChildren()
     Item(1)->SetValue( (long)point.y );
 }
 
-wxVariant wxFBPointProperty::ChildChanged(wxVariant& thisValue, const int childIndex,
+wxVariant wxWeaverPointProperty::ChildChanged(wxVariant& thisValue, const int childIndex,
                                           wxVariant& childValue) const {
 	wxPoint& point = wxPointRefFromVariant( thisValue );
 
@@ -128,7 +128,7 @@ wxVariant wxFBPointProperty::ChildChanged(wxVariant& thisValue, const int childI
 }
 
 // -----------------------------------------------------------------------
-// wxFBBitmapProperty
+// wxWeaverBitmapProperty
 // -----------------------------------------------------------------------
 
 // static long gs_imageFilterIndex = -1; TODO: new wxPropertyGrid misses the
@@ -136,13 +136,13 @@ wxVariant wxFBPointProperty::ChildChanged(wxVariant& thisValue, const int childI
 static wxString gs_imageInitialPath = wxEmptyString;
 
 #if wxCHECK_VERSION(3, 1, 0)
-wxPG_IMPLEMENT_PROPERTY_CLASS(wxFBBitmapProperty, wxPGProperty, TextCtrl)
+wxPG_IMPLEMENT_PROPERTY_CLASS(wxWeaverBitmapProperty, wxPGProperty, TextCtrl)
 #else
-WX_PG_IMPLEMENT_PROPERTY_CLASS( wxFBBitmapProperty, wxPGProperty,
+WX_PG_IMPLEMENT_PROPERTY_CLASS( wxWeaverBitmapProperty, wxPGProperty,
                                 wxString, const wxString&, TextCtrl )
 #endif
 
-void wxFBBitmapProperty::GetChildValues( const wxString& parentValue, wxArrayString& childValues ) const
+void wxWeaverBitmapProperty::GetChildValues( const wxString& parentValue, wxArrayString& childValues ) const
 {
 	// some properties can contain value like "[-1;-1]" which must be modified due to use of ";" as a
 	// string separator
@@ -169,14 +169,14 @@ void wxFBBitmapProperty::GetChildValues( const wxString& parentValue, wxArrayStr
 	}
 }
 
-wxFBBitmapProperty::wxFBBitmapProperty( const wxString& label,
+wxWeaverBitmapProperty::wxWeaverBitmapProperty( const wxString& label,
                                         const wxString& name,
                                         const wxString& value ) : wxPGProperty( label, name )
 {
     SetValue( WXVARIANT( value ) );
 }
 
-void wxFBBitmapProperty::CreateChildren()
+void wxWeaverBitmapProperty::CreateChildren()
 {
 	wxString  propValue  = m_value.GetString();
 	wxVariant thisValue  = WXVARIANT( propValue );
@@ -226,7 +226,7 @@ void wxFBBitmapProperty::CreateChildren()
 	ChildChanged( thisValue, 0, childValue );
 }
 
-wxPGProperty *wxFBBitmapProperty::CreatePropertySource( int sourceIndex )
+wxPGProperty *wxWeaverBitmapProperty::CreatePropertySource( int sourceIndex )
 {
     wxPGChoices sourceChoices;
 
@@ -256,7 +256,7 @@ wxPGProperty *wxFBBitmapProperty::CreatePropertySource( int sourceIndex )
     return srcProp;
 }
 
-wxPGProperty *wxFBBitmapProperty::CreatePropertyFilePath()
+wxPGProperty *wxWeaverBitmapProperty::CreatePropertyFilePath()
 {
     // Add 'file_path' property (common for 'Load From File' and 'Load From Embedded File' choices)
     wxPGProperty *propFilePath = new wxImageFileProperty( wxT("file_path"), wxPG_LABEL );
@@ -271,7 +271,7 @@ wxPGProperty *wxFBBitmapProperty::CreatePropertyFilePath()
     return propFilePath;
 }
 
-wxPGProperty *wxFBBitmapProperty::CreatePropertyResourceName()
+wxPGProperty *wxWeaverBitmapProperty::CreatePropertyResourceName()
 {
     // Create 'resource_name' property (common for 'Load From Resource' and 'Load From Icon Resource' choices)
     wxPGProperty *propResName = new wxStringProperty( wxT("resource_name"), wxPG_LABEL );
@@ -280,16 +280,16 @@ wxPGProperty *wxFBBitmapProperty::CreatePropertyResourceName()
     return propResName;
 }
 
-wxPGProperty *wxFBBitmapProperty::CreatePropertyIconSize()
+wxPGProperty *wxWeaverBitmapProperty::CreatePropertyIconSize()
 {
     // Create 'ico_size' property ('Load From Icon Resource' only)
-    wxPGProperty *propIcoSize = new wxFBSizeProperty(wxT("ico_size"), wxPG_LABEL, wxDefaultSize);
+    wxPGProperty *propIcoSize = new wxWeaverSizeProperty(wxT("ico_size"), wxPG_LABEL, wxDefaultSize);
     propIcoSize->SetHelpString(_("The size of the icon to use from a ICON resource with multiple icons in it.") );
 
     return propIcoSize;
 }
 
-wxPGProperty* wxFBBitmapProperty::CreatePropertyXrcName()
+wxPGProperty* wxWeaverBitmapProperty::CreatePropertyXrcName()
 {
 	// Create 'xrc_name' property ('Load From XRC' only)
 	auto* propXRCName = new wxStringProperty(wxT("xrc_name"), wxPG_LABEL);
@@ -298,7 +298,7 @@ wxPGProperty* wxFBBitmapProperty::CreatePropertyXrcName()
 	return propXRCName;
 }
 
-wxPGProperty *wxFBBitmapProperty::CreatePropertyArtId()
+wxPGProperty *wxWeaverBitmapProperty::CreatePropertyArtId()
 {
     wxPGChoices artIdChoices;
 
@@ -465,7 +465,7 @@ wxPGProperty *wxFBBitmapProperty::CreatePropertyArtId()
     return propArtId;
 }
 
-wxPGProperty *wxFBBitmapProperty::CreatePropertyArtClient()
+wxPGProperty *wxWeaverBitmapProperty::CreatePropertyArtClient()
 {
     wxPGChoices artClientChoices;
 
@@ -485,14 +485,14 @@ wxPGProperty *wxFBBitmapProperty::CreatePropertyArtClient()
     return propArtClient;
 }
 
-wxFBBitmapProperty::~wxFBBitmapProperty()
+wxWeaverBitmapProperty::~wxWeaverBitmapProperty()
 {
 }
 
-wxVariant wxFBBitmapProperty::ChildChanged(wxVariant& thisValue, const int childIndex,
+wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int childIndex,
                                            wxVariant& childValue) const
 {
-	auto* bp = const_cast<wxFBBitmapProperty*>(this);
+	auto* bp = const_cast<wxWeaverBitmapProperty*>(this);
 
 	const auto val = thisValue.GetString();
 	wxArrayString childVals;
@@ -520,7 +520,7 @@ wxVariant wxFBBitmapProperty::ChildChanged(wxVariant& thisValue, const int child
 						{
 							if (auto* p = Item(i))
 							{
-								wxLogDebug(wxT("wxFBBP::ChildChanged: Removing:%s"), p->GetLabel().c_str());
+								wxLogDebug(wxT("wxWeaverBP::ChildChanged: Removing:%s"), p->GetLabel().c_str());
 								GetGrid()->DeleteProperty(p);
 							}
 						}
@@ -546,7 +546,7 @@ wxVariant wxFBBitmapProperty::ChildChanged(wxVariant& thisValue, const int child
 						{
 							if (auto* p = Item(i))
 							{
-								wxLogDebug(wxT("wxFBBP::ChildChanged: Removing:%s"), p->GetLabel().c_str());
+								wxLogDebug(wxT("wxWeaverBP::ChildChanged: Removing:%s"), p->GetLabel().c_str());
 								GetGrid()->DeleteProperty(p);
 							}
 						}
@@ -572,7 +572,7 @@ wxVariant wxFBBitmapProperty::ChildChanged(wxVariant& thisValue, const int child
 						{
 							if (auto* p = Item(i))
 							{
-								wxLogDebug(wxT("wxFBBP::ChildChanged: Removing:%s"), p->GetLabel().c_str());
+								wxLogDebug(wxT("wxWeaverBP::ChildChanged: Removing:%s"), p->GetLabel().c_str());
 								GetGrid()->DeleteProperty(p);
 							}
 						}
@@ -599,7 +599,7 @@ wxVariant wxFBBitmapProperty::ChildChanged(wxVariant& thisValue, const int child
 						{
 							if (auto* p = Item(i))
 							{
-								wxLogDebug(wxT("wxFBBP::ChildChanged: Removing:%s"), p->GetLabel().c_str());
+								wxLogDebug(wxT("wxWeaverBP::ChildChanged: Removing:%s"), p->GetLabel().c_str());
 								GetGrid()->DeleteProperty(p);
 							}
 						}
@@ -625,7 +625,7 @@ wxVariant wxFBBitmapProperty::ChildChanged(wxVariant& thisValue, const int child
 						{
 							if (auto* p = Item(i))
 							{
-								wxLogDebug(wxT("wxFBBP::ChildChanged: Removing:%s"), p->GetLabel().c_str());
+								wxLogDebug(wxT("wxWeaverBP::ChildChanged: Removing:%s"), p->GetLabel().c_str());
 								GetGrid()->DeleteProperty(p);
 							}
 						}
@@ -687,7 +687,7 @@ wxVariant wxFBBitmapProperty::ChildChanged(wxVariant& thisValue, const int child
     return thisValue;
 }
 
-void wxFBBitmapProperty::UpdateChildValues(const wxString& value)
+void wxWeaverBitmapProperty::UpdateChildValues(const wxString& value)
 {
 	wxArrayString childVals;
 	GetChildValues( value, childVals );
@@ -756,11 +756,11 @@ void wxFBBitmapProperty::UpdateChildValues(const wxString& value)
 	}
 }
 
-void wxFBBitmapProperty::OnSetValue()
+void wxWeaverBitmapProperty::OnSetValue()
 {
 }
 
-wxString wxFBBitmapProperty::SetupImage( const wxString &imgPath )
+wxString wxWeaverBitmapProperty::SetupImage( const wxString &imgPath )
 {
 	if(!imgPath.IsEmpty())
 	{
@@ -789,7 +789,7 @@ wxString wxFBBitmapProperty::SetupImage( const wxString &imgPath )
     return imgPath;
 }
 
-wxString wxFBBitmapProperty::SetupResource( const wxString &resName )
+wxString wxWeaverBitmapProperty::SetupResource( const wxString &resName )
 {
     wxString res = wxEmptyString;
     // Keep old value from an icon resource only
@@ -910,7 +910,7 @@ void wxPGSliderEditor::SetValueToUnspecified( wxPGProperty* WXUNUSED( property )
 #endif //wxUSE_SLIDER
 
 // -----------------------------------------------------------------------
-// wxFBFontProperty
+// wxWeaverFontProperty
 // -----------------------------------------------------------------------
 
 #include <wx/fontdlg.h>
@@ -958,14 +958,14 @@ static long gs_fp_es_weight_values[] = {
 };
 
 #if wxCHECK_VERSION(3, 1, 0)
-wxPG_IMPLEMENT_PROPERTY_CLASS(wxFBFontProperty, wxPGProperty, TextCtrlAndButton)
+wxPG_IMPLEMENT_PROPERTY_CLASS(wxWeaverFontProperty, wxPGProperty, TextCtrlAndButton)
 #else
-WX_PG_IMPLEMENT_PROPERTY_CLASS(wxFBFontProperty,wxPGProperty,
+WX_PG_IMPLEMENT_PROPERTY_CLASS(wxWeaverFontProperty,wxPGProperty,
                                wxFont,const wxFont&,TextCtrlAndButton)
 #endif
 
 
-wxFBFontProperty::wxFBFontProperty( const wxString& label, const wxString& name,
+wxWeaverFontProperty::wxWeaverFontProperty( const wxString& label, const wxString& name,
                                 const wxFontContainer& value )
     : wxPGProperty(label,name)
 {
@@ -1017,19 +1017,19 @@ wxFBFontProperty::wxFBFontProperty( const wxString& label, const wxString& name,
               value.m_underlined) );
 }
 
-wxFBFontProperty::~wxFBFontProperty() { }
+wxWeaverFontProperty::~wxWeaverFontProperty() { }
 
-void wxFBFontProperty::OnSetValue()
+void wxWeaverFontProperty::OnSetValue()
 {
 	// do nothing
 }
 
-wxString wxFBFontProperty::GetValueAsString( int argFlags ) const
+wxString wxWeaverFontProperty::GetValueAsString( int argFlags ) const
 {
     return wxPGProperty::GetValueAsString(argFlags);
 }
 
-bool wxFBFontProperty::OnEvent( wxPropertyGrid* propgrid, wxWindow* WXUNUSED(primary),
+bool wxWeaverFontProperty::OnEvent( wxPropertyGrid* propgrid, wxWindow* WXUNUSED(primary),
                               wxEvent& event )
 {
     if ( propgrid->IsMainButtonEvent(event) )
@@ -1058,7 +1058,7 @@ bool wxFBFontProperty::OnEvent( wxPropertyGrid* propgrid, wxWindow* WXUNUSED(pri
     return false;
 }
 
-void wxFBFontProperty::RefreshChildren()
+void wxWeaverFontProperty::RefreshChildren()
 {
 	wxString fstr = m_value.GetString();
 	wxFontContainer font = TypeConv::StringToFont( fstr );
@@ -1072,7 +1072,7 @@ void wxFBFontProperty::RefreshChildren()
 }
 
     wxVariant
-wxFBFontProperty::ChildChanged( wxVariant& thisValue, int ind, wxVariant& childValue ) const
+wxWeaverFontProperty::ChildChanged( wxVariant& thisValue, int ind, wxVariant& childValue ) const
 {
 	wxFontContainer font = TypeConv::StringToFont( thisValue.GetString() );
 

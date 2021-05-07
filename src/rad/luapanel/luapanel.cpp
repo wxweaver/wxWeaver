@@ -137,35 +137,35 @@ void LuaPanel::OnFind( wxFindDialogEvent& event )
 	m_luaPanel->GetEventHandler()->ProcessEvent( event );
 }
 
-void LuaPanel::OnPropertyModified( wxFBPropertyEvent& event )
+void LuaPanel::OnPropertyModified( wxWeaverPropertyEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void LuaPanel::OnProjectRefresh( wxFBEvent& event )
+void LuaPanel::OnProjectRefresh( wxWeaverEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void LuaPanel::OnObjectChange( wxFBObjectEvent& event )
+void LuaPanel::OnObjectChange( wxWeaverObjectEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void LuaPanel::OnEventHandlerModified( wxFBEventHandlerEvent& event )
+void LuaPanel::OnEventHandlerModified( wxWeaverEventHandlerEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void LuaPanel::OnCodeGeneration( wxFBEvent& event )
+void LuaPanel::OnCodeGeneration( wxWeaverEvent& event )
 {
     PObjectBase objectToGenerate;
 
@@ -267,7 +267,7 @@ void LuaPanel::OnCodeGeneration( wxFBEvent& event )
 	{
 		path = AppData()->GetOutputPath();
 	}
-	catch ( wxFBException& ex )
+	catch ( wxWeaverException& ex )
 	{
 		if ( doFile )
 		{
@@ -346,7 +346,7 @@ void LuaPanel::OnCodeGeneration( wxFBEvent& event )
 			codegen.GenerateCode( project );
 			wxLogStatus( wxT( "Code generated on \'%s\'." ), path.c_str() );
 		}
-		catch ( wxFBException& ex )
+		catch ( wxWeaverException& ex )
 		{
 			wxLogError( ex.what() );
 		}

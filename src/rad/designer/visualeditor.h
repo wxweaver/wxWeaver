@@ -78,9 +78,9 @@ class DesignerWindow : public wxInnerFrame
    void OnPaint(wxPaintEvent &event);
 };
 
-class wxFBEvent;
-class wxFBPropertyEvent;
-class wxFBObjectEvent;
+class wxWeaverEvent;
+class wxWeaverPropertyEvent;
+class wxWeaverObjectEvent;
 
 class VisualEditor : public wxScrolledWindow
 {
@@ -147,13 +147,13 @@ class VisualEditor : public wxScrolledWindow
   void ClearComponents( wxWindow* parent );
 
   // Events
-  void OnProjectLoaded ( wxFBEvent &event );
-  void OnProjectSaved  ( wxFBEvent &event );
-  void OnObjectSelected( wxFBObjectEvent &event );
-  void OnObjectCreated ( wxFBObjectEvent &event );
-  void OnObjectRemoved ( wxFBObjectEvent &event );
-  void OnPropertyModified ( wxFBPropertyEvent &event );
-  void OnProjectRefresh ( wxFBEvent &event);
+  void OnProjectLoaded ( wxWeaverEvent &event );
+  void OnProjectSaved  ( wxWeaverEvent &event );
+  void OnObjectSelected( wxWeaverObjectEvent &event );
+  void OnObjectCreated ( wxWeaverObjectEvent &event );
+  void OnObjectRemoved ( wxWeaverObjectEvent &event );
+  void OnPropertyModified ( wxWeaverPropertyEvent &event );
+  void OnProjectRefresh ( wxWeaverEvent &event);
 };
 
 #endif //__VISUAL_EDITOR__

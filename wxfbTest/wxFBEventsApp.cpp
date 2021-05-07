@@ -26,16 +26,16 @@
 #pragma hdrstop
 #endif //__BORLANDC__
 
-#include "wxFBEventsApp.h"
-#include "wxFBEventMainFrame.h"
+#include "wxWeaverEventsApp.h"
+#include "wxWeaverEventMainFrame.h"
 
-IMPLEMENT_APP( wxFBEventsApp );
+IMPLEMENT_APP( wxWeaverEventsApp );
 
-bool wxFBEventsApp::OnInit()
+bool wxWeaverEventsApp::OnInit()
 {
 	//::wxInitAllImageHandlers();
 
-	wxFBEventMainFrame* frame = new wxFBEventMainFrame( 0L );
+	wxWeaverEventMainFrame* frame = new wxWeaverEventMainFrame( 0L );
 //	frame->SetIcon( wxICON( aaaa ) ); // To Set App Icon
 	frame->Show();
 

@@ -1,6 +1,6 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado (as )
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -35,11 +35,11 @@ class Element;
 
 class Property;
 
-class wxFBEvent;
+class wxWeaverEvent;
 
-class wxFBManager;
+class wxWeaverManager;
 
-class wxFBIPC;
+class wxWEAVERIPC;
 
 #define AppData()         	(ApplicationData::Get())
 #define AppDataCreate(path) (ApplicationData::Get(path))
@@ -83,17 +83,17 @@ class ApplicationData
 
 		wxString m_projectPath;
 
-		PwxFBManager m_manager;
+		PwxWeaverManager m_manager;
 
 		// Prevent more than one instance of a project
-		std::shared_ptr< wxFBIPC > m_ipc;
+		std::shared_ptr< wxWEAVERIPC > m_ipc;
 
 
 		typedef std::vector< wxEvtHandler* > HandlerVector;
 
 		HandlerVector m_handlers;
 
-		void NotifyEvent( wxFBEvent& event, bool forcedelayed = false );
+		void NotifyEvent( wxWeaverEvent& event, bool forcedelayed = false );
 
 		// Notifican a cada observador el evento correspondiente
 		void NotifyProjectLoaded();
@@ -221,7 +221,7 @@ class ApplicationData
 		 */
 		wxString GetPathProperty( const wxString& pathName );
 
-		#ifdef __WXFB_DEBUG__
+		#ifdef __wxWEAVER_DEBUG__
 		wxLog* m_debugLogTarget;
 		#endif
 
@@ -236,7 +236,7 @@ class ApplicationData
 		ApplicationData(ApplicationData&&) = delete;
 		ApplicationData& operator=(ApplicationData&&) = delete;
 
-		#ifdef __WXFB_DEBUG__
+		#ifdef __wxWEAVER_DEBUG__
 		wxLog* GetDebugLogTarget(){ return m_debugLogTarget; }
 		#endif
 
@@ -250,10 +250,10 @@ class ApplicationData
 		// Initialize application
 		void LoadApp();
 
-		// Hold a pointer to the wxFBManager
-		PwxFBManager GetManager();
+		// Hold a pointer to the wxWeaverManager
+		PwxWeaverManager GetManager();
 
-		// Procedures for register/unregister wxEvtHandlers to be notified of wxFBEvents
+		// Procedures for register/unregister wxEvtHandlers to be notified of wxWeaverEvents
 		void AddHandler( wxEvtHandler* handler );
 
 		void RemoveHandler( wxEvtHandler* handler );

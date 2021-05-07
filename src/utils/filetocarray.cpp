@@ -80,7 +80,7 @@ wxString FileToCArray::Generate( const wxString& sourcePath )
 		outputPath = AppData()->GetOutputPath();
 		embeddedFilesOutputPath = AppData()->GetEmbeddedFilesOutputPath();
 	}
-	catch ( wxFBException& ex )
+	catch ( wxWeaverException& ex )
 	{
 		wxLogWarning( ex.what() );
 		return targetFullName;

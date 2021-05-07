@@ -131,28 +131,28 @@ void XrcPanel::OnFind( wxFindDialogEvent& event )
 	}
 }
 
-void XrcPanel::OnPropertyModified( wxFBPropertyEvent& event )
+void XrcPanel::OnPropertyModified( wxWeaverPropertyEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void XrcPanel::OnProjectRefresh( wxFBEvent& event )
+void XrcPanel::OnProjectRefresh( wxWeaverEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void XrcPanel::OnObjectChange( wxFBObjectEvent& event )
+void XrcPanel::OnObjectChange( wxWeaverObjectEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void XrcPanel::OnCodeGeneration( wxFBEvent& event )
+void XrcPanel::OnCodeGeneration( wxWeaverEvent& event )
 {
     PObjectBase project;
 
@@ -249,7 +249,7 @@ void XrcPanel::OnCodeGeneration( wxFBEvent& event )
 			codegen.GenerateCode( project );
 			wxLogStatus( wxT( "Code generated on \'%s\'." ), path.c_str() );
 		}
-		catch ( wxFBException& ex )
+		catch ( wxWeaverException& ex )
 		{
 			wxLogError( ex.what() );
 		}

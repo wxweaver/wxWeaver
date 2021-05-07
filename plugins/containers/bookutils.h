@@ -95,11 +95,11 @@ namespace BookUtils
 		// Error checking
 		if ( !( obj && book && page ) )
 		{
-			wxLogError( _("%s is missing its wxFormBuilder object(%p), its parent(%p), or its child(%p)"), name.c_str(), obj, book, page );
+			wxLogError( _("%s is missing its wxWeaver object(%p), its parent(%p), or its child(%p)"), name.c_str(), obj, book, page );
 			return;
 		}
 
-		// Prevent event handling by wxFB - these aren't user generated events
+		// Prevent event handling by wxWeaver - these aren't user generated events
 		SuppressEventHandlers suppress( book );
 
 		// Save selection
@@ -110,7 +110,7 @@ namespace BookUtils
 		IObject* parentObj = manager->GetIObject( wxparent );
 		if ( !parentObj )
 		{
-			wxLogError( _("%s's parent is missing its wxFormBuilder object"), name.c_str() );
+			wxLogError( _("%s's parent is missing its wxWeaver object"), name.c_str() );
 			return;
 		}
 

@@ -874,7 +874,7 @@ void XrcToXfbFilter::ImportFontProperty( const wxString &xrcPropName, ticpp::Ele
 			font.SetFaceName( wxEmptyString );
 		}
 
-		// We already have the font type. So we must now use the wxFB format
+		// We already have the font type. So we must now use the wxWeaver format
 		wxString font_str =
 			wxString::Format( wxT("%s,%d,%d,%d,%d,%d"), font.GetFaceName().c_str(), font.GetStyle(),
 														font.GetWeight(), font.GetPointSize(),

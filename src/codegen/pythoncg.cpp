@@ -282,7 +282,7 @@ wxString PythonTemplateParser::ValueToCode( PropertyType type, wxString value )
 				{
 					absPath = TypeConv::MakeAbsolutePath( path, AppData()->GetProjectPath() );
 				}
-				catch( wxFBException& ex )
+				catch( wxWeaverException& ex )
 				{
 					wxLogError( ex.what() );
 					result = wxT( "wx.NullBitmap" );
@@ -502,8 +502,8 @@ bool PythonCodeGenerator::GenerateCode( PObjectBase project )
 
 	code = wxString::Format(
 		wxT("###########################################################################\n")
-		wxT("## Python code generated with wxFormBuilder (version %s%s ") wxT(__DATE__) wxT(")\n")
-		wxT("## http://www.wxformbuilder.org/\n")
+		wxT("## Python code generated with wxWeaver (version %s%s ") wxT(__DATE__) wxT(")\n")
+        wxT("## https://wxweaver.github.io/\n")
 		wxT("##\n")
 		wxT("## PLEASE DO *NOT* EDIT THIS FILE!\n")
 		wxT("###########################################################################\n"),

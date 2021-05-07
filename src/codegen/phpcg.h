@@ -32,7 +32,7 @@ The value of all properties that are file or a directory paths must be absolute,
 #ifndef _PHP_CODE_GEN_
 #define _PHP_CODE_GEN_
 
-// wxFormBuilder flags (fbfXXX)
+// wxWeaver flags (fbfXXX)
 #define fbfSILENT true
 #define fbfMESSAGE false
 

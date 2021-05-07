@@ -40,10 +40,10 @@ class wxStyledTextCtrl;
 
 class wxFindDialogEvent;
 
-class wxFBEvent;
-class wxFBPropertyEvent;
-class wxFBObjectEvent;
-class wxFBEventHandlerEvent;
+class wxWeaverEvent;
+class wxWeaverPropertyEvent;
+class wxWeaverObjectEvent;
+class wxWeaverEventHandlerEvent;
 
 class PHPPanel : public wxPanel
 {
@@ -57,11 +57,11 @@ public:
 	PHPPanel( wxWindow *parent, int id );
 	~PHPPanel() override;
 
-	void OnPropertyModified( wxFBPropertyEvent& event );
-	void OnProjectRefresh( wxFBEvent& event );
-	void OnCodeGeneration( wxFBEvent& event );
-	void OnObjectChange( wxFBObjectEvent& event );
-	void OnEventHandlerModified( wxFBEventHandlerEvent& event );
+	void OnPropertyModified( wxWeaverPropertyEvent& event );
+	void OnProjectRefresh( wxWeaverEvent& event );
+	void OnCodeGeneration( wxWeaverEvent& event );
+	void OnObjectChange( wxWeaverObjectEvent& event );
+	void OnEventHandlerModified( wxWeaverEventHandlerEvent& event );
 
 	void OnFind( wxFindDialogEvent& event );
 

@@ -67,7 +67,7 @@ AboutDialog::AboutDialog(wxWindow *parent, int id) : wxDialog(parent,id,wxT("Abo
 #if 0
   wxBoxSizer *sizer2;
   sizer2 = new wxBoxSizer(wxVERTICAL);
-  m_staticText2 = new wxStaticText(this,wxID_ANY,wxT("wxFormBuilder"),wxDefaultPosition,wxDefaultSize,0);
+  m_staticText2 = new wxStaticText(this,wxID_ANY,wxT("wxWeaver"),wxDefaultPosition,wxDefaultSize,0);
   m_staticText2->SetFont(wxFont(12,74,90,92,false,wxT("Arial")));
   sizer2->Add(m_staticText2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5);
   m_staticText3 = new wxStaticText(this,wxID_ANY,wxT("a RAD tool for wxWidgets framework"),wxDefaultPosition,wxDefaultSize,0);
@@ -110,9 +110,9 @@ AboutDialog::AboutDialog(wxWindow *parent, int id) : wxDialog(parent,id,wxT("Abo
 
 #ifdef __WXMAC__
   // work around a wxMac bug
-  htmlWin->SetSize(400, 600);
+  htmlWin->SetSize(360, 400);
 #else
-  htmlWin->SetMinSize(wxSize(400, 600));
+  htmlWin->SetMinSize(wxSize(350, 400));
 #endif
 
 

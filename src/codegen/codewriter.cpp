@@ -253,7 +253,7 @@ void FileCodeWriter::Clear()
 		// check for write access to the target file
 		if ( !wxFile::Access( m_filename, wxFile::write ) )
 		{
-			THROW_WXFBEX( _("Unable to write file: ") << m_filename );
+			THROW_wxWEAVEREX( _("Unable to write file: ") << m_filename );
 		}
 	}
 	else
@@ -261,7 +261,7 @@ void FileCodeWriter::Clear()
 		wxFile file;
 		if ( !file.Create( m_filename, true ) )
 		{
-			THROW_WXFBEX( _("Unable to create file: ") << m_filename );
+			THROW_wxWEAVEREX( _("Unable to create file: ") << m_filename );
 		}
 	}
 }

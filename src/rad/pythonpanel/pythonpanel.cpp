@@ -137,35 +137,35 @@ void PythonPanel::OnFind( wxFindDialogEvent& event )
 	m_pythonPanel->GetEventHandler()->ProcessEvent( event );
 }
 
-void PythonPanel::OnPropertyModified( wxFBPropertyEvent& event )
+void PythonPanel::OnPropertyModified( wxWeaverPropertyEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void PythonPanel::OnProjectRefresh( wxFBEvent& event )
+void PythonPanel::OnProjectRefresh( wxWeaverEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void PythonPanel::OnObjectChange( wxFBObjectEvent& event )
+void PythonPanel::OnObjectChange( wxWeaverObjectEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void PythonPanel::OnEventHandlerModified( wxFBEventHandlerEvent& event )
+void PythonPanel::OnEventHandlerModified( wxWeaverEventHandlerEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void PythonPanel::OnCodeGeneration( wxFBEvent& event )
+void PythonPanel::OnCodeGeneration( wxWeaverEvent& event )
 {
     PObjectBase objectToGenerate;
 
@@ -268,7 +268,7 @@ void PythonPanel::OnCodeGeneration( wxFBEvent& event )
 	{
 		path = AppData()->GetOutputPath();
 	}
-	catch ( wxFBException& ex )
+	catch ( wxWeaverException& ex )
 	{
 		if ( doFile )
 		{
@@ -365,7 +365,7 @@ void PythonPanel::OnCodeGeneration( wxFBEvent& event )
 			codegen.GenerateCode( project );
 			wxLogStatus( wxT( "Code generated on \'%s\'." ), path.c_str() );
 		}
-		catch ( wxFBException& ex )
+		catch ( wxWeaverException& ex )
 		{
 			wxLogError( ex.what() );
 		}

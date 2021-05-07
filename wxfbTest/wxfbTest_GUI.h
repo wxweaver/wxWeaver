@@ -18,8 +18,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
-// C++ code generated with wxFormBuilder (version May  4 2007)
-// http://www.wxformbuilder.org/
+// C++ code generated with wxWeaver (version May 7 2021)
+// https://wxweaver.github.io/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////
@@ -61,7 +61,7 @@ class MainFrame : public wxFrame
 		wxToolBar* m_toolBar1;
 
 	public:
-		MainFrame( wxWindow* parent, int id = ID_DEFAULT, wxString title = wxT("wxFormBuilder Test App"), wxPoint pos = wxDefaultPosition, wxSize size = wxSize( 500,300 ), int style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MainFrame( wxWindow* parent, int id = ID_DEFAULT, wxString title = wxT("wxWeaver Test App"), wxPoint pos = wxDefaultPosition, wxSize size = wxSize( 500,300 ), int style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 };
 

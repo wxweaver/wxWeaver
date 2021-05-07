@@ -147,7 +147,7 @@ bool TemplateParser::ParseMacro()
 		ParseLuaTable();
 		break;
 	default:
-		THROW_WXFBEX( wxT("Invalid Macro Type") );
+		THROW_wxWEAVEREX( wxT("Invalid Macro Type") );
 		break;
 	}
 
@@ -567,7 +567,7 @@ PProperty TemplateParser::GetProperty( wxString* childName )
                     break;
             }
 	    }
-	    catch( wxFBException& ex )
+	    catch( wxWeaverException& ex )
 	    {
 	        wxLogError( ex.what() );
 	    }
@@ -972,7 +972,7 @@ TemplateParser::Ident TemplateParser::SearchIdent(wxString ident)
 	else if(ident == wxT("utbl"))
 		return ID_UTBL;
 	else
-		THROW_WXFBEX( wxString::Format( wxT("Unknown macro: \"%s\""), ident.c_str() ) );
+		THROW_wxWEAVEREX( wxString::Format( wxT("Unknown macro: \"%s\""), ident.c_str() ) );
 }
 
 wxString TemplateParser::ParseTemplate()
@@ -998,7 +998,7 @@ wxString TemplateParser::ParseTemplate()
             }
         }
     }
-    catch ( wxFBException& ex )
+    catch ( wxWeaverException& ex )
     {
         wxLogError( ex.what() );
     }

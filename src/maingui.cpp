@@ -99,16 +99,16 @@ int MyApp::OnRun()
 	#endif
 
 	// Using a space so the initial 'w' will not be capitalized in wxLogGUI dialogs
-	wxApp::SetAppName( wxT( " wxFormBuilder" ) );
+	wxApp::SetAppName( wxT( " wxWeaver" ) );
 
 	// Creating the wxConfig manually so there will be no space
 	// The old config (if any) is returned, delete it
-	delete wxConfigBase::Set( new wxConfig( wxT("wxFormBuilder") ) );
+	delete wxConfigBase::Set( new wxConfig( wxT("wxWeaver") ) );
 
 	// Get the data directory
 	wxStandardPathsBase& stdPaths = wxStandardPaths::Get();
 	wxString dataDir = stdPaths.GetDataDir();
-	dataDir.Replace( GetAppName().c_str(), wxT("wxformbuilder") );
+    dataDir.Replace( GetAppName().c_str(), wxT("wxweaver") );
 
 	// Log to stderr while working on the command line
 	delete wxLog::SetActiveTarget( new wxLogStderr );
@@ -124,7 +124,7 @@ int MyApp::OnRun()
 	}
 
 	if (parser.Found("v")) {
-		std::cout << "wxFormBuilder " << VERSION << REVISION << std::endl;
+		std::cout << "wxWeaver " << VERSION << REVISION << std::endl;
 		return EXIT_SUCCESS;
 	}
 
@@ -176,20 +176,20 @@ int MyApp::OnRun()
 			wxFileName projectPath( projectToLoad );
 			if ( !projectPath.IsOk() )
 			{
-				THROW_WXFBEX( wxT("This path is invalid: ") << projectToLoad );
+				THROW_wxWEAVEREX( wxT("This path is invalid: ") << projectToLoad );
 			}
 
 			if ( !projectPath.IsAbsolute() )
 			{
 				if ( !projectPath.MakeAbsolute() )
 				{
-					THROW_WXFBEX( wxT("Could not make path absolute: ") << projectToLoad );
+					THROW_wxWEAVEREX( wxT("Could not make path absolute: ") << projectToLoad );
 				}
 			}
 			projectToLoad = projectPath.GetFullPath();
 		}
 	}
-	catch ( wxFBException& ex )
+	catch ( wxWeaverException& ex )
 	{
 		wxLogError( ex.what() );
 	}
@@ -220,9 +220,9 @@ int MyApp::OnRun()
 	{
 		AppDataInit();
 	}
-	catch( wxFBException& ex )
+	catch( wxWeaverException& ex )
 	{
-		wxLogError( _("Error loading application: %s\nwxFormBuilder cannot continue."),	ex.what() );
+		wxLogError( _("Error loading application: %s\n cannot continue."),	ex.what() );
 		wxLog::FlushActive();
 		return 5;
 	}
@@ -244,10 +244,10 @@ int MyApp::OnRun()
 	config->Read( wxT( "SizeW" ), &w );
 	config->Read( wxT( "SizeH" ), &h );
 
-	long style = config->Read( wxT("style"), wxFB_WIDE_GUI );
-	if ( style != wxFB_CLASSIC_GUI )
+	long style = config->Read( wxT("style"), wxWEAVER_WIDE_GUI );
+	if ( style != wxWEAVER_CLASSIC_GUI )
 	{
-		style = wxFB_WIDE_GUI;
+		style = wxWEAVER_WIDE_GUI;
 	}
 
 	config->SetPath( wxT("/") );
@@ -258,16 +258,16 @@ int MyApp::OnRun()
 		m_frame->Show( TRUE );
 		SetTopWindow( m_frame );
 
-		#ifdef __WXFB_DEBUG__
+		#ifdef __wxWEAVER_DEBUG__
 			wxLogWindow* log = dynamic_cast< wxLogWindow* >( AppData()->GetDebugLogTarget() );
 			if ( log )
 			{
 				m_frame->AddChild( log->GetFrame() );
 			}
-		#endif //__WXFB_DEBUG__
+		#endif //__wxWEAVER_DEBUG__
 	}
 
-	// This is not necessary for wxFB to work. However, Windows sets the Current Working Directory
+	// This is not necessary for wxWeaver to work. However, Windows sets the Current Working Directory
 	// to the directory from which a .fbp file was opened, if opened from Windows Explorer.
 	// This puts an unneccessary lock on the directory.
 	// This changes the CWD to the already locked app directory as a workaround

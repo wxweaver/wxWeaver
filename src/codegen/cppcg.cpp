@@ -246,7 +246,7 @@ wxString CppTemplateParser::ValueToCode( PropertyType type, wxString value )
 				{
 					absPath = TypeConv::MakeAbsolutePath( path, AppData()->GetProjectPath() );
 				}
-				catch ( wxFBException& ex )
+				catch ( wxWeaverException& ex )
 				{
 					wxLogError( ex.what() );
 					result = wxT( "wxNullBitmap" );
@@ -273,7 +273,7 @@ wxString CppTemplateParser::ValueToCode( PropertyType type, wxString value )
 				{
 					absPath = TypeConv::MakeAbsolutePath( path, AppData()->GetProjectPath() );
 				}
-				catch ( wxFBException& ex )
+				catch ( wxWeaverException& ex )
 				{
 					wxLogError( ex.what() );
 					result = wxT( "wxNullBitmap" );
@@ -594,8 +594,8 @@ bool CppCodeGenerator::GenerateCode( PObjectBase project )
 	m_source->Clear();
 	wxString code = wxString::Format(
 		wxT("///////////////////////////////////////////////////////////////////////////\n")
-		wxT("// C++ code generated with wxFormBuilder (version %s%s ") wxT(__DATE__) wxT(")\n")
-		wxT("// http://www.wxformbuilder.org/\n")
+		wxT("// C++ code generated with wxWeaver (version %s%s ") wxT(__DATE__) wxT(")\n")
+        wxT("// https://wxweaver.github.io/\n")
 		wxT("//\n")
 		wxT("// PLEASE DO *NOT* EDIT THIS FILE!\n")
 		wxT("///////////////////////////////////////////////////////////////////////////\n"),
@@ -858,7 +858,7 @@ void CppCodeGenerator::GenEvents( PObjectBase class_obj, const EventVector &even
 			}
 			else
 			{
-				handlerName.Printf( wxT( "%s::_wxFB_%s" ), class_name.c_str(), event->GetValue().c_str() );
+				handlerName.Printf( wxT( "%s::_wxWEAVER_%s" ), class_name.c_str(), event->GetValue().c_str() );
 			}
 			wxString templateName = wxString::Format( wxT( "%s_%s" ), m_useConnect ? wxT( "connect" ) : wxT( "entry" ), event->GetName().c_str() );
 
@@ -932,7 +932,7 @@ void CppCodeGenerator::GenPrivateEventHandlers( const EventVector& events )
 
 			if ( generatedHandlers.find( event->GetValue() ) == generatedHandlers.end() )
 			{
-				aux = wxT( "void _wxFB_" ) + event->GetValue() + wxT( "( " ) +
+				aux = wxT( "void _wxWEAVER_" ) + event->GetValue() + wxT( "( " ) +
 					  event->GetEventInfo()->GetEventClassName() + wxT( "& event ){ " ) +
 					  event->GetValue() + wxT( "( event ); }" );
 

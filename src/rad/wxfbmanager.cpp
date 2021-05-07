@@ -62,18 +62,18 @@ public:
 	}
 };
 
-wxFBManager::wxFBManager()
+wxWeaverManager::wxWeaverManager()
 :
 m_visualEdit( NULL )
 {
 }
 
-void wxFBManager::SetVisualEditor( VisualEditor* visualEdit )
+void wxWeaverManager::SetVisualEditor( VisualEditor* visualEdit )
 {
 	m_visualEdit = visualEdit;
 }
 
-IObject* wxFBManager::GetIObject( wxObject* wxobject )
+IObject* wxWeaverManager::GetIObject( wxObject* wxobject )
 {
 	CHECK_VISUAL_EDITOR( NULL )
 
@@ -86,7 +86,7 @@ IObject* wxFBManager::GetIObject( wxObject* wxobject )
 	return obj.get();
 }
 
-size_t wxFBManager::GetChildCount( wxObject* wxobject )
+size_t wxWeaverManager::GetChildCount( wxObject* wxobject )
 {
 	CHECK_VISUAL_EDITOR( 0 )
 
@@ -99,7 +99,7 @@ size_t wxFBManager::GetChildCount( wxObject* wxobject )
 	return obj->GetChildCount();
 }
 
-wxObject* wxFBManager::GetChild( wxObject* wxobject, size_t childIndex )
+wxObject* wxWeaverManager::GetChild( wxObject* wxobject, size_t childIndex )
 {
 	CHECK_VISUAL_EDITOR( NULL )
 
@@ -117,7 +117,7 @@ wxObject* wxFBManager::GetChild( wxObject* wxobject, size_t childIndex )
 	return m_visualEdit->GetWxObject( obj->GetChild( childIndex ) );
 }
 
-IObject* wxFBManager::GetIParent( wxObject* wxobject )
+IObject* wxWeaverManager::GetIParent( wxObject* wxobject )
 {
 	CHECK_VISUAL_EDITOR( NULL )
 
@@ -130,7 +130,7 @@ IObject* wxFBManager::GetIParent( wxObject* wxobject )
 	return obj->GetParent().get();
 }
 
-wxObject* wxFBManager::GetParent( wxObject* wxobject )
+wxObject* wxWeaverManager::GetParent( wxObject* wxobject )
 {
 	CHECK_VISUAL_EDITOR( NULL )
 
@@ -143,14 +143,14 @@ wxObject* wxFBManager::GetParent( wxObject* wxobject )
 	return m_visualEdit->GetWxObject( obj->GetParent() );
 }
 
-wxObject* wxFBManager::GetWxObject( PObjectBase obj )
+wxObject* wxWeaverManager::GetWxObject( PObjectBase obj )
 {
 	CHECK_OBJECT_BASE( NULL )
 
 	return m_visualEdit->GetWxObject( obj );
 }
 
-void wxFBManager::ModifyProperty( wxObject* wxobject, wxString property, wxString value, bool allowUndo )
+void wxWeaverManager::ModifyProperty( wxObject* wxobject, wxString property, wxString value, bool allowUndo )
 {
 	CHECK_VISUAL_EDITOR()
 
@@ -181,7 +181,7 @@ void wxFBManager::ModifyProperty( wxObject* wxobject, wxString property, wxStrin
 	}
 }
 
-bool wxFBManager::SelectObject( wxObject* wxobject )
+bool wxWeaverManager::SelectObject( wxObject* wxobject )
 {
 	CHECK_VISUAL_EDITOR( false )
 
@@ -197,7 +197,7 @@ bool wxFBManager::SelectObject( wxObject* wxobject )
 	return AppData()->SelectObject( obj );
 }
 
-wxNoObject* wxFBManager::NewNoObject()
+wxNoObject* wxWeaverManager::NewNoObject()
 {
     return new wxNoObject;
 }

@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version 3.9.0 Dec  4 2019)
-// http://www.wxformbuilder.org/
+// C++ code generated with wxWeaver (version 0.1.0 May 7 2021)
+// https://wxweaver.github.io/
 //
 // PLEASE DO *NOT* EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!--
-wxFormBuilder - A Visual Dialog Editor for wxWidgets.
+wxWeaver - A Visual Dialog Editor for wxWidgets.
 Copyright (C) 2005 José Antonio Hurtado
 
 This program is free software; you can redistribute it and/or
@@ -23,12 +23,12 @@ Created with Code::Blocks by:
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="wxFBEvents" />
+		<Option title="wxWeaverEvents" />
 		<Option pch_mode="0" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="Debug\wxFBEvents.exe" prefix_auto="1" extension_auto="1" />
+				<Option output="Debug\wxWeaverEvents.exe" prefix_auto="1" extension_auto="1" />
 				<Option object_output="Debug\obj\" />
 				<Option type="0" />
 				<Option compiler="gcc" />
@@ -47,7 +47,7 @@ Created with Code::Blocks by:
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="Release\wxFBEvents.exe" prefix_auto="1" extension_auto="1" />
+				<Option output="Release\wxWeaverEvents.exe" prefix_auto="1" extension_auto="1" />
 				<Option object_output="Release\obj\" />
 				<Option type="0" />
 				<Option compiler="gcc" />
@@ -99,14 +99,14 @@ Created with Code::Blocks by:
 		</Linker>
 		<Unit filename="event_GUI.cpp" />
 		<Unit filename="event_GUI.h" />
-		<Unit filename="wxFBEventAdditionalPanel.cpp" />
-		<Unit filename="wxFBEventAdditionalPanel.h" />
-		<Unit filename="wxFBEventCommonPanel.cpp" />
-		<Unit filename="wxFBEventCommonPanel.h" />
-		<Unit filename="wxFBEventMainFrame.cpp" />
-		<Unit filename="wxFBEventMainFrame.h" />
-		<Unit filename="wxFBEventsApp.cpp" />
-		<Unit filename="wxFBEventsApp.h" />
+		<Unit filename="wxWeaverEventAdditionalPanel.cpp" />
+		<Unit filename="wxWeaverEventAdditionalPanel.h" />
+		<Unit filename="wxWeaverEventCommonPanel.cpp" />
+		<Unit filename="wxWeaverEventCommonPanel.h" />
+		<Unit filename="wxWeaverEventMainFrame.cpp" />
+		<Unit filename="wxWeaverEventMainFrame.h" />
+		<Unit filename="wxWeaverEventsApp.cpp" />
+		<Unit filename="wxWeaverEventsApp.h" />
 		<Unit filename="wx_pch.h">
 			<Option compile="1" />
 			<Option weight="0" />

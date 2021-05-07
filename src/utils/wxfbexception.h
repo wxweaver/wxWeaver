@@ -17,23 +17,23 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef WXFBEXCEPTION
-#define WXFBEXCEPTION
+#ifndef wxWEAVEREXCEPTION
+#define wxWEAVEREXCEPTION
 
 #include <wx/string.h>
 
 /**
-Exception class for wxFormBuilder
+Exception class for wxWeaver
 */
-class wxFBException
+class wxWeaverException
 {
 public:
-	explicit wxFBException( const wxString& what )
+	explicit wxWeaverException( const wxString& what )
 	:
 	m_what(what)
 	{}
 
-	virtual ~wxFBException() = default;
+	virtual ~wxWeaverException() = default;
 
 	virtual const wxChar* what() const throw()
 	{
@@ -48,14 +48,14 @@ private:
 This allows you to stream your exceptions in.
 It will take care of the conversion	and throwing the exception.
 */
-#define THROW_WXFBEX( message )																								\
+#define THROW_wxWEAVEREX( message )																								\
 	{																														\
 	wxString hopefullyThisNameWontConflictWithOtherVariables;																\
 	wxString hopefullyUniqueFile(__FILE__, wxConvUTF8);																		\
 	hopefullyUniqueFile = hopefullyUniqueFile.substr(hopefullyUniqueFile.find_last_of(wxT("\\/")) + 1);						\
 	hopefullyThisNameWontConflictWithOtherVariables << message << wxT(" <") << hopefullyUniqueFile << wxT("@");				\
 	hopefullyThisNameWontConflictWithOtherVariables << wxString::Format( wxT("%i"), __LINE__ ) << wxT(">");					\
-	throw wxFBException( hopefullyThisNameWontConflictWithOtherVariables );													\
+	throw wxWeaverException( hopefullyThisNameWontConflictWithOtherVariables );													\
 	}
 
-#endif //WXFBEXCEPTION
+#endif //wxWEAVEREXCEPTION

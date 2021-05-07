@@ -405,7 +405,7 @@ wxString TypeConv::FontWeightToString(wxFontWeight weight) {
 
 wxBitmap TypeConv::StringToBitmap( const wxString& filename )
 {
-	#ifndef __WXFB_DEBUG__
+	#ifndef __wxWEAVER_DEBUG__
 	wxLogNull stopLogging;
 	#endif
 

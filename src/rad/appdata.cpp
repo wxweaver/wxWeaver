@@ -50,7 +50,7 @@
 using namespace TypeConv;
 
 
-const char* const VERSION = "3.9.0";
+const char* const VERSION = "0.1.0";
 const char* const REVISION = "";
 
 
@@ -474,12 +474,12 @@ ApplicationData::ApplicationData( const wxString &rootdir )
 		m_warnOnAdditionsUpdate( true ),
 		m_darkMode(false),
 		m_objDb( new ObjectDatabase() ),
-		m_manager( new wxFBManager ),
-		m_ipc( new wxFBIPC ),
+		m_manager( new wxWeaverManager ),
+		m_ipc( new wxWEAVERIPC ),
 		m_fbpVerMajor( 1 ),
 		m_fbpVerMinor(15)
 {
-	#ifdef __WXFB_DEBUG__
+	#ifdef __wxWEAVER_DEBUG__
 	//wxLog* log = wxLog::SetActiveTarget( NULL );
 	m_debugLogTarget = new wxLogWindow( NULL, wxT( "Logging" ) );
 	//wxLog::SetActiveTarget( log );
@@ -499,7 +499,7 @@ ApplicationData::ApplicationData( const wxString &rootdir )
 
 ApplicationData::~ApplicationData()
 {
-	#ifdef __WXFB_DEBUG__
+	#ifdef __wxWEAVER_DEBUG__
         delete m_debugLogTarget;
         m_debugLogTarget = 0;
 	#endif
@@ -514,7 +514,7 @@ void ApplicationData::LoadApp()
 	m_objDb->LoadPlugins( m_manager );
 }
 
-PwxFBManager ApplicationData::GetManager()
+PwxWeaverManager ApplicationData::GetManager()
 {
 	return m_manager;
 }
@@ -818,7 +818,7 @@ void ApplicationData::CreateObject( wxString name )
 			SelectObject( old_selected, true, true );
 		}
 	}
-	catch ( wxFBException& ex )
+	catch ( wxWeaverException& ex )
 	{
 		wxLogError( ex.what() );
 	}
@@ -913,7 +913,7 @@ void ApplicationData::CopyObjectToClipboard( PObjectBase obj )
 
     // This data objects are held by the clipboard,
     // so do not delete them in the app.
-    wxTheClipboard->SetData( new wxFBDataObject( obj ) );
+    wxTheClipboard->SetData( new wxWeaverDataObject( obj ) );
     wxTheClipboard->Close();
 }
 
@@ -928,9 +928,9 @@ bool ApplicationData::PasteObjectFromClipboard( PObjectBase parent )
         }
 	}
 
-    if ( wxTheClipboard->IsSupported( wxFBDataObjectFormat ) )
+    if ( wxTheClipboard->IsSupported( wxWeaverDataObjectFormat ) )
     {
-        wxFBDataObject data;
+        wxWeaverDataObject data;
         if ( wxTheClipboard->GetData( data ) )
         {
             PObjectBase obj = data.GetObj();
@@ -958,7 +958,7 @@ bool ApplicationData::CanPasteObjectFromClipboard()
         }
 	}
 
-	bool canPaste = wxTheClipboard->IsSupported( wxFBDataObjectFormat );
+	bool canPaste = wxTheClipboard->IsSupported( wxWeaverDataObjectFormat );
 
 	if( wxTheClipboard->IsOpened() )
 		wxTheClipboard->Close();
@@ -1131,7 +1131,7 @@ bool ApplicationData::PasteObject( PObjectBase parent, PObjectBase objToPaste )
 
 		CheckProjectTree( m_project );
 	}
-	catch ( wxFBException& ex )
+	catch ( wxWeaverException& ex )
 	{
 		wxLogError( ex.what() );
 		return false;
@@ -1251,7 +1251,7 @@ void ApplicationData::SaveProject( const wxString& filename )
 			message = wxString( ex.m_details.c_str(), wxConvFile );
 		}
 
-		THROW_WXFBEX( message )
+		THROW_wxWEAVEREX( message )
 	}
 }
 
@@ -1316,11 +1316,11 @@ bool ApplicationData::LoadProject( const wxString &file, bool justGenerate )
 		if ( newer )
 		{
 			if( justGenerate ){
-				wxLogError( wxT( "This project file is newer than this version of wxFormBuilder.\n" ) );
+				wxLogError( wxT( "This project file is newer than this version of wxWeaver.\n" ) );
 			}else{
-				wxMessageBox( wxT( "This project file is newer than this version of wxFormBuilder.\n" )
+				wxMessageBox( wxT( "This project file is newer than this version of wxWeaver.\n" )
 			              wxT( "It cannot be opened.\n\n" )
-			              wxT( "Please download an updated version from http://www.wxFormBuilder.org" ), _( "New Version" ), wxICON_ERROR );
+			              wxT( "Please download an updated version from http://www.wxWeaver.org" ), _( "New Version" ), wxICON_ERROR );
 			}
 			return false;
 		}
@@ -1356,7 +1356,7 @@ bool ApplicationData::LoadProject( const wxString &file, bool justGenerate )
 		{
 			proj = m_objDb->CreateObject( object );
 		}
-		catch ( wxFBException& ex )
+		catch ( wxWeaverException& ex )
 		{
 			wxLogError( ex.what() );
 			return false;
@@ -1517,7 +1517,7 @@ void ApplicationData::ConvertProjectProperties( ticpp::Element* project, const w
 
 	// The pch property is now the exact code to be generated, not just the header filename
 	// The goal of this conversion block is to determine which of two possible pch blocks to use
-	// The pch block that wxFB generated changed in version 1.6
+	// The pch block that wxWeaver generated changed in version 1.6
 	if ( fileMajor < 1 || ( 1 == fileMajor && fileMinor < 8 ) )
 	{
 		oldProps.clear();
@@ -2516,7 +2516,7 @@ void ApplicationData::GenerateInheritedClass( PObjectBase form, wxString classNa
 
 		wxLogStatus( wxT( "Class generated at \'%s\'." ), path.c_str() );
 	}
-	catch( wxFBException& ex )
+	catch( wxWeaverException& ex )
 	{
 		wxLogError( ex.what() );
 	}
@@ -2999,7 +2999,7 @@ void ApplicationData::RemoveHandler( wxEvtHandler* handler )
 	}
 }
 
-void ApplicationData::NotifyEvent( wxFBEvent& event, bool forcedelayed )
+void ApplicationData::NotifyEvent( wxWeaverEvent& event, bool forcedelayed )
 {
 
 	if ( !forcedelayed )
@@ -3028,25 +3028,25 @@ void ApplicationData::NotifyEvent( wxFBEvent& event, bool forcedelayed )
 
 void ApplicationData::NotifyProjectLoaded()
 {
-	wxFBEvent event( wxEVT_FB_PROJECT_LOADED );
+	wxWeaverEvent event( wxEVT_FB_PROJECT_LOADED );
 	NotifyEvent( event );
 }
 
 void ApplicationData::NotifyProjectSaved()
 {
-	wxFBEvent event( wxEVT_FB_PROJECT_SAVED );
+	wxWeaverEvent event( wxEVT_FB_PROJECT_SAVED );
 	NotifyEvent( event );
 }
 
 void ApplicationData::NotifyObjectExpanded( PObjectBase obj )
 {
-	wxFBObjectEvent event( wxEVT_FB_OBJECT_EXPANDED, obj );
+	wxWeaverObjectEvent event( wxEVT_FB_OBJECT_EXPANDED, obj );
 	NotifyEvent( event );
 }
 
 void ApplicationData::NotifyObjectSelected( PObjectBase obj, bool force )
 {
-	wxFBObjectEvent event( wxEVT_FB_OBJECT_SELECTED, obj );
+	wxWeaverObjectEvent event( wxEVT_FB_OBJECT_SELECTED, obj );
 	if( force ) event.SetString( wxT("force") );
 
 	NotifyEvent( event, false );
@@ -3054,31 +3054,31 @@ void ApplicationData::NotifyObjectSelected( PObjectBase obj, bool force )
 
 void ApplicationData::NotifyObjectCreated( PObjectBase obj )
 {
-	wxFBObjectEvent event( wxEVT_FB_OBJECT_CREATED, obj );
+	wxWeaverObjectEvent event( wxEVT_FB_OBJECT_CREATED, obj );
 	NotifyEvent( event, false );
 }
 
 void ApplicationData::NotifyObjectRemoved( PObjectBase obj )
 {
-	wxFBObjectEvent event( wxEVT_FB_OBJECT_REMOVED, obj );
+	wxWeaverObjectEvent event( wxEVT_FB_OBJECT_REMOVED, obj );
 	NotifyEvent( event, false );
 }
 
 void ApplicationData::NotifyPropertyModified( PProperty prop )
 {
-	wxFBPropertyEvent event( wxEVT_FB_PROPERTY_MODIFIED, prop );
+	wxWeaverPropertyEvent event( wxEVT_FB_PROPERTY_MODIFIED, prop );
 	NotifyEvent( event );
 }
 
 void ApplicationData::NotifyEventHandlerModified( PEvent evtHandler )
 {
-	wxFBEventHandlerEvent event( wxEVT_FB_EVENT_HANDLER_MODIFIED, evtHandler );
+	wxWeaverEventHandlerEvent event( wxEVT_FB_EVENT_HANDLER_MODIFIED, evtHandler );
 	NotifyEvent( event );
 }
 
 void ApplicationData::NotifyCodeGeneration( bool panelOnly, bool forcedelayed )
 {
-	wxFBEvent event( wxEVT_FB_CODE_GENERATION );
+	wxWeaverEvent event( wxEVT_FB_CODE_GENERATION );
 
 	// Using the previously unused Id field in the event to carry a boolean
 	event.SetId( ( panelOnly ? 1 : 0 ) );
@@ -3088,7 +3088,7 @@ void ApplicationData::NotifyCodeGeneration( bool panelOnly, bool forcedelayed )
 
 void ApplicationData::NotifyProjectRefresh()
 {
-	wxFBEvent event( wxEVT_FB_PROJECT_REFRESH );
+	wxWeaverEvent event( wxEVT_FB_PROJECT_REFRESH );
 	NotifyEvent( event );
 }
 
@@ -3110,7 +3110,7 @@ wxString ApplicationData::GetPathProperty( const wxString& pathName )
 
 		if ( pathEntry.empty() )
 		{
-			THROW_WXFBEX( wxT( "You must set the \"") + pathName + wxT("\" property of the project to a valid path for output files" ) );
+			THROW_wxWEAVEREX( wxT( "You must set the \"") + pathName + wxT("\" property of the project to a valid path for output files" ) );
 		}
 
 		path = wxFileName::DirName( pathEntry );
@@ -3121,7 +3121,7 @@ wxString ApplicationData::GetPathProperty( const wxString& pathName )
 
 			if ( projectPath.empty() )
 			{
-				THROW_WXFBEX( wxT( "You must save the project when using a relative path for output files" ) );
+				THROW_wxWEAVEREX( wxT( "You must save the project when using a relative path for output files" ) );
 			}
 
 			path = wxFileName(  projectPath +
@@ -3139,7 +3139,7 @@ wxString ApplicationData::GetPathProperty( const wxString& pathName )
 
 	if ( !path.DirExists() )
 	{
-		THROW_WXFBEX( wxT( "Invalid Path: " ) << path.GetPath() << wxT( "\nYou must set the \"") + pathName + wxT("\" property of the project to a valid path for output files" ) );
+		THROW_wxWEAVEREX( wxT( "Invalid Path: " ) << path.GetPath() << wxT( "\nYou must set the \"") + pathName + wxT("\" property of the project to a valid path for output files" ) );
 	}
 
 	return path.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR );

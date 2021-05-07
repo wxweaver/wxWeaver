@@ -193,35 +193,35 @@ void CppPanel::OnFind( wxFindDialogEvent& event )
 	}
 }
 
-void CppPanel::OnPropertyModified( wxFBPropertyEvent& event )
+void CppPanel::OnPropertyModified( wxWeaverPropertyEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void CppPanel::OnProjectRefresh( wxFBEvent& event )
+void CppPanel::OnProjectRefresh( wxWeaverEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void CppPanel::OnObjectChange( wxFBObjectEvent& event )
+void CppPanel::OnObjectChange( wxWeaverObjectEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void CppPanel::OnEventHandlerModified( wxFBEventHandlerEvent& event )
+void CppPanel::OnEventHandlerModified( wxWeaverEventHandlerEvent& event )
 {
 	// Generate code to the panel only
 	event.SetId( 1 );
 	OnCodeGeneration( event );
 }
 
-void CppPanel::OnCodeGeneration( wxFBEvent& event )
+void CppPanel::OnCodeGeneration( wxWeaverEvent& event )
 {
     PObjectBase objectToGenerate;
 
@@ -323,7 +323,7 @@ void CppPanel::OnCodeGeneration( wxFBEvent& event )
 	{
 		path = AppData()->GetOutputPath();
 	}
-	catch ( wxFBException& ex )
+	catch ( wxWeaverException& ex )
 	{
 		if ( doFile )
 		{
@@ -417,7 +417,7 @@ void CppPanel::OnCodeGeneration( wxFBEvent& event )
 			codegen.GenerateCode( project );
 			wxLogStatus( wxT( "Code generated on \'%s\'." ), path.c_str() );
 		}
-		catch ( wxFBException& ex )
+		catch ( wxWeaverException& ex )
 		{
 			wxLogError( ex.what() );
 		}

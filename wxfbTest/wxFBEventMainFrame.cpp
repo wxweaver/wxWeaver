@@ -17,13 +17,13 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "wxFBEventMainFrame.h"
-#include "wxFBEventAdditionalPanel.h"
+#include "wxWeaverEventMainFrame.h"
+#include "wxWeaverEventAdditionalPanel.h"
 
-wxFBEventMainFrame::wxFBEventMainFrame( wxWindow* parent )
+wxWeaverEventMainFrame::wxWeaverEventMainFrame( wxWindow* parent )
 :
 MainFrame( parent )
 {
 	// Change the panel you want to show here.
-	new wxFBEventAdditionalPanel( this );
+	new wxWeaverEventAdditionalPanel( this );
 }

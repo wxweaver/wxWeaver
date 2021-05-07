@@ -27,9 +27,9 @@
 #include <wx/panel.h>
 
 class CodeEditor;
-class wxFBEvent;
-class wxFBObjectEvent;
-class wxFBPropertyEvent;
+class wxWeaverEvent;
+class wxWeaverObjectEvent;
+class wxWeaverPropertyEvent;
 class wxFindDialogEvent;
 
 class XrcPanel : public wxPanel
@@ -44,10 +44,10 @@ public:
 	XrcPanel( wxWindow *parent, int id );
 	~XrcPanel() override;
 
-	void OnPropertyModified( wxFBPropertyEvent& event );
-	void OnProjectRefresh( wxFBEvent& event );
-	void OnCodeGeneration( wxFBEvent& event );
-	void OnObjectChange( wxFBObjectEvent& event );
+	void OnPropertyModified( wxWeaverPropertyEvent& event );
+	void OnProjectRefresh( wxWeaverEvent& event );
+	void OnCodeGeneration( wxWeaverEvent& event );
+	void OnObjectChange( wxWeaverObjectEvent& event );
 
 	void OnFind( wxFindDialogEvent& event );
 

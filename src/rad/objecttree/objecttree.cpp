@@ -57,8 +57,8 @@ wxPanel( parent, id )
     SetSizer(sizer_1);
     sizer_1->Fit(this);
     sizer_1->SetSizeHints(this);
-    Connect( wxID_ANY, wxEVT_FB_OBJECT_EXPANDED, wxFBObjectEventHandler( ObjectTree::OnObjectExpanded ) );
-    Connect( wxID_ANY, wxEVT_FB_OBJECT_SELECTED, wxFBObjectEventHandler( ObjectTree::OnObjectSelected ) );
+    Connect( wxID_ANY, wxEVT_FB_OBJECT_EXPANDED, wxWeaverObjectEventHandler( ObjectTree::OnObjectExpanded ) );
+    Connect( wxID_ANY, wxEVT_FB_OBJECT_SELECTED, wxWeaverObjectEventHandler( ObjectTree::OnObjectSelected ) );
     Connect( wxID_ANY, wxEVT_COMMAND_TREE_ITEM_EXPANDED, wxTreeEventHandler( ObjectTree::OnExpansionChange ) );
     Connect( wxID_ANY, wxEVT_COMMAND_TREE_ITEM_COLLAPSED, wxTreeEventHandler( ObjectTree::OnExpansionChange ) );
 
@@ -161,9 +161,9 @@ void ObjectTree::OnSelChanged(wxTreeEvent &event)
 	{
 		PObjectBase obj(((ObjectTreeItemData *)item_data)->GetObject());
 		assert(obj);
-		Disconnect( wxID_ANY, wxEVT_FB_OBJECT_SELECTED, wxFBObjectEventHandler( ObjectTree::OnObjectSelected ) );
+		Disconnect( wxID_ANY, wxEVT_FB_OBJECT_SELECTED, wxWeaverObjectEventHandler( ObjectTree::OnObjectSelected ) );
 		AppData()->SelectObject(obj);
-		Connect( wxID_ANY, wxEVT_FB_OBJECT_SELECTED, wxFBObjectEventHandler( ObjectTree::OnObjectSelected ) );
+		Connect( wxID_ANY, wxEVT_FB_OBJECT_SELECTED, wxWeaverObjectEventHandler( ObjectTree::OnObjectSelected ) );
 	}
 }
 
@@ -255,12 +255,12 @@ void ObjectTree::OnExpansionChange(wxTreeEvent &event)
 		PObjectBase obj(((ObjectTreeItemData *)item_data)->GetObject());
 		assert(obj);
 
-		Disconnect( wxID_ANY, wxEVT_FB_OBJECT_EXPANDED, wxFBObjectEventHandler( ObjectTree::OnObjectExpanded ) );
+		Disconnect( wxID_ANY, wxEVT_FB_OBJECT_EXPANDED, wxWeaverObjectEventHandler( ObjectTree::OnObjectExpanded ) );
 		Disconnect( wxID_ANY, wxEVT_COMMAND_TREE_ITEM_EXPANDED, wxTreeEventHandler( ObjectTree::OnExpansionChange ) );
 
 		AppData()->ExpandObject( obj, m_tcObjects->IsExpanded( id ) );
 
-		Connect( wxID_ANY, wxEVT_FB_OBJECT_EXPANDED, wxFBObjectEventHandler( ObjectTree::OnObjectExpanded ) );
+		Connect( wxID_ANY, wxEVT_FB_OBJECT_EXPANDED, wxWeaverObjectEventHandler( ObjectTree::OnObjectExpanded ) );
 		Connect( wxID_ANY, wxEVT_COMMAND_TREE_ITEM_EXPANDED, wxTreeEventHandler( ObjectTree::OnExpansionChange ) );
 	}
 }
@@ -452,18 +452,18 @@ void ObjectTree::ClearMap(PObjectBase obj)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// wxFormBuilder Event Handlers
+// wxWeaver Event Handlers
 /////////////////////////////////////////////////////////////////////////////
-void ObjectTree::OnProjectLoaded( wxFBEvent &)
+void ObjectTree::OnProjectLoaded( wxWeaverEvent &)
 {
 	RebuildTree();
 }
 
-void ObjectTree::OnProjectSaved( wxFBEvent &)
+void ObjectTree::OnProjectSaved( wxWeaverEvent &)
 {
 }
 
-void ObjectTree::OnObjectExpanded( wxFBObjectEvent& event )
+void ObjectTree::OnObjectExpanded( wxWeaverObjectEvent& event )
 {
 	PObjectBase obj = event.GetFBObject();
 	ObjectItemMap::iterator it = m_map.find( obj );
@@ -483,7 +483,7 @@ void ObjectTree::OnObjectExpanded( wxFBObjectEvent& event )
 	}
 }
 
-void ObjectTree::OnObjectSelected( wxFBObjectEvent &event )
+void ObjectTree::OnObjectSelected( wxWeaverObjectEvent &event )
 {
     PObjectBase obj = event.GetFBObject();
 
@@ -508,21 +508,21 @@ void ObjectTree::OnObjectSelected( wxFBObjectEvent &event )
 	}
 }
 
-void ObjectTree::OnObjectCreated ( wxFBObjectEvent &event )
+void ObjectTree::OnObjectCreated ( wxWeaverObjectEvent &event )
 {
 	//RebuildTree();
 
 	if( event.GetFBObject() ) AddItem( event.GetFBObject(), event.GetFBObject()->GetParent() );
 }
 
-void ObjectTree::OnObjectRemoved ( wxFBObjectEvent &event )
+void ObjectTree::OnObjectRemoved ( wxWeaverObjectEvent &event )
 {
 	//RebuildTree();
 
 	RemoveItem( event.GetFBObject() );
 }
 
-void ObjectTree::OnPropertyModified ( wxFBPropertyEvent &event )
+void ObjectTree::OnPropertyModified ( wxWeaverPropertyEvent &event )
 {
   PProperty prop = event.GetFBProperty();
 
@@ -536,7 +536,7 @@ void ObjectTree::OnPropertyModified ( wxFBPropertyEvent &event )
 	}
 }
 
-void ObjectTree::OnProjectRefresh ( wxFBEvent &)
+void ObjectTree::OnProjectRefresh ( wxWeaverEvent &)
 {
 	RebuildTree();
 }

@@ -223,7 +223,7 @@ m_findDialog( NULL )
 
 	SetIcons( bundle );
 
-	SetTitle( wxT( "wxFormBuilder" ) );
+	SetTitle( wxT( "wxWeaver" ) );
 
 	//SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BTNFACE ) );
 
@@ -288,13 +288,13 @@ m_findDialog( NULL )
 	switch ( style )
 	{
 
-		case wxFB_DOCKABLE_GUI:
+		case wxWEAVER_DOCKABLE_GUI:
 			// TO-DO
 			CreateWideGui();
 
 			break;
 
-		case wxFB_CLASSIC_GUI:
+		case wxWEAVER_CLASSIC_GUI:
 
 			/*  //  --- Classic style Gui --
 			     //
@@ -314,9 +314,9 @@ m_findDialog( NULL )
 
 			break;
 
-		case wxFB_DEFAULT_GUI:
+		case wxWEAVER_DEFAULT_GUI:
 
-		case wxFB_WIDE_GUI:
+		case wxWEAVER_WIDE_GUI:
 
 		default:
 
@@ -454,7 +454,7 @@ void MainFrame::SavePosition( const wxString &name )
 		switch ( m_style )
 		{
 
-			case wxFB_WIDE_GUI:
+			case wxWEAVER_WIDE_GUI:
 				{
 					int rightSash = -1 * ( m_rightSplitter->GetSize().GetWidth() - m_rightSplitter->GetSashPosition() );
 					config->Write( wxT( "RightSplitterWidth" ), rightSash );
@@ -470,7 +470,7 @@ void MainFrame::SavePosition( const wxString &name )
 					break;
 				}
 
-			case wxFB_CLASSIC_GUI:
+			case wxWEAVER_CLASSIC_GUI:
 				{
 					int rightSash = -1 * ( m_rightSplitter->GetSize().GetHeight() - m_rightSplitter->GetSashPosition() );
 					config->Write( wxT( "RightSplitterWidth" ), rightSash );
@@ -499,7 +499,7 @@ void MainFrame::OnSaveProject( wxCommandEvent &event )
 			AppData()->SaveProject( filename );
 			InsertRecentProject( filename );
 		}
-		catch ( wxFBException& ex )
+		catch ( wxWeaverException& ex )
 		{
 			wxLogError( ex.what() );
 		}
@@ -509,7 +509,7 @@ void MainFrame::OnSaveProject( wxCommandEvent &event )
 void MainFrame::OnSaveAsProject( wxCommandEvent & )
 {
 	wxFileDialog *dialog = new wxFileDialog( this, wxT( "Save Project" ), m_currentDir,
-	                       wxT( "" ), wxT( "wxFormBuilder Project File (*.fbp)|*.fbp|All files (*.*)|*.*" ), wxFD_SAVE );
+	                       wxT( "" ), wxT( "wxWeaver Project File (*.fbp)|*.fbp|All files (*.*)|*.*" ), wxFD_SAVE );
 
 	if ( dialog->ShowModal() == wxID_OK )
 	{
@@ -541,7 +541,7 @@ void MainFrame::OnSaveAsProject( wxCommandEvent & )
 			AppData()->SaveProject( filename );
 			InsertRecentProject( filename );
 		}
-		catch ( wxFBException& ex )
+		catch ( wxWeaverException& ex )
 		{
 			wxLogError( ex.what() );
 		}
@@ -556,7 +556,7 @@ void MainFrame::OnOpenProject( wxCommandEvent &)
 		return;
 
 	wxFileDialog *dialog = new wxFileDialog( this, wxT( "Open Project" ), m_currentDir,
-	                       wxT( "" ), wxT( "wxFormBuilder Project File (*.fbp)|*.fbp|All files (*.*)|*.*" ), wxFD_OPEN );
+	                       wxT( "" ), wxT( "wxWeaver Project File (*.fbp)|*.fbp|All files (*.*)|*.*" ), wxFD_OPEN );
 
 	if ( dialog->ShowModal() == wxID_OK )
 	{
@@ -627,7 +627,7 @@ void MainFrame::OnImportXrc( wxCommandEvent &)
 				wxLogError( wxT( "Error while loading XRC" ) );
 			}
 		}
-		catch ( wxFBException& ex )
+		catch ( wxWeaverException& ex )
 		{
 			wxLogError( _( "Error Loading XRC: %s" ), ex.what() );
 		}
@@ -672,7 +672,7 @@ void MainFrame::OnClose( wxCloseEvent &event )
 	event.Skip();
 }
 
-void MainFrame::OnProjectLoaded( wxFBEvent& )
+void MainFrame::OnProjectLoaded( wxWeaverEvent& )
 {
 	GetStatusBar()->SetStatusText( wxT( "Project Loaded!" ) );
 	PObjectBase project = AppData()->GetProjectData();
@@ -686,18 +686,18 @@ void MainFrame::OnProjectLoaded( wxFBEvent& )
 	UpdateFrame();
 }
 
-void MainFrame::OnProjectSaved( wxFBEvent& )
+void MainFrame::OnProjectSaved( wxWeaverEvent& )
 {
 	GetStatusBar()->SetStatusText( wxT( "Project Saved!" ) );
 	UpdateFrame();
 }
 
-void MainFrame::OnObjectExpanded( wxFBObjectEvent& )
+void MainFrame::OnObjectExpanded( wxWeaverObjectEvent& )
 {
 	UpdateFrame();
 }
 
-void MainFrame::OnObjectSelected( wxFBObjectEvent& event )
+void MainFrame::OnObjectSelected( wxWeaverObjectEvent& event )
 {
 	PObjectBase obj = event.GetFBObject();
 
@@ -709,7 +709,7 @@ void MainFrame::OnObjectSelected( wxFBObjectEvent& event )
 		wxSize      panel_size;
 		int         sash_pos;
 
-		if ( m_style != wxFB_CLASSIC_GUI )
+		if ( m_style != wxWEAVER_CLASSIC_GUI )
 		{
 			switch(m_page_selection)
 			{
@@ -776,7 +776,7 @@ void MainFrame::OnObjectSelected( wxFBObjectEvent& event )
 	UpdateFrame();
 }
 
-void MainFrame::OnObjectCreated( wxFBObjectEvent& event )
+void MainFrame::OnObjectCreated( wxWeaverObjectEvent& event )
 {
 	wxString message;
 
@@ -791,7 +791,7 @@ void MainFrame::OnObjectCreated( wxFBObjectEvent& event )
 	else
 	{
 		message = wxT( "Impossible to create the object. Did you forget to add a sizer/parent object or turn on/off an AUI management?" );
-		wxMessageBox( message, wxT("wxFormBuilder"), wxICON_WARNING | wxOK );
+		wxMessageBox( message, wxT("wxWeaver"), wxICON_WARNING | wxOK );
 	}
 
 	GetStatusBar()->SetStatusText( message );
@@ -799,7 +799,7 @@ void MainFrame::OnObjectCreated( wxFBObjectEvent& event )
 	UpdateFrame();
 }
 
-void MainFrame::OnObjectRemoved( wxFBObjectEvent& event )
+void MainFrame::OnObjectRemoved( wxWeaverObjectEvent& event )
 {
 	wxString message;
 	message.Printf( wxT( "Object '%s' removed." ),
@@ -808,7 +808,7 @@ void MainFrame::OnObjectRemoved( wxFBObjectEvent& event )
 	UpdateFrame();
 }
 
-void MainFrame::OnPropertyModified( wxFBPropertyEvent& event )
+void MainFrame::OnPropertyModified( wxWeaverPropertyEvent& event )
 {
 	PProperty prop = event.GetFBProperty();
 
@@ -839,7 +839,7 @@ void MainFrame::OnPropertyModified( wxFBPropertyEvent& event )
 	}
 }
 
-void MainFrame::OnEventHandlerModified( wxFBEventHandlerEvent& event )
+void MainFrame::OnEventHandlerModified( wxWeaverEventHandlerEvent& event )
 {
 	wxString message;
 	message.Printf( wxT( "Event handler '%s' of object '%s' modified." ),
@@ -850,7 +850,7 @@ void MainFrame::OnEventHandlerModified( wxFBEventHandlerEvent& event )
 	UpdateFrame();
 }
 
-void MainFrame::OnCodeGeneration( wxFBEvent& event )
+void MainFrame::OnCodeGeneration( wxWeaverEvent& event )
 {
 	// Using the previously unused Id field in the event to carry a boolean
 	bool panelOnly = ( event.GetId() != 0 );
@@ -861,7 +861,7 @@ void MainFrame::OnCodeGeneration( wxFBEvent& event )
 	}
 }
 
-void MainFrame::OnProjectRefresh( wxFBEvent& )
+void MainFrame::OnProjectRefresh( wxWeaverEvent& )
 {
 	PObjectBase project = AppData()->GetProjectData();
 
@@ -954,7 +954,7 @@ void MainFrame::UpdateFrame()
 		file = fn.GetName();
 	}
 
-	SetTitle(wxString::Format(wxT("%s%s - wxFormBuilder v%s%s"),
+	SetTitle(wxString::Format(wxT("%s%s - wxWeaver v%s%s"),
 	                          AppData()->IsModified() ? wxT("*") : wxT(""), file.c_str(), VERSION, REVISION));
 	GetStatusBar()->SetStatusText( filename, STATUS_FIELD_PATH );
 
@@ -1255,7 +1255,7 @@ void MainFrame::OnGenInhertedClass( wxCommandEvent& WXUNUSED( e ) )
 		// Get the output path
 		filePath = AppData()->GetOutputPath();
 	}
-	catch ( wxFBException& ex )
+	catch ( wxWeaverException& ex )
 	{
 		wxLogWarning( ex.what() );
 		return;
@@ -1286,7 +1286,7 @@ void MainFrame::OnGenInhertedClass( wxCommandEvent& WXUNUSED( e ) )
 		AppData()->GenerateInheritedClass( details.m_form, details.m_className, filePath, details.m_fileName );
 	}
 
-	wxMessageBox( wxString::Format( wxT( "Class(es) generated to \'%s\'." ), filePath.c_str() ), wxT("wxFormBuilder") );
+	wxMessageBox( wxString::Format( wxT( "Class(es) generated to \'%s\'." ), filePath.c_str() ), wxT("wxWeaver") );
 }
 
 bool MainFrame::SaveWarning()
@@ -1323,7 +1323,7 @@ void MainFrame::OnAuiNotebookPageChanged( wxAuiNotebookEvent& event )
 		wxSize panel_size;
 		int sash_pos;
 
-		if(m_style != wxFB_CLASSIC_GUI)
+		if(m_style != wxWEAVER_CLASSIC_GUI)
 		{
 			switch( m_page_selection )
 			{
@@ -1488,7 +1488,7 @@ wxMenuBar * MainFrame::CreateFBMenuBar()
 	menuFile->AppendSeparator();
 	menuFile->Append( ID_GENERATE_CODE, wxT( "&Generate Code\tF8" ), wxT( "Generate Code" ) );
 	menuFile->AppendSeparator();
-	menuFile->Append( wxID_EXIT, wxT( "E&xit\tAlt-F4" ), wxT( "Quit wxFormBuilder" ) );
+	menuFile->Append( wxID_EXIT, wxT( "E&xit\tAlt-F4" ), wxT( "Quit wxWeaver" ) );
 
 	wxMenu *menuEdit = new wxMenu;
 	menuEdit->Append( ID_UNDO, wxT( "&Undo \tCtrl+Z" ), wxT( "Undo changes" ) );
@@ -1636,7 +1636,7 @@ wxWindow * MainFrame::CreateObjectTree( wxWindow *parent )
 wxWindow * MainFrame::CreateObjectInspector( wxWindow *parent )
 {
 	//TO-DO: make object inspector style selectable.
-	int style = ( m_style == wxFB_CLASSIC_GUI ? wxFB_OI_MULTIPAGE_STYLE : wxFB_OI_SINGLE_PAGE_STYLE );
+	int style = ( m_style == wxWEAVER_CLASSIC_GUI ? wxWEAVER_OI_MULTIPAGE_STYLE : wxWEAVER_OI_SINGLE_PAGE_STYLE );
 	m_objInsp = new ObjectInspector( parent, wxID_ANY, style );
 	return m_objInsp;
 }
@@ -1683,7 +1683,7 @@ void MainFrame::CreateWideGui()
 	m_rightSplitter->SetSashGravity( 1 );
 	m_rightSplitter->SetMinimumPaneSize( 2 );
 
-	m_style = wxFB_WIDE_GUI;
+	m_style = wxWEAVER_WIDE_GUI;
 
 	SetMinSize( wxSize( 700, 380 ) );
 }

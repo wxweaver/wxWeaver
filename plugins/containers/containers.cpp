@@ -820,11 +820,11 @@ public:
 		// Error checking
 		if ( !( obj && book && page ) )
 		{
-			wxLogError( _("AuiNotebookPageComponent is missing its wxFormBuilder object(%i), its parent(%i), or its child(%i)"), obj, book, page );
+			wxLogError( _("AuiNotebookPageComponent is missing its wxWeaver object(%i), its parent(%i), or its child(%i)"), obj, book, page );
 			return;
 		}
 
-		// Prevent event handling by wxFB - these aren't user generated events
+		// Prevent event handling by wxWeaver - these aren't user generated events
 		SuppressEventHandlers suppress( book );
 
 		// Save selection

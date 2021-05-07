@@ -18,8 +18,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef WXFBEVENTSAPP_H
-#define WXFBEVENTSAPP_H
+#ifndef wxWEAVEREVENTSAPP_H
+#define wxWEAVEREVENTSAPP_H
 
 #include <wx/wxprec.h>
 
@@ -31,10 +31,10 @@
     #include <wx/wx.h>
 #endif
 
-class wxFBEventsApp : public wxApp
+class wxWeaverEventsApp : public wxApp
 {
 	public:
 		virtual bool OnInit();
 };
 
-#endif // wxFBEventsAPP_H
+#endif // wxWeaverEventsAPP_H
