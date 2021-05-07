@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=wxWeaver
+Comment=wxWidgets GUI Designer
+TryExec=wxweaver
+Exec=wxweaver %f
+Icon=wwxweaver
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Categories=GTK;GUIDesigner;Development;
+StartupNotify=true
+MimeType=application/x-wxweaver;

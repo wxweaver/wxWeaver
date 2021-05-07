@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>org.wxweaver.wxWeaver.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>wxWeaver</name>
+  <summary>wxWidgets GUI Designer</summary>
+
+  <description>
+    <p>
+      wxWeaver is a visual development tool, but also allows including non-graphical
+      components. It can emit C++, Python, PHP, Lua and XRC code.
+    </p>
+  </description>
+
+  <url type="homepage">http://wxweaver.github.io</url>
+
+  <provides>
+    <binary>wxweaver</binary>
+  </provides>
+  <releases>
+  </releases>
+</component>

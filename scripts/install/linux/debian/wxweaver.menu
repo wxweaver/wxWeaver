@@ -1,0 +1,1 @@
+?package(wxweaver):needs="X11" section="Applications/Programming" title="wxWeaver" command="wxweaver" icon="/usr/share/wxweaver/resources/icons/logo.xpm"
