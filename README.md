@@ -1,8 +1,6 @@
-# wxFormBuilder [![Build Status](https://travis-ci.org/wxFormBuilder/wxFormBuilder.svg?branch=master)](https://travis-ci.org/wxFormBuilder/wxFormBuilder)
+# wxWeaver
 
-## Download Binaries
-
-* [GitHub Releases](https://github.com/wxFormBuilder/wxFormBuilder/releases)
+Fork of wxFormBuilder.
 
 ## Install From Source
 
@@ -31,7 +29,7 @@ Run:
 
 ```sh
 cd ../../../output/
-./wxFormBuilder.exe
+./wxWeaver.exe
 ```
 
 ### Linux
@@ -51,11 +49,11 @@ sudo pacman -Syu --needed meson wxgtk2
 Build and run:
 
 ```sh
-git clone --recursive --depth=1 https://github.com/wxFormBuilder/wxFormBuilder
-cd wxFormBuilder
+git clone --recursive --depth=1 https://github.com/wxweaver/wxWeaver
+cd wxWeaver
 meson _build --prefix $PWD/_install --buildtype=release
 ninja -C _build install
-./_install/bin/wxformbuilder
+./_install/bin/wxweaver
 ```
 
 ### macOS
@@ -66,11 +64,11 @@ Pre-requisites for macOS can be installed via [Homebrew](https://brew.sh/):
 brew install wxmac boost dylibbundler make
 ```
 
-Note: Building with Xcode currently does not work without issues (see [issue #247](https://github.com/wxFormBuilder/wxFormBuilder/issues/247)). Therefore it is recommended to build with GNU make like as described below:
+Note: Building with Xcode currently does not work.
 
 ```sh
-git clone --recursive --depth=1 https://github.com/wxFormBuilder/wxFormBuilder
-cd wxFormBuilder
+git clone --recursive --depth=1 https://github.com/wxweaver/wxWeaver
+cd wxWeaver
 ./create_build_files4.sh
 cd build/3.0/gmake
 make config=release
@@ -80,5 +78,5 @@ Run:
 
 ```sh
 cd ../../../output/
-open wxFormBuilder.app
+open wxWeaver.app
 ```
