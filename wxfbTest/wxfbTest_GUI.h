@@ -1,7 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// wxFormBuilder - A Visual Dialog Editor for wxWidgets.
-// Copyright (C) 2005 José Antonio Hurtado
+// wxWeaver - A GUI Designer Editor for wxWidgets.
+// Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+// Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -48,29 +49,29 @@
 ///////////////////////////////////////////////////////////////////////////////
 /// Class MainFrame
 ///////////////////////////////////////////////////////////////////////////////
-class MainFrame : public wxFrame 
+class MainFrame : public wxFrame
 {
 	private:
-	
+
 	protected:
 		wxMenuBar* m_menubar1;
 		wxMenu* file;
 		wxMenu* help;
 		wxStatusBar* m_statusBar1;
 		wxToolBar* m_toolBar1;
-	
+
 	public:
 		MainFrame( wxWindow* parent, int id = ID_DEFAULT, wxString title = wxT("wxFormBuilder Test App"), wxPoint pos = wxDefaultPosition, wxSize size = wxSize( 500,300 ), int style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
-	
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class MainPanel
 ///////////////////////////////////////////////////////////////////////////////
-class MainPanel : public wxPanel 
+class MainPanel : public wxPanel
 {
 	private:
-	
+
 	protected:
 		wxButton* m_button1;
 		wxBitmapButton* m_bpButton1;
@@ -89,10 +90,10 @@ class MainPanel : public wxPanel
 		wxChoice* m_choice1;
 		wxSlider* m_slider1;
 		wxCheckListBox* m_checkList1;
-	
+
 	public:
 		MainPanel( wxWindow* parent, int id = ID_DEFAULT, wxPoint pos = wxDefaultPosition, wxSize size = wxSize( 800,600 ), int style = wxTAB_TRAVERSAL );
-	
+
 };
 
 #endif //__wxfbTest_GUI__

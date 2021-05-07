@@ -1,7 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// wxFormBuilder - A Visual Dialog Editor for wxWidgets.
-// Copyright (C) 2005 José Antonio Hurtado
+// wxWeaver - A GUI Designer Editor for wxWidgets.
+// Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+// Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -66,10 +67,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 /// Class MainFrame
 ///////////////////////////////////////////////////////////////////////////////
-class MainFrame : public wxFrame 
+class MainFrame : public wxFrame
 {
 	private:
-	
+
 	protected:
 		enum
 		{
@@ -82,12 +83,12 @@ class MainFrame : public wxFrame
 			ID_SAVE_TOOL,
 			ID_ABOUT_TOOL,
 		};
-		
+
 		wxMenuBar* m_menubar1;
 		wxMenu* m_fileMenu;
 		wxMenu* m_helpMenu;
 		wxToolBar* m_toolBar1;
-		
+
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnClose( wxCloseEvent& event ){ event.Skip(); }
 		virtual void OnSize( wxSizeEvent& event ){ event.Skip(); }
@@ -98,20 +99,20 @@ class MainFrame : public wxFrame
 		virtual void OnOpenEntered( wxCommandEvent& event ){ event.Skip(); }
 		virtual void OnAboutClicked( wxCommandEvent& event ){ event.Skip(); }
 		virtual void OnAboutRClick( wxCommandEvent& event ){ event.Skip(); }
-		
-	
+
+
 	public:
 		MainFrame( wxWindow* parent, int id = wxID_ANY, wxString title = wxEmptyString, wxPoint pos = wxDefaultPosition, wxSize size = wxSize( 500,300 ), int style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
-	
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class CommonPanel
 ///////////////////////////////////////////////////////////////////////////////
-class CommonPanel : public wxPanel 
+class CommonPanel : public wxPanel
 {
 	private:
-	
+
 	protected:
 		enum
 		{
@@ -128,7 +129,7 @@ class CommonPanel : public wxPanel
 			ID_SLIDER,
 			ID_GRID,
 		};
-		
+
 		wxButton* m_button1;
 		wxBitmapButton* m_bpButton1;
 		wxTextCtrl* m_textCtrl1;
@@ -140,7 +141,7 @@ class CommonPanel : public wxPanel
 		wxRadioBox* m_radioBox1;
 		wxSlider* m_slider1;
 		wxGrid* m_grid1;
-		
+
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnClick( wxCommandEvent& event ){ event.Skip(); }
 		virtual void OnClickBitmap( wxCommandEvent& event ){ event.Skip(); }
@@ -179,20 +180,20 @@ class CommonPanel : public wxPanel
 		virtual void OnGridLabelDClick( wxGridEvent& event ){ event.Skip(); }
 		virtual void OnGridRangeSelect( wxGridRangeSelectEvent& event ){ event.Skip(); }
 		virtual void OnGridCellSelected( wxGridEvent& event ){ event.Skip(); }
-		
-	
+
+
 	public:
 		CommonPanel( wxWindow* parent, int id = ID_DEFAULT, wxPoint pos = wxDefaultPosition, wxSize size = wxSize( 420,382 ), int style = wxTAB_TRAVERSAL );
-	
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class AdditionalPanel
 ///////////////////////////////////////////////////////////////////////////////
-class AdditionalPanel : public wxPanel 
+class AdditionalPanel : public wxPanel
 {
 	private:
-	
+
 	protected:
 		wxCalendarCtrl* m_calendar1;
 		wxDatePickerCtrl* m_datePicker1;
@@ -221,13 +222,13 @@ class AdditionalPanel : public wxPanel
 		wxListBox* m_listBox2;
 		wxStaticText* m_staticText1;
 		wxScrolledWindow* m_scrolledWindow2;
-		
+
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnCheckListBox( wxCommandEvent& event ){ event.Skip(); }
 		virtual void OnCheckListBoxDClick( wxCommandEvent& event ){ event.Skip(); }
 		virtual void OnCheckListBoxToggle( wxCommandEvent& event ){ event.Skip(); }
-		
-	
+
+
 	public:
 		AdditionalPanel( wxWindow* parent, int id = wxID_ANY, wxPoint pos = wxDefaultPosition, wxSize size = wxSize( 447,514 ), int style = wxTAB_TRAVERSAL );
 		void m_splitter1OnIdle( wxIdleEvent& )
@@ -235,8 +236,8 @@ class AdditionalPanel : public wxPanel
 		m_splitter1->SetSashPosition( 85 );
 		m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( AdditionalPanel::m_splitter1OnIdle ), NULL, this );
 		}
-		
-	
+
+
 };
 
 #endif //__event_GUI__

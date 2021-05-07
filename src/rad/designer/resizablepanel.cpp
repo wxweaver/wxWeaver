@@ -1,27 +1,22 @@
-///////////////////////////////////////////////////////////////////////////////
-//
-// wxFormBuilder - A Visual Dialog Editor for wxWidgets.
-// Copyright (C) 2005 José Antonio Hurtado
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-//
-// Written by
-//   José Antonio Hurtado - joseantonio.hurtado@gmail.com
-//   Juan Antonio Ortega  - jortegalalmolda@gmail.com
-//
-///////////////////////////////////////////////////////////////////////////////
+/*
+    wxWeaver - A GUI Designer Editor for wxWidgets.
+    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+*/
 
 #include "resizablepanel.h"
 
@@ -36,7 +31,7 @@ BEGIN_EVENT_TABLE(ResizablePanel, wxPanel)
 END_EVENT_TABLE()
 
 ResizablePanel::ResizablePanel(wxWindow *parent, const wxPoint& pos, const wxSize& size,
-  long style) : 
+  long style) :
   wxPanel(parent, -1, pos, size, style)
 {
   m_sizing = NONE;
@@ -81,35 +76,35 @@ void ResizablePanel::OnSetCursor(wxSetCursorEvent& e)
 void ResizablePanel::OnMouseMotion(wxMouseEvent& e)
 {
   if (m_sizing != NONE)
-  { 
+  {
     wxScreenDC dc;
     wxPen pen(*wxBLACK, 1, wxDOT);
-    
+
     dc.SetPen(pen);
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
     dc.SetLogicalFunction(wxINVERT);
-    
+
     //wxPoint pos = ClientToScreen(wxPoint(0, 0));
     wxPoint pos = GetParent()->ClientToScreen(GetPosition());
-    
+
     if (m_curX >= 0 && m_curY >= 0)
       dc.DrawRectangle(pos.x, pos.y, m_curX, m_curY);
-      
+
     if (m_sizing == RIGHT || m_sizing == RIGHTBOTTOM)
       m_curX = e.GetX() + m_difX;
     else
       m_curX = GetSize().x;
-    
-    if (m_sizing == BOTTOM || m_sizing == RIGHTBOTTOM)  
+
+    if (m_sizing == BOTTOM || m_sizing == RIGHTBOTTOM)
       m_curY = e.GetY() + m_difY;
     else
       m_curY = GetSize().y;
-      
+
     if (m_curX < m_minSize.x) m_curX = m_minSize.x;
     if (m_curY < m_minSize.y) m_curY = m_minSize.y;
-    
+
     dc.DrawRectangle(pos.x, pos.y, m_curX, m_curY);
-  
+
     dc.SetLogicalFunction(wxCOPY);
     dc.SetPen(wxNullPen);
     dc.SetBrush(wxNullBrush);
@@ -126,7 +121,7 @@ void ResizablePanel::OnLeftDown(wxMouseEvent& e)
       m_sizing = RIGHT;
     else if (e.GetY() >= GetSize().y - m_resizeBorder)
       m_sizing = BOTTOM;
-      
+
     if (m_sizing != NONE)
     {
       m_difX = GetSize().x - e.GetX();
@@ -143,29 +138,29 @@ void ResizablePanel::OnLeftUp(wxMouseEvent& )
   {
     m_sizing = NONE;
     ReleaseMouse();
-    
+
     wxScreenDC dc;
     wxPen pen(*wxBLACK, 1, wxDOT);
-    
+
     dc.SetPen(pen);
     dc.SetBrush(*wxTRANSPARENT_BRUSH);
     dc.SetLogicalFunction(wxINVERT);
-    
+
     //wxPoint pos = ClientToScreen(wxPoint(0, 0));
     wxPoint pos = GetParent()->ClientToScreen(GetPosition());
-    
+
     dc.DrawRectangle(pos.x, pos.y, m_curX, m_curY);
-  
+
     dc.SetLogicalFunction(wxCOPY);
     dc.SetPen(wxNullPen);
     dc.SetBrush(wxNullBrush);
-    
+
     SetSize(m_curX, m_curY);
-    
+
     wxCommandEvent event(wxEVT_PANEL_RESIZED, GetId());
     event.SetEventObject(this);
     GetEventHandler()->ProcessEvent(event);
-    
+
     m_curX = m_curY = -1;
   }
 }
