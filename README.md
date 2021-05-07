@@ -10,9 +10,9 @@ Install [MSYS2](http://msys2.github.io/) and run the following inside a MinGW 32
 
 ```sh
 pacman -S --needed mingw-w64-i686-gcc mingw-w64-i686-wxWidgets make git
-git clone --recursive --depth=1 https://github.com/wxFormBuilder/wxFormBuilder
-cd wxFormBuilder
-cmd.exe /C "create_build_files4.bat --wx-root=/mingw32/bin --force-wx-config --disable-mediactrl"
+git clone --recursive --depth=1 https://github.com/wxweaver/wxWeaver
+cd wxWeaver
+cmd.exe /C "create_build_files.bat --wx-root=/mingw32/bin --force-wx-config --disable-mediactrl"
 ln -s /mingw32/include/binutils/ansidecl.h /mingw32/include/ansidecl.h
 ln -s /mingw32/include/binutils/bfd.h /mingw32/include/bfd.h
 ln -s /mingw32/include/binutils/bfd_stdint.h /mingw32/include/bfd_stdint.h
@@ -69,7 +69,7 @@ Note: Building with Xcode currently does not work.
 ```sh
 git clone --recursive --depth=1 https://github.com/wxweaver/wxWeaver
 cd wxWeaver
-./create_build_files4.sh
+./create_build_files.sh
 cd build/3.0/gmake
 make config=release
 ```
