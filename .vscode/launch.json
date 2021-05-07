@@ -5,7 +5,7 @@
 				"type": "gdb",
 				"request": "launch",
 				"name": "Launch Program",
-				"target": "./wxformbuilder",
+				"target": "./wxweaver",
 				"cwd": "${workspaceRoot}/_install/bin",
 				"valuesFormatting": "prettyPrinters"
 			},
@@ -13,7 +13,7 @@
 				"type": "lldb",
 				"request": "launch",
 				"name": "Launch",
-				"program": "${workspaceRoot}/_install/bin/wxformbuilder",
+				"program": "${workspaceRoot}/_install/bin/wxweaver",
 				"args": [],
 				"cwd": "${workspaceRoot}/_install/bin",
 				"preLaunchTask": "build"
