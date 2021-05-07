@@ -133,6 +133,6 @@ ECHO.
 scripts\premake\4.3\bin\release\premake4.exe --file=scripts/premake/solution.lua --wx-root=%wxroot% --wx-version=%wxver% --compiler=%compiler% %compilerversion% %architecture% %shared% %monolithic% %mediactrl% %usewxconfig% vs2010
 ECHO.
 
-ECHO Done generating all project files for wxFormBuilder.
+ECHO Done generating all project files for wxWeaver.
 :End
 

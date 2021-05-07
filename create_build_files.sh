@@ -28,7 +28,7 @@ do
         echo "                          Current: $wxpath"
         echo
         echo "--architecture            Specify build architecture (e.g. --architecture=i386)."
-        echo "--rpath                   Specify a rpath  (e.g. --rpath=/usr/lib/wxformbuilder)."
+        echo "--rpath                   Specify a rpath  (e.g. --rpath=/usr/lib/wxweaver)."
         echo
         exit
     elif [ ${args} = "--disable-mediactrl" ]; then
