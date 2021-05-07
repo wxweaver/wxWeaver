@@ -106,7 +106,7 @@ set(wxWEAVER_SOURCE_FILES
     src/rad/wxfbmanager.cpp
     src/utils/annoyingdialog.cpp
     src/utils/filetocarray.cpp
-    src/utils/m_wxfb.cpp
+    src/utils/m_wxweaver.cpp
     src/utils/stringutils.cpp
     src/utils/typeconv.cpp
     src/utils/wxfbipc.cpp

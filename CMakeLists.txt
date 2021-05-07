@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 project(wxWeaver
-    VERSION 3.9.1
+    VERSION 0.1.0
     LANGUAGES CXX C
     DESCRIPTION "GUI Designer for wxWidgets"
     HOMEPAGE_URL "http://wxweaver.github.io.org"
@@ -10,8 +10,8 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/scripts/cmake)
 option(wxWEAVER_DISABLE_MEDIACTRL "Disable wxMediaCtrl / wxMedia library. [Default: OFF]" OFF)
 
 # TODO: Custom wxWidgets build
-#option(wxWeaver_DISABLE_SHARED    "Use static wxWidgets build instead of shared libraries. [Default: OFF]" OFF)
-#set(wxWeaver_WX_ROOT "" CACHE STRING "Install destination for VST bundle [Default: Empty]")
+#option(wxWEAVER_DISABLE_SHARED    "Use static wxWidgets build instead of shared libraries. [Default: OFF]" OFF)
+#set(wxWEAVER_WX_ROOT "" CACHE STRING "Install destination for VST bundle [Default: Empty]")
 
 include(wxWeaverConfig)
 
