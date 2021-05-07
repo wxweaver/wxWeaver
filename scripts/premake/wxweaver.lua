@@ -23,7 +23,7 @@ project "wxWeaver"
     includedirs
     {
         "../../src",
-        "../../subprojects/ticpp", "../../sdk/plugin_interface"
+        "../../external/ticpp", "../../sdk/plugin_interface"
     }
     defines             {"NO_GCC_PRAGMA", "TIXML_USE_TICPP", "APPEND_WXVERSION"}
     libdirs             {"../../sdk/lib"}

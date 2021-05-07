@@ -1,5 +1,5 @@
 # TICPP
-add_subdirectory(subprojects/ticpp)
+add_subdirectory(external/ticpp)
 add_library(wxfb::ticpp ALIAS ticpp)
 
 # Plugin Interface

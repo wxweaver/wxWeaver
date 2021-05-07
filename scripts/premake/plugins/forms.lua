@@ -14,7 +14,7 @@ project "forms-components-plugin"
     files               {"../../../plugins/forms/forms.cpp"}
     includedirs
     {
-        "../../../subprojects/ticpp", "../../../sdk/plugin_interface"
+        "../../../external/ticpp", "../../../sdk/plugin_interface"
     }
     defines             {"BUILD_DLL", "TIXML_USE_TICPP"}
     links               {"plugin-interface", "TiCPP"}

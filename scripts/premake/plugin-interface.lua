@@ -16,7 +16,7 @@ project "plugin-interface"
         "../../sdk/plugin_interface/**.cpp",
         "../../sdk/plugin_interface/**.fbp"
     }
-    includedirs         {"../../subprojects/ticpp"}
+    includedirs         {"../../external/ticpp"}
     targetdir           "../../sdk/lib"
     defines             {"TIXML_USE_TICPP"}
     targetsuffix        ("-" .. wxVersion)
