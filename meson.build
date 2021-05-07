@@ -1,4 +1,4 @@
-project('wxweaver', 'cpp', default_options : ['cpp_std=c++17'])
+project('wxweaver', 'cpp', default_options : ['cpp_std=c++17'], subproject_dir : 'external')
 
 cxx = meson.get_compiler('cpp')
 add_project_arguments(cxx.get_supported_arguments([
