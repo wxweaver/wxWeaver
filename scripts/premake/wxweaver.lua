@@ -17,7 +17,6 @@ project "wxWeaver"
     }
     excludes
     {
-        "../../src/controls/**",
         "../../src/rad/designer/resizablepanel.*"
     }
     includedirs
