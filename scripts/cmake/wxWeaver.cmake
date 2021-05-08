@@ -200,7 +200,7 @@ if (UNIX AND NOT APPLE)
         "${CMAKE_CURRENT_SOURCE_DIR}/scripts/install/linux/data/gnome/usr/share/pixmaps"
         DESTINATION "${CMAKE_INSTALL_DATADIR}"
     )
-    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/install/linux/debian/wxweaver.sharedmimeinfo"
+    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/scripts/install/linux/debian/wxweaver.sharedmimeinfo"
         DESTINATION "${CMAKE_INSTALL_DATADIR}/mime/packages"
         RENAME "wxweaver.xml"
     )
