@@ -2,52 +2,52 @@
 <icons>
 
   <!-- Main Application Icon-->
-  <icon name="app16" file="wxwin16x16.xpm"/>
-  <icon name="app32" file="logo.png"/>
+  <icon name="app16" file="wxweaver-16.png"/>
+  <icon name="app32" file="wxweaver-32.png"/>
 
   <!-- Toolbar Icons -->
-  <icon name="new" file="new.png"/>
-  <icon name="open" file="open.png"/>
-  <icon name="save" file="save.png"/>
-  <icon name="undo" file="undo.png"/>
-  <icon name="redo" file="redo.png"/>
-  <icon name="copy" file="copy.xpm"/>
-  <icon name="paste" file="paste.png"/>
-  <icon name="cut" file="cut.png"/>
-  <icon name="delete" file="delete.png"/>
+  <icon name="new" file="document-new.png"/>
+  <icon name="open" file="document-open.png"/>
+  <icon name="save" file="document-save.png"/>
+  <icon name="undo" file="edit-undo.png"/>
+  <icon name="redo" file="edit-redo.png"/>
+  <icon name="copy" file="edit-copy.png"/>
+  <icon name="paste" file="edit-paste.png"/>
+  <icon name="cut" file="edit-cut.png"/>
+  <icon name="delete" file="edit-delete.png"/>
   <icon name="generate" file="generate.png"/>
-  <icon name="lalign" file="lalign.png"/>
-  <icon name="chalign" file="chalign.png"/>
-  <icon name="ralign" file="ralign.png"/>
-  <icon name="talign" file="talign.png"/>
-  <icon name="cvalign" file="cvalign.png"/>
-  <icon name="balign" file="balign.png"/>
-  <icon name="expand" file="expand.png"/>
-  <icon name="stretch" file="stretch.png"/>
-  <icon name="left" file="left.xpm"/>
-  <icon name="right" file="right.xpm"/>
-  <icon name="top" file="top.xpm"/>
-  <icon name="bottom" file="bottom.xpm"/>
+  <icon name="lalign" file="align-left.png"/>
+  <icon name="chalign" file="align-center-horizontal.png"/>
+  <icon name="ralign" file="align-right.png"/>
+  <icon name="talign" file="align-top.png"/>
+  <icon name="cvalign" file="align-center-vertical.png"/>
+  <icon name="balign" file="align-bottom.png"/>
+  <icon name="expand" file="size-expand.png"/>
+  <icon name="stretch" file="size-stretch.png"/>
+  <icon name="left" file="border-left.png"/>
+  <icon name="right" file="border-right.png"/>
+  <icon name="top" file="border-top.png"/>
+  <icon name="bottom" file="border-bottom.png"/>
   <icon name="swap" file="swap.png"/>
 
   <!-- Object Tree -->
-  <icon name="project" file="project.xpm"/>
+  <icon name="project" file="document-project.png"/>
 
-  <!-- Replace Unknown Icon -->
-  <!-- <icon name="unknown" file="unknown.xpm"/> -->
+  <!-- TODO: Replace Unknown Icon -->
+  <!-- <icon name="unknown" file="unknown.png"/> -->
 
   <!-- Visual Editor -->
-  <icon name="cpp" file="cpp.png"/>
-  <icon name="h" file="h.png"/>
-  <icon name="designer" file="designer.png"/>
-  <icon name="c++" file="cpp.png"/>
-  <icon name="python" file="python.png"/>
-  <icon name="php" file="php.png"/>
-  <icon name="lua" file="lua.png"/>
-  <icon name="xrc" file="xrc.png"/>
+  <icon name="cpp" file="editor-cpp.png"/>
+  <icon name="h" file="editor-h.png"/>
+  <icon name="designer" file="editor-designer.png"/>
+  <icon name="c++" file="editor-cpp.png"/>
+  <icon name="python" file="editor-python.png"/>
+  <icon name="php" file="editor-php.png"/>
+  <icon name="lua" file="editor-lua.png"/>
+  <icon name="xrc" file="editor-xrc.png"/>
 
   <!-- Object Properties -->
-  <icon name="properties" file="properties.png"/>
-  <icon name="events" file="events.png"/>
+  <icon name="properties" file="object-properties.png"/>
+  <icon name="events" file="object-events.png"/>
 
 </icons>

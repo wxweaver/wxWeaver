@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!--
 wxWeaver - A Visual Dialog Editor for wxWidgets.
-Copyright (C) 2005 José Antonio Hurtado
+Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+Copyright (C) 2021 Andrea Zanellato
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -16,14 +17,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
-Written by
-  José Antonio Hurtado - joseantonio.hurtado@gmail.com
-  Juan Antonio Ortega  - jortegalalmolda@gmail.com
 -->
-<package name="Data" lib="libadditional" icon="grid.xpm" desc="Data manipulation controls">
+<package name="Data" lib="libadditional" icon="data.png" desc="Data manipulation controls">
 
-  <objectinfo class="wxTreeCtrl" icon="tree_ctrl.xpm" type="widget">
+  <objectinfo class="wxTreeCtrl" icon="treectrl.png" type="widget">
     <inherits class="wxTreeCtrlBase"/>
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
@@ -50,7 +47,7 @@ Written by
     <event name="OnTreeStateImageClick" class="wxTreeEvent" help="The state image has been clicked. Windows only."/>
   </objectinfo>
 
-  <objectinfo class="wxGrid" icon="grid.xpm" type="widget">
+  <objectinfo class="wxGrid" icon="grid.png" type="widget">
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
     <property name="name" type="text">m_grid</property>
@@ -163,7 +160,7 @@ Written by
     <event name="OnGridCmdEditorCreated" class="wxGridEditorCreatedEvent" help="The editor for a cell was created; variant taking a window identifier. Processes a wxEVT_GRID_EDITOR_CREATED."/>
   </objectinfo>
 
-  <objectinfo class="wxCheckListBox" icon="checklistbox.xpm" type="widget">
+  <objectinfo class="wxCheckListBox" icon="checklistbox.png" type="widget">
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
     <inherits class="Validator"/>
@@ -183,7 +180,7 @@ Written by
     <event name="OnCheckListBoxDClick" class="wxCommandEvent" help="Process a wxEVT_COMMAND_LISTBOX_DOUBLECLICKED event, when the listbox is double-clicked."/>
   </objectinfo>
 
-  <objectinfo class="wxTreeListCtrl" icon="treelistctrl.xpm" type="treelistctrl" startgroup="1">
+  <objectinfo class="wxTreeListCtrl" icon="treelistctrl.png" type="treelistctrl" startgroup="1">
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
     <property name="name" type="text">m_treeListCtrl</property>
@@ -205,7 +202,7 @@ Written by
     <event name="OnTreelistColumnSorted" class="wxTreeListEvent" help="Process wxEVT_TREELIST_COLUMN_SORTED event indicating that the control contents has just been resorted using the specified column. The event doesn't carry the sort direction, use GetSortColumn() method if you need to know it."/>
   </objectinfo>
 
-  <objectinfo class="wxTreeListCtrlColumn" icon="treelistctrlcolumn.xpm" type="treelistctrlcolumn">
+  <objectinfo class="wxTreeListCtrlColumn" icon="treelistctrlcolumn.png" type="treelistctrlcolumn">
     <property name="name" type="wxString_i18n" help="The column label.">Column</property>
     <property name="width" type="editoption" help="The width of the column in pixels or the special wxCOL_WIDTH_AUTOSIZE value indicating that the column should adjust to its contents. Notice that the first column is special and will be always resized to fill all the space not taken by the other columns, i.e. the width specified here is ignored for it.">
       <option name="wxCOL_WIDTH_DEFAULT" help="Special value used for column width meaning unspecified or default."/>
@@ -227,7 +224,7 @@ Written by
     </property>
   </objectinfo>
 
-  <objectinfo class="wxDataViewCtrl" icon="dataviewtree_ctrl.xpm" startgroup="1" type="dataviewctrl" wxversion="2904" >
+  <objectinfo class="wxDataViewCtrl" icon="dataviewtreectrl.png" startgroup="1" type="dataviewctrl" wxversion="2904" >
     <inherits class="wxControl"/>
     <inherits class="wxWindow"/>
     <property name="name" type="text">m_dataViewCtrl</property>
@@ -261,7 +258,7 @@ Written by
     <event name="OnDataViewCtrlItemDrop" class="wxDataViewEvent" help="Process a wxEVT_DATAVIEW_ITEM_DROP event."/>
   </objectinfo>
 
-  <objectinfo class="wxDataViewTreeCtrl" icon="dataviewtree_ctrl.xpm" type="dataviewtreectrl" wxversion="2904" >
+  <objectinfo class="wxDataViewTreeCtrl" icon="dataviewtreectrl.png" type="dataviewtreectrl" wxversion="2904" >
     <inherits class="wxControl"/>
     <inherits class="wxWindow"/>
     <property name="name" type="text">m_dataViewTreeCtrl</property>
@@ -295,7 +292,7 @@ Written by
     <event name="OnDataViewTreeCtrlItemDrop" class="wxDataViewEvent" help="Process a wxEVT_DATAVIEW_ITEM_DROP event."/>
   </objectinfo>
 
-  <objectinfo class="wxDataViewListCtrl" icon="dataviewlist_ctrl.xpm" type="dataviewlistctrl" wxversion="2904" >
+  <objectinfo class="wxDataViewListCtrl" icon="dataviewlistctrl.png" type="dataviewlistctrl" wxversion="2904" >
     <inherits class="wxControl"/>
     <inherits class="wxWindow"/>
     <property name="name" type="text">m_dataViewListCtrl</property>
@@ -329,7 +326,7 @@ Written by
     <event name="OnDataViewListCtrlItemDrop" class="wxDataViewEvent" help="Process a wxEVT_DATAVIEW_ITEM_DROP event."/>
   </objectinfo>
 
-  <objectinfo class="dataViewColumn" icon="dataviewlist_column.xpm" type="dataviewcolumn" wxversion="2904" >
+  <objectinfo class="dataViewColumn" icon="dataviewcolumn.png" type="dataviewcolumn" wxversion="2904" >
     <property name="name" type="text">m_dataViewColumn</property>
     <property name="label" type="wxString_i18n">Name</property>
     <property name="model_column" type="uint">0</property>
@@ -375,7 +372,7 @@ Written by
     </property>
   </objectinfo>
 
-  <objectinfo class="dataViewListColumn" icon="dataviewlist_column.xpm" type="dataviewlistcolumn" wxversion="2904" >
+  <objectinfo class="dataViewListColumn" icon="dataviewcolumn.png" type="dataviewlistcolumn" wxversion="2904" >
     <property name="name" type="text">m_dataViewListColumn</property>
     <property name="label" type="wxString_i18n">Name</property>
     <property name="type" type="option">
@@ -418,7 +415,7 @@ Written by
     </property>
   </objectinfo>
 
-  <objectinfo class="wxPropertyGrid" icon="propgrid.xpm" type="propgrid" startgroup="1" wxversion="2904" >
+  <objectinfo class="wxPropertyGrid" icon="propertygrid.png" type="propgrid" startgroup="1" wxversion="2904" >
     <inherits class="wxWindow"/>
     <inherits class="AUI"/> <property name="bitmap" type="bitmap" help="This is the bitmap shown in the default state, it must be always valid while all the other bitmaps are optional and don't have to be set."/>
     <property name="style" type="bitlist">
@@ -451,7 +448,7 @@ Written by
     <event name="OnPropertyGridChanged" class="wxPropertyGridEvent" help="Property value is modified."/>
   </objectinfo>
 
-  <objectinfo class="wxPropertyGridManager" icon="propgridman.xpm" type="propgridman" wxversion="2904">
+  <objectinfo class="wxPropertyGridManager" icon="propertygridmanager.png" type="propgridman" wxversion="2904">
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
     <property name="style" type="bitlist">
@@ -494,13 +491,13 @@ Written by
     <event name="OnPropertyGridChanged" class="wxPropertyGridEvent" help="Property value is modified."/>
   </objectinfo>
 
-  <objectinfo class="propGridPage" icon="propgridpage.xpm" type="propgridpage" wxversion="2904">
+  <objectinfo class="propGridPage" icon="propertygridpage.png" type="propgridpage" wxversion="2904">
     <property name="name" type="text" help="Instance name.">m_propertyGridPage</property>
     <property name="label" type="wxString_i18n" help="Label shown as a tooltip of the manager's tool button.">Page</property>
     <property name="bitmap" type="bitmap" help="Bitmap shown in the property manager's header."/>
   </objectinfo>
 
-  <objectinfo class="propGridItem" icon="propgriditem.xpm" type="propgriditem" wxversion="2904">
+  <objectinfo class="propGridItem" icon="propertygriditem.png" type="propgriditem" wxversion="2904">
     <property name="name" type="text" help="Instance name and an internal name of the property item.">m_propertyGridItem</property>
     <property name="label" type="wxString_i18n" help="Label shown in parent property grid/page.">Name</property>
     <property name="type" type="option" help="Type of the property item.">
