@@ -126,7 +126,7 @@ void wxFbPalette::Create()
 
 	// Read the page order from settings and build the list of pages from it
 	auto* config = wxConfigBase::Get();
-	wxStringTokenizer pageOrder(config->Read(wxT("/palette/pageOrder"), wxT("Common,Additional,Data,Containers,Menu/Toolbar,Layout,Forms,Ribbon")), wxT(","));
+	wxStringTokenizer pageOrder(config->Read(wxT("/palette/pageOrder"), wxT("Common,Additional,Data,Containers,Bars,Layout,Forms,Ribbon")), wxT(","));
 	while (pageOrder.HasMoreTokens())
 	{
 		const auto packageName = pageOrder.GetNextToken();
