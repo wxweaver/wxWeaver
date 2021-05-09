@@ -12,19 +12,33 @@
 
 ## Misc
 
-- Get rid and eliminate the `output` directory.
-- Move `resources` directory in the root and add various better paths.
-- Move  `plugins`, `sdk` and `wxFbTest` in `src`.
-- Handle own project files adding mimetype.
+- Handle own project files, adding the related mimetype.
+- CI stuff.
+- Handle API and XRC based on wx version also in plugins.
 
 ## Controls
 
-### wxWizard
+- Check the controls returned by plugins with `OnCreated()` and its log errors.
+- Try to replace static event tables with `Bind()`.
+  Note that using `clang-format` with `wx{BEGIN|END}_EVENT_TABLE` screws up the
+  indentation of next elements for an unknown reason, it doesn't happens with
+  the old deprecated versions.
+- Check components with:
+    - no `public` access specifier
+    - `CleanUp()` disabled
+    - exceptions "handling"
 
-- Add a wxWizard 2-steps creation (with Create() function) in Python code to add
-  the Help button on Python code generation like in C++ one
-  (see wxWizard doc's webpage under 'Extended styles').
+- Replace static event tables with dynamic ones.
 
-- Only wxWizardPageSimple class is supported: we need a change to customcontrol
-  in additional component plugin (change it from widget type to a standalone)
-  in order to use it to create custom wxWizardPages.
+- wxWizard
+    - Add a wxWizard 2-steps creation (with Create() function) in Python code to add
+    the Help button on Python code generation like in C++ one
+    (see wxWizard doc's webpage under 'Extended styles').
+
+    - Only wxWizardPageSimple class is supported: we need a change to customcontrol
+    in additional component plugin (change it from widget type to a standalone)
+    in order to use it to create custom wxWizardPages.
+
+- wxTreebook and wxToolbook
+- wxWebView
+- wxImageList
