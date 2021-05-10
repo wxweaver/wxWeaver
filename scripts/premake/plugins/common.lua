@@ -11,7 +11,7 @@
 project "common-components-plugin"
     kind                "SharedLib"
     targetname          "common"
-    files               {"../../../plugins/common/common.cpp"}
+    files               {"../../../src/plugins/common/common.cpp"}
     includedirs
     {
         "../../../external/ticpp", "../../../sdk/plugin_interface"

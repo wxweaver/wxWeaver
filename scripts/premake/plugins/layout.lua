@@ -11,7 +11,7 @@
 project "layout-components-plugin"
     kind                "SharedLib"
     targetname          "layout"
-    files               {"../../../plugins/layout/layout.cpp"}
+    files               {"../../../src/plugins/layout/layout.cpp"}
     includedirs
     {
         "../../../external/ticpp", "../../../sdk/plugin_interface"

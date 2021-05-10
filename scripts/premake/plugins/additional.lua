@@ -11,7 +11,7 @@
 project "additional-components-plugin"
     kind                "SharedLib"
     targetname          "additional"
-    files               {"../../../plugins/additional/additional.cpp"}
+    files               {"../../../src/plugins/additional/additional.cpp"}
     includedirs
     {
         "../../../external/ticpp", "../../../sdk/plugin_interface"

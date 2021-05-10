@@ -11,7 +11,7 @@
 project "forms-components-plugin"
     kind                "SharedLib"
     targetname          "forms"
-    files               {"../../../plugins/forms/forms.cpp"}
+    files               {"../../../src/plugins/forms/forms.cpp"}
     includedirs
     {
         "../../../external/ticpp", "../../../sdk/plugin_interface"

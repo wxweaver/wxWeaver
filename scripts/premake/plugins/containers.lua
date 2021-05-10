@@ -11,7 +11,7 @@
 project "containers-components-plugin"
     kind                "SharedLib"
     targetname          "containers"
-    files               {"../../../plugins/containers/containers.cpp"}
+    files               {"../../../src/plugins/containers/containers.cpp"}
     includedirs
     {
         "../../../external/ticpp", "../../../sdk/plugin_interface"

@@ -95,7 +95,7 @@ executable('wxweaver', [
 	link_with : plugin_interface, install : true)
 
 foreach plugin : ['common', 'containers', 'forms', 'layout', 'additional']
-	shared_library(plugin, 'plugins/@0@/@0@.cpp'.format(plugin), dependencies : [ticpp_dep, wx_dep],
+	shared_library(plugin, 'src/plugins/@0@/@0@.cpp'.format(plugin), dependencies : [ticpp_dep, wx_dep],
 		include_directories : inc, link_with : plugin_interface, install : true,
 		install_dir : '@0@/wxweaver'.format(get_option('libdir')))
 endforeach
