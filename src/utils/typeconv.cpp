@@ -17,9 +17,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
-#include "typeconv.h"
-
+#include "utils/typeconv.h"
 #include "rad/appdata.h"
 #include "rad/bitmaps.h"
 #include "rad/inspector/objinspect.h"

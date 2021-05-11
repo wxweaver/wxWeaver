@@ -22,7 +22,7 @@
 #define __OBJECT_TREE__
 
 #include "utils/defs.h"
-#include "customkeys.h"
+#include "rad/customkeys.h"
 
 #include <wx/treectrl.h>
 

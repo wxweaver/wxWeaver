@@ -18,15 +18,15 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "visualeditor.h"
+#include "rad/designer/visualeditor.h"
 
 #include "model/objectbase.h"
 #include "utils/typeconv.h"
 #include "utils/exception.h"
-#include "appdata.h"
-#include "event.h"
-#include "manager.h"
-#include "menubar.h"
+#include "rad/appdata.h"
+#include "rad/event.h"
+#include "rad/manager.h"
+#include "rad/designer/menubar.h"
 
 #include <wx/collpane.h>
 

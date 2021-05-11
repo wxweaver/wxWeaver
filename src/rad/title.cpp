@@ -18,7 +18,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "title.h"
+#include "rad/title.h"
 
 Title::Title(wxWindow *parent,const wxString &title) : wxPanel(parent, wxID_ANY)
 {

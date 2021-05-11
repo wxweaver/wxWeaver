@@ -10,9 +10,8 @@
 * HeadURL: http://svn.berlios.de/svnroot/repos/codeblocks/trunk/src/sdk/annoyingdialog.cpp
 */
 
-#include "annoyingdialog.h"
+#include "utils/annoyingdialog.h"
 
-#include <memory>
 #include <wx/button.h>
 #include <wx/checkbox.h>
 #include <wx/config.h>

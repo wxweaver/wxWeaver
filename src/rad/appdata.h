@@ -22,7 +22,7 @@
 #define __APP_DATA__
 
 #include "model/database.h"
-#include "cmdproc.h"
+#include "rad/cmdproc.h"
 
 namespace ticpp
 {

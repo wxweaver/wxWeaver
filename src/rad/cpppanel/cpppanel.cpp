@@ -18,13 +18,13 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "cpppanel.h"
+#include "rad/cpppanel/cpppanel.h"
 
-#include "appdata.h"
-#include "auitabart.h"
-#include "bitmaps.h"
-#include "codeeditor/codeeditor.h"
-#include "event.h"
+#include "rad/appdata.h"
+#include "rad/auitabart.h"
+#include "rad/bitmaps.h"
+#include "rad/codeeditor/codeeditor.h"
+#include "rad/event.h"
 
 #include "utils/typeconv.h"
 #include "utils/exception.h"

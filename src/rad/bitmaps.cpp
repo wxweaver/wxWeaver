@@ -18,7 +18,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "bitmaps.h"
+#include "rad/bitmaps.h"
 
 #include "utils/stringutils.h"
 #include "utils/typeconv.h"

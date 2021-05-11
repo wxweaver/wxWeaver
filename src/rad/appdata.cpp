@@ -18,11 +18,11 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "appdata.h"
+#include "rad/appdata.h"
 
-#include "bitmaps.h"
-#include "event.h"
-#include "manager.h"
+#include "rad/bitmaps.h"
+#include "rad/event.h"
+#include "rad/manager.h"
 
 #include "codegen/codewriter.h"
 #include "codegen/cppcg.h"
@@ -34,8 +34,8 @@
 #include "utils/typeconv.h"
 #include "utils/exception.h"
 #include "utils/ipc.h"
-#include "dataobject/dataobject.h"
-#include "xrcpreview/xrcpreview.h"
+#include "rad/dataobject/dataobject.h"
+#include "rad/xrcpreview/xrcpreview.h"
 
 #include <ticpp.h>
 

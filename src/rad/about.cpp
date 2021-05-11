@@ -18,9 +18,9 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "about.h"
+#include "rad/about.h"
 
-#include "appdata.h"
+#include "rad/appdata.h"
 
 #include <wx/html/htmlwin.h>
 #include <wx/mimetype.h>

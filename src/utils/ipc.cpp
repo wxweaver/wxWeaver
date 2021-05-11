@@ -22,9 +22,8 @@
 #pragma hdrstop
 #endif
 
-#include "ipc.h"
-
-#include "debug.h"
+#include "utils/ipc.h"
+#include "utils/debug.h"
 
 #include <wx/filename.h>
 #include <wx/wx.h>

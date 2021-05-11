@@ -18,12 +18,12 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "customkeys.h"
+#include "rad/customkeys.h"
 #include "utils/debug.h"
 #include "codegen/cppcg.h"
 #include "model/objectbase.h"
 
-#include <rad/appdata.h>
+#include "rad/appdata.h"
 
 BEGIN_EVENT_TABLE(CustomKeysEvtHandler,wxEvtHandler)
   EVT_CHAR(CustomKeysEvtHandler::OnKeyPress)

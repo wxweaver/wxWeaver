@@ -17,11 +17,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "manager.h"
+#include "rad/manager.h"
 
 #include "model/objectbase.h"
-#include "appdata.h"
-#include "designer/visualeditor.h"
+#include "rad/appdata.h"
+#include "rad/designer/visualeditor.h"
 
 #define CHECK_NULL( THING, THING_NAME, RETURN ) 									\
 	if ( !THING )																	\

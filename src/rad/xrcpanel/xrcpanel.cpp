@@ -18,7 +18,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "xrcpanel.h"
+#include "rad/xrcpanel/xrcpanel.h"
 
 #include "codegen/codewriter.h"
 #include "codegen/xrccg.h"
@@ -26,9 +26,9 @@
 #include "model/objectbase.h"
 #include "utils/typeconv.h"
 #include "utils/exception.h"
-#include "appdata.h"
-#include "codeeditor/codeeditor.h"
-#include "event.h"
+#include "rad/appdata.h"
+#include "rad/codeeditor/codeeditor.h"
+#include "rad/event.h"
 
 #include <wx/fdrepdlg.h>
 

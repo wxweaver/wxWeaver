@@ -17,29 +17,30 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "mainframe.h"
+#include "rad/mainframe.h"
 
 #include "model/xrcfilter.h"
 #include "utils/stringutils.h"
 #include "utils/exception.h"
-#include "about.h"
-#include "appdata.h"
-#include "auitabart.h"
-#include "bitmaps.h"
-#include "cpppanel/cpppanel.h"
-#include "designer/visualeditor.h"
-#include "geninheritclass/geninhertclass.h"
-#include "inspector/objinspect.h"
-#include "luapanel/luapanel.h"
-#include "objecttree/objecttree.h"
-#include "palette.h"
-#include "phppanel/phppanel.h"
-#include "pythonpanel/pythonpanel.h"
-#include "title.h"
-#include "wx/config.h"
-#include "event.h"
-#include "manager.h"
-#include "xrcpanel/xrcpanel.h"
+#include "rad/about.h"
+#include "rad/appdata.h"
+#include "rad/auitabart.h"
+#include "rad/bitmaps.h"
+#include "rad/cpppanel/cpppanel.h"
+#include "rad/designer/visualeditor.h"
+#include "rad/geninheritclass/geninhertclass.h"
+#include "rad/inspector/objinspect.h"
+#include "rad/luapanel/luapanel.h"
+#include "rad/objecttree/objecttree.h"
+#include "rad/palette.h"
+#include "rad/phppanel/phppanel.h"
+#include "rad/pythonpanel/pythonpanel.h"
+#include "rad/title.h"
+#include "rad/event.h"
+#include "rad/manager.h"
+#include "rad/xrcpanel/xrcpanel.h"
+
+#include <wx/config.h>
 
 enum
 {

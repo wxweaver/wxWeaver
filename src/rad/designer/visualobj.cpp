@@ -18,11 +18,11 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "visualeditor.h"
+#include "rad/designer/visualeditor.h"
 
 #include "model/objectbase.h"
 #include "utils/typeconv.h"
-#include "appdata.h"
+#include "rad/appdata.h"
 
 using namespace TypeConv;
 

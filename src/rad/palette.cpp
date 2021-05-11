@@ -18,18 +18,18 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "palette.h"
+#include "rad/palette.h"
 
 #include "model/objectbase.h"
 #include "utils/debug.h"
-#include "appdata.h"
-#include "auitabart.h"
-
-#include <map>
-#include <vector>
+#include "rad/appdata.h"
+#include "rad/auitabart.h"
 
 #include <wx/config.h>
 #include <wx/tokenzr.h>
+
+#include <map>
+#include <vector>
 
 #ifdef __WXMAC__
 	#include <wx/tooltip.h>

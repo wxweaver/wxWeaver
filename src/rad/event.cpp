@@ -18,7 +18,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "event.h"
+#include "rad/event.h"
 
 DEFINE_EVENT_TYPE( wxEVT_FB_PROJECT_LOADED )
 DEFINE_EVENT_TYPE( wxEVT_FB_PROJECT_SAVED )

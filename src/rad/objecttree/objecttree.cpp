@@ -18,13 +18,13 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include "objecttree.h"
+#include "rad/objecttree/objecttree.h"
 
 #include "model/objectbase.h"
-#include "appdata.h"
-#include "bitmaps.h"
-#include "menueditor.h"
-#include "event.h"
+#include "rad/appdata.h"
+#include "rad/bitmaps.h"
+#include "rad/menueditor.h"
+#include "rad/event.h"
 
 #include <wx/imaglist.h>
 
