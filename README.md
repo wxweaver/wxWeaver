@@ -25,13 +25,6 @@ sed 's!\$(LDFLAGS) \$(RESOURCES) \$(ARCH) \$(LIBS)!\$(LIBS) \$(LDFLAGS) \$(RESOU
 make config=release
 ```
 
-Run:
-
-```sh
-cd ../../../output/
-./wxWeaver.exe
-```
-
 ### Linux
 
 Pre-requisites for Ubuntu:
@@ -77,6 +70,5 @@ make config=release
 Run:
 
 ```sh
-cd ../../../output/
 open wxWeaver.app
 ```
