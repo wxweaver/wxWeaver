@@ -28,7 +28,7 @@
 #ifndef __OBJ__
 #define __OBJ__
 
-#include "../utils/wxfbdefs.h"
+#include "utils/defs.h"
 #include "types.h"
 
 #include <component.h>

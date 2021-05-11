@@ -21,7 +21,7 @@
 #ifndef __XRC_PANEL__
 #define __XRC_PANEL__
 
-#include "../../utils/wxfbdefs.h"
+#include "utils/defs.h"
 
 #include <wx/stc/stc.h>
 #include <wx/panel.h>

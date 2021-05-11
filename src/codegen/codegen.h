@@ -27,8 +27,8 @@
 #ifndef __CODEGEN__
 #define __CODEGEN__
 
-#include "../model/types.h"
-#include "../utils/wxfbdefs.h"
+#include "model/types.h"
+#include "utils/defs.h"
 
 #include <map>
 #include <vector>

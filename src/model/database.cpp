@@ -20,11 +20,11 @@
 
 #include "database.h"
 
-#include "../rad/bitmaps.h"
-#include "../utils/debug.h"
-#include "../utils/stringutils.h"
-#include "../utils/typeconv.h"
-#include "../utils/wxfbexception.h"
+#include "rad/bitmaps.h"
+#include "utils/debug.h"
+#include "utils/stringutils.h"
+#include "utils/typeconv.h"
+#include "utils/exception.h"
 #include "objectbase.h"
 
 #include <ticpp.h>

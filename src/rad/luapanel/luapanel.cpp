@@ -20,17 +20,17 @@
 
 #include "luapanel.h"
 
-#include "../appdata.h"
-#include "../codeeditor/codeeditor.h"
-#include "../wxfbevent.h"
+#include "appdata.h"
+#include "codeeditor/codeeditor.h"
+#include "event.h"
 
-#include "../../utils/typeconv.h"
-#include "../../utils/wxfbexception.h"
+#include "utils/typeconv.h"
+#include "utils/exception.h"
 
-#include "../../model/objectbase.h"
+#include "model/objectbase.h"
 
-#include "../../codegen/codewriter.h"
-#include "../../codegen/luacg.h"
+#include "codegen/codewriter.h"
+#include "codegen/luacg.h"
 
 #include <wx/fdrepdlg.h>
 

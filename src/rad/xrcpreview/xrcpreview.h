@@ -19,7 +19,7 @@
 */
 #pragma once
 
-#include "../../utils/wxfbdefs.h"
+#include "utils/defs.h"
 
 class wxWindow;
 

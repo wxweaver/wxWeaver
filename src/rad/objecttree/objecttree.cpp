@@ -20,11 +20,11 @@
 
 #include "objecttree.h"
 
-#include "../../model/objectbase.h"
-#include "../appdata.h"
-#include "../bitmaps.h"
-#include "../menueditor.h"
-#include "../wxfbevent.h"
+#include "model/objectbase.h"
+#include "appdata.h"
+#include "bitmaps.h"
+#include "menueditor.h"
+#include "event.h"
 
 #include <wx/imaglist.h>
 

@@ -20,9 +20,9 @@
 
 #include "visualeditor.h"
 
-#include "../../model/objectbase.h"
-#include "../../utils/typeconv.h"
-#include "../appdata.h"
+#include "model/objectbase.h"
+#include "utils/typeconv.h"
+#include "appdata.h"
 
 using namespace TypeConv;
 

@@ -1,7 +1,7 @@
 #include <wx/html/forcelnk.h>
 #include <wx/html/m_templ.h>
 
-#include "../rad/appdata.h"
+#include "rad/appdata.h"
 
 
 FORCE_LINK_ME(m_wxweaver)

@@ -23,7 +23,7 @@
 #include "rad/appdata.h"
 #include "rad/mainframe.h"
 #include "utils/typeconv.h"
-#include "utils/wxfbexception.h"
+#include "utils/exception.h"
 
 #include <wx/clipbrd.h>
 #include <wx/cmdline.h>

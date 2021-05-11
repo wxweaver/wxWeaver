@@ -20,9 +20,9 @@
 
 #include "codewriter.h"
 
-#include "../md5/md5.hh"
-#include "../utils/typeconv.h"
-#include "../utils/wxfbexception.h"
+#include "md5/md5.hh"
+#include "utils/typeconv.h"
+#include "utils/exception.h"
 
 #include <wx/file.h>
 #include <wx/regex.h>

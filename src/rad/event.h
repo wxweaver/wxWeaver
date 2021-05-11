@@ -21,7 +21,7 @@
 #ifndef __wxWEAVEREVENT__
 #define __wxWEAVEREVENT__
 
-#include "../utils/wxfbdefs.h"
+#include "utils/defs.h"
 
 #include <wx/event.h>
 

@@ -27,7 +27,7 @@
 #ifndef __PYTHON_PANEL__
 #define __PYTHON_PANEL__
 
-#include "../../utils/wxfbdefs.h"
+#include "utils/defs.h"
 
 #include <wx/panel.h>
 

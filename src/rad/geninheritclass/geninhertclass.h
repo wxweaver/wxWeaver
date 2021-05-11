@@ -21,7 +21,7 @@
 #ifndef __GENINHERTCLASS_IMP__
 #define __GENINHERTCLASS_IMP__
 
-#include "../../utils/wxfbdefs.h"
+#include "utils/defs.h"
 #include "geninhertclass_gui.h"
 
 /** Holds the details of the class to generate. */

@@ -21,7 +21,7 @@
 #ifndef __TYPE_UTILS__
 #define __TYPE_UTILS__
 
-#include "../model/types.h"
+#include "model/types.h"
 #include "fontcontainer.h"
 
 // macros para la conversión entre wxString <-> wxString

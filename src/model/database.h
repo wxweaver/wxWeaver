@@ -21,7 +21,7 @@
 #ifndef __OBJ_DATABASE__
 #define __OBJ_DATABASE__
 
-#include "../utils/wxfbdefs.h"
+#include "utils/defs.h"
 #include "types.h"
 
 #include <set>

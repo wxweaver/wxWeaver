@@ -21,8 +21,8 @@
 #ifndef __OBJECT_TREE__
 #define __OBJECT_TREE__
 
-#include "../../utils/wxfbdefs.h"
-#include "../customkeys.h"
+#include "utils/defs.h"
+#include "customkeys.h"
 
 #include <wx/treectrl.h>
 

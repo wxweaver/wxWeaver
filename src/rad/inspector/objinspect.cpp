@@ -20,16 +20,16 @@
 
 #include "objinspect.h"
 
-#include "wxfbadvprops.h"
+#include "advprops.h"
 
-#include "../../utils/debug.h"
-#include "../../utils/typeconv.h"
-#include "../../utils/wxfbexception.h"
+#include "utils/debug.h"
+#include "utils/typeconv.h"
+#include "utils/exception.h"
 
-#include "../appdata.h"
-#include "../auitabart.h"
-#include "../bitmaps.h"
-#include "../wxfbevent.h"
+#include "appdata.h"
+#include "auitabart.h"
+#include "bitmaps.h"
+#include "event.h"
 
 #include <wx/config.h>
 #include <wx/propgrid/propgrid.h>

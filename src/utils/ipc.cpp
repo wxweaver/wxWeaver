@@ -22,7 +22,7 @@
 #pragma hdrstop
 #endif
 
-#include "wxfbipc.h"
+#include "ipc.h"
 
 #include "debug.h"
 

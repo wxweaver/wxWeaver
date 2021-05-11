@@ -20,11 +20,11 @@
 
 #include "cppcg.h"
 
-#include "../model/objectbase.h"
-#include "../rad/appdata.h"
-#include "../utils/filetocarray.h"
-#include "../utils/typeconv.h"
-#include "../utils/wxfbexception.h"
+#include "model/objectbase.h"
+#include "rad/appdata.h"
+#include "utils/filetocarray.h"
+#include "utils/typeconv.h"
+#include "utils/exception.h"
 #include "codewriter.h"
 
 #include <algorithm>

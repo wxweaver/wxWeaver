@@ -21,7 +21,7 @@
 #ifndef __LUA_PANEL__
 #define __LUA_PANEL__
 
-#include "../../utils/wxfbdefs.h"
+#include "utils/defs.h"
 
 #include <wx/panel.h>
 

@@ -19,9 +19,9 @@
 */
 #include "mainframe.h"
 
-#include "../model/xrcfilter.h"
-#include "../utils/stringutils.h"
-#include "../utils/wxfbexception.h"
+#include "model/xrcfilter.h"
+#include "utils/stringutils.h"
+#include "utils/exception.h"
 #include "about.h"
 #include "appdata.h"
 #include "auitabart.h"
@@ -37,8 +37,8 @@
 #include "pythonpanel/pythonpanel.h"
 #include "title.h"
 #include "wx/config.h"
-#include "wxfbevent.h"
-#include "wxfbmanager.h"
+#include "event.h"
+#include "manager.h"
 #include "xrcpanel/xrcpanel.h"
 
 enum

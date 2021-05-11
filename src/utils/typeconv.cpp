@@ -20,9 +20,9 @@
 
 #include "typeconv.h"
 
-#include "../rad/appdata.h"
-#include "../rad/bitmaps.h"
-#include "../rad/inspector/objinspect.h"
+#include "rad/appdata.h"
+#include "rad/bitmaps.h"
+#include "rad/inspector/objinspect.h"
 
 #include <wx/artprov.h>
 #include <wx/filesys.h>

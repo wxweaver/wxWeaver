@@ -20,15 +20,15 @@
 
 #include "xrcpanel.h"
 
-#include "../../codegen/codewriter.h"
-#include "../../codegen/xrccg.h"
+#include "codegen/codewriter.h"
+#include "codegen/xrccg.h"
 
-#include "../../model/objectbase.h"
-#include "../../utils/typeconv.h"
-#include "../../utils/wxfbexception.h"
-#include "../appdata.h"
-#include "../codeeditor/codeeditor.h"
-#include "../wxfbevent.h"
+#include "model/objectbase.h"
+#include "utils/typeconv.h"
+#include "utils/exception.h"
+#include "appdata.h"
+#include "codeeditor/codeeditor.h"
+#include "event.h"
 
 #include <wx/fdrepdlg.h>
 

@@ -20,9 +20,9 @@
 
 #include "bitmaps.h"
 
-#include "../utils/stringutils.h"
-#include "../utils/typeconv.h"
-#include "../utils/wxfbexception.h"
+#include "utils/stringutils.h"
+#include "utils/typeconv.h"
+#include "utils/exception.h"
 
 #include <default.xpm>
 #include <ticpp.h>

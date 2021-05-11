@@ -20,8 +20,8 @@
 
 #include "palette.h"
 
-#include "../model/objectbase.h"
-#include "../utils/debug.h"
+#include "model/objectbase.h"
+#include "utils/debug.h"
 #include "appdata.h"
 #include "auitabart.h"
 

@@ -20,7 +20,7 @@
 #ifndef wxWEAVERMANAGER
 #define wxWEAVERMANAGER
 
-#include "../utils/wxfbdefs.h"
+#include "utils/defs.h"
 
 #include <component.h>
 

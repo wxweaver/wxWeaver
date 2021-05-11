@@ -20,12 +20,12 @@
 
 #include "visualeditor.h"
 
-#include "../../model/objectbase.h"
-#include "../../utils/typeconv.h"
-#include "../../utils/wxfbexception.h"
-#include "../appdata.h"
-#include "../wxfbevent.h"
-#include "../wxfbmanager.h"
+#include "model/objectbase.h"
+#include "utils/typeconv.h"
+#include "utils/exception.h"
+#include "appdata.h"
+#include "event.h"
+#include "manager.h"
 #include "menubar.h"
 
 #include <wx/collpane.h>

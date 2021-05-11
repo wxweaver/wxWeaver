@@ -20,7 +20,7 @@
 #ifndef __INNER_FRAME__
 #define __INNER_FRAME__
 
-#include "../../utils/debug.h"
+#include "utils/debug.h"
 
 #include <wx/aui/aui.h>
 #include <wx/wx.h>
