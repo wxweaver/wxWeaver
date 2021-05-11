@@ -16,12 +16,12 @@
   <icon name="cut" file="edit-cut.png"/>
   <icon name="delete" file="edit-delete.png"/>
   <icon name="generate" file="generate.png"/>
-  <icon name="lalign" file="align-left.png"/>
-  <icon name="chalign" file="align-center-horizontal.png"/>
-  <icon name="ralign" file="align-right.png"/>
-  <icon name="talign" file="align-top.png"/>
-  <icon name="cvalign" file="align-center-vertical.png"/>
-  <icon name="balign" file="align-bottom.png"/>
+  <icon name="lalign" file="align-horizontal-left.png"/>
+  <icon name="chalign" file="align-horizontal-center.png"/>
+  <icon name="ralign" file="align-horizontal-right.png"/>
+  <icon name="talign" file="align-vertical-top.png"/>
+  <icon name="cvalign" file="align-vertical-center.png"/>
+  <icon name="balign" file="align-vertical-bottom.png"/>
   <icon name="expand" file="size-expand.png"/>
   <icon name="stretch" file="size-stretch.png"/>
   <icon name="left" file="border-left.png"/>
