@@ -72,7 +72,7 @@ executable('wxweaver', [
 		'src/rad/geninheritclass/geninhertclass_gui.cpp',
 		'src/rad/geninheritclass/geninhertclass.cpp',
 		'src/rad/inspector/objinspect.cpp',
-		'src/rad/inspector/wxfbadvprops.cpp',
+		'src/rad/inspector/advprops.cpp',
 		'src/rad/luapanel/luapanel.cpp',
 		'src/rad/mainframe.cpp',
 		'src/rad/menueditor.cpp',
@@ -81,8 +81,8 @@ executable('wxweaver', [
 		'src/rad/phppanel/phppanel.cpp',
 		'src/rad/pythonpanel/pythonpanel.cpp',
 		'src/rad/title.cpp',
-		'src/rad/wxfbevent.cpp',
-		'src/rad/wxfbmanager.cpp',
+		'src/rad/event.cpp',
+		'src/rad/manager.cpp',
 		'src/rad/xrcpanel/xrcpanel.cpp',
 		'src/rad/xrcpreview/xrcpreview.cpp',
 		'src/utils/annoyingdialog.cpp',
@@ -90,7 +90,7 @@ executable('wxweaver', [
 		'src/utils/stringutils.cpp',
 		'src/utils/typeconv.cpp',
 		'src/utils/typeconv.cpp',
-		'src/utils/wxfbipc.cpp',
+		'src/utils/ipc.cpp',
 	], dependencies : [ticpp_dep, wx_dep, media_dep], include_directories : inc,
 	link_with : plugin_interface, install : true)
 
@@ -100,6 +100,4 @@ foreach plugin : ['common', 'containers', 'forms', 'layout', 'additional']
 		install_dir : '@0@/wxweaver'.format(get_option('libdir')))
 endforeach
 
-install_subdir('output/xml', install_dir : 'share/wxweaver')
-install_subdir('output/resources', install_dir : 'share/wxweaver')
-install_subdir('output/plugins', install_dir : 'share/wxweaver')
+install_subdir('resources/application', install_dir : 'share/wxweaver')

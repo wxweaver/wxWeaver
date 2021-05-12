@@ -1,6 +1,6 @@
 # TICPP
 add_subdirectory(external/ticpp)
-add_library(wxfb::ticpp ALIAS ticpp)
+add_library(wxweaver::ticpp ALIAS ticpp)
 
 # Plugin Interface
 set(wxWEAVER_PLUGIN_INTERFACE_SOURCE_FILES
@@ -14,7 +14,7 @@ set(wxWEAVER_PLUGIN_INTERFACE_SOURCE_FILES
     sdk/plugin_interface/forms/wizard.fbp
 )
 add_library(plugin_interface STATIC ${wxWEAVER_PLUGIN_INTERFACE_SOURCE_FILES})
-add_library(wxfb::plugin_interface ALIAS plugin_interface)
+add_library(wxweaver::plugin_interface ALIAS plugin_interface)
 if(MSVC)
     # Workaround to unwanted build-type directory added by MSVC
     set_target_properties(plugin_interface PROPERTIES
@@ -22,34 +22,33 @@ if(MSVC)
         ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<0:>"
     )
 endif()
-target_link_libraries(plugin_interface wxfb::ticpp ${wxWidgets_LIBRARIES})
+target_include_directories(plugin_interface PUBLIC "sdk/plugin_interface")
+target_link_libraries(plugin_interface wxweaver::ticpp ${wxWidgets_LIBRARIES})
 
 # Plugins
 set(wxWeaverPlugins additional common containers forms layout)
-function(wxfb_add_plugins)
+function(_add_plugins)
     foreach(_plugin IN LISTS wxWeaverPlugins)
-        add_library(${_plugin} MODULE "plugins/${_plugin}/${_plugin}.cpp")
-        add_library(wxfb::${_plugin} ALIAS ${_plugin})
+        add_library(${_plugin} MODULE "src/plugins/${_plugin}/${_plugin}.cpp")
+        add_library(wxweaver::${_plugin} ALIAS ${_plugin})
         if(WIN32)
             set_target_properties(${_plugin} PROPERTIES
                 PREFIX "lib"
                 SUFFIX ".dll"
-#               LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/plugins/${_plugin}/$<0:>"
-                LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/output/plugins/${_plugin}/$<0:>"
+                LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/plugins/${_plugin}/$<0:>"
             )
         else()
             set_target_properties(${_plugin} PROPERTIES
-#               LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/wxweaver"
-                LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/output/lib/wxweaver"
+                LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/wxweaver"
             )
         endif()
         target_compile_definitions(${_plugin} PRIVATE BUILD_DLL)
         target_include_directories(${_plugin} PRIVATE "sdk/plugin_interface")
         target_link_libraries(${_plugin}
-            wxfb::ticpp
-            wxfb::plugin_interface
+            wxweaver::ticpp
+            wxweaver::plugin_interface
             ${wxWidgets_LIBRARIES}
         )
     endforeach()
 endfunction()
-wxfb_add_plugins()
+_add_plugins()

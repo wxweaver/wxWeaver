@@ -24,8 +24,8 @@ set(wxWEAVER_INCLUDE_FILES
     src/rad/designer/window_buttons.h
     src/rad/geninheritclass/geninhertclass.h
     src/rad/geninheritclass/geninhertclass_gui.h
+    src/rad/inspector/advprops.h
     src/rad/inspector/objinspect.h
-    src/rad/inspector/wxfbadvprops.h
     src/rad/luapanel/luapanel.h
     src/rad/objecttree/objecttree.h
     src/rad/phppanel/phppanel.h
@@ -38,22 +38,22 @@ set(wxWEAVER_INCLUDE_FILES
     src/rad/bitmaps.h
     src/rad/cmdproc.h
     src/rad/customkeys.h
+    src/rad/event.h
     src/rad/genericpanel.h
     src/rad/mainframe.h
+    src/rad/manager.h
     src/rad/menueditor.h
     src/rad/palette.h
     src/rad/title.h
-    src/rad/wxfbevent.h
-    src/rad/wxfbmanager.h
     src/utils/annoyingdialog.h
     src/utils/debug.h
+    src/utils/defs.h
+    src/utils/exception.h
     src/utils/filetocarray.h
+    src/utils/ipc.h
+    src/utils/wxlogstring.h
     src/utils/stringutils.h
     src/utils/typeconv.h
-    src/utils/wxfbdefs.h
-    src/utils/wxfbexception.h
-    src/utils/wxfbipc.h
-    src/utils/wxlogstring.h
     src/maingui.h
     src/pch.h
     src/rad/geninheritclass/GenInheritedDlg.fbp
@@ -83,8 +83,8 @@ set(wxWEAVER_SOURCE_FILES
     src/rad/designer/visualobj.cpp
     src/rad/geninheritclass/geninhertclass.cpp
     src/rad/geninheritclass/geninhertclass_gui.cpp
+    src/rad/inspector/advprops.cpp
     src/rad/inspector/objinspect.cpp
-    src/rad/inspector/wxfbadvprops.cpp
     src/rad/luapanel/luapanel.cpp
     src/rad/objecttree/objecttree.cpp
     src/rad/phppanel/phppanel.cpp
@@ -97,19 +97,19 @@ set(wxWEAVER_SOURCE_FILES
     src/rad/bitmaps.cpp
     src/rad/cmdproc.cpp
     src/rad/customkeys.cpp
+    src/rad/event.cpp
     src/rad/genericpanel.cpp
     src/rad/mainframe.cpp
+    src/rad/manager.cpp
     src/rad/menueditor.cpp
     src/rad/palette.cpp
     src/rad/title.cpp
-    src/rad/wxfbevent.cpp
-    src/rad/wxfbmanager.cpp
     src/utils/annoyingdialog.cpp
     src/utils/filetocarray.cpp
+    src/utils/ipc.cpp
     src/utils/m_wxweaver.cpp
     src/utils/stringutils.cpp
     src/utils/typeconv.cpp
-    src/utils/wxfbipc.cpp
     src/maingui.cpp
 )
 if(APPLE)
@@ -120,7 +120,7 @@ if(APPLE)
         ${wxWEAVER_RESOURCE_FILES}
     )
 elseif(WIN32)
-    list(APPEND wxWEAVER_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/wxWeaver.rc")
+    list(APPEND wxWEAVER_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/windows/wxWeaver.rc")
 
     add_executable(${CMAKE_PROJECT_NAME}
         WIN32
@@ -130,11 +130,10 @@ elseif(WIN32)
     )
     set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
         SUFFIX ".exe"
-#       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<0:>"
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/output/$<0:>"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<0:>"
     )
     if(MSVC)
-        # wxfbmanager.cpp CHECK_{VISUAL_EDITOR|WX_OBJECT|OBJECT_BASE} macros warnings
+        # TODO: manager.cpp CHECK_{VISUAL_EDITOR|WX_OBJECT|OBJECT_BASE} macros warnings
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4003")
         target_link_libraries(${CMAKE_PROJECT_NAME} Dbghelp)
     else()
@@ -159,8 +158,7 @@ else()
     )
     set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
         OUTPUT_NAME "wxweaver"
-#       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/output/bin"
+       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
 endif()
 
@@ -177,8 +175,8 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 )
 target_link_libraries(${CMAKE_PROJECT_NAME}
     ${wxWidgets_LIBRARIES}
-    wxfb::ticpp
-    wxfb::plugin_interface
+    wxweaver::ticpp
+    wxweaver::plugin_interface
 )
 if(NOT WIN32)
     target_link_libraries(${CMAKE_PROJECT_NAME} dl)
@@ -194,20 +192,21 @@ if (UNIX AND NOT APPLE)
         DESTINATION "${CMAKE_INSTALL_LIBDIR}/wxweaver"
     )
     install(DIRECTORY
-        "${CMAKE_CURRENT_SOURCE_DIR}/scripts/install/linux/data/gnome/usr/share/appdata"
-        "${CMAKE_CURRENT_SOURCE_DIR}/scripts/install/linux/data/gnome/usr/share/applications"
-        "${CMAKE_CURRENT_SOURCE_DIR}/scripts/install/linux/data/gnome/usr/share/icons"
-        "${CMAKE_CURRENT_SOURCE_DIR}/scripts/install/linux/data/gnome/usr/share/pixmaps"
-        DESTINATION "${CMAKE_INSTALL_DATADIR}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/resources/linux/icons"
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor"
     )
-    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/scripts/install/linux/debian/wxweaver.sharedmimeinfo"
+    install (FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/linux/wxweaver.appdata.xml"
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/metainfo"
+    )
+    install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/linux/wxweaver.sharedmimeinfo"
         DESTINATION "${CMAKE_INSTALL_DATADIR}/mime/packages"
         RENAME "wxweaver.xml"
     )
+    install (FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/linux/wxweaver.desktop"
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/applications"
+    )
     install(DIRECTORY
-        "${CMAKE_CURRENT_SOURCE_DIR}/output/plugins"
-        "${CMAKE_CURRENT_SOURCE_DIR}/output/resources"
-        "${CMAKE_CURRENT_SOURCE_DIR}/output/xml"
+        "${CMAKE_CURRENT_SOURCE_DIR}/resources/application"
         DESTINATION "${CMAKE_INSTALL_DATADIR}/wxweaver"
     )
     install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/COPYING"
