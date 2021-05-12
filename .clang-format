@@ -1,6 +1,7 @@
 ---
 BasedOnStyle: WebKit
 AlignAfterOpenBracket: Align
+AlignTrailingComments: true
 FixNamespaceComments: true
 SortIncludes: false
 
