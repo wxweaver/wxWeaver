@@ -27,9 +27,9 @@ cd ../../../
 PROJECT_ROOT=`pwd`
 popd > /dev/null
 
-PLUG_IN_PATH="$PROJECT_ROOT/output/wxWeaver.app/Contents/PlugIns"
+PLUG_IN_PATH="$PROJECT_ROOT/wxWeaver.app/Contents/PlugIns"
 
-FILES="-x $PROJECT_ROOT/output/wxWeaver.app/Contents/MacOS/wxweaver \
+FILES="-x $PROJECT_ROOT/wxWeaver.app/Contents/MacOS/wxweaver \
 -x $PLUG_IN_PATH/libadditional.dylib \
 -x $PLUG_IN_PATH/libcommon.dylib \
 -x $PLUG_IN_PATH/libcontainers.dylib \
@@ -51,10 +51,10 @@ if [ -f "$PLUG_IN_PATH/libwxadditions-mini.dylib" ]; then
 	FILES = "$FILES -x $PLUG_IN_PATH/libwxadditions-mini.dylib "
 fi
 
-dylibbundler -od -b -d $PROJECT_ROOT/output/wxWeaver.app/Contents/libs/ $FILES
+dylibbundler -od -b -d $PROJECT_ROOT/wxWeaver.app/Contents/libs/ $FILES
 
 #Work around the likely bug in dylibbundler leading in copying two exemplars of the same dylib with different names instead of creating symlinks or changing the dependency name in the depending binaries
-pushd $PROJECT_ROOT/output/wxWeaver.app/Contents/libs/
+pushd $PROJECT_ROOT/wxWeaver.app/Contents/libs/
 wx_version="$(wx-config --version|cut -c1-3)"
 for lib in $(ls libwx_*.dylib); do
   lib_basename="${lib%%\-*}"

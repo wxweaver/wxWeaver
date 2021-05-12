@@ -45,13 +45,13 @@ PROJECT_ROOT=`pwd`
 popd > /dev/null
 
 if [ "$CONFIG" == "debug" ]; then
-	APPCONTENTS="$PROJECT_ROOT/output/wxWeaverd.app/Contents"
-	rm -r -f $PROJECT_ROOT/output/wxWeaverd.app
-	mkdir -p $PROJECT_ROOT/output/wxWeaverd.app
+	APPCONTENTS="$PROJECT_ROOT/wxWeaverd.app/Contents"
+	rm -r -f $PROJECT_ROOT/wxWeaverd.app
+	mkdir -p $PROJECT_ROOT/wxWeaverd.app
 else
-	APPCONTENTS="$PROJECT_ROOT/output/wxWeaver.app/Contents"
-	rm -r -f $PROJECT_ROOT/output/wxWeaver.app
-	mkdir -p $PROJECT_ROOT/output/wxWeaver.app
+	APPCONTENTS="$PROJECT_ROOT/wxWeaver.app/Contents"
+	rm -r -f $PROJECT_ROOT/wxWeaver.app
+	mkdir -p $PROJECT_ROOT/wxWeaver.app
 fi
 
 mkdir -p $APPCONTENTS
@@ -61,25 +61,25 @@ mkdir -p $APPCONTENTS/PlugIns
 mkdir -p $APPCONTENTS/SharedSupport
 
 # read carefully, the original output by the compiler is itself an app bundle
-# located in output/bin/, but we create our own directory for another app
+# located in bin/, but we create our own directory for another app
 # bundle
-if [ -f $PROJECT_ROOT/output/bin/wxweaver.app/Contents/MacOS/wxweaver-2.8 ]; then
-	cp $PROJECT_ROOT/output/bin/wxweaver.app/Contents/MacOS/wxweaver-2.8 $APPCONTENTS/MacOS/wxweaver
+if [ -f $PROJECT_ROOT/bin/wxweaver.app/Contents/MacOS/wxweaver-2.8 ]; then
+	cp $PROJECT_ROOT/bin/wxweaver.app/Contents/MacOS/wxweaver-2.8 $APPCONTENTS/MacOS/wxweaver
 fi
-if [ -f $PROJECT_ROOT/output/bin/wxweaver.app/Contents/MacOS/wxweaver-2.9 ]; then
-	cp $PROJECT_ROOT/output/bin/wxweaver.app/Contents/MacOS/wxweaver-2.9 $APPCONTENTS/MacOS/wxweaver
+if [ -f $PROJECT_ROOT/bin/wxweaver.app/Contents/MacOS/wxweaver-2.9 ]; then
+	cp $PROJECT_ROOT/bin/wxweaver.app/Contents/MacOS/wxweaver-2.9 $APPCONTENTS/MacOS/wxweaver
 fi
-if [ -f $PROJECT_ROOT/output/bin/wxweaver.app/Contents/MacOS/wxweaver-3.1 ]; then
-	cp $PROJECT_ROOT/output/bin/wxweaver.app/Contents/MacOS/wxweaver-3.1 $APPCONTENTS/MacOS/wxweaver
+if [ -f $PROJECT_ROOT/bin/wxweaver.app/Contents/MacOS/wxweaver-3.1 ]; then
+	cp $PROJECT_ROOT/bin/wxweaver.app/Contents/MacOS/wxweaver-3.1 $APPCONTENTS/MacOS/wxweaver
 fi
-if [ -f $PROJECT_ROOT/output/bin/wxweaver.app/Contents/MacOS/wxweaver ]; then
-	cp $PROJECT_ROOT/output/bin/wxweaver.app/Contents/MacOS/wxweaver $APPCONTENTS/MacOS/wxweaver
+if [ -f $PROJECT_ROOT/bin/wxweaver.app/Contents/MacOS/wxweaver ]; then
+	cp $PROJECT_ROOT/bin/wxweaver.app/Contents/MacOS/wxweaver $APPCONTENTS/MacOS/wxweaver
 fi
 
-cp $PROJECT_ROOT/output/lib/wxweaver/* $APPCONTENTS/PlugIns
-cp -r $PROJECT_ROOT/output/plugins/ $APPCONTENTS/SharedSupport/plugins
-cp -r $PROJECT_ROOT/output/resources/ $APPCONTENTS/SharedSupport/resources
-cp -r $PROJECT_ROOT/output/xml/ $APPCONTENTS/SharedSupport/xml
+cp $PROJECT_ROOT/lib/wxweaver/* $APPCONTENTS/PlugIns
+cp -r $PROJECT_ROOT/plugins/ $APPCONTENTS/SharedSupport/plugins
+cp -r $PROJECT_ROOT/resources/ $APPCONTENTS/SharedSupport/resources
+cp -r $PROJECT_ROOT/xml/ $APPCONTENTS/SharedSupport/xml
 
 cp $PROJECT_ROOT/install/macosx/icon.icns $APPCONTENTS/Resources/icon.icns
 cp $PROJECT_ROOT/install/macosx/docicon.icns $APPCONTENTS/Resources/docicon.icns

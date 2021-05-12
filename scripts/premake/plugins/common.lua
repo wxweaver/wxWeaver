@@ -28,11 +28,11 @@ project "common-components-plugin"
         buildoptions    "/std:c++17"
 
     configuration "not windows"
-        targetdir       "../../../output/lib/wxweaver"
+        targetdir       "../../../lib/wxweaver"
 
     configuration "windows"
         targetprefix    "lib"
-        targetdir       "../../../output/plugins/common"
+        targetdir       "../../../plugins/common"
 
     configuration "Debug"
         wx_config       {Debug="yes", Libs=libs}

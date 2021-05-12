@@ -23,8 +23,8 @@ matrix:
         - travis_wait 40 brew install cdalvaro/tap/wxmac
         - ./create_build_files.sh
         - make config=release -C build/3.1/gmake
-        - cd output && zip -ry _macOS.zip wxWeaver.app && ls && cd -
-      env: DEPLOY_FILE=output/_macOS.zip
+        - zip -ry _macOS.zip wxWeaver.app && ls && cd -
+      env: DEPLOY_FILE=_macOS.zip
 deploy:
   provider: releases
   api_key:

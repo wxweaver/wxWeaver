@@ -28,11 +28,11 @@ project "containers-components-plugin"
         buildoptions    "/std:c++17"
 
     configuration "not windows"
-        targetdir       "../../../output/lib/wxweaver"
+        targetdir       "../../../lib/wxweaver"
 
     configuration "windows"
         targetprefix    "lib"
-        targetdir       "../../../output/plugins/containers"
+        targetdir       "../../../plugins/containers"
 
     configuration "Debug"
         wx_config       {Debug="yes", Libs=libs}

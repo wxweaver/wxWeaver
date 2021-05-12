@@ -84,7 +84,7 @@ solution "wxWeaver-Solution"
         -- This produces D9025 because without ExtraWarnings /W3 gets set
         --buildoptions    {"/W4"}
 
-    dofile(scriptDir .. "/utilities.lua")
+--  dofile(scriptDir .. "/utilities.lua")
 
     dofile(scriptDir .. "/plugin-interface.lua")
     dofile(scriptDir .. "/ticpp.lua")

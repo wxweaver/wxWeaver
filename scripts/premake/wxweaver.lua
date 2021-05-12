@@ -80,7 +80,7 @@ project "wxWeaver"
 
     configuration "not windows"
         excludes        {"../../src/*.rc"}
-        targetdir       "../../output/bin"
+        targetdir       "../../bin"
         targetname      "wxweaver"
         links           {"dl"}
 

@@ -32,11 +32,11 @@ project "additional-components-plugin"
         buildoptions    "/std:c++17"
 
     configuration "not windows"
-        targetdir       "../../../output/lib/wxweaver"
+        targetdir       "../../../lib/wxweaver"
 
     configuration "windows"
         targetprefix    "lib"
-        targetdir       "../../../output/plugins/additional"
+        targetdir       "../../../plugins/additional"
 
     configuration "Debug"
         wx_config       {Libs=libs, Debug="yes"}
