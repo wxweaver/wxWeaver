@@ -39,7 +39,6 @@ set(wxWEAVER_INCLUDE_FILES
     src/rad/cmdproc.h
     src/rad/customkeys.h
     src/rad/event.h
-    src/rad/genericpanel.h
     src/rad/mainframe.h
     src/rad/manager.h
     src/rad/menueditor.h
@@ -98,7 +97,6 @@ set(wxWEAVER_SOURCE_FILES
     src/rad/cmdproc.cpp
     src/rad/customkeys.cpp
     src/rad/event.cpp
-    src/rad/genericpanel.cpp
     src/rad/mainframe.cpp
     src/rad/manager.cpp
     src/rad/menueditor.cpp
