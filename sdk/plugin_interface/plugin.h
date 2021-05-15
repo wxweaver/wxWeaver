@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -23,12 +24,12 @@
 
 #include <vector>
 #include <map>
-
-// Library implementation. This module must be implemented inside the library,
-// instead of linking it as an object for doing the plugin.
-// We will make a template so that the preprocessor implements the library inside
-// the module itself.
-
+/*
+    Library implementation. This module must be implemented inside the library,
+    instead of linking it as an object for doing the plugin.
+    We will make a template so that the preprocessor implements the library inside
+    the module itself.
+*/
 class ComponentLibrary : public IComponentLibrary {
 private:
     typedef struct
@@ -149,24 +150,14 @@ public:
             found = true;
             trans = it->second;
         }
-
         return found;
     }
 
-    unsigned int GetMacroCount() override
-    {
-        return (unsigned int)m_macros.size();
-    }
+    size_t GetMacroCount() override { return m_macros.size(); }
 
-    unsigned int GetComponentCount() override
-    {
-        return (unsigned int)m_components.size();
-    }
+    size_t GetComponentCount() override { return m_components.size(); }
 #if 0
-    unsigned int GetSynonymousCount() override
-    {
-        return m_synonymous.size();
-    }
+    size_t GetSynonymousCount() override { return m_synonymous.size(); }
 #endif
 };
 
@@ -189,45 +180,25 @@ public:
         m_type = (type >= 0 && type <= 2 ? type : COMPONENT_TYPE_ABSTRACT);
     }
 
-    void __SetManager(IManager* manager)
-    {
-        m_manager = manager;
-    }
+    void __SetManager(IManager* manager) { m_manager = manager; }
 
-    IManager* GetManager()
-    {
-        return m_manager;
-    }
+    IManager* GetManager() { return m_manager; }
 
     wxObject* Create(IObject* /*obj*/, wxObject* /*parent*/) override
     {
-        return m_manager->NewNoObject(); /* Even components which are not visible must be unique in the map */
+        // Even components which are not visible must be unique in the map
+        return m_manager->NewNoObject();
     }
 
-    void Cleanup(wxObject* /*obj*/) override
-    {
-    }
+    void Cleanup(wxObject* /*obj*/) override { }
 
-    void OnCreated(wxObject* /*wxobject*/, wxWindow* /*wxparent*/) override
-    {
-    }
+    void OnCreated(wxObject* /*wxobject*/, wxWindow* /*wxparent*/) override { }
 
-    void OnSelected(wxObject* /*wxobject*/) override
-    {
-    }
+    void OnSelected(wxObject* /*wxobject*/) override { }
 
-    ticpp::Element* ExportToXrc(IObject* /*obj*/) override
-    {
-        return nullptr;
-    }
+    ticpp::Element* ExportToXrc(IObject* /*obj*/) override { return nullptr; }
 
-    ticpp::Element* ImportFromXrc(ticpp::Element* /*xrcObj*/) override
-    {
-        return nullptr;
-    }
+    ticpp::Element* ImportFromXrc(ticpp::Element* /*xrcObj*/) override { return nullptr; }
 
-    int GetComponentType() override
-    {
-        return m_type;
-    }
+    int GetComponentType() override { return m_type; }
 };

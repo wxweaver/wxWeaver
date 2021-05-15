@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -21,6 +22,7 @@
 
 #include "component.h"
 
+// TODO: Make this an enum
 #define XRC_TYPE_TEXT 0
 #define XRC_TYPE_INTEGER 1
 #define XRC_TYPE_BOOL 2
@@ -58,8 +60,8 @@ class ObjectToXrcFilter {
 public:
     ObjectToXrcFilter(IObject* obj,
                       const wxString& classname,
-                      const wxString& objname = wxT(""),
-                      const wxString& base = wxT(""));
+                      const wxString& objname = wxEmptyString,
+                      const wxString& base = wxEmptyString);
     ~ObjectToXrcFilter();
 
     void AddProperty(const wxString& objPropName,

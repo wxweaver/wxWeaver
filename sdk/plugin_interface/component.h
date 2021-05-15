@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -94,10 +95,10 @@ public:
 #endif
     virtual bool FindSynonymous(const wxString& syn, wxString& trans) = 0;
 
-    virtual unsigned int GetMacroCount() = 0;
-    virtual unsigned int GetComponentCount() = 0;
+    virtual size_t GetMacroCount() = 0;
+    virtual size_t GetComponentCount() = 0;
 #if 0
-    virtual unsigned int GetSynonymousCount() = 0;
+    virtual size_t GetSynonymousCount() = 0;
 #endif
     virtual ~IComponentLibrary()
     {
