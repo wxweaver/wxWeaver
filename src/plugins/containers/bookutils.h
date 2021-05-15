@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,12 +18,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef BOOKUTILS
-#define BOOKUTILS
+#pragma once
 
 #include <component.h>
 #include <default.xpm>
-#include <vector>
+
 #ifdef wxUSE_COLLPANE
 #include <wx/collpane.h>
 #endif
@@ -31,145 +31,115 @@
 #include <wx/simplebook.h>
 #include <wx/aui/auibook.h>
 
-class SuppressEventHandlers
-{
+#include <vector>
+
+class SuppressEventHandlers {
 private:
-	std::vector< wxEvtHandler* > m_handlers;
-	wxWindow* m_window;
+    std::vector<wxEvtHandler*> m_handlers;
+    wxWindow* m_window;
 
 public:
-	SuppressEventHandlers( wxWindow* window )
-	:
-	m_window( window  )
-	{
-		while ( window->GetEventHandler() != window )
-		{
-			m_handlers.push_back( window->PopEventHandler() );
-		}
-	}
+    SuppressEventHandlers(wxWindow* window)
+        : m_window(window)
+    {
+        while (window->GetEventHandler() != window)
+            m_handlers.push_back(window->PopEventHandler());
+    }
 
-	~SuppressEventHandlers()
-	{
-		std::vector< wxEvtHandler* >::reverse_iterator handler;
-		for ( handler = m_handlers.rbegin(); handler != m_handlers.rend(); ++handler )
-		{
-			m_window->PushEventHandler( *handler );
-		}
-	}
+    ~SuppressEventHandlers()
+    {
+        std::vector<wxEvtHandler*>::reverse_iterator handler;
+        for (handler = m_handlers.rbegin(); handler != m_handlers.rend(); ++handler)
+            m_window->PushEventHandler(*handler);
+    }
 };
 
-namespace BookUtils
+namespace BookUtils {
+template <class T>
+void AddImageList(IObject* obj, T* book)
 {
-	template < class T >
-		void AddImageList( IObject* obj, T* book )
-	{
-		if ( !obj->GetPropertyAsString( _("bitmapsize") ).empty() )
-		{
-			wxSize imageSize = obj->GetPropertyAsSize(_("bitmapsize"));
-			wxImageList* images = new wxImageList( imageSize.GetWidth(), imageSize.GetHeight() );
-			wxImage image = wxBitmap( default_xpm ).ConvertToImage();
-			images->Add( image.Scale( imageSize.GetWidth(), imageSize.GetHeight() ) );
-			book->AssignImageList( images );
-		}
-	}
-
-	template < class T >
-		void OnCreated( wxObject* wxobject, wxWindow* wxparent, IManager* manager, wxString name )
-	{
-		// Easy read-only property access
-		IObject* obj = manager->GetIObject( wxobject );
-
-		T* book = wxDynamicCast( wxparent, T );
-
-		//This wouldn't compile in MinGW - strange
-		///wxWindow* page = wxDynamicCast( manager->GetChild( wxobject, 0 ), wxWindow );
-
-		// Do this instead
-		wxObject* child = manager->GetChild( wxobject, 0 );
-		wxWindow* page = NULL;
-		if ( child->IsKindOf(CLASSINFO(wxWindow)))
-		{
-			page = (wxWindow*)child;
-		}
-
-		// Error checking
-		if ( !( obj && book && page ) )
-		{
-			wxLogError( _("%s is missing its wxWeaver object(%p), its parent(%p), or its child(%p)"), name.c_str(), obj, book, page );
-			return;
-		}
-
-		// Prevent event handling by wxWeaver - these aren't user generated events
-		SuppressEventHandlers suppress( book );
-
-		// Save selection
-		int selection = book->GetSelection();
-		book->AddPage( page, obj->GetPropertyAsString( _("label") ) );
-
-		// Apply image to page
-		IObject* parentObj = manager->GetIObject( wxparent );
-		if ( !parentObj )
-		{
-			wxLogError( _("%s's parent is missing its wxWeaver object"), name.c_str() );
-			return;
-		}
-
-		if ( !parentObj->GetPropertyAsString( _("bitmapsize") ).empty() )
-		{
-			if ( !obj->GetPropertyAsString( _("bitmap") ).empty() )
-			{
-				wxSize imageSize = parentObj->GetPropertyAsSize( _("bitmapsize") );
-				int width = imageSize.GetWidth();
-				int height = imageSize.GetHeight();
-				if ( width > 0 && height > 0 )
-				{
-					wxImageList* imageList = book->GetImageList();
-					if ( imageList != NULL )
-					{
-						wxImage image = obj->GetPropertyAsBitmap( _("bitmap") ).ConvertToImage();
-						imageList->Add( image.Scale( width, height ) );
-						book->SetPageImage( book->GetPageCount() - 1, imageList->GetImageCount() - 1 );
-					}
-				}
-			}
-		}
-
-		if ( obj->GetPropertyAsString( _("select") ) == wxT("0") && selection >= 0 )
-		{
-			book->SetSelection(selection);
-		}
-		else
-		{
-			book->SetSelection( book->GetPageCount() - 1 );
-		}
-	}
-
-	template < class T >
-		void OnSelected( wxObject* wxobject, IManager* manager )
-	{
-		// Get actual page - first child
-		wxObject* page = manager->GetChild( wxobject, 0 );
-		if ( NULL == page )
-		{
-			return;
-		}
-
-		T* book = wxDynamicCast( manager->GetParent( wxobject ), T );
-		if ( book )
-		{
-			for ( size_t i = 0; i < book->GetPageCount(); ++i )
-			{
-				if ( book->GetPage( i ) == page )
-				{
-					// Prevent infinite event loop
-					SuppressEventHandlers suppress( book );
-
-					// Select Page
-					book->SetSelection( i );
-				}
-			}
-		}
-	}
+    if (!obj->GetPropertyAsString("bitmapsize").empty()) {
+        wxSize imageSize = obj->GetPropertyAsSize("bitmapsize");
+        wxImageList* images = new wxImageList(imageSize.GetWidth(), imageSize.GetHeight());
+        wxImage image = wxBitmap(default_xpm).ConvertToImage();
+        images->Add(image.Scale(imageSize.GetWidth(), imageSize.GetHeight()));
+        book->AssignImageList(images);
+    }
 }
 
-#endif //BOOKUTILS
+template <class T>
+void OnCreated(wxObject* wxobject, wxWindow* wxparent,
+               IManager* manager, wxString name)
+{
+    // Easy read-only property access
+    IObject* obj = manager->GetIObject(wxobject);
+    T* book = wxDynamicCast(wxparent, T);
+#if 0
+    // This wouldn't compile in MinGW - strange
+    wxWindow* page = wxDynamicCast(manager->GetChild( wxobject, 0 ), wxWindow);
+
+    // Do this instead
+#endif
+    wxObject* child = manager->GetChild(wxobject, 0);
+    wxWindow* page = nullptr;
+    if (child->IsKindOf(wxCLASSINFO(wxWindow)))
+        page = (wxWindow*)child;
+
+    // Error checking
+    if (!(obj && book && page)) {
+        wxLogError(
+            "%s is missing its wxWeaver object(%p), its parent(%p), or its child(%p)",
+            name.c_str(), obj, book, page);
+        return;
+    }
+    // TODO: remove this by replacing static event tables with Bind().
+    // Prevent event handling by wxWeaver, these aren't user generated events
+    SuppressEventHandlers suppress(book);
+
+    int selection = book->GetSelection(); // Save selection
+    book->AddPage(page, obj->GetPropertyAsString("label"));
+
+    IObject* parentObj = manager->GetIObject(wxparent);
+    if (!parentObj) {
+        wxLogError("%s's parent is missing its wxWeaver object", name.c_str());
+        return;
+    }
+    if (!parentObj->GetPropertyAsString("bitmapsize").empty()
+        && !obj->GetPropertyAsString("bitmap").empty()) {
+
+        wxSize imageSize = parentObj->GetPropertyAsSize("bitmapsize");
+        int width = imageSize.GetWidth();
+        int height = imageSize.GetHeight();
+        if (width > 0 && height > 0) {
+            wxImageList* imageList = book->GetImageList();
+            if (imageList) {
+                wxImage image
+                    = obj->GetPropertyAsBitmap(_("bitmap")).ConvertToImage();
+                imageList->Add(image.Scale(width, height));
+                book->SetPageImage( // Apply image to page
+                    book->GetPageCount() - 1, imageList->GetImageCount() - 1);
+            }
+        }
+    }
+    if (obj->GetPropertyAsString("select") == "0" && selection >= 0)
+        book->SetSelection(selection);
+    else
+        book->SetSelection(book->GetPageCount() - 1);
+}
+
+template <class T>
+void OnSelected(wxObject* wxobject, IManager* manager)
+{
+    wxObject* page = manager->GetChild(wxobject, 0); // Get actual page, first child
+    T* book = wxDynamicCast(manager->GetParent(wxobject), T);
+    if (!book || !page)
+        return;
+
+    for (size_t i = 0; i < book->GetPageCount(); ++i) {
+        if (page == book->GetPage(i)) {
+            SuppressEventHandlers suppress(book); // Prevent infinite event loop
+            book->SetSelection(i);                // Select Page
+        }
+    }
+}
+} // namespace BookUtils
