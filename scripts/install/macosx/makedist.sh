@@ -36,24 +36,11 @@ FILES="-x $PROJECT_ROOT/wxWeaver.app/Contents/MacOS/wxweaver \
 -x $PLUG_IN_PATH/liblayout.dylib \
 -x $PLUG_IN_PATH/libforms.dylib"
 
-# these are 'old' contributions that were merged into the main
-# wxWidgets repo after 2.9
-if [ -f "$PLUG_IN_PATH/libwx_macu_flatnotebook-2.8_wxfb.dylib" ]; then
-	FILES = "$FILES -x $PLUG_IN_PATH/libwx_macu_flatnotebook-2.8_wxfb.dylib "
-fi
-if [ -f "$PLUG_IN_PATH/libwx_macu_propgrid-2.8_wxfb.dylib" ]; then
-	FILES = "$FILES -x $PLUG_IN_PATH/libwx_macu_propgrid-2.8_wxfb.dylib "
-fi
-if [ -f "$PLUG_IN_PATH/libwx_macu_scintilla-2.8_wxfb.dylib" ]; then
-	FILES = "$FILES -x $PLUG_IN_PATH/libwx_macu_scintilla-2.8_wxfb.dylib "
-fi
-if [ -f "$PLUG_IN_PATH/libwxadditions-mini.dylib" ]; then
-	FILES = "$FILES -x $PLUG_IN_PATH/libwxadditions-mini.dylib "
-fi
-
 dylibbundler -od -b -d $PROJECT_ROOT/wxWeaver.app/Contents/libs/ $FILES
 
-#Work around the likely bug in dylibbundler leading in copying two exemplars of the same dylib with different names instead of creating symlinks or changing the dependency name in the depending binaries
+# Work around the likely bug in dylibbundler leading in copying two exemplars
+# of the same dylib with different names instead of creating symlinks
+# or changing the dependency name in the depending binaries
 pushd $PROJECT_ROOT/wxWeaver.app/Contents/libs/
 wx_version="$(wx-config --version|cut -c1-3)"
 for lib in $(ls libwx_*.dylib); do

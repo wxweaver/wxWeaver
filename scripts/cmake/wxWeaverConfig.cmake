@@ -25,7 +25,7 @@ if(${wxWidgets_FOUND})
     include(${wxWidgets_USE_FILE})
     include(CMakeDependentOption)
 
-    set(CMAKE_CXX_FLAGS_DEBUG "-D__wxWEAVER_DEBUG__ ${CMAKE_CXX_FLAGS_DEBUG}")
+    set(CMAKE_CXX_FLAGS_DEBUG "-DwxWEAVER_DEBUG ${CMAKE_CXX_FLAGS_DEBUG}")
     set(CMAKE_CXX_STANDARD 17)
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 

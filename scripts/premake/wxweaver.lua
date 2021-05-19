@@ -94,7 +94,7 @@ project "wxWeaver"
 
     configuration "Debug"
         wx_config       {Libs=libs, Debug="yes"}
-        defines         {"__wxWEAVER_DEBUG__"}
+        defines         {"wxWEAVER_DEBUG"}
         targetsuffix    (DebugSuffix)
 
     configuration "Release"

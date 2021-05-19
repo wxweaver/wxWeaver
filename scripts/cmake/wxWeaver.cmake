@@ -34,10 +34,13 @@ set(wxWEAVER_INCLUDE_FILES
     src/rad/xrcpreview/xrcpreview.h
     src/rad/about.h
     src/rad/appdata.h
+    src/rad/auibarart.h
+    src/rad/auidockart.h
     src/rad/auitabart.h
     src/rad/bitmaps.h
     src/rad/cmdproc.h
-    src/rad/customkeys.h
+#   src/rad/customkeys.h
+    src/rad/debugwindow.h
     src/rad/event.h
     src/rad/mainframe.h
     src/rad/manager.h
@@ -50,7 +53,6 @@ set(wxWEAVER_INCLUDE_FILES
     src/utils/exception.h
     src/utils/filetocarray.h
     src/utils/ipc.h
-    src/utils/wxlogstring.h
     src/utils/stringutils.h
     src/utils/typeconv.h
     src/maingui.h
@@ -92,10 +94,13 @@ set(wxWEAVER_SOURCE_FILES
     src/rad/xrcpreview/xrcpreview.cpp
     src/rad/about.cpp
     src/rad/appdata.cpp
+    src/rad/auibarart.cpp
+    src/rad/auidockart.cpp
     src/rad/auitabart.cpp
     src/rad/bitmaps.cpp
     src/rad/cmdproc.cpp
-    src/rad/customkeys.cpp
+#   src/rad/customkeys.cpp
+    src/rad/debugwindow.cpp
     src/rad/event.cpp
     src/rad/mainframe.cpp
     src/rad/manager.cpp
