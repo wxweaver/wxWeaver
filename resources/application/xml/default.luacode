@@ -71,7 +71,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			@{
 			#ifequal #parent $aui_managed "1"
 			@{
-			#iftypeequal "widget || container || notebook || auinotebook || flatnotebook || listbook || choicebook || treelistctrl || splitter"
+			#iftypeequal "widget || container || notebook || auinotebook || listbook || choicebook || treelistctrl || splitter"
 			@{
 				#utbl#wxparent $name.m_mgr:AddPane( #utbl$name, wxaui.wxAuiPaneInfo()
 				#ifnotnull $aui_name @{:Name( $aui_name )@}:$docking()

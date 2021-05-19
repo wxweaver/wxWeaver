@@ -85,7 +85,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <childtype name="container" nmax="0"/>
     <childtype name="notebook" nmax="0"/>
     <childtype name="auinotebook" nmax="0"/>
-    <childtype name="flatnotebook" nmax="0"/>
     <childtype name="listbook" nmax="0"/>
     <childtype name="simplebook" nmax="0"/>
     <childtype name="choicebook" nmax="0"/>
@@ -150,7 +149,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <childtype name="sizer" nmax="1" aui_nmax="1"/>
     <childtype name="gbsizer" nmax="1" aui_nmax="1"/>
     <childtype name="notebook" nmax="1" aui_nmax="1"/>
-    <childtype name="flatnotebook" nmax="1" aui_nmax="1"/>
     <childtype name="listbook" nmax="1" aui_nmax="1"/>
     <childtype name="simplebook" nmax="1" aui_nmax="1"/>
     <childtype name="choicebook" nmax="1" aui_nmax="1"/>
@@ -173,7 +171,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <childtype name="sizer" nmax="1" aui_nmax="1"/>
     <childtype name="gbsizer" nmax="1" aui_nmax="1"/>
     <childtype name="notebook" nmax="1" aui_nmax="1"/>
-    <childtype name="flatnotebook" nmax="1" aui_nmax="1"/>
     <childtype name="listbook" nmax="1" aui_nmax="1"/>
     <childtype name="choicebook" nmax="1" aui_nmax="1"/>
     <childtype name="simplebook" nmax="1" aui_nmax="1"/>
@@ -202,14 +199,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
   </objtype>
 
   <objtype name="notebookpage" item="1">
-    <childtype name="container" nmax="1" aui_nmax="1"/>
-  </objtype>
-
-  <objtype name="flatnotebook" >
-    <childtype name="flatnotebookpage"/>
-  </objtype>
-
-  <objtype name="flatnotebookpage" item="1">
     <childtype name="container" nmax="1" aui_nmax="1"/>
   </objtype>
 

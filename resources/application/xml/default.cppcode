@@ -32,7 +32,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			@{ #nl @#include &lt;wx/intl.h&gt; @}
 		</template>
 		<template name="header_epilogue">
-			///////////////////////////////////////////////////////////////////////////
 		</template>
 		<template name="cpp_preamble">
 			#ifnotnull $precompiled_header
@@ -61,7 +60,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 				#nl
 				static wxWeaverContextSensitiveHelpSetter s_wxWeaverSetTheHelpProvider; #nl
 			@}
-			///////////////////////////////////////////////////////////////////////////
 		</template>
 	</templates>
 
