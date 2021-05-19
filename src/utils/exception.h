@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,45 +18,37 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef wxWEAVEREXCEPTION
-#define wxWEAVEREXCEPTION
+#pragma once
 
 #include <wx/string.h>
 
-/**
-Exception class for wxWeaver
+/** Exception class for wxWeaver
 */
-class wxWeaverException
-{
+class wxWeaverException {
 public:
-	explicit wxWeaverException( const wxString& what )
-	:
-	m_what(what)
-	{}
+    explicit wxWeaverException(const wxString& what)
+        : m_what(what)
+    {
+    }
+    virtual ~wxWeaverException() = default;
 
-	virtual ~wxWeaverException() = default;
-
-	virtual const wxChar* what() const throw()
-	{
-		return m_what.c_str();
-	}
+    virtual const wxChar* what() const throw() { return m_what.c_str(); }
 
 private:
-   wxString m_what;
+    wxString m_what;
 };
 
-/**
-This allows you to stream your exceptions in.
-It will take care of the conversion	and throwing the exception.
-*/
-#define THROW_wxWEAVEREX( message )																								\
-	{																														\
-	wxString hopefullyThisNameWontConflictWithOtherVariables;																\
-	wxString hopefullyUniqueFile(__FILE__, wxConvUTF8);																		\
-	hopefullyUniqueFile = hopefullyUniqueFile.substr(hopefullyUniqueFile.find_last_of(wxT("\\/")) + 1);						\
-	hopefullyThisNameWontConflictWithOtherVariables << message << wxT(" <") << hopefullyUniqueFile << wxT("@");				\
-	hopefullyThisNameWontConflictWithOtherVariables << wxString::Format( wxT("%i"), __LINE__ ) << wxT(">");					\
-	throw wxWeaverException( hopefullyThisNameWontConflictWithOtherVariables );													\
-	}
+/** This allows you to stream your exceptions in.
 
-#endif //wxWEAVEREXCEPTION
+    It will take care of the conversion	and throwing the exception.
+*/
+// TODO: Replace this crap
+#define wxWEAVER_THROW_EX(message)                                                                        \
+    {                                                                                                     \
+        wxString hopefullyThisNameWontConflictWithOtherVariables;                                         \
+        wxString hopefullyUniqueFile(__FILE__, wxConvUTF8);                                               \
+        hopefullyUniqueFile = hopefullyUniqueFile.substr(hopefullyUniqueFile.find_last_of("\\/") + 1);    \
+        hopefullyThisNameWontConflictWithOtherVariables << message << " <" << hopefullyUniqueFile << "@"; \
+        hopefullyThisNameWontConflictWithOtherVariables << wxString::Format("%i", __LINE__) << ">";       \
+        throw wxWeaverException(hopefullyThisNameWontConflictWithOtherVariables);                         \
+    }

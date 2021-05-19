@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,12 +18,10 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
 #include "rad/xrcpanel/xrcpanel.h"
 
 #include "codegen/codewriter.h"
 #include "codegen/xrccg.h"
-
 #include "model/objectbase.h"
 #include "utils/typeconv.h"
 #include "utils/exception.h"
@@ -31,227 +30,200 @@
 #include "rad/event.h"
 
 #include <wx/fdrepdlg.h>
-
 #include <wx/aui/auibook.h>
 
-BEGIN_EVENT_TABLE( XrcPanel,  wxPanel )
-	EVT_FB_CODE_GENERATION( XrcPanel::OnCodeGeneration )
-	EVT_FB_PROJECT_REFRESH( XrcPanel::OnProjectRefresh )
-	EVT_FB_PROPERTY_MODIFIED( XrcPanel::OnPropertyModified )
-	EVT_FB_OBJECT_CREATED( XrcPanel::OnObjectChange )
-	EVT_FB_OBJECT_REMOVED( XrcPanel::OnObjectChange )
-	EVT_FB_OBJECT_SELECTED( XrcPanel::OnObjectChange )
-
-	EVT_FIND( wxID_ANY, XrcPanel::OnFind )
-	EVT_FIND_NEXT( wxID_ANY, XrcPanel::OnFind )
+#if 0
+BEGIN_EVENT_TABLE(XrcPanel, wxPanel)
+EVT_WVR_CODE_GENERATION(XrcPanel::OnCodeGeneration)
+EVT_WVR_PROJECT_REFRESH(XrcPanel::OnProjectRefresh)
+EVT_WVR_PROPERTY_MODIFIED(XrcPanel::OnPropertyModified)
+EVT_WVR_OBJECT_CREATED(XrcPanel::OnObjectChange)
+EVT_WVR_OBJECT_REMOVED(XrcPanel::OnObjectChange)
+EVT_WVR_OBJECT_SELECTED(XrcPanel::OnObjectChange)
+EVT_FIND(wxID_ANY, XrcPanel::OnFind)
+EVT_FIND_NEXT(wxID_ANY, XrcPanel::OnFind)
 END_EVENT_TABLE()
+#endif
 
-XrcPanel::XrcPanel( wxWindow *parent, int id )
-		: wxPanel ( parent, id )
+XrcPanel::XrcPanel(wxWindow* parent, int id)
+    : wxPanel(parent, id)
+    , m_xrcPanel(new CodeEditor(this, wxID_ANY))
+    , m_codeWriter(PTCCodeWriter(new TCCodeWriter(m_xrcPanel->GetTextCtrl())))
 {
-	AppData()->AddHandler( this->GetEventHandler() );
-	wxBoxSizer *top_sizer = new wxBoxSizer( wxVERTICAL );
+    AppData()->AddHandler(this->GetEventHandler());
+    wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
+    SetSizer(topSizer);
 
-	m_xrcPanel = new CodeEditor( this, wxID_ANY);
-	InitStyledTextCtrl( m_xrcPanel->GetTextCtrl() );
+    InitStyledTextCtrl(m_xrcPanel->GetTextCtrl());
 
-	top_sizer->Add( m_xrcPanel, 1, wxEXPAND, 0 );
+    topSizer->Add(m_xrcPanel, 1, wxEXPAND, 0);
+    topSizer->Fit(this);
+    topSizer->Layout();
 
-	SetSizer( top_sizer );
-	SetAutoLayout( true );
-	//top_sizer->SetSizeHints( this );
-	top_sizer->Fit( this );
-	top_sizer->Layout();
+    SetAutoLayout(true);
 
-	m_cw = PTCCodeWriter( new TCCodeWriter( m_xrcPanel->GetTextCtrl() ) );
+    Bind(wxEVT_FIND, &XrcPanel::OnFind, this);
+    Bind(wxEVT_FIND_NEXT, &XrcPanel::OnFind, this);
+
+    Bind(wxEVT_WVR_CODE_GENERATION, &XrcPanel::OnCodeGeneration, this);
+    Bind(wxEVT_WVR_PROJECT_REFRESH, &XrcPanel::OnProjectRefresh, this);
+    Bind(wxEVT_WVR_PROPERTY_MODIFIED, &XrcPanel::OnPropertyModified, this);
+    Bind(wxEVT_WVR_OBJECT_CREATED, &XrcPanel::OnObjectChange, this);
+    Bind(wxEVT_WVR_OBJECT_REMOVED, &XrcPanel::OnObjectChange, this);
+    Bind(wxEVT_WVR_OBJECT_SELECTED, &XrcPanel::OnObjectChange, this);
 }
 
 XrcPanel::~XrcPanel()
 {
-	AppData()->RemoveHandler( this->GetEventHandler() );
+    AppData()->RemoveHandler(this->GetEventHandler());
 }
 
-void XrcPanel::InitStyledTextCtrl( wxStyledTextCtrl *stc )
+void XrcPanel::InitStyledTextCtrl(wxStyledTextCtrl* stc)
 {
-    stc->SetLexer( wxSTC_LEX_XML );
+    stc->SetLexer(wxSTC_LEX_XML);
 #ifdef __WXGTK__
-	// Debe haber un bug en wxGTK ya que la familia wxMODERN no es de ancho fijo.
-	wxFont font(8, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-	font.SetFaceName( wxT( "Monospace" ) );
+    // Debe haber un bug en wxGTK ya que la familia wxMODERN no es de ancho fijo.
+    wxFont font(8, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    font.SetFaceName(wxT("Monospace"));
 #else
-	wxFont font(10, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+    wxFont font(10, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 #endif
-	stc->StyleSetForeground(wxSTC_STYLE_DEFAULT, wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-	stc->StyleSetBackground(wxSTC_STYLE_DEFAULT, wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
-    stc->StyleSetFont( wxSTC_STYLE_DEFAULT, font );
+    stc->StyleSetForeground(
+        wxSTC_STYLE_DEFAULT, wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
+
+    stc->StyleSetBackground(
+        wxSTC_STYLE_DEFAULT, wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
+
+    stc->StyleSetFont(wxSTC_STYLE_DEFAULT, font);
     stc->StyleClearAll();
-	if (!AppData()->IsDarkMode())
-	{
-		stc->StyleSetForeground(wxSTC_H_DOUBLESTRING, *wxRED);
-		stc->StyleSetForeground(wxSTC_H_TAG, wxColour(0, 0, 128));
-		stc->StyleSetForeground(wxSTC_H_ATTRIBUTE, wxColour(128, 0, 128));
-	}
-	else
-	{
-		stc->StyleSetForeground(wxSTC_H_DOUBLESTRING, wxColour(23, 198, 163));
-		stc->StyleSetForeground(wxSTC_H_TAG, wxColour(18, 144, 195));
-		stc->StyleSetForeground(wxSTC_H_ATTRIBUTE, wxColour(221, 40, 103));
-	}
-	stc->SetUseTabs( false );
-	stc->SetTabWidth( 4 );
-	stc->SetTabIndents( true );
-	stc->SetBackSpaceUnIndents( true );
-	stc->SetIndent( 4 );
-	stc->SetSelBackground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHT ) );
-	stc->SetSelForeground( true, wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHTTEXT ) );
-
-	stc->SetCaretForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-	stc->SetCaretWidth( 2 );
-	stc->SetReadOnly( true );
+    if (!AppData()->IsDarkMode()) {
+        stc->StyleSetForeground(wxSTC_H_DOUBLESTRING, *wxRED);
+        stc->StyleSetForeground(wxSTC_H_TAG, wxColour(0, 0, 128));
+        stc->StyleSetForeground(wxSTC_H_ATTRIBUTE, wxColour(128, 0, 128));
+    } else {
+        stc->StyleSetForeground(wxSTC_H_DOUBLESTRING, wxColour(23, 198, 163));
+        stc->StyleSetForeground(wxSTC_H_TAG, wxColour(18, 144, 195));
+        stc->StyleSetForeground(wxSTC_H_ATTRIBUTE, wxColour(221, 40, 103));
+    }
+    stc->SetUseTabs(false);
+    stc->SetTabWidth(4);
+    stc->SetTabIndents(true);
+    stc->SetBackSpaceUnIndents(true);
+    stc->SetIndent(4);
+    stc->SetSelBackground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT));
+    stc->SetSelForeground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHTTEXT));
+    stc->SetCaretForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
+    stc->SetCaretWidth(2);
+    stc->SetReadOnly(true);
 }
 
-void XrcPanel::OnFind( wxFindDialogEvent& event )
+void XrcPanel::OnFind(wxFindDialogEvent& event)
 {
-	wxAuiNotebook* notebook = wxDynamicCast( this->GetParent(), wxAuiNotebook );
-	if ( NULL == notebook )
-	{
-		return;
-	}
+    wxAuiNotebook* notebook = wxDynamicCast(this->GetParent(), wxAuiNotebook);
+    if (!notebook)
+        return;
 
-	int selection = notebook->GetSelection();
-	if ( selection < 0 )
-	{
-		return;
-	}
+    int selection = notebook->GetSelection();
+    if (selection < 0)
+        return;
 
-	wxString text = notebook->GetPageText( selection );
-	if ( wxT("XRC") == text )
-	{
-		m_xrcPanel->GetEventHandler()->ProcessEvent( event );
-	}
+    wxString text = notebook->GetPageText(selection);
+    if (text == "XRC")
+        m_xrcPanel->GetEventHandler()->ProcessEvent(event);
 }
 
-void XrcPanel::OnPropertyModified( wxWeaverPropertyEvent& event )
+void XrcPanel::OnPropertyModified(wxWeaverPropertyEvent& event)
 {
-	// Generate code to the panel only
-	event.SetId( 1 );
-	OnCodeGeneration( event );
+    event.SetId(1); // Generate code to the panel only
+    OnCodeGeneration(event);
 }
 
-void XrcPanel::OnProjectRefresh( wxWeaverEvent& event )
+void XrcPanel::OnProjectRefresh(wxWeaverEvent& event)
 {
-	// Generate code to the panel only
-	event.SetId( 1 );
-	OnCodeGeneration( event );
+    event.SetId(1); // Generate code to the panel only
+    OnCodeGeneration(event);
 }
 
-void XrcPanel::OnObjectChange( wxWeaverObjectEvent& event )
+void XrcPanel::OnObjectChange(wxWeaverObjectEvent& event)
 {
-	// Generate code to the panel only
-	event.SetId( 1 );
-	OnCodeGeneration( event );
+    event.SetId(1); // Generate code to the panel only
+    OnCodeGeneration(event);
 }
 
-void XrcPanel::OnCodeGeneration( wxWeaverEvent& event )
+void XrcPanel::OnCodeGeneration(wxWeaverEvent& event)
 {
+    bool doPanel = IsShown(); // Generate code in the panel if the panel is active
+
+    // Using the previously unused Id field in the event to carry a boolean
+    bool panelOnly = (event.GetId());
+
+    // Only generate to panel + panel is not shown = do nothing
+    if (panelOnly && !doPanel)
+        return;
+
+    // For code preview generate only code relevant to selected form,
+    //  otherwise generate full project code.
+    //PObjectBase project = AppData()->GetProjectData();
     PObjectBase project;
+    if (panelOnly)
+        project = AppData()->GetSelectedForm();
 
-	// Using the previously unused Id field in the event to carry a boolean
-	bool panelOnly = ( event.GetId() != 0 );
+    if (!panelOnly || !project)
+        project = AppData()->GetProjectData();
 
-	// Generate code in the panel if the panel is active
-	bool doPanel = IsShown();
+    if (!project)
+        return;
 
-	// Only generate to panel + panel is not shown = do nothing
-	if ( panelOnly && !doPanel )
-	{
-		return;
-	}
+    if (doPanel) { // Generate code in the panel if the panel is active
 
-	// For code preview generate only code relevant to selected form,
-	//  otherwise generate full project code.
-	if(panelOnly)
-	{
-	    project = AppData()->GetSelectedForm();
-	}
+        Freeze();
 
-	if(!panelOnly || !project)
-	{
-	    project = AppData()->GetProjectData();
-	}
-	//PObjectBase project = AppData()->GetProjectData();
-
-	if(!project)return;
-
-	// Generate code in the panel if the panel is active
-	if ( IsShown() )
-	{
-		Freeze();
         wxStyledTextCtrl* editor = m_xrcPanel->GetTextCtrl();
-		editor->SetReadOnly( false );
-		int line = editor->GetFirstVisibleLine() + editor->LinesOnScreen() - 1;
-		int xOffset = editor->GetXOffset();
 
-		XrcCodeGenerator codegen;
-		codegen.SetWriter( m_cw );
-		codegen.GenerateCode( project );
-		editor->SetReadOnly( true );
-		editor->GotoLine( line );
-		editor->SetXOffset( xOffset );
-		editor->SetAnchor( 0 );
-		editor->SetCurrentPos( 0 );
-		Thaw();
-	}
+        editor->SetReadOnly(false);
 
-	if ( panelOnly )
-	{
-		return;
-	}
+        int line = editor->GetFirstVisibleLine() + editor->LinesOnScreen() - 1;
+        int xOffset = editor->GetXOffset();
 
-	PProperty pCodeGen = project->GetProperty( wxT("code_generation") );
-	if ( pCodeGen )
-	{
-		if ( !TypeConv::FlagSet ( wxT("XRC"), pCodeGen->GetValue() ) )
-		{
-			return;
-		}
-	}
+        XrcCodeGenerator codegen;
+        codegen.SetWriter(m_codeWriter);
+        codegen.GenerateCode(project);
+        editor->SetReadOnly(true);
+        editor->GotoLine(line);
+        editor->SetXOffset(xOffset);
+        editor->SetAnchor(0);
+        editor->SetCurrentPos(0);
 
-	// And now in the file.
-	{
-		XrcCodeGenerator codegen;
+        Thaw();
+    }
+    if (panelOnly)
+        return;
 
-		wxString file, pathEntry;
+    PProperty pCodeGen = project->GetProperty("code_generation");
+    if (!pCodeGen || !TypeConv::FlagSet("XRC", pCodeGen->GetValue()))
+        return;
 
-		wxString path;
+    { // And now in the file.
+        try {
+            wxString path = AppData()->GetOutputPath(); // Get the output path
+            wxString file;
+            PProperty pfile = project->GetProperty("file");
+            if (pfile)
+                file = pfile->GetValue();
 
-		try
-		{
-			// Get the output path
-			path = AppData()->GetOutputPath();
+            if (file.empty())
+                file = "noname";
 
-			PProperty pfile = project->GetProperty( wxT( "file" ) );
+            wxString filePath;
+            filePath << path << file << wxT(".xrc");
+            PCodeWriter cw(new FileCodeWriter(filePath));
 
-			if ( pfile )
-				file = pfile->GetValue();
-
-			if ( file.empty() )
-			{
-				file = wxT( "noname" );
-			}
-
-			wxString filePath;
-
-			filePath << path << file << wxT( ".xrc" );
-			PCodeWriter cw( new FileCodeWriter( filePath ) );
-
-			codegen.SetWriter( cw );
-			codegen.GenerateCode( project );
-			wxLogStatus( wxT( "Code generated on \'%s\'." ), path.c_str() );
-		}
-		catch ( wxWeaverException& ex )
-		{
-			wxLogError( ex.what() );
-		}
-	}
+            XrcCodeGenerator codegen;
+            codegen.SetWriter(cw);
+            codegen.GenerateCode(project);
+            wxLogStatus(_("Code generated on \'%s\'."), path.c_str());
+        } catch (wxWeaverException& ex) {
+            wxLogError(ex.what());
+        }
+    }
 }

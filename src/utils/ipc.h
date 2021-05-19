@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,63 +18,57 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef wxWEAVERIPC_H
-#define wxWEAVERIPC_H
+#pragma once
 
 #include <wx/ipc.h>
-#include <memory>
 #include <wx/snglinst.h>
 
-/* Only allow one instance of a project to be loaded at a time */
+#include <memory>
 
+// Only allow one instance of a project to be loaded at a time
 class AppServer;
 
-class wxWEAVERIPC
-{
-	private:
-		std::unique_ptr<wxSingleInstanceChecker> m_checker;
-		std::unique_ptr<AppServer> m_server;
-		const int m_port;
+class wxWeaverIPC {
+public:
+    wxWeaverIPC()
+        : m_port(4242)
+    {
+    }
+    bool VerifySingleInstance(const wxString& file, bool switchTo = true);
+    void Reset();
 
-		bool CreateServer( const wxString& name );
+private:
+    bool CreateServer(const wxString& name);
 
-	public:
-		wxWEAVERIPC()
-		:
-		m_port( 4242 )
-		{
-		}
-
-		bool VerifySingleInstance( const wxString& file, bool switchTo = true );
-		void Reset();
+    std::unique_ptr<wxSingleInstanceChecker> m_checker;
+    std::unique_ptr<AppServer> m_server;
+    const int m_port;
 };
 
 // Connection class, for use by both communicationg instances
-class AppConnection: public wxConnection
-{
-private:
-	wxString m_data;
-
+class AppConnection : public wxConnection {
 public:
-	AppConnection(){}
+    AppConnection() { }
+
+private:
+    wxString m_data;
 };
 
 // Server class, for listening to connection requests
-class AppServer: public wxServer
-{
+class AppServer : public wxServer {
 public:
-	const wxString m_name;
+    AppServer(const wxString& name)
+        : m_name(name)
+    {
+    }
+    wxConnectionBase* OnAcceptConnection(const wxString& topic) override;
 
-	AppServer( const wxString& name ) : m_name( name ){}
-	wxConnectionBase* OnAcceptConnection(const wxString& topic) override;
+    const wxString m_name;
 };
 
 // Client class, to be used by subsequent instances in OnInit
-class AppClient: public wxClient
-{
+class AppClient : public wxClient {
 public:
-	AppClient(){}
-	wxConnectionBase* OnMakeConnection() override;
+    AppClient() { }
+    wxConnectionBase* OnMakeConnection() override;
 };
-
-#endif //wxWEAVERIPC_H

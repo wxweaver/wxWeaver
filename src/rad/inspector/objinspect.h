@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,9 +18,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
-#ifndef __OBJ_INSPECT__
-#define __OBJ_INSPECT__
+#pragma once
 
 #include "model/objectbase.h"
 
@@ -41,123 +40,106 @@ enum {
     wxWEAVER_OI_SINGLE_PAGE_STYLE
 };
 
-class ObjectInspector : public wxPanel
-{
-private:
-    typedef std::map< wxPGProperty*, PProperty> ObjInspectorPropertyMap;
-    typedef std::map< wxPGProperty*, PEvent> ObjInspectorEventMap;
+class ObjectInspector : public wxPanel {
+public:
+    ObjectInspector(wxWindow* parent, int id, int style = wxWEAVER_OI_DEFAULT_STYLE);
+    ~ObjectInspector() override;
 
+    void OnObjectSelected(wxWeaverObjectEvent& event);
+    void OnProjectRefresh(wxWeaverEvent& event);
+    void OnPropertyModified(wxWeaverPropertyEvent& event);
+    void OnEventHandlerModified(wxWeaverEventHandlerEvent& event);
+
+    void AutoGenerateId(PObjectBase objectChanged, PProperty propChanged, wxString reason);
+    wxPropertyGridManager* CreatePropertyGridManager(wxWindow* parent, wxWindowID id);
+    void SaveSettings();
+
+private:
+    void Create(bool force = false);
+
+    void AddItems(const wxString& name, PObjectBase obj, PObjectInfo objInfo,
+                  PPropertyCategory category, PropertyMap& map);
+
+    void AddItems(const wxString& name, PObjectBase obj, PObjectInfo objInfo,
+                  PPropertyCategory category, EventMap& map);
+
+    wxPGProperty* GetProperty(PProperty prop);
+
+    void RestoreLastSelectedPropItem();
+    void ModifyProperty(PProperty prop, const wxString& str);
+    int StringToBits(const wxString& strVal, wxPGChoices& constants);
+
+    void OnPropertyGridChanging(wxPropertyGridEvent& event);
+    void OnPropertyGridChanged(wxPropertyGridEvent& event);
+    void OnEventGridChanged(wxPropertyGridEvent& event);
+    void OnPropertyGridDblClick(wxPropertyGridEvent& event);
+    void OnEventGridDblClick(wxPropertyGridEvent& event);
+    void OnPropertyGridExpand(wxPropertyGridEvent& event);
+    void OnEventGridExpand(wxPropertyGridEvent& event);
+    void OnPropertyGridItemSelected(wxPropertyGridEvent& event);
+    void OnReCreateGrid(wxCommandEvent& event);
+    void OnBitmapPropertyChanged(wxCommandEvent& event);
+    void OnChildFocus(wxChildFocusEvent& event);
+
+    template <class ValueT>
+    void CreateCategory(const wxString& name, PObjectBase obj, PObjectInfo objInfo,
+                        std::map<wxString, ValueT>& itemMap, bool addingEvents)
+    {
+        // Get Category
+        PPropertyCategory category = objInfo->GetCategory();
+        if (!category)
+            return;
+
+        // Prevent page creation if there are no properties
+        if (!category->GetCategoryCount()
+            && !(addingEvents
+                     ? category->GetEventCount()
+                     : category->GetPropertyCount()))
+            return;
+
+        wxString pageName;
+        if (m_style == wxWEAVER_OI_MULTIPAGE_STYLE)
+            pageName = name;
+        else
+            pageName = wxT("default");
+
+        wxPropertyGridManager* pg = (addingEvents ? m_eg : m_pg);
+        int pageIndex = pg->GetPageByName(pageName);
+        if (wxNOT_FOUND == pageIndex)
+            pg->AddPage(pageName, objInfo->GetSmallIconFile());
+
+        const wxString& catName = category->GetName();
+
+        wxPGProperty* id = pg->Append(new wxPropertyCategory(catName));
+
+        AddItems(name, obj, objInfo, category, itemMap);
+
+        ExpandMap::iterator it = m_isExpanded.find(catName);
+        if (it != m_isExpanded.end()) {
+            if (it->second)
+                pg->Expand(id);
+            else
+                pg->Collapse(id);
+        }
+        pg->SetPropertyAttributeAll(wxPG_BOOL_USE_CHECKBOX, (long)1);
+    }
+    typedef std::map<wxPGProperty*, PProperty> ObjInspectorPropertyMap;
+    typedef std::map<wxPGProperty*, PEvent> ObjInspectorEventMap;
     ObjInspectorPropertyMap m_propMap;
     ObjInspectorEventMap m_eventMap;
 
     PObjectBase m_currentSel;
 
-	//save the current selected property
-	wxString m_strSelPropItem;
-	wxString m_pageName;
+    //save the current selected property
+    wxString m_strSelPropItem;
+    wxString m_pageName;
 
-	wxAuiNotebook* m_nb;
-
+    wxAuiNotebook* m_nb;
     wxPropertyGridManager* m_pg;
     wxPropertyGridManager* m_eg;
 
     int m_style;
 
-    int StringToBits( const wxString& strVal, wxPGChoices& constants );
-
-    typedef std::map< wxString, bool > ExpandMap;
+    typedef std::map<wxString, bool> ExpandMap;
     ExpandMap m_isExpanded;
-
-    template < class ValueT >
-        void CreateCategory( const wxString& name, PObjectBase obj, PObjectInfo obj_info, std::map< wxString, ValueT >& itemMap, bool addingEvents )
-    {
-        // Get Category
-        PPropertyCategory category = obj_info->GetCategory();
-        if ( !category )
-        {
-            return;
-        }
-
-        // Prevent page creation if there are no properties
-        if ( 0 == category->GetCategoryCount() && 0 == ( addingEvents ? category->GetEventCount() : category->GetPropertyCount() ) )
-        {
-            return;
-        }
-
-        wxString pageName;
-
-        if ( m_style == wxWEAVER_OI_MULTIPAGE_STYLE )
-            pageName = name;
-        else
-            pageName = wxT("default");
-
-
-        wxPropertyGridManager* pg = ( addingEvents ? m_eg : m_pg );
-        int pageIndex = pg->GetPageByName( pageName );
-        if ( wxNOT_FOUND == pageIndex )
-        {
-            pg->AddPage( pageName, obj_info->GetSmallIconFile() );
-        }
-
-        const wxString& catName = category->GetName();
-
-        wxPGProperty* id = pg->Append( new wxPropertyCategory( catName ) );
-
-        AddItems( name, obj, obj_info, category, itemMap );
-
-        ExpandMap::iterator it = m_isExpanded.find(catName);
-        if (it != m_isExpanded.end())
-        {
-            if ( it->second )
-            {
-                pg->Expand( id );
-            }
-            else
-            {
-                pg->Collapse( id );
-            }
-        }
-
-        pg->SetPropertyAttributeAll( wxPG_BOOL_USE_CHECKBOX, (long)1 );
-    }
-
-    void AddItems( const wxString& name, PObjectBase obj, PObjectInfo obj_info, PPropertyCategory category, PropertyMap& map );
-    void AddItems( const wxString& name, PObjectBase obj, PObjectInfo obj_info, PPropertyCategory category, EventMap& map );
-    wxPGProperty* GetProperty( PProperty prop );
-
-    void Create( bool force = false );
-
-    void OnPropertyGridChanging( wxPropertyGridEvent& event );
-    void OnPropertyGridChanged( wxPropertyGridEvent& event );
-    void OnEventGridChanged( wxPropertyGridEvent& event );
-    void OnPropertyGridDblClick( wxPropertyGridEvent& event );
-    void OnEventGridDblClick( wxPropertyGridEvent& event );
-    void OnPropertyGridExpand( wxPropertyGridEvent& event );
-    void OnEventGridExpand( wxPropertyGridEvent& event );
-	void OnPropertyGridItemSelected( wxPropertyGridEvent& event );
-    void OnReCreateGrid( wxCommandEvent& event );
-	void OnBitmapPropertyChanged( wxCommandEvent& event );
-
-	void RestoreLastSelectedPropItem();
-
-	void ModifyProperty( PProperty prop, const wxString& str );
-
-	void OnChildFocus( wxChildFocusEvent& event );
-
-public:
-    ObjectInspector(wxWindow *parent, int id, int style = wxWEAVER_OI_DEFAULT_STYLE);
-	~ObjectInspector() override;
-
-    void OnObjectSelected( wxWeaverObjectEvent& event );
-    void OnProjectRefresh( wxWeaverEvent& event );
-    void OnPropertyModified( wxWeaverPropertyEvent& event );
-    void OnEventHandlerModified( wxWeaverEventHandlerEvent& event );
-
-    void AutoGenerateId( PObjectBase objectChanged, PProperty propChanged, wxString reason );
-    wxPropertyGridManager* CreatePropertyGridManager( wxWindow *parent, wxWindowID id );
-    void SavePosition();
-
-    DECLARE_EVENT_TABLE()
 };
-
-#endif //__OBJ_INSPECT__

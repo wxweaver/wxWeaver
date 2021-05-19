@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,22 +18,16 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
-#ifndef __KEYS_HANDLER__
-#define __KEYS_HANDLER__
+#pragma once
 
 #include <wx/wx.h>
 
-// This class is not needed because shorcuts are made through acceletors
+// This class is not needed because shorcuts are made through accelerators
 // of the MainFrame menubar.
-class CustomKeysEvtHandler : public wxEvtHandler
-{
- private:
-  CustomKeysEvtHandler() {}
+class CustomKeysEvtHandler : public wxEvtHandler {
+public:
+    void OnKeyPress(wxKeyEvent& event);
 
-  DECLARE_EVENT_TABLE()
- public:
-  void OnKeyPress(wxKeyEvent &event);
+private:
+    CustomKeysEvtHandler();
 };
-
-#endif //__KEYS_HANDLER__

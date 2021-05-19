@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -27,15 +28,16 @@
 
 class wxWeaverDataObject : public wxDataObject {
 public:
-	wxWeaverDataObject(PObjectBase obj = PObjectBase());
-	void GetAllFormats(wxDataFormat* formats, Direction dir = Get) const override;
-	bool GetDataHere(const wxDataFormat& format, void* buf) const override;
-	size_t GetDataSize(const wxDataFormat& format) const override;
-	size_t GetFormatCount(Direction dir = Get) const override;
-	wxDataFormat GetPreferredFormat(Direction dir = Get) const override;
-	bool SetData(const wxDataFormat& format, size_t len, const void* buf) override;
-	PObjectBase GetObj();
+    wxWeaverDataObject(PObjectBase obj = PObjectBase());
+
+    void GetAllFormats(wxDataFormat* formats, Direction dir = Get) const override;
+    bool GetDataHere(const wxDataFormat& format, void* buf) const override;
+    size_t GetDataSize(const wxDataFormat& format) const override;
+    size_t GetFormatCount(Direction dir = Get) const override;
+    wxDataFormat GetPreferredFormat(Direction dir = Get) const override;
+    bool SetData(const wxDataFormat& format, size_t len, const void* buf) override;
+    PObjectBase GetObj();
 
 private:
-	std::string m_data;
+    std::string m_data;
 };

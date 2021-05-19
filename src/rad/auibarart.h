@@ -1,7 +1,8 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
-    Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
+    Copyright (C) 2012-2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -17,27 +18,14 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include <wx/log.h>
+#pragma once
 
-class wxLogString : public wxLog {
+#include <wx/dc.h>
+#include <wx/aui/auibar.h>
+
+class ToolBarArt : public wxAuiDefaultToolBarArt {
 public:
-	wxLogString() {
-	}
-
-	void DoLogString(const wxChar* str, time_t t) {
-		m_str += str;
-		m_str += wxT("\n");
-	}
-
-	void FlushStr(wxString& str) {
-		str = m_str;
-		m_str.clear();
-	}
-
-	wxString GetStr() const {
-		return m_str;
-	}
-
-private:
-	wxString m_str;
+    void DrawBackground(wxDC& dc, wxWindow* wnd, const wxRect& rect);
+    void DrawOverflowButton(wxDC& dc, wxWindow* wnd,
+                            const wxRect& rect, int state);
 };

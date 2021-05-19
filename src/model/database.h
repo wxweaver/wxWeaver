@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,15 +18,14 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
-#ifndef __OBJ_DATABASE__
-#define __OBJ_DATABASE__
+#pragma once
 
 #include "utils/defs.h"
-#include "types.h"
+#include "model/types.h"
+
+#include <wx/dynlib.h>
 
 #include <set>
-#include <wx/dynlib.h>
 
 class ObjectDatabase;
 class ObjectTypeDictionary;
@@ -33,247 +33,215 @@ class PropertyCategory;
 
 typedef std::shared_ptr<ObjectDatabase> PObjectDatabase;
 
-namespace ticpp
-{
-	class Element;
+namespace ticpp {
+class Element;
 }
+/** Object class package.
 
-/**
- * Paquete de clases de objetos.
- * Determinará la agrupación en la paleta de componentes.
+    It will determine the grouping in the component palette.
  */
-class ObjectPackage
-{
- private:
-  wxString m_name;    // nombre del paquete
-  wxString m_desc;  // breve descripción del paquete
-  wxBitmap m_icon;	// The icon for the notebook page
+class ObjectPackage {
+public:
+    /** Constructor.
+    */
+    ObjectPackage(wxString name, wxString desc, wxBitmap icon);
 
-  // Vector con los objetos que están contenidos en el paquete
-  std::vector< PObjectInfo > m_objs;
+    /** Adds an object information into the package.
+    */
+    void Add(PObjectInfo obj) { m_objs.push_back(obj); }
 
- public:
-  /**
-   * Constructor.
-   */
-  ObjectPackage(wxString name, wxString desc, wxBitmap icon);
+    /** Returns the package name.
+    */
+    wxString GetPackageName() { return m_name; }
 
-  /**
-   * Incluye en el paquete la información de un objeto.
-   */
-  void Add(PObjectInfo obj) { m_objs.push_back(obj); }
+    /** Returns the package description.
+    */
+    wxString GetPackageDescription() { return m_desc; }
 
-  /**
-   * Obtiene el nombre del paquete.
-   */
-  wxString GetPackageName() { return m_name; }
+    /** Returns the package icon.
+    */
+    wxBitmap GetPackageIcon() { return m_icon; }
 
-  /**
-   * Obtiene el texto que describe el paquete.
-   */
-  wxString GetPackageDescription() { return m_desc; }
+    /** Returns the package objects count.
+    */
+    size_t GetObjectCount() { return m_objs.size(); }
 
-  /**
-   * Get Package Icon
-   */
-  wxBitmap GetPackageIcon() { return m_icon; }
+    /** Returns the information about the object contained in the package.
+    */
+    PObjectInfo GetObjectInfo(size_t idx);
 
-  /**
-   * Obtiene el número de objetos incluidos en el paquete.
-   */
-  unsigned int GetObjectCount() { return (unsigned int)m_objs.size(); }
+    /** If two xml files specify the same package name,
+        then they merged to one package with this.
 
-  /**
-   * Obtiene la información de un objeto incluido en el paquete.
-   */
-  PObjectInfo GetObjectInfo(unsigned int idx);
+        This allows one package to be splitted across multiple xml files.
+    */
+    void AppendPackage(PObjectPackage package);
 
-  /**
-  If two xml files specify the same package name, then they merged to one package with this.
-  This allows one package to be split across multiple xml files.
-  */
-  void AppendPackage( PObjectPackage package );
-
+private:
+    wxString m_name;                 // Package name
+    wxString m_desc;                 // Brief package description
+    wxBitmap m_icon;                 // The notebook page icon
+    std::vector<PObjectInfo> m_objs; // Objects contained in the package
 };
 
 class IComponentLibrary;
 
-/**
- * Base de datos de objetos.
- * Todos las informaciones de objetos importadas de los archivos XML, serán
- * almacenados por esta clase.
+/** Object database.
+
+    All imported objects information from XML files will be stored in this class.
  */
-class ObjectDatabase
-{
- public:
-  static bool HasCppProperties(wxString type);
- private:
-  typedef std::vector<PObjectPackage> PackageVector;
+class ObjectDatabase {
+public:
+    ObjectDatabase();
+    ~ObjectDatabase();
 
-  // Map the property type string to the property type number
-  typedef std::map<wxString,PropertyType> PTMap;
-  typedef std::map<wxString,PObjectType> ObjectTypeMap;
-  #ifdef __WXMAC__
-	typedef std::vector< void * > LibraryVector;
-  #else
-	typedef std::vector< wxDynamicLibrary * > LibraryVector;
-  #endif
-  typedef void (*PFFreeComponentLibrary)( IComponentLibrary* lib );
-  typedef std::map< PFFreeComponentLibrary, IComponentLibrary * > ComponentLibraryMap;
-  typedef std::set<wxString> MacroSet;
-  typedef std::map< wxString, PCodeInfo > LangTemplateMap;
-  typedef std::map< PropertyType, LangTemplateMap > PTLangTemplateMap;
+    PObjectBase NewObject(PObjectInfo obj_info);
 
-  wxString m_xmlPath;
-  wxString m_iconPath;
-  wxString m_pluginPath;
-  std::map< wxString, PObjectInfo > m_objs;
-  PackageVector m_pkgs;
-  PTMap m_propTypes;
-  LibraryVector m_libs;
-  ComponentLibraryMap m_componentLibs;
-  ObjectTypeMap m_types; // register object types
+    /** Gets the information of an object from the name of the class.
+    */
+    PObjectInfo GetObjectInfo(wxString class_name);
 
-  // para comprobar que no se nos han quedado macros sin añadir en las
-  // liberias de componentes, vamos a crear un conjunto con las macros
-  // definidas en los XML, y al importar las librerías vamos a ir eliminando
-  // dichas macros del conjunto, quedando al final las macros que faltan
-  // por registrar en la librería.
-  MacroSet m_macroSet;
+    /** Sets the path where the files with the description are located.
+    */
+    void SetXmlPath(const wxString& path) { m_xmlPath = path; }
 
-  // used so libraries are only imported once, even if multiple libraries use them
-  std::set< wxString > m_importedLibraries;
+    /** Sets the path where the icons associated with the objects are located.
+    */
+    void SetIconPath(const wxString& path) { m_iconPath = path; }
 
-  PTLangTemplateMap m_propertyTypeTemplates;
+    void SetPluginPath(const wxString& path) { m_pluginPath = path; }
 
-  /**
-   * Initialize the property type map.
+    /** Obtains the path where the files with the object description are located.
+    */
+    wxString GetXmlPath() { return m_xmlPath; }
+    wxString GetIconPath() { return m_iconPath; }
+    wxString GetPluginPath() { return m_pluginPath; }
+
+    /** Loads the object type definitions.
+    */
+    bool LoadObjectTypes();
+
+    /** Find and load plugins from the plugins directory
+    */
+    void LoadPlugins(PwxWeaverManager manager);
+
+    /** Objects factory.
+
+        A new instance of an object is created from the class name.
+    */
+    PObjectBase CreateObject(std::string class_name, PObjectBase parent = PObjectBase());
+
+    /** Factory of objects from an XML object.
+
+        This method is used to load a saved project.
+    */
+    PObjectBase CreateObject(ticpp::Element* obj, PObjectBase parent = PObjectBase());
+
+    /** Copies an object
+    */
+    PObjectBase CopyObject(PObjectBase obj);
+
+    /** Gets a package of objects from the given index.
+    */
+    PObjectPackage GetPackage(size_t idx);
+
+    /** Gets the number of registered packages.
+    */
+    size_t GetPackageCount() { return m_pkgs.size(); }
+
+    /** Reset the counters that accompany the name.
+
+        The "name" property is a special property,
+        reserved for the name of the object instance.
+        Each object class has a counter associated with it so as not to duplicate
+        the name when creating new objects (e.g. m_button1, m_button2...)
    */
-  void InitPropertyTypes();
+    void ResetObjectCounters();
 
-  /**
-   * Carga las plantillas de generación de código de un fichero
-   * xml de código dado
-   */
-  void LoadCodeGen( const wxString& file );
+    static bool HasCppProperties(wxString type);
 
-  /**
-   * Carga los objetos de un paquete con todas sus propiedades salvo
-   * los objetos heredados
-   */
-  PObjectPackage LoadPackage( const wxString& file, const wxString& iconPath = wxEmptyString );
+private:
+    /** Initialize the property type map.
+    */
+    void InitPropertyTypes();
 
-  void ParseProperties( ticpp::Element* elem_obj, PObjectInfo obj_info, PPropertyCategory category, std::set< PropertyType >* types );
-  void ParseEvents    ( ticpp::Element* elem_obj, PObjectInfo obj_info, PPropertyCategory category );
+    /** Loads the code generation templates from a XML file.
+    */
+    void LoadCodeGen(const wxString& file);
 
-  /**
-   * Importa una librería de componentes y lo asocia a cada clase.
-   * @throw wxWeaverException If the library could not be imported.
-   */
-  void ImportComponentLibrary( wxString libfile, PwxWeaverManager manager );
+    /** Loads the objects of a package with all their properties except
+        inherited objects.
+    */
+    PObjectPackage LoadPackage(const wxString& file, const wxString& iconPath = wxEmptyString);
 
-  /**
-   * Incluye la información heredada de los objetos de un paquete.
-   * En la segunda pasada configura cada paquete con sus objetos base.
-   */
-  void SetupPackage( const wxString& file, const wxString& path, PwxWeaverManager manager );
+    void ParseProperties(ticpp::Element* elem_obj, PObjectInfo obj_info, PPropertyCategory category, std::set<PropertyType>* types);
 
-  /**
-   * Determina si el tipo de objeto hay que incluirlo en la paleta de
-   * componentes.
-   */
-  bool ShowInPalette(wxString type);
+    void ParseEvents(ticpp::Element* elem_obj, PObjectInfo obj_info, PPropertyCategory category);
 
-  // rutinas de conversión
-  PropertyType ParsePropertyType (wxString str);
-  wxString       ParseObjectType   (wxString str);
+    /** Imports a components library and associates it with each class.
 
+        @throw wxWeaverException If the library could not be imported.
+    */
+    void ImportComponentLibrary(wxString libfile, PwxWeaverManager manager);
 
-  PObjectType GetObjectType(wxString name);
+    /** Includes information inherited from objects in a package.
 
-  int CountChildrenWithSameType(PObjectBase parent,PObjectType type);
-  int CountChildrenWithSameType(PObjectBase parent, const std::set<PObjectType>& types);
+        In the second pass configure each package with its base objects.
+    */
+    void SetupPackage(const wxString& file, const wxString& path, PwxWeaverManager manager);
 
-  void SetDefaultLayoutProperties(PObjectBase obj);
+    /** Determines whether the object type should be included in the components.
+    */
+    bool ShowInPalette(wxString type);
 
- public:
-  ObjectDatabase();
-  ~ObjectDatabase();
+    // conversion routines
+    PropertyType ParsePropertyType(wxString str);
 
-  PObjectBase NewObject(PObjectInfo obj_info);
+    wxString ParseObjectType(wxString str);
 
-  /**
-   * Obtiene la información de un objeto a partir del nombre de la clase.
-   */
-  PObjectInfo GetObjectInfo(wxString class_name);
+    PObjectType GetObjectType(wxString name);
 
-  /**
-   * Configura la ruta donde se encuentran los ficheros con la descripción.
-   */
-  void SetXmlPath( const wxString& path ) { m_xmlPath = path; }
+    size_t CountChildrenWithSameType(PObjectBase parent, PObjectType type);
+    size_t CountChildrenWithSameType(PObjectBase parent, const std::set<PObjectType>& types);
 
-  /**
-   * Configura la ruta donde se encuentran los iconos asociados a los objetos.
-   */
-  void SetIconPath( const wxString& path)  { m_iconPath = path; }
-  void SetPluginPath( const wxString& path ) { m_pluginPath = path; }
+    void SetDefaultLayoutProperties(PObjectBase obj);
 
-  /**
-   * Obtiene la ruta donde se encuentran los ficheros con la descripción de
-   * objetos.
-   */
-  wxString GetXmlPath()		{ return m_xmlPath; 		}
-  wxString GetIconPath()	{ return m_iconPath; 		}
-  wxString GetPluginPath()	{ return m_pluginPath; 		}
+    typedef std::vector<PObjectPackage> PackageVector;
 
-  /**
-   * Carga las definiciones de tipos de objetos.
-   */
-  bool LoadObjectTypes();
+    // Map the property type string to the property type number
+    typedef std::map<wxString, PropertyType> PTMap;
+    typedef std::map<wxString, PObjectType> ObjectTypeMap;
+#ifdef __WXMAC__
+    typedef std::vector<void*> LibraryVector;
+#else
+    typedef std::vector<wxDynamicLibrary*> LibraryVector;
+#endif
+    typedef void (*PFFreeComponentLibrary)(IComponentLibrary* lib);
+    typedef std::map<PFFreeComponentLibrary, IComponentLibrary*> ComponentLibraryMap;
+    typedef std::set<wxString> MacroSet;
+    typedef std::map<wxString, PCodeInfo> LangTemplateMap;
+    typedef std::map<PropertyType, LangTemplateMap> PTLangTemplateMap;
 
-  /**
-   * Find and load plugins from the plugins directory
-   */
-  void LoadPlugins( PwxWeaverManager manager );
+    PackageVector m_pkgs;
+    LibraryVector m_libs;
+    ComponentLibraryMap m_componentLibs;
+    /*
+        para comprobar que no se nos han quedado macros sin añadir en las
+        liberias de componentes, vamos a crear un conjunto con las macros
+        definidas en los XML, y al importar las librerías vamos a ir eliminando
+        dichas macros del conjunto, quedando al final las macros que faltan
+        por registrar en la librería.
+    */
+    MacroSet m_macroSet;
+    ObjectTypeMap m_types; // register object types
+    PTLangTemplateMap m_propertyTypeTemplates;
+    PTMap m_propTypes;
 
-  /**
-   * Fabrica de objetos.
-   * A partir del nombre de la clase se crea una nueva instancia de un objeto.
-   */
-  PObjectBase CreateObject( std::string class_name, PObjectBase parent = PObjectBase());
+    wxString m_xmlPath;
+    wxString m_iconPath;
+    wxString m_pluginPath;
+    std::map<wxString, PObjectInfo> m_objs;
 
-  /**
-   * Fábrica de objetos a partir de un objeto XML.
-   * Este método se usará para cargar un proyecto almacenado.
-   */
-  PObjectBase CreateObject( ticpp::Element* obj, PObjectBase parent = PObjectBase());
-
-  /**
-   * Crea un objeto como copia de otro.
-   */
-
-  PObjectBase CopyObject(PObjectBase obj);
-
-  /**
-   * Obtiene un paquete de objetos.
-   */
-  PObjectPackage GetPackage(unsigned int idx);
-
-  /**
-   * Obtiene el número de paquetes registrados.
-   */
-  unsigned int GetPackageCount() { return (unsigned int)m_pkgs.size(); }
-
-  /**
-   * Resetea los contadores que acompañan al nombre.
-   * La propiedad "name" es una propiedad especial, reservada para el nombre
-   * de la instancia del objeto. Cada clase de objeto tiene asociado un contador
-   * para no duplicar nombre en la creación de nuevos objetos
-   * (p.e. m_button1, m_button2 ...)
-   */
-  void ResetObjectCounters();
+    // Used so libraries are only imported once, even if multiple libraries use them
+    std::set<wxString> m_importedLibraries;
 };
-
-
-
-#endif //__OBJ_DATABASE__

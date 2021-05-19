@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,17 +18,16 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
 #pragma once
+
+#include <wx/wx.h>
 
 const int ICON_SIZE = 22;
 const int TOOL_SIZE = 22;
 const int SMALL_ICON_SIZE = 14;
 
-#include <wx/wx.h>
-
 class AppBitmaps {
 public:
-	static wxBitmap GetBitmap(wxString iconname, unsigned int size = 0);
-	static void LoadBitmaps(wxString filepath, wxString iconpath);
+    static wxBitmap GetBitmap(wxString iconname, int size = 0);
+    static void LoadBitmaps(wxString filepath, wxString iconpath);
 };

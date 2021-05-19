@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,80 +18,59 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
-#ifndef __PALETTE__
-#define __PALETTE__
+#pragma once
 
 #include "model/database.h"
-
 #include <wx/aui/auibar.h>
 #include <wx/aui/auibook.h>
 #include <wx/spinbutt.h>
 
 typedef std::vector<wxAuiToolBar*> ToolbarVector;
 
-class wxFbPalette : public wxPanel
-{
- private:
-  ToolbarVector m_tv;
-  wxAuiNotebook *m_notebook;
-  static wxWindowID nextId;
-  std::vector<int> m_posVector;
+class Palette : public wxPanel {
+public:
+    Palette(wxWindow* parent, int id);
 
-  void PopulateToolbar(PObjectPackage pkg, wxAuiToolBar *toolbar);
+    void SaveSettings();
 
-  DECLARE_EVENT_TABLE()
+    /** Crea la paleta, previamente se ha debido configurar el objeto DataObservable.
+    */
+    void Create();
+    void OnSpinUp(wxSpinEvent& e);
+    void OnSpinDown(wxSpinEvent& e);
+    void OnButtonClick(wxCommandEvent& event);
 
- public:
-  wxFbPalette(wxWindow *parent,int id);
+private:
+    void PopulateToolbar(PObjectPackage pkg, wxAuiToolBar* toolbar);
 
-	void SavePosition();
-
-  /**
-   * Crea la paleta, previamente se ha debido configurar el objeto
-   * DataObservable.
-   */
-  void Create();
-  void OnSpinUp(wxSpinEvent& e);
-  void OnSpinDown(wxSpinEvent& e);
-  void OnButtonClick(wxCommandEvent &event);
+    ToolbarVector m_tv;
+    wxAuiNotebook* m_notebook;
+    static wxWindowID nextId;
+    std::vector<int> m_posVector;
 };
-/*
-class PaletteButton : public wxBitmapButton
-{
- private:
-  wxString m_name;
-  DECLARE_EVENT_TABLE()
+#if 0
+class PaletteButton : public wxBitmapButton {
+public:
+    PaletteButton(wxWindow* parent, const wxBitmap& bitmap, wxString& name);
+    void OnButtonClick(wxCommandEvent& event);
 
- public:
-  PaletteButton(wxWindow *parent, const wxBitmap &bitmap, wxString &name);
-  void OnButtonClick(wxCommandEvent &event);
+private:
+    wxString m_name;
 };
 
-*/
-/*
-class ToolPanel : public wxPanel, public DataObserver
-{
- protected:
-   DECLARE_EVENT_TABLE()
-
- public:
-   ToolPanel(wxWindow *parent, int id);
-   void OnSaveFile(wxCommandEvent &event);
-
-};  */
-
-/*
-class PaletteButtonEventHandler : public wxEvtHandler
-{
- private:
-  wxString m_name;
-  DECLARE_EVENT_TABLE()
-  DataObservable *m_data;
-
- public:
-  PaletteButtonEventHandler(wxString name, DataObservable *data);
-  void OnButtonClick(wxCommandEvent &event);
+class ToolPanel : public wxPanel, public DataObserver {
+public:
+    ToolPanel(wxWindow* parent, int id);
+    void OnSaveFile(wxCommandEvent& event);
 };
-*/
-#endif //__PALETTE__
+
+class PaletteButtonEventHandler : public wxEvtHandler {
+public:
+    PaletteButtonEventHandler(wxString name, DataObservable* data);
+    void OnButtonClick(wxCommandEvent& event);
+
+private:
+    wxString m_name;
+    DataObservable* m_data;
+};
+#endif

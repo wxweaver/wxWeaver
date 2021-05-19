@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,32 +18,22 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
+#pragma once
 
-#ifndef __XRC_FILTER__
-#define __XRC_FILTER__
-
-#include "database.h"
-
+#include "model/database.h"
 #include <ticpp.h>
 
-/**
- * Filtro de importación de un fichero XRC.
+/** XRC file import filter.
  */
-class XrcLoader
-{
- private:
-  PObjectDatabase m_objDb;
+class XrcLoader {
+public:
+    /** Creates the object tree from a XRC file.
+    */
+    PObjectBase GetProject(ticpp::Document* xrcDoc);
 
-  PObjectBase GetObject(ticpp::Element *xrcObj, PObjectBase parent);
+    void SetObjectDatabase(PObjectDatabase db) { m_objDb = db; }
 
- public:
-
-  void SetObjectDatabase(PObjectDatabase db) { m_objDb = db; }
-
-  /**
-   * Dado un árbol XML en formato XRC, crea el arbol de objetos asociado.
-   */
-  PObjectBase GetProject(ticpp::Document* xrcDoc);
+private:
+    PObjectBase GetObject(ticpp::Element* xrcObj, PObjectBase parent);
+    PObjectDatabase m_objDb;
 };
-
-#endif //__XRC_FILTER__

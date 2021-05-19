@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,9 +18,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
-#ifndef __COMMAND_PROC__
-#define __COMMAND_PROC__
+#pragma once
 
 #include <stack>
 #include <memory>
@@ -27,53 +26,46 @@
 class Command;
 typedef std::shared_ptr<Command> PCommand;
 
-class CommandProcessor
-{
- private:
-  typedef std::stack<PCommand> CommandStack;
+class CommandProcessor {
+public:
+    CommandProcessor();
+    void Execute(PCommand command);
 
-  CommandStack m_undoStack;
-  CommandStack m_redoStack;
-  size_t m_savePoint;
+    void Undo();
+    void Redo();
+    void Reset();
 
- public:
-   CommandProcessor();
-   void Execute(PCommand command);
+    void SetSavePoint();
+    bool IsAtSavePoint();
 
-   void Undo();
-   void Redo();
-   void Reset();
+    bool CanUndo();
+    bool CanRedo();
 
-   void SetSavePoint();
-   bool IsAtSavePoint();
+private:
+    typedef std::stack<PCommand> CommandStack;
+    CommandStack m_undoStack;
+    CommandStack m_redoStack;
 
-   bool CanUndo();
-   bool CanRedo();
+    size_t m_savePoint;
 };
 
+class Command {
+public:
+    Command();
+    virtual ~Command() = default;
 
-class Command
-{
- private:
-  bool m_executed;
+    /** Executes a command.
+    */
+    void Execute();
 
- protected:
-  /**
-   * Ejecuta el comando.
-   */
-  virtual void DoExecute() = 0;
+    /** Restores the previous state of a executed command.
+    */
+    void Restore();
 
-  /**
-   * Restaura el estado previo a la ejecución del comando.
-   */
-  virtual void DoRestore() = 0;
+protected:
+    virtual void DoExecute() = 0;
+    virtual void DoRestore() = 0;
 
- public:
-  Command();
-  virtual ~Command() = default;
-
-  void Execute();
-  void Restore();
+private:
+    bool m_executed;
 };
-
-#endif //__COMMAND_PROC__

@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,40 +18,25 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
-#ifndef __VISUAL_OBJS__
-#define __VISUAL_OBJS__
+#pragma once
 
 #include "utils/defs.h"
 
-#include <wx/wx.h>
+#include <wx/window.h>
 
-/**
- * Processes events from visual objects.
+/** Processes events from visual objects.
  */
-class VObjEvtHandler : public wxEvtHandler
-{
- private:
-   WPObjectBase m_object;
-   wxWindow *m_window;
+class VObjEvtHandler : public wxEvtHandler {
+public:
+    VObjEvtHandler(wxWindow* win, PObjectBase obj);
+    void OnLeftClick(wxMouseEvent& event);
+    void OnRightClick(wxMouseEvent& event);
+    void OnPaint(wxPaintEvent& event);
+    void OnSetCursor(wxSetCursorEvent& event);
 
-   VObjEvtHandler() = default;
+private:
+    VObjEvtHandler() = default;
 
- protected:
-  DECLARE_EVENT_TABLE()
-
- public:
-   VObjEvtHandler(wxWindow *win, PObjectBase obj);
-   void OnLeftClick(wxMouseEvent &event);
-   void OnRightClick(wxMouseEvent &event);
-   void OnPaint(wxPaintEvent &event);
-   void OnSetCursor(wxSetCursorEvent &event);
+    WPObjectBase m_object;
+    wxWindow* m_window;
 };
-
-
-///////////////////////////////////////////////////////////////////////////////
-
-
-#endif //__VISUAL_OBJS__
-
-

@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,43 +18,43 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
+#pragma once
 
-#ifndef __MENUBAR__
-#define __MENUBAR__
+#include <wx/menu.h>
+#include <wx/panel.h>
 
-#include "wx/wx.h"
 #include <vector>
 
-typedef std::vector<wxMenu*> MenuVector;
+class wxBoxSizer;
+class wxStaticText;
 
-class Menubar : public wxPanel
-{
-    public:
-        Menubar();
-        Menubar(wxWindow *parent, int id, const wxPoint& pos = wxDefaultPosition,
-            const wxSize &size = wxDefaultSize,
-            long style = 0, const wxString &name = wxT("fbmenubar"));
-	~Menubar() override;
-        void AppendMenu(const wxString& name, wxMenu *menu);
-        wxMenu* GetMenu(int i);
-        int GetMenuCount();
-        wxMenu* Remove(int i);
+class Menubar : public wxPanel {
+public:
+    Menubar();
+    Menubar(wxWindow* parent, int id,
+            const wxPoint& pos = wxDefaultPosition,
+            const wxSize& size = wxDefaultSize,
+            long style = 0,
+            const wxString& name = "wxwMenubar");
+    ~Menubar() override;
 
-    private:
-        MenuVector m_menus;
-        wxBoxSizer *m_sizer;
+    void AppendMenu(const wxString& name, wxMenu* menu);
+    wxMenu* GetMenu(int index);
+    wxMenu* Remove(int index);
+    size_t GetMenuCount() const;
+
+private:
+    typedef std::vector<wxMenu*> MenuVector;
+    MenuVector m_menus;
+    wxBoxSizer* m_sizer;
 };
 
-class MenuEvtHandler : public wxEvtHandler
-{
-    public:
-        MenuEvtHandler(wxStaticText *st, wxMenu *menu);
-        void OnMouseEvent(wxMouseEvent& event);
+class MenuEvtHandler : public wxEvtHandler {
+public:
+    MenuEvtHandler(wxStaticText* staticText, wxMenu* menu);
+    void OnMouseEvent(wxMouseEvent& event);
 
-        DECLARE_EVENT_TABLE()
-    private:
-        wxStaticText *m_label;
-        wxMenu *m_menu;
+private:
+    wxStaticText* m_label;
+    wxMenu* m_menu;
 };
-
-#endif

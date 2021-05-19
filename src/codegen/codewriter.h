@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,140 +18,135 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
-#ifndef __CODE_WRITER__
-#define __CODE_WRITER__
+#pragma once
 
 #include <wx/string.h>
 
 /** Abstracts the code generation from the target.
-Because, in some cases the target is a file, sometimes a TextCtrl, and sometimes both.
+    Because, in some cases the target is a file, sometimes a TextCtrl, and sometimes both.
 */
-class CodeWriter
-{
-private:
-	/// Current indentation level in the file
-	int m_indent;
-	/// Flag if line writing is in progress
-	bool m_isLineWriting;
-	bool m_indent_with_spaces;
+class CodeWriter {
+public:
+    /** Constructor.
+    */
+    CodeWriter();
+    virtual ~CodeWriter();
+
+    /** Increment the indent.
+    */
+    void Indent();
+
+    /** Decrement the indent.
+    */
+    void Unindent();
+
+    /** Write a block of code with trailing newline
+
+        This is a general purpose method to output the input properly formatted.
+        Cleans up whitespace and applies template indentation processing.
+
+        @param code Block of code
+        @param rawIndents If true, keep leading indenting whitespace and don't apply own indenting
+     */
+    void WriteLn(const wxString& code = wxEmptyString, bool rawIndents = false);
+
+    /** Write a fragment of code without trailing newline
+
+        This method is not intended for general purpose output but only to output preformatted input.
+        No whitespace cleanup and no template indentation processing is performed!
+
+        The initial call of this method initiates the output process, it can be called multiple times
+        to continue the output process, but it must be terminated with a call to WriteLn(const wxString&, bool).
+
+        @param code Block of code
+        @param rawIndents If true, keep leading indenting whitespace and don't apply own indenting
+     */
+    void Write(const wxString& code, bool rawIndents = false);
+
+    /** Sets the option to indent with spaces
+    */
+    void SetIndentWithSpaces(bool on);
+
+    /** Deletes all the code previously written.
+    */
+    virtual void Clear() = 0;
 
 protected:
-	/// Write a wxString.
-	virtual void DoWrite(const wxString& code) = 0;
+    /** Write a wxString.
+    */
+    virtual void DoWrite(const wxString& code) = 0;
 
-	/// Returns the size of the indentation - was useful when using spaces, now it is 1 because using tabs.
-	virtual int GetIndentSize() const;
+    // TODO: "was useful when using spaces, now it is 1 because using tabs"
+    //       no shit like this, make spaces or tabs as options instead.
+    /** Returns the size of the indentation.
+    */
+    virtual int GetIndentSize() const;
 
-	/**
-	 * @param code Code fragment
-	 *
-	 * @return True, if code doesn't contain any newline character
-	 */
-	bool IsSingleLine(const wxString& code) const;
+    /** Returns if code doesn't contain any newline character
 
-	/**
-	 * Outputs a single line
-	 *
-	 * Performs whitespace cleanup and indentation processing
-	 * including the special markers of the TemplateParser.
-	 *
-	 * @param line Single line, must not contain newlines
-	 * @param rawIndents If true, keep leading indenting whitespace and don't apply own indenting
-	 */
-	void ProcessLine(wxString line, bool rawIndents);
+        @param code Code fragment
+    */
+    bool IsSingleLine(const wxString& code) const;
 
-public:
-	/// Constructor.
-	CodeWriter();
-	virtual ~CodeWriter() = default;
+    /** Outputs a single line
 
-	/// Increment the indent.
-	void Indent();
+        Performs whitespace cleanup and indentation processing
+        including the special markers of the TemplateParser.
 
-	/// Decrement the indent.
-	void Unindent();
+        @param line Single line, must not contain newlines
+        @param rawIndents If true, keep leading indenting whitespace and don't apply own indenting
+     */
+    void ProcessLine(wxString line, bool rawIndents);
 
-	/**
-	 * Write a block of code with trailing newline
-	 *
-	 * This is a general purpose method to output the input properly formatted.
-	 * Cleans up whitespace and applies template indentation processing.
-	 *
-	 * @param code Block of code
-	 * @param rawIndents If true, keep leading indenting whitespace and don't apply own indenting
-	 */
-	void WriteLn(const wxString& code = wxEmptyString, bool rawIndents = false);
-
-	/**
-	 * Write a fragment of code without trailing newline
-	 *
-	 * This method is not intended for general purpose output but only to output preformatted input.
-	 * No whitespace cleanup and no template indentation processing is performed!
-	 *
-	 * The initial call of this method initiates the output process, it can be called multiple times
-	 * to continue the output process, but it must be terminated with a call to WriteLn(const wxString&, bool).
-	 *
-	 * @param code Block of code
-	 * @param rawIndents If true, keep leading indenting whitespace and don't apply own indenting
-	 */
-	void Write(const wxString& code, bool rawIndents = false);
-
-	// Sets the option to indent with spaces
-	void SetIndentWithSpaces( bool on );
-
-	/// Deletes all the code previously written.
-	virtual void Clear() = 0;
+private:
+    int m_indent;                // Current indentation level in the file
+    bool m_isLineWriting;        // Flag if line writing is in progress
+    bool m_hasSpacesIndentation; // If using spaces for indentation
 };
 
 class wxStyledTextCtrl;
 
-class TCCodeWriter : public CodeWriter
-{
+class TCCodeWriter : public CodeWriter {
+public:
+    TCCodeWriter();
+    TCCodeWriter(wxStyledTextCtrl*);
+
+    void SetTextCtrl(wxStyledTextCtrl*);
+    void Clear() override;
+
+protected:
+    void DoWrite(const wxString&) override;
+
 private:
-	wxStyledTextCtrl* m_tc;
-
-protected:
-	void DoWrite(const wxString& code) override;
-
-public:
-	TCCodeWriter();
-	TCCodeWriter(wxStyledTextCtrl* tc);
-
-	void SetTextCtrl(wxStyledTextCtrl* tc);
-	void Clear() override;
+    wxStyledTextCtrl* m_styledTextCtrl;
 };
 
-class StringCodeWriter : public CodeWriter
-{
-protected:
-	wxString m_buffer;
-
-protected:
-	void DoWrite(const wxString& code) override;
-
+class StringCodeWriter : public CodeWriter {
 public:
-	StringCodeWriter();
+    StringCodeWriter();
 
-	void Clear() override;
-	const wxString& GetString() const;
+    void Clear() override;
+    const wxString& GetString() const;
+
+protected:
+    void DoWrite(const wxString& code) override;
+
+    wxString m_buffer;
 };
 
-class FileCodeWriter : public StringCodeWriter
-{
+class FileCodeWriter : public StringCodeWriter {
+public:
+    FileCodeWriter(const wxString& file, bool useMicrosoftBOM = false,
+                   bool useUtf8 = true);
+    ~FileCodeWriter() override;
+
+    void Clear() final;
+
+protected:
+    void WriteBuffer();
+
 private:
-	wxString m_filename;
-	bool m_useMicrosoftBOM;
-	bool m_useUtf8;
-
-protected:
-	void WriteBuffer();
-
-public:
-	FileCodeWriter(const wxString& file, bool useMicrosoftBOM = false, bool useUtf8 = true);
-	~FileCodeWriter() override;
-
-	void Clear() final;
+    wxString m_filename;
+    bool m_useMicrosoftBOM;
+    bool m_useUtf8;
 };
-
-#endif //__CODE_WRITER__

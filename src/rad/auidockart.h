@@ -2,7 +2,7 @@
     wxWeaver - A GUI Designer Editor for wxWidgets.
     Copyright (C) 2005 José Antonio Hurtado
     Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
-    Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
+    Copyright (C) 2012-2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -20,30 +20,22 @@
 */
 #pragma once
 
-#include "utils/defs.h"
-#include <wx/stc/stc.h>
-#include <wx/panel.h>
+#include <wx/aui/framemanager.h>
+#include <wx/aui/dockart.h>
 
-class CodeEditor;
-class wxWeaverEvent;
-class wxWeaverObjectEvent;
-class wxWeaverPropertyEvent;
-class wxFindDialogEvent;
-
-class XrcPanel : public wxPanel {
+class DockArt : public wxAuiDefaultDockArt {
 public:
-    XrcPanel(wxWindow* parent, int id);
-    ~XrcPanel() override;
+    DockArt();
 
-    void OnPropertyModified(wxWeaverPropertyEvent& event);
-    void OnProjectRefresh(wxWeaverEvent& event);
-    void OnCodeGeneration(wxWeaverEvent& event);
-    void OnObjectChange(wxWeaverObjectEvent& event);
-    void OnFind(wxFindDialogEvent& event);
+    void DrawCaption(wxDC& dc, wxWindow* window, const wxString& text,
+                     const wxRect& rect, wxAuiPaneInfo& pane);
+
+    void DrawButton(wxDC& dc, wxWindow* window, int button, int button_state,
+                    const wxRect& _rect, wxAuiPaneInfo& pane);
+
+    void UpdateColoursFromSystem();
 
 private:
-    void InitStyledTextCtrl(wxStyledTextCtrl* stc);
-
-    CodeEditor* m_xrcPanel;
-    PTCCodeWriter m_codeWriter;
+    wxString EllipsizeText(wxDC& dc, const wxString& text, int maxSize);
+    void InitBitmaps();
 };

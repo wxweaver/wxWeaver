@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,34 +18,27 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
+#pragma once
 
-#ifndef _XRC_CODE_GEN_
-#define _XRC_CODE_GEN_
+#include "codegen/codegen.h"
 
-#include "codegen.h"
-
-namespace ticpp
-{
-	class Element;
+namespace ticpp {
+class Element;
 }
-
-/// XRC code generator.
-
-class XrcCodeGenerator : public CodeGenerator
-{
-private:
-	PCodeWriter m_cw;
-	std::vector<ticpp::Element*> m_contextMenus;
-
-	ticpp::Element* GetElement( PObjectBase obj, ticpp::Element* parent = NULL );
-
+/** XRC code generator.
+*/
+class XrcCodeGenerator : public CodeGenerator {
 public:
-	/// Configures the code writer for the XML file.
-	void SetWriter( PCodeWriter cw );
+    /** Configures the code writer for the XML file.
+    */
+    void SetWriter(PCodeWriter cw);
 
-	/// Generates the XRC code for the project.
-	bool GenerateCode(PObjectBase project) override;
+    /** Generates the XRC code for the project.
+    */
+    bool GenerateCode(PObjectBase project) override;
+
+private:
+    PCodeWriter m_codeWriter;
+    std::vector<ticpp::Element*> m_contextMenus;
+    ticpp::Element* GetElement(PObjectBase obj, ticpp::Element* parent = nullptr);
 };
-
-
-#endif //_XRC_CODE_GEN_

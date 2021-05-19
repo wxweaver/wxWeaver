@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,22 +18,12 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
+#pragma once
 
-#ifndef __TITLE__
-#define __TITLE__
+#include <wx/panel.h>
 
-#include <wx/wx.h>
-
-class Title : public wxPanel
-{
- private:
-//  DECLARE_EVENT_TABLE()
- public:
-  Title(wxWindow *parent,const wxString &title=wxT("No title"));
-
-  static wxWindow* CreateTitle (wxWindow *inner, const wxString &title);
+class Title : public wxPanel {
+public:
+    Title(wxWindow* parent, const wxString& title = _("No title"));
+    static wxWindow* CreateTitle(wxWindow* inner, const wxString& title);
 };
-
-
-
-#endif //__TITLE__

@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,30 +18,23 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
-#ifndef __CODE_EDITOR__
-#define __CODE_EDITOR__
+#pragma once
 
 #include <wx/panel.h>
 
 class wxStyledTextCtrl;
 class wxStyledTextEvent;
-
 class wxFindDialogEvent;
 
-class CodeEditor : public wxPanel
-{
-private:
-    wxStyledTextCtrl* m_code;
-    void OnMarginClick( wxStyledTextEvent& event );
-	DECLARE_EVENT_TABLE()
-
+class CodeEditor : public wxPanel {
 public:
-	CodeEditor( wxWindow *parent, int id );
+    CodeEditor(wxWindow* parent, int id);
 
     wxStyledTextCtrl* GetTextCtrl();
+    void OnFind(wxFindDialogEvent& event);
 
-	void OnFind( wxFindDialogEvent& event );
+private:
+    void OnMarginClick(wxStyledTextEvent& event);
+
+    wxStyledTextCtrl* m_code;
 };
-
-#endif //__CODE_EDITOR__

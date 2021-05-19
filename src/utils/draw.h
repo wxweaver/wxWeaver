@@ -2,7 +2,7 @@
     wxWeaver - A GUI Designer Editor for wxWidgets.
     Copyright (C) 2005 José Antonio Hurtado
     Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
-    Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
+    Copyright (C) 2012-2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
@@ -20,30 +20,27 @@
 */
 #pragma once
 
-#include "utils/defs.h"
-#include <wx/stc/stc.h>
-#include <wx/panel.h>
+#include <wx/colour.h>
 
-class CodeEditor;
-class wxWeaverEvent;
-class wxWeaverObjectEvent;
-class wxWeaverPropertyEvent;
-class wxFindDialogEvent;
+class wxBitmap;
+class wxDC;
+class wxRect;
+class wxString;
 
-class XrcPanel : public wxPanel {
-public:
-    XrcPanel(wxWindow* parent, int id);
-    ~XrcPanel() override;
+namespace wxw {
+static bool IsDark(const wxColour& colour)
+{
+    int average = (colour.Red() + colour.Green() + colour.Blue()) / 3;
+    if (average < 128)
+        return true;
 
-    void OnPropertyModified(wxWeaverPropertyEvent& event);
-    void OnProjectRefresh(wxWeaverEvent& event);
-    void OnCodeGeneration(wxWeaverEvent& event);
-    void OnObjectChange(wxWeaverObjectEvent& event);
-    void OnFind(wxFindDialogEvent& event);
+    return false;
+}
 
-private:
-    void InitStyledTextCtrl(wxStyledTextCtrl* stc);
+void GlossyGradient(wxDC& dc, wxRect& rect, wxColour& topStart,
+                    wxColour& bottomStart, wxColour& bottomEnd,
+                    wxColour& colour, bool hover = false);
 
-    CodeEditor* m_xrcPanel;
-    PTCCodeWriter m_codeWriter;
-};
+void Bitmap(wxDC& dc, const wxBitmap& bitmap, const wxRect& rect,
+            const wxString& text);
+} // namespace wxw

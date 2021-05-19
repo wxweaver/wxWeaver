@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -18,34 +19,33 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#ifndef RESIZABLEPANEL_H
-#define RESIZABLEPANEL_H
+#pragma once
 
 #include <wx/wxprec.h>
 #ifdef __BORLANDC__
-    #pragma hdrstop
+#pragma hdrstop
 #endif
 #ifndef WX_PRECOMP
-    #include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 
 #include <wx/event.h>
 
-class ResizablePanel : public wxPanel
-{
-    enum{
-      NONE,
-      RIGHTBOTTOM,
-      RIGHT,
-      BOTTOM
+class ResizablePanel : public wxPanel {
+    enum {
+        NONE,
+        RIGHTBOTTOM,
+        RIGHT,
+        BOTTOM
     } m_sizing;
 
     int m_curX, m_curY, m_difX, m_difY;
     int m_resizeBorder;
     wxSize m_minSize;
-  public:
-    ResizablePanel(wxWindow *parent, const wxPoint& pos = wxDefaultPosition,
-      const wxSize& size = wxDefaultSize, long style = wxTAB_TRAVERSAL);
+
+public:
+    ResizablePanel(wxWindow* parent, const wxPoint& pos = wxDefaultPosition,
+                   const wxSize& size = wxDefaultSize, long style = wxTAB_TRAVERSAL);
 
     void SetResizeBorder(int border);
     int GetResizeBorder();
@@ -57,20 +57,17 @@ class ResizablePanel : public wxPanel
     void OnSetCursor(wxSetCursorEvent& e);
     void OnLeftUp(wxMouseEvent& e);
     //void OnSize(wxSizeEvent& e);
-    void OnPanelResized(wxSizeEvent &e);
-
-    DECLARE_EVENT_TABLE()
+    void OnPanelResized(wxSizeEvent& e);
 };
-
+#if 0
 BEGIN_DECLARE_EVENT_TYPES()
     DECLARE_LOCAL_EVENT_TYPE(wxEVT_PANEL_RESIZED, 6000)
 END_DECLARE_EVENT_TYPES()
 
-#define EVT_PANEL_RESIZED(id, fn) \
-    DECLARE_EVENT_TABLE_ENTRY( \
-        wxEVT_PANEL_RESIZED, id, wxID_ANY, \
-        (wxObjectEventFunction)(wxEventFunction) wxStaticCastEvent( wxCommandEventFunction, &fn ), \
-        (wxObject *) NULL \
-    ),
+#define EVT_PANEL_RESIZED(id, fn)                                                               \
+    DECLARE_EVENT_TABLE_ENTRY(                                                                  \
+        wxEVT_PANEL_RESIZED, id, wxID_ANY,                                                      \
+        (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxCommandEventFunction, &fn), \
+        (wxObject*)NULL),
 
 #endif

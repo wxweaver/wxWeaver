@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,124 +18,121 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
 #include "rad/event.h"
 
-DEFINE_EVENT_TYPE( wxEVT_FB_PROJECT_LOADED )
-DEFINE_EVENT_TYPE( wxEVT_FB_PROJECT_SAVED )
-DEFINE_EVENT_TYPE( wxEVT_FB_OBJECT_EXPANDED )
-DEFINE_EVENT_TYPE( wxEVT_FB_OBJECT_SELECTED )
-DEFINE_EVENT_TYPE( wxEVT_FB_OBJECT_CREATED )
-DEFINE_EVENT_TYPE( wxEVT_FB_OBJECT_REMOVED )
-DEFINE_EVENT_TYPE( wxEVT_FB_PROPERTY_MODIFIED )
-DEFINE_EVENT_TYPE( wxEVT_FB_PROJECT_REFRESH )
-DEFINE_EVENT_TYPE( wxEVT_FB_CODE_GENERATION )
-DEFINE_EVENT_TYPE( wxEVT_FB_EVENT_HANDLER_MODIFIED )
+wxDEFINE_EVENT(wxEVT_WVR_PROJECT_LOADED, wxWeaverEvent);
+wxDEFINE_EVENT(wxEVT_WVR_PROJECT_SAVED, wxWeaverEvent);
+wxDEFINE_EVENT(wxEVT_WVR_PROJECT_REFRESH, wxWeaverEvent);
+wxDEFINE_EVENT(wxEVT_WVR_CODE_GENERATION, wxWeaverEvent);
+wxDEFINE_EVENT(wxEVT_WVR_EVENT_HANDLER_MODIFIED, wxWeaverEventHandlerEvent);
+wxDEFINE_EVENT(wxEVT_WVR_OBJECT_EXPANDED, wxWeaverObjectEvent);
+wxDEFINE_EVENT(wxEVT_WVR_OBJECT_SELECTED, wxWeaverObjectEvent);
+wxDEFINE_EVENT(wxEVT_WVR_OBJECT_CREATED, wxWeaverObjectEvent);
+wxDEFINE_EVENT(wxEVT_WVR_OBJECT_REMOVED, wxWeaverObjectEvent);
+wxDEFINE_EVENT(wxEVT_WVR_PROPERTY_MODIFIED, wxWeaverPropertyEvent);
 
-wxWeaverEvent::wxWeaverEvent( wxEventType commandType )
-:
-wxEvent( 0, commandType )
+wxWeaverEvent::wxWeaverEvent(wxEventType commandType)
+    : wxEvent(0, commandType)
 {
-	//ctor
 }
 
-// required for sending with wxPostEvent()
 wxEvent* wxWeaverEvent::Clone() const
 {
-	return new wxWeaverEvent( *this );
+    return new wxWeaverEvent(*this);
 }
 
-wxWeaverEvent::wxWeaverEvent( const wxWeaverEvent& event )
-:
-wxEvent( event ),
-m_string( event.m_string )
+wxWeaverEvent::wxWeaverEvent(const wxWeaverEvent& event)
+    : wxEvent(event)
+    , m_string(event.m_string)
 {
 }
 
 wxWeaverEvent::~wxWeaverEvent()
 {
-	//dtor
 }
-
-#define CASE( EVENT )									\
-	if ( EVENT == m_eventType )							\
-	{													\
-		return wxT( #EVENT );							\
-	}
 
 wxString wxWeaverEvent::GetEventName()
 {
-	CASE( wxEVT_FB_PROJECT_LOADED )
-	CASE( wxEVT_FB_PROJECT_SAVED )
-	CASE( wxEVT_FB_OBJECT_EXPANDED )
-	CASE( wxEVT_FB_OBJECT_SELECTED )
-	CASE( wxEVT_FB_OBJECT_CREATED )
-	CASE( wxEVT_FB_OBJECT_REMOVED )
-	CASE( wxEVT_FB_PROPERTY_MODIFIED )
-	CASE( wxEVT_FB_EVENT_HANDLER_MODIFIED )
-	CASE( wxEVT_FB_PROJECT_REFRESH )
-	CASE( wxEVT_FB_CODE_GENERATION )
+#define CASE(EVENT)           \
+    if (EVENT == m_eventType) \
+        return #EVENT;
 
-	return wxT( "Unknown Type" );
+    CASE(wxEVT_WVR_PROJECT_LOADED)
+    CASE(wxEVT_WVR_PROJECT_SAVED)
+    CASE(wxEVT_WVR_OBJECT_EXPANDED)
+    CASE(wxEVT_WVR_OBJECT_SELECTED)
+    CASE(wxEVT_WVR_OBJECT_CREATED)
+    CASE(wxEVT_WVR_OBJECT_REMOVED)
+    CASE(wxEVT_WVR_PROPERTY_MODIFIED)
+    CASE(wxEVT_WVR_EVENT_HANDLER_MODIFIED)
+    CASE(wxEVT_WVR_PROJECT_REFRESH)
+    CASE(wxEVT_WVR_CODE_GENERATION)
+
+#undef CASE
+
+    return "Unknown Type";
 }
 
-void wxWeaverEvent::SetString( const wxString& newString )
+void wxWeaverEvent::SetString(const wxString& newString)
 {
-	m_string = newString;
+    m_string = newString;
 }
 
 wxString wxWeaverEvent::GetString()
 {
-	return m_string;
+    return m_string;
 }
 
-wxWeaverPropertyEvent::wxWeaverPropertyEvent(wxEventType commandType, PProperty property)
- : wxWeaverEvent(commandType), m_property(property)
+wxWeaverPropertyEvent::wxWeaverPropertyEvent(wxEventType commandType,
+                                             PProperty property)
+    : wxWeaverEvent(commandType)
+    , m_property(property)
 {
 }
 
-wxWeaverPropertyEvent::wxWeaverPropertyEvent( const wxWeaverPropertyEvent& event )
-:
-wxWeaverEvent( event ),
-m_property( event.m_property )
+wxWeaverPropertyEvent::wxWeaverPropertyEvent(const wxWeaverPropertyEvent& event)
+    : wxWeaverEvent(event)
+    , m_property(event.m_property)
 {
 }
 
 wxEvent* wxWeaverPropertyEvent::Clone() const
 {
-	return new wxWeaverPropertyEvent( *this );
+    return new wxWeaverPropertyEvent(*this);
 }
 
-wxWeaverObjectEvent::wxWeaverObjectEvent(wxEventType commandType, PObjectBase object)
- : wxWeaverEvent(commandType), m_object(object)
+wxWeaverObjectEvent::wxWeaverObjectEvent(wxEventType commandType,
+                                         PObjectBase object)
+    : wxWeaverEvent(commandType)
+    , m_object(object)
 {
 }
 
-wxWeaverObjectEvent::wxWeaverObjectEvent( const wxWeaverObjectEvent& event )
-:
-wxWeaverEvent( event ),
-m_object( event.m_object )
+wxWeaverObjectEvent::wxWeaverObjectEvent(const wxWeaverObjectEvent& event)
+    : wxWeaverEvent(event)
+    , m_object(event.m_object)
 {
 }
 
 wxEvent* wxWeaverObjectEvent::Clone() const
 {
-	return new wxWeaverObjectEvent( *this );
+    return new wxWeaverObjectEvent(*this);
 }
 
-wxWeaverEventHandlerEvent::wxWeaverEventHandlerEvent(wxEventType commandType, PEvent event)
- : wxWeaverEvent(commandType), m_event(event)
+wxWeaverEventHandlerEvent::wxWeaverEventHandlerEvent(wxEventType commandType,
+                                                     PEvent event)
+    : wxWeaverEvent(commandType)
+    , m_event(event)
 {
 }
 
-wxWeaverEventHandlerEvent::wxWeaverEventHandlerEvent( const wxWeaverEventHandlerEvent& event )
-:
-wxWeaverEvent( event ),
-m_event( event.m_event )
+wxWeaverEventHandlerEvent::wxWeaverEventHandlerEvent(const wxWeaverEventHandlerEvent& event)
+    : wxWeaverEvent(event)
+    , m_event(event.m_event)
 {
 }
 
 wxEvent* wxWeaverEventHandlerEvent::Clone() const
 {
-	return new wxWeaverEventHandlerEvent( *this );
+    return new wxWeaverEventHandlerEvent(*this);
 }

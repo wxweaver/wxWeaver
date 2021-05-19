@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,20 +18,17 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef PCH_H
-#define PCH_H
+#pragma once
 
-#if ( !defined(WX_PRECOMP) )
-    #define WX_PRECOMP
+#if (!defined(WX_PRECOMP))
+#define WX_PRECOMP
 #endif
 
 // basic wxWidgets headers
 #include <wx/wxprec.h>
 
 #ifndef WX_PRECOMP
-	#include <wx/wx.h>
+#include <wx/wx.h>
 #endif
 
 // #include other rarely changing headers here
-
-#endif // PCH_H

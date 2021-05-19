@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,37 +18,33 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef wxWEAVERMANAGER
-#define wxWEAVERMANAGER
+#pragma once
 
 #include "utils/defs.h"
-
 #include <component.h>
 
 class VisualEditor;
 class ObjectBase;
 
-class wxWeaverManager : public IManager
-{
-private:
-	VisualEditor* m_visualEdit;
-
+class wxWeaverManager : public IManager {
 public:
-	wxWeaverManager();
-	void SetVisualEditor( VisualEditor* visualEdit );
-	size_t GetChildCount(wxObject* wxobject) override;
-	wxObject* GetChild(wxObject* wxobject, size_t childIndex) override;
-	wxObject* GetParent(wxObject* wxobject) override;
-	IObject* GetIParent(wxObject* wxobject) override;
-	IObject* GetIObject(wxObject* wxobject) override;
-	wxObject* GetWxObject( PObjectBase obj );
-	wxNoObject* NewNoObject() override;
+    wxWeaverManager();
+    void SetVisualEditor(VisualEditor* visualEdit);
+    size_t GetChildCount(wxObject* wxobject) override;
+    wxObject* GetChild(wxObject* wxobject, size_t childIndex) override;
+    wxObject* GetParent(wxObject* wxobject) override;
+    IObject* GetIParent(wxObject* wxobject) override;
+    IObject* GetIObject(wxObject* wxobject) override;
+    wxObject* GetWxObject(PObjectBase obj);
+    wxNoObject* NewNoObject() override;
 
-	void ModifyProperty(wxObject* wxobject, wxString property, wxString value,
-	                    bool allowUndo = true) override;
+    void ModifyProperty(wxObject* wxobject, wxString property, wxString value,
+                        bool allowUndo = true) override;
 
-	// Returns true if selection changed, false if already selected
-	bool SelectObject(wxObject* wxobject) override;
+    /** Returns @true if selection changed, @false if already selected
+    */
+    bool SelectObject(wxObject* wxobject) override;
+
+private:
+    VisualEditor* m_visualEdit;
 };
-
-#endif //wxWEAVERMANAGER

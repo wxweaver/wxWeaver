@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,159 +18,138 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
-#include "types.h"
+#include "model/types.h"
 
 #include "utils/stringutils.h"
 
 #include <wx/tokenzr.h>
 
 ObjectType::ObjectType(wxString name, int id, bool hidden, bool item)
-{
-	m_id = id;
-	m_name = name;
-	m_hidden = hidden;
-	m_item = item;
-}
-
-void ObjectType::AddChildType(PObjectType type, int max, int aui_max)
-{
-	/*assert(max != 0);
-	assert(aui_max != 0);*/
-	m_childTypes.insert(ChildTypeMap::value_type(type,ChildCount(max, aui_max)));
-}
-
-int ObjectType::FindChildType(int type_id, bool aui)
-{
-	int max = 0;
-	ChildTypeMap::iterator it;
-	for (it = m_childTypes.begin(); it != m_childTypes.end() && max == 0; it++)
-	{
-		PObjectType type(it->first);
-		if (type && type_id == type->GetId())
-		{
-			if( aui ) max = it->second.aui_max;
-			else
-				max = it->second.max;
-		}
-	}
-	return max;
-}
-
-int ObjectType::FindChildType(PObjectType type, bool aui)
-{
-	int type_id = type->GetId();
-	return FindChildType(type_id, aui);
-}
-
-unsigned int ObjectType::GetChildTypeCount()
-{
-	return (unsigned int)m_childTypes.size();
-}
-
-PObjectType ObjectType::GetChildType(unsigned int idx)
-{
-	PObjectType result;
-
-	assert (idx < GetChildTypeCount());
-
-	unsigned int i = 0;
-	ChildTypeMap::iterator it = m_childTypes.begin();
-
-	while (i < idx && it != m_childTypes.end())
-	{
-		i++;
-		it++;
-	}
-
-	if (i == idx)
-		result = PObjectType(it->first);
-
-
-	return result;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-IntList::IntList(bool absolute_value, bool pair_value)
-	: m_abs(absolute_value)
-	, m_pairs(pair_value)
+    : m_name(name)
+    , m_id(id)
+    , m_hidden(hidden)
+    , m_item(item)
 {
 }
 
-IntList::IntList(const wxString& value, bool absolute_value, bool pair_value)
-	: IntList(absolute_value, pair_value)
+void ObjectType::AddChildType(PObjectType type, int max, int auiMax)
 {
-	SetList(value);
+#if 0
+    assert(max != 0);
+    assert(auiMax != 0);
+#endif
+    m_childTypes.insert(ChildTypeMap::value_type(type, ChildCount(max, auiMax)));
 }
 
+size_t ObjectType::FindChildType(int typeId, bool aui)
+{
+    size_t max = 0;
+    ChildTypeMap::iterator it;
+    for (it = m_childTypes.begin(); it != m_childTypes.end() && !max; it++) {
+        PObjectType type(it->first);
+        if (type && typeId == type->GetId()) {
+            if (aui)
+                max = it->second.auiMax;
+            else
+                max = it->second.max;
+        }
+    }
+    return max;
+}
+
+size_t ObjectType::FindChildType(PObjectType type, bool aui)
+{
+    int typeId = type->GetId();
+    return FindChildType(typeId, aui);
+}
+
+size_t ObjectType::GetChildTypeCount()
+{
+    return m_childTypes.size();
+}
+
+PObjectType ObjectType::GetChildType(size_t idx)
+{
+    PObjectType result;
+    assert(idx < GetChildTypeCount());
+    size_t i = 0;
+    ChildTypeMap::iterator it = m_childTypes.begin();
+
+    while (i < idx && it != m_childTypes.end()) {
+        i++;
+        it++;
+    }
+    if (i == idx)
+        result = PObjectType(it->first);
+
+    return result;
+}
+
+IntList::IntList(bool absoluteValue, bool pairValue)
+    : m_abs(absoluteValue)
+    , m_pairs(pairValue)
+{
+}
+
+IntList::IntList(const wxString& value, bool absoluteValue, bool pairValue)
+    : IntList(absoluteValue, pairValue)
+{
+    SetList(value);
+}
 
 void IntList::Add(int value)
 {
-	Add(value, 0);
+    Add(value, 0);
 }
 
 void IntList::Add(int first, int second)
 {
-	if (m_abs)
-	{
-		m_ints.emplace_back(std::abs(first), (m_pairs ? std::abs(second) : 0));
-	}
-	else
-	{
-		m_ints.emplace_back(first, (m_pairs ? second : 0));
-	}
+    if (m_abs)
+        m_ints.emplace_back(std::abs(first), (m_pairs ? std::abs(second) : 0));
+    else
+        m_ints.emplace_back(first, (m_pairs ? second : 0));
 }
 
 void IntList::DeleteList()
 {
-	m_ints.clear();
+    m_ints.clear();
 }
 
 void IntList::SetList(const wxString& str)
 {
-	DeleteList();
-
-	wxStringTokenizer tkz(str, wxT(","));
-	m_ints.reserve(tkz.CountTokens());
-	while (tkz.HasMoreTokens())
-	{
-		wxString secondToken;
-		wxString firstToken = tkz.GetNextToken().BeforeFirst(wxT(':'), &secondToken);
-		firstToken.Trim(true);
-		firstToken.Trim(false);
-		secondToken.Trim(true);
-		secondToken.Trim(false);
-
-		long first;
-		long second = 0;
-		if (firstToken.ToLong(&first) && (!m_pairs || secondToken.empty() || secondToken.ToLong(&second)))
-		{
-			Add(static_cast<int>(first), static_cast<int>(second));
-		}
-	}
+    DeleteList();
+    wxStringTokenizer tkz(str, wxT(","));
+    m_ints.reserve(tkz.CountTokens());
+    while (tkz.HasMoreTokens()) {
+        wxString secondToken;
+        wxString firstToken = tkz.GetNextToken().BeforeFirst(wxT(':'), &secondToken);
+        firstToken.Trim(true);
+        firstToken.Trim(false);
+        secondToken.Trim(true);
+        secondToken.Trim(false);
+        long first;
+        long second = 0;
+        if (firstToken.ToLong(&first)
+            && (!m_pairs || secondToken.empty() || secondToken.ToLong(&second))) {
+            Add(static_cast<int>(first), static_cast<int>(second));
+        }
+    }
 }
 
-
-wxString IntList::ToString(bool skip_zero_second)
+wxString IntList::ToString(bool skipZeroSecond)
 {
-	wxString result;
-	// Reserve some space to avoid many reallocations, assume one digit numbers
-	result.reserve(m_pairs ? m_ints.size() * 3 : m_ints.size() * 2);
-
-	for (const auto& entry : m_ints)
-	{
-		if (!result.empty()) {
-			result.append(wxT(","));
-		}
-
-		result.append(StringUtils::IntToStr(entry.first));
-		if (m_pairs && !(skip_zero_second && entry.second == 0))
-		{
-			result.append(wxT(":"));
-			result.append(StringUtils::IntToStr(entry.second));
-		}
-	}
-
-	return result;
+    wxString result;
+    // Reserve some space to avoid many reallocations, assume one digit numbers
+    result.reserve(m_pairs ? m_ints.size() * 3 : m_ints.size() * 2);
+    for (const auto& entry : m_ints) {
+        if (!result.empty()) {
+            result.append(wxT(","));
+        }
+        result.append(StringUtils::IntToStr(entry.first));
+        if (m_pairs && !(skipZeroSecond && !entry.second)) {
+            result.append(wxT(":"));
+            result.append(StringUtils::IntToStr(entry.second));
+        }
+    }
+    return result;
 }

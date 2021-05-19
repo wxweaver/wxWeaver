@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -32,239 +33,221 @@
 
 #define MENU_DELETE 109
 
-class XrcPreviewPopupMenu : public wxMenu
-{
-	DECLARE_EVENT_TABLE()
-
-private:
-	wxWindow* m_window;
-
-public:
-	XrcPreviewPopupMenu(wxWindow* window) : m_window(window) {
-		Append( MENU_DELETE, wxT("Close Preview") );
-	}
-
-	void OnMenuEvent ( wxCommandEvent& event )
-	{
-		int id = event.GetId();
-
-		switch ( id )
-		{
-		case MENU_DELETE:
-			m_window->Close();
-			break;
-		default:
-			break;
-		}
-	}
-};
-
-BEGIN_EVENT_TABLE( XrcPreviewPopupMenu, wxMenu )
-	EVT_MENU( wxID_ANY, XrcPreviewPopupMenu::OnMenuEvent )
+#if 0
+BEGIN_EVENT_TABLE(XrcPreviewPopupMenu, wxMenu)
+EVT_MENU(wxID_ANY, XrcPreviewPopupMenu::OnMenuEvent)
 END_EVENT_TABLE()
+#endif
 
-class XRCPreviewEvtHandler : public wxEvtHandler
-{
-private:
-	wxWindow* m_window;
-
+class XrcPreviewPopupMenu : public wxMenu {
 public:
-	XRCPreviewEvtHandler( wxWindow* win )
-	:
-	m_window( win )
-	{
-	}
-
-protected:
-	void OnKeyUp( wxKeyEvent& event )
-	{
-		if ( event.GetKeyCode() == WXK_ESCAPE )
-		{
-			m_window->Close();
-		}
-	}
-
-	void OnRightDown( wxMouseEvent& event )
-	{
-		wxMenu* menu = new XrcPreviewPopupMenu( m_window );
-		wxPoint pos = event.GetPosition();
-		m_window->PopupMenu( menu, pos.x, pos.y );
-	}
-
-    void RemoveEventHandler( wxWindow* window )
+    XrcPreviewPopupMenu(wxWindow* window)
+        : m_window(window)
     {
-        const wxWindowList& children = window->GetChildren();
-        for ( size_t i = 0; i < children.GetCount(); ++i )
-        {
-            RemoveEventHandler( children.Item( i )->GetData() );
-        }
-        wxEvtHandler* handler = window->PopEventHandler();
-        if ( handler != this )
-        {
-            delete handler;
+        Append(MENU_DELETE, "Close Preview");
+        Bind(wxEVT_MENU, &XrcPreviewPopupMenu::OnMenuEvent, this);
+    }
+
+    void OnMenuEvent(wxCommandEvent& event)
+    {
+        int id = event.GetId();
+        switch (id) {
+        case MENU_DELETE:
+            m_window->Close();
+            break;
+        default:
+            break;
         }
     }
 
-	void OnClose( wxCloseEvent& )
-	{
-	    RemoveEventHandler( m_window );
-		m_window->Destroy();
-		delete this;
-	}
-
-	DECLARE_EVENT_TABLE()
+private:
+    wxWindow* m_window;
 };
 
-BEGIN_EVENT_TABLE( XRCPreviewEvtHandler, wxEvtHandler )
-	EVT_KEY_UP( XRCPreviewEvtHandler::OnKeyUp )
-	EVT_RIGHT_DOWN( XRCPreviewEvtHandler::OnRightDown )
-	EVT_CLOSE ( XRCPreviewEvtHandler::OnClose )
+#if 0
+BEGIN_EVENT_TABLE(XRCPreviewEvtHandler, wxEvtHandler)
+EVT_KEY_UP(XRCPreviewEvtHandler::OnKeyUp)
+EVT_RIGHT_DOWN(XRCPreviewEvtHandler::OnRightDown)
+EVT_CLOSE(XRCPreviewEvtHandler::OnClose)
 END_EVENT_TABLE()
+#endif
 
-void XRCPreview::Show( PObjectBase form, const wxString& projectPath )
+class XRCPreviewEvtHandler : public wxEvtHandler {
+public:
+    XRCPreviewEvtHandler(wxWindow* win)
+        : m_window(win)
+    {
+        Bind(wxEVT_KEY_UP, &XRCPreviewEvtHandler::OnKeyUp, this);
+        Bind(wxEVT_RIGHT_DOWN, &XRCPreviewEvtHandler::OnRightDown, this);
+        Bind(wxEVT_CLOSE_WINDOW, &XRCPreviewEvtHandler::OnClose, this);
+    }
+
+protected:
+    void OnKeyUp(wxKeyEvent& event)
+    {
+        if (event.GetKeyCode() == WXK_ESCAPE)
+            m_window->Close();
+    }
+
+    void OnRightDown(wxMouseEvent& event)
+    {
+        wxMenu* menu = new XrcPreviewPopupMenu(m_window);
+        wxPoint pos = event.GetPosition();
+        m_window->PopupMenu(menu, pos.x, pos.y);
+    }
+
+    void RemoveEventHandler(wxWindow* window)
+    {
+        const wxWindowList& children = window->GetChildren();
+        for (size_t i = 0; i < children.GetCount(); ++i)
+            RemoveEventHandler(children.Item(i)->GetData());
+
+        wxEvtHandler* handler = window->PopEventHandler();
+        if (handler != this)
+            delete handler;
+    }
+
+    void OnClose(wxCloseEvent&)
+    {
+        RemoveEventHandler(m_window);
+        m_window->Destroy();
+        delete this;
+    }
+
+private:
+    wxWindow* m_window;
+};
+
+void XRCPreview::Show(PObjectBase form, const wxString& projectPath)
 {
+    AnnoyingDialog dlg(_("WARNING - For XRC Developers ONLY!!"),
+                       _("The XRC language is not as powerful as C++.\n"
+                         "It has limitations that will affect the GUI\n"
+                         "layout. This preview will ONLY show how the\n"
+                         "generated XRC will look, and it will probably\n"
+                         "be different from the Designer.\n\n"
+                         "If you are not using XRC, do NOT use the XRC\n"
+                         "preview, it will only confuse you."),
+                       wxART_WARNING,
+                       AnnoyingDialog::OK_CANCEL,
+                       wxID_CANCEL);
 
-	AnnoyingDialog dlg(_("WARNING - For XRC Developers ONLY!!"),
-						wxGetTranslation(	wxT("The XRC language is not as powerful as C++.\n")
-											wxT("It has limitations that will affect the GUI\n")
-											wxT("layout. This preview will ONLY show how the\n")
-											wxT("generated XRC will look, and it will probably\n")
-											wxT("be different from the Designer.\n\n")
-											wxT("If you are not using XRC, do NOT use the XRC\n")
-											wxT("preview, it will only confuse you.")
-										),
-								wxART_WARNING,
-								AnnoyingDialog::OK_CANCEL,
-								wxID_CANCEL);
+    if (wxID_CANCEL == dlg.ShowModal())
+        return;
 
-	if ( wxID_CANCEL == dlg.ShowModal() )
-	{
-		return;
-	}
+    wxString className = form->GetClassName();
 
-	wxString className = form->GetClassName();
+    PStringCodeWriter cw(new StringCodeWriter);
+    try {
+        XrcCodeGenerator codegen;
+        codegen.SetWriter(cw);
+        codegen.GenerateCode(form);
+    } catch (wxWeaverException& ex) {
+        wxLogError(ex.what());
+        return;
+    }
 
-	PStringCodeWriter cw( new StringCodeWriter );
-	try
-	{
-		XrcCodeGenerator codegen;
-		codegen.SetWriter( cw );
-		codegen.GenerateCode( form );
-	}
-	catch ( wxWeaverException& ex )
-	{
-		wxLogError( ex.what() );
-		return;
-	}
+    wxString workingDir = ::wxGetCwd();
+    // We change the current directory so that the relative paths work properly
+    if (!projectPath.IsEmpty())
+        ::wxSetWorkingDirectory(projectPath);
 
-	wxString workingDir = ::wxGetCwd();
-	// We change the current directory so that the relative paths work properly
-	if( !projectPath.IsEmpty() ) ::wxSetWorkingDirectory( projectPath );
-	wxXmlResource *res = wxXmlResource::Get();
-	res->InitAllHandlers();
+    wxXmlResource* res = wxXmlResource::Get();
+    res->InitAllHandlers();
 
-	const std::string& data = _STDSTR( cw->GetString() );
-	wxMemoryFSHandler::AddFile(wxT("xrcpreview.xrc"), data.c_str(), data.size() );
-	res->Load( wxT("memory:xrcpreview.xrc") );
+    const std::string& data = _STDSTR(cw->GetString());
+    wxMemoryFSHandler::AddFile("xrcpreview.xrc", data.c_str(), data.size());
+    res->Load("memory:xrcpreview.xrc");
 
-	wxWindow* window = NULL;
-	if ( className == wxT( "Frame" ) )
-	{
-		wxFrame* frame = new wxFrame();
-		res->LoadFrame( frame, wxTheApp->GetTopWindow(), form->GetPropertyAsString( wxT( "name" ) ) );
-		// Prevent events from propagating up to wxWeaver's frame
-		frame->SetExtraStyle( frame->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS );
-		frame->Show();
-		window = frame;
-	}
-	else if ( className == wxT( "Dialog" ) )
-	{
-		wxDialog* dialog = new wxDialog;
-		res->LoadDialog( dialog, wxTheApp->GetTopWindow(), form->GetPropertyAsString( wxT( "name" ) ) );
-		// Prevent events from propagating up to wxWeaver's frame
-		dialog->SetExtraStyle( dialog->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS );
-		dialog->Show();
-		window = dialog;
-	}
-	else if ( className == wxT("Wizard") )
-	{
-        wxString            wizName = form->GetPropertyAsString( wxT("name") );
-        wxString            pgName;
-        wxObject           *wizObj  = res->LoadObject( NULL, wizName, wxT("wxWizard") );
-        wxWizard           *wizard  = wxDynamicCast( wizObj, wxWizard );
-        wxWizardPageSimple *wizpge  = NULL;
+    wxWindow* window = NULL;
+    if (className == wxT("Frame")) {
+        wxFrame* frame = new wxFrame();
+        res->LoadFrame(
+            frame, wxTheApp->GetTopWindow(),
+            form->GetPropertyAsString("name"));
 
-        if ( wizard )
-        {
-            wizard->SetExtraStyle( wizard->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS );
+        // Prevent events from propagating up to wxWeaver's frame
+        frame->SetExtraStyle(frame->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS);
+        frame->Show();
+        window = frame;
+    } else if (className == "Dialog") {
+        wxDialog* dialog = new wxDialog;
+        res->LoadDialog(
+            dialog, wxTheApp->GetTopWindow(),
+            form->GetPropertyAsString(wxT("name")));
+
+        // Prevent events from propagating up to wxWeaver's frame
+        dialog->SetExtraStyle(dialog->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS);
+        dialog->Show();
+        window = dialog;
+    } else if (className == "Wizard") {
+        wxString wizName = form->GetPropertyAsString("name");
+        wxString pgName;
+        wxObject* wizObj = res->LoadObject(nullptr, wizName, "wxWizard");
+        wxWizard* wizard = wxDynamicCast(wizObj, wxWizard);
+        wxWizardPageSimple* wizpge = nullptr;
+
+        if (wizard)
+            wizard->SetExtraStyle(wizard->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS);
+
+        if (form->GetChildCount() > 0) {
+            pgName = form->GetChild(0)->GetPropertyAsString("name");
+            wizpge = (wxWizardPageSimple*)wizard->FindWindow(pgName);
         }
-
-        if ( form->GetChildCount() > 0 )
-        {
-            pgName = form->GetChild(0)->GetPropertyAsString( wxT("name") );
-            wizpge = ( wxWizardPageSimple * )wizard->FindWindow( pgName );
-        }
-
-        if ( wizpge )
-        {
-            wizard->RunWizard( wizpge );
+        if (wizpge) {
+            wizard->RunWizard(wizpge);
             wizard->Destroy();
-            window = NULL;
+            window = nullptr;
         }
-	}
-	else if ( className == wxT( "Panel" ) )
-	{
-		wxDialog* dialog = new wxDialog( wxTheApp->GetTopWindow(), wxID_ANY, wxT( "Dialog" ), wxDefaultPosition,
-		                 wxDefaultSize, wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER );
-		// Prevent events from propagating up to wxWeaver's frame
-		dialog->SetExtraStyle( wxWS_EX_BLOCK_EVENTS );
-		wxPanel *panel = new wxPanel();
-		res->LoadPanel( panel, dialog, form->GetPropertyAsString( wxT( "name" ) ) );
-		dialog->SetClientSize( panel->GetSize() );
-		dialog->SetSize( form->GetPropertyAsSize( wxT( "size" ) ) );
-		dialog->CenterOnScreen();
-		dialog->Show();
-		window = dialog;
-	}
-	else if ( className == wxT( "MenuBar" ) )
-	{
-		wxFrame* frame = new wxFrame( NULL, wxID_ANY, form->GetPropertyAsString( wxT( "name" ) ) );
-		// Prevent events from propagating up to wxWeaver's frame
-		frame->SetExtraStyle( frame->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS );
-		frame->SetMenuBar( res->LoadMenuBar( form->GetPropertyAsString( wxT( "name" ) ) ) );
-		frame->CenterOnScreen();
-		frame->Show();
-		window = frame;
-	}
-	else if ( className == wxT( "ToolBar" ) )
-	{
-		wxFrame* frame = new wxFrame( NULL, wxID_ANY, form->GetPropertyAsString( wxT( "name" ) ) );
-		// Prevent events from propagating up to wxWeaver's frame
-		frame->SetExtraStyle( frame->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS );
-		frame->SetToolBar( res->LoadToolBar( frame, form->GetPropertyAsString( wxT( "name" ) ) ) );
-		frame->CenterOnScreen();
-		frame->Show();
-		window = frame;
-	}
+    } else if (className == "Panel") {
+        wxDialog* dialog
+            = new wxDialog(wxTheApp->GetTopWindow(), wxID_ANY, "Dialog",
+                           wxDefaultPosition, wxDefaultSize,
+                           wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
 
-	if ( window )
-	{
-		AddEventHandler( window, window );
-	}
+        // Prevent events from propagating up to wxWeaver's frame
+        dialog->SetExtraStyle(wxWS_EX_BLOCK_EVENTS);
+        wxPanel* panel = new wxPanel();
+        res->LoadPanel(panel, dialog, form->GetPropertyAsString("name"));
+        dialog->SetClientSize(panel->GetSize());
+        dialog->SetSize(form->GetPropertyAsSize(wxT("size")));
+        dialog->CenterOnScreen();
+        dialog->Show();
+        window = dialog;
+    } else if (className == "MenuBar") {
+        wxFrame* frame
+            = new wxFrame(nullptr, wxID_ANY, form->GetPropertyAsString("name"));
 
-	::wxSetWorkingDirectory( workingDir );
+        // Prevent events from propagating up to wxWeaver's frame
+        frame->SetExtraStyle(frame->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS);
+        frame->SetMenuBar(res->LoadMenuBar(form->GetPropertyAsString("name")));
+        frame->CenterOnScreen();
+        frame->Show();
+        window = frame;
+    } else if (className == "ToolBar") {
+        wxFrame* frame
+            = new wxFrame(nullptr, wxID_ANY, form->GetPropertyAsString("name"));
 
-	res->Unload( wxT("memory:xrcpreview.xrc") );
+        // Prevent events from propagating up to wxWeaver's frame
+        frame->SetExtraStyle(frame->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS);
+        frame->SetToolBar(res->LoadToolBar(frame, form->GetPropertyAsString("name")));
+        frame->CenterOnScreen();
+        frame->Show();
+        window = frame;
+    }
+    if (window)
+        AddEventHandler(window, window);
 
-	wxMemoryFSHandler::RemoveFile( wxT("xrcpreview.xrc") );
+    ::wxSetWorkingDirectory(workingDir);
+    res->Unload("memory:xrcpreview.xrc");
+    wxMemoryFSHandler::RemoveFile("xrcpreview.xrc");
 }
 
-void XRCPreview::AddEventHandler( wxWindow* window, wxWindow* form )
+void XRCPreview::AddEventHandler(wxWindow* window, wxWindow* form)
 {
-	const wxWindowList& children = window->GetChildren();
-	for ( size_t i = 0; i < children.GetCount(); ++i )
-	{
-		AddEventHandler( children.Item( i )->GetData(), form );
-	}
-	window->PushEventHandler( ( new XRCPreviewEvtHandler( form ) ) );
+    const wxWindowList& children = window->GetChildren();
+    for (size_t i = 0; i < children.GetCount(); ++i)
+        AddEventHandler(children.Item(i)->GetData(), form);
+
+    window->PushEventHandler((new XRCPreviewEvtHandler(form)));
 }

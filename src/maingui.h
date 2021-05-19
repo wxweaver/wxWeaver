@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,32 +18,28 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#ifndef __MAINGUI__
-#define __MAINGUI__
+#pragma once
 
 #include <wx/app.h>
 
 class MainFrame;
 
-class MyApp : public wxApp
-{
+class MyApp : public wxApp {
 private:
-  MainFrame *m_frame;
+    MainFrame* m_frame;
 
 public:
-	bool OnInit() override;
-  #if wxUSE_ON_FATAL_EXCEPTION && wxUSE_STACKWALKER
-	void OnFatalException() override;
-  #endif
-	int OnRun() override;
-	int OnExit() override;
+    bool OnInit() override;
+#if wxUSE_ON_FATAL_EXCEPTION && wxUSE_STACKWALKER
+    void OnFatalException() override;
+#endif
+    int OnRun() override;
+    int OnExit() override;
 
-  #ifdef __WXMAC__
-  wxString m_mac_file_name;
-  void MacOpenFile(const wxString &fileName) override;
-  #endif
+#ifdef __WXMAC__
+    wxString m_mac_file_name;
+    void MacOpenFile(const wxString& fileName) override;
+#endif
 };
 
-DECLARE_APP(MyApp)
-
-#endif //__MAINGUI__
+wxDECLARE_APP(MyApp);

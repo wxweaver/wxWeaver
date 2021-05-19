@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -24,27 +25,37 @@
 namespace ticpp {
 class Document;
 }
-
 class TiXmlDocument;
 class wxArrayString;
 
-namespace StringUtils
-{
-  wxString IntToStr(int num);
+namespace StringUtils {
+wxString IntToStr(int num);
 
-  wxString GetSupportedEncodings( bool columnateWithTab = true, wxArrayString* array = NULL );
-  wxFontEncoding GetEncodingFromUser( const wxString& message );
-}
+wxString GetSupportedEncodings(bool columnateWithTab = true,
+                               wxArrayString* array = nullptr);
 
-namespace XMLUtils
-{
-	// These are only vaguely string related, perhaps they deserve their own files.
-	// These load xml files and verify the encoding is correct, optionally converting
-	// the files using wxWidgets.
-	void LoadXMLFile( ticpp::Document& doc, bool condenseWhiteSpace, const wxString& path = wxEmptyString );
-	void LoadXMLFile( TiXmlDocument& doc, bool condenseWhiteSpace, const wxString& path = wxEmptyString );
+wxFontEncoding GetEncodingFromUser(const wxString& message);
+} // namespace StringUtils
 
-	// Converts to UTF-8 and prepends declaration
-	void ConvertAndAddDeclaration( const wxString& path, wxFontEncoding encoding = wxFONTENCODING_SYSTEM, bool backup = true );
-	void ConvertAndChangeDeclaration( const wxString& path, const wxString& version, const wxString& standalone, wxFontEncoding encoding = wxFONTENCODING_SYSTEM, bool backup = true );
-}
+namespace XMLUtils {
+/*
+    These are only vaguely string related, perhaps they deserve their own files.
+    These load xml files and verify the encoding is correct, optionally converting
+    the files using wxWidgets.
+*/
+void LoadXMLFile(ticpp::Document& doc, bool condenseWhiteSpace,
+                 const wxString& path = wxEmptyString);
+
+void LoadXMLFile(TiXmlDocument& doc, bool condenseWhiteSpace,
+                 const wxString& path = wxEmptyString);
+
+// Converts to UTF-8 and prepends declaration
+void ConvertAndAddDeclaration(const wxString& path,
+                              wxFontEncoding encoding = wxFONTENCODING_SYSTEM,
+                              bool backup = true);
+
+void ConvertAndChangeDeclaration(const wxString& path,
+                                 const wxString& version, const wxString& standalone,
+                                 wxFontEncoding encoding = wxFONTENCODING_SYSTEM,
+                                 bool backup = true);
+} // namespace XMLUtils

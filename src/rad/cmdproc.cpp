@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,99 +18,91 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
 #include "rad/cmdproc.h"
 
 CommandProcessor::CommandProcessor()
-:
-m_savePoint( 0 )
+    : m_savePoint(0)
 {
 }
 
 void CommandProcessor::Execute(PCommand command)
 {
-  command->Execute();
-  m_undoStack.push(command);
+    command->Execute();
+    m_undoStack.push(command);
 
-  while (!m_redoStack.empty())
-    m_redoStack.pop();
+    while (!m_redoStack.empty())
+        m_redoStack.pop();
 }
 
 void CommandProcessor::Undo()
 {
-  if (!m_undoStack.empty())
-  {
-    PCommand command = m_undoStack.top();
-    m_undoStack.pop();
+    if (!m_undoStack.empty()) {
+        PCommand command = m_undoStack.top();
+        m_undoStack.pop();
 
-    command->Restore();
-    m_redoStack.push(command);
-  }
+        command->Restore();
+        m_redoStack.push(command);
+    }
 }
 
 void CommandProcessor::Redo()
 {
-  if (!m_redoStack.empty())
-  {
-    PCommand command = m_redoStack.top();
-    m_redoStack.pop();
+    if (!m_redoStack.empty()) {
+        PCommand command = m_redoStack.top();
+        m_redoStack.pop();
 
-    command->Execute();
-    m_undoStack.push(command);
-  }
+        command->Execute();
+        m_undoStack.push(command);
+    }
 }
 
 void CommandProcessor::Reset()
 {
-  while (!m_redoStack.empty())
-    m_redoStack.pop();
+    while (!m_redoStack.empty())
+        m_redoStack.pop();
 
-  while (!m_undoStack.empty())
-    m_undoStack.pop();
+    while (!m_undoStack.empty())
+        m_undoStack.pop();
 
-  m_savePoint = 0;
+    m_savePoint = 0;
 }
 
 bool CommandProcessor::CanUndo()
 {
-  return (!m_undoStack.empty());
+    return (!m_undoStack.empty());
 }
 bool CommandProcessor::CanRedo()
 {
-  return (!m_redoStack.empty());
+    return (!m_redoStack.empty());
 }
 
 void CommandProcessor::SetSavePoint()
 {
-	m_savePoint = m_undoStack.size();
+    m_savePoint = m_undoStack.size();
 }
 
 bool CommandProcessor::IsAtSavePoint()
 {
-	return m_undoStack.size() == m_savePoint;
+    return m_undoStack.size() == m_savePoint;
 }
 
-///////////////////////////////////////////////////////////////////////////////
 Command::Command()
 {
-  m_executed = false;
+    m_executed = false;
 }
 
 void Command::Execute()
 {
-  if (!m_executed)
-  {
-    DoExecute();
-    m_executed = true;
-  }
+    if (!m_executed) {
+        DoExecute();
+        m_executed = true;
+    }
 }
 
 void Command::Restore()
 {
-  if (m_executed)
-  {
-    DoRestore();
-    m_executed = false;
-  }
+    if (m_executed) {
+        DoRestore();
+        m_executed = false;
+    }
 }
-

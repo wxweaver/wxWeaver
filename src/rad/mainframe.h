@@ -1,6 +1,7 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado (as wxFormBuilder)
+    Copyright (C) 2005 José Antonio Hurtado
+    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -17,20 +18,20 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-
 #pragma once
 
-#include <wx/splitter.h>
-#include <wx/wx.h>
-
 #include <wx/aui/auibook.h>
+#include <wx/aui/framemanager.h>
 #include <wx/fdrepdlg.h>
+#include <wx/frame.h>
+#include <wx/splitter.h>
 
 class wxWeaverEvent;
 class wxWeaverObjectEvent;
 class wxWeaverPropertyEvent;
 class wxWeaverEventHandlerEvent;
 
+class DebugWindow;
 class CppPanel;
 class PythonPanel;
 class LuaPanel;
@@ -38,135 +39,130 @@ class PHPPanel;
 class XrcPanel;
 class ObjectTree;
 class ObjectInspector;
-class wxFbPalette;
+class Palette;
 class VisualEditor;
 
-/**
- * wxWeaver GUI styles.
+class wxLog;
+
+// TODO: Make GUI configurable in the settings dialog
+/** wxWeaver GUI styles.
  */
 enum {
-  wxWEAVER_DEFAULT_GUI,
-  wxWEAVER_DOCKABLE_GUI,
-	wxWEAVER_CLASSIC_GUI,
-	wxWEAVER_WIDE_GUI
+    wxWEAVER_GUI_DEFAULT,
+    wxWEAVER_GUI_DOCKABLE,
+    wxWEAVER_GUI_CLASSIC,
+    wxWEAVER_GUI_WIDE
 };
 
-class MainFrame : public wxFrame
-{
- private:
-  wxSplitterWindow *m_leftSplitter;
-  wxSplitterWindow *m_rightSplitter;
-  int m_leftSplitterWidth;
-  int m_rightSplitterWidth;
-  wxString m_rightSplitterType;
+class MainFrame : public wxFrame {
+public:
+    MainFrame(wxWindow* parent, int id = wxID_ANY,
+              int style = wxWEAVER_GUI_DOCKABLE, wxPoint pos = wxDefaultPosition,
+              wxSize size = wxSize(1000, 800));
+    ~MainFrame() override;
 
-  //wxFrameManager m_mgr;
-  wxAuiNotebook *m_notebook;
-  wxFbPalette *m_palette;
-  ObjectTree *m_objTree;
-  ObjectInspector *m_objInsp;
-  VisualEditor *m_visualEdit;
-  CppPanel *m_cpp;
-  PythonPanel *m_python;
-  LuaPanel *m_lua;
-  PHPPanel *m_php;
-  XrcPanel *m_xrc;
-  int m_style;
+    void LoadSettings(const wxString& name);
+    void SaveSettings(const wxString& name);
 
-  // Save which page is selected
-  int m_page_selection;
+    void OnPreferences(wxCommandEvent&);
 
-  // Save right splitter's sash position
-  int m_rightSplitter_sash_pos;
+    void OnSaveProject(wxCommandEvent& event);
+    void OnSaveAsProject(wxCommandEvent& event);
+    void OnOpenProject(wxCommandEvent& event);
+    void OnNewProject(wxCommandEvent& event);
+    void OnGenerateCode(wxCommandEvent& event);
+    void OnAbout(wxCommandEvent& event);
+    void OnExit(wxCommandEvent& event);
+    void OnClose(wxCloseEvent& event);
+    void OnImportXrc(wxCommandEvent& event);
+    void OnUndo(wxCommandEvent& event);
+    void OnRedo(wxCommandEvent& event);
+    void OnCopy(wxCommandEvent& event);
+    void OnPaste(wxCommandEvent& event);
+    void OnCut(wxCommandEvent& event);
+    void OnDelete(wxCommandEvent& event);
+    void OnClipboardCopy(wxCommandEvent& e);
+    void OnClipboardPaste(wxCommandEvent& e);
+    void OnClipboardPasteUpdateUI(wxUpdateUIEvent& e);
+    void OnToggleExpand(wxCommandEvent& event);
+    void OnToggleStretch(wxCommandEvent& event);
+    void OnMoveUp(wxCommandEvent& event);
+    void OnMoveDown(wxCommandEvent& event);
+    void OnMoveLeft(wxCommandEvent& event);
+    void OnMoveRight(wxCommandEvent& event);
+    void OnChangeAlignment(wxCommandEvent& event);
+    void OnChangeBorder(wxCommandEvent& e);
+    void OnXrcPreview(wxCommandEvent& e);
+    void OnGenInhertedClass(wxCommandEvent& e);
+    void OnWindowSwap(wxCommandEvent& e);
 
-  // Automatically update sash in splitter window base on user action
-  bool m_autoSash;
+    void OnAuiNotebookPageChanged(wxAuiNotebookEvent& event);
 
-  wxString m_currentDir;
-  wxString m_recentProjects[4];
+    void OnProjectLoaded(wxWeaverEvent& event);
+    void OnProjectSaved(wxWeaverEvent& event);
+    void OnObjectExpanded(wxWeaverObjectEvent& event);
+    void OnObjectSelected(wxWeaverObjectEvent& event);
+    void OnObjectCreated(wxWeaverObjectEvent& event);
+    void OnObjectRemoved(wxWeaverObjectEvent& event);
+    void OnPropertyModified(wxWeaverPropertyEvent& event);
+    void OnEventHandlerModified(wxWeaverEventHandlerEvent& event);
+    void OnCodeGeneration(wxWeaverEvent& event);
+    void OnProjectRefresh(wxWeaverEvent& event);
 
-  void UpdateFrame();
+    void OnSplitterChanged(wxSplitterEvent& event);
 
-  // Actualiza los projectos más recientes en el menu
-  void UpdateRecentProjects();
-  void OnOpenRecent(wxCommandEvent &event);
-  void UpdateLayoutTools();
+    void InsertRecentProject(const wxString& file);
 
-  // Used to correctly restore splitter position
-  void OnIdle( wxIdleEvent& );
+    wxWindow* CreateComponentPalette(wxWindow* parent);
+    wxWindow* CreateDesignerWindow(wxWindow* parent);
+    wxWindow* CreateObjectTree(wxWindow* parent);
+    wxWindow* CreateObjectInspector(wxWindow* parent);
+    wxMenuBar* CreateWeaverMenuBar();
+    wxToolBar* CreateWeaverToolBar();
 
-  wxFindReplaceData m_findData;
-  wxFindReplaceDialog* m_findDialog;
+    void CreateClassicGui();
+    void CreateDockableGui();
+    void CreateWideGui();
 
-  // Used to force propgrid to save on lost focus
-  wxEvtHandler* m_focusKillEvtHandler;
+    void OnFindDialog(wxCommandEvent& event);
+    void OnFind(wxFindDialogEvent& event);
+    void OnFindClose(wxFindDialogEvent& event);
 
-  DECLARE_EVENT_TABLE()
- public:
-  MainFrame(wxWindow *parent, int id = wxID_ANY, int style = wxWEAVER_DEFAULT_GUI, wxPoint pos = wxDefaultPosition, wxSize size = wxSize( 1000, 800 ) );
-	~MainFrame() override;
-  void RestorePosition(const wxString &name);
-  void SavePosition(const wxString &name);
-  void OnSaveProject(wxCommandEvent &event);
-  void OnSaveAsProject(wxCommandEvent &event);
-  void OnOpenProject(wxCommandEvent &event);
-  void OnNewProject(wxCommandEvent &event);
-  void OnGenerateCode(wxCommandEvent &event);
-  void OnAbout(wxCommandEvent &event);
-  void OnExit(wxCommandEvent &event);
-  void OnClose(wxCloseEvent &event);
-  void OnImportXrc(wxCommandEvent &event);
-  void OnUndo(wxCommandEvent &event);
-  void OnRedo(wxCommandEvent &event);
-  void OnCopy (wxCommandEvent &event);
-  void OnPaste (wxCommandEvent &event);
-  void OnCut (wxCommandEvent &event);
-  void OnDelete (wxCommandEvent &event);
-  void OnClipboardCopy(wxCommandEvent& e);
-  void OnClipboardPaste(wxCommandEvent& e);
-  void OnClipboardPasteUpdateUI( wxUpdateUIEvent& e );
-  void OnToggleExpand (wxCommandEvent &event);
-  void OnToggleStretch (wxCommandEvent &event);
-  void OnMoveUp (wxCommandEvent &event);
-  void OnMoveDown (wxCommandEvent &event);
-  void OnMoveLeft (wxCommandEvent &event);
-  void OnMoveRight (wxCommandEvent &event);
-  void OnChangeAlignment (wxCommandEvent &event);
-  void OnChangeBorder(wxCommandEvent& e);
-  void OnXrcPreview(wxCommandEvent& e);
-  void OnGenInhertedClass(wxCommandEvent& e);
-  void OnWindowSwap(wxCommandEvent& e);
+    bool SaveWarning();
 
-  void OnAuiNotebookPageChanged( wxAuiNotebookEvent& event );
+private:
+    void UpdateFrame();
+    void UpdateLayoutTools();
+    void UpdateRecentProjects(); // Actualiza los projectos más recientes en el menu
 
-  void OnProjectLoaded( wxWeaverEvent& event );
-  void OnProjectSaved( wxWeaverEvent& event );
-  void OnObjectExpanded( wxWeaverObjectEvent& event );
-  void OnObjectSelected( wxWeaverObjectEvent& event );
-  void OnObjectCreated( wxWeaverObjectEvent& event );
-  void OnObjectRemoved( wxWeaverObjectEvent& event );
-  void OnPropertyModified( wxWeaverPropertyEvent& event );
-  void OnEventHandlerModified( wxWeaverEventHandlerEvent& event );
-  void OnCodeGeneration( wxWeaverEvent& event );
-  void OnProjectRefresh( wxWeaverEvent& event );
+    void OnOpenRecent(wxCommandEvent& event);
+    void OnIdle(wxIdleEvent&); // Used to correctly restore splitter position
 
-  void OnSplitterChanged( wxSplitterEvent &event );
+    ObjectTree* m_objTree;
+    ObjectInspector* m_objInsp;
+    VisualEditor* m_visualEdit;
+    Palette* m_palette;
+    PythonPanel* m_python;
+    CppPanel* m_cpp;
+    LuaPanel* m_lua;
+    PHPPanel* m_php;
+    XrcPanel* m_xrc;
 
-  void InsertRecentProject(const wxString &file);
+    wxAuiManager m_mgr;
+    wxAuiNotebook* m_notebook;
+    wxEvtHandler* m_focusKillEvtHandler; // Used to force propgrid to save on lost focus
+    wxFindReplaceData m_findData;
+    wxFindReplaceDialog* m_findDialog;
+    wxSplitterWindow* m_leftSplitter;
+    wxSplitterWindow* m_rightSplitter;
+    wxString m_rightSplitterType;
+    wxString m_currentDir;
+    wxString m_recentProjects[4];
 
-  wxWindow  *CreateComponentPalette (wxWindow *parent);
-  wxWindow  *CreateDesignerWindow   (wxWindow *parent);
-  wxWindow  *CreateObjectTree       (wxWindow *parent);
-  wxWindow  *CreateObjectInspector  (wxWindow *parent);
-  wxMenuBar *CreateFBMenuBar();
-  wxToolBar *CreateFBToolBar();
-
-  void CreateWideGui();
-  void CreateClassicGui();
-
-  void OnFindDialog( wxCommandEvent& event );
-  void OnFind( wxFindDialogEvent& event );
-  void OnFindClose( wxFindDialogEvent& event );
-
-  bool SaveWarning();
-  };
+    bool m_autoSash;            // Automatically update sash in splitter window base on user action
+    int m_pageSelection;        // Save which page is selected
+    int m_rightSplitterSashPos; // Save right splitter's sash position
+    int m_leftSplitterWidth;
+    int m_rightSplitterWidth;
+    int m_style;
+};

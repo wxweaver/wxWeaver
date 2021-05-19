@@ -2,6 +2,7 @@
     wxWeaver - A GUI Designer Editor for wxWidgets.
     Copyright (C) 2005 José Antonio Hurtado
     Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
+    Copyright (C) 2011-2021 Jefferson González <jgmdev@gmail.com>
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -18,32 +19,29 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#pragma once
+#include <wx/textctrl.h>
+#include <wx/tokenzr.h>
 
-#include "utils/defs.h"
-#include <wx/stc/stc.h>
-#include <wx/panel.h>
+#include "debugwindow.h"
 
-class CodeEditor;
-class wxWeaverEvent;
-class wxWeaverObjectEvent;
-class wxWeaverPropertyEvent;
-class wxFindDialogEvent;
+DebugWindow::DebugWindow(wxWindow* parent)
+    : wxTextCtrl(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize,
+                 wxTE_MULTILINE | wxTE_READONLY | wxTE_LEFT)
+{
+    Bind(wxEVT_COMMAND_TEXT_UPDATED, &DebugWindow::OnTextUpdated, this);
+}
 
-class XrcPanel : public wxPanel {
-public:
-    XrcPanel(wxWindow* parent, int id);
-    ~XrcPanel() override;
+void DebugWindow::OnTextUpdated(wxCommandEvent& event)
+{
+    wxString msg = event.GetString();
 
-    void OnPropertyModified(wxWeaverPropertyEvent& event);
-    void OnProjectRefresh(wxWeaverEvent& event);
-    void OnCodeGeneration(wxWeaverEvent& event);
-    void OnObjectChange(wxWeaverObjectEvent& event);
-    void OnFind(wxFindDialogEvent& event);
-
-private:
-    void InitStyledTextCtrl(wxStyledTextCtrl* stc);
-
-    CodeEditor* m_xrcPanel;
-    PTCCodeWriter m_codeWriter;
-};
+    wxArrayString lines = wxStringTokenize(msg, "\n");
+    for (size_t i = 0; i < lines.GetCount(); i++) {
+        if (lines.Item(i).Contains(_("Error: ")))
+            SetDefaultStyle(wxTextAttr(wxColour(210, 0, 0)));
+        else if (lines.Item(i).Contains(_("Warning: ")))
+            SetDefaultStyle(wxTextAttr(wxColour(255, 150, 0)));
+        else
+            SetDefaultStyle(wxTextAttr(wxColour(0, 150, 0)));
+    }
+}
