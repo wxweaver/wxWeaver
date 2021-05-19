@@ -76,9 +76,6 @@ private:
     wxStaticBitmap* m_statbmp;     // the control for the bitmap
     WizardPages m_pages;
     WizardPageSimple* m_page;
-#if 0
-    DECLARE_EVENT_TABLE()
-#endif
 };
 
 // ----------------------------------------------------------------------------
@@ -114,14 +111,14 @@ private:
 // macros for handling WizardEvents
 // ----------------------------------------------------------------------------
 #define wxWEAVERDLLIMPEXP
-wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxWEAVER_EVT_WIZARD_PAGE_CHANGED, WizardEvent);
-wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxWEAVER_EVT_WIZARD_PAGE_CHANGING, WizardEvent);
-wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxWEAVER_EVT_WIZARD_CANCEL, WizardEvent);
-wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxWEAVER_EVT_WIZARD_HELP, WizardEvent);
-wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxWEAVER_EVT_WIZARD_FINISHED, WizardEvent);
-wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxWEAVER_EVT_WIZARD_PAGE_SHOWN, WizardEvent);
+wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxEVT_WVR_WIZARD_PAGE_CHANGED, WizardEvent);
+wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxEVT_WVR_WIZARD_PAGE_CHANGING, WizardEvent);
+wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxEVT_WVR_WIZARD_CANCEL, WizardEvent);
+wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxEVT_WVR_WIZARD_HELP, WizardEvent);
+wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxEVT_WVR_WIZARD_FINISHED, WizardEvent);
+wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxEVT_WVR_WIZARD_PAGE_SHOWN, WizardEvent);
 #if 0
-wxDECLARE_EXPORTED_EVENT( wxWEAVERDLLIMPEXP, wxWEAVER_EVT_WIZARD_BEFORE_PAGE_CHANGED, WizardEvent );
+wxDECLARE_EXPORTED_EVENT(wxWEAVERDLLIMPEXP, wxEVT_WVR_WIZARD_BEFORE_PAGE_CHANGED, WizardEvent);
 #endif
 
 using WizardEventFunction = void (wxEvtHandler::*)(WizardEvent&);
@@ -130,24 +127,24 @@ using WizardEventFunction = void (wxEvtHandler::*)(WizardEvent&);
     (wxObjectEventFunction)(wxEventFunction) wxStaticCastEvent(WizardEventFunction, &func)
 
 #define wxWEAVER__DECLARE_WIZARDEVT(evt, id, fn) \
-    wx__DECLARE_EVT1(wxWEAVER_EVT_WIZARD_##evt, id, WizardEventHandler(fn))
+    wx__DECLARE_EVT1(wxEVT_WVR_WIZARD_##evt, id, WizardEventHandler(fn))
 
 // notifies that the page has just been changed (can't be vetoed)
-#define EVT_wxWEAVER_WIZARD_PAGE_CHANGED(id, fn) wxWEAVER__DECLARE_WIZARDEVT(PAGE_CHANGED, id, fn)
+#define EVT_WVR_WIZARD_PAGE_CHANGED(id, fn) wxWEAVER__DECLARE_WIZARDEVT(PAGE_CHANGED, id, fn)
 
 // the user pressed "<Back" or "Next>" button and the page is going to be
 // changed - unless the event handler vetoes the event
-#define EVT_wxWEAVER_WIZARD_PAGE_CHANGING(id, fn) wxWEAVER__DECLARE_WIZARDEVT(PAGE_CHANGING, id, fn)
+#define EVT_WVR_WIZARD_PAGE_CHANGING(id, fn) wxWEAVER__DECLARE_WIZARDEVT(PAGE_CHANGING, id, fn)
 
 // the user pressed "Cancel" button and the wizard is going to be dismissed -
 // unless the event handler vetoes the event
-#define EVT_wxWEAVER_WIZARD_CANCEL(id, fn) wxWEAVER__DECLARE_WIZARDEVT(CANCEL, id, fn)
+#define EVT_WVR_WIZARD_CANCEL(id, fn) wxWEAVER__DECLARE_WIZARDEVT(CANCEL, id, fn)
 
 // the user pressed "Finish" button and the wizard is going to be dismissed -
-#define EVT_wxWEAVER_WIZARD_FINISHED(id, fn) wxWEAVER__DECLARE_WIZARDEVT(FINISHED, id, fn)
+#define EVT_WVR_WIZARD_FINISHED(id, fn) wxWEAVER__DECLARE_WIZARDEVT(FINISHED, id, fn)
 
 // the user pressed "Help" button
-#define EVT_wxWEAVER_WIZARD_HELP(id, fn) wxWEAVER__DECLARE_WIZARDEVT(HELP, id, fn)
+#define EVT_WVR_WIZARD_HELP(id, fn) wxWEAVER__DECLARE_WIZARDEVT(HELP, id, fn)
 
 // the page was just shown and laid out
-#define EVT_wxWEAVER_WIZARD_PAGE_SHOWN(id, fn) wxWEAVER__DECLARE_WIZARDEVT(PAGE_SHOWN, id, fn)
+#define EVT_WVR_WIZARD_PAGE_SHOWN(id, fn) wxWEAVER__DECLARE_WIZARDEVT(PAGE_SHOWN, id, fn)

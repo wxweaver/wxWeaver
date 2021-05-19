@@ -27,7 +27,7 @@ static wxString StringToXrcText(const wxString& str)
 {
     wxString result;
 
-    for (unsigned int i = 0; i < str.Length(); i++) {
+    for (size_t i = 0; i < str.Length(); i++) {
         wxChar c = str[i];
 
         switch (c) {
@@ -67,7 +67,7 @@ static wxString XrcTextToString(const wxString& str)
 {
     wxString result;
 
-    for (unsigned int i = 0; i < str.Length(); i++) {
+    for (size_t i = 0; i < str.Length(); i++) {
         wxChar c = str[i];
         if (c == wxChar('\\') && i < str.length() - 1) {
             wxChar next = str[i + 1];

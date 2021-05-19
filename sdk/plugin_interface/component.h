@@ -69,9 +69,9 @@ public:
     virtual double GetPropertyAsFloat(const wxString& pname) = 0;
     virtual wxString GetChildFromParentProperty(const wxString& parentName, const wxString& childName) = 0;
     virtual wxString GetClassName() = 0;
-    virtual unsigned int GetChildCount() = 0;
+    virtual size_t GetChildCount() = 0;
     virtual wxString GetObjectTypeName() = 0;
-    virtual IObject* GetChildPtr(unsigned int idx) = 0;
+    virtual IObject* GetChildPtr(size_t idx) = 0;
     virtual ~IObject() { }
 };
 
@@ -85,13 +85,13 @@ public:
     virtual void RegisterMacroSynonymous(const wxString& text, const wxString& name) = 0;
 
     // Used by wxWeaver for recovering components and macros
-    virtual IComponent* GetComponent(unsigned int idx) = 0;
-    virtual wxString GetComponentName(unsigned int idx) = 0;
-    virtual wxString GetMacroName(unsigned int i) = 0;
-    virtual int GetMacroValue(unsigned int i) = 0;
+    virtual IComponent* GetComponent(size_t idx) = 0;
+    virtual wxString GetComponentName(size_t idx) = 0;
+    virtual wxString GetMacroName(size_t i) = 0;
+    virtual int GetMacroValue(size_t i) = 0;
 #if 0
-    virtual wxString GetMacroSynonymous(unsigned int i) = 0;
-    virtual wxString GetSynonymousName(unsigned int i) = 0;
+    virtual wxString GetMacroSynonymous(size_t i) = 0;
+    virtual wxString GetSynonymousName(size_t i) = 0;
 #endif
     virtual bool FindSynonymous(const wxString& syn, wxString& trans) = 0;
 

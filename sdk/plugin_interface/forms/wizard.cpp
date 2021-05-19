@@ -19,15 +19,15 @@
 */
 #include "wizard.h"
 
-wxDEFINE_EVENT(wxWEAVER_EVT_WIZARD_PAGE_CHANGED, WizardEvent);
-wxDEFINE_EVENT(wxWEAVER_EVT_WIZARD_PAGE_CHANGING, WizardEvent);
+wxDEFINE_EVENT(wxEVT_WVR_WIZARD_PAGE_CHANGED, WizardEvent);
+wxDEFINE_EVENT(wxEVT_WVR_WIZARD_PAGE_CHANGING, WizardEvent);
 #if 0
-wxDEFINE_EVENT(wxWEAVER_EVT_WIZARD_BEFORE_PAGE_CHANGED, WizardEvent);
+wxDEFINE_EVENT(wxEVT_WVR_WIZARD_BEFORE_PAGE_CHANGED, WizardEvent);
 #endif
-wxDEFINE_EVENT(wxWEAVER_EVT_WIZARD_CANCEL, WizardEvent);
-wxDEFINE_EVENT(wxWEAVER_EVT_WIZARD_FINISHED, WizardEvent);
-wxDEFINE_EVENT(wxWEAVER_EVT_WIZARD_HELP, WizardEvent);
-wxDEFINE_EVENT(wxWEAVER_EVT_WIZARD_PAGE_SHOWN, WizardEvent);
+wxDEFINE_EVENT(wxEVT_WVR_WIZARD_CANCEL, WizardEvent);
+wxDEFINE_EVENT(wxEVT_WVR_WIZARD_FINISHED, WizardEvent);
+wxDEFINE_EVENT(wxEVT_WVR_WIZARD_HELP, WizardEvent);
+wxDEFINE_EVENT(wxEVT_WVR_WIZARD_PAGE_SHOWN, WizardEvent);
 
 WizardPageSimple::WizardPageSimple(Wizard* parent)
     : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0)
@@ -83,38 +83,30 @@ Wizard::Wizard(wxWindow* parent, wxWindowID id,
     this->Layout();
     windowSizer->Fit(this);
 
-    m_btnHelp->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Wizard::OnHelp), nullptr,
-                       this);
-    m_btnPrev->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Wizard::OnBackOrNext),
-                       nullptr, this);
-    m_btnNext->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Wizard::OnBackOrNext),
-                       nullptr, this);
-    m_btnCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Wizard::OnCancel),
-                         nullptr, this);
+    m_btnHelp->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &Wizard::OnHelp, this);
+    m_btnPrev->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &Wizard::OnBackOrNext, this);
+    m_btnNext->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &Wizard::OnBackOrNext, this);
+    m_btnCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &Wizard::OnCancel, this);
 
-    this->Connect(wxID_ANY, wxWEAVER_EVT_WIZARD_PAGE_CHANGED, WizardEventHandler(Wizard::OnWizEvent));
-    this->Connect(wxID_ANY, wxWEAVER_EVT_WIZARD_PAGE_CHANGING, WizardEventHandler(Wizard::OnWizEvent));
-    this->Connect(wxID_ANY, wxWEAVER_EVT_WIZARD_CANCEL, WizardEventHandler(Wizard::OnWizEvent));
-    this->Connect(wxID_ANY, wxWEAVER_EVT_WIZARD_FINISHED, WizardEventHandler(Wizard::OnWizEvent));
-    this->Connect(wxID_ANY, wxWEAVER_EVT_WIZARD_HELP, WizardEventHandler(Wizard::OnWizEvent));
+    this->Bind(wxEVT_WVR_WIZARD_PAGE_CHANGED, &Wizard::OnWizEvent, this);
+    this->Bind(wxEVT_WVR_WIZARD_PAGE_CHANGING, &Wizard::OnWizEvent, this);
+    this->Bind(wxEVT_WVR_WIZARD_CANCEL, &Wizard::OnWizEvent, this);
+    this->Bind(wxEVT_WVR_WIZARD_FINISHED, &Wizard::OnWizEvent, this);
+    this->Bind(wxEVT_WVR_WIZARD_HELP, &Wizard::OnWizEvent, this);
 }
 
 Wizard::~Wizard()
 {
-    m_btnHelp->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Wizard::OnHelp),
-                          nullptr, this);
-    m_btnPrev->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Wizard::OnBackOrNext),
-                          nullptr, this);
-    m_btnNext->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Wizard::OnBackOrNext),
-                          nullptr, this);
-    m_btnCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(Wizard::OnCancel),
-                            nullptr, this);
+    m_btnHelp->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &Wizard::OnHelp, this);
+    m_btnPrev->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &Wizard::OnBackOrNext, this);
+    m_btnNext->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &Wizard::OnBackOrNext, this);
+    m_btnCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &Wizard::OnCancel, this);
 
-    this->Disconnect(wxID_ANY, wxWEAVER_EVT_WIZARD_PAGE_CHANGED, WizardEventHandler(Wizard::OnWizEvent));
-    this->Disconnect(wxID_ANY, wxWEAVER_EVT_WIZARD_PAGE_CHANGING, WizardEventHandler(Wizard::OnWizEvent));
-    this->Disconnect(wxID_ANY, wxWEAVER_EVT_WIZARD_CANCEL, WizardEventHandler(Wizard::OnWizEvent));
-    this->Disconnect(wxID_ANY, wxWEAVER_EVT_WIZARD_FINISHED, WizardEventHandler(Wizard::OnWizEvent));
-    this->Disconnect(wxID_ANY, wxWEAVER_EVT_WIZARD_HELP, WizardEventHandler(Wizard::OnWizEvent));
+    this->Unbind(wxEVT_WVR_WIZARD_PAGE_CHANGED, &Wizard::OnWizEvent, this);
+    this->Unbind(wxEVT_WVR_WIZARD_PAGE_CHANGING, &Wizard::OnWizEvent, this);
+    this->Unbind(wxEVT_WVR_WIZARD_CANCEL, &Wizard::OnWizEvent, this);
+    this->Unbind(wxEVT_WVR_WIZARD_FINISHED, &Wizard::OnWizEvent, this);
+    this->Unbind(wxEVT_WVR_WIZARD_HELP, &Wizard::OnWizEvent, this);
 
     m_statbmp->SetBitmap(wxNullBitmap);
     m_bitmap = wxNullBitmap;
@@ -130,7 +122,7 @@ void Wizard::OnHelp(wxCommandEvent&)
         // Create and send the help event to the specific page handler
         // event data contains the active page so that context-sensitive
         // help is possible
-        WizardEvent eventHelp(wxWEAVER_EVT_WIZARD_HELP, GetId(), true, m_page);
+        WizardEvent eventHelp(wxEVT_WVR_WIZARD_HELP, GetId(), true, m_page);
         (void)m_page->GetEventHandler()->ProcessEvent(eventHelp);
     }
 }
@@ -170,13 +162,13 @@ void Wizard::OnBackOrNext(wxCommandEvent& event)
 
     SetSelection(pageIndex);
 
-    WizardEvent eventChanged(wxWEAVER_EVT_WIZARD_PAGE_CHANGED, GetId(), forward, m_page);
+    WizardEvent eventChanged(wxEVT_WVR_WIZARD_PAGE_CHANGED, GetId(), forward, m_page);
     m_page->GetEventHandler()->ProcessEvent(eventChanged);
 }
 
 void Wizard::OnCancel(wxCommandEvent&)
 {
-    WizardEvent eventCancel(wxWEAVER_EVT_WIZARD_CANCEL, GetId(), false, m_page);
+    WizardEvent eventCancel(wxEVT_WVR_WIZARD_CANCEL, GetId(), false, m_page);
     GetEventHandler()->ProcessEvent(eventCancel);
 }
 
@@ -185,7 +177,7 @@ void Wizard::OnWizEvent(WizardEvent& event)
     if (event.IsAllowed()) {
         wxEventType eventType = event.GetEventType();
 
-        if (eventType == wxWEAVER_EVT_WIZARD_PAGE_CHANGED) {
+        if (eventType == wxEVT_WVR_WIZARD_PAGE_CHANGED) {
             for (size_t i = 0; i < m_pages.GetCount(); ++i) {
                 m_pages.Item(i)->Hide();
             }
@@ -194,23 +186,23 @@ void Wizard::OnWizEvent(WizardEvent& event)
             Layout();
         }
 #if 0
-        else if ( eventType == wxWEAVER_EVT_WIZARD_PAGE_CHANGING )
+        else if ( eventType == wxEVT_WVR_WIZARD_PAGE_CHANGING )
         {
             wxLogDebug( wxT("Wizard Page changing.") );
         }
-        else if ( eventType == wxWEAVER_EVT_WIZARD_CANCEL )
+        else if ( eventType == wxEVT_WVR_WIZARD_CANCEL )
         {
             wxLogDebug( wxT("Wizard Cancel button was pressed.") );
         }
-        else if ( eventType == wxWEAVER_EVT_WIZARD_HELP )
+        else if ( eventType == wxEVT_WVR_WIZARD_HELP )
         {
             wxLogDebug( wxT("Wizard Help button was pressed.") );
         }
-        else if ( eventType == wxWEAVER_EVT_WIZARD_FINISHED )
+        else if ( eventType == wxEVT_WVR_WIZARD_FINISHED )
         {
             wxLogDebug( wxT("Wizard Finish button was pressed.") );
         }
-        else if ( eventType == wxWEAVER_EVT_WIZARD_PAGE_SHOWN )
+        else if ( eventType == wxEVT_WVR_WIZARD_PAGE_SHOWN )
         {
             wxLogDebug( wxT("Wizard Page shown.") );
         }

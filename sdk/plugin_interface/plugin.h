@@ -94,7 +94,7 @@ public:
         m_synMap.insert(SynMap::value_type(syn, name));
     }
 
-    IComponent* GetComponent(unsigned int idx) override
+    IComponent* GetComponent(size_t idx) override
     {
         if (idx < m_components.size())
             return m_components[idx].component;
@@ -102,7 +102,7 @@ public:
         return nullptr;
     }
 
-    wxString GetComponentName(unsigned int idx) override
+    wxString GetComponentName(size_t idx) override
     {
         if (idx < m_components.size())
             return m_components[idx].name;
@@ -110,7 +110,7 @@ public:
         return wxString();
     }
 
-    wxString GetMacroName(unsigned int idx) override
+    wxString GetMacroName(size_t idx) override
     {
         if (idx < m_macros.size())
             return m_macros[idx].name;
@@ -118,7 +118,7 @@ public:
         return wxString();
     }
 
-    int GetMacroValue(unsigned int idx) override
+    int GetMacroValue(size_t idx) override
     {
         if (idx < m_macros.size())
             return m_macros[idx].value;
@@ -126,7 +126,7 @@ public:
         return 0;
     }
 #if 0
-    wxString GetMacroSynonymous(unsigned int idx) override
+    wxString GetMacroSynonymous(size_t idx) override
     {
         if (idx < m_synonymous.size())
             return m_synonymous[idx].syn;
@@ -134,7 +134,7 @@ public:
         return wxString();
     }
 
-    wxString GetSynonymousName(unsigned int idx) override
+    wxString GetSynonymousName(size_t idx) override
     {
         if (idx < m_synonymous.size())
             return m_synonymous[idx].name;
