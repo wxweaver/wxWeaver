@@ -470,7 +470,7 @@ public:
 
         // choices
         wxArrayString choices = obj->GetPropertyAsArrayString("choices");
-        for (unsigned int i = 0; i < choices.GetCount(); i++)
+        for (size_t i = 0; i < choices.GetCount(); i++)
             comboBox->Append(choices[i]);
 
         int sel = obj->GetPropertyAsInteger("selection");
@@ -522,7 +522,7 @@ public:
 
         // choices
         wxArrayString choices = obj->GetPropertyAsArrayString("choices");
-        for (unsigned int i = 0; i < choices.GetCount(); i++) {
+        for (size_t i = 0; i < choices.GetCount(); i++) {
             wxImage img(choices[i].BeforeFirst(wxChar(58)));
             bmpComboBox->Append(choices[i].AfterFirst(wxChar(58)), wxBitmap(img));
         }
@@ -1012,7 +1012,7 @@ public:
         if (obj->GetPropertyAsInteger("checked") && (kind == wxITEM_RADIO || kind == wxITEM_CHECK)) {
             xrc.AddProperty("checked", "checked", XRC_TYPE_BOOL);
         }
-        if (obj->GetPropertyAsInteger("enabled") == 0)
+        if (!obj->GetPropertyAsInteger("enabled"))
             xrc.AddProperty("enabled", "enabled", XRC_TYPE_BOOL);
 
         switch (kind) {
@@ -1159,7 +1159,7 @@ wxMenu* AuiToolBar::GetMenuFromObject(IObject* menuObj)
 {
     int lastMenuId = wxID_HIGHEST + 1;
     wxMenu* menu = new wxMenu();
-    for (unsigned int j = 0; j < menuObj->GetChildCount(); j++) {
+    for (size_t j = 0; j < menuObj->GetChildCount(); j++) {
         IObject* menuItem = menuObj->GetChildPtr(j);
         if (menuItem->GetObjectTypeName() == "submenu") {
             menu->Append(
@@ -1315,7 +1315,7 @@ public:
                 if (childObj->GetPropertyAsInteger("context_menu") == 1
                     && !itm->HasDropDown())
                     auiToolBar->SetToolDropDown(itm->GetId(), true);
-                else if (childObj->GetPropertyAsInteger("context_menu") == 0
+                else if (!childObj->GetPropertyAsInteger("context_menu")
                          && itm->HasDropDown())
                     auiToolBar->SetToolDropDown(itm->GetId(), false);
             } else if ("toolSeparator" == childObj->GetClassName()) {
@@ -1438,7 +1438,7 @@ public:
 
         // TODO: is "new" necessary?
         wxString* strings = new wxString[choices.GetCount()];
-        for (unsigned int i = 0; i < choices.GetCount(); i++)
+        for (size_t i = 0; i < choices.GetCount(); i++)
             strings[i] = choices[i];
 
         wxChoice* choice = new wxChoice(

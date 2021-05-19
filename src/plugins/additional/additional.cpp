@@ -2474,7 +2474,7 @@ void ComponentEvtHandler::OnRibbonBarPageChanged(wxRibbonBarEvent& event)
         if (!iChild)
             return;
 
-        if (int(i) == selPage && iChild->GetPropertyAsInteger("select") == 0) {
+        if (int(i) == selPage && !iChild->GetPropertyAsInteger("select")) {
             m_manager->ModifyProperty(wxChild, "select", "1", false);
         } else if (int(i) != selPage && iChild->GetPropertyAsInteger("select")) {
             m_manager->ModifyProperty(wxChild, "select", "0", false);

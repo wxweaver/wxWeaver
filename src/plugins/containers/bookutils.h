@@ -130,6 +130,7 @@ void OnCreated(wxObject* wxobject, wxWindow* wxparent,
 template <class T>
 void OnSelected(wxObject* wxobject, IManager* manager)
 {
+    // TODO: suspicious first page check and or condition
     wxObject* page = manager->GetChild(wxobject, 0); // Get actual page, first child
     T* book = wxDynamicCast(manager->GetParent(wxobject), T);
     if (!book || !page)

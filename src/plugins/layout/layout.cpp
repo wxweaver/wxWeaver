@@ -398,7 +398,7 @@ private:
                 sizeritem->GetPropertyAsInteger("border"), nullptr);
         } else {
             wxLogError(
-                "The GBSizerItem component's child is not a wxWindow"
+                "The GBSizerItem component's child is not a wxWindow "
                 "or a wxSizer or a Spacer: this should not be possible!");
             return nullptr;
         }
@@ -683,8 +683,6 @@ public:
         return filter.GetXfbObject();
     }
 };
-
-///////////////////////////////////////////////////////////////////////////////
 
 BEGIN_LIBRARY()
 ABSTRACT_COMPONENT("spacer", SpacerComponent)
