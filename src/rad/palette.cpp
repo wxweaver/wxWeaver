@@ -95,7 +95,7 @@ void Palette::PopulateToolbar(PObjectPackage pkg, wxAuiToolBar* toolbar)
 
 void Palette::SaveSettings()
 {
-    auto* config = wxConfigBase::Get();
+    wxConfigBase* config = wxConfigBase::Get();
     wxString pageOrder;
 
     for (size_t i = 0; i < m_notebook->GetPageCount(); ++i) {
@@ -104,7 +104,7 @@ void Palette::SaveSettings()
 
         pageOrder.append(m_notebook->GetPageText(i));
     }
-    config->Write("/mainframe/palette/PluginTabsOrder", pageOrder);
+    config->Write("/MainWindow/Palette/PluginTabsOrder", pageOrder);
 }
 
 void Palette::Create()
@@ -117,7 +117,7 @@ void Palette::Create()
     std::vector<std::pair<wxString, PObjectPackage>> pages;
     pages.reserve(pkg_count);
 
-    LogDebug(wxT("[Palette] Pages %d"), pkg_count);
+    LogDebug("[Palette] Pages %d", pkg_count);
 
     // Fill lookup map of packages
     for (size_t i = 0; i < pkg_count; ++i) {
@@ -126,11 +126,11 @@ void Palette::Create()
     }
 
     // Read the page order from settings and build the list of pages from it
-    auto* config = wxConfigBase::Get();
+    wxConfigBase* config = wxConfigBase::Get();
     wxStringTokenizer pageOrder(
         config->Read(
-            "/mainframe/palette/PluginTabsOrder",
-            "Common,Additional,Data,Containers,Bars,Layout,Forms,Ribbon"),
+            "/MainWindow/Palette/PluginTabsOrder",
+            "Forms,Layout,Common,Additional,Containers,Bars,Data,Ribbon"),
         ",");
 
     while (pageOrder.HasMoreTokens()) {

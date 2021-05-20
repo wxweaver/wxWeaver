@@ -132,7 +132,7 @@ void ObjectInspector::SaveSettings()
 {
     // Save Layout
     wxConfigBase* config = wxConfigBase::Get();
-    config->Write(wxT("/mainframe/propertyeditor/DescBoxHeight"), m_pg->GetDescBoxHeight());
+    config->Write("/MainWindow/PropertyEditor/DescBoxHeight", m_pg->GetDescBoxHeight());
 }
 
 void ObjectInspector::Create(bool force)
@@ -993,7 +993,7 @@ wxPropertyGridManager* ObjectInspector::CreatePropertyGridManager(wxWindow* pare
     int descBoxHeight;
     wxConfigBase* config = wxConfigBase::Get();
     config->Read(
-        "/mainframe/propertyeditor/DescBoxHeight", &descBoxHeight, defaultDescBoxHeight);
+        "/MainWindow/PropertyEditor/DescBoxHeight", &descBoxHeight, defaultDescBoxHeight);
 
     if (descBoxHeight == -1)
         descBoxHeight = defaultDescBoxHeight;

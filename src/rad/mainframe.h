@@ -43,12 +43,12 @@ class Palette;
 class VisualEditor;
 
 class wxLog;
+class wxPanel;
 
 // TODO: Make GUI configurable in the settings dialog
 /** wxWeaver GUI styles.
  */
 enum {
-    wxWEAVER_GUI_DEFAULT,
     wxWEAVER_GUI_DOCKABLE,
     wxWEAVER_GUI_CLASSIC,
     wxWEAVER_GUI_WIDE
@@ -56,13 +56,13 @@ enum {
 
 class MainFrame : public wxFrame {
 public:
-    MainFrame(wxWindow* parent, int id = wxID_ANY,
+    MainFrame(wxWindow* parent = nullptr, int id = wxID_ANY,
               int style = wxWEAVER_GUI_DOCKABLE, wxPoint pos = wxDefaultPosition,
-              wxSize size = wxSize(1000, 800));
+              wxSize size = wxDefaultSize);
     ~MainFrame() override;
 
-    void LoadSettings(const wxString& name);
-    void SaveSettings(const wxString& name);
+    void LoadSettings(const wxString& name = "/MainWindow");
+    void SaveSettings(const wxString& name = "/MainWindow");
 
     void OnPreferences(wxCommandEvent&);
 
@@ -149,6 +149,7 @@ private:
     XrcPanel* m_xrc;
 
     wxAuiManager m_mgr;
+    wxPanel* m_panel;
     wxAuiNotebook* m_notebook;
     wxEvtHandler* m_focusKillEvtHandler; // Used to force propgrid to save on lost focus
     wxFindReplaceData m_findData;

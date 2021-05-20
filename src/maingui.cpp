@@ -208,20 +208,7 @@ int MyApp::OnRun()
     m_frame = nullptr;
     wxYield();
 
-    // Read size and position from config file
-    wxConfigBase* config = wxConfigBase::Get();
-    config->SetPath("/mainframe");
-    int x, y, w, h;
-    x = y = w = h = -1;
-    config->Read("PosX", &x);
-    config->Read("PosY", &y);
-    config->Read("SizeW", &w);
-    config->Read("SizeH", &h);
-
-    long style = config->Read("Style", wxWEAVER_GUI_DEFAULT);
-    config->SetPath("/");
-
-    m_frame = new MainFrame(nullptr, wxID_ANY, (int)style, wxPoint(x, y), wxSize(w, h));
+    m_frame = new MainFrame();
     if (!justGenerate) {
         m_frame->Show();
         SetTopWindow(m_frame);

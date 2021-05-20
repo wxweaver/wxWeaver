@@ -44,6 +44,7 @@
 #include "rad/debugwindow.h"
 
 #include <wx/config.h>
+#include <wx/panel.h>
 
 namespace wxw {
 enum {
@@ -97,7 +98,7 @@ public:
             }
             windowWithFocus = windowWithFocus->GetParent();
         }
-        // Add the event to the mainframe's original handler
+        // Add the event to the main window's original handler
         // Add as pending so propgrid saves the property before the event is processed
         GetNextHandler()->AddPendingEvent(event);
     }
@@ -105,6 +106,13 @@ public:
 
 MainFrame::MainFrame(wxWindow* parent, int id, int style, wxPoint pos, wxSize size)
     : wxFrame(parent, id, wxEmptyString, pos, size, wxDEFAULT_FRAME_STYLE)
+    , m_python(nullptr)
+    , m_cpp(nullptr)
+    , m_lua(nullptr)
+    , m_php(nullptr)
+    , m_xrc(nullptr)
+    , m_panel(nullptr)
+    , m_focusKillEvtHandler(new FocusKillerEvtHandler)
     , m_findData(wxFR_DOWN)
     , m_findDialog(nullptr)
     /*
@@ -138,12 +146,6 @@ MainFrame::MainFrame(wxWindow* parent, int id, int style, wxPoint pos, wxSize si
     int widths[3] = { -1, -1, 300 };
     SetStatusWidths(sizeof(widths) / sizeof(int), widths);
     CreateWeaverToolBar();
-
-    m_cpp = nullptr;
-    m_lua = nullptr;
-    m_php = nullptr;
-    m_xrc = nullptr;
-    m_python = nullptr;
 
     switch (style) {
     case wxWEAVER_GUI_CLASSIC:
@@ -180,18 +182,16 @@ MainFrame::MainFrame(wxWindow* parent, int id, int style, wxPoint pos, wxSize si
         CreateWideGui();
         break;
 
-    case wxWEAVER_GUI_DEFAULT:
     case wxWEAVER_GUI_DOCKABLE:
     default:
         CreateDockableGui();
     }
-    LoadSettings("mainframe");
+    LoadSettings();
     Layout();
 
     AppData()->AddHandler(this->GetEventHandler());
     wxTheApp->SetTopWindow(this);
 
-    m_focusKillEvtHandler = new FocusKillerEvtHandler;
     PushEventHandler(m_focusKillEvtHandler);
 
     // So splitter windows can be restored correctly
@@ -311,40 +311,48 @@ MainFrame::~MainFrame()
 
 void MainFrame::LoadSettings(const wxString& name)
 {
-    m_currentDir = "./projects";
     wxConfigBase* config = wxConfigBase::Get();
     config->SetPath(name);
 
     wxString perspective;
+    wxSize bestSize = GetBestSize();
     bool maximized, iconized;
+    int x, y, w, h;
 
+    // disabled in default due to possible bug(?) in wxMSW
+    config->Read("AutoSash", &m_autoSash, false);
+#if 0
+    config->Read("LeftSplitterWidth", &m_leftSplitterWidth, 300);
+    config->Read("RightSplitterWidth", &m_rightSplitterWidth, -300);
+    config->Read("RightSplitterType", &m_rightSplitterType, "editor");
+#endif
+    config->Read("CurrentDirectory", &m_currentDir, "./projects");
+    config->Read("RecentFile0", &m_recentProjects[0]);
+    config->Read("RecentFile1", &m_recentProjects[1]);
+    config->Read("RecentFile2", &m_recentProjects[2]);
+    config->Read("RecentFile3", &m_recentProjects[3]);
+    config->Read("Style", &m_style, wxWEAVER_GUI_DOCKABLE);
     config->Read("Perspective", &perspective);
-    config->Read("IsMaximized", &maximized, true);
+    config->Read("IsMaximized", &maximized, false);
     config->Read("IsIconized", &iconized, false);
+    config->Read("Left", &x, 0);
+    config->Read("Top", &y, 0);
+    config->Read("Width", &w, bestSize.GetWidth());
+    config->Read("Height", &h, bestSize.GetHeight());
 
-    if (m_style == wxWEAVER_GUI_DOCKABLE) {
-        if (!perspective.empty())
-            m_mgr.LoadPerspective(perspective);
+    SetSize(x, y, w, h);
 
-        m_mgr.Update();
-    }
     if (maximized) {
         Maximize(maximized);
     } else if (iconized) {
         Iconize(iconized);
     }
-    // disabled in default due to possible bug(?) in wxMSW
-    config->Read("AutoSash", &m_autoSash, false);
-    config->Read("LeftSplitterWidth", &m_leftSplitterWidth, 300);
-    config->Read("RightSplitterWidth", &m_rightSplitterWidth, -300);
-    config->Read("RightSplitterType", &m_rightSplitterType, "editor");
-    config->Read("CurrentDirectory", &m_currentDir);
-    config->Read("RecentFile0", &m_recentProjects[0]);
-    config->Read("RecentFile1", &m_recentProjects[1]);
-    config->Read("RecentFile2", &m_recentProjects[2]);
-    config->Read("RecentFile3", &m_recentProjects[3]);
-    config->Read("Style", &m_style, wxWEAVER_GUI_DEFAULT);
-    config->SetPath("..");
+    if (m_style == wxWEAVER_GUI_DOCKABLE) {
+        if (!perspective.empty()) {
+            m_mgr.LoadPerspective(perspective);
+            m_mgr.Update();
+        }
+    }
     UpdateRecentProjects();
 }
 
@@ -364,10 +372,10 @@ void MainFrame::SaveSettings(const wxString& name)
         config->Write("Perspective", perspective);
     }
     if (!isMaximized) {
-        config->Write("PosX", isIconized ? -1 : GetPosition().x);
-        config->Write("PosY", isIconized ? -1 : GetPosition().y);
-        config->Write("SizeW", isIconized ? -1 : GetSize().GetWidth());
-        config->Write("SizeH", isIconized ? -1 : GetSize().GetHeight());
+        config->Write("Left", isIconized ? -1 : GetPosition().x);
+        config->Write("Top", isIconized ? -1 : GetPosition().y);
+        config->Write("Width", isIconized ? -1 : GetSize().GetWidth());
+        config->Write("Height", isIconized ? -1 : GetSize().GetHeight());
     }
     config->Write("IsMaximized", isMaximized);
     config->Write("IsIconized", isIconized);
@@ -406,7 +414,6 @@ void MainFrame::SaveSettings(const wxString& name)
             break;
         }
     }
-    config->SetPath("..");
 }
 
 void MainFrame::OnPreferences(wxCommandEvent&)
@@ -587,7 +594,7 @@ void MainFrame::OnClose(wxCloseEvent& event)
     if (!SaveWarning())
         return;
 
-    SaveSettings("mainframe");
+    SaveSettings();
 
     if (m_style != wxWEAVER_GUI_DOCKABLE) {
         m_rightSplitter->Unbind(
@@ -631,9 +638,6 @@ void MainFrame::OnObjectSelected(wxWeaverObjectEvent& event)
 
     // resize sash position if necessary
     if (m_autoSash) {
-        wxSize panelSize;
-        int sashPos;
-
         if (m_style == wxWEAVER_GUI_WIDE) {
             switch (m_pageSelection) {
             case 1: // CPP panel
@@ -659,8 +663,8 @@ void MainFrame::OnObjectSelected(wxWeaverObjectEvent& event)
                         || obj->GetObjectTypeName() == "wizard"
                         || obj->GetObjectTypeName() == "menubar_form"
                         || obj->GetObjectTypeName() == "toolbar_form") {
-                        sashPos = m_rightSplitter->GetSashPosition();
-                        panelSize = m_visualEdit->GetVirtualSize();
+                        int sashPos = m_rightSplitter->GetSashPosition();
+                        wxSize panelSize = m_visualEdit->GetVirtualSize();
                         LogDebug(
                             "MainFrame::OnObjectSelected > sash pos = %d", sashPos);
                         LogDebug(
@@ -1509,6 +1513,8 @@ wxWindow* MainFrame::CreateObjectInspector(wxWindow* parent)
 
 void MainFrame::CreateWideGui()
 {
+    m_style = wxWEAVER_GUI_WIDE;
+
     // MainFrame only contains m_leftSplitter window
     m_leftSplitter
         = new wxSplitterWindow(
@@ -1517,7 +1523,7 @@ void MainFrame::CreateWideGui()
     wxWindow* objectTree
         = Title::CreateTitle(CreateObjectTree(m_leftSplitter), _("Project"));
 
-    // panel1 contains Palette and splitter2 (m_rightSplitter)
+    // panel1 contains palette and splitter2 (m_rightSplitter)
     wxPanel* panel1 = new wxPanel(m_leftSplitter, wxID_ANY);
 
     wxWindow* palette = Title::CreateTitle(
@@ -1558,12 +1564,13 @@ void MainFrame::CreateWideGui()
     m_rightSplitter->SetSashGravity(1);
     m_rightSplitter->SetMinimumPaneSize(2);
 
-    m_style = wxWEAVER_GUI_WIDE;
     SetMinSize(wxSize(700, 380));
 }
 
 void MainFrame::CreateClassicGui()
 {
+    m_style = wxWEAVER_GUI_CLASSIC;
+
     // Give ID to left splitter
     m_leftSplitter = new wxSplitterWindow(
         this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_LIVE_UPDATE);
@@ -1610,46 +1617,52 @@ void MainFrame::CreateClassicGui()
 
 void MainFrame::CreateDockableGui()
 {
-    wxWindow* projectTree = CreateObjectTree(this);
-    wxWindow* propertyEditor = CreateObjectInspector(this);
-    wxWindow* palette = CreateComponentPalette(this);
-    wxWindow* designer = CreateDesignerWindow(this);
-
-    m_mgr.SetManagedWindow(this);
+    m_style = wxWEAVER_GUI_DOCKABLE;
+    m_panel = new wxPanel(this, wxID_ANY);
+    m_mgr.SetFlags(wxAUI_MGR_DEFAULT | wxAUI_MGR_LIVE_RESIZE); // TODO: Set in preferences
+    m_mgr.SetManagedWindow(m_panel);
     m_mgr.SetArtProvider(new DockArt());
 
-    // clang-format off
-    m_mgr.AddPane(palette, wxAuiPaneInfo().Top()//.DockFixed(true)
-                  .Name("palette").Caption(_("Widgets"))
-                  .CloseButton(false)
-                  .LeftDockable(false).RightDockable(false)
-                  .MinSize(-1, palette->GetBestSize().GetHeight())
-    );
-    m_mgr.AddPane(projectTree, wxAuiPaneInfo().Left()
-                  .Name("tree").Caption(_("Project"))
-                  .CloseButton(false).MaximizeButton(true)
-                  .TopDockable(false).BottomDockable(false)
-                  .BestSize(300, 400).Layer(1)
-    );
-    m_mgr.AddPane(designer, wxAuiPaneInfo().Center().DockFixed(true)
-                  .Name("editor").Caption(_("Editor"))
-                  .CloseButton(false).MaximizeButton(true)
+    wxWindow* palette = CreateComponentPalette(m_panel);
+    wxWindow* treeView = CreateObjectTree(m_panel);
+    wxWindow* designer = CreateDesignerWindow(m_panel);
+    wxWindow* propertyEditor = CreateObjectInspector(m_panel);
 
-    );
-    m_mgr.AddPane(propertyEditor, wxAuiPaneInfo().Right()
-                  .Name("propertyeditor").Caption(_("Properties"))
-                  .CloseButton(false).MaximizeButton(true)
-                  .BestSize(300, 400)
-    );
+    int paletteHeight = palette->GetBestSize().GetHeight();
+
+    // clang-format off
 #ifdef wxWEAVER_DEBUG
-        wxWindow* dbgWnd = (wxWindow*)AppData()->GetDebugWindow(this);
+        wxWindow* dbgWnd = (wxWindow*)AppData()->GetDebugWindow(m_panel);
         m_mgr.AddPane(dbgWnd, wxAuiPaneInfo().Bottom()
-                      .Name("logwindow").Caption(_("Logging"))
-                      .CloseButton(false).MaximizeButton(true)
-                      .LeftDockable(false).RightDockable(false)
+                    .Name("logwindow").Caption(_("Logger"))
+                    .CloseButton(false).MaximizeButton(true)
+                    .LeftDockable(false).RightDockable(false)
+                    .MinSize(-1, 120).FloatingSize(300, 120)
     );
 #endif
+    m_mgr.AddPane(designer, wxAuiPaneInfo().Center().DockFixed(true)
+                    .Name("editor").Caption(_("Editor"))
+                    .CloseButton(false).MaximizeButton(true)
+    );
+    m_mgr.AddPane(palette, wxAuiPaneInfo().Top()//.DockFixed(true)
+                    .Name("palette").Caption(_("Widgets"))
+                    .CloseButton(false)
+                    .LeftDockable(false).RightDockable(false)
+                    .MinSize(-1, paletteHeight).FloatingSize(300, paletteHeight)
+    );
+    m_mgr.AddPane(treeView, wxAuiPaneInfo().Left()
+                    .Name("tree").Caption(_("Project"))
+                    .CloseButton(false).MaximizeButton(true)
+                    .TopDockable(false).BottomDockable(false)
+                    .MinSize(150,-1).FloatingSize(150, 300)
+    );
+    m_mgr.AddPane(propertyEditor, wxAuiPaneInfo().Right()
+                    .Name("propertyeditor").Caption(_("Properties"))
+                    .CloseButton(false).MaximizeButton(true)
+                    .MinSize(150,-1).FloatingSize(150, 300)
+    );
     // clang-format on
+    m_mgr.Update();
 }
 
 void MainFrame::OnIdle(wxIdleEvent&)

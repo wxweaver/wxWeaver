@@ -45,7 +45,7 @@ AnnoyingDialog::AnnoyingDialog(const wxString& caption, const wxString& message,
 {
     wxConfigBase* config = wxConfigBase::Get();
     int defRet;
-    if (config->Read(wxT("annoyingdialog/") + caption, &defRet)) {
+    if (config->Read("AnnoyingDialog/" + caption, &defRet)) {
         if (defRet != wxID_CANCEL) {
             m_dontAnnoy = true;
             m_defRet = defRet;
