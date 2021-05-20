@@ -1,10 +1,17 @@
 # TODO
 
+## Linux
+
+- Handle own project files, adding the related mimetype, including icons.
+- Debian and other distro packages on OBS.
+
 ## macOS
 
+- Replace `postbuild.sh` with a CMake script
 - Fix the build, see:
   https://github.com/wxFormBuilder/wxFormBuilder/issues/247
   https://github.com/wxFormBuilder/wxFormBuilder/issues/665
+  https://github.com/wxFormBuilder/wxFormBuilder/issues/677
 
 ## Windows
 
@@ -12,23 +19,23 @@
 
 ## Misc
 
-- Handle own project files, adding the related mimetype.
 - CI stuff.
 - Handle API and XRC based on wx version also in plugins.
+- Add removed names to copyright headers.
+- Use snake case instead camel case in some plugins properties
+  (toolSeparator -> tool_separator)
+- Separated `ticpp` and `lua` static libraries
 
 ## Controls
 
 - Check the controls returned by plugins with `OnCreated()` and its log errors.
-- Try to replace static event tables with `Bind()`.
-  Note that using `clang-format` with `wx{BEGIN|END}_EVENT_TABLE` screws up the
-  indentation of next elements for an unknown reason, it doesn't happens with
-  the old deprecated versions.
+
+- Replace static event tables and `Connect()` with `Bind()`.
+
 - Check components with:
     - no `public` access specifier
     - `CleanUp()` disabled
     - exceptions "handling"
-
-- Replace static event tables with dynamic ones.
 
 - wxWizard
     - Add a wxWizard 2-steps creation (with Create() function) in Python code to add
@@ -42,3 +49,4 @@
 - wxTreebook and wxToolbook
 - wxWebView
 - wxImageList
+- Make a common base class for codeeditor panels
