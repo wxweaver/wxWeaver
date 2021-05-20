@@ -22,20 +22,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 <codegen language="C++">
 
 	<templates class="wxWindow">
-		<template name="toolbar_add">#parent $name->AddControl( $name );</template>
+        <template name="toolbar_add">#parent $name->AddControl($name);</template>
 	</templates>
 
 	<templates class="wxStatusBar">
 		<template name="declaration">#class* $name;</template>
 		<template name="include">@#include &lt;wx/statusbr.h&gt;</template>
-		<template name="construction">$name = #wxparent $name->CreateStatusBar( $fields, $style #ifnotnull $window_style @{ |$window_style @}, $id #ifnotnull $window_name @{, $window_name @} );</template>
+        <template name="construction">$name = #wxparent $name->CreateStatusBar($fields, $style #ifnotnull $window_style @{ |$window_style @}, $id #ifnotnull $window_name @{, $window_name @});</template>
 	</templates>
 
 	<templates class="wxMenuBar">
 		<template name="declaration">#class* $name;</template>
-		<template name="construction">$name = new #class( $style #ifnotnull $window_style @{ |$window_style @} );</template>
+        <template name="construction">$name = new #class($style #ifnotnull $window_style @{ |$window_style @});</template>
 		<template name="include">@#include &lt;wx/menu.h&gt;</template>
-		<template name="after_addchild">#wxparent $name->SetMenuBar( $name );</template>
+        <template name="after_addchild">#wxparent $name->SetMenuBar($name);</template>
 	</templates>
 
 	<templates class="wxMenu">
@@ -59,19 +59,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			@{ #ifequal #parent $context_menu "1"
 			@{
 				#ifparenttypeequal "widget || container || expanded_widget || wizardpagesimple || treelistctrl || dataviewctrl || dataviewtreectrl || dataviewlistctrl || propgrid || propgridman"
-				@{ #parent $name->Connect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( #form $name::#parent $name #append OnContextMenu ), nullptr, this ); @}
+                @{ #parent $name->Connect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(#form $name::#parent $name #append OnContextMenu), nullptr, this); @}
 				#ifparenttypeequal "form || wizard"
-				@{ #wxparent $name->Connect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( #form $name::#parent $name #append OnContextMenu ), nullptr, this ); @}
+                @{ #wxparent $name->Connect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(#form $name::#parent $name #append OnContextMenu), nullptr, this); @}
 				#ifparenttypeequal "tool"
-				@{ #wxparent $name->Connect( #parent $name->GetId(), wxEVT_COMMAND_AUITOOLBAR_TOOL_DROPDOWN, wxAuiToolBarEventHandler( #form $name::#parent $name #append OnDropDownMenu ), nullptr, this ); @}
+                @{ #wxparent $name->Connect(#parent $name->GetId(), wxEVT_COMMAND_AUITOOLBAR_TOOL_DROPDOWN, wxAuiToolBarEventHandler(#form $name::#parent $name #append OnDropDownMenu), nullptr, this); @}
 			@}@}
 			#ifparenttypeequal "menubar"
 			@{
-				#parent $name->Append( $name, $label );
+                #parent $name->Append($name, $label);
 			@}
 			#ifparenttypeequal "menubar_form"
 			@{
-				Append( $name, $label );
+                Append($name, $label);
 			@}
 		</template>
 		<template name="generated_event_handlers">
@@ -80,30 +80,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			@{
 				#ifparenttypeequal "widget || container || expanded_widget || wizardpagesimple || treelistctrl || dataviewctrl || dataviewtreectrl || dataviewlistctrl || propgrid || propgridman"
 				@{
-					#nl void #parent $name #append OnContextMenu( wxMouseEvent &amp;event )
+                    #nl void #parent $name #append OnContextMenu(wxMouseEvent &amp;event)
 					#nl { #indent
-						#nl #parent $name->PopupMenu( $name, event.GetPosition() ); #unindent
+                        #nl #parent $name->PopupMenu($name, event.GetPosition()); #unindent
 					#nl }
 				@}
 				#ifparenttypeequal "form || wizard"
 				@{
-					#nl void #parent $name #append OnContextMenu( wxMouseEvent &amp;event )
+                    #nl void #parent $name #append OnContextMenu(wxMouseEvent &amp;event)
 					#nl { #indent
-						#nl #wxparent $name->PopupMenu( $name, event.GetPosition() ); #unindent
+                        #nl #wxparent $name->PopupMenu($name, event.GetPosition()); #unindent
 					#nl }
 				@}
 				#ifparenttypeequal "tool"
 				@{
-					#nl void #parent $name #append OnDropDownMenu( wxAuiToolBarEvent &amp;event )
+                    #nl void #parent $name #append OnDropDownMenu(wxAuiToolBarEvent &amp;event)
 					#nl { #indent
-						#nl if ( event.IsDropDownClicked() )
+                        #nl if (event.IsDropDownClicked())
 						#nl { #indent
-							#nl #wxparent $name->SetToolSticky( event.GetId(), true );
-							#nl wxRect rect = #wxparent $name->GetToolRect( event.GetId() );
-							#nl wxPoint pt = #wxparent $name->ClientToScreen( rect.GetBottomLeft() );
-							#nl pt = ScreenToClient( pt );
-							#nl #wxparent $name->PopupMenu( $name, pt );
-							#nl #wxparent $name->SetToolSticky( event.GetId(), false ); #unindent
+                            #nl #wxparent $name->SetToolSticky(event.GetId(), true);
+                            #nl wxRect rect = #wxparent $name->GetToolRect(event.GetId());
+                            #nl wxPoint pt = #wxparent $name->ClientToScreen(rect.GetBottomLeft());
+                            #nl pt = ScreenToClient(pt);
+                            #nl #wxparent $name->PopupMenu($name, pt);
+                            #nl #wxparent $name->SetToolSticky(event.GetId(), false); #unindent
 						#nl } #unindent
 					#nl }
 				@}
@@ -115,24 +115,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 		<template name="declaration">wxMenu* $name;</template>
 		<template name="construction">
 			$name = new wxMenu(); #nl
-			wxMenuItem* $name #append Item = new wxMenuItem( #parent $name, wxID_ANY, $label, wxEmptyString, wxITEM_NORMAL, $name );
+            wxMenuItem* $name #append Item = new wxMenuItem(#parent $name, wxID_ANY, $label, wxEmptyString, wxITEM_NORMAL, $name);
 		</template>
 		<template name="settings">
 			#ifnotnull $bitmap
 			@{
-				@#if (defined( __WXMSW__ ) || defined( __WXGTK__ ) || defined( __WXOSX__ )) #nl
-				$name #append Item->SetBitmap( $bitmap ); #nl
+                @#if (defined(__WXMSW__) || defined(__WXGTK__) || defined(__WXOSX__)) #nl
+                $name #append Item->SetBitmap($bitmap); #nl
 				@#endif #nl
 			@}
 		</template>
 		<template name="include">@#include &lt;wx/menu.h&gt;</template>
-		<template name="after_addchild">#parent $name->Append( $name #append Item );</template>
+        <template name="after_addchild">#parent $name->Append($name #append Item);</template>
 	</templates>
 
 	<templates class="wxMenuItem">
 		<template name="declaration">wxMenuItem* $name;</template>
 		<template name="construction">
-			$name = new wxMenuItem( #parent $name, $id, wxString( $label ) #ifnotnull $shortcut @{ + wxT('\t') + $shortcut @}, $help, $kind );
+            $name = new wxMenuItem(#parent $name, $id, wxString($label) #ifnotnull $shortcut @{ + '\t' + $shortcut @}, $help, $kind);
 		</template>
 		<template name="settings">
 			#ifnotequal $kind "wxITEM_RADIO"
@@ -140,9 +140,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			#ifnotnull $bitmap
 			@{
 				@#ifdef __WXMSW__ #nl
-				$name->SetBitmaps( $bitmap #ifnotnull $unchecked_bitmap @{, $unchecked_bitmap @} ); #nl
-				@#elif (defined( __WXGTK__ ) || defined( __WXOSX__ )) #nl
-				$name->SetBitmap( $bitmap ); #nl
+                $name->SetBitmaps($bitmap #ifnotnull $unchecked_bitmap @{, $unchecked_bitmap @}); #nl
+                @#elif (defined(__WXGTK__) || defined(__WXOSX__)) #nl
+                $name->SetBitmap($bitmap); #nl
 				@#endif #nl
 			@}
 			#ifnull $bitmap
@@ -150,32 +150,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			#ifnotnull $unchecked_bitmap
 			@{
 				@#ifdef __WXMSW__ #nl
-				$name->SetBitmaps( wxNullBitmap, $unchecked_bitmap ); #nl
+                $name->SetBitmaps(wxNullBitmap, $unchecked_bitmap); #nl
 				@#endif #nl
 			@}
 			@}
 			@}
-			#parent $name->Append( $name ); #nl
+            #parent $name->Append($name); #nl
 			#ifequal $enabled "0"
-				@{$name->Enable( $enabled ); #nl @}
+                @{$name->Enable($enabled); #nl @}
 			#ifequal $kind "wxITEM_CHECK"
 			@{
 				#ifequal $checked "1"
-				@{ $name->Check( $checked ); #nl @}
+                @{ $name->Check($checked); #nl @}
 			@}
 
 			#ifequal $kind "wxITEM_RADIO"
 			@{
 				#ifequal $checked "1"
-				@{ $name->Check( $checked ); #nl @}
+                @{ $name->Check($checked); #nl @}
 			@}
 		</template>
 		<template name="include">@#include &lt;wx/menu.h&gt;</template>
-		<template name="evt_entry_OnMenuSelection">EVT_MENU( $id, #handler )</template>
+        <template name="evt_entry_OnMenuSelection">EVT_MENU($id, #handler)</template>
 		<template name="evt_connect_OnMenuSelection">#parent $name->Bind(wxEVT_COMMAND_MENU_SELECTED, #handler, this, $name->GetId());</template>
-		<template name="evt_entry_OnUpdateUI">EVT_UPDATE_UI( $id, #handler )</template>
-		<template name="evt_connect_OnUpdateUI">this->Connect( $name->GetId(), wxEVT_UPDATE_UI, #handler );</template>
-		<template name="evt_disconnect_OnUpdateUI">this->Disconnect( $id, wxEVT_UPDATE_UI, #handler );</template>
+        <template name="evt_entry_OnUpdateUI">EVT_UPDATE_UI($id, #handler)</template>
+        <template name="evt_connect_OnUpdateUI">this->Connect($name->GetId(), wxEVT_UPDATE_UI, #handler);</template>
+        <template name="evt_disconnect_OnUpdateUI">this->Disconnect($id, wxEVT_UPDATE_UI, #handler);</template>
 	</templates>
 
 	<templates class="separator">
@@ -195,37 +195,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			@{
 				#ifequal #parent $aui_managed "1"
 				@{
-					$name = new #class( #wxparent $name, $id, $pos, $size, $style #ifnotnull $window_style @{ |$window_style @} #ifnotnull $window_name @{, $window_name @} );
+                    $name = new #class(#wxparent $name, $id, $pos, $size, $style #ifnotnull $window_style @{ |$window_style @} #ifnotnull $window_name @{, $window_name @});
 				@}
 				#ifequal #parent $aui_managed "0"
 				@{
-					$name = #wxparent $name->CreateToolBar( $style #ifnotnull $window_style @{ |$window_style @}, $id #ifnotnull $window_name @{, $window_name @} );
+                    $name = #wxparent $name->CreateToolBar($style #ifnotnull $window_style @{ |$window_style @}, $id #ifnotnull $window_name @{, $window_name @});
 				@}
 			@}
 			#ifparenttypeequal "sizeritem"
 			@{
-				$name = new #class( #wxparent $name, $id, $pos, $size, $style #ifnotnull $window_style @{ |$window_style @} #ifnotnull $window_name @{, $window_name @} );
+                $name = new #class(#wxparent $name, $id, $pos, $size, $style #ifnotnull $window_style @{ |$window_style @} #ifnotnull $window_name @{, $window_name @});
 			@}
 			#ifparenttypeequal "gbsizeritem"
 			@{
-				$name = new #class( #wxparent $name, $id, $pos, $size, $style #ifnotnull $window_style @{ |$window_style @} #ifnotnull $window_name @{, $window_name @} );
+                $name = new #class(#wxparent $name, $id, $pos, $size, $style #ifnotnull $window_style @{ |$window_style @} #ifnotnull $window_name @{, $window_name @});
 			@}
 			#ifnotnull $bitmapsize
-			@{ #nl $name->SetToolBitmapSize( $bitmapsize ); @}
+            @{ #nl $name->SetToolBitmapSize($bitmapsize); @}
 
 			#ifnotnull $separation
 			@{
 				#ifnotequal $separation "5"
-				@{ #nl $name->SetToolSeparation( $separation ); @}
+                @{ #nl $name->SetToolSeparation($separation); @}
 			@}
 
 			#ifnotnull $margins
-			@{ #nl $name->SetMargins( $margins ); @}
+            @{ #nl $name->SetMargins($margins); @}
 
 			#ifnotnull $packing
 			@{
 				#ifnotequal $packing "1"
-				@{ #nl $name->SetToolPacking( $packing ); @}
+                @{ #nl $name->SetToolPacking($packing); @}
 			@}
 		</template>
 		<template name="after_addchild">
@@ -234,32 +234,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			@{
 			#ifequal #parent $aui_managed "1"
 			@{ #nl
-				m_mgr.AddPane( $name, wxAuiPaneInfo()
-				#ifnotnull $aui_name @{.Name( $aui_name )@}.$docking()
-				#ifnotnull $caption @{.Caption( $caption )@}
-				#ifequal $caption_visible "0" @{.CaptionVisible( $caption_visible )@}
-				#ifequal $close_button "0" @{.CloseButton( $close_button )@}
-				#ifequal $maximize_button "1" @{.MaximizeButton( $maximize_button )@}
-				#ifequal $minimize_button "1" @{.MinimizeButton( $minimize_button )@}
-				#ifequal $pin_button "1" @{.PinButton( $pin_button )@}
-				#ifequal $pane_border "0" @{.PaneBorder( $pane_border )@}
+                m_mgr.AddPane($name, wxAuiPaneInfo()
+                #ifnotnull $aui_name @{.Name($aui_name)@}.$docking()
+                #ifnotnull $caption @{.Caption($caption)@}
+                #ifequal $caption_visible "0" @{.CaptionVisible($caption_visible)@}
+                #ifequal $close_button "0" @{.CloseButton($close_button)@}
+                #ifequal $maximize_button "1" @{.MaximizeButton($maximize_button)@}
+                #ifequal $minimize_button "1" @{.MinimizeButton($minimize_button)@}
+                #ifequal $pin_button "1" @{.PinButton($pin_button)@}
+                #ifequal $pane_border "0" @{.PaneBorder($pane_border)@}
 				#ifequal $gripper "1" @{.Gripper()@}
 				#ifequal $show "0" @{.Hide()@}
-				#ifequal $moveable "0" @{.Movable( $moveable )@}
-				#ifnotnull $dock @{.$dock()#ifequal $dock "Float" @{.FloatingPosition( $pane_position )@}@}
-				#ifnotnull $resize @{.$resize()#ifequal $resize "Resizable" @{.FloatingSize( $pane_size )@}@}
-				#ifequal $dock_fixed "1" @{.DockFixed( $dock_fixed )@}
-				#ifequal $BottomDockable "0" @{.BottomDockable( $BottomDockable )@}
-				#ifequal $TopDockable "0" @{.TopDockable( $TopDockable )@}
-				#ifequal $LeftDockable "0" @{.LeftDockable( $LeftDockable )@}
-				#ifequal $RightDockable "0" @{.RightDockable( $RightDockable )@}
-				#ifequal $floatable "0"	@{.Floatable( $floatable )@}
-				#ifnotnull $aui_row	@{.Row( $aui_row )@}
-				#ifnotnull $aui_position @{.Position( $aui_position )@}
-				#ifnotnull $best_size @{.BestSize( $best_size )@}
-				#ifnotnull $min_size @{.MinSize( $min_size )@}
-				#ifnotnull $max_size @{.MaxSize( $max_size )@}
-				#ifnotnull $aui_layer @{.Layer( $aui_layer )@}
+                #ifequal $moveable "0" @{.Movable($moveable)@}
+                #ifnotnull $dock @{.$dock()#ifequal $dock "Float" @{.FloatingPosition($pane_position)@}@}
+                #ifnotnull $resize @{.$resize()#ifequal $resize "Resizable" @{.FloatingSize($pane_size)@}@}
+                #ifequal $dock_fixed "1" @{.DockFixed($dock_fixed)@}
+                #ifequal $BottomDockable "0" @{.BottomDockable($BottomDockable)@}
+                #ifequal $TopDockable "0" @{.TopDockable($TopDockable)@}
+                #ifequal $LeftDockable "0" @{.LeftDockable($LeftDockable)@}
+                #ifequal $RightDockable "0" @{.RightDockable($RightDockable)@}
+                #ifequal $floatable "0"	@{.Floatable($floatable)@}
+                #ifnotnull $aui_row	@{.Row($aui_row)@}
+                #ifnotnull $aui_position @{.Position($aui_position)@}
+                #ifnotnull $best_size @{.BestSize($best_size)@}
+                #ifnotnull $min_size @{.MinSize($min_size)@}
+                #ifnotnull $max_size @{.MaxSize($max_size)@}
+                #ifnotnull $aui_layer @{.Layer($aui_layer)@}
 				#ifequal $center_pane "1" @{.CentrePane()@}
 				#ifequal $default_pane "1" @{.DefaultPane()@}
 				#ifequal $toolbar_pane "1" @{.ToolbarPane()@}
@@ -276,23 +276,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			@#include &lt;wx/aui/auibar.h&gt;
 		</template>
 		<template name="construction">
-			$name = new #class( #wxparent $name, $id, $pos, $size, $style #ifnotnull $window_style @{ |$window_style @} #ifnotnull $window_name @{, wxDefaultValidator, $window_name @} );
+            $name = new #class(#wxparent $name, $id, $pos, $size, $style #ifnotnull $window_style @{ |$window_style @} #ifnotnull $window_name @{, wxDefaultValidator, $window_name @});
 			#ifnotnull $bitmapsize
-			@{ #nl $name->SetToolBitmapSize( $bitmapsize ); @}
+            @{ #nl $name->SetToolBitmapSize($bitmapsize); @}
 
 			#ifnotnull $separation
 			@{
 				#ifnotequal $separation "5"
-				@{ #nl $name->SetToolSeparation( $separation ); @}
+                @{ #nl $name->SetToolSeparation($separation); @}
 			@}
 
 			#ifnotnull $margins
-			@{ #nl $name->SetMargins( $margins ); @}
+            @{ #nl $name->SetMargins($margins); @}
 
 			#ifnotnull $packing
 			@{
 				#ifnotequal $packing "1"
-				@{ #nl $name->SetToolPacking( $packing ); @}
+                @{ #nl $name->SetToolPacking($packing); @}
 			@}
 		</template>
 		<template name="after_addchild">
@@ -301,33 +301,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			@{
 			#ifequal #parent $aui_managed "1"
 			@{ #nl
-				m_mgr.AddPane( $name, wxAuiPaneInfo()#ifnotnull $aui_name
-				@{.Name( $aui_name )@}.$docking()#ifnotnull $caption
-				@{.Caption( $caption )@}#ifequal $caption_visible "0"
-				@{.CaptionVisible( $caption_visible )@}#ifequal $close_button "0"
-				@{.CloseButton( $close_button )@}#ifequal $maximize_button "1"
-				@{.MaximizeButton( $maximize_button )@}#ifequal $minimize_button "1"
-				@{.MinimizeButton( $minimize_button )@}#ifequal $pin_button "1"
-				@{.PinButton( $pin_button )@}#ifequal $pane_border "0"
-				@{.PaneBorder( $pane_border )@}#ifequal $gripper "1"
+                m_mgr.AddPane($name, wxAuiPaneInfo()#ifnotnull $aui_name
+                @{.Name($aui_name)@}.$docking()#ifnotnull $caption
+                @{.Caption($caption)@}#ifequal $caption_visible "0"
+                @{.CaptionVisible($caption_visible)@}#ifequal $close_button "0"
+                @{.CloseButton($close_button)@}#ifequal $maximize_button "1"
+                @{.MaximizeButton($maximize_button)@}#ifequal $minimize_button "1"
+                @{.MinimizeButton($minimize_button)@}#ifequal $pin_button "1"
+                @{.PinButton($pin_button)@}#ifequal $pane_border "0"
+                @{.PaneBorder($pane_border)@}#ifequal $gripper "1"
 				@{.Gripper()@}#ifequal $show "0"
 				@{.Hide()@}#ifequal $moveable "0"
-				@{.Movable( $moveable )@}#ifnotnull $dock
+                @{.Movable($moveable)@}#ifnotnull $dock
 				@{.$dock()#ifequal $dock "Float"
-				@{.FloatingPosition( $pane_position )@}
+                @{.FloatingPosition($pane_position)@}
 				@}#ifnotnull $resize
 				@{.$resize()#ifequal $resize "Resizable"
-				@{.FloatingSize( $pane_size )@}
+                @{.FloatingSize($pane_size)@}
 				@}#ifequal $dock_fixed "1"
-				@{.DockFixed( $dock_fixed )@}#ifequal $BottomDockable "0"
-				@{.BottomDockable( $BottomDockable )@}#ifequal $TopDockable "0"
-				@{.TopDockable( $TopDockable )@}#ifequal $LeftDockable "0"
-				@{.LeftDockable( $LeftDockable )@}#ifequal $RightDockable "0"
-				@{.RightDockable( $RightDockable )@}#ifequal $floatable "0"
-				@{.Floatable( $floatable )@}#ifnotnull $aui_row
-				@{.Row( $aui_row )@}#ifnotnull $aui_position
-				@{.Position( $aui_position )@}#ifnotnull $aui_layer
-				@{.Layer( $aui_layer )@}#ifequal $center_pane "1"
+                @{.DockFixed($dock_fixed)@}#ifequal $BottomDockable "0"
+                @{.BottomDockable($BottomDockable)@}#ifequal $TopDockable "0"
+                @{.TopDockable($TopDockable)@}#ifequal $LeftDockable "0"
+                @{.LeftDockable($LeftDockable)@}#ifequal $RightDockable "0"
+                @{.RightDockable($RightDockable)@}#ifequal $floatable "0"
+                @{.Floatable($floatable)@}#ifnotnull $aui_row
+                @{.Row($aui_row)@}#ifnotnull $aui_position
+                @{.Position($aui_position)@}#ifnotnull $aui_layer
+                @{.Layer($aui_layer)@}#ifequal $center_pane "1"
 				@{.CentrePane()@}#ifequal $default_pane "1"
 				@{.DefaultPane()@}#ifequal $toolbar_pane "1"
 				@{.ToolbarPane()@}
@@ -357,48 +357,48 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 		@{
 			#ifparentclassnotequal "wxAuiToolBar"
 			@{
-				$name = #parent $name->AddTool( $id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, nullptr );
+                $name = #parent $name->AddTool($id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, nullptr);
 			@}
 			#ifparentclassequal "wxAuiToolBar"
 			@{
 				#ifequal #parent $use_explicit_ids "1"
 				@{
-					#parent $name->AddTool( $id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, nullptr ); #nl
-					$name = #parent $name->FindTool( $id );
+                    #parent $name->AddTool($id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, nullptr); #nl
+                    $name = #parent $name->FindTool($id);
 				@}
 				#ifequal #parent $use_explicit_ids "0"
 				@{
-					$name = #parent $name->AddTool( $id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, nullptr );
+                    $name = #parent $name->AddTool($id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, nullptr);
 				@}
 				#ifequal $context_menu "1"
 				@{
-					#nl #parent $name->SetToolDropDown( $name->GetId(), true );
+                    #nl #parent $name->SetToolDropDown($name->GetId(), true);
 					#nl
 				@}
 			@}
 		@}
 		#ifparenttypeequal "toolbar_form"
 		@{
-			$name = AddTool( $id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, nullptr );
+            $name = AddTool($id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, nullptr);
 		@}
 		</template>
 		<template name="generated_event_handlers">
 		</template>
-		<template name="evt_entry_OnToolClicked">EVT_TOOL( $id, #handler )</template>
-		<template name="evt_connect_OnToolClicked">this->Connect( $name->GetId(), wxEVT_COMMAND_TOOL_CLICKED, #handler );</template>
-		<template name="evt_entry_OnMenuSelection">EVT_MENU( $id, #handler )</template>
-		<template name="evt_connect_OnMenuSelection">this->Connect( $name->GetId(), wxEVT_COMMAND_MENU_SELECTED, #handler);</template>
-		<template name="evt_entry_OnToolRClicked">EVT_TOOL_RCLICKED( $id, #handler )</template>
-		<template name="evt_connect_OnToolRClicked">this->Connect( $name->GetId(), wxEVT_COMMAND_TOOL_RCLICKED, #handler );</template>
-		<template name="evt_entry_OnToolEnter">EVT_TOOL_ENTER(#parent $id, #handler )</template>
-		<template name="evt_connect_OnToolEnter">this->Connect( $name->GetId(), wxEVT_COMMAND_TOOL_ENTER, #handler );</template>
-		<template name="evt_entry_OnUpdateUI">EVT_UPDATE_UI( $id, #handler )</template>
-		<template name="evt_connect_OnUpdateUI">this->Connect( $name->GetId(), wxEVT_UPDATE_UI, #handler );</template>
-		<template name="evt_connect_OnAuiToolBarToolDropDown">#ifparentclassequal "wxAuiToolBar" @{this->Connect( $name->GetId(), wxEVT_COMMAND_AUITOOLBAR_TOOL_DROPDOWN, #handler );@}</template>
-		<template name="evt_connect_OnAuiToolBarOverflowClick">#ifparentclassequal "wxAuiToolBar" @{this->Connect( $name->GetId(), wxEVT_COMMAND_AUITOOLBAR_OVERFLOW_CLICK, #handler );@}</template>
-		<template name="evt_connect_OnAuiToolBarRightClick">#ifparentclassequal "wxAuiToolBar" @{this->Connect( $name->GetId(), wxEVT_COMMAND_AUITOOLBAR_RIGHT_CLICK, #handler );@}</template>
-		<template name="evt_connect_OnAuiToolBarMiddleClick">#ifparentclassequal "wxAuiToolBar" @{this->Connect( $name->GetId(), wxEVT_COMMAND_AUITOOLBAR_MIDDLE_CLICK, #handler );@}</template>
-		<template name="evt_connect_OnAuiToolBarBeginDrag">#ifparentclassequal "wxAuiToolBar" @{this->Connect( $name->GetId(), wxEVT_COMMAND_AUITOOLBAR_BEGIN_DRAG, #handler );@}</template>
+        <template name="evt_entry_OnToolClicked">EVT_TOOL($id, #handler)</template>
+        <template name="evt_connect_OnToolClicked">this->Connect($name->GetId(), wxEVT_COMMAND_TOOL_CLICKED, #handler);</template>
+        <template name="evt_entry_OnMenuSelection">EVT_MENU($id, #handler)</template>
+        <template name="evt_connect_OnMenuSelection">this->Connect($name->GetId(), wxEVT_COMMAND_MENU_SELECTED, #handler);</template>
+        <template name="evt_entry_OnToolRClicked">EVT_TOOL_RCLICKED($id, #handler)</template>
+        <template name="evt_connect_OnToolRClicked">this->Connect($name->GetId(), wxEVT_COMMAND_TOOL_RCLICKED, #handler);</template>
+        <template name="evt_entry_OnToolEnter">EVT_TOOL_ENTER(#parent $id, #handler)</template>
+        <template name="evt_connect_OnToolEnter">this->Connect($name->GetId(), wxEVT_COMMAND_TOOL_ENTER, #handler);</template>
+        <template name="evt_entry_OnUpdateUI">EVT_UPDATE_UI($id, #handler)</template>
+        <template name="evt_connect_OnUpdateUI">this->Connect($name->GetId(), wxEVT_UPDATE_UI, #handler);</template>
+        <template name="evt_connect_OnAuiToolBarToolDropDown">#ifparentclassequal "wxAuiToolBar" @{this->Connect($name->GetId(), wxEVT_COMMAND_AUITOOLBAR_TOOL_DROPDOWN, #handler);@}</template>
+        <template name="evt_connect_OnAuiToolBarOverflowClick">#ifparentclassequal "wxAuiToolBar" @{this->Connect($name->GetId(), wxEVT_COMMAND_AUITOOLBAR_OVERFLOW_CLICK, #handler);@}</template>
+        <template name="evt_connect_OnAuiToolBarRightClick">#ifparentclassequal "wxAuiToolBar" @{this->Connect($name->GetId(), wxEVT_COMMAND_AUITOOLBAR_RIGHT_CLICK, #handler);@}</template>
+        <template name="evt_connect_OnAuiToolBarMiddleClick">#ifparentclassequal "wxAuiToolBar" @{this->Connect($name->GetId(), wxEVT_COMMAND_AUITOOLBAR_MIDDLE_CLICK, #handler);@}</template>
+        <template name="evt_connect_OnAuiToolBarBeginDrag">#ifparentclassequal "wxAuiToolBar" @{this->Connect($name->GetId(), wxEVT_COMMAND_AUITOOLBAR_BEGIN_DRAG, #handler);@}</template>
 	</templates>
 
 	<templates class="toolSeparator">
@@ -417,10 +417,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	<templates class="wxInfoBar">
 		<template name="declaration">#class* $name;</template>
 		<template name="include">@#include &lt;wx/infobar.h&gt;</template>
-		<template name="construction">$name = new #class( #wxparent $name );</template>
+        <template name="construction">$name = new #class(#wxparent $name);</template>
 		<template name="settings">
-			$name->SetShowHideEffects( $show_effect, $hide_effect ); #nl
-			$name->SetEffectDuration( $duration );
+            $name->SetShowHideEffects($show_effect, $hide_effect); #nl
+            $name->SetEffectDuration($duration);
 		</template>
 	</templates>
 

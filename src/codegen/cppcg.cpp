@@ -424,21 +424,21 @@ void CppCodeGenerator::GenerateInheritedClass(PObjectBase userClasses,
     FindEventHandlers(form, events);
 
     if (events.size() > 0) {
-        m_header->WriteLn(wxT("protected:"));
+        m_header->WriteLn("protected:");
         m_header->Indent();
-        code = GetCode(userClasses, wxT("event_handler_comment"));
+        code = GetCode(userClasses, "event_handler_comment");
         m_header->WriteLn(code);
 
-        wxString className = userClasses->GetPropertyAsString(_("name"));
+        wxString className = userClasses->GetPropertyAsString("name");
         std::set<wxString> generatedHandlers;
         for (size_t i = 0; i < events.size(); i++) {
             PEvent event = events[i];
             wxString prototype;
             if (generatedHandlers.find(event->GetValue()) == generatedHandlers.end()) {
                 prototype = wxString::Format(
-                    wxT("%s( %s& event )"), event->GetValue().c_str(),
+                    "%s(%s& event)", event->GetValue().c_str(),
                     event->GetEventInfo()->GetEventClassName().c_str());
-                m_header->WriteLn(wxString::Format(wxT("void %s;"), prototype.c_str()));
+                m_header->WriteLn(wxString::Format("void %s;", prototype.c_str()));
 
                 userCode = m_inheritedCodeParser.GetFunctionDocumentation(
                     event->GetValue());
@@ -449,14 +449,14 @@ void CppCodeGenerator::GenerateInheritedClass(PObjectBase userClasses,
                     m_source->WriteLn();
 
                 m_source->WriteLn(wxString::Format(
-                    wxT("void %s::%s"), className.c_str(), prototype.c_str()));
+                    "void %s::%s", className.c_str(), prototype.c_str()));
                 m_source->WriteLn(wxT("{"));
                 userCode = m_inheritedCodeParser.GetFunctionContents(
-                    wxString::Format(wxT("void %s::%s"),
+                    wxString::Format("void %s::%s",
                                      className.c_str(),
                                      prototype.c_str()));
                 LogDebug(wxString::Format(
-                             wxT("void %s::%s"), className.c_str(),
+                             "void %s::%s", className.c_str(),
                              prototype.c_str())
                          + "<");
 
@@ -466,24 +466,24 @@ void CppCodeGenerator::GenerateInheritedClass(PObjectBase userClasses,
                     m_source->Indent();
                     m_source->WriteLn(
                         wxString::Format(
-                            wxT("// TODO: Implement %s"), event->GetValue().c_str()),
+                            "// TODO: Implement %s", event->GetValue().c_str()),
                         true);
                     m_source->Unindent();
                 }
-                m_source->WriteLn(wxT("}"));
+                m_source->WriteLn("}");
                 generatedHandlers.insert(event->GetValue());
             }
         }
         m_header->Unindent();
     }
     // Finish header file
-    m_header->WriteLn(wxT("public:"));
+    m_header->WriteLn("public:");
     m_header->Indent();
 
-    code = GetCode(userClasses, type + wxT("_cons_decl"));
+    code = GetCode(userClasses, type + "_cons_decl");
     m_header->WriteLn(code);
     m_header->Unindent();
-    m_header->WriteLn(wxT("//// end generated class members"));
+    m_header->WriteLn("//// end generated class members");
 
     userCode = m_inheritedCodeParser.GetUserMembers();
     if (!userCode.IsEmpty())
@@ -492,10 +492,10 @@ void CppCodeGenerator::GenerateInheritedClass(PObjectBase userClasses,
         m_header->WriteLn(wxEmptyString);
 
     m_header->Unindent();
-    m_header->WriteLn(wxT("};"));
+    m_header->WriteLn("};");
     m_header->WriteLn(wxEmptyString);
 
-    code = GetCode(userClasses, wxT("guard_macro_close"));
+    code = GetCode(userClasses, "guard_macro_close");
     m_header->WriteLn(code);
 
     userCode = m_inheritedCodeParser.GetRemainingFunctions();
@@ -510,7 +510,7 @@ void CppCodeGenerator::GenerateInheritedClass(PObjectBase userClasses,
 bool CppCodeGenerator::GenerateCode(PObjectBase project)
 {
     if (!project) {
-        wxLogError(wxT("There is no project to generate code"));
+        wxLogError("There is no project to generate code");
         return false;
     }
     bool useEnum = false;
@@ -720,40 +720,40 @@ void CppCodeGenerator::GenEvents(PObjectBase classObj, const EventVector& events
     }
     wxString className = propName->GetValue();
     if (className.empty()) {
-        wxLogError(wxT("Object name cannot be null"));
+        wxLogError("Object name cannot be null");
         return;
     }
     wxString base_class;
-    PProperty propSubclass = classObj->GetProperty(wxT("subclass"));
+    PProperty propSubclass = classObj->GetProperty("subclass");
     if (propSubclass) {
-        wxString subclass = propSubclass->GetChildFromParent(wxT("name"));
+        wxString subclass = propSubclass->GetChildFromParent("name");
         if (!subclass.empty())
             base_class = subclass;
     }
     if (base_class.empty())
-        base_class = wxT("wx") + classObj->GetClassName();
+        base_class = "wx" + classObj->GetClassName();
 
     if (events.size() > 0) {
         if (!m_useConnect) {
             m_source->WriteLn();
-            m_source->WriteLn(wxT("BEGIN_EVENT_TABLE( ")
-                              + className + wxT(", ") + base_class + wxT(" )"));
+            m_source->WriteLn("wxBEGIN_EVENT_TABLE("
+                              + className + ", " + base_class + ")");
             m_source->Indent();
         }
         for (size_t i = 0; i < events.size(); i++) {
             PEvent event = events[i];
             wxString handlerName;
             if (m_useConnect) {
-                handlerName.Printf(wxT("%sHandler( %s::%s )"),
+                handlerName.Printf("%sHandler( %s::%s )",
                                    event->GetEventInfo()->GetEventClassName().c_str(),
                                    className.c_str(), event->GetValue().c_str());
             } else {
-                handlerName.Printf(wxT("%s::_wxWEAVER_%s"),
+                handlerName.Printf("%s::_wxWEAVER_%s",
                                    className.c_str(),
                                    event->GetValue().c_str());
             }
             wxString templateName = wxString::Format(
-                wxT("%s_%s"), m_useConnect ? wxT("connect") : wxT("entry"),
+                "%s_%s", m_useConnect ? "connect" : "entry",
                 event->GetName().c_str());
 
             PObjectBase obj = event->GetObject();
@@ -762,14 +762,14 @@ void CppCodeGenerator::GenEvents(PObjectBase classObj, const EventVector& events
                 && (!disconnect || event->GetName() != "OnMenuSelection")) {
                 // We don't bother with disconnecting OnMenuSelection events,
                 // that's why we skip the error message in that case.
-                wxLogError(wxT("Missing \"evt_%s\" template for \"%s\" class."
-                               "Review your XML object description"),
+                wxLogError("Missing \"evt_%s\" template for \"%s\" class."
+                           "Review your XML object description",
                            templateName.c_str(), className.c_str());
             }
         }
         if (!m_useConnect) {
             m_source->Unindent();
-            m_source->WriteLn(wxT("END_EVENT_TABLE()"));
+            m_source->WriteLn("wxEND_EVENT_TABLE()");
         }
     }
 }
@@ -783,16 +783,16 @@ bool CppCodeGenerator::GenEventEntry(PObjectBase obj, PObjectInfo obj_info,
     if (codeInfo) {
         _template = codeInfo->GetTemplate(
             wxString::Format(
-                wxT("evt_%s%s"),
-                disconnect ? wxT("dis") : wxEmptyString, templateName.c_str()));
+                "evt_%s%s",
+                disconnect ? wxS("dis") : wxEmptyString, templateName.c_str()));
 
         if (disconnect && _template.empty()) {
-            _template = codeInfo->GetTemplate(wxT("evt_") + templateName);
-            if (!_template.Replace(wxT("Connect"), wxT("Disconnect"), true))
+            _template = codeInfo->GetTemplate("evt_" + templateName);
+            if (!_template.Replace("Connect", "Disconnect", true))
                 _template.clear(); // "Connect" wasn't found, skip this entry
         }
         if (!_template.empty()) {
-            _template.Replace(wxT("#handler"), handlerName.c_str()); // TODO: ugly patch!
+            _template.Replace("#handler", handlerName.c_str()); // TODO: ugly patch!
             CppTemplateParser parser(obj, _template,
                                      m_useI18n, m_useRelativePath, m_basePath);
             m_source->WriteLn(parser.ParseTemplate());
@@ -811,7 +811,8 @@ void CppCodeGenerator::GenPrivateEventHandlers(const EventVector& events)
 {
     if (events.size() > 0) {
         m_header->WriteLn(wxEmptyString);
-        m_header->WriteLn(wxT("// Private event handlers"));
+        m_header->Indent();
+        m_header->WriteLn("// Private event handlers");
 
         std::set<wxString> generatedHandlers;
 
@@ -820,15 +821,15 @@ void CppCodeGenerator::GenPrivateEventHandlers(const EventVector& events)
             wxString aux;
 
             if (generatedHandlers.find(event->GetValue()) == generatedHandlers.end()) {
-                aux = wxT("void _wxWEAVER_") + event->GetValue()
-                    + wxT("( ") + event->GetEventInfo()->GetEventClassName()
-                    + wxT("& event ){ ") + event->GetValue() + wxT("( event ); }");
+                aux = "void _wxWEAVER_" + event->GetValue()
+                    + "(" + event->GetEventInfo()->GetEventClassName()
+                    + "& event){ " + event->GetValue() + "(event); }";
 
                 m_header->WriteLn(aux);
                 generatedHandlers.insert(event->GetValue());
             }
         }
-        m_header->WriteLn(wxEmptyString);
+        m_header->Unindent();
     }
 }
 
@@ -845,22 +846,21 @@ void CppCodeGenerator::GenVirtualEventHandlers(const EventVector& events,
         */
         m_header->WriteLn(wxEmptyString);
         m_header->WriteLn(
-            wxT("// Virtual event handlers, override them in your derived class"));
+            "// Virtual event handlers, override them in your derived class");
 
         std::set<wxString> generatedHandlers;
         for (size_t i = 0; i < events.size(); i++) {
             PEvent event = events[i];
             wxString aux = eventHandlerPrefix
-                + wxT("void ") + event->GetValue() + wxT("( ")
+                + "void " + event->GetValue() + "("
                 + event->GetEventInfo()->GetEventClassName()
-                + wxT("& event )") + eventHandlerPostfix;
+                + "& event)" + eventHandlerPostfix;
 
             if (generatedHandlers.find(aux) == generatedHandlers.end()) {
                 m_header->WriteLn(aux);
                 generatedHandlers.insert(aux);
             }
         }
-        m_header->WriteLn(wxEmptyString);
     }
 }
 
@@ -869,11 +869,11 @@ void CppCodeGenerator::GenAttributeDeclaration(PObjectBase obj, Permission perm,
 {
     wxString typeName = obj->GetObjectTypeName();
     if (ObjectDatabase::HasCppProperties(typeName)) {
-        wxString permStr = obj->GetProperty(wxT("permission"))->GetValue();
+        wxString permStr = obj->GetProperty("permission")->GetValue();
 
-        if ((perm == P_PUBLIC && permStr == wxT("public"))
-            || (perm == P_PROTECTED && permStr == wxT("protected"))
-            || (perm == P_PRIVATE && permStr == wxT("private"))) {
+        if ((perm == P_PUBLIC && permStr == "public")
+            || (perm == P_PROTECTED && permStr == "protected")
+            || (perm == P_PRIVATE && permStr == "private")) {
             const auto& code = GetDeclaration(obj, arrays, perm != P_PRIVATE && m_useArrayEnum);
             if (!code.empty())
                 m_header->WriteLn(code);
@@ -930,11 +930,11 @@ void CppCodeGenerator::GetGenEventHandlers(PObjectBase obj)
 
 void CppCodeGenerator::GenDefinedEventHandlers(PObjectInfo info, PObjectBase obj)
 {
-    PCodeInfo codeInfo = info->GetCodeInfo(wxT("C++"));
+    PCodeInfo codeInfo = info->GetCodeInfo("C++");
     if (!codeInfo)
         return;
 
-    wxString _template = codeInfo->GetTemplate(wxT("generated_event_handlers"));
+    wxString _template = codeInfo->GetTemplate("generated_event_handlers");
     if (!_template.empty()) {
         CppTemplateParser parser(obj, _template,
                                  m_useI18n, m_useRelativePath, m_basePath);
@@ -951,10 +951,10 @@ void CppCodeGenerator::GenDefinedEventHandlers(PObjectInfo info, PObjectBase obj
 
 wxString CppCodeGenerator::GetCode(PObjectBase obj, wxString name)
 {
-    PCodeInfo codeInfo = obj->GetObjectInfo()->GetCodeInfo(wxT("C++"));
+    PCodeInfo codeInfo = obj->GetObjectInfo()->GetCodeInfo("C++");
     if (!codeInfo) {
         wxString msg = wxString::Format(
-            wxT("Missing \"%s\" template for \"%s\" class. Review your XML object description"),
+            "Missing \"%s\" template for \"%s\" class. Review your XML object description",
             name.c_str(), obj->GetClassName().c_str());
         wxLogError(msg);
         return wxEmptyString;
@@ -972,7 +972,7 @@ wxString CppCodeGenerator::GetDeclaration(PObjectBase obj,
     const auto& propName = obj->GetProperty(wxT("name"));
     if (!propName) {
         // Object has no name, just get its code
-        return GetCode(obj, wxT("declaration"));
+        return GetCode(obj, "declaration");
     }
     // Object has a name, check if its an array
     const auto& name = propName->GetValue();
@@ -980,7 +980,7 @@ wxString CppCodeGenerator::GetDeclaration(PObjectBase obj,
     ArrayItem unused;
     if (!ParseArrayName(name, baseName, unused)) {
         // Object is not an array, just get its code
-        return GetCode(obj, wxT("declaration"));
+        return GetCode(obj, "declaration");
     }
     // Object is an array, check if it needs to be declared
     auto& item = arrays[baseName];
@@ -1003,12 +1003,12 @@ wxString CppCodeGenerator::GetDeclaration(PObjectBase obj,
             code.append("enum { ");
             for (size_t i = 0; i < item.maxIndex.size(); ++i) {
                 if (i > 0) {
-                    code.append(wxT(", "));
+                    code.append(", ");
                 }
                 code.append(wxString::Format(
                     "%s_%z_SIZE = %z", enumBaseName, i, item.maxIndex[i] + 1));
             }
-            code.append(wxT(" };\n"));
+            code.append(" };\n");
         }
     }
     // Construct proper name for declaration
@@ -1032,39 +1032,41 @@ void CppCodeGenerator::GenClassDeclaration(PObjectBase classObj, bool useEnum,
     PProperty propName = classObj->GetProperty(wxT("name"));
     if (!propName) {
         wxLogError(
-            wxT("Missing \"name\" property on \"%s\" class. Review your XML object description"),
+            "Missing \"name\" property on \"%s\" class. Review your XML object description",
             classObj->GetClassName().c_str());
         return;
     }
     wxString className = propName->GetValue();
     if (className.empty()) {
-        wxLogError(wxT("Object name can not be null"));
+        wxLogError("Object name can not be null");
         return;
     }
     m_header->WriteLn(
-        wxT("class ") + classDecoration + className + wxT(" : ")
-        + GetCode(classObj, wxT("base")));
+        "class " + classDecoration + className + " : "
+        + GetCode(classObj, "base"));
 
-    m_header->WriteLn(wxT("{"));
+    m_header->WriteLn("{");
+
+    // public
+    m_header->WriteLn("public:");
     m_header->Indent();
+    GenAttributeDeclaration(classObj, P_PUBLIC, arrays);
 
-    // are there event handlers?
-    if (!m_useConnect && events.size() > 0)
-        m_header->WriteLn(wxT("DECLARE_EVENT_TABLE()"));
+    // Validators' variables
+    GenValidatorVariables(classObj);
 
-    // private
-    m_header->WriteLn(wxT("private:"));
-    m_header->Indent();
-    GenAttributeDeclaration(classObj, P_PRIVATE, arrays);
+    // The constructor is also included within public
+    m_header->WriteLn(GetCode(classObj, "cons_decl"));
 
-    if (!m_useConnect)
-        GenPrivateEventHandlers(events);
+    // Destructor
+    m_header->WriteLn(wxString::Format("~%s();", className.c_str()));
 
+    GetGenEventHandlers(classObj);
     m_header->Unindent();
     m_header->WriteLn(wxEmptyString);
 
     // protected
-    m_header->WriteLn(wxT("protected:"));
+    m_header->WriteLn("protected:");
     m_header->Indent();
 
     if (useEnum)
@@ -1076,48 +1078,41 @@ void CppCodeGenerator::GenClassDeclaration(PObjectBase classObj, bool useEnum,
     wxString eventHandlerPrefix;
     wxString eventHandlerPostfix;
 
-    PProperty eventHandlerKindProp = classObj->GetProperty(wxT("event_handler"));
-    if (eventHandlerKindProp) {
+    PProperty eventHandlerKindProp = classObj->GetProperty("event_handler");
+    if (eventHandlerKindProp)
         eventHandlerKind = eventHandlerKindProp->GetValueAsString();
-    }
 
-    if (!eventHandlerKind.compare(wxT("decl_pure_virtual"))) {
-        eventHandlerPrefix = wxT("virtual ");
-        eventHandlerPostfix = wxT(" = 0;");
-    } else if (!eventHandlerKind.compare(wxT("decl"))) {
+    if (!eventHandlerKind.compare("decl_pure_virtual")) {
+        eventHandlerPrefix = "virtual ";
+        eventHandlerPostfix = " = 0;";
+    } else if (!eventHandlerKind.compare("decl")) {
         eventHandlerPrefix = wxEmptyString;
-        eventHandlerPostfix = wxT(";");
+        eventHandlerPostfix = ";";
     } else // Default: impl_virtual
     {
-        eventHandlerPrefix = wxT("virtual ");
-        eventHandlerPostfix = wxT(" { event.Skip(); }");
+        eventHandlerPrefix = "virtual ";
+        eventHandlerPostfix = " { event.Skip(); }";
     }
     GenVirtualEventHandlers(events, eventHandlerPrefix, eventHandlerPostfix);
 
     m_header->Unindent();
     m_header->WriteLn(wxEmptyString);
 
-    // public
-    m_header->WriteLn(wxT("public:"));
-    m_header->Indent();
-    GenAttributeDeclaration(classObj, P_PUBLIC, arrays);
+    // private
+    m_header->WriteLn("private:");
+    GenAttributeDeclaration(classObj, P_PRIVATE, arrays);
 
-    // Validators' variables
-    GenValidatorVariables(classObj);
-    m_header->WriteLn(wxEmptyString);
-
-    // The constructor is also included within public
-    m_header->WriteLn(GetCode(classObj, wxT("cons_decl")));
-
-    // Destructor
-    m_header->WriteLn(wxString::Format(wxT("~%s();"), className.c_str()));
-
-    GetGenEventHandlers(classObj);
+    if (!m_useConnect) {
+        GenPrivateEventHandlers(events);
+        if (events.size()) {
+            m_header->WriteLn(wxEmptyString);
+            m_header->Indent();
+            m_header->WriteLn("wxDECLARE_EVENT_TABLE();");
+            m_header->Unindent();
+        }
+    }
     m_header->Unindent();
-    m_header->WriteLn(wxEmptyString);
-
-    m_header->Unindent();
-    m_header->WriteLn(wxT("};"));
+    m_header->WriteLn("};");
     m_header->WriteLn(wxEmptyString);
 }
 

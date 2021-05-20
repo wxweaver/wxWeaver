@@ -111,9 +111,9 @@ public:
 
 private:
     typedef enum {
-        P_PRIVATE,
+        P_PUBLIC,
         P_PROTECTED,
-        P_PUBLIC
+        P_PRIVATE
     } Permission;
 
     /** Predefined macros won't generate defines.

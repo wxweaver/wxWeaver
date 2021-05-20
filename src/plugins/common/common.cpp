@@ -1436,7 +1436,7 @@ public:
     {
         wxArrayString choices = obj->GetPropertyAsArrayString("choices");
 
-        // TODO: is "new" necessary?
+        // TODO: is `new` necessary?
         wxString* strings = new wxString[choices.GetCount()];
         for (size_t i = 0; i < choices.GetCount(); i++)
             strings[i] = choices[i];
