@@ -169,7 +169,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <property name="name" type="text">m_ribbonGallery</property>
     <event name="OnRibbonGallerySelected" class="wxRibbonGalleryEvent" help="Triggered when the user selects an item from the gallery."/>
     <event name="OnRibbonGalleryClicked" class="wxRibbonGalleryEvent" help="Similar to EVT_RIBBONGALLERY_SELECTED but triggered every time a gallery item is clicked, even if it is already selected."/>
-    <event name="OnRibbonGalleryHoverChanged" class="wxRibbonGalleryEvent" help="Triggered when the item being hovered over by the user changes. The item in the event will be the new item being hovered, or NULL if there is no longer an item being hovered."/>
+    <event name="OnRibbonGalleryHoverChanged" class="wxRibbonGalleryEvent" help="Triggered when the item being hovered over by the user changes. The item in the event will be the new item being hovered, or nullptr if there is no longer an item being hovered."/>
     <event name="OnRibbonGalleryExtensionButtonPressed" class="wxCommandEvent" help="Triggered when the extension button of the gallery is pressed."/>
   </objectinfo>
 

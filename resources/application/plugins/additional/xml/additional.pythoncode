@@ -131,14 +131,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 		<template name="evt_entry_OnScroll">EVT_SCROLL( #handler )</template>
 		<template name="evt_connect_OnScroll">
 			self.$name.Bind( wx.EVT_SCROLL, #handler )
-			<!-- $name->Connect( wxEVT_SCROLL_BOTTOM, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_LINEUP, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_LINEDOWN, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_PAGEUP, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_PAGEDOWN, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_THUMBTRACK, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_THUMBRELEASE, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_CHANGED, #handler, NULL, this ); -->
+			<!-- $name->Connect( wxEVT_SCROLL_BOTTOM, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_LINEUP, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_LINEDOWN, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_PAGEUP, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_PAGEDOWN, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_THUMBTRACK, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_THUMBRELEASE, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_CHANGED, #handler, nullptr, this ); -->
 		</template>
 		<template name="evt_connect_OnScrollTop">self.$name.Bind( wx.EVT_SCROLL_TOP, #handler )</template>
 		<template name="evt_connect_OnScrollBottom">self.$name.Bind( wx.EVT_SCROLL_BOTTOM, #handler )</template>
@@ -151,14 +151,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 		<template name="evt_connect_OnScrollChanged">self.$name.Bind( wx.EVT_SCROLL_CHANGED, #handler )</template>
 		<template name="evt_connect_OnCommandScroll">
 			self.$name.Bind( wx.EVT_COMMAND_SCROLL, #handler )
-			<!-- $name->Connect( wxEVT_SCROLL_BOTTOM, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_LINEUP, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_LINEDOWN, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_PAGEUP, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_PAGEDOWN, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_THUMBTRACK, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_THUMBRELEASE, #handler, NULL, this ); #nl
-			$name->Connect( wxEVT_SCROLL_CHANGED, #handler, NULL, this ); -->
+			<!-- $name->Connect( wxEVT_SCROLL_BOTTOM, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_LINEUP, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_LINEDOWN, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_PAGEUP, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_PAGEDOWN, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_THUMBTRACK, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_THUMBRELEASE, #handler, nullptr, this ); #nl
+			$name->Connect( wxEVT_SCROLL_CHANGED, #handler, nullptr, this ); -->
 		</template>
 		<template name="evt_connect_OnCommandScrollTop">self.$name.Bind( wx.EVT_COMMAND_SCROLL_TOP, #handler )</template>
 		<template name="evt_connect_OnCommandScrollBottom">self.$name.Bind( wx.EVT_COMMAND_SCROLL_BOTTOM, #handler )</template>

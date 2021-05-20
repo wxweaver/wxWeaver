@@ -111,7 +111,7 @@ private:
                this is used to preserve data like bitmaps and events.
     */
     void GetItem(long n, wxString& label, wxString& shortcut, wxString& id,
-                 wxString& name, wxString& help, wxString& kind, PObjectBase* obj = NULL);
+                 wxString& name, wxString& help, wxString& kind, PObjectBase* obj = nullptr);
 
     // TODO: hides overloaded function
     /** Inserta en la posición "n" del wxListCtrl, los hijos de "obj".

@@ -68,6 +68,6 @@ END_DECLARE_EVENT_TYPES()
     DECLARE_EVENT_TABLE_ENTRY(                                                                  \
         wxEVT_PANEL_RESIZED, id, wxID_ANY,                                                      \
         (wxObjectEventFunction)(wxEventFunction)wxStaticCastEvent(wxCommandEventFunction, &fn), \
-        (wxObject*)NULL),
+        (wxObject*)nullptr),
 
 #endif

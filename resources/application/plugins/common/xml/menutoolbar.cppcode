@@ -59,11 +59,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			@{ #ifequal #parent $context_menu "1"
 			@{
 				#ifparenttypeequal "widget || container || expanded_widget || wizardpagesimple || treelistctrl || dataviewctrl || dataviewtreectrl || dataviewlistctrl || propgrid || propgridman"
-				@{ #parent $name->Connect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( #form $name::#parent $name #append OnContextMenu ), NULL, this ); @}
+				@{ #parent $name->Connect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( #form $name::#parent $name #append OnContextMenu ), nullptr, this ); @}
 				#ifparenttypeequal "form || wizard"
-				@{ #wxparent $name->Connect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( #form $name::#parent $name #append OnContextMenu ), NULL, this ); @}
+				@{ #wxparent $name->Connect( wxEVT_RIGHT_DOWN, wxMouseEventHandler( #form $name::#parent $name #append OnContextMenu ), nullptr, this ); @}
 				#ifparenttypeequal "tool"
-				@{ #wxparent $name->Connect( #parent $name->GetId(), wxEVT_COMMAND_AUITOOLBAR_TOOL_DROPDOWN, wxAuiToolBarEventHandler( #form $name::#parent $name #append OnDropDownMenu ), NULL, this ); @}
+				@{ #wxparent $name->Connect( #parent $name->GetId(), wxEVT_COMMAND_AUITOOLBAR_TOOL_DROPDOWN, wxAuiToolBarEventHandler( #form $name::#parent $name #append OnDropDownMenu ), nullptr, this ); @}
 			@}@}
 			#ifparenttypeequal "menubar"
 			@{
@@ -357,18 +357,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 		@{
 			#ifparentclassnotequal "wxAuiToolBar"
 			@{
-				$name = #parent $name->AddTool( $id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, NULL );
+				$name = #parent $name->AddTool( $id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, nullptr );
 			@}
 			#ifparentclassequal "wxAuiToolBar"
 			@{
 				#ifequal #parent $use_explicit_ids "1"
 				@{
-					#parent $name->AddTool( $id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, NULL ); #nl
+					#parent $name->AddTool( $id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, nullptr ); #nl
 					$name = #parent $name->FindTool( $id );
 				@}
 				#ifequal #parent $use_explicit_ids "0"
 				@{
-					$name = #parent $name->AddTool( $id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, NULL );
+					$name = #parent $name->AddTool( $id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, nullptr );
 				@}
 				#ifequal $context_menu "1"
 				@{
@@ -379,7 +379,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 		@}
 		#ifparenttypeequal "toolbar_form"
 		@{
-			$name = AddTool( $id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, NULL );
+			$name = AddTool( $id, $label, $bitmap, wxNullBitmap, $kind, $tooltip, $statusbar, nullptr );
 		@}
 		</template>
 		<template name="generated_event_handlers">

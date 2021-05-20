@@ -2464,7 +2464,7 @@ void ApplicationData::ShowXrcPreview()
 {
     PObjectBase form = GetSelectedForm();
 
-    if (form == NULL) {
+    if (!form) {
         wxMessageBox(_("Please select a form and try again."),
                      _("XRC Preview"), wxICON_ERROR);
         return;
@@ -2481,7 +2481,7 @@ bool ApplicationData::CanPasteObject()
 {
     PObjectBase obj = GetSelectedObject();
     if (obj && obj->GetObjectTypeName() != "project")
-        return (m_clipboard != NULL);
+        return (m_clipboard != nullptr);
 
     return false;
 }

@@ -401,7 +401,7 @@ class SplitterWindowComponent : public ComponentBase {
 
             // This one should be the actual wxWindow
             wxWindow* subwindow = wxDynamicCast(GetManager()->GetChild(splitterItem, 0), wxWindow);
-            if (NULL == subwindow) {
+            if (!subwindow) {
                 wxLogError("A SplitterItem is abstract and must have a child!");
                 return;
             }
@@ -424,7 +424,7 @@ class SplitterWindowComponent : public ComponentBase {
             wxWindow* subwindow0 = wxDynamicCast(GetManager()->GetChild(splitterItem0, 0), wxWindow);
             wxWindow* subwindow1 = wxDynamicCast(GetManager()->GetChild(splitterItem1, 0), wxWindow);
 
-            if (NULL == subwindow0 || NULL == subwindow1) {
+            if (!subwindow0 || !subwindow1) {
                 wxLogError("A SplitterItem is abstract and must have a child!");
                 return;
             }

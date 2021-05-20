@@ -771,7 +771,7 @@ wxPGWindowList wxPGSliderEditor::CreateControls(wxPropertyGrid* propgrid,
                                                 const wxSize& sz) const
 {
     wxCHECK_MSG(property->IsKindOf(wxCLASSINFO(wxFloatProperty)),
-                NULL,
+                nullptr,
                 wxT("Slider editor can only be used with wxFloatProperty or derivative."));
 
     // Use two stage creation to allow cleaner display on wxMSW
@@ -859,7 +859,7 @@ static const wxChar* gs_fp_es_family_labels[] = {
     wxT("Roman"), wxT("Script"),
     wxT("Swiss"), wxT("Modern"),
     wxT("Teletype"), wxT("Unknown"),
-    (const wxChar*)NULL
+    (const wxChar*)nullptr
 };
 
 static long gs_fp_es_family_values[] = {
@@ -873,7 +873,7 @@ static const wxChar* gs_fp_es_style_labels[] = {
     wxT("Normal"),
     wxT("Slant"),
     wxT("Italic"),
-    (const wxChar*)NULL
+    (const wxChar*)nullptr
 };
 
 static long gs_fp_es_style_values[] = {
@@ -886,7 +886,7 @@ static const wxChar* gs_fp_es_weight_labels[] = {
     wxT("Normal"),
     wxT("Light"),
     wxT("Bold"),
-    (const wxChar*)NULL
+    (const wxChar*)nullptr
 };
 
 static long gs_fp_es_weight_values[] = {

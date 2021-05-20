@@ -120,7 +120,7 @@ std::string TypeConv::_WxStringToAnsiString(const wxString& str)
     return newstr;
 #if 0
     setlocale(LC_ALL, "");
-    size_t len = wcstombs(NULL, str.char_str(), 0);
+    size_t len = wcstombs(nullptr, str.char_str(), 0);
     std::vector<char> buf(len + 1);
     wcstombs(&buf[0], str.char_str(), len);
     return std::string(&buf[0]);

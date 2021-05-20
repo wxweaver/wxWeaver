@@ -284,7 +284,7 @@ int MyApp::OnExit()
 #ifdef __WXMAC__
 void MyApp::MacOpenFile(const wxString& fileName)
 {
-    if (m_frame == NULL)
+    if (!m_frame)
         m_mac_file_name = fileName;
     else {
         if (!m_frame->SaveWarning())

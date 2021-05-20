@@ -56,7 +56,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 		</template>
 		<template name="construction">$name = new wxStaticBoxSizer( new wxStaticBox( #wxparent $name, $id, $label ), $orient ); #nl</template>
 		<template name="evt_entry_OnUpdateUI">EVT_UPDATE_UI( $id, #handler )</template>
-		<template name="evt_connect_OnUpdateUI">$name->GetStaticBox()->Connect( wxEVT_UPDATE_UI, #handler, NULL, this );</template>
+		<template name="evt_connect_OnUpdateUI">$name->GetStaticBox()->Connect( wxEVT_UPDATE_UI, #handler, nullptr, this );</template>
 	</templates>
 
 	<templates class="wxWrapSizer">
@@ -207,14 +207,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 		<template name="evt_entry_OnCancelButtonClick">EVT_BUTTON( wxID_CANCEL, #handler )</template>
 		<template name="evt_entry_OnHelpButtonClick">EVT_BUTTON( wxID_HELP, #handler )</template>
 		<template name="evt_entry_OnContextHelpButtonClick">EVT_BUTTON( wxID_CONTEXT_HELP, #handler )</template>
-		<template name="evt_connect_OnOKButtonClick">$name #append OK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, NULL, this );</template>
-		<template name="evt_connect_OnYesButtonClick">$name #append Yes->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, NULL, this );</template>
-		<template name="evt_connect_OnSaveButtonClick">$name #append Save->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, NULL, this );</template>
-		<template name="evt_connect_OnApplyButtonClick">$name #append Apply->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, NULL, this );</template>
-		<template name="evt_connect_OnNoButtonClick">$name #append No->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, NULL, this );</template>
-		<template name="evt_connect_OnCancelButtonClick">$name #append Cancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, NULL, this );</template>
-		<template name="evt_connect_OnHelpButtonClick">$name #append Help->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, NULL, this );</template>
-		<template name="evt_connect_OnContextHelpButtonClick">$name #append ContextHelp->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, NULL, this );</template>
+		<template name="evt_connect_OnOKButtonClick">$name #append OK->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnYesButtonClick">$name #append Yes->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnSaveButtonClick">$name #append Save->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnApplyButtonClick">$name #append Apply->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnNoButtonClick">$name #append No->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnCancelButtonClick">$name #append Cancel->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnHelpButtonClick">$name #append Help->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnContextHelpButtonClick">$name #append ContextHelp->Connect( wxEVT_COMMAND_BUTTON_CLICKED, #handler, nullptr, this );</template>
 	</templates>
 
 </codegen>

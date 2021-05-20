@@ -360,13 +360,13 @@ PObjectBase ObjectBase::FindNearAncestorByBaseClass(wxString type)
 
 PObjectBase ObjectBase::FindParentForm()
 {
-    PObjectBase retObj = this->FindNearAncestor(wxT("form"));
-    if (retObj == NULL)
-        retObj = this->FindNearAncestor(wxT("menubar_form"));
-    if (retObj == NULL)
-        retObj = this->FindNearAncestor(wxT("toolbar_form"));
-    if (retObj == NULL)
-        retObj = this->FindNearAncestor(wxT("wizard"));
+    PObjectBase retObj = this->FindNearAncestor("form");
+    if (!retObj)
+        retObj = this->FindNearAncestor("menubar_form");
+    if (!retObj)
+        retObj = this->FindNearAncestor("toolbar_form");
+    if (!retObj)
+        retObj = this->FindNearAncestor("wizard");
 
     return retObj;
 }

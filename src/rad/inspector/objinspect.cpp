@@ -236,7 +236,7 @@ int ObjectInspector::StringToBits(const wxString& strVal, wxPGChoices& constants
 
 wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
 {
-    wxPGProperty* result = NULL;
+    wxPGProperty* result = nullptr;
     PropertyType type = prop->GetType();
     wxString name = prop->GetName();
     wxVariant vTrue = wxVariant(true, wxT("true"));

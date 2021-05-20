@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 		<template name="include">@#include &lt;wx/collpane.h&gt;</template>
 		<template name="settings">#ifnotnull $collapsed @{ $name->Collapse( $collapsed ); #nl @}</template>
 		<template name="evt_entry_OnCollapsiblePaneChanged">EVT_COLLAPSIBLEPANE_CHANGED( $id, #handler )</template>
-		<template name="evt_connect_OnCollapsiblePaneChanged">$name->Connect( wxEVT_COLLAPSIBLEPANE_CHANGED, #handler, NULL, this );</template>
+		<template name="evt_connect_OnCollapsiblePaneChanged">$name->Connect( wxEVT_COLLAPSIBLEPANE_CHANGED, #handler, nullptr, this );</template>
 	</templates>
 
 	<templates class="wxSplitterWindow">
@@ -54,7 +54,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			#ifnotnull $sashpos
 			@{
 				#ifnotequal $sashpos "-1"
-				@{ $name->Connect( wxEVT_IDLE, wxIdleEventHandler( #form $name::$name #append OnIdle ), NULL, this ); #nl @}
+				@{ $name->Connect( wxEVT_IDLE, wxIdleEventHandler( #form $name::$name #append OnIdle ), nullptr, this ); #nl @}
 			@}
 			#ifnotnull $min_pane_size
 			@{
@@ -70,19 +70,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 				#nl void $name #append OnIdle( wxIdleEvent&amp; )
 				#nl { #indent
 					#nl $name->SetSashPosition( $sashpos );
-					#nl $name->Disconnect( wxEVT_IDLE, wxIdleEventHandler( #form $name::$name #append OnIdle ), NULL, this ); #unindent
+					#nl $name->Disconnect( wxEVT_IDLE, wxIdleEventHandler( #form $name::$name #append OnIdle ), nullptr, this ); #unindent
 				#nl}
 				@}
 			@}
 		</template>
 		<template name="evt_entry_OnSplitterSashPosChanging">EVT_SPLITTER_SASH_POS_CHANGING( $id, #handler )</template>
-		<template name="evt_connect_OnSplitterSashPosChanging">$name->Connect( wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGING, #handler, NULL, this );</template>
+		<template name="evt_connect_OnSplitterSashPosChanging">$name->Connect( wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGING, #handler, nullptr, this );</template>
 		<template name="evt_entry_OnSplitterSashPosChanged">EVT_SPLITTER_SASH_POS_CHANGED( $id, #handler )</template>
-		<template name="evt_connect_OnSplitterSashPosChanged">$name->Connect( wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED, #handler, NULL, this );</template>
+		<template name="evt_connect_OnSplitterSashPosChanged">$name->Connect( wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED, #handler, nullptr, this );</template>
 		<template name="evt_entry_OnSplitterUnsplit">EVT_SPLITTER_UNSPLIT( $id, #handler )</template>
-		<template name="evt_connect_OnSplitterUnsplit">$name->Connect( wxEVT_COMMAND_SPLITTER_UNSPLIT, #handler, NULL, this );</template>
+		<template name="evt_connect_OnSplitterUnsplit">$name->Connect( wxEVT_COMMAND_SPLITTER_UNSPLIT, #handler, nullptr, this );</template>
 		<template name="evt_entry_OnSplitterDClick">EVT_SPLITTER_DCLICK( $id, #handler )</template>
-		<template name="evt_connect_OnSplitterDClick">$name->Connect( wxEVT_COMMAND_SPLITTER_DOUBLECLICKED, #handler, NULL, this );</template>
+		<template name="evt_connect_OnSplitterDClick">$name->Connect( wxEVT_COMMAND_SPLITTER_DOUBLECLICKED, #handler, nullptr, this );</template>
 	</templates>
 
 	<templates class="wxNotebook">
@@ -108,9 +108,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			@}
 		</template>
 		<template name="evt_entry_OnNotebookPageChanged">EVT_NOTEBOOK_PAGE_CHANGED( $id, #handler )</template>
-		<template name="evt_connect_OnNotebookPageChanged">$name->Connect( wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, #handler, NULL, this );</template>
+		<template name="evt_connect_OnNotebookPageChanged">$name->Connect( wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, #handler, nullptr, this );</template>
 		<template name="evt_entry_OnNotebookPageChanging">EVT_NOTEBOOK_PAGE_CHANGING( $id, #handler )</template>
-		<template name="evt_connect_OnNotebookPageChanging">$name->Connect( wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING, #handler, NULL, this );</template>
+		<template name="evt_connect_OnNotebookPageChanging">$name->Connect( wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING, #handler, nullptr, this );</template>
 	</templates>
 
 	<templates class="notebookpage">
@@ -171,9 +171,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			@}
 		</template>
 		<template name="evt_entry_OnListbookPageChanged">EVT_LISTBOOK_PAGE_CHANGED( $id, #handler )</template>
-		<template name="evt_connect_OnListbookPageChanged">$name->Connect( wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED, #handler, NULL, this );</template>
+		<template name="evt_connect_OnListbookPageChanged">$name->Connect( wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED, #handler, nullptr, this );</template>
 		<template name="evt_entry_OnListbookPageChanging">EVT_LISTBOOK_PAGE_CHANGING( $id, #handler )</template>
-		<template name="evt_connect_OnListbookPageChanging">$name->Connect( wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING, #handler, NULL, this );</template>
+		<template name="evt_connect_OnListbookPageChanging">$name->Connect( wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING, #handler, nullptr, this );</template>
 	</templates>
 
 	<templates class="listbookpage">
@@ -201,9 +201,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 		<template name="construction">$name = new #class( #wxparent $name, $id, $pos, $size, $style #ifnotnull $window_style @{ |$window_style @} #ifnotnull $window_name @{, $window_name @} );</template>
 		<template name="include">@#include &lt;wx/choicebk.h&gt;</template>
 		<template name="evt_entry_OnChoicebookPageChanged">EVT_CHOICEBOOK_PAGE_CHANGED( $id, #handler )</template>
-		<template name="evt_connect_OnChoicebookPageChanged">$name->Connect( wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGED, #handler, NULL, this );</template>
+		<template name="evt_connect_OnChoicebookPageChanged">$name->Connect( wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGED, #handler, nullptr, this );</template>
 		<template name="evt_entry_OnChoicebookPageChanging">EVT_CHOICEBOOK_PAGE_CHANGING( $id, #handler )</template>
-		<template name="evt_connect_OnChoicebookPageChanging">$name->Connect( wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGING, #handler, NULL, this );</template>
+		<template name="evt_connect_OnChoicebookPageChanging">$name->Connect( wxEVT_COMMAND_CHOICEBOOK_PAGE_CHANGING, #handler, nullptr, this );</template>
 	</templates>
 
 	<templates class="choicebookpage">
@@ -215,9 +215,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 		<template name="construction">$name = new #class( #wxparent $name, $id, $pos, $size, $window_style #ifnotnull $window_name @{, $window_name @} );</template>
 		<template name="include">@#include &lt;wx/simplebook.h&gt;</template>
 		<template name="evt_entry_OnSimplebookPageChanged">EVT_BOOKCTRL_PAGE_CHANGED( $id, #handler )</template>
-		<template name="evt_connect_OnSimplebookPageChanged">$name->Connect( wxEVT_COMMAND_BOOKCTRL_PAGE_CHANGED, #handler, NULL, this );</template>
+		<template name="evt_connect_OnSimplebookPageChanged">$name->Connect( wxEVT_COMMAND_BOOKCTRL_PAGE_CHANGED, #handler, nullptr, this );</template>
 		<template name="evt_entry_OnSimplebookPageChanging">EVT_BOOKCTRL_PAGE_CHANGING( $id, #handler )</template>
-		<template name="evt_connect_OnSimplebookPageChanging">$name->Connect( wxEVT_COMMAND_BOOKCTRL_PAGE_CHANGING, #handler, NULL, this );</template>
+		<template name="evt_connect_OnSimplebookPageChanging">$name->Connect( wxEVT_COMMAND_BOOKCTRL_PAGE_CHANGING, #handler, nullptr, this );</template>
 	</templates>
 
 	<templates class="simplebookpage">
@@ -243,21 +243,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 		<template name="evt_entry_OnAuiNotebookTabRightDown">EVT_AUINOTEBOOK_TAB_RIGHT_DOWN( $id, #handler )</template>
 		<template name="evt_entry_OnAuiNotebookTabRightUp">EVT_AUINOTEBOOK_TAB_RIGHT_UP( $id, #handler )</template>
 		<template name="evt_entry_OnAuiNotebookBGDClick">EVT_AUINOTEBOOK_BG_DCLICK( $id, #handler )</template>
-		<template name="evt_connect_OnAuiNotebookPageClose">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookPageClosed">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSED, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookPageChanged">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookPageChanging">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGING, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookButton">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_BUTTON, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookBeginDrag">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_BEGIN_DRAG, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookEndDrag">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_END_DRAG, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookDragMotion">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_DRAG_MOTION, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookAllowDND">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_ALLOW_DND, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookDragDone">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_DRAG_DONE, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookTabMiddleDown">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_TAB_MIDDLE_DOWN, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookTabMiddleUp">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_TAB_MIDDLE_IP, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookTabRightDown">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_TAB_RIGHT_DOWN, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookTabRightUp">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_TAB_RIGHT_UP, #handler, NULL, this );</template>
-		<template name="evt_connect_OnAuiNotebookBGDClick">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_BG_DCLICK, #handler, NULL, this );</template>
+		<template name="evt_connect_OnAuiNotebookPageClose">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSE, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookPageClosed">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CLOSED, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookPageChanged">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookPageChanging">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGING, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookButton">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_BUTTON, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookBeginDrag">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_BEGIN_DRAG, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookEndDrag">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_END_DRAG, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookDragMotion">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_DRAG_MOTION, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookAllowDND">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_ALLOW_DND, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookDragDone">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_DRAG_DONE, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookTabMiddleDown">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_TAB_MIDDLE_DOWN, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookTabMiddleUp">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_TAB_MIDDLE_IP, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookTabRightDown">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_TAB_RIGHT_DOWN, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookTabRightUp">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_TAB_RIGHT_UP, #handler, nullptr, this );</template>
+		<template name="evt_connect_OnAuiNotebookBGDClick">$name->Connect( wxEVT_COMMAND_AUINOTEBOOK_BG_DCLICK, #handler, nullptr, this );</template>
 	</templates>
 
 	<templates class="auinotebookpage">

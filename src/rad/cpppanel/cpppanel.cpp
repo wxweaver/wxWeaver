@@ -103,7 +103,7 @@ void CppPanel::InitStyledTextCtrl(wxStyledTextCtrl* stc)
     stc->SetKeyWords(
         0,
         "#define #else #elseif #endif #error #if #ifdef #ifndef #include #pragma "
-        "#warning NULL alignas alignof and and_eq asm auto bitand bitor break "
+        "#warning nullptr alignas alignof and and_eq asm auto bitand bitor break "
         "case catch class co_return co_wait co_yield compl concept const const "
         "const_cast consteval constexpr constinit continue decltype default "
         "delete do dynamic_cast else elseif enum explicit export export extern "

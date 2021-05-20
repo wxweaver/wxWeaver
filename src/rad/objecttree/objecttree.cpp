@@ -120,7 +120,7 @@ PObjectBase ObjectTree::GetObjectFromTreeItem(wxTreeItemId item)
             return obj;
         }
     }
-    return PObjectBase((ObjectBase*)NULL);
+    return PObjectBase((ObjectBase*)nullptr);
 }
 
 void ObjectTree::RebuildTree()

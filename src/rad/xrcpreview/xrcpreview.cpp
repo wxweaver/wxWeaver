@@ -159,7 +159,7 @@ void XRCPreview::Show(PObjectBase form, const wxString& projectPath)
     wxMemoryFSHandler::AddFile("xrcpreview.xrc", data.c_str(), data.size());
     res->Load("memory:xrcpreview.xrc");
 
-    wxWindow* window = NULL;
+    wxWindow* window = nullptr;
     if (className == wxT("Frame")) {
         wxFrame* frame = new wxFrame();
         res->LoadFrame(

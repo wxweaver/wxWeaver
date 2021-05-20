@@ -464,7 +464,7 @@ public:
             (wxWindow*)parent, wxID_ANY,
             obj->GetPropertyAsString("value"),
             obj->GetPropertyAsPoint("pos"),
-            obj->GetPropertyAsSize("size"), 0, NULL,
+            obj->GetPropertyAsSize("size"), 0, nullptr,
             obj->GetPropertyAsInteger("style")
                 | obj->GetPropertyAsInteger("window_style"));
 
@@ -516,7 +516,7 @@ public:
             (wxWindow*)parent, wxID_ANY,
             obj->GetPropertyAsString("value"),
             obj->GetPropertyAsPoint("pos"),
-            obj->GetPropertyAsSize("size"), 0, NULL,
+            obj->GetPropertyAsSize("size"), 0, nullptr,
             obj->GetPropertyAsInteger("style")
                 | obj->GetPropertyAsInteger("window_style"));
 
@@ -737,7 +737,7 @@ public:
         wxListBox* listBox = new wxListBox(
             (wxWindow*)parent, wxID_ANY,
             obj->GetPropertyAsPoint("pos"),
-            obj->GetPropertyAsSize("size"), 0, NULL,
+            obj->GetPropertyAsSize("size"), 0, nullptr,
             obj->GetPropertyAsInteger("style")
                 | obj->GetPropertyAsInteger("window_style"));
 
@@ -799,7 +799,7 @@ public:
 
         radioBox->Connect(wxEVT_COMMAND_RADIOBOX_SELECTED,
                           wxCommandEventHandler(RadioBoxComponent::OnRadioBox),
-                          NULL, this);
+                          nullptr, this);
         return radioBox;
     }
 
@@ -825,7 +825,7 @@ public:
         radioBox->Disconnect(
             wxEVT_COMMAND_RADIOBOX_SELECTED,
             wxCommandEventHandler(RadioBoxComponent::OnRadioBox),
-            NULL, this);
+            nullptr, this);
 
         ComponentBase::Cleanup(obj);
     }

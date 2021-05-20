@@ -469,7 +469,7 @@ public:
         toggleButton->SetValue((obj->GetPropertyAsInteger("value")));
         toggleButton->Connect(wxEVT_COMMAND_TOGGLEBUTTON_CLICKED,
                               wxCommandEventHandler(ToggleButtonComponent::OnToggle),
-                              NULL, this);
+                              nullptr, this);
         return toggleButton;
     }
 
@@ -573,7 +573,7 @@ public:
         bmpToggleBtn->SetValue((obj->GetPropertyAsInteger("value")));
         bmpToggleBtn->Connect(wxEVT_COMMAND_TOGGLEBUTTON_CLICKED,
                               wxCommandEventHandler(ToggleButtonComponent::OnToggle),
-                              NULL, this);
+                              nullptr, this);
         return bmpToggleBtn;
     }
 
@@ -740,7 +740,7 @@ public:
 
         spinCtrl->Connect(wxEVT_COMMAND_SPINCTRL_UPDATED,
                           wxSpinEventHandler(SpinCtrlComponent::OnSpin),
-                          NULL, this);
+                          nullptr, this);
         return spinCtrl;
     }
 
@@ -764,7 +764,7 @@ public:
 
         spinCtrl->Disconnect(wxEVT_COMMAND_SPINCTRL_UPDATED,
                              wxSpinEventHandler(SpinCtrlComponent::OnSpin),
-                             NULL, this);
+                             nullptr, this);
         ComponentBase::Cleanup(obj);
     }
 
@@ -810,7 +810,7 @@ public:
         spinCtrlDouble->SetDigits(obj->GetPropertyAsInteger("digits"));
         spinCtrlDouble->Connect(wxEVT_COMMAND_SPINCTRLDOUBLE_UPDATED,
                                 wxSpinEventHandler(SpinCtrlDoubleComponent::OnSpin),
-                                NULL, this);
+                                nullptr, this);
         return spinCtrlDouble;
     }
 
@@ -835,7 +835,7 @@ public:
 
         spinCtrlDouble->Disconnect(wxEVT_COMMAND_SPINCTRLDOUBLE_UPDATED,
                                    wxSpinEventHandler(SpinCtrlDoubleComponent::OnSpin),
-                                   NULL, this);
+                                   nullptr, this);
         ComponentBase::Cleanup(obj);
     }
 
@@ -1103,7 +1103,7 @@ public:
         picker->GetPickerCtrl()->Connect(
             wxEVT_LEFT_DOWN,
             wxMouseEventHandler(PickerComponentBase::OnLeftClick),
-            NULL, this);
+            nullptr, this);
 
         wxTextCtrl* textCtrl = picker->GetTextCtrl();
         if (!textCtrl)
@@ -1112,7 +1112,7 @@ public:
         textCtrl->Connect(
             wxEVT_LEFT_DOWN,
             wxMouseEventHandler(PickerComponentBase::OnLeftClick),
-            NULL, this);
+            nullptr, this);
     }
 
     void Cleanup(wxObject* obj) override
@@ -1124,7 +1124,7 @@ public:
         picker->GetPickerCtrl()->Disconnect(
             wxEVT_LEFT_DOWN,
             wxMouseEventHandler(PickerComponentBase::OnLeftClick),
-            NULL, this);
+            nullptr, this);
 
         wxTextCtrl* textCtrl = picker->GetTextCtrl();
         if (!textCtrl)
@@ -1133,7 +1133,7 @@ public:
         textCtrl->Disconnect(
             wxEVT_LEFT_DOWN,
             wxMouseEventHandler(PickerComponentBase::OnLeftClick),
-            NULL, this);
+            nullptr, this);
 
         ComponentBase::Cleanup(obj);
     }
@@ -2086,7 +2086,7 @@ public:
     }
     wxDataViewItem GetParent(const wxDataViewItem&) const override
     {
-        return wxDataViewItem(NULL);
+        return wxDataViewItem(nullptr);
     }
     bool IsContainer(const wxDataViewItem&) const override
     {

@@ -687,7 +687,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 	<templates class="WizardPageSimple">
 		<template name="construction">
-			wxWizardPageSimple* $name = new wxWizardPageSimple( #wxparent $name #ifnotnull $bitmap @{ , NULL, NULL, $bitmap @} ); #nl
+			wxWizardPageSimple* $name = new wxWizardPageSimple( #wxparent $name #ifnotnull $bitmap @{ , nullptr, nullptr, $bitmap @} ); #nl
 			m_pages.Add( $name ); #nl
 		</template>
 	</templates>

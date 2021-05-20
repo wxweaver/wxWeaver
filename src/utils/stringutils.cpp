@@ -224,7 +224,7 @@ void XMLUtils::LoadXMLFile(ticpp::Document& doc, bool condenseWhiteSpace,
         ticpp::Node* firstChild = doc.FirstChild();
         declaration = firstChild->ToDeclaration();
     } catch (ticpp::Exception&) {
-        declaration = NULL;
+        declaration = nullptr;
     }
     LoadXMLFileImp(doc, condenseWhiteSpace, path, declaration);
 }
@@ -265,7 +265,7 @@ void XMLUtils::LoadXMLFile(TiXmlDocument& doc, bool condenseWhiteSpace, const wx
         ConvertAndAddDeclaration(path, chosenEncoding);
         LoadXMLFile(doc, condenseWhiteSpace, path);
     }
-    TiXmlDeclaration* declaration = NULL;
+    TiXmlDeclaration* declaration = nullptr;
     TiXmlNode* firstChild = doc.FirstChild();
     if (firstChild)
         declaration = firstChild->ToDeclaration();
