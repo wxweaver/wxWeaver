@@ -9,8 +9,6 @@
       <match type="string" offset="58:59" value="wxFormBuilder_Project"/>
     </magic>
   </mime-type>
-</mime-info>
-<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
   <mime-type type="application/x-wxweaver">
     <comment>wxWeaver Project</comment>
     <glob pattern="*.wxwp"/>

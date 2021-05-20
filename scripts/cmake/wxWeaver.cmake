@@ -195,7 +195,7 @@ if (UNIX AND NOT APPLE)
         DESTINATION "${CMAKE_INSTALL_LIBDIR}/wxweaver"
     )
     install(DIRECTORY
-        "${CMAKE_CURRENT_SOURCE_DIR}/resources/linux/icons"
+        "${CMAKE_CURRENT_SOURCE_DIR}/resources/linux/icons/"
         DESTINATION "${CMAKE_INSTALL_DATADIR}/icons/hicolor"
     )
     install (FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/linux/wxweaver.appdata.xml"
@@ -209,7 +209,7 @@ if (UNIX AND NOT APPLE)
         DESTINATION "${CMAKE_INSTALL_DATADIR}/applications"
     )
     install(DIRECTORY
-        "${CMAKE_CURRENT_SOURCE_DIR}/resources/application"
+        "${CMAKE_CURRENT_SOURCE_DIR}/resources/application/"
         DESTINATION "${CMAKE_INSTALL_DATADIR}/wxweaver"
     )
     install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/COPYING"
