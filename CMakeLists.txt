@@ -16,6 +16,7 @@ option(wxWEAVER_DISABLE_MEDIACTRL "Disable wxMediaCtrl / wxMedia library. [Defau
 include(wxWeaverConfig)
 
 if(${wxWidgets_FOUND})
+    add_subdirectory(sdk)
     include(wxWeaverLibs)
     include(wxWeaver)
 
@@ -43,5 +44,5 @@ Compiler CXX min size flags: ${CMAKE_CXX_FLAGS_MINSIZEREL}
 ")
 endif()
 
-include(Utils)
+#include(Utils)
 #print_all_variables()

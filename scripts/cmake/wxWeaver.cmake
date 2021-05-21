@@ -178,8 +178,8 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 )
 target_link_libraries(${CMAKE_PROJECT_NAME}
     ${wxWidgets_LIBRARIES}
-    wxweaver::ticpp
-    wxweaver::plugin_interface
+    sdk::ticpp
+    sdk::plugin_interface
 )
 if(NOT WIN32)
     target_link_libraries(${CMAKE_PROJECT_NAME} dl)
