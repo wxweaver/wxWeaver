@@ -118,11 +118,11 @@ void IntList::DeleteList()
 void IntList::SetList(const wxString& str)
 {
     DeleteList();
-    wxStringTokenizer tkz(str, wxT(","));
+    wxStringTokenizer tkz(str, ",");
     m_ints.reserve(tkz.CountTokens());
     while (tkz.HasMoreTokens()) {
         wxString secondToken;
-        wxString firstToken = tkz.GetNextToken().BeforeFirst(wxT(':'), &secondToken);
+        wxString firstToken = tkz.GetNextToken().BeforeFirst(':', &secondToken);
         firstToken.Trim(true);
         firstToken.Trim(false);
         secondToken.Trim(true);
@@ -143,11 +143,11 @@ wxString IntList::ToString(bool skipZeroSecond)
     result.reserve(m_pairs ? m_ints.size() * 3 : m_ints.size() * 2);
     for (const auto& entry : m_ints) {
         if (!result.empty()) {
-            result.append(wxT(","));
+            result.append(",");
         }
         result.append(StringUtils::IntToStr(entry.first));
         if (m_pairs && !(skipZeroSecond && !entry.second)) {
-            result.append(wxT(":"));
+            result.append(":");
             result.append(StringUtils::IntToStr(entry.second));
         }
     }

@@ -65,7 +65,7 @@ bool Property::IsNull()
     switch (m_info->GetType()) {
     case PT_BITMAP: {
         wxString path;
-        size_t semicolonIndex = m_value.find_first_of(wxT(";"));
+        size_t semicolonIndex = m_value.find_first_of(";");
         if (semicolonIndex != m_value.npos)
             path = m_value.substr(0, semicolonIndex);
         else
@@ -194,7 +194,7 @@ void Property::SplitParentProperty(std::map<wxString, wxString>* children)
     std::list<PropertyChild>* myChildren = m_info->GetChildren();
     std::list<PropertyChild>::iterator it = myChildren->begin();
 
-    wxStringTokenizer tkz(m_value, wxT(";"), wxTOKEN_RET_EMPTY_ALL);
+    wxStringTokenizer tkz(m_value, ";", wxTOKEN_RET_EMPTY_ALL);
     while (tkz.HasMoreTokens()) {
         if (myChildren->end() == it)
             return;
@@ -228,7 +228,7 @@ ObjectBase::ObjectBase(wxString class_name)
 {
     m_class = class_name;
 
-    LogDebug(wxT("new ObjectBase"));
+    LogDebug("new ObjectBase");
 }
 
 ObjectBase::~ObjectBase()
@@ -240,7 +240,7 @@ ObjectBase::~ObjectBase()
         PObjectBase pobj(GetThis());
         parent->RemoveChild(pobj);
     }
-    LogDebug(wxT("delete ObjectBase"));
+    LogDebug("delete ObjectBase");
 }
 
 wxString ObjectBase::GetIndentString(int indent)
@@ -249,7 +249,7 @@ wxString ObjectBase::GetIndentString(int indent)
     wxString s;
 
     for (i = 0; i < indent; i++)
-        s += wxT(" ");
+        s += " ";
 
     return s;
 }
@@ -259,8 +259,8 @@ PObjectBase ObjectBase::GetNonSizerParent()
     PObjectBase current = GetThis();
 
     while ((current = current->GetParent())
-           && (current->GetObjectInfo()->IsSubclassOf(wxT("sizeritem"))
-               || current->GetObjectInfo()->IsSubclassOf(wxT("sizer"))))
+           && (current->GetObjectInfo()->IsSubclassOf("sizeritem")
+               || current->GetObjectInfo()->IsSubclassOf("sizer")))
         ;
 
     return current;
@@ -272,7 +272,7 @@ PProperty ObjectBase::GetProperty(wxString name)
     if (it != m_properties.end())
         return it->second;
 #if 0
-    LogDebug(wxT("[ObjectBase::GetProperty] Property %s not found!"), name.c_str());
+    LogDebug("[ObjectBase::GetProperty] Property %s not found!"), name.c_str());
     // este aserto falla siempre que se crea un sizeritem
     assert(false);
 #endif
@@ -408,9 +408,9 @@ bool ObjectBase::ChildTypeOk(PObjectType type)
     int nmax = 0;
 
     // check allowed child count
-    if (GetObjectInfo()->GetObjectType()->GetName() == wxT("form")) {
+    if (GetObjectInfo()->GetObjectType()->GetName() == "form") {
         nmax = GetObjectInfo()->GetObjectType()->FindChildType(
-            type, this->GetPropertyAsInteger(wxT("aui_managed")));
+            type, this->GetPropertyAsInteger("aui_managed"));
     } else
         nmax = GetObjectInfo()->GetObjectType()->FindChildType(type, false);
 
@@ -436,7 +436,7 @@ PObjectBase ObjectBase::GetLayout()
 {
     PObjectBase result;
 
-    if (GetParent() && GetParent()->GetObjectInfo()->IsSubclassOf(wxT("sizeritembase")))
+    if (GetParent() && GetParent()->GetObjectInfo()->IsSubclassOf("sizeritembase"))
         result = GetParent();
 
     return result;

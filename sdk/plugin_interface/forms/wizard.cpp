@@ -155,7 +155,7 @@ void Wizard::OnBackOrNext(wxCommandEvent& event)
 
     if (forward) {
         pageIndex++; // Update current page index depending
-    } else           // ( event.GetEventObject() == m_btnPrev )
+    } else           // (event.GetEventObject() == m_btnPrev)
     {
         pageIndex--; // on which button was pressed.
     }
@@ -186,25 +186,16 @@ void Wizard::OnWizEvent(WizardEvent& event)
             Layout();
         }
 #if 0
-        else if ( eventType == wxEVT_WVR_WIZARD_PAGE_CHANGING )
-        {
-            wxLogDebug( wxT("Wizard Page changing.") );
-        }
-        else if ( eventType == wxEVT_WVR_WIZARD_CANCEL )
-        {
-            wxLogDebug( wxT("Wizard Cancel button was pressed.") );
-        }
-        else if ( eventType == wxEVT_WVR_WIZARD_HELP )
-        {
-            wxLogDebug( wxT("Wizard Help button was pressed.") );
-        }
-        else if ( eventType == wxEVT_WVR_WIZARD_FINISHED )
-        {
-            wxLogDebug( wxT("Wizard Finish button was pressed.") );
-        }
-        else if ( eventType == wxEVT_WVR_WIZARD_PAGE_SHOWN )
-        {
-            wxLogDebug( wxT("Wizard Page shown.") );
+        else if (eventType == wxEVT_WVR_WIZARD_PAGE_CHANGING) {
+            wxLogDebug("Wizard Page changing.");
+        } else if (eventType == wxEVT_WVR_WIZARD_CANCEL) {
+            wxLogDebug("Wizard Cancel button was pressed.");
+        } else if (eventType == wxEVT_WVR_WIZARD_HELP) {
+            wxLogDebug("Wizard Help button was pressed.");
+        } else if (eventType == wxEVT_WVR_WIZARD_FINISHED) {
+            wxLogDebug("Wizard Finish button was pressed.");
+        } else if (eventType == wxEVT_WVR_WIZARD_PAGE_SHOWN) {
+            wxLogDebug("Wizard Page shown.");
         }
 #endif
     }

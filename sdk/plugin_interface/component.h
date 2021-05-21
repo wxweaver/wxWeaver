@@ -224,17 +224,17 @@ DLL_FUNC void FreeComponentLibrary(IComponentLibrary* lib);
     }
 
 #define MACRO(name) \
-    lib->RegisterMacro(wxT(#name), name);
+    lib->RegisterMacro(#name, name);
 
 #define SYNONYMOUS(syn, name) \
-    lib->RegisterMacroSynonymous(wxT(#syn), wxT(#name));
+    lib->RegisterMacroSynonymous(#syn, #name);
 
 #define _REGISTER_COMPONENT(name, class, type) \
     {                                          \
         ComponentBase* c = new class();        \
         c->__SetComponentType(type);           \
         c->__SetManager(manager);              \
-        lib->RegisterComponent(wxT(name), c);  \
+        lib->RegisterComponent(name, c);       \
     }
 
 #define WINDOW_COMPONENT(name, class) \

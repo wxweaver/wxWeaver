@@ -265,7 +265,7 @@ void ObjectTree::AddChildren(PObjectBase obj, wxTreeItemId& parent, bool isRoot)
             PObjectBase itemParent = obj->GetParent();
             assert(parent);
             msg = wxString::Format("Item without object as child of \'%s:%s\'",
-                                   itemParent->GetPropertyAsString(wxT("name")).c_str(),
+                                   itemParent->GetPropertyAsString("name").c_str(),
                                    itemParent->GetClassName().c_str());
             wxLogError(msg);
         }
@@ -274,7 +274,7 @@ void ObjectTree::AddChildren(PObjectBase obj, wxTreeItemId& parent, bool isRoot)
         ObjectTreeItemData* itemData = new ObjectTreeItemData(obj);
 
         if (isRoot)
-            new_parent = m_tcObjects->AddRoot(wxT(""), -1, -1, itemData);
+            new_parent = m_tcObjects->AddRoot("", -1, -1, itemData);
         else {
             size_t pos = 0;
 
@@ -288,9 +288,9 @@ void ObjectTree::AddChildren(PObjectBase obj, wxTreeItemId& parent, bool isRoot)
 
             // insert tree item to proper position
             if (pos > 0)
-                new_parent = m_tcObjects->InsertItem(parent, pos, wxT(""), -1, -1, itemData);
+                new_parent = m_tcObjects->InsertItem(parent, pos, "", -1, -1, itemData);
             else
-                new_parent = m_tcObjects->AppendItem(parent, wxT(""), -1, -1, itemData);
+                new_parent = m_tcObjects->AppendItem(parent, "", -1, -1, itemData);
         }
         // Add the item to the map
         m_map.insert(ObjectItemMap::value_type(obj, new_parent));
@@ -326,7 +326,7 @@ void ObjectTree::UpdateItem(wxTreeItemId id, PObjectBase obj)
 {
     // mostramos el nombre
     wxString className(obj->GetClassName());
-    PProperty prop = obj->GetProperty(wxT("name"));
+    PProperty prop = obj->GetProperty("name");
     wxString objName;
     if (prop)
         objName = prop->GetValue();
@@ -341,9 +341,9 @@ void ObjectTree::Create()
     size_t index = 0;
     m_iconList = new wxImageList(ICON_SIZE, ICON_SIZE);
     {
-        wxBitmap icon = AppBitmaps::GetBitmap(wxT("project"), ICON_SIZE);
+        wxBitmap icon = AppBitmaps::GetBitmap("project", ICON_SIZE);
         m_iconList->Add(icon);
-        m_iconIdx.insert(IconIndexMap::value_type(wxT("_default_"), index++));
+        m_iconIdx.insert(IconIndexMap::value_type("_default_", index++));
     }
     size_t pkg_count = AppData()->GetPackageCount();
     for (size_t i = 0; i < pkg_count; i++) {
@@ -515,20 +515,20 @@ END_EVENT_TABLE()
 ItemPopupMenu::ItemPopupMenu(PObjectBase obj)
     : m_object(obj)
 {
-    Append(MENU_CUT, wxT("Cut\tCtrl+X"));
-    Append(MENU_COPY, wxT("Copy\tCtrl+C"));
-    Append(MENU_PASTE, wxT("Paste\tCtrl+V"));
+    Append(MENU_CUT, _("Cut\tCtrl+X"));
+    Append(MENU_COPY, _("Copy\tCtrl+C"));
+    Append(MENU_PASTE, _("Paste\tCtrl+V"));
     AppendSeparator();
-    Append(MENU_DELETE, wxT("Delete\tCtrl+D"));
+    Append(MENU_DELETE, _("Delete\tCtrl+D"));
     AppendSeparator();
-    Append(MENU_MOVE_UP, wxT("Move Up\tAlt+Up"));
-    Append(MENU_MOVE_DOWN, wxT("Move Down\tAlt+Down"));
-    Append(MENU_MOVE_LEFT, wxT("Move Left\tAlt+Left"));
-    Append(MENU_MOVE_RIGHT, wxT("Move Right\tAlt+Right"));
+    Append(MENU_MOVE_UP, _("Move Up\tAlt+Up"));
+    Append(MENU_MOVE_DOWN, _("Move Down\tAlt+Down"));
+    Append(MENU_MOVE_LEFT, _("Move Left\tAlt+Left"));
+    Append(MENU_MOVE_RIGHT, _("Move Right\tAlt+Right"));
     AppendSeparator();
-    Append(MENU_MOVE_NEW_BOXSIZER, wxT("Move into a new wxBoxSizer"));
+    Append(MENU_MOVE_NEW_BOXSIZER, _("Move into a new wxBoxSizer"));
     AppendSeparator();
-    Append(MENU_EDIT_MENUS, wxT("Menu Editor..."));
+    Append(MENU_EDIT_MENUS, _("Menu Editor..."));
 }
 
 void ItemPopupMenu::OnMenuEvent(wxCommandEvent& event)
@@ -567,12 +567,12 @@ void ItemPopupMenu::OnMenuEvent(wxCommandEvent& event)
         PObjectBase obj = m_object;
         if (obj && (obj->GetClassName() == "wxMenuBar" || obj->GetClassName() == "Frame")) {
             MenuEditor menuEditor;
-            if (obj->GetClassName() == wxT("Frame")) {
+            if (obj->GetClassName() == "Frame") {
                 bool found = false;
                 PObjectBase menubar;
                 for (size_t i = 0; i < obj->GetChildCount() && !found; i++) {
                     menubar = obj->GetChild(i);
-                    found = menubar->GetClassName() == wxT("wxMenuBar");
+                    found = menubar->GetClassName() == "wxMenuBar";
                 }
                 if (found)
                     obj = menubar;

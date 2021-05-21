@@ -121,7 +121,7 @@ void CppPanel::InitStyledTextCtrl(wxStyledTextCtrl* stc)
 #ifdef __WXGTK__
     // Debe haber un bug en wxGTK ya que la familia wxMODERN no es de ancho fijo.
     wxFont font(8, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    font.SetFaceName(wxT("Monospace"));
+    font.SetFaceName("Monospace");
 #else
     wxFont font(10, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 #endif
@@ -275,7 +275,7 @@ void CppPanel::OnCodeGeneration(wxWeaverEvent& event)
     // Get C++ properties from the project
     // If C++ generation is not enabled, do not generate the file
     bool doFile = false;
-    PProperty pCodeGen = project->GetProperty(wxT("code_generation"));
+    PProperty pCodeGen = project->GetProperty("code_generation");
     if (pCodeGen)
         doFile = TypeConv::FlagSet("C++", pCodeGen->GetValue()) && !panelOnly;
 
@@ -383,7 +383,7 @@ void CppPanel::OnCodeGeneration(wxWeaverEvent& event)
         codegen.SetHeaderWriter(h_cw);
         codegen.SetSourceWriter(cpp_cw);
         codegen.GenerateCode(project);
-        wxLogStatus(wxT("Code generated on \'%s\'."), path.c_str());
+        wxLogStatus("Code generated on \'%s\'.", path.c_str());
     } catch (wxWeaverException& ex) {
         wxLogError(ex.what());
     }

@@ -84,16 +84,20 @@ void XrcPanel::InitStyledTextCtrl(wxStyledTextCtrl* stc)
 #ifdef __WXGTK__
     // Debe haber un bug en wxGTK ya que la familia wxMODERN no es de ancho fijo.
     wxFont font(8, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    font.SetFaceName(wxT("Monospace"));
+    font.SetFaceName("Monospace");
 #else
     wxFont font(10, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 #endif
-    stc->StyleSetForeground(
-        wxSTC_STYLE_DEFAULT, wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-
-    stc->StyleSetBackground(
-        wxSTC_STYLE_DEFAULT, wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
-
+    bool darkMode = AppData()->IsDarkMode();
+    if (darkMode) {
+        stc->StyleSetBackground(wxSTC_STYLE_DEFAULT, wxColour(30, 30, 30));
+        stc->StyleSetForeground(wxSTC_STYLE_DEFAULT, wxColour(170, 180, 190));
+    } else {
+        stc->StyleSetBackground(wxSTC_STYLE_DEFAULT,
+                                wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
+        stc->StyleSetForeground(wxSTC_STYLE_DEFAULT,
+                                wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
+    }
     stc->StyleSetFont(wxSTC_STYLE_DEFAULT, font);
     stc->StyleClearAll();
     if (!AppData()->IsDarkMode()) {
@@ -105,16 +109,16 @@ void XrcPanel::InitStyledTextCtrl(wxStyledTextCtrl* stc)
         stc->StyleSetForeground(wxSTC_H_TAG, wxColour(18, 144, 195));
         stc->StyleSetForeground(wxSTC_H_ATTRIBUTE, wxColour(221, 40, 103));
     }
+    stc->SetCaretForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
+    stc->SetCaretWidth(2);
+    stc->SetReadOnly(true);
+
+    // TODO: Make this configurable
     stc->SetUseTabs(false);
     stc->SetTabWidth(4);
     stc->SetTabIndents(true);
     stc->SetBackSpaceUnIndents(true);
     stc->SetIndent(4);
-    stc->SetSelBackground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT));
-    stc->SetSelForeground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHTTEXT));
-    stc->SetCaretForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-    stc->SetCaretWidth(2);
-    stc->SetReadOnly(true);
 }
 
 void XrcPanel::OnFind(wxFindDialogEvent& event)
@@ -215,7 +219,7 @@ void XrcPanel::OnCodeGeneration(wxWeaverEvent& event)
                 file = "noname";
 
             wxString filePath;
-            filePath << path << file << wxT(".xrc");
+            filePath << path << file << ".xrc";
             PCodeWriter cw(new FileCodeWriter(filePath));
 
             XrcCodeGenerator codegen;

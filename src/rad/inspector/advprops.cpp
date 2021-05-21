@@ -47,8 +47,8 @@ WX_PG_IMPLEMENT_PROPERTY_CLASS(wxWeaverSizeProperty, wxPGProperty,
     : wxPGProperty(label, name)
 {
     DoSetValue(value);
-    AddPrivateChild(new wxIntProperty(wxT("Width"), wxPG_LABEL, value.x));
-    AddPrivateChild(new wxIntProperty(wxT("Height"), wxPG_LABEL, value.y));
+    AddPrivateChild(new wxIntProperty("Width", wxPG_LABEL, value.x));
+    AddPrivateChild(new wxIntProperty("Height", wxPG_LABEL, value.y));
 }
 
 void wxWeaverSizeProperty::RefreshChildren()
@@ -100,8 +100,8 @@ WX_PG_IMPLEMENT_PROPERTY_CLASS(wxWeaverPointProperty, wxPGProperty, wxPoint, con
     : wxPGProperty(label, name)
 {
     DoSetValue(value);
-    AddPrivateChild(new wxIntProperty(wxT("X"), wxPG_LABEL, value.x));
-    AddPrivateChild(new wxIntProperty(wxT("Y"), wxPG_LABEL, value.y));
+    AddPrivateChild(new wxIntProperty("X", wxPG_LABEL, value.x));
+    AddPrivateChild(new wxIntProperty("Y", wxPG_LABEL, value.y));
 }
 
 wxWeaverPointProperty::~wxWeaverPointProperty() { }
@@ -159,21 +159,21 @@ WX_PG_IMPLEMENT_PROPERTY_CLASS(wxWeaverBitmapProperty, wxPGProperty,
     // some properties can contain value like "[-1;-1]"
     // which must be modified due to use of ";" as a string separator
     wxString values = parentValue;
-    wxRegEx regex(wxT("\\[.+;.+\\]"));
+    wxRegEx regex("\\[.+;.+\\]");
     if (regex.IsValid()) {
         if (regex.Matches(values)) {
             wxString sizeVal = regex.GetMatch(values);
-            sizeVal.Replace(wxT(";"), wxT("<semicolon>"));
-            sizeVal.Replace(wxT("["), wxT(""));
-            sizeVal.Replace(wxT("]"), wxT(""));
+            sizeVal.Replace(";", "<semicolon>");
+            sizeVal.Replace("[", "");
+            sizeVal.Replace("]", "");
             regex.Replace(&values, sizeVal);
         }
     }
-    childValues = wxStringTokenize(values, wxT(';'), wxTOKEN_RET_EMPTY_ALL);
+    childValues = wxStringTokenize(values, ';', wxTOKEN_RET_EMPTY_ALL);
     for (wxArrayString::iterator value = childValues.begin();
          value != childValues.end(); ++value) {
         value->Trim(false);
-        value->Replace(wxT("<semicolon>"), wxT(";"));
+        value->Replace("<semicolon>", ";");
     }
 }
 
@@ -232,7 +232,7 @@ wxPGProperty* wxWeaverBitmapProperty::CreatePropertySource(int sourceIndex)
     sourceChoices.Add(_("Load From Art Provider"));
 
     wxPGProperty* srcProp
-        = new wxEnumProperty(wxT("source"), wxPG_LABEL, sourceChoices, sourceIndex);
+        = new wxEnumProperty("source", wxPG_LABEL, sourceChoices, sourceIndex);
 
     srcProp->SetHelpString(
         wxString(
@@ -258,7 +258,7 @@ wxPGProperty* wxWeaverBitmapProperty::CreatePropertyFilePath()
     // Add 'file_path' property
     // (common for 'Load From File' and 'Load From Embedded File' choices)
     wxPGProperty* propFilePath
-        = new wxImageFileProperty(wxT("file_path"), wxPG_LABEL);
+        = new wxImageFileProperty("file_path", wxPG_LABEL);
 
     propFilePath->SetHelpString(_("Path to the image file."));
 #if 0
@@ -275,7 +275,7 @@ wxPGProperty* wxWeaverBitmapProperty::CreatePropertyResourceName()
     // Create 'resource_name' property
     // (common for 'Load From Resource' and 'Load From Icon Resource' choices)
     wxPGProperty* propResName
-        = new wxStringProperty(wxT("resource_name"), wxPG_LABEL);
+        = new wxStringProperty("resource_name", wxPG_LABEL);
 
     propResName->SetHelpString(
         _("Windows Only. Name of the resource in the .rc file."));
@@ -287,7 +287,7 @@ wxPGProperty* wxWeaverBitmapProperty::CreatePropertyIconSize()
 {
     // Create 'ico_size' property ('Load From Icon Resource' only)
     wxPGProperty* propIcoSize
-        = new wxWeaverSizeProperty(wxT("ico_size"), wxPG_LABEL, wxDefaultSize);
+        = new wxWeaverSizeProperty("ico_size", wxPG_LABEL, wxDefaultSize);
 
     propIcoSize->SetHelpString(
         _("The size of the icon to use from a ICON resource with multiple icons in it."));
@@ -298,7 +298,7 @@ wxPGProperty* wxWeaverBitmapProperty::CreatePropertyIconSize()
 wxPGProperty* wxWeaverBitmapProperty::CreatePropertyXrcName()
 {
     // Create 'xrc_name' property ('Load From XRC' only)
-    wxPGProperty* propXRCName = new wxStringProperty(wxT("xrc_name"), wxPG_LABEL);
+    wxPGProperty* propXRCName = new wxStringProperty("xrc_name", wxPG_LABEL);
     propXRCName->SetHelpString(_("Name of the item in the XRC ressources."));
     return propXRCName;
 }
@@ -307,165 +307,165 @@ wxPGProperty* wxWeaverBitmapProperty::CreatePropertyArtId()
 {
     // Create 'id' property ('Load From Art Provider' only)
     wxPGChoices artIdChoices;
-    artIdChoices.Add(wxT("wxART_ADD_BOOKMARK"));
-    artIdChoices.Add(wxT("wxART_DEL_BOOKMARK"));
-    artIdChoices.Add(wxT("wxART_HELP_SIDE_PANEL"));
-    artIdChoices.Add(wxT("wxART_HELP_SETTINGS"));
-    artIdChoices.Add(wxT("wxART_HELP_BOOK"));
-    artIdChoices.Add(wxT("wxART_HELP_FOLDER"));
-    artIdChoices.Add(wxT("wxART_HELP_PAGE"));
-    artIdChoices.Add(wxT("wxART_GO_BACK"));
-    artIdChoices.Add(wxT("wxART_GO_FORWARD"));
-    artIdChoices.Add(wxT("wxART_GO_UP"));
-    artIdChoices.Add(wxT("wxART_GO_DOWN"));
-    artIdChoices.Add(wxT("wxART_GO_TO_PARENT"));
-    artIdChoices.Add(wxT("wxART_GO_HOME"));
-    artIdChoices.Add(wxT("wxART_FILE_OPEN"));
-    artIdChoices.Add(wxT("wxART_FILE_SAVE"));
-    artIdChoices.Add(wxT("wxART_FILE_SAVE_AS"));
-    artIdChoices.Add(wxT("wxART_GOTO_FIRST"));
-    artIdChoices.Add(wxT("wxART_GOTO_LAST"));
-    artIdChoices.Add(wxT("wxART_PRINT"));
-    artIdChoices.Add(wxT("wxART_HELP"));
-    artIdChoices.Add(wxT("wxART_TIP"));
-    artIdChoices.Add(wxT("wxART_REPORT_VIEW"));
-    artIdChoices.Add(wxT("wxART_LIST_VIEW"));
-    artIdChoices.Add(wxT("wxART_NEW_DIR"));
-    artIdChoices.Add(wxT("wxART_HARDDISK"));
-    artIdChoices.Add(wxT("wxART_FLOPPY"));
-    artIdChoices.Add(wxT("wxART_CDROM"));
-    artIdChoices.Add(wxT("wxART_REMOVABLE"));
-    artIdChoices.Add(wxT("wxART_FOLDER"));
-    artIdChoices.Add(wxT("wxART_FOLDER_OPEN"));
-    artIdChoices.Add(wxT("wxART_GO_DIR_UP"));
-    artIdChoices.Add(wxT("wxART_EXECUTABLE_FILE"));
-    artIdChoices.Add(wxT("wxART_NORMAL_FILE"));
-    artIdChoices.Add(wxT("wxART_TICK_MARK"));
-    artIdChoices.Add(wxT("wxART_CROSS_MARK"));
-    artIdChoices.Add(wxT("wxART_ERROR"));
-    artIdChoices.Add(wxT("wxART_QUESTION"));
-    artIdChoices.Add(wxT("wxART_WARNING"));
-    artIdChoices.Add(wxT("wxART_INFORMATION"));
-    artIdChoices.Add(wxT("wxART_MISSING_IMAGE"));
-    artIdChoices.Add(wxT("wxART_COPY"));
-    artIdChoices.Add(wxT("wxART_CUT"));
-    artIdChoices.Add(wxT("wxART_PASTE"));
-    artIdChoices.Add(wxT("wxART_DELETE"));
-    artIdChoices.Add(wxT("wxART_NEW"));
-    artIdChoices.Add(wxT("wxART_UNDO"));
-    artIdChoices.Add(wxT("wxART_REDO"));
-    artIdChoices.Add(wxT("wxART_PLUS"));
-    artIdChoices.Add(wxT("wxART_MINUS"));
-    artIdChoices.Add(wxT("wxART_CLOSE"));
-    artIdChoices.Add(wxT("wxART_QUIT"));
-    artIdChoices.Add(wxT("wxART_FIND"));
-    artIdChoices.Add(wxT("wxART_FIND_AND_REPLACE"));
-    artIdChoices.Add(wxT("wxART_FULL_SCREEN"));
-    artIdChoices.Add(wxT("wxART_EDIT"));
+    artIdChoices.Add("wxART_ADD_BOOKMARK");
+    artIdChoices.Add("wxART_DEL_BOOKMARK");
+    artIdChoices.Add("wxART_HELP_SIDE_PANEL");
+    artIdChoices.Add("wxART_HELP_SETTINGS");
+    artIdChoices.Add("wxART_HELP_BOOK");
+    artIdChoices.Add("wxART_HELP_FOLDER");
+    artIdChoices.Add("wxART_HELP_PAGE");
+    artIdChoices.Add("wxART_GO_BACK");
+    artIdChoices.Add("wxART_GO_FORWARD");
+    artIdChoices.Add("wxART_GO_UP");
+    artIdChoices.Add("wxART_GO_DOWN");
+    artIdChoices.Add("wxART_GO_TO_PARENT");
+    artIdChoices.Add("wxART_GO_HOME");
+    artIdChoices.Add("wxART_FILE_OPEN");
+    artIdChoices.Add("wxART_FILE_SAVE");
+    artIdChoices.Add("wxART_FILE_SAVE_AS");
+    artIdChoices.Add("wxART_GOTO_FIRST");
+    artIdChoices.Add("wxART_GOTO_LAST");
+    artIdChoices.Add("wxART_PRINT");
+    artIdChoices.Add("wxART_HELP");
+    artIdChoices.Add("wxART_TIP");
+    artIdChoices.Add("wxART_REPORT_VIEW");
+    artIdChoices.Add("wxART_LIST_VIEW");
+    artIdChoices.Add("wxART_NEW_DIR");
+    artIdChoices.Add("wxART_HARDDISK");
+    artIdChoices.Add("wxART_FLOPPY");
+    artIdChoices.Add("wxART_CDROM");
+    artIdChoices.Add("wxART_REMOVABLE");
+    artIdChoices.Add("wxART_FOLDER");
+    artIdChoices.Add("wxART_FOLDER_OPEN");
+    artIdChoices.Add("wxART_GO_DIR_UP");
+    artIdChoices.Add("wxART_EXECUTABLE_FILE");
+    artIdChoices.Add("wxART_NORMAL_FILE");
+    artIdChoices.Add("wxART_TICK_MARK");
+    artIdChoices.Add("wxART_CROSS_MARK");
+    artIdChoices.Add("wxART_ERROR");
+    artIdChoices.Add("wxART_QUESTION");
+    artIdChoices.Add("wxART_WARNING");
+    artIdChoices.Add("wxART_INFORMATION");
+    artIdChoices.Add("wxART_MISSING_IMAGE");
+    artIdChoices.Add("wxART_COPY");
+    artIdChoices.Add("wxART_CUT");
+    artIdChoices.Add("wxART_PASTE");
+    artIdChoices.Add("wxART_DELETE");
+    artIdChoices.Add("wxART_NEW");
+    artIdChoices.Add("wxART_UNDO");
+    artIdChoices.Add("wxART_REDO");
+    artIdChoices.Add("wxART_PLUS");
+    artIdChoices.Add("wxART_MINUS");
+    artIdChoices.Add("wxART_CLOSE");
+    artIdChoices.Add("wxART_QUIT");
+    artIdChoices.Add("wxART_FIND");
+    artIdChoices.Add("wxART_FIND_AND_REPLACE");
+    artIdChoices.Add("wxART_FULL_SCREEN");
+    artIdChoices.Add("wxART_EDIT");
 
-    // TODO: #if defined(__wxGTK__)
-    artIdChoices.Add(wxT("gtk-about"));
-    artIdChoices.Add(wxT("gtk-add"));
-    artIdChoices.Add(wxT("gtk-apply"));
-    artIdChoices.Add(wxT("gtk-bold"));
-    artIdChoices.Add(wxT("gtk-cancel"));
-    artIdChoices.Add(wxT("gtk-caps-lock-warning"));
-    artIdChoices.Add(wxT("gtk-cdrom"));
-    artIdChoices.Add(wxT("gtk-clear"));
-    artIdChoices.Add(wxT("gtk-close"));
-    artIdChoices.Add(wxT("gtk-color-picker"));
-    artIdChoices.Add(wxT("gtk-convert"));
-    artIdChoices.Add(wxT("gtk-copy"));
-    artIdChoices.Add(wxT("gtk-cut"));
-    artIdChoices.Add(wxT("gtk-delete"));
-    artIdChoices.Add(wxT("gtk-dialog-authentication"));
-    artIdChoices.Add(wxT("gtk-dialog-error"));
-    artIdChoices.Add(wxT("gtk-dialog-info"));
-    artIdChoices.Add(wxT("gtk-dialog-question"));
-    artIdChoices.Add(wxT("gtk-dialog-warning"));
-    artIdChoices.Add(wxT("gtk-warning"));
-    artIdChoices.Add(wxT("gtk-discard"));
-    artIdChoices.Add(wxT("gtk-disconnect"));
-    artIdChoices.Add(wxT("gtk-dnd"));
-    artIdChoices.Add(wxT("gtk-dnd-multiple"));
-    artIdChoices.Add(wxT("gtk-edit"));
-    artIdChoices.Add(wxT("gtk-execute"));
-    artIdChoices.Add(wxT("gtk-file"));
-    artIdChoices.Add(wxT("gtk-find"));
-    artIdChoices.Add(wxT("gtk-find-and-replace"));
-    artIdChoices.Add(wxT("gtk-fullscreen"));
-    artIdChoices.Add(wxT("gtk-goto-bottom"));
-    artIdChoices.Add(wxT("gtk-goto-first"));
-    artIdChoices.Add(wxT("gtk-goto-last"));
-    artIdChoices.Add(wxT("gtk-goto-top"));
-    artIdChoices.Add(wxT("gtk-go-back"));
-    artIdChoices.Add(wxT("gtk-go-down"));
-    artIdChoices.Add(wxT("gtk-go-forward"));
-    artIdChoices.Add(wxT("gtk-go-up"));
-    artIdChoices.Add(wxT("gtk-harddisk"));
-    artIdChoices.Add(wxT("gtk-indent"));
-    artIdChoices.Add(wxT("gtk-index"));
-    artIdChoices.Add(wxT("gtk-info"));
-    artIdChoices.Add(wxT("gtk-italic"));
-    artIdChoices.Add(wxT("gtk-jump-to"));
-    artIdChoices.Add(wxT("gtk-justify-center"));
-    artIdChoices.Add(wxT("gtk-justify-fill"));
-    artIdChoices.Add(wxT("gtk-justify-left"));
-    artIdChoices.Add(wxT("gtk-justify-right"));
-    artIdChoices.Add(wxT("gtk-leave-fullscreen"));
-    artIdChoices.Add(wxT("gtk-media-forward"));
-    artIdChoices.Add(wxT("gtk-media-next"));
-    artIdChoices.Add(wxT("gtk-media-forward"));
-    artIdChoices.Add(wxT("gtk-media-pause"));
-    artIdChoices.Add(wxT("gtk-media-play"));
-    artIdChoices.Add(wxT("gtk-media-previous"));
-    artIdChoices.Add(wxT("gtk-media-record"));
-    artIdChoices.Add(wxT("gtk-media-rewind"));
-    artIdChoices.Add(wxT("gtk-media-stop"));
-    artIdChoices.Add(wxT("gtk-missing-image"));
-    artIdChoices.Add(wxT("gtk-network"));
-    artIdChoices.Add(wxT("gtk-new"));
-    artIdChoices.Add(wxT("gtk-no"));
-    artIdChoices.Add(wxT("gtk-ok"));
-    artIdChoices.Add(wxT("gtk-open"));
-    artIdChoices.Add(wxT("gtk-orientation-landscape"));
-    artIdChoices.Add(wxT("gtk-orientation-portrait"));
-    artIdChoices.Add(wxT("gtk-orientation-reverse-landscape"));
-    artIdChoices.Add(wxT("gtk-orientation-reverse-portrait"));
-    artIdChoices.Add(wxT("gtk-page-setup"));
-    artIdChoices.Add(wxT("gtk-paste"));
-    artIdChoices.Add(wxT("gtk-preferences"));
-    artIdChoices.Add(wxT("gtk-print"));
-    artIdChoices.Add(wxT("gtk-print-paused"));
-    artIdChoices.Add(wxT("gtk-print-report"));
-    artIdChoices.Add(wxT("gtk-print-warning"));
-    artIdChoices.Add(wxT("gtk-properties"));
-    artIdChoices.Add(wxT("gtk-quit"));
-    artIdChoices.Add(wxT("gtk-redo"));
-    artIdChoices.Add(wxT("gtk-refresh"));
-    artIdChoices.Add(wxT("gtk-remove"));
-    artIdChoices.Add(wxT("gtk-save"));
-    artIdChoices.Add(wxT("gtk-save-as"));
-    artIdChoices.Add(wxT("gtk-select-all"));
-    artIdChoices.Add(wxT("gtk-select-color"));
-    artIdChoices.Add(wxT("gtk-select-font"));
-    artIdChoices.Add(wxT("gtk-sort-ascending"));
-    artIdChoices.Add(wxT("gtk-sort-descending"));
-    artIdChoices.Add(wxT("gtk-spell-check"));
-    artIdChoices.Add(wxT("gtk-stop"));
-    artIdChoices.Add(wxT("gtk-strikethrough"));
-    artIdChoices.Add(wxT("gtk-undelete"));
-    artIdChoices.Add(wxT("gtk-underline"));
-    artIdChoices.Add(wxT("gtk-undo"));
-    artIdChoices.Add(wxT("gtk-unindent"));
-    artIdChoices.Add(wxT("gtk-yes"));
-    artIdChoices.Add(wxT("gtk-zoom-100"));
-    artIdChoices.Add(wxT("gtk-zoom-fit"));
-    artIdChoices.Add(wxT("gtk-zoom-in"));
-    artIdChoices.Add(wxT("gtk-zoom-out"));
+    // TODO: Replace with freedesktop ones onlym use #if defined(__wxGTK__) macro
+    artIdChoices.Add("gtk-about");
+    artIdChoices.Add("gtk-add");
+    artIdChoices.Add("gtk-apply");
+    artIdChoices.Add("gtk-bold");
+    artIdChoices.Add("gtk-cancel");
+    artIdChoices.Add("gtk-caps-lock-warning");
+    artIdChoices.Add("gtk-cdrom");
+    artIdChoices.Add("gtk-clear");
+    artIdChoices.Add("gtk-close");
+    artIdChoices.Add("gtk-color-picker");
+    artIdChoices.Add("gtk-convert");
+    artIdChoices.Add("gtk-copy");
+    artIdChoices.Add("gtk-cut");
+    artIdChoices.Add("gtk-delete");
+    artIdChoices.Add("gtk-dialog-authentication");
+    artIdChoices.Add("gtk-dialog-error");
+    artIdChoices.Add("gtk-dialog-info");
+    artIdChoices.Add("gtk-dialog-question");
+    artIdChoices.Add("gtk-dialog-warning");
+    artIdChoices.Add("gtk-warning");
+    artIdChoices.Add("gtk-discard");
+    artIdChoices.Add("gtk-disconnect");
+    artIdChoices.Add("gtk-dnd");
+    artIdChoices.Add("gtk-dnd-multiple");
+    artIdChoices.Add("gtk-edit");
+    artIdChoices.Add("gtk-execute");
+    artIdChoices.Add("gtk-file");
+    artIdChoices.Add("gtk-find");
+    artIdChoices.Add("gtk-find-and-replace");
+    artIdChoices.Add("gtk-fullscreen");
+    artIdChoices.Add("gtk-goto-bottom");
+    artIdChoices.Add("gtk-goto-first");
+    artIdChoices.Add("gtk-goto-last");
+    artIdChoices.Add("gtk-goto-top");
+    artIdChoices.Add("gtk-go-back");
+    artIdChoices.Add("gtk-go-down");
+    artIdChoices.Add("gtk-go-forward");
+    artIdChoices.Add("gtk-go-up");
+    artIdChoices.Add("gtk-harddisk");
+    artIdChoices.Add("gtk-indent");
+    artIdChoices.Add("gtk-index");
+    artIdChoices.Add("gtk-info");
+    artIdChoices.Add("gtk-italic");
+    artIdChoices.Add("gtk-jump-to");
+    artIdChoices.Add("gtk-justify-center");
+    artIdChoices.Add("gtk-justify-fill");
+    artIdChoices.Add("gtk-justify-left");
+    artIdChoices.Add("gtk-justify-right");
+    artIdChoices.Add("gtk-leave-fullscreen");
+    artIdChoices.Add("gtk-media-forward");
+    artIdChoices.Add("gtk-media-next");
+    artIdChoices.Add("gtk-media-forward");
+    artIdChoices.Add("gtk-media-pause");
+    artIdChoices.Add("gtk-media-play");
+    artIdChoices.Add("gtk-media-previous");
+    artIdChoices.Add("gtk-media-record");
+    artIdChoices.Add("gtk-media-rewind");
+    artIdChoices.Add("gtk-media-stop");
+    artIdChoices.Add("gtk-missing-image");
+    artIdChoices.Add("gtk-network");
+    artIdChoices.Add("gtk-new");
+    artIdChoices.Add("gtk-no");
+    artIdChoices.Add("gtk-ok");
+    artIdChoices.Add("gtk-open");
+    artIdChoices.Add("gtk-orientation-landscape");
+    artIdChoices.Add("gtk-orientation-portrait");
+    artIdChoices.Add("gtk-orientation-reverse-landscape");
+    artIdChoices.Add("gtk-orientation-reverse-portrait");
+    artIdChoices.Add("gtk-page-setup");
+    artIdChoices.Add("gtk-paste");
+    artIdChoices.Add("gtk-preferences");
+    artIdChoices.Add("gtk-print");
+    artIdChoices.Add("gtk-print-paused");
+    artIdChoices.Add("gtk-print-report");
+    artIdChoices.Add("gtk-print-warning");
+    artIdChoices.Add("gtk-properties");
+    artIdChoices.Add("gtk-quit");
+    artIdChoices.Add("gtk-redo");
+    artIdChoices.Add("gtk-refresh");
+    artIdChoices.Add("gtk-remove");
+    artIdChoices.Add("gtk-save");
+    artIdChoices.Add("gtk-save-as");
+    artIdChoices.Add("gtk-select-all");
+    artIdChoices.Add("gtk-select-color");
+    artIdChoices.Add("gtk-select-font");
+    artIdChoices.Add("gtk-sort-ascending");
+    artIdChoices.Add("gtk-sort-descending");
+    artIdChoices.Add("gtk-spell-check");
+    artIdChoices.Add("gtk-stop");
+    artIdChoices.Add("gtk-strikethrough");
+    artIdChoices.Add("gtk-undelete");
+    artIdChoices.Add("gtk-underline");
+    artIdChoices.Add("gtk-undo");
+    artIdChoices.Add("gtk-unindent");
+    artIdChoices.Add("gtk-yes");
+    artIdChoices.Add("gtk-zoom-100");
+    artIdChoices.Add("gtk-zoom-fit");
+    artIdChoices.Add("gtk-zoom-in");
+    artIdChoices.Add("gtk-zoom-out");
 
     wxPGProperty* propArtId
-        = new wxEditEnumProperty(wxT("id"), wxPG_LABEL, artIdChoices);
+        = new wxEditEnumProperty("id", wxPG_LABEL, artIdChoices);
 
     propArtId->SetHelpString(
         _("Choose a wxArtID unique identifier of the bitmap or enter a wxArtID for your custom wxArtProvider. IDs with prefix 'gtk-' are available under wxGTK only."));
@@ -477,17 +477,17 @@ wxPGProperty* wxWeaverBitmapProperty::CreatePropertyArtClient()
 {
     // Create 'client' property ('Load From Art Provider' only)
     wxPGChoices artClientChoices;
-    artClientChoices.Add(wxT("wxART_TOOLBAR"));
-    artClientChoices.Add(wxT("wxART_MENU"));
-    artClientChoices.Add(wxT("wxART_BUTTON"));
-    artClientChoices.Add(wxT("wxART_FRAME_ICON"));
-    artClientChoices.Add(wxT("wxART_CMN_DIALOG"));
-    artClientChoices.Add(wxT("wxART_HELP_BROWSER"));
-    artClientChoices.Add(wxT("wxART_MESSAGE_BOX"));
-    artClientChoices.Add(wxT("wxART_OTHER"));
+    artClientChoices.Add("wxART_TOOLBAR");
+    artClientChoices.Add("wxART_MENU");
+    artClientChoices.Add("wxART_BUTTON");
+    artClientChoices.Add("wxART_FRAME_ICON");
+    artClientChoices.Add("wxART_CMN_DIALOG");
+    artClientChoices.Add("wxART_HELP_BROWSER");
+    artClientChoices.Add("wxART_MESSAGE_BOX");
+    artClientChoices.Add("wxART_OTHER");
 
     wxPGProperty* propArtClient
-        = new wxEditEnumProperty(wxT("client"), wxPG_LABEL, artClientChoices);
+        = new wxEditEnumProperty("client", wxPG_LABEL, artClientChoices);
 
     propArtClient->SetHelpString(
         _("Choose a wxArtClient identifier of the client (i.e. who is asking for the bitmap) or enter a wxArtClient for your custom wxArtProvider."));
@@ -533,9 +533,9 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
                 bp->AppendChild(bp->CreatePropertyFilePath());
             }
             if (childVals.GetCount() == 2)
-                newVal = childVals.Item(0) + wxT("; ") + childVals.Item(1);
+                newVal = childVals.Item(0) + "; " + childVals.Item(1);
             else if (childVals.GetCount() > 0)
-                newVal = childVals.Item(0) + wxT("; ");
+                newVal = childVals.Item(0) + "; ";
 
             break;
         }
@@ -554,9 +554,9 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
                 bp->AppendChild(bp->CreatePropertyResourceName());
             }
             if (childVals.GetCount() == 2)
-                newVal = childVals.Item(0) + wxT("; ") + childVals.Item(1);
+                newVal = childVals.Item(0) + "; " + childVals.Item(1);
             else if (childVals.GetCount() > 0)
-                newVal = childVals.Item(0) + wxT("; ");
+                newVal = childVals.Item(0) + "; ";
 
             break;
         }
@@ -577,10 +577,10 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
             }
 
             if (childVals.GetCount() == 3) {
-                newVal = childVals.Item(0) + wxT("; ") + childVals.Item(1)
-                    + wxT("; [") + childVals.Item(2) + wxT("]");
+                newVal = childVals.Item(0) + "; " + childVals.Item(1)
+                    + "; [" + childVals.Item(2) + "]";
             } else if (childVals.GetCount() > 0) {
-                newVal = childVals.Item(0) + wxT("; ; []");
+                newVal = childVals.Item(0) + "; ; []";
             }
             break;
         }
@@ -599,9 +599,9 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
                 bp->AppendChild(bp->CreatePropertyXrcName());
             }
             if (childVals.GetCount() == 2)
-                newVal = childVals.Item(0) + wxT("; ") + childVals.Item(1);
+                newVal = childVals.Item(0) + "; " + childVals.Item(1);
             else if (childVals.GetCount() > 0)
-                newVal = childVals.Item(0) + wxT("; ");
+                newVal = childVals.Item(0) + "; ";
 
             break;
         }
@@ -622,10 +622,10 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
             }
 
             if (childVals.GetCount() == 3) {
-                newVal = childVals.Item(0) + wxT("; ") + childVals.Item(1)
-                    + wxT("; ") + childVals.Item(2);
+                newVal = childVals.Item(0) + "; " + childVals.Item(1)
+                    + "; " + childVals.Item(2);
             } else if (childVals.GetCount() > 0) {
-                newVal = childVals.Item(0) + wxT("; ; ");
+                newVal = childVals.Item(0) + "; ; ";
             }
             break;
         }
@@ -647,7 +647,7 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
                 } else {
                     Item(1)->SetValueToUnspecified();
                 }
-                newVal = Item(0)->GetValueAsString() + wxT("; ") + img;
+                newVal = Item(0)->GetValueAsString() + "; " + img;
             }
         }
         break;
@@ -695,7 +695,7 @@ void wxWeaverBitmapProperty::UpdateChildValues(const wxString& value)
             // The string format of a wxSize doesn't match the display format,
             // convert it like ObjectInspector does
             wxString aux = childVals[2];
-            aux.Replace(wxT(";"), wxT(","));
+            aux.Replace(";", ",");
             Item(2)->SetValue(WXVARIANT(TypeConv::StringToSize(aux)));
         }
     } else if (childVals[0].Contains(_("Load From XRC"))) {
@@ -724,7 +724,7 @@ wxString wxWeaverBitmapProperty::SetupImage(const wxString& imgPath)
         if (!imgName.FileExists())
             return imgPath;
 
-        wxString res = wxT("");
+        wxString res = "";
         wxImage img = wxImage(imgPath);
         if (!img.IsOk())
             return res;
@@ -746,9 +746,9 @@ wxString wxWeaverBitmapProperty::SetupResource(const wxString& resName)
 {
     wxString res = wxEmptyString;
     // Keep old value from an icon resource only
-    if (resName.Contains(wxT(";")) && resName.Contains(wxT("[")))
-        return resName.BeforeFirst(wxT(';'));
-    else if (resName.Contains(wxT(";")))
+    if (resName.Contains(";") && resName.Contains("["))
+        return resName.BeforeFirst(';');
+    else if (resName.Contains(";"))
         return res;
 
     return resName;
@@ -772,7 +772,7 @@ wxPGWindowList wxPGSliderEditor::CreateControls(wxPropertyGrid* propgrid,
 {
     wxCHECK_MSG(property->IsKindOf(wxCLASSINFO(wxFloatProperty)),
                 nullptr,
-                wxT("Slider editor can only be used with wxFloatProperty or derivative."));
+                "Slider editor can only be used with wxFloatProperty or derivative.");
 
     // Use two stage creation to allow cleaner display on wxMSW
     wxSlider* ctrl = new wxSlider();
@@ -855,10 +855,10 @@ void wxPGSliderEditor::SetValueToUnspecified(wxPGProperty* WXUNUSED(property),
 #include <wx/fontenum.h>
 
 static const wxChar* gs_fp_es_family_labels[] = {
-    wxT("Default"), wxT("Decorative"),
-    wxT("Roman"), wxT("Script"),
-    wxT("Swiss"), wxT("Modern"),
-    wxT("Teletype"), wxT("Unknown"),
+    wxS("Default"), wxS("Decorative"),
+    wxS("Roman"), wxS("Script"),
+    wxS("Swiss"), wxS("Modern"),
+    wxS("Teletype"), wxS("Unknown"),
     (const wxChar*)nullptr
 };
 
@@ -870,9 +870,9 @@ static long gs_fp_es_family_values[] = {
 };
 
 static const wxChar* gs_fp_es_style_labels[] = {
-    wxT("Normal"),
-    wxT("Slant"),
-    wxT("Italic"),
+    wxS("Normal"),
+    wxS("Slant"),
+    wxS("Italic"),
     (const wxChar*)nullptr
 };
 
@@ -883,9 +883,9 @@ static long gs_fp_es_style_values[] = {
 };
 
 static const wxChar* gs_fp_es_weight_labels[] = {
-    wxT("Normal"),
-    wxT("Light"),
-    wxT("Bold"),
+    wxS("Normal"),
+    wxS("Light"),
+    wxS("Bold"),
     (const wxChar*)nullptr
 };
 
@@ -921,10 +921,10 @@ WX_PG_IMPLEMENT_PROPERTY_CLASS(wxWeaverFontProperty, wxPGProperty,
     }
     wxString emptyString(wxEmptyString); // TODO: ?????????
 
-    AddPrivateChild(new wxIntProperty(_("Point Size"), wxT("Point Size"),
+    AddPrivateChild(new wxIntProperty(_("Point Size"), "Point Size",
                                       value.m_pointSize));
 
-    AddPrivateChild(new wxEnumProperty(_("Family"), wxT("Family"),
+    AddPrivateChild(new wxEnumProperty(_("Family"), "Family",
                                        gs_fp_es_family_labels, gs_fp_es_family_values,
                                        value.m_family));
 
@@ -935,20 +935,20 @@ WX_PG_IMPLEMENT_PROPERTY_CLASS(wxWeaverFontProperty, wxPGProperty,
 
         wxPGGlobalVars->m_fontFamilyChoices->AddAsSorted(faceName);
 
-    wxPGProperty* p = new wxEnumProperty(_("Face Name"), wxT("Face Name"),
+    wxPGProperty* p = new wxEnumProperty(_("Face Name"), "Face Name",
                                          *wxPGGlobalVars->m_fontFamilyChoices);
     p->SetValueFromString(faceName, wxPG_FULL_VALUE);
     AddPrivateChild(p);
 
-    AddPrivateChild(new wxEnumProperty(_("Style"), wxT("Style"),
+    AddPrivateChild(new wxEnumProperty(_("Style"), "Style",
                                        gs_fp_es_style_labels, gs_fp_es_style_values,
                                        value.m_style));
 
-    AddPrivateChild(new wxEnumProperty(_("Weight"), wxT("Weight"),
+    AddPrivateChild(new wxEnumProperty(_("Weight"), "Weight",
                                        gs_fp_es_weight_labels, gs_fp_es_weight_values,
                                        value.m_weight));
 
-    AddPrivateChild(new wxBoolProperty(_("Underlined"), wxT("Underlined"),
+    AddPrivateChild(new wxBoolProperty(_("Underlined"), "Underlined",
                                        value.m_underlined));
 }
 

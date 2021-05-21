@@ -185,7 +185,7 @@ PObjectBase ObjectDatabase::NewObject(PObjectInfo objInfo)
     objInfo->IncrementInstanceCount();
 
     size_t ins = objInfo->GetInstanceCount();
-    PProperty pname = object->GetProperty(wxT(NAME_TAG));
+    PProperty pname = object->GetProperty(NAME_TAG);
     if (pname)
         pname->SetValue(pname->GetValue() + StringUtils::IntToStr(ins));
 
@@ -254,8 +254,8 @@ PObjectBase ObjectDatabase::CreateObject(std::string classname, PObjectBase pare
 
         //AUI
         bool aui = false;
-        if (parentType->GetName() == wxT("form"))
-            aui = parent->GetPropertyAsInteger(wxT("aui_managed"));
+        if (parentType->GetName() == "form")
+            aui = parent->GetPropertyAsInteger("aui_managed");
 
         int max = parentType->FindChildType(objType, aui);
         /*
@@ -266,20 +266,20 @@ PObjectBase ObjectDatabase::CreateObject(std::string classname, PObjectBase pare
             para forms que no sean de tipo "form". Dicho de otra manera, hay
             código que dependen del nombre del tipo, cosa que hay que evitar.
         */
-        if (parentType->GetName() == wxT("form")
-            && parent->GetClassName() != wxT("Frame")
-            && (objType->GetName() == wxT("statusbar")
-                || objType->GetName() == wxT("menubar")
-                || objType->GetName() == wxT("ribbonbar")
-                || objType->GetName() == wxT("toolbar")))
+        if (parentType->GetName() == "form"
+            && parent->GetClassName() != "Frame"
+            && (objType->GetName() == "statusbar"
+                || objType->GetName() == "menubar"
+                || objType->GetName() == "ribbonbar"
+                || objType->GetName() == "toolbar"))
             return PObjectBase(); // Not a valid type
 #if 1
         // TODO: Re implement wxITEM_DROPDOWN
         // No menu dropdown for wxToolBar until wx 2.9 :(
-        if (parentType->GetName() == wxT("tool")) {
+        if (parentType->GetName() == "tool") {
             PObjectBase gParent = parent->GetParent();
-            if ((gParent->GetClassName() == wxT("wxToolBar"))
-                && (objType->GetName() == wxT("menu")))
+            if ((gParent->GetClassName() == "wxToolBar")
+                && (objType->GetName() == "menu"))
                 return PObjectBase(); // Not a valid type
         }
 #endif
@@ -289,11 +289,11 @@ PObjectBase ObjectDatabase::CreateObject(std::string classname, PObjectBase pare
 
             // we check the number of instances
             int count;
-            if (objType == GetObjectType(wxT("sizer"))
-                || objType == GetObjectType(wxT("gbsizer"))) {
+            if (objType == GetObjectType("sizer")
+                || objType == GetObjectType("gbsizer")) {
                 count = CountChildrenWithSameType(
                     parent,
-                    { GetObjectType(wxT("sizer")), GetObjectType(wxT("gbsizer")) });
+                    { GetObjectType("sizer"), GetObjectType("gbsizer") });
             } else {
                 count = CountChildrenWithSameType(parent, objType);
             }
@@ -334,13 +334,13 @@ PObjectBase ObjectDatabase::CreateObject(std::string classname, PObjectBase pare
                             // sizeritem es un tipo de objeto reservado, para que el uso sea
                             // más práctico se asignan unos valores por defecto en función
                             // del tipo de objeto creado
-                            if (item->GetObjectInfo()->IsSubclassOf(wxT("sizeritembase")))
+                            if (item->GetObjectInfo()->IsSubclassOf("sizeritembase"))
                                 SetDefaultLayoutProperties(item);
 
                             object = item;
                             created = true;
                         } else
-                            wxLogError(wxT("Review your definitions file (objtypes.xml)"));
+                            wxLogError("Review your definitions file (objtypes.xml)");
                     }
                 }
             }
@@ -400,44 +400,44 @@ PObjectBase ObjectDatabase::CopyObject(PObjectBase obj)
 
 void ObjectDatabase::SetDefaultLayoutProperties(PObjectBase sizeritem)
 {
-    if (!sizeritem->GetObjectInfo()->IsSubclassOf(wxT("sizeritembase"))) {
-        LogDebug(wxT("SetDefaultLayoutProperties expects a subclass of sizeritembase"));
+    if (!sizeritem->GetObjectInfo()->IsSubclassOf("sizeritembase")) {
+        LogDebug("SetDefaultLayoutProperties expects a subclass of sizeritembase");
         return;
     }
     PObjectBase child = sizeritem->GetChild(0);
     PObjectInfo childInfo = child->GetObjectInfo();
     wxString objType = child->GetObjectTypeName();
-    PProperty proportion = sizeritem->GetProperty(wxT("proportion"));
+    PProperty proportion = sizeritem->GetProperty("proportion");
 
-    if (childInfo->IsSubclassOf(wxT("sizer"))
-        || childInfo->IsSubclassOf(wxT("gbsizer"))
-        || objType == wxT("splitter")
-        || childInfo->GetClassName() == wxT("spacer")) {
+    if (childInfo->IsSubclassOf("sizer")
+        || childInfo->IsSubclassOf("gbsizer")
+        || objType == "splitter"
+        || childInfo->GetClassName() == "spacer") {
         if (proportion)
-            proportion->SetValue(wxT("1"));
+            proportion->SetValue(wxS("1"));
 
-        sizeritem->GetProperty(wxT("flag"))->SetValue(wxT("wxEXPAND"));
-    } else if (childInfo->GetClassName() == wxT("wxStaticLine")) {
-        sizeritem->GetProperty(wxT("flag"))->SetValue(wxT("wxEXPAND | wxALL"));
-    } else if (childInfo->GetClassName() == wxT("wxToolBar")) {
-        sizeritem->GetProperty(wxT("flag"))->SetValue(wxT("wxEXPAND"));
-    } else if (objType == wxT("widget") || objType == wxT("statusbar")) {
+        sizeritem->GetProperty("flag")->SetValue(wxS("wxEXPAND"));
+    } else if (childInfo->GetClassName() == "wxStaticLine") {
+        sizeritem->GetProperty("flag")->SetValue(wxS("wxEXPAND | wxALL"));
+    } else if (childInfo->GetClassName() == "wxToolBar") {
+        sizeritem->GetProperty("flag")->SetValue(wxS("wxEXPAND"));
+    } else if (objType == "widget" || objType == "statusbar") {
         if (proportion)
-            proportion->SetValue(wxT("0"));
+            proportion->SetValue(wxS("0"));
 
-        sizeritem->GetProperty(wxT("flag"))->SetValue(wxT("wxALL"));
-    } else if (objType == wxT("notebook")
-               || objType == wxT("listbook")
-               || objType == wxT("simplebook")
-               || objType == wxT("choicebook")
-               || objType == wxT("auinotebook")
-               || objType == wxT("treelistctrl")
-               || objType == wxT("expanded_widget")
-               || objType == wxT("container")) {
+        sizeritem->GetProperty("flag")->SetValue(wxS("wxALL"));
+    } else if (objType == "notebook"
+               || objType == "listbook"
+               || objType == "simplebook"
+               || objType == "choicebook"
+               || objType == "auinotebook"
+               || objType == "treelistctrl"
+               || objType == "expanded_widget"
+               || objType == "container") {
         if (proportion)
-            proportion->SetValue(wxT("1"));
+            proportion->SetValue(wxS("1"));
 
-        sizeritem->GetProperty(wxT("flag"))->SetValue(wxT("wxEXPAND | wxALL"));
+        sizeritem->GetProperty("flag")->SetValue(wxS("wxEXPAND | wxALL"));
     }
 }
 
@@ -528,15 +528,15 @@ bool IncludeInPalette(wxString /*type*/)
 void ObjectDatabase::LoadPlugins(PwxWeaverManager manager)
 {
     // Load some default templates
-    LoadCodeGen(m_xmlPath + wxT("properties.cppcode"));
-    LoadCodeGen(m_xmlPath + wxT("properties.pythoncode"));
-    LoadCodeGen(m_xmlPath + wxT("properties.luacode"));
-    LoadCodeGen(m_xmlPath + wxT("properties.phpcode"));
-    LoadPackage(m_xmlPath + wxT("default.xml"), m_iconPath);
-    LoadCodeGen(m_xmlPath + wxT("default.cppcode"));
-    LoadCodeGen(m_xmlPath + wxT("default.pythoncode"));
-    LoadCodeGen(m_xmlPath + wxT("default.luacode"));
-    LoadCodeGen(m_xmlPath + wxT("default.phpcode"));
+    LoadCodeGen(m_xmlPath + "properties.cppcode");
+    LoadCodeGen(m_xmlPath + "properties.pythoncode");
+    LoadCodeGen(m_xmlPath + "properties.luacode");
+    LoadCodeGen(m_xmlPath + "properties.phpcode");
+    LoadPackage(m_xmlPath + "default.xml", m_iconPath);
+    LoadCodeGen(m_xmlPath + "default.cppcode");
+    LoadCodeGen(m_xmlPath + "default.pythoncode");
+    LoadCodeGen(m_xmlPath + "default.luacode");
+    LoadCodeGen(m_xmlPath + "default.phpcode");
 
     // Map to temporarily hold plugins.
     // Used to both set page order and to prevent two plugins with the same name.
@@ -558,8 +558,8 @@ void ObjectDatabase::LoadPlugins(PwxWeaverManager manager)
     while (moreDirectories) {
         // Iterate through .xml files in the xml directory
         wxString nextPluginPath = m_pluginPath + pluginDirName;
-        wxString nextPluginXmlPath = nextPluginPath + wxFILE_SEP_PATH + wxT("xml");
-        wxString nextPluginIconPath = nextPluginPath + wxFILE_SEP_PATH + wxT("icons");
+        wxString nextPluginXmlPath = nextPluginPath + wxFILE_SEP_PATH + "xml";
+        wxString nextPluginIconPath = nextPluginPath + wxFILE_SEP_PATH + "icons";
         if (wxDir::Exists(nextPluginPath)) {
             if (wxDir::Exists(nextPluginXmlPath)) {
                 wxDir pluginXmlDir(nextPluginXmlPath);
@@ -567,7 +567,7 @@ void ObjectDatabase::LoadPlugins(PwxWeaverManager manager)
                     std::map<wxString, PObjectPackage> packagesToSetup;
                     wxString packageXmlFile;
                     bool moreXmlFiles
-                        = pluginXmlDir.GetFirst(&packageXmlFile, wxT("*.xml"),
+                        = pluginXmlDir.GetFirst(&packageXmlFile, "*.xml",
                                                 wxDIR_FILES | wxDIR_HIDDEN);
                     while (moreXmlFiles) {
                         try {
@@ -602,19 +602,19 @@ void ObjectDatabase::LoadPlugins(PwxWeaverManager manager)
                                          fullNextPluginPath.GetFullPath(), manager);
 
                             // Load the C++ code tempates
-                            xmlFileName.SetExt(wxT("cppcode"));
+                            xmlFileName.SetExt("cppcode");
                             LoadCodeGen(xmlFileName.GetFullPath());
 
                             // Load the Python code tempates
-                            xmlFileName.SetExt(wxT("pythoncode"));
+                            xmlFileName.SetExt("pythoncode");
                             LoadCodeGen(xmlFileName.GetFullPath());
 
                             // Load the PHP code tempates
-                            xmlFileName.SetExt(wxT("phpcode"));
+                            xmlFileName.SetExt("phpcode");
                             LoadCodeGen(xmlFileName.GetFullPath());
 
                             // Load the Lua code tempates
-                            xmlFileName.SetExt(wxT("luacode"));
+                            xmlFileName.SetExt("luacode");
                             LoadCodeGen(xmlFileName.GetFullPath());
 
                             std::pair<PackageMap::iterator, bool> addedPackage
@@ -654,16 +654,16 @@ void ObjectDatabase::SetupPackage(const wxString& file,
 #else
     wxStandardPathsBase& stdpaths = wxStandardPaths::Get();
     wxString libPath = stdpaths.GetPluginsDir();
-    libPath.Replace(wxTheApp->GetAppName().c_str(), wxT("wxweaver"));
+    libPath.Replace(wxTheApp->GetAppName().c_str(), "wxweaver");
 #endif
     // Renamed libraries for convenience in debug using a "-xx" wx version as suffix.
     // This will also prevent loading debug libraries in release and vice versa,
     // that used to cause crashes when trying to debug.
-    wxString wxver = wxT("");
+    wxString wxver = "";
 
 #ifdef DEBUG
 #ifdef APPEND_WXVERSION
-    wxver = wxver + wxString::Format(wxT("-%i%i"), wxMAJOR_VERSION, wxMINOR_VERSION);
+    wxver = wxver + wxString::Format("-%i%i"), wxMAJOR_VERSION, wxMINOR_VERSION);
 #endif
 #endif
     try {
@@ -736,14 +736,14 @@ void ObjectDatabase::SetupPackage(const wxString& file,
             // Add the "C++" base class, predefined for the components and widgets
             wxString typeName = classInfo->GetObjectTypeName();
             if (HasCppProperties(typeName)) {
-                PObjectInfo cpp_interface = GetObjectInfo(wxT("C++"));
+                PObjectInfo cpp_interface = GetObjectInfo("C++");
                 if (cpp_interface) {
                     size_t baseIndex = classInfo->AddBaseClass(cpp_interface);
-                    if (typeName == wxT("sizer")
-                        || typeName == wxT("gbsizer")
-                        || typeName == wxT("menuitem")) {
+                    if (typeName == "sizer"
+                        || typeName == "gbsizer"
+                        || typeName == "menuitem") {
                         classInfo->AddBaseClassDefaultPropertyValue(
-                            baseIndex, _("permission"), _("none"));
+                            baseIndex, "permission", "none");
                     }
                 }
             }
@@ -757,53 +757,53 @@ void ObjectDatabase::SetupPackage(const wxString& file,
 // TODO: Replace this horror with a vector or something
 bool ObjectDatabase::HasCppProperties(wxString type)
 {
-    return (type == wxT("notebook")
-            || type == wxT("listbook")
-            || type == wxT("simplebook")
-            || type == wxT("choicebook")
-            || type == wxT("auinotebook")
-            || type == wxT("widget")
-            || type == wxT("expanded_widget")
-            || type == wxT("propgrid")
-            || type == wxT("propgridman")
-            || type == wxT("statusbar")
-            || type == wxT("component")
-            || type == wxT("container")
-            || type == wxT("menubar")
-            || type == wxT("menu")
-            || type == wxT("menuitem")
-            || type == wxT("submenu")
-            || type == wxT("toolbar")
-            || type == wxT("ribbonbar")
-            || type == wxT("ribbonpage")
-            || type == wxT("ribbonpanel")
-            || type == wxT("ribbonbuttonbar")
-            || type == wxT("ribbonbutton")
-            || type == wxT("ribbondropdownbutton")
-            || type == wxT("ribbonhybridbutton")
-            || type == wxT("ribbontogglebutton")
-            || type == wxT("ribbontoolbar")
-            || type == wxT("ribbontool")
-            || type == wxT("ribbondropdowntool")
-            || type == wxT("ribbonhybridtool")
-            || type == wxT("ribbontoggletool")
-            || type == wxT("ribbongallery")
-            || type == wxT("ribbongalleryitem")
-            || type == wxT("dataviewctrl")
-            || type == wxT("dataviewtreectrl")
-            || type == wxT("dataviewlistctrl")
-            || type == wxT("dataviewlistcolumn")
-            || type == wxT("dataviewcolumn")
-            || type == wxT("tool")
-            || type == wxT("splitter")
-            || type == wxT("treelistctrl")
-            || type == wxT("sizer")
-            || type == wxT("nonvisual")
-            || type == wxT("gbsizer")
-            || type == wxT("propgriditem")
-            || type == wxT("propgridpage")
-            || type == wxT("gbsizer")
-            || type == wxT("wizardpagesimple"));
+    return (type == "notebook"
+            || type == "listbook"
+            || type == "simplebook"
+            || type == "choicebook"
+            || type == "auinotebook"
+            || type == "widget"
+            || type == "expanded_widget"
+            || type == "propgrid"
+            || type == "propgridman"
+            || type == "statusbar"
+            || type == "component"
+            || type == "container"
+            || type == "menubar"
+            || type == "menu"
+            || type == "menuitem"
+            || type == "submenu"
+            || type == "toolbar"
+            || type == "ribbonbar"
+            || type == "ribbonpage"
+            || type == "ribbonpanel"
+            || type == "ribbonbuttonbar"
+            || type == "ribbonbutton"
+            || type == "ribbondropdownbutton"
+            || type == "ribbonhybridbutton"
+            || type == "ribbontogglebutton"
+            || type == "ribbontoolbar"
+            || type == "ribbontool"
+            || type == "ribbondropdowntool"
+            || type == "ribbonhybridtool"
+            || type == "ribbontoggletool"
+            || type == "ribbongallery"
+            || type == "ribbongalleryitem"
+            || type == "dataviewctrl"
+            || type == "dataviewtreectrl"
+            || type == "dataviewlistctrl"
+            || type == "dataviewlistcolumn"
+            || type == "dataviewcolumn"
+            || type == "tool"
+            || type == "splitter"
+            || type == "treelistctrl"
+            || type == "sizer"
+            || type == "nonvisual"
+            || type == "gbsizer"
+            || type == "propgriditem"
+            || type == "propgridpage"
+            || type == "gbsizer"
+            || type == "wizardpagesimple");
 }
 
 void ObjectDatabase::LoadCodeGen(const wxString& file)
@@ -893,7 +893,7 @@ PObjectPackage ObjectDatabase::LoadPackage(const wxString& file,
             wxImage image(pkgIconPath, wxBITMAP_TYPE_ANY);
             pkgIcon = wxBitmap(image.Scale(16, 16));
         } else {
-            pkgIcon = AppBitmaps::GetBitmap(wxT("unknown"), 16);
+            pkgIcon = AppBitmaps::GetBitmap("unknown", 16);
         }
 
         package = PObjectPackage(new ObjectPackage(
@@ -939,7 +939,7 @@ PObjectPackage ObjectDatabase::LoadPackage(const wxString& file,
                 wxImage img(iconFullPath, wxBITMAP_TYPE_ANY);
                 objInfo->SetIconFile(wxBitmap(img.Scale(ICON_SIZE, ICON_SIZE)));
             } else {
-                objInfo->SetIconFile(AppBitmaps::GetBitmap(wxT("unknown"), ICON_SIZE));
+                objInfo->SetIconFile(AppBitmaps::GetBitmap("unknown", ICON_SIZE));
             }
             if (!smallIcon.empty() && wxFileName::FileExists(smallIconFullPath)) {
                 wxImage img(smallIconFullPath, wxBITMAP_TYPE_ANY);
@@ -1008,7 +1008,7 @@ void ObjectDatabase::ParseProperties(ticpp::Element* elemObj, PObjectInfo objInf
             ptype = ParsePropertyType(_WXSTR(propType));
         } catch (wxWeaverException& ex) {
             wxLogError(
-                wxT("Error: %s\nWhile parsing property \"%s\" of class \"%s\""),
+                "Error: %s\nWhile parsing property \"%s\" of class \"%s\"",
                 ex.what(), pname.c_str(), objInfo->GetClassName().c_str());
             elem_prop = elem_prop->NextSiblingElement(PROPERTY_TAG, false);
             continue;
@@ -1164,57 +1164,57 @@ void ObjectDatabase::ParseEvents(ticpp::Element* elemObj, PObjectInfo objInfo,
 // TODO: Replace this horror with a vector or something
 bool ObjectDatabase::ShowInPalette(wxString type)
 {
-    return (type == wxT("form")
-            || type == wxT("wizard")
-            || type == wxT("wizardpagesimple")
-            || type == wxT("menubar_form")
-            || type == wxT("toolbar_form")
-            || type == wxT("sizer")
-            || type == wxT("gbsizer")
-            || type == wxT("menu")
-            || type == wxT("menuitem")
-            || type == wxT("submenu")
-            || type == wxT("tool")
-            || type == wxT("ribbonbar")
-            || type == wxT("ribbonpage")
-            || type == wxT("ribbonpanel")
-            || type == wxT("ribbonbuttonbar")
-            || type == wxT("ribbonbutton")
-            || type == wxT("ribbondropdownbutton")
-            || type == wxT("ribbonhybridbutton")
-            || type == wxT("ribbontogglebutton")
-            || type == wxT("ribbontoolbar")
-            || type == wxT("ribbontool")
-            || type == wxT("ribbondropdowntool")
-            || type == wxT("ribbonhybridtool")
-            || type == wxT("ribbontoggletool")
-            || type == wxT("ribbongallery")
-            || type == wxT("ribbongalleryitem")
-            || type == wxT("dataviewctrl")
-            || type == wxT("dataviewtreectrl")
-            || type == wxT("dataviewlistctrl")
-            || type == wxT("dataviewlistcolumn")
-            || type == wxT("dataviewcolumn")
-            || type == wxT("notebook")
-            || type == wxT("listbook")
-            || type == wxT("simplebook")
-            || type == wxT("choicebook")
-            || type == wxT("auinotebook")
-            || type == wxT("widget")
-            || type == wxT("expanded_widget")
-            || type == wxT("propgrid")
-            || type == wxT("propgridman")
-            || type == wxT("propgridpage")
-            || type == wxT("propgriditem")
-            || type == wxT("statusbar")
-            || type == wxT("component")
-            || type == wxT("container")
-            || type == wxT("menubar")
-            || type == wxT("treelistctrl")
-            || type == wxT("treelistctrlcolumn")
-            || type == wxT("toolbar")
-            || type == wxT("nonvisual")
-            || type == wxT("splitter"));
+    return (type == "form"
+            || type == "wizard"
+            || type == "wizardpagesimple"
+            || type == "menubar_form"
+            || type == "toolbar_form"
+            || type == "sizer"
+            || type == "gbsizer"
+            || type == "menu"
+            || type == "menuitem"
+            || type == "submenu"
+            || type == "tool"
+            || type == "ribbonbar"
+            || type == "ribbonpage"
+            || type == "ribbonpanel"
+            || type == "ribbonbuttonbar"
+            || type == "ribbonbutton"
+            || type == "ribbondropdownbutton"
+            || type == "ribbonhybridbutton"
+            || type == "ribbontogglebutton"
+            || type == "ribbontoolbar"
+            || type == "ribbontool"
+            || type == "ribbondropdowntool"
+            || type == "ribbonhybridtool"
+            || type == "ribbontoggletool"
+            || type == "ribbongallery"
+            || type == "ribbongalleryitem"
+            || type == "dataviewctrl"
+            || type == "dataviewtreectrl"
+            || type == "dataviewlistctrl"
+            || type == "dataviewlistcolumn"
+            || type == "dataviewcolumn"
+            || type == "notebook"
+            || type == "listbook"
+            || type == "simplebook"
+            || type == "choicebook"
+            || type == "auinotebook"
+            || type == "widget"
+            || type == "expanded_widget"
+            || type == "propgrid"
+            || type == "propgridman"
+            || type == "propgridpage"
+            || type == "propgriditem"
+            || type == "statusbar"
+            || type == "component"
+            || type == "container"
+            || type == "menubar"
+            || type == "treelistctrl"
+            || type == "treelistctrlcolumn"
+            || type == "toolbar"
+            || type == "nonvisual"
+            || type == "splitter");
 }
 
 void ObjectDatabase::ImportComponentLibrary(wxString libfile, PwxWeaverManager manager)
@@ -1225,7 +1225,7 @@ void ObjectDatabase::ImportComponentLibrary(wxString libfile, PwxWeaverManager m
     typedef IComponentLibrary* (*PFGetComponentLibrary)(IManager * manager);
 
 #ifdef __WXMAC__
-    path += wxT(".dylib");
+    path += ".dylib";
 
     // open the library
     void* handle = dlopen(path.mb_str(), RTLD_LAZY);
@@ -1233,7 +1233,7 @@ void ObjectDatabase::ImportComponentLibrary(wxString libfile, PwxWeaverManager m
     if (!handle) {
         wxString error = wxString(dlerror(), wxConvUTF8);
 
-        wxWEAVER_THROW_EX(wxT("Error loading library ") << path << wxT(" ") << error)
+        wxWEAVER_THROW_EX("Error loading library " << path << " " << error)
     }
     dlerror(); // reset errors
 
@@ -1256,14 +1256,14 @@ void ObjectDatabase::ImportComponentLibrary(wxString libfile, PwxWeaverManager m
     // Attempt to load the DLL
     wxDynamicLibrary* library = new wxDynamicLibrary(path);
     if (!library->IsLoaded()) {
-        wxWEAVER_THROW_EX(wxT("Error loading library ") << path)
+        wxWEAVER_THROW_EX("Error loading library " << path)
     }
     m_libs.push_back(library);
 
     PFGetComponentLibrary GetComponentLibrary
-        = (PFGetComponentLibrary)library->GetSymbol(wxT("GetComponentLibrary"));
+        = (PFGetComponentLibrary)library->GetSymbol("GetComponentLibrary");
     PFFreeComponentLibrary FreeComponentLibrary
-        = (PFFreeComponentLibrary)library->GetSymbol(wxT("FreeComponentLibrary"));
+        = (PFFreeComponentLibrary)library->GetSymbol("FreeComponentLibrary");
 
     if (!(GetComponentLibrary && FreeComponentLibrary)) {
         wxWEAVER_THROW_EX(path << " is not a valid component library")
@@ -1308,7 +1308,7 @@ PropertyType ObjectDatabase::ParsePropertyType(wxString str)
         result = it->second;
     else {
         wxWEAVER_THROW_EX(wxString::Format(
-            wxT("Unknown property type \"%s\""),
+            "Unknown property type \"%s\"",
             str.c_str()));
     }
     return result;
@@ -1322,36 +1322,36 @@ wxString ObjectDatabase::ParseObjectType(wxString str)
 #define PT(x, y) m_propTypes.insert(PTMap::value_type(x, y))
 void ObjectDatabase::InitPropertyTypes()
 {
-    PT(wxT("bool"), PT_BOOL);
-    PT(wxT("text"), PT_TEXT);
-    PT(wxT("int"), PT_INT);
-    PT(wxT("uint"), PT_UINT);
-    PT(wxT("bitlist"), PT_BITLIST);
-    PT(wxT("intlist"), PT_INTLIST);
-    PT(wxT("uintlist"), PT_UINTLIST);
-    PT(wxT("intpairlist"), PT_INTPAIRLIST);
-    PT(wxT("uintpairlist"), PT_UINTPAIRLIST);
-    PT(wxT("option"), PT_OPTION);
-    PT(wxT("macro"), PT_MACRO);
-    PT(wxT("path"), PT_PATH);
-    PT(wxT("file"), PT_FILE);
-    PT(wxT("wxString"), PT_WXSTRING);
-    PT(wxT("wxPoint"), PT_WXPOINT);
-    PT(wxT("wxSize"), PT_WXSIZE);
-    PT(wxT("wxFont"), PT_WXFONT);
-    PT(wxT("wxColour"), PT_WXCOLOUR);
-    PT(wxT("bitmap"), PT_BITMAP);
-    PT(wxT("wxString_i18n"), PT_WXSTRING_I18N);
-    PT(wxT("stringlist"), PT_STRINGLIST);
-    PT(wxT("float"), PT_FLOAT);
-    PT(wxT("parent"), PT_PARENT);
-    PT(wxT("editoption"), PT_EDIT_OPTION);
+    PT("bool", PT_BOOL);
+    PT("text", PT_TEXT);
+    PT("int", PT_INT);
+    PT("uint", PT_UINT);
+    PT("bitlist", PT_BITLIST);
+    PT("intlist", PT_INTLIST);
+    PT("uintlist", PT_UINTLIST);
+    PT("intpairlist", PT_INTPAIRLIST);
+    PT("uintpairlist", PT_UINTPAIRLIST);
+    PT("option", PT_OPTION);
+    PT("macro", PT_MACRO);
+    PT("path", PT_PATH);
+    PT("file", PT_FILE);
+    PT("wxString", PT_WXSTRING);
+    PT("wxPoint", PT_WXPOINT);
+    PT("wxSize", PT_WXSIZE);
+    PT("wxFont", PT_WXFONT);
+    PT("wxColour", PT_WXCOLOUR);
+    PT("bitmap", PT_BITMAP);
+    PT("wxString_i18n", PT_WXSTRING_I18N);
+    PT("stringlist", PT_STRINGLIST);
+    PT("float", PT_FLOAT);
+    PT("parent", PT_PARENT);
+    PT("editoption", PT_EDIT_OPTION);
 }
 
 bool ObjectDatabase::LoadObjectTypes()
 {
     ticpp::Document doc;
-    wxString xmlPath = m_xmlPath + wxT("objtypes.xml");
+    wxString xmlPath = m_xmlPath + "objtypes.xml";
     XMLUtils::LoadXMLFile(doc, true, xmlPath);
 
     // First load the object types, then the children

@@ -35,13 +35,13 @@ void CustomKeysEvtHandler::OnKeyPress(wxKeyEvent& event)
     if (event.GetKeyCode() == WXK_DELETE) {
         AppData()->RemoveObject(AppData()->GetSelectedObject());
     } else if (event.GetKeyCode() == 'P') {
-        LogDebug(wxT("#### Prueba del parser ####"));
+        LogDebug("#### Prueba del parser ####");
         PObjectBase obj = AppData()->GetSelectedObject();
-        PCodeInfo code_info = obj->GetObjectInfo()->GetCodeInfo(wxT("C++"));
-        LogDebug(wxT("#### Plantillas ####"));
-        LogDebug(code_info->GetTemplate(wxT("construction")));
-        LogDebug(code_info->GetTemplate(wxT("declaration")));
-        LogDebug(wxT("#### Código ####"));
+        PCodeInfo code_info = obj->GetObjectInfo()->GetCodeInfo("C++");
+        LogDebug("#### Plantillas ####");
+        LogDebug(code_info->GetTemplate("construction"));
+        LogDebug(code_info->GetTemplate("declaration"));
+        LogDebug("#### Código ####");
         {
             CppTemplateParser parser(obj, code_info->GetTemplate("construction"),
                                      false, false, wxEmptyString);

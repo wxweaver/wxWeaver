@@ -334,7 +334,7 @@ private:
 
     void PropagateExpansion(PObjectBase obj, bool expand, bool up);
 
-    ApplicationData(const wxString& rootdir = wxT(".")); // hidden constructor
+    ApplicationData(const wxString& rootdir = "."); // hidden constructor
 
     /** Helper for GetOutputPath and GetEmbeddedFilesOutputPath
     */

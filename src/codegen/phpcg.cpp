@@ -78,22 +78,22 @@ wxString PHPTemplateParser::ValueToCode(PropertyType type, wxString value)
 
     switch (type) {
     case PT_WXPARENT: {
-        result = wxT("$this->") + value;
+        result = "$this->" + value;
         break;
     }
     case PT_WXPARENT_SB: {
-        result = wxT("$") + value + wxT("->GetStaticBox()");
+        result = "$" + value + "->GetStaticBox()";
         break;
     }
     case PT_WXPARENT_CP: {
-        result = wxT("$this->") + value + wxT("->GetPane()");
+        result = "$this->" + value + "->GetPane()";
         break;
     }
     case PT_WXSTRING:
     case PT_FILE:
     case PT_PATH: {
         if (value.empty())
-            result << wxT("wxEmptyString");
+            result << "wxEmptyString";
         else
             result << "\"" << PHPCodeGenerator::ConvertPHPString(value) << "\"";
 
@@ -101,12 +101,12 @@ wxString PHPTemplateParser::ValueToCode(PropertyType type, wxString value)
     }
     case PT_WXSTRING_I18N: {
         if (value.empty()) {
-            result << wxT("wxEmptyString");
+            result << "wxEmptyString";
         } else {
             if (m_useI18n)
-                result << wxT("_(\"") << PHPCodeGenerator::ConvertPHPString(value) << wxT("\")");
+                result << "_(\"" << PHPCodeGenerator::ConvertPHPString(value) << "\")";
             else
-                result << wxT("\"") << PHPCodeGenerator::ConvertPHPString(value) << wxT("\"");
+                result << "\"" << PHPCodeGenerator::ConvertPHPString(value) << "\"";
         }
         break;
     }
@@ -125,27 +125,27 @@ wxString PHPTemplateParser::ValueToCode(PropertyType type, wxString value)
         break;
     }
     case PT_BITLIST: {
-        result = (value.empty() ? wxT("0") : value);
+        result = (value.empty() ? "0" : value);
         break;
     }
     case PT_WXPOINT: {
         if (value.empty())
-            result = wxT("wxDefaultPosition");
+            result = "wxDefaultPosition";
         else
-            result << wxT("new wxPoint( ") << value << wxT(" )");
+            result << "new wxPoint(" << value << ")";
 
         break;
     }
     case PT_WXSIZE: {
         if (value.empty())
-            result = wxT("wxDefaultSize");
+            result = "wxDefaultSize";
         else
-            result << wxT("new wxSize( ") << value << wxT(" )");
+            result << "new wxSize(" << value << ")";
 
         break;
     }
     case PT_BOOL: {
-        result = (value == wxT("0") ? wxT("false") : wxT("true"));
+        result = (value == "0" ? "false" : "true");
         break;
     }
     case PT_WXFONT: {
@@ -174,18 +174,18 @@ wxString PHPTemplateParser::ValueToCode(PropertyType type, wxString value)
     }
     case PT_WXCOLOUR: {
         if (!value.empty()) {
-            if (!value.find_first_of(wxT("wx"))) {
+            if (!value.find_first_of("wx")) {
                 // System Colour
-                result << wxT("wxSystemSettings::GetColour( ")
-                       << ValueToCode(PT_OPTION, value) << wxT(" )");
+                result << "wxSystemSettings::GetColour("
+                       << ValueToCode(PT_OPTION, value) << ")";
             } else {
                 wxColour colour = TypeConv::StringToColour(value);
                 result = wxString::Format(
-                    wxT("new wxColour( %i, %i, %i )"),
+                    "new wxColour(%i, %i, %i)",
                     colour.Red(), colour.Green(), colour.Blue());
             }
         } else {
-            result = wxT("new wxColour()");
+            result = "new wxColour()";
         }
         break;
     }
@@ -197,23 +197,23 @@ wxString PHPTemplateParser::ValueToCode(PropertyType type, wxString value)
 
         if (path.empty()) {
             // Empty path, generate Null Bitmap
-            result = wxT("wxNullBitmap");
+            result = "wxNullBitmap";
             break;
         }
-        if (path.StartsWith(wxT("file:"))) {
+        if (path.StartsWith("file:")) {
             wxLogWarning(
                 "PHP code generation does not support using URLs for bitmap properties:\n%s",
                 path.c_str());
-            result = wxT("wxNullBitmap");
+            result = "wxNullBitmap";
             break;
         }
-        if (source == wxT("Load From File")) {
+        if (source == "Load From File") {
             wxString absPath;
             try {
                 absPath = TypeConv::MakeAbsolutePath(path, AppData()->GetProjectPath());
             } catch (wxWeaverException& ex) {
                 wxLogError(ex.what());
-                result = wxT("wxNullBitmap");
+                result = "wxNullBitmap";
                 break;
             }
             wxString file
@@ -221,45 +221,45 @@ wxString PHPTemplateParser::ValueToCode(PropertyType type, wxString value)
                        ? TypeConv::MakeRelativePath(absPath, m_basePath)
                        : absPath);
 
-            result << wxT("new wxBitmap( \"")
+            result << "new wxBitmap(\""
                    << PHPCodeGenerator::ConvertPHPString(file)
-                   << wxT("\", wxBITMAP_TYPE_ANY )");
+                   << "\", wxBITMAP_TYPE_ANY)";
         } else if (source == _("Load From Embedded File")) {
-            result << wxT("wxNullBitmap /* embedded files aren't supported */");
-        } else if (source == wxT("Load From Resource")) {
-            result << wxT("new wxBitmap( \"") << path
-                   << wxT("\", wxBITMAP_TYPE_RESOURCE )");
-        } else if (source == wxT("Load From Icon Resource")) {
+            result << "wxNullBitmap /* embedded files aren't supported */";
+        } else if (source == _("Load From Resource")) {
+            result << "new wxBitmap(\"" << path
+                   << "\", wxBITMAP_TYPE_RESOURCE)";
+        } else if (source == _("Load From Icon Resource")) {
             if (wxDefaultSize == icoSize) {
-                result << wxT("new wxICON( ") << path << wxT(" )");
+                result << "new wxICON(" << path << ")";
             } else {
                 result.Printf(
-                    wxT("new wxIcon( \"%s\", wxBITMAP_TYPE_ICO_RESOURCE, %i, %i )"),
+                    "new wxIcon(\"%s\", wxBITMAP_TYPE_ICO_RESOURCE, %i, %i)",
                     path.c_str(),
                     icoSize.GetWidth(), icoSize.GetHeight());
             }
         } else if (source == _("Load From XRC")) {
             // This requires that the global wxXmlResource object is set
-            result << wxT("wxXmlResource::Get()->LoadBitmap( \"") << path
-                   << wxT("\" )");
+            result << "wxXmlResource::Get()->LoadBitmap(\"" << path
+                   << "\")";
         } else if (source == _("Load From Art Provider")) {
-            wxString rid = path.BeforeFirst(wxT(':'));
-            if (rid.StartsWith(wxT("gtk-")))
-                rid = wxT("wxT(\"") + rid + wxT("\")");
+            wxString rid = path.BeforeFirst(':');
+            if (rid.StartsWith("gtk-"))
+                rid = "\"" + rid + "\"";
 
-            result = wxT("wxArtProvider::GetBitmap( ") + rid + wxT(", ")
-                + path.AfterFirst(wxT(':')) + wxT(" )");
+            result = "wxArtProvider::GetBitmap(" + rid + ", "
+                + path.AfterFirst(':') + ")";
         }
         break;
     }
     case PT_STRINGLIST: {
-        // Stringlists are generated like a sequence of wxString separated by ', '.
+        // Stringlists are generated like a sequence of wxString separated by ", ".
         wxArrayString array = TypeConv::StringToArrayString(value);
         if (array.Count() > 0)
             result = ValueToCode(PT_WXSTRING_I18N, array[0]);
 
         for (size_t i = 1; i < array.Count(); i++)
-            result << wxT(", ") << ValueToCode(PT_WXSTRING_I18N, array[i]);
+            result << ", " << ValueToCode(PT_WXSTRING_I18N, array[i]);
 
         break;
     }
@@ -285,24 +285,24 @@ wxString PHPCodeGenerator::ConvertPHPString(wxString text)
         wxChar c = text[i];
 
         switch (c) {
-        case wxT('"'):
-            result += wxT("\\\"");
+        case '"':
+            result += "\\\"";
             break;
 
-        case wxT('\\'):
-            result += wxT("\\\\");
+        case '\\':
+            result += "\\\\";
             break;
 
-        case wxT('\t'):
-            result += wxT("\\t");
+        case '\t':
+            result += "\\t";
             break;
 
-        case wxT('\n'):
-            result += wxT("\\n");
+        case '\n':
+            result += "\\n";
             break;
 
-        case wxT('\r'):
-            result += wxT("\\r");
+        case '\r':
+            result += "\\r";
             break;
 
         default:
@@ -316,29 +316,29 @@ wxString PHPCodeGenerator::ConvertPHPString(wxString text)
 void PHPCodeGenerator::GenerateInheritedClass(PObjectBase userClasses, PObjectBase form)
 {
     if (!userClasses) {
-        wxLogError(wxT("There is no object to generate inherited class"));
+        wxLogError("There is no object to generate inherited class");
         return;
     }
-    if (wxT("UserClasses") != userClasses->GetClassName()) {
-        wxLogError(wxT("This not a UserClasses object"));
+    if ("UserClasses" != userClasses->GetClassName()) {
+        wxLogError("This not a UserClasses object");
         return;
     }
-    wxString type = userClasses->GetPropertyAsString(wxT("type"));
+    wxString type = userClasses->GetPropertyAsString("type");
 
     // Start file
-    wxString code = GetCode(userClasses, wxT("file_comment"));
+    wxString code = GetCode(userClasses, "file_comment");
     m_source->WriteLn(code);
     m_source->WriteLn(wxEmptyString);
 
-    code = GetCode(userClasses, wxT("source_include"));
+    code = GetCode(userClasses, "source_include");
     m_source->WriteLn(code);
     m_source->WriteLn(wxEmptyString);
 
-    code = GetCode(userClasses, wxT("class_decl"));
+    code = GetCode(userClasses, "class_decl");
     m_source->WriteLn(code);
     m_source->Indent();
 
-    code = GetCode(userClasses, type + wxT("_cons_def"));
+    code = GetCode(userClasses, type + "_cons_def");
     m_source->WriteLn(code);
 
     // Do events
@@ -346,7 +346,7 @@ void PHPCodeGenerator::GenerateInheritedClass(PObjectBase userClasses, PObjectBa
     FindEventHandlers(form, events);
 
     if (events.size() > 0) {
-        code = GetCode(userClasses, wxT("event_handler_comment"));
+        code = GetCode(userClasses, "event_handler_comment");
         m_source->WriteLn(code);
 
         std::set<wxString> generatedHandlers;
@@ -354,12 +354,12 @@ void PHPCodeGenerator::GenerateInheritedClass(PObjectBase userClasses, PObjectBa
             PEvent event = events[i];
             if (generatedHandlers.find(event->GetValue()) == generatedHandlers.end()) {
                 m_source->WriteLn(wxString::Format(
-                    wxT("function %s( event ){"), event->GetValue().c_str()));
+                    "function %s(event){", event->GetValue().c_str()));
                 m_source->Indent();
                 m_source->WriteLn(wxString::Format(
-                    wxT("// TODO: Implement %s"), event->GetValue().c_str()));
+                    "// TODO: Implement %s", event->GetValue().c_str()));
                 m_source->Unindent();
-                m_source->WriteLn(wxT("}"));
+                m_source->WriteLn("}");
                 m_source->WriteLn(wxEmptyString);
                 generatedHandlers.insert(event->GetValue());
             }
@@ -372,15 +372,15 @@ void PHPCodeGenerator::GenerateInheritedClass(PObjectBase userClasses, PObjectBa
 bool PHPCodeGenerator::GenerateCode(PObjectBase project)
 {
     if (!project) {
-        wxLogError(wxT("There is no project to generate code"));
+        wxLogError("There is no project to generate code");
         return false;
     }
     m_useI18n = false;
-    PProperty i18nProperty = project->GetProperty(wxT("internationalize"));
+    PProperty i18nProperty = project->GetProperty("internationalize");
     if (i18nProperty && i18nProperty->GetValueAsInteger())
         m_useI18n = true;
 
-    m_disconnectEvents = (project->GetPropertyAsInteger(wxT("disconnect_php_events")));
+    m_disconnectEvents = (project->GetPropertyAsInteger("disconnect_php_events"));
 
     m_source->Clear();
 
@@ -400,14 +400,14 @@ bool PHPCodeGenerator::GenerateCode(PObjectBase project)
 
     m_source->WriteLn(code, true);
 
-    PProperty propFile = project->GetProperty(wxT("file"));
+    PProperty propFile = project->GetProperty("file");
     if (!propFile) {
-        wxLogError(wxT("Missing \"file\" property on Project Object"));
+        wxLogError("Missing \"file\" property on Project Object");
         return false;
     }
     wxString file = propFile->GetValue();
     if (file.empty())
-        file = wxT("noname");
+        file = "noname";
 
     // Generate the subclass sets
     std::set<wxString> subclasses;
@@ -428,10 +428,10 @@ bool PHPCodeGenerator::GenerateCode(PObjectBase project)
     if (!headerIncludes.empty())
         m_source->WriteLn(wxEmptyString);
 #if 0
-    // Write internationalization support
+    // TODO: Write internationalization support
     if (m_useI18n) {
             // PHP gettext already implements this function
-        m_source->WriteLn(wxT("function _(){/* TODO: Implement this function on wxPHP */}"));
+        m_source->WriteLn("function _(){/* TODO: Implement this function on wxPHP */}");
         m_source->WriteLn(wxEmptyString);
     }
 #endif
@@ -439,13 +439,13 @@ bool PHPCodeGenerator::GenerateCode(PObjectBase project)
     GenDefines(project);
 
     wxString eventHandlerPostfix;
-    PProperty eventKindProp = project->GetProperty(wxT("skip_php_events"));
+    PProperty eventKindProp = project->GetProperty("skip_php_events");
     if (eventKindProp->GetValueAsInteger())
-        eventHandlerPostfix = wxT("$event->Skip();");
+        eventHandlerPostfix = "$event->Skip();";
     else
         eventHandlerPostfix = wxEmptyString;
 
-    PProperty disconnectMode = project->GetProperty(wxT("disconnect_mode"));
+    PProperty disconnectMode = project->GetProperty("disconnect_mode");
     m_disconnecMode = disconnectMode->GetValueAsString();
 
     for (size_t i = 0; i < project->GetChildCount(); i++) {
@@ -465,7 +465,7 @@ bool PHPCodeGenerator::GenerateCode(PObjectBase project)
                             eventHandlerPostfix, arrays);
 #endif
     }
-    code = GetCode(project, wxT("php_epilogue"));
+    code = GetCode(project, "php_epilogue");
     if (!code.empty())
         m_source->WriteLn(code);
 
@@ -479,12 +479,12 @@ void PHPCodeGenerator::GenEvents(PObjectBase classObj,
         return;
 
     if (disconnect) {
-        m_source->WriteLn(wxT("// Disconnect Events"));
+        m_source->WriteLn("// Disconnect Events");
     } else {
         m_source->WriteLn();
-        m_source->WriteLn(wxT("// Connect Events"));
+        m_source->WriteLn("// Connect Events");
     }
-    PProperty propName = classObj->GetProperty(wxT("name"));
+    PProperty propName = classObj->GetProperty("name");
     if (!propName) {
         wxLogError(
             "Missing \"name\" property on \"%s\" class. Review your XML object description",
@@ -493,19 +493,19 @@ void PHPCodeGenerator::GenEvents(PObjectBase classObj,
     }
     wxString class_name = propName->GetValue();
     if (class_name.empty()) {
-        wxLogError(wxT("Object name cannot be null"));
+        wxLogError("Object name cannot be null");
         return;
     }
     wxString baseClass, handlerName;
 
-    PProperty propSubclass = classObj->GetProperty(wxT("subclass"));
+    PProperty propSubclass = classObj->GetProperty("subclass");
     if (propSubclass) {
-        wxString subclass = propSubclass->GetChildFromParent(wxT("name"));
+        wxString subclass = propSubclass->GetChildFromParent("name");
         if (!subclass.empty())
             baseClass = subclass;
     }
     if (baseClass.empty())
-        baseClass = wxT("wx") + classObj->GetClassName();
+        baseClass = "wx" + classObj->GetClassName();
 
     if (events.size() > 0) {
         for (size_t i = 0; i < events.size(); i++) {
@@ -514,7 +514,7 @@ void PHPCodeGenerator::GenEvents(PObjectBase classObj,
             handlerName = event->GetValue();
 
             wxString templateName = wxString::Format(
-                wxT("connect_%s"), event->GetName().c_str());
+                "connect_%s", event->GetName().c_str());
 
             PObjectBase obj = event->GetObject();
             if (!GenEventEntry(obj, obj->GetObjectInfo(),
@@ -532,21 +532,21 @@ bool PHPCodeGenerator::GenEventEntry(PObjectBase obj, PObjectInfo obj_info,
                                      const wxString& handlerName, bool disconnect)
 {
     wxString _template;
-    PCodeInfo codeInfo = obj_info->GetCodeInfo(wxT("PHP"));
+    PCodeInfo codeInfo = obj_info->GetCodeInfo("PHP");
     if (codeInfo) {
         _template = codeInfo->GetTemplate(wxString::Format(
-            wxT("evt_%s%s"), disconnect ? wxT("dis") : wxEmptyString, templateName.c_str()));
+            "evt_%s%s", disconnect ? wxS("dis") : wxEmptyString, templateName.c_str()));
         if (disconnect && _template.empty()) {
-            _template = codeInfo->GetTemplate(wxT("evt_") + templateName);
-            _template.Replace(wxT("Connect"), wxT("Disconnect"), true);
+            _template = codeInfo->GetTemplate("evt_" + templateName);
+            _template.Replace("Connect", "Disconnect", true);
         }
         if (!_template.empty()) {
             if (disconnect) {
-                if (m_disconnecMode == wxT("handler_name"))
-                    _template.Replace(wxT("#handler"),
-                                      wxT("handler = array(@$this, \"")
-                                          + handlerName + wxT("\")"));
-                else if (m_disconnecMode == wxT("source_name"))
+                if (m_disconnecMode == "handler_name")
+                    _template.Replace("#handler",
+                                      "handler = array(@$this, \""
+                                          + handlerName + "\")");
+                else if (m_disconnecMode == "source_name")
                     _template.Replace(
                         "#handler",
 #if 1
@@ -556,7 +556,7 @@ bool PHPCodeGenerator::GenEventEntry(PObjectBase obj, PObjectInfo obj_info,
 #endif
             } else
                 _template.Replace(
-                    wxT("#handler"), wxT("array(@$this, \"") + handlerName + wxT("\")"));
+                    "#handler", "array(@$this, \"" + handlerName + "\")");
 
             PHPTemplateParser parser(obj, _template,
                                      m_useI18n, m_useRelativePath, m_basePath);
@@ -582,19 +582,19 @@ void PHPCodeGenerator::GenVirtualEventHandlers(const EventVector& events, const 
             So we create a default handler which will skip the event.
         */
         m_source->WriteLn(wxEmptyString);
-        m_source->WriteLn(wxT("// Virtual event handlers, override them in your derived class"));
+        m_source->WriteLn("// Virtual event handlers, override them in your derived class");
 
         std::set<wxString> generatedHandlers;
         for (size_t i = 0; i < events.size(); i++) {
             PEvent event = events[i];
-            wxString aux = wxT("function ") + event->GetValue() + wxT("( $event ){");
+            wxString aux = "function " + event->GetValue() + "($event){";
 
             if (generatedHandlers.find(aux) == generatedHandlers.end()) {
                 m_source->WriteLn(aux);
                 m_source->Indent();
                 m_source->WriteLn(eventHandlerPostfix);
                 m_source->Unindent();
-                m_source->WriteLn(wxT("}"));
+                m_source->WriteLn("}");
 
                 generatedHandlers.insert(aux);
             }
@@ -617,9 +617,9 @@ void PHPCodeGenerator::GetGenEventHandlers(PObjectBase obj)
 
 void PHPCodeGenerator::GenDefinedEventHandlers(PObjectInfo info, PObjectBase obj)
 {
-    PCodeInfo codeInfo = info->GetCodeInfo(wxT("PHP"));
+    PCodeInfo codeInfo = info->GetCodeInfo("PHP");
     if (codeInfo) {
-        wxString _template = codeInfo->GetTemplate(wxT("generated_event_handlers"));
+        wxString _template = codeInfo->GetTemplate("generated_event_handlers");
         if (!_template.empty()) {
             PHPTemplateParser parser(obj, _template,
                                      m_useI18n, m_useRelativePath, m_basePath);
@@ -638,11 +638,11 @@ void PHPCodeGenerator::GenDefinedEventHandlers(PObjectInfo info, PObjectBase obj
 
 wxString PHPCodeGenerator::GetCode(PObjectBase obj, wxString name, bool silent)
 {
-    PCodeInfo codeInfo = obj->GetObjectInfo()->GetCodeInfo(wxT("PHP"));
+    PCodeInfo codeInfo = obj->GetObjectInfo()->GetCodeInfo("PHP");
     if (!codeInfo) {
         if (!silent) {
             wxString msg(wxString::Format(
-                wxT("Missing \"%s\" template for \"%s\" class. Review your XML object description"),
+                "Missing \"%s\" template for \"%s\" class. Review your XML object description",
                 name.c_str(), obj->GetClassName().c_str()));
             wxLogError(msg);
         }
@@ -657,10 +657,10 @@ wxString PHPCodeGenerator::GetCode(PObjectBase obj, wxString name, bool silent)
 wxString PHPCodeGenerator::GetConstruction(PObjectBase obj, ArrayItems& arrays)
 {
     // Get the name
-    const auto& propName = obj->GetProperty(wxT("name"));
+    const auto& propName = obj->GetProperty("name");
     if (!propName) {
         // Object has no name, just get its code
-        return GetCode(obj, wxT("construction"));
+        return GetCode(obj, "construction");
     }
     // Object has a name, check if its an array
     const auto& name = propName->GetValue();
@@ -668,27 +668,27 @@ wxString PHPCodeGenerator::GetConstruction(PObjectBase obj, ArrayItems& arrays)
     ArrayItem unused;
     if (!ParseArrayName(name, baseName, unused)) {
         // Object is not an array, just get its code
-        return GetCode(obj, wxT("construction"));
+        return GetCode(obj, "construction");
     }
     // Object is an array, check if it needs to be declared
     auto& item = arrays[baseName];
     if (item.isDeclared) {
         // Object is already declared, just get its code
-        return GetCode(obj, wxT("construction"));
+        return GetCode(obj, "construction");
     }
     // Array needs to be declared
     wxString code;
 
     // Array declaration
     // Base array
-    code.append(wxT("$this->"));
+    code.append("$this->");
     code.append(baseName);
-    code.append(wxT(" = array();\n"));
+    code.append(" = array();\n");
 
     // If more dimensions are present they will get created automatically
 
     // Get the Code
-    code.append(GetCode(obj, wxT("construction")));
+    code.append(GetCode(obj, "construction"));
 
     // Mark the array as declared
     item.isDeclared = true;
@@ -702,25 +702,25 @@ void PHPCodeGenerator::GenClassDeclaration(PObjectBase classObj, bool /*use_enum
                                            const wxString& eventHandlerPostfix,
                                            ArrayItems& arrays)
 {
-    PProperty propName = classObj->GetProperty(wxT("name"));
+    PProperty propName = classObj->GetProperty("name");
     if (!propName) {
         wxLogError(
-            wxT("Missing \"name\" property on \"%s\" class. Review your XML object description"),
+            "Missing \"name\" property on \"%s\" class. Review your XML object description",
             classObj->GetClassName().c_str());
         return;
     }
     wxString class_name = propName->GetValue();
     if (class_name.empty()) {
-        wxLogError(wxT("Object name can not be null"));
+        wxLogError("Object name can not be null");
         return;
     }
-    m_source->WriteLn(wxT("/*"));
-    m_source->WriteLn(wxT(" * Class ") + class_name);
-    m_source->WriteLn(wxT(" */"));
+    m_source->WriteLn("/*");
+    m_source->WriteLn(" * Class " + class_name);
+    m_source->WriteLn(" */");
     m_source->WriteLn();
     m_source->WriteLn(
-        wxT("class ") + classDecoration + class_name
-        + wxT(" extends ") + GetCode(classObj, wxT("base")).Trim() + wxT(" {"));
+        "class " + classDecoration + class_name
+        + " extends " + GetCode(classObj, "base").Trim() + " {");
     m_source->Indent();
 
     // The constructor is also included within public
@@ -734,7 +734,7 @@ void PHPCodeGenerator::GenClassDeclaration(PObjectBase classObj, bool /*use_enum
     GetGenEventHandlers(classObj);
 
     m_source->Unindent();
-    m_source->WriteLn(wxT("}"));
+    m_source->WriteLn("}");
     m_source->WriteLn(wxEmptyString);
 }
 
@@ -747,13 +747,13 @@ void PHPCodeGenerator::GenSubclassSets(PObjectBase obj,
         GenSubclassSets(obj->GetChild(i), subclasses, headerIncludes);
 
     // Fill the set
-    PProperty subclass = obj->GetProperty(wxT("subclass"));
+    PProperty subclass = obj->GetProperty("subclass");
     if (subclass) {
         std::map<wxString, wxString> children;
         subclass->SplitParentProperty(&children);
 
         std::map<wxString, wxString>::iterator name;
-        name = children.find(wxT("name"));
+        name = children.find("name");
 
         if (children.end() == name) {
             // No name, so do nothing
@@ -766,7 +766,7 @@ void PHPCodeGenerator::GenSubclassSets(PObjectBase obj,
         }
         // Now get the header
         std::map<wxString, wxString>::iterator header;
-        header = children.find(wxT("header"));
+        header = children.find("header");
 
         if (children.end() == header) {
             // No header, so do nothing
@@ -786,7 +786,7 @@ void PHPCodeGenerator::GenSubclassSets(PObjectBase obj,
         if (!pkg)
             return;
 
-        wxString include = wxT("include_once ") + headerVal + wxT(";");
+        wxString include = "include_once " + headerVal + ";";
         std::vector<wxString>::iterator it
             = std::find(headerIncludes->begin(), headerIncludes->end(), include);
         if (headerIncludes->end() == it)
@@ -806,9 +806,9 @@ void PHPCodeGenerator::GenObjectIncludes(PObjectBase project,
                                          std::set<wxString>* templates)
 {
     // Fill the set
-    PCodeInfo codeInfo = project->GetObjectInfo()->GetCodeInfo(wxT("PHP"));
+    PCodeInfo codeInfo = project->GetObjectInfo()->GetCodeInfo("PHP");
     if (codeInfo) {
-        PHPTemplateParser parser(project, codeInfo->GetTemplate(wxT("include")),
+        PHPTemplateParser parser(project, codeInfo->GetTemplate("include"),
                                  m_useI18n, m_useRelativePath, m_basePath);
         wxString include = parser.ParseTemplate();
         if (!include.empty()) {
@@ -836,9 +836,9 @@ void PHPCodeGenerator::GenBaseIncludes(PObjectInfo info, PObjectBase obj,
         PObjectInfo base_info = info->GetBaseClass(i);
         GenBaseIncludes(base_info, obj, includes, templates);
     }
-    PCodeInfo codeInfo = info->GetCodeInfo(wxT("PHP"));
+    PCodeInfo codeInfo = info->GetCodeInfo("PHP");
     if (codeInfo) {
-        PHPTemplateParser parser(obj, codeInfo->GetTemplate(wxT("include")),
+        PHPTemplateParser parser(obj, codeInfo->GetTemplate("include"),
                                  m_useI18n, m_useRelativePath, m_basePath);
         wxString include = parser.ParseTemplate();
         if (!include.empty()) {
@@ -853,7 +853,7 @@ void PHPCodeGenerator::AddUniqueIncludes(const wxString& include,
 {
     // Split on newlines to only generate unique include lines
     // This strips blank lines and trims
-    wxStringTokenizer tkz(include, wxT("\n"), wxTOKEN_STRTOK);
+    wxStringTokenizer tkz(include, "\n", wxTOKEN_STRTOK);
 
     while (tkz.HasMoreTokens()) {
         wxString line = tkz.GetNextToken();
@@ -861,7 +861,7 @@ void PHPCodeGenerator::AddUniqueIncludes(const wxString& include,
         line.Trim(true);
 
         // If it is not an include line, it will be written
-        if (!line.StartsWith(wxT("import"))) {
+        if (!line.StartsWith("import")) {
             includes->push_back(line);
             continue;
         }
@@ -890,50 +890,50 @@ void PHPCodeGenerator::GenConstructor(PObjectBase classObj,
 {
     m_source->WriteLn();
     // generate function definition
-    m_source->WriteLn(GetCode(classObj, wxT("cons_def")));
+    m_source->WriteLn(GetCode(classObj, "cons_def"));
     m_source->Indent();
 
-    m_source->WriteLn(GetCode(classObj, wxT("cons_call")));
+    m_source->WriteLn(GetCode(classObj, "cons_call"));
     m_source->WriteLn();
 
-    wxString settings = GetCode(classObj, wxT("settings"));
+    wxString settings = GetCode(classObj, "settings");
     if (!settings.IsEmpty())
         m_source->WriteLn(settings);
 
     for (size_t i = 0; i < classObj->GetChildCount(); i++)
         GenConstruction(classObj->GetChild(i), true, arrays);
 
-    wxString afterAddChild = GetCode(classObj, wxT("after_addchild"));
+    wxString afterAddChild = GetCode(classObj, "after_addchild");
     if (!afterAddChild.IsEmpty())
         m_source->WriteLn(afterAddChild);
 
     GenEvents(classObj, events);
 
     m_source->Unindent();
-    m_source->WriteLn(wxT("}"));
+    m_source->WriteLn("}");
     m_source->WriteLn(wxEmptyString);
 
-    if (classObj->GetObjectTypeName() == wxT("wizard")
+    if (classObj->GetObjectTypeName() == "wizard"
         && classObj->GetChildCount() > 0) {
-        m_source->WriteLn(wxT("function AddPage($page){"));
+        m_source->WriteLn("function AddPage($page){");
         m_source->Indent();
-        m_source->WriteLn(wxT("if(count($this->m_pages) > 0){"));
+        m_source->WriteLn("if(count($this->m_pages) > 0){");
         m_source->Indent();
-        m_source->WriteLn(wxT("$previous_page = $this->m_pages[count($this->m_pages)-1];"));
-        m_source->WriteLn(wxT("$page->SetPrev($previous_page);"));
-        m_source->WriteLn(wxT("$previous_page->SetNext($page);"));
+        m_source->WriteLn("$previous_page = $this->m_pages[count($this->m_pages)-1];");
+        m_source->WriteLn("$page->SetPrev($previous_page);");
+        m_source->WriteLn("$previous_page->SetNext($page);");
         m_source->Unindent();
-        m_source->WriteLn(wxT("}"));
-        m_source->WriteLn(wxT("$this->m_pages[] = $page;"));
+        m_source->WriteLn("}");
+        m_source->WriteLn("$this->m_pages[] = $page;");
         m_source->Unindent();
-        m_source->WriteLn(wxT("}"));
+        m_source->WriteLn("}");
     }
 }
 
 void PHPCodeGenerator::GenDestructor(PObjectBase classObj, const EventVector& events)
 {
     m_source->WriteLn();
-    m_source->WriteLn(wxT("function __destruct( ){")); // generate function definition
+    m_source->WriteLn("function __destruct( ){"); // generate function definition
     m_source->Indent();
 
     if (m_disconnectEvents && !events.empty())
@@ -943,7 +943,7 @@ void PHPCodeGenerator::GenDestructor(PObjectBase classObj, const EventVector& ev
     GenDestruction(classObj);
 
     m_source->Unindent();
-    m_source->WriteLn(wxT("}"));
+    m_source->WriteLn("}");
 }
 
 void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayItems& arrays)
@@ -956,19 +956,19 @@ void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayIte
 
         GenSettings(obj->GetObjectInfo(), obj);
 
-        bool isWidget = !info->IsSubclassOf(wxT("sizer"));
+        bool isWidget = !info->IsSubclassOf("sizer");
 
         for (size_t i = 0; i < obj->GetChildCount(); i++) {
             PObjectBase child = obj->GetChild(i);
             GenConstruction(child, isWidget, arrays);
 
-            if (type == wxT("toolbar"))
+            if (type == "toolbar")
                 GenAddToolbar(child->GetObjectInfo(), child);
         }
 
         if (!isWidget) // sizers
         {
-            wxString afterAddChild = GetCode(obj, wxT("after_addchild"));
+            wxString afterAddChild = GetCode(obj, "after_addchild");
             if (!afterAddChild.empty()) {
                 m_source->WriteLn(afterAddChild);
             }
@@ -990,7 +990,7 @@ void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayIte
                                          m_useRelativePath, m_basePath);
                 m_source->WriteLn(parser.ParseTemplate());
             }
-        } else if (type == wxT("splitter")) {
+        } else if (type == "splitter") {
             // Generating the split
             switch (obj->GetChildCount()) {
             case 1: {
@@ -1009,16 +1009,16 @@ void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayIte
                 sub2 = obj->GetChild(1)->GetChild(0);
 
                 wxString _template;
-                if (obj->GetProperty(wxT("splitmode"))->GetValue() == wxT("wxSPLIT_VERTICAL"))
-                    _template = wxT("@$this->$name->SplitVertically(");
+                if (obj->GetProperty("splitmode")->GetValue() == "wxSPLIT_VERTICAL")
+                    _template = "@$this->$name->SplitVertically(";
                 else
-                    _template = wxT("@$this->$name->SplitHorizontally(");
+                    _template = "@$this->$name->SplitHorizontally(";
 
-                _template = _template + wxT("@$this->")
-                    + sub1->GetProperty(wxT("name"))->GetValue()
-                    + wxT(", @$this->")
-                    + sub2->GetProperty(wxT("name"))->GetValue()
-                    + wxT(", $sashpos);");
+                _template = _template + "@$this->"
+                    + sub1->GetProperty("name")->GetValue()
+                    + ", @$this->"
+                    + sub2->GetProperty("name")->GetValue()
+                    + ", $sashpos);";
 
                 PHPTemplateParser parser(obj, _template, m_useI18n,
                                          m_useRelativePath, m_basePath);
@@ -1029,24 +1029,24 @@ void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayIte
                 wxLogError("Missing subwindows for wxSplitterWindow widget.");
                 break;
             }
-        } else if (type == wxT("menubar")
-                   || type == wxT("menu")
-                   || type == wxT("submenu")
-                   || type == wxT("toolbar")
-                   || type == wxT("ribbonbar")
-                   || type == wxT("listbook")
-                   || type == wxT("simplebook")
-                   || type == wxT("notebook")
-                   || type == wxT("auinotebook")
-                   || type == wxT("treelistctrl")
-                   || type == wxT("wizard")) {
-            wxString afterAddChild = GetCode(obj, wxT("after_addchild"));
+        } else if (type == "menubar"
+                   || type == "menu"
+                   || type == "submenu"
+                   || type == "toolbar"
+                   || type == "ribbonbar"
+                   || type == "listbook"
+                   || type == "simplebook"
+                   || type == "notebook"
+                   || type == "auinotebook"
+                   || type == "treelistctrl"
+                   || type == "wizard") {
+            wxString afterAddChild = GetCode(obj, "after_addchild");
             if (!afterAddChild.empty())
                 m_source->WriteLn(afterAddChild);
 
             m_source->WriteLn();
         }
-    } else if (info->IsSubclassOf(wxT("sizeritembase"))) {
+    } else if (info->IsSubclassOf("sizeritembase")) {
         // The child must be added to the sizer having in mind the
         // child object type (there are 3 different routines)
         GenConstruction(obj->GetChild(0), false, arrays);
@@ -1055,29 +1055,29 @@ void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayIte
         wxString temp_name;
         if (childInfo->IsSubclassOf("wxWindow")
             || childInfo->GetClassName() == "CustomControl") {
-            temp_name = wxT("window_add");
-        } else if (childInfo->IsSubclassOf(wxT("sizer"))) {
-            temp_name = wxT("sizer_add");
-        } else if (childInfo->GetClassName() == wxT("spacer")) {
-            temp_name = wxT("spacer_add");
+            temp_name = "window_add";
+        } else if (childInfo->IsSubclassOf("sizer")) {
+            temp_name = "sizer_add";
+        } else if (childInfo->GetClassName() == "spacer") {
+            temp_name = "spacer_add";
         } else {
             LogDebug(
                 "SizerItem child is not a Spacer and is not a subclass of wxWindow or of sizer.");
             return;
         }
         m_source->WriteLn(GetCode(obj, temp_name));
-    } else if (type == wxT("notebookpage")
-               || type == wxT("listbookpage")
-               || type == wxT("simplebookpage")
-               || type == wxT("choicebookpage")
-               || type == wxT("auinotebookpage")) {
+    } else if (type == "notebookpage"
+               || type == "listbookpage"
+               || type == "simplebookpage"
+               || type == "choicebookpage"
+               || type == "auinotebookpage") {
         GenConstruction(obj->GetChild(0), false, arrays);
-        m_source->WriteLn(GetCode(obj, wxT("page_add")));
+        m_source->WriteLn(GetCode(obj, "page_add"));
         GenSettings(obj->GetObjectInfo(), obj);
-    } else if (type == wxT("treelistctrlcolumn")) {
-        m_source->WriteLn(GetCode(obj, wxT("column_add")));
+    } else if (type == "treelistctrlcolumn") {
+        m_source->WriteLn(GetCode(obj, "column_add"));
         GenSettings(obj->GetObjectInfo(), obj);
-    } else if (type == wxT("tool")) {
+    } else if (type == "tool") {
         // If loading bitmap from ICON resource, and size is not set,
         // set size to toolbars bitmapsize
         // TODO: So hacky, yet so useful ...
@@ -1089,10 +1089,10 @@ void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayIte
                 wxString path, source;
                 wxSize toolsize;
                 TypeConv::ParseBitmapWithResource(oldVal, &path, &source, &toolsize);
-                if (wxT("Load From Icon Resource") == source
+                if (_("Load From Icon Resource") == source
                     && wxDefaultSize == toolsize) {
                     prop->SetValue(wxString::Format(
-                        wxT("%s; %s [%i; %i]"), path.c_str(), source.c_str(),
+                        "%s; %s [%i; %i]", path.c_str(), source.c_str(),
                         toolbarsize.GetWidth(), toolbarsize.GetHeight()));
                     m_source->WriteLn(GetConstruction(obj, arrays));
                     prop->SetValue(oldVal);
@@ -1110,9 +1110,9 @@ void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayIte
 
 void PHPCodeGenerator::GenDestruction(PObjectBase obj)
 {
-    PCodeInfo codeInfo = obj->GetObjectInfo()->GetCodeInfo(wxT("PHP"));
+    PCodeInfo codeInfo = obj->GetObjectInfo()->GetCodeInfo("PHP");
     if (codeInfo) {
-        wxString _template = codeInfo->GetTemplate(wxT("destruction"));
+        wxString _template = codeInfo->GetTemplate("destruction");
         if (!_template.empty()) {
             PHPTemplateParser parser(obj, _template,
                                      m_useI18n, m_useRelativePath, m_basePath);
@@ -1140,7 +1140,7 @@ void PHPCodeGenerator::FindMacros(PObjectBase obj, std::vector<wxString>* macros
                 continue;
 
             // Skip wx IDs
-            if ((!value.Contains(wxT("XRCID")))
+            if ((!value.Contains("XRCID"))
                 && (m_predMacros.end() == m_predMacros.find(value))) {
                 if (macros->end() == std::find(macros->begin(), macros->end(), value))
                     macros->push_back(value);
@@ -1171,19 +1171,19 @@ void PHPCodeGenerator::GenDefines(PObjectBase project)
 
     // Remove the default macro from the set, for backward compatiblity
     std::vector<wxString>::iterator it
-        = std::find(macros.begin(), macros.end(), wxT("ID_DEFAULT"));
+        = std::find(macros.begin(), macros.end(), "ID_DEFAULT");
     if (it != macros.end()) {
         // The default macro is defined to wxID_ANY
-        m_source->WriteLn(wxT("const ID_DEFAULT = wxID_ANY; // Default"));
+        m_source->WriteLn("const ID_DEFAULT = wxID_ANY; // Default");
         macros.erase(it);
     }
     size_t id = m_firstID;
     if (id < 1000)
-        wxLogWarning(wxT("First ID is Less than 1000"));
+        wxLogWarning("First ID is Less than 1000");
 
     for (it = macros.begin(); it != macros.end(); it++) {
         // Don't redefine wx IDs
-        m_source->WriteLn(wxString::Format(wxT("const %s = %z;"), it->c_str(), id));
+        m_source->WriteLn(wxString::Format("const %s = %z;", it->c_str(), id));
         id++;
     }
     if (!macros.empty())
@@ -1192,11 +1192,11 @@ void PHPCodeGenerator::GenDefines(PObjectBase project)
 
 void PHPCodeGenerator::GenSettings(PObjectInfo info, PObjectBase obj)
 {
-    PCodeInfo codeInfo = info->GetCodeInfo(wxT("PHP"));
+    PCodeInfo codeInfo = info->GetCodeInfo("PHP");
     if (!codeInfo)
         return;
 
-    wxString _template = codeInfo->GetTemplate(wxT("settings"));
+    wxString _template = codeInfo->GetTemplate("settings");
     if (!_template.empty()) {
         PHPTemplateParser parser(obj, _template, m_useI18n, m_useRelativePath, m_basePath);
         wxString code = parser.ParseTemplate();
@@ -1221,11 +1221,11 @@ void PHPCodeGenerator::GenAddToolbar(PObjectInfo info, PObjectBase obj)
 void PHPCodeGenerator::GetAddToolbarCode(PObjectInfo info, PObjectBase obj,
                                          wxArrayString& codelines)
 {
-    PCodeInfo codeInfo = info->GetCodeInfo(wxT("PHP"));
+    PCodeInfo codeInfo = info->GetCodeInfo("PHP");
     if (!codeInfo)
         return;
 
-    wxString _template = codeInfo->GetTemplate(wxT("toolbar_add"));
+    wxString _template = codeInfo->GetTemplate("toolbar_add");
     if (!_template.empty()) {
         PHPTemplateParser parser(obj, _template, m_useI18n,
                                  m_useRelativePath, m_basePath);
@@ -1255,8 +1255,8 @@ void PHPCodeGenerator::UseRelativePath(bool relative, wxString basePath)
 
 void PHPCodeGenerator::SetupPredefinedMacros()
 {
-#define ADD_PREDEFINED_MACRO(x) m_predMacros.insert(wxT(#x))
-#define ADD_PREDEFINED_PREFIX(k, v) m_predModulePrefix[wxT(#k)] = wxT(#v)
+#define ADD_PREDEFINED_MACRO(x) m_predMacros.insert(#x)
+#define ADD_PREDEFINED_PREFIX(k, v) m_predModulePrefix[#k] = #v
 
     // No id matches this one when compared to it
     ADD_PREDEFINED_MACRO(wxID_NONE);

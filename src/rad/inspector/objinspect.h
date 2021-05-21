@@ -101,7 +101,7 @@ private:
         if (m_style == wxWEAVER_OI_MULTIPAGE_STYLE)
             pageName = name;
         else
-            pageName = wxT("default");
+            pageName = "default";
 
         wxPropertyGridManager* pg = (addingEvents ? m_eg : m_pg);
         int pageIndex = pg->GetPageByName(pageName);

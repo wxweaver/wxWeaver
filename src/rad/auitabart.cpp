@@ -128,7 +128,7 @@ static wxString wxAuiChopText(wxDC& dc, const wxString& text, int max_size)
     size_t last_good_length = 0;
     for (i = 0; i < len; ++i) {
         wxString s = text.Left(i);
-        s += wxT("...");
+        s += "...";
 
         dc.GetTextExtent(s, &x, &y);
         if (x > max_size)
@@ -138,7 +138,7 @@ static wxString wxAuiChopText(wxDC& dc, const wxString& text, int max_size)
     }
 
     wxString ret = text.Left(last_good_length);
-    ret += wxT("...");
+    ret += "...";
     return ret;
 }
 
@@ -196,7 +196,7 @@ void AuiTabArt::DrawTab(wxDC& dc,
     // if the caption is empty, measure some temporary text
     wxString caption = page.caption;
     if (caption.empty())
-        caption = wxT("Xj");
+        caption = "Xj";
 
     dc.SetFont(m_selectedFont);
     dc.GetTextExtent(caption, &selected_textx, &selected_texty);

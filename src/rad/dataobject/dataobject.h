@@ -24,7 +24,7 @@
 
 #include <wx/dnd.h>
 
-#define wxWeaverDataObjectFormat wxDataFormat(wxT("wxWeaverDataFormat"))
+#define wxWeaverDataObjectFormat wxDataFormat("wxWeaverDataFormat")
 
 class wxWeaverDataObject : public wxDataObject {
 public:

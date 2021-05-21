@@ -91,47 +91,62 @@ void LuaPanel::InitStyledTextCtrl(wxStyledTextCtrl* stc)
         "is lambda not or pass print raise return try while");
 #ifdef __WXGTK__
     wxFont font(8, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    font.SetFaceName(wxT("Monospace"));
+    font.SetFaceName("Monospace");
 #else
     wxFont font(10, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 #endif
-
-    stc->StyleSetForeground(wxSTC_STYLE_DEFAULT, wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-    stc->StyleSetBackground(wxSTC_STYLE_DEFAULT, wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
+    bool darkMode = AppData()->IsDarkMode();
+    if (darkMode) {
+        stc->StyleSetBackground(wxSTC_STYLE_DEFAULT, wxColour(30, 30, 30));
+        stc->StyleSetForeground(wxSTC_STYLE_DEFAULT, wxColour(170, 180, 190));
+    } else {
+        stc->StyleSetBackground(wxSTC_STYLE_DEFAULT,
+                                wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
+        stc->StyleSetForeground(wxSTC_STYLE_DEFAULT,
+                                wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
+    }
     stc->StyleSetFont(wxSTC_STYLE_DEFAULT, font);
     stc->StyleClearAll();
     stc->StyleSetBold(wxSTC_C_WORD, true);
-    if (!AppData()->IsDarkMode()) {
-        stc->StyleSetForeground(wxSTC_C_WORD, *wxBLUE);
-        stc->StyleSetForeground(wxSTC_C_STRING, *wxRED);
-        stc->StyleSetForeground(wxSTC_C_STRINGEOL, *wxRED);
-        stc->StyleSetForeground(wxSTC_C_PREPROCESSOR, wxColour(49, 106, 197));
+    if (!darkMode) {
+        stc->StyleSetForeground(wxSTC_C_WORD, wxColour(0, 0, 128));
+        stc->StyleSetForeground(wxSTC_C_STRING, wxColour(0, 128, 0));
+        stc->StyleSetForeground(wxSTC_C_STRINGEOL, wxColour(0, 128, 0));
+        stc->StyleSetForeground(wxSTC_C_PREPROCESSOR, wxColour(0, 0, 80));
         stc->StyleSetForeground(wxSTC_C_COMMENT, wxColour(0, 128, 0));
         stc->StyleSetForeground(wxSTC_C_COMMENTLINE, wxColour(0, 128, 0));
         stc->StyleSetForeground(wxSTC_C_COMMENTDOC, wxColour(0, 128, 0));
         stc->StyleSetForeground(wxSTC_C_COMMENTLINEDOC, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_NUMBER, *wxBLUE);
+        stc->StyleSetForeground(wxSTC_C_NUMBER, wxColour(0, 0, 128));
+        stc->SetSelBackground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT));
+        stc->SetSelForeground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHTTEXT));
     } else {
-        stc->StyleSetForeground(wxSTC_C_WORD, wxColour(221, 40, 103));
-        stc->StyleSetForeground(wxSTC_C_STRING, wxColour(23, 198, 163));
-        stc->StyleSetForeground(wxSTC_C_STRINGEOL, wxColour(23, 198, 163));
-        stc->StyleSetForeground(wxSTC_C_PREPROCESSOR, wxColour(204, 129, 186));
-        stc->StyleSetForeground(wxSTC_C_COMMENT, wxColour(98, 98, 98));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINE, wxColour(98, 98, 98));
-        stc->StyleSetForeground(wxSTC_C_COMMENTDOC, wxColour(98, 98, 98));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINEDOC, wxColour(98, 98, 98));
-        stc->StyleSetForeground(wxSTC_C_NUMBER, wxColour(104, 151, 187));
+        stc->StyleSetForeground(wxSTC_C_WORD, wxColour(200, 120, 230));
+        stc->StyleSetForeground(wxSTC_C_WORD2, wxColour(235, 100, 115));
+        stc->StyleSetForeground(wxSTC_C_GLOBALCLASS, wxColour(235, 100, 115));
+        //stc->StyleSetForeground(wxSTC_C_IDENTIFIER, wxColour(90, 180, 250));
+        stc->StyleSetForeground(wxSTC_C_CHARACTER, wxColour(150, 200, 120));
+        stc->StyleSetForeground(wxSTC_C_STRING, wxColour(150, 200, 120));
+        stc->StyleSetForeground(wxSTC_C_STRINGEOL, wxColour(150, 200, 120));
+        stc->StyleSetForeground(wxSTC_C_PREPROCESSOR, wxColour(200, 120, 230));
+        stc->StyleSetForeground(wxSTC_C_PREPROCESSORCOMMENT, wxColour(90, 100, 120));
+        stc->StyleSetForeground(wxSTC_C_COMMENT, wxColour(90, 100, 120));
+        stc->StyleSetForeground(wxSTC_C_COMMENTLINE, wxColour(90, 100, 120));
+        stc->StyleSetForeground(wxSTC_C_COMMENTDOC, wxColour(90, 100, 120));
+        stc->StyleSetForeground(wxSTC_C_COMMENTLINEDOC, wxColour(90, 100, 120));
+        stc->StyleSetForeground(wxSTC_C_NUMBER, wxColour(220, 160, 100));
+        stc->SetSelBackground(true, wxColour(45, 50, 60));
     }
-    stc->SetUseTabs(true);
+    stc->SetCaretForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
+    stc->SetCaretWidth(2);
+    stc->SetReadOnly(true);
+
+    // TODO: Make this configurable
+    stc->SetUseTabs(false);
     stc->SetTabWidth(4);
     stc->SetTabIndents(true);
     stc->SetBackSpaceUnIndents(true);
     stc->SetIndent(4);
-    stc->SetSelBackground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT));
-    stc->SetSelForeground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHTTEXT));
-    stc->SetCaretForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-    stc->SetCaretWidth(2);
-    stc->SetReadOnly(true);
 }
 
 void LuaPanel::OnFind(wxFindDialogEvent& event)
@@ -209,7 +224,7 @@ void LuaPanel::OnCodeGeneration(wxWeaverEvent& event)
     bool doFile = false;
     PProperty pCodeGen = project->GetProperty("code_generation");
     if (pCodeGen)
-        doFile = TypeConv::FlagSet(wxT("Lua"), pCodeGen->GetValue()) && !panelOnly;
+        doFile = TypeConv::FlagSet("Lua", pCodeGen->GetValue()) && !panelOnly;
 
     if (!(doPanel || doFile))
         return;

@@ -54,13 +54,13 @@ void Function::SetContents(wxString contents)
 wxString Function::GetFunction()
 {
     wxString Str;
-    Str << wxT("\n");
+    Str << "\n";
     Str << m_documentation;
-    Str << wxT("\n");
+    Str << "\n";
     Str << m_functionHeading;
-    Str << wxT("\n{\n");
+    Str << "\n{\n";
     Str << m_functionContents;
-    Str << wxT("\n}");
+    Str << "\n}";
     return Str;
 }
 
@@ -84,12 +84,12 @@ void CCodeParser::ParseCFiles(wxString className)
         Str = headerFile.GetFirstLine();
         while (!(headerFile.Eof())) {
             header << Str;
-            header << wxT('\n');
+            header << '\n';
             Str = headerFile.GetNextLine();
         }
         headerFile.Close();
     } else {
-        header = wxT("");
+        header = "";
     }
     if (sourceFile.Open()) {
         wxString Str;
@@ -97,12 +97,12 @@ void CCodeParser::ParseCFiles(wxString className)
         source = sourceFile.GetFirstLine();
         while (!(sourceFile.Eof())) {
             source << Str;
-            source << wxT('\n');
+            source << '\n';
             Str = sourceFile.GetNextLine();
         }
         sourceFile.Close();
     } else {
-        source = wxT("");
+        source = "";
     }
     // parse the file contents
     ParseCCode(header, source);
@@ -118,15 +118,15 @@ void CCodeParser::ParseCCode(wxString header, wxString source)
 void CCodeParser::ParseCInclude(wxString code)
 {
     int userIncludeEnd;
-    m_userInclude = wxT("");
+    m_userInclude = "";
 
     // find the begining of the user include
-    int userIncludeStart = code.Find(wxT("//// end generated include"));
+    int userIncludeStart = code.Find("//// end generated include");
     if (userIncludeStart != wxNOT_FOUND) {
-        userIncludeStart = code.find(wxT('\n'), userIncludeStart);
+        userIncludeStart = code.find('\n', userIncludeStart);
         if (userIncludeStart != wxNOT_FOUND) {
             // find the end of the user include
-            userIncludeEnd = code.find(wxT("\n/** Implementing "), userIncludeStart);
+            userIncludeEnd = code.find("\n/** Implementing ", userIncludeStart);
 
             if (userIncludeEnd != wxNOT_FOUND) {
                 userIncludeStart++;
@@ -139,7 +139,7 @@ void CCodeParser::ParseCInclude(wxString code)
 
 void CCodeParser::ParseCClass(wxString code)
 {
-    int startClass = code.Find(wxT("class ") + m_className);
+    int startClass = code.Find("class " + m_className);
     if (startClass != wxNOT_FOUND) {
         code = ParseBrackets(code, startClass);
         if (startClass != wxNOT_FOUND)
@@ -149,12 +149,12 @@ void CCodeParser::ParseCClass(wxString code)
 
 void CCodeParser::ParseCUserMembers(wxString code)
 {
-    m_userMemebers = wxT("");
-    int userMembersStart = code.Find(wxT("//// end generated class members"));
+    m_userMemebers = "";
+    int userMembersStart = code.Find("//// end generated class members");
     if (userMembersStart != wxNOT_FOUND) {
         userMembersStart = code.find('\n', userMembersStart);
         if (userMembersStart == wxNOT_FOUND) {
-            m_userMemebers = wxT("");
+            m_userMemebers = "";
         } else {
             userMembersStart++;
             if (userMembersStart < (int)code.Len())
@@ -175,7 +175,7 @@ void CCodeParser::ParseSourceFunctions(wxString code)
     int loop = 0;
     while (1) {
         // find the begining of the function name
-        Str = m_className + wxT("::");
+        Str = m_className + "::";
         functionStart = code.find(Str, previousFunctionEnd);
         if (functionStart == wxNOT_FOUND) {
             // Get the last bit of remaining code after the last function in the file
@@ -206,11 +206,11 @@ void CCodeParser::ParseSourceFunctions(wxString code)
         if (functionStart != wxNOT_FOUND) {
             functionEnd = functionStart;
         } else {
-            wxMessageBox(wxT("Brackets Missing in Source File!"));
+            wxMessageBox("Brackets Missing in Source File!");
             code.insert(functionEnd + 1,
-                        wxT("//The Following Block is missing a closing bracket\n//and has been "
-                            "set aside by wxWeaver\n"));
-            func->SetContents(wxT(""));
+                        "//The Following Block is missing a closing bracket\n//and has been "
+                        "set aside by wxWeaver\n");
+            func->SetContents("");
         }
         previousFunctionEnd = functionEnd;
         if (loop == 100) // TODO: ???
@@ -235,7 +235,7 @@ wxString CCodeParser::ParseBrackets(wxString code, int& functionStart)
         functionStart = index;
         int loop = 0;
         while (openingBrackets > closingBrackets) {
-            index = code.find_first_of(wxT("{}"), index);
+            index = code.find_first_of("{}", index);
             if (index == wxNOT_FOUND) {
                 Str = code.Mid(functionStart, index);
                 functionStart = index;
@@ -249,14 +249,14 @@ wxString CCodeParser::ParseBrackets(wxString code, int& functionStart)
                 closingBrackets++;
             }
             if (loop == 100) // TODO: ???
-                return wxT("");
+                return "";
 
             loop++;
         }
         index--;
         functionLength = index - functionStart;
     } else {
-        wxMessageBox(wxT("no brackets found"));
+        wxMessageBox("no brackets found");
     }
     Str = code.Mid(functionStart, functionLength);
     functionStart = functionStart + functionLength + 1;
@@ -265,7 +265,7 @@ wxString CCodeParser::ParseBrackets(wxString code, int& functionStart)
 
 wxString CodeParser::GetFunctionDocumentation(wxString function)
 {
-    wxString contents = wxT("");
+    wxString contents = "";
     Function* func;
 
     m_functionIter = m_functions.find(std::string(function.ToUTF8()));
@@ -278,7 +278,7 @@ wxString CodeParser::GetFunctionDocumentation(wxString function)
 
 wxString CodeParser::GetFunctionContents(wxString function)
 {
-    wxString contents = wxT("");
+    wxString contents = "";
     Function* func;
 
     m_functionIter = m_functions.find(std::string(RemoveWhiteSpace(function).ToUTF8()));

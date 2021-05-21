@@ -239,7 +239,7 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
     wxPGProperty* result = nullptr;
     PropertyType type = prop->GetType();
     wxString name = prop->GetName();
-    wxVariant vTrue = wxVariant(true, wxT("true"));
+    wxVariant vTrue = wxVariant(true, "true");
 
     if (type == PT_MACRO) {
         result = new wxStringProperty(name, wxPG_LABEL,
@@ -258,7 +258,7 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
                                           prop->GetValueAsString());
     } else if (type == PT_BOOL) {
         result = new wxBoolProperty(name, wxPG_LABEL,
-                                    prop->GetValue() == wxT("1"));
+                                    prop->GetValue() == "1");
     } else if (type == PT_BITLIST) {
         PPropertyInfo propDesc = prop->GetPropertyInfo();
         POptionList optList = propDesc->GetOptionList();
@@ -321,9 +321,9 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
 
         wxString desc = propDesc->GetDescription();
         if (desc.empty())
-            desc = value + wxT(":\n") + help;
+            desc = value + ":\n" + help;
         else
-            desc += wxT("\n\n") + value + wxT(":\n") + help;
+            desc += "\n\n" + value + ":\n" + help;
 
         result->SetHelpString(wxGetTranslation(desc));
 
@@ -342,7 +342,7 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
         {
             wxColourPropertyValue colProp;
             colProp.m_type = wxSYS_COLOUR_WINDOW;
-            colProp.m_colour = TypeConv::StringToSystemColour(wxT("wxSYS_COLOUR_WINDOW"));
+            colProp.m_colour = TypeConv::StringToSystemColour("wxSYS_COLOUR_WINDOW");
             result = new wxSystemColourProperty(name, wxPG_LABEL, colProp);
         } else {
             if (!value.find_first_of("wx")) {
@@ -359,7 +359,7 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
     } else if (type == PT_FILE) {
         result = new wxFileProperty(name, wxPG_LABEL, prop->GetValueAsString());
     } else if (type == PT_BITMAP) {
-        wxLogDebug(wxT("OI::GetProperty: prop:%s"), prop->GetValueAsString().c_str());
+        wxLogDebug("OI::GetProperty: prop:%s", prop->GetValueAsString().c_str());
 
         result = new wxWeaverBitmapProperty(name, wxPG_LABEL, prop->GetValueAsString());
     } else if (type == PT_STRINGLIST) {
@@ -430,7 +430,7 @@ void ObjectInspector::AddItems(const wxString& name, PObjectBase obj,
 
                         // perform delayed child properties update
                         wxCommandEvent e(wxEVT_WVR_PROP_BITMAP_CHANGED);
-                        e.SetString(bp->GetName() + wxT(":") + prop->GetValue());
+                        e.SetString(bp->GetName() + ":" + prop->GetValue());
                         GetEventHandler()->AddPendingEvent(e);
 #if 0
                         AppData()->ModifyProperty(prop, bp->GetValueAsString());
@@ -682,9 +682,9 @@ void ObjectInspector::OnPropertyGridChanged(wxPropertyGridEvent& event)
                 std::map<wxString, wxString>::const_iterator option = options.find(value);
                 if (option != options.end()) {
                     if (helpString.empty()) {
-                        helpString = value + wxT(":\n") + option->second;
+                        helpString = value + ":\n" + option->second;
                     } else {
-                        helpString += wxT("\n\n") + value + wxT(":\n") + option->second;
+                        helpString += "\n\n" + value + ":\n" + option->second;
                     }
                 }
             }
@@ -726,21 +726,21 @@ void ObjectInspector::OnPropertyGridChanged(wxPropertyGridEvent& event)
         }
         case PT_BITLIST: {
             wxString aux = m_pg->GetPropertyValueAsString(propPtr);
-            aux.Replace(wxT(" "), wxT(""));
-            aux.Replace(wxT(","), wxT("|"));
+            aux.Replace(" ", "");
+            aux.Replace(",", "|");
             ModifyProperty(prop, aux);
             break;
         }
         case PT_WXPOINT: {
             wxPoint point = wxPointRefFromVariant(event.GetPropertyValue());
             ModifyProperty(
-                prop, wxString::Format(wxT("%i,%i"), point.x, point.y));
+                prop, wxString::Format("%i,%i", point.x, point.y));
             break;
         }
         case PT_WXSIZE: {
             wxSize size = wxSizeRefFromVariant(event.GetPropertyValue());
             ModifyProperty(
-                prop, wxString::Format(wxT("%i,%i"), size.GetWidth(), size.GetHeight()));
+                prop, wxString::Format("%i,%i", size.GetWidth(), size.GetHeight()));
             break;
         }
         case PT_WXFONT: {
@@ -752,7 +752,7 @@ void ObjectInspector::OnPropertyGridChanged(wxPropertyGridEvent& event)
             colour << event.GetPropertyValue();
             switch (colour.m_type) {
             case wxSYS_COLOUR_MAX:
-                ModifyProperty(prop, wxT(""));
+                ModifyProperty(prop, "");
                 break;
             case wxPG_COLOUR_CUSTOM:
                 ModifyProperty(prop, TypeConv::ColourToString(colour.m_colour));
@@ -794,7 +794,7 @@ void ObjectInspector::OnPropertyGridChanged(wxPropertyGridEvent& event)
             if (event.GetProperty()->GetIndexInParent() > 0) {
                 // perform delayed child properties update
                 wxCommandEvent e(wxEVT_WVR_PROP_BITMAP_CHANGED);
-                e.SetString(propPtr->GetName() + wxT(":") + bmpVal);
+                e.SetString(propPtr->GetName() + ":" + bmpVal);
                 GetEventHandler()->AddPendingEvent(e);
             }
             break;
@@ -916,21 +916,21 @@ void ObjectInspector::OnPropertyModified(wxWeaverPropertyEvent& event)
         break;
     case PT_BITLIST: {
         wxString aux = prop->GetValueAsString();
-        aux.Replace(wxT("|"), wxT(", "));
-        if (aux == wxT("0"))
-            aux = wxT("");
+        aux.Replace("|", ", ");
+        if (aux == "0")
+            aux = "";
         pgProp->SetValueFromString(aux, 0);
     } break;
     case PT_WXPOINT: {
         //m_pg->SetPropertyValue( pgProp, prop->GetValue() );
         wxString aux = prop->GetValueAsString();
-        aux.Replace(wxT(","), wxT(";"));
+        aux.Replace(",", ";");
         pgProp->SetValueFromString(aux, 0);
     } break;
     case PT_WXSIZE: {
         //m_pg->SetPropertyValue( pgProp, prop->GetValue() );
         wxString aux = prop->GetValueAsString();
-        aux.Replace(wxT(","), wxT(";"));
+        aux.Replace(",", ";");
         pgProp->SetValueFromString(aux, 0);
     } break;
     case PT_WXFONT:
@@ -942,7 +942,7 @@ void ObjectInspector::OnPropertyModified(wxWeaverPropertyEvent& event)
         {
             wxColourPropertyValue def;
             def.m_type = wxSYS_COLOUR_WINDOW;
-            def.m_colour = TypeConv::StringToSystemColour(wxT("wxSYS_COLOUR_WINDOW"));
+            def.m_colour = TypeConv::StringToSystemColour("wxSYS_COLOUR_WINDOW");
             m_pg->SetPropertyValue(pgProp, def);
         } else {
             if (!value.find_first_of("wx")) {
@@ -958,7 +958,7 @@ void ObjectInspector::OnPropertyModified(wxWeaverPropertyEvent& event)
     } break;
     case PT_BITMAP:
         //      pgProp->SetValue( WXVARIANT( prop->GetValueAsString() ) );
-        wxLogDebug(wxT("OI::OnPropertyModified: prop:%s"), prop->GetValueAsString().c_str());
+        wxLogDebug("OI::OnPropertyModified: prop:%s", prop->GetValueAsString().c_str());
         break;
     default:
         pgProp->SetValueFromString(prop->GetValueAsString(), wxPG_FULL_VALUE);
@@ -1022,7 +1022,7 @@ void ObjectInspector::OnPropertyGridDblClick(wxPropertyGridEvent& event)
 
 void ObjectInspector::OnEventGridDblClick(wxPropertyGridEvent& event)
 {
-    wxPGProperty* pgProp = m_pg->GetPropertyByLabel(wxT("name"));
+    wxPGProperty* pgProp = m_pg->GetPropertyByLabel("name");
     if (!pgProp)
         return;
 
@@ -1057,13 +1057,13 @@ void ObjectInspector::AutoGenerateId(PObjectBase objectChanged,
                     if (prop) {
                         if (prop->GetValueAsString() == "wxID_ANY"
                             || reason == "DblClk") {
-                            PProperty name(objectChanged->GetProperty(wxT("name")));
+                            PProperty name(objectChanged->GetProperty("name"));
                             wxString idString;
-                            idString << wxT("ID_");
+                            idString << "ID_";
                             idString << name->GetValueAsString().Upper();
                             ModifyProperty(prop, idString);
 
-                            wxPGProperty* pgid = m_pg->GetPropertyByLabel(wxT("id"));
+                            wxPGProperty* pgid = m_pg->GetPropertyByLabel("id");
                             if (!pgid)
                                 return;
 
@@ -1071,13 +1071,13 @@ void ObjectInspector::AutoGenerateId(PObjectBase objectChanged,
                         }
                     }
                 } else {
-                    prop = objectChanged->GetProperty(wxT("id"));
+                    prop = objectChanged->GetProperty("id");
                     if (prop) {
-                        ModifyProperty(prop, wxT("wxID_ANY"));
-                        wxPGProperty* pgid = m_pg->GetPropertyByLabel(wxT("id"));
+                        ModifyProperty(prop, "wxID_ANY");
+                        wxPGProperty* pgid = m_pg->GetPropertyByLabel("id");
                         if (!pgid)
                             return;
-                        m_pg->SetPropertyValue(pgid, wxT("wxID_ANY"));
+                        m_pg->SetPropertyValue(pgid, "wxID_ANY");
                     }
                 }
             }

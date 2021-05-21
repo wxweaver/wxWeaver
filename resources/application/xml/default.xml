@@ -36,7 +36,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
       <option name="Lua" help="Generate Lua Code"/>
       C++
     </property>
-    <property name="internationalize" type="bool" help="For C++ Only.&#x0A;Generate strings with _() macro instead of wxT() macro. This allows for translation.">0</property>
+    <property name="internationalize" type="bool" help="For C++ Only.&#x0A;Generate strings using _() macro for translation.">0</property>
     <category name="C++ Properties">
       <property name="use_enum" type="bool" help="For C++ Only.&#x0A;Generate an enumeration for control IDs instead of a list of #defines">0</property>
       <property name="use_array_enum" type="bool" help="For C++ Only.&#x0A;Generate an enumeration for the dimensions of arrays">0</property>

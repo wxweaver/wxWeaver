@@ -51,7 +51,7 @@ wxBitmap AppBitmaps::GetBitmap(wxString iconname, int size)
 void AppBitmaps::LoadBitmaps(wxString filepath, wxString iconpath)
 {
     try {
-        m_bitmaps[wxT("unknown")] = wxBitmap(default_xpm);
+        m_bitmaps["unknown"] = wxBitmap(default_xpm);
 
         ticpp::Document doc;
         XMLUtils::LoadXMLFile(doc, true, filepath);

@@ -164,7 +164,7 @@ void AnnoyingDialog::OnButton(wxCommandEvent& event)
     if (event.GetId() != wxID_CANCEL) {
         wxConfigBase* config = wxConfigBase::Get();
         if (m_checkBox->IsChecked())
-            config->Write(wxT("annoyingdialog/") + GetTitle(), event.GetId());
+            config->Write("annoyingdialog/" + GetTitle(), event.GetId());
     }
     EndModal(event.GetId());
 }

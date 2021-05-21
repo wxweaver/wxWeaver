@@ -160,7 +160,7 @@ void XRCPreview::Show(PObjectBase form, const wxString& projectPath)
     res->Load("memory:xrcpreview.xrc");
 
     wxWindow* window = nullptr;
-    if (className == wxT("Frame")) {
+    if (className == "Frame") {
         wxFrame* frame = new wxFrame();
         res->LoadFrame(
             frame, wxTheApp->GetTopWindow(),
@@ -174,7 +174,7 @@ void XRCPreview::Show(PObjectBase form, const wxString& projectPath)
         wxDialog* dialog = new wxDialog;
         res->LoadDialog(
             dialog, wxTheApp->GetTopWindow(),
-            form->GetPropertyAsString(wxT("name")));
+            form->GetPropertyAsString("name"));
 
         // Prevent events from propagating up to wxWeaver's frame
         dialog->SetExtraStyle(dialog->GetExtraStyle() | wxWS_EX_BLOCK_EVENTS);
@@ -210,7 +210,7 @@ void XRCPreview::Show(PObjectBase form, const wxString& projectPath)
         wxPanel* panel = new wxPanel();
         res->LoadPanel(panel, dialog, form->GetPropertyAsString("name"));
         dialog->SetClientSize(panel->GetSize());
-        dialog->SetSize(form->GetPropertyAsSize(wxT("size")));
+        dialog->SetSize(form->GetPropertyAsSize("size"));
         dialog->CenterOnScreen();
         dialog->Show();
         window = dialog;

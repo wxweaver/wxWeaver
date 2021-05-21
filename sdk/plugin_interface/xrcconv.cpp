@@ -32,27 +32,27 @@ static wxString StringToXrcText(const wxString& str)
 
         switch (c) {
         case wxChar('\n'):
-            result = result + wxT("\\n");
+            result = result + "\\n";
             break;
 
         case wxChar('\t'):
-            result = result + wxT("\\t");
+            result = result + "\\t";
             break;
 
         case wxChar('\r'):
-            result = result + wxT("\\r");
+            result = result + "\\r";
             break;
 
         case wxChar('\\'):
-            result = result + wxT("\\\\");
+            result = result + "\\\\";
             break;
 
         case wxChar('_'):
-            result = result + wxT("__");
+            result = result + "__";
             break;
 
         case wxChar('&'):
-            result = result + wxT("_");
+            result = result + "_";
             break;
 
         default:
@@ -110,14 +110,14 @@ static wxString ReplaceSynonymous(const wxString& bitlist)
 {
     IComponentLibrary* lib = GetComponentLibrary(nullptr);
     wxString result, translation;
-    wxStringTokenizer tkz(bitlist, wxT("|"));
+    wxStringTokenizer tkz(bitlist, "|");
     while (tkz.HasMoreTokens()) {
         wxString token;
         token = tkz.GetNextToken();
         token.Trim(true);
         token.Trim(false);
 
-        if (result != wxT(""))
+        if (result != "")
             result = result + wxChar('|');
 
         if (lib->FindSynonymous(token, translation))
@@ -140,10 +140,10 @@ ObjectToXrcFilter::ObjectToXrcFilter(IObject* obj,
 
     m_xrcObj->SetAttribute("class", classname.mb_str(wxConvUTF8));
 
-    if (objname != wxT(""))
+    if (objname != "")
         m_xrcObj->SetAttribute("name", objname.mb_str(wxConvUTF8));
 
-    if (base != wxT(""))
+    if (base != "")
         m_xrcObj->SetAttribute("base", base.mb_str(wxConvUTF8));
 }
 
@@ -201,7 +201,7 @@ void ObjectToXrcFilter::AddProperty(const wxString& objPropName,
             break;
         }
 
-        wxString filename = bitmapProp.AfterFirst(wxT(';'));
+        wxString filename = bitmapProp.AfterFirst(';');
         if (filename.empty()) {
             break;
         }
@@ -216,11 +216,11 @@ void ObjectToXrcFilter::AddProperty(const wxString& objPropName,
             LinkText(filename.Trim().Trim(false), &propElement);
         } else if (bitmapProp.StartsWith(_("Load From Art Provider"))) {
             propElement.SetAttribute("stock_id",
-                                     filename.BeforeFirst(wxT(';')).Trim().Trim(false).mb_str(wxConvUTF8));
+                                     filename.BeforeFirst(';').Trim().Trim(false).mb_str(wxConvUTF8));
             propElement.SetAttribute("stock_client",
-                                     filename.AfterFirst(wxT(';')).Trim().Trim(false).mb_str(wxConvUTF8));
+                                     filename.AfterFirst(';').Trim().Trim(false).mb_str(wxConvUTF8));
 
-            LinkText(wxT("undefined.png"), &propElement);
+            LinkText("undefined.png", &propElement);
         }
     } break;
     }
@@ -242,7 +242,7 @@ void ObjectToXrcFilter::AddPropertyPair(const wxString& objPropName1,
                                         const wxString& xrcPropName)
 {
     AddPropertyValue(xrcPropName,
-                     wxString::Format(_("%d,%d"),
+                     wxString::Format("%d,%d",
                                       m_obj->GetPropertyAsInteger(objPropName1),
                                       m_obj->GetPropertyAsInteger(objPropName2)));
 }
@@ -275,7 +275,7 @@ void ObjectToXrcFilter::LinkFloat(const double& value,
 void ObjectToXrcFilter::LinkColour(const wxColour& colour,
                                    ticpp::Element* propElement)
 {
-    wxString value = wxString::Format(wxT("#%02x%02x%02x"),
+    wxString value = wxString::Format("#%02x%02x%02x",
                                       colour.Red(), colour.Green(), colour.Blue());
     propElement->SetText(value.mb_str(wxConvUTF8));
 }
@@ -285,7 +285,7 @@ void ObjectToXrcFilter::LinkFont(const wxFontContainer& font,
 {
     if (font.GetPointSize() > 0) {
         wxString aux;
-        aux.Printf(wxT("%d"), font.GetPointSize());
+        aux.Printf("%d", font.GetPointSize());
 
         ticpp::Element size("size");
         size.SetText(aux.mb_str(wxConvUTF8));
@@ -422,11 +422,11 @@ void ObjectToXrcFilter::AddWindowProperties()
         AddProperty(_("font"), _("font"), XRC_TYPE_FONT);
 
     if (!m_obj->IsNull(_("tooltip")))
-        AddProperty(_("tooltip"), wxT("tooltip"), XRC_TYPE_TEXT);
+        AddProperty("tooltip", "tooltip", XRC_TYPE_TEXT);
 
     if (!m_obj->IsNull(_("subclass"))) {
         wxString subclass
-            = m_obj->GetChildFromParentProperty(_("subclass"), wxT("name"));
+            = m_obj->GetChildFromParentProperty(_("subclass"), "name");
         if (!subclass.empty()) {
             m_xrcObj->SetAttribute("subclass", subclass.mb_str(wxConvUTF8));
         }
@@ -448,7 +448,7 @@ XrcToXfbFilter::XrcToXfbFilter(ticpp::Element* obj,
         wxLogDebug(wxString(ex.m_details.c_str(), wxConvUTF8));
     }
     if (!objname.empty())
-        AddProperty(wxT("name"), objname, XRC_TYPE_TEXT);
+        AddProperty("name", objname, XRC_TYPE_TEXT);
 }
 
 XrcToXfbFilter::XrcToXfbFilter(ticpp::Element* obj,
@@ -462,7 +462,7 @@ XrcToXfbFilter::XrcToXfbFilter(ticpp::Element* obj,
         std::string name;
         obj->GetAttribute("name", &name);
         wxString objname(name.c_str(), wxConvUTF8);
-        AddPropertyValue(wxT("name"), objname);
+        AddPropertyValue("name", objname);
 
     } catch (ticpp::Exception& ex) {
         wxLogDebug(wxString(ex.m_details.c_str(), wxConvUTF8));
@@ -550,26 +550,26 @@ void XrcToXfbFilter::AddStyleProperty()
 
         // FIXME: We should avoid hardcoding these things
         std::set<wxString> windowStyles;
-        windowStyles.insert(wxT("wxBORDER_DEFAULT"));
-        windowStyles.insert(wxT("wxBORDER_SIMPLE"));
-        windowStyles.insert(wxT("wxBORDER_DOUBLE"));
-        windowStyles.insert(wxT("wxBORDER_SUNKEN"));
-        windowStyles.insert(wxT("wxBORDER_RAISED"));
-        windowStyles.insert(wxT("wxBORDER_STATIC"));
-        windowStyles.insert(wxT("wxBORDER_THEME"));
-        windowStyles.insert(wxT("wxBORDER_NONE"));
-        windowStyles.insert(wxT("wxTRANSPARENT_WINDOW"));
-        windowStyles.insert(wxT("wxTAB_TRAVERSAL"));
-        windowStyles.insert(wxT("wxWANTS_CHARS"));
-        windowStyles.insert(wxT("wxVSCROLL"));
-        windowStyles.insert(wxT("wxHSCROLL"));
-        windowStyles.insert(wxT("wxALWAYS_SHOW_SB"));
-        windowStyles.insert(wxT("wxCLIP_CHILDREN"));
-        windowStyles.insert(wxT("wxFULL_REPAINT_ON_RESIZE"));
-        windowStyles.insert(wxT("wxNO_FULL_REPAINT_ON_RESIZE"));
+        windowStyles.insert("wxBORDER_DEFAULT");
+        windowStyles.insert("wxBORDER_SIMPLE");
+        windowStyles.insert("wxBORDER_DOUBLE");
+        windowStyles.insert("wxBORDER_SUNKEN");
+        windowStyles.insert("wxBORDER_RAISED");
+        windowStyles.insert("wxBORDER_STATIC");
+        windowStyles.insert("wxBORDER_THEME");
+        windowStyles.insert("wxBORDER_NONE");
+        windowStyles.insert("wxTRANSPARENT_WINDOW");
+        windowStyles.insert("wxTAB_TRAVERSAL");
+        windowStyles.insert("wxWANTS_CHARS");
+        windowStyles.insert("wxVSCROLL");
+        windowStyles.insert("wxHSCROLL");
+        windowStyles.insert("wxALWAYS_SHOW_SB");
+        windowStyles.insert("wxCLIP_CHILDREN");
+        windowStyles.insert("wxFULL_REPAINT_ON_RESIZE");
+        windowStyles.insert("wxNO_FULL_REPAINT_ON_RESIZE");
 
         wxString style, windowStyle;
-        wxStringTokenizer tkz(bitlist, wxT(" |"));
+        wxStringTokenizer tkz(bitlist, " |");
         while (tkz.HasMoreTokens()) {
             wxString token;
             token = tkz.GetNextToken();
@@ -588,10 +588,10 @@ void XrcToXfbFilter::AddStyleProperty()
         }
 
         if (!style.empty()) {
-            AddPropertyValue(wxT("style"), style);
+            AddPropertyValue("style", style);
         }
 
-        AddPropertyValue(wxT("window_style"), windowStyle);
+        AddPropertyValue("window_style", windowStyle);
     } catch (ticpp::Exception& ex) {
         wxLogDebug(wxString(ex.m_details.c_str(), wxConvUTF8));
     }
@@ -607,15 +607,15 @@ void XrcToXfbFilter::AddExtraStyleProperty()
 
         // FIXME: We should avoid hardcoding these things
         std::set<wxString> windowStyles;
-        windowStyles.insert(wxT("wxWS_EX_VALIDATE_RECURSIVELY"));
-        windowStyles.insert(wxT("wxWS_EX_BLOCK_EVENTS"));
-        windowStyles.insert(wxT("wxWS_EX_TRANSIENT"));
-        windowStyles.insert(wxT("wxWS_EX_CONTEXTHELP"));
-        windowStyles.insert(wxT("wxWS_EX_PROCESS_IDLE"));
-        windowStyles.insert(wxT("wxWS_EX_PROCESS_UI_UPDATES"));
+        windowStyles.insert("wxWS_EX_VALIDATE_RECURSIVELY");
+        windowStyles.insert("wxWS_EX_BLOCK_EVENTS");
+        windowStyles.insert("wxWS_EX_TRANSIENT");
+        windowStyles.insert("wxWS_EX_CONTEXTHELP");
+        windowStyles.insert("wxWS_EX_PROCESS_IDLE");
+        windowStyles.insert("wxWS_EX_PROCESS_UI_UPDATES");
 
         wxString style, windowStyle;
-        wxStringTokenizer tkz(bitlist, wxT(" |"));
+        wxStringTokenizer tkz(bitlist, " |");
         while (tkz.HasMoreTokens()) {
             wxString token;
             token = tkz.GetNextToken();
@@ -634,9 +634,9 @@ void XrcToXfbFilter::AddExtraStyleProperty()
         }
 
         if (!style.empty()) {
-            AddPropertyValue(wxT("extra_style"), style);
+            AddPropertyValue("extra_style", style);
         }
-        AddPropertyValue(wxT("window_extra_style"), windowStyle);
+        AddPropertyValue("window_extra_style", windowStyle);
     } catch (ticpp::Exception& ex) {
         wxLogDebug(wxString(ex.m_details.c_str(), wxConvUTF8));
     }
@@ -651,7 +651,7 @@ void XrcToXfbFilter::AddPropertyPair(const char* xrcPropName,
 
         wxString width = wxEmptyString;
         wxString height = wxEmptyString;
-        wxStringTokenizer tkz(wxString(pairProp->GetText().c_str(), wxConvUTF8), wxT(","));
+        wxStringTokenizer tkz(wxString(pairProp->GetText().c_str(), wxConvUTF8), ",");
         if (tkz.HasMoreTokens()) {
             width = tkz.GetNextToken();
             if (tkz.HasMoreTokens()) {
@@ -807,7 +807,7 @@ void XrcToXfbFilter::ImportFontProperty(const wxString& xrcPropName,
             element = xrcProperty->FirstChildElement("underlined");
             wxString underlined_str(element->GetText().c_str(), wxConvUTF8);
 
-            if (underlined_str == wxT("1"))
+            if (underlined_str == "1")
                 font.SetUnderlined(true);
             else
                 font.SetUnderlined(false);
@@ -826,7 +826,7 @@ void XrcToXfbFilter::ImportFontProperty(const wxString& xrcPropName,
 
         // We already have the font type. So we must now use the wxWeaver format
         wxString font_str = wxString::Format(
-            wxT("%s,%d,%d,%d,%d,%d"),
+            "%s,%d,%d,%d,%d,%d",
             font.GetFaceName().c_str(),
             font.GetStyle(),
             font.GetWeight(),
@@ -851,15 +851,15 @@ void XrcToXfbFilter::ImportBitmapProperty(const wxString& xrcPropName,
             && (xrcProperty->GetAttribute("stock_client") != "")) {
             // read wxArtProvider-based bitmap
             wxString res = _("Load From Art Provider");
-            res += wxT(";");
+            res += ";";
             res += wxString(xrcProperty->GetAttribute("stock_id").c_str(), wxConvUTF8);
-            res += wxT(";");
+            res += ";";
             res += wxString(xrcProperty->GetAttribute("stock_client").c_str(), wxConvUTF8);
             property->SetText(res.Trim().mb_str(wxConvUTF8));
         } else {
             // read file-based bitmap
             wxString res = _("Load From File");
-            res += wxT(";");
+            res += ";";
             res += wxString(xrcProperty->GetText().c_str(), wxConvUTF8);
             property->SetText(res.Trim().mb_str(wxConvUTF8));
         }
@@ -917,9 +917,9 @@ void XrcToXfbFilter::ImportStringListProperty(const wxString& xrcPropName,
                 if (parseXrcText)
                     value = XrcTextToString(value);
 
-                res += wxChar('\"') + value + wxT("\" ");
+                res += wxChar('\"') + value + "\" ";
             } catch (ticpp::Exception& ex) {
-                wxLogDebug(wxT("%s. line: %i"),
+                wxLogDebug("%s. line: %i",
                            wxString(ex.m_details.c_str(), wxConvUTF8).c_str(), __LINE__);
             }
 
@@ -929,7 +929,7 @@ void XrcToXfbFilter::ImportStringListProperty(const wxString& xrcPropName,
         res.Trim();
         property->SetText(res.mb_str(wxConvUTF8));
     } catch (ticpp::Exception& ex) {
-        wxLogDebug(wxT("%s. line: %i"),
+        wxLogDebug("%s. line: %i",
                    wxString(ex.m_details.c_str(), wxConvUTF8).c_str(), __LINE__);
     }
 }

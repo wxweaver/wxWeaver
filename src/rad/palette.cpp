@@ -100,7 +100,7 @@ void Palette::SaveSettings()
 
     for (size_t i = 0; i < m_notebook->GetPageCount(); ++i) {
         if (!pageOrder.empty())
-            pageOrder.append(wxT(","));
+            pageOrder.append(",");
 
         pageOrder.append(m_notebook->GetPageText(i));
     }
