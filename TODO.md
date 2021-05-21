@@ -24,7 +24,6 @@
 - Add removed names to copyright headers.
 - Use snake case instead camel case in some plugins properties
   (toolSeparator -> tool_separator)
-- Separated `ticpp` and `lua` static libraries
 
 ## Controls
 
