@@ -123,7 +123,7 @@ PObjectBase wxWeaverDataObject::GetObj()
         if (major > AppData()->m_fbpVerMajor
             || (AppData()->m_fbpVerMajor == major
                 && minor > AppData()->m_fbpVerMinor))
-            wxLogError(_("This object cannot be pasted because it is from a newer version of wxWeaver"));
+            wxLogError("This object cannot be pasted because it is from a newer version of wxWeaver");
 
         if (major < AppData()->m_fbpVerMajor
             || (AppData()->m_fbpVerMajor == major

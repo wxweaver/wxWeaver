@@ -1081,9 +1081,9 @@ void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayIte
         // If loading bitmap from ICON resource, and size is not set,
         // set size to toolbars bitmapsize
         // TODO: So hacky, yet so useful ...
-        wxSize toolbarsize = obj->GetParent()->GetPropertyAsSize(_("bitmapsize"));
+        wxSize toolbarsize = obj->GetParent()->GetPropertyAsSize("bitmapsize");
         if (wxDefaultSize != toolbarsize) {
-            PProperty prop = obj->GetProperty(_("bitmap"));
+            PProperty prop = obj->GetProperty("bitmap");
             if (prop) {
                 wxString oldVal = prop->GetValueAsString();
                 wxString path, source;

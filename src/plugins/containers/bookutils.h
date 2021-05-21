@@ -114,7 +114,7 @@ void OnCreated(wxObject* wxobject, wxWindow* wxparent,
             wxImageList* imageList = book->GetImageList();
             if (imageList) {
                 wxImage image
-                    = obj->GetPropertyAsBitmap(_("bitmap")).ConvertToImage();
+                    = obj->GetPropertyAsBitmap("bitmap").ConvertToImage();
                 imageList->Add(image.Scale(width, height));
                 book->SetPageImage( // Apply image to page
                     book->GetPageCount() - 1, imageList->GetImageCount() - 1);

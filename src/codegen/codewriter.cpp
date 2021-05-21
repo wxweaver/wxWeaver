@@ -212,7 +212,7 @@ void FileCodeWriter::WriteBuffer()
     if (shouldWrite) {
         wxFile fileOut;
         if (!fileOut.Create(m_filename, true)) {
-            wxLogError(_("Unable to create file: %s"), m_filename.c_str());
+            wxLogError("Unable to create file: %s", m_filename.c_str());
             return;
         }
         if (m_useUtf8 && m_useMicrosoftBOM)
@@ -229,10 +229,10 @@ void FileCodeWriter::Clear()
     if (::wxFileExists(m_filename)) {
         // check for write access to the target file
         if (!wxFile::Access(m_filename, wxFile::write))
-            wxWEAVER_THROW_EX(_("Unable to write file: ") << m_filename);
+            wxWEAVER_THROW_EX("Unable to write file: " << m_filename);
     } else {
         wxFile file;
         if (!file.Create(m_filename, true))
-            wxWEAVER_THROW_EX(_("Unable to create file: ") << m_filename);
+            wxWEAVER_THROW_EX("Unable to create file: " << m_filename);
     }
 }

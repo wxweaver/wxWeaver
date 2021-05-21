@@ -142,12 +142,12 @@ int MyApp::OnRun()
     bool hasLanguage = parser.Found("l", &language);
     if (parser.Found("g")) {
         if (projectToLoad.empty()) {
-            wxLogError(_("You must pass a path to a project file. Nothing to generate."));
+            wxLogError("You must pass a path to a project file. Nothing to generate.");
             return 2;
         }
         if (hasLanguage) {
             if (language.empty()) {
-                wxLogError(_("Empty language option. Nothing generated."));
+                wxLogError("Empty language option. Nothing generated.");
                 return 3;
             }
             language.Replace(",", "|", true);
@@ -198,7 +198,7 @@ int MyApp::OnRun()
     try {
         AppDataInit();
     } catch (wxWeaverException& ex) {
-        wxLogError(_("Error loading application: %s\n cannot continue."), ex.what());
+        wxLogError("Error loading application: %s\n cannot continue.", ex.what());
         wxLog::FlushActive();
         return 5;
     }
@@ -239,7 +239,7 @@ int MyApp::OnRun()
                 return wxApp::OnRun();
             }
         } else {
-            wxLogError(_("Unable to load project: %s"), projectToLoad.c_str());
+            wxLogError("Unable to load project: %s", projectToLoad.c_str());
         }
     }
     if (justGenerate)
@@ -372,7 +372,7 @@ public:
     LoggingStackWalker() { wxLog::Suspend(); }
     ~LoggingStackWalker() override
     {
-        wxLogError(_("A Fatal Error Occurred. Click Details for a backtrace."));
+        wxLogError("A Fatal Error Occurred. Click Details for a backtrace.");
         wxLog::Resume();
         wxLog* logger = wxLog::GetActiveTarget();
         if (logger)

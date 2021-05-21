@@ -375,58 +375,58 @@ void ObjectToXrcFilter::LinkStringList(const wxArrayString& array,
 void ObjectToXrcFilter::AddWindowProperties()
 {
     wxString style;
-    if (!m_obj->IsNull(_("style")))
-        style = m_obj->GetPropertyAsString(_T( "style" ));
-    if (!m_obj->IsNull(_("window_style"))) {
+    if (!m_obj->IsNull("style"))
+        style = m_obj->GetPropertyAsString("style");
+    if (!m_obj->IsNull("window_style")) {
         if (!style.IsEmpty())
-            style += _T('|');
-        style += m_obj->GetPropertyAsString(_T( "window_style" ));
+            style += '|';
+        style += m_obj->GetPropertyAsString("window_style");
     }
     if (!style.IsEmpty())
-        AddPropertyValue(_T( "style" ), style);
+        AddPropertyValue("style", style);
 
     wxString extraStyle;
-    if (!m_obj->IsNull(_("extra_style")))
-        extraStyle = m_obj->GetPropertyAsString(_T( "extra_style" ));
-    if (!m_obj->IsNull(_("window_extra_style"))) {
+    if (!m_obj->IsNull("extra_style"))
+        extraStyle = m_obj->GetPropertyAsString("extra_style");
+    if (!m_obj->IsNull("window_extra_style")) {
         if (!extraStyle.IsEmpty())
-            extraStyle += _T('|');
-        extraStyle += m_obj->GetPropertyAsString(_T( "window_extra_style" ));
+            extraStyle += '|';
+        extraStyle += m_obj->GetPropertyAsString("window_extra_style");
     }
     if (!extraStyle.IsEmpty())
-        AddPropertyValue(_T( "exstyle" ), extraStyle);
+        AddPropertyValue("exstyle", extraStyle);
 
-    if (!m_obj->IsNull(_("pos")))
-        AddProperty(_("pos"), _("pos"), XRC_TYPE_SIZE);
+    if (!m_obj->IsNull("pos"))
+        AddProperty("pos", "pos", XRC_TYPE_SIZE);
 
-    if (!m_obj->IsNull(_("size")))
-        AddProperty(_("size"), _("size"), XRC_TYPE_SIZE);
+    if (!m_obj->IsNull("size"))
+        AddProperty("size", "size", XRC_TYPE_SIZE);
 
-    if (!m_obj->IsNull(_("bg")))
-        AddProperty(_("bg"), _("bg"), XRC_TYPE_COLOUR);
+    if (!m_obj->IsNull("bg"))
+        AddProperty("bg", "bg", XRC_TYPE_COLOUR);
 
-    if (!m_obj->IsNull(_("fg")))
-        AddProperty(_("fg"), _("fg"), XRC_TYPE_COLOUR);
+    if (!m_obj->IsNull("fg"))
+        AddProperty("fg", "fg", XRC_TYPE_COLOUR);
 
     // TODO: ???
-    if (!m_obj->IsNull(_("enabled")) && !m_obj->GetPropertyAsInteger(_("enabled"))) {
-        AddProperty(_("enabled"), _("enabled"), XRC_TYPE_BOOL);
+    if (!m_obj->IsNull("enabled") && !m_obj->GetPropertyAsInteger("enabled")) {
+        AddProperty("enabled", "enabled", XRC_TYPE_BOOL);
     }
-    if (!m_obj->IsNull(_("focused")))
-        AddPropertyValue(_("focused"), _("0"));
+    if (!m_obj->IsNull("focused"))
+        AddPropertyValue("focused", "0");
 
-    if (!m_obj->IsNull(_("hidden")) && m_obj->GetPropertyAsInteger(_("hidden"))) {
-        AddProperty(_("hidden"), _("hidden"), XRC_TYPE_BOOL);
+    if (!m_obj->IsNull("hidden") && m_obj->GetPropertyAsInteger("hidden")) {
+        AddProperty("hidden", "hidden", XRC_TYPE_BOOL);
     }
-    if (!m_obj->IsNull(_("font")))
-        AddProperty(_("font"), _("font"), XRC_TYPE_FONT);
+    if (!m_obj->IsNull("font"))
+        AddProperty("font", "font", XRC_TYPE_FONT);
 
-    if (!m_obj->IsNull(_("tooltip")))
+    if (!m_obj->IsNull("tooltip"))
         AddProperty("tooltip", "tooltip", XRC_TYPE_TEXT);
 
-    if (!m_obj->IsNull(_("subclass"))) {
+    if (!m_obj->IsNull("subclass")) {
         wxString subclass
-            = m_obj->GetChildFromParentProperty(_("subclass"), "name");
+            = m_obj->GetChildFromParentProperty("subclass", "name");
         if (!subclass.empty()) {
             m_xrcObj->SetAttribute("subclass", subclass.mb_str(wxConvUTF8));
         }
@@ -578,11 +578,11 @@ void XrcToXfbFilter::AddStyleProperty()
 
             if (windowStyles.find(token) == windowStyles.end()) {
                 if (!style.IsEmpty())
-                    style += _T( "|" );
+                    style += "|";
                 style += token;
             } else {
                 if (!windowStyle.IsEmpty())
-                    windowStyle += _T( "|" );
+                    windowStyle += "|";
                 windowStyle += token;
             }
         }
@@ -624,11 +624,11 @@ void XrcToXfbFilter::AddExtraStyleProperty()
 
             if (windowStyles.find(token) == windowStyles.end()) {
                 if (!style.IsEmpty())
-                    style += _T( "|" );
+                    style += "|";
                 style += token;
             } else {
                 if (!windowStyle.IsEmpty())
-                    windowStyle += _T( "|" );
+                    windowStyle += "|";
                 windowStyle += token;
             }
         }
@@ -754,17 +754,17 @@ void XrcToXfbFilter::ImportFontProperty(const wxString& xrcPropName,
             element = xrcProperty->FirstChildElement("family");
             wxString family_str(element->GetText().c_str(), wxConvUTF8);
 
-            if (family_str == _("decorative"))
+            if (family_str == "decorative")
                 font.SetFamily(wxFONTFAMILY_DECORATIVE);
-            else if (family_str == _("roman"))
+            else if (family_str == "roman")
                 font.SetFamily(wxFONTFAMILY_ROMAN);
-            else if (family_str == _("swiss"))
+            else if (family_str == "swiss")
                 font.SetFamily(wxFONTFAMILY_SWISS);
-            else if (family_str == _("script"))
+            else if (family_str == "script")
                 font.SetFamily(wxFONTFAMILY_SCRIPT);
-            else if (family_str == _("modern"))
+            else if (family_str == "modern")
                 font.SetFamily(wxFONTFAMILY_MODERN);
-            else if (family_str == _("teletype"))
+            else if (family_str == "teletype")
                 font.SetFamily(wxFONTFAMILY_TELETYPE);
             else
                 font.SetFamily(wxFONTFAMILY_DEFAULT);
@@ -777,9 +777,9 @@ void XrcToXfbFilter::ImportFontProperty(const wxString& xrcPropName,
             element = xrcProperty->FirstChildElement("style");
             wxString style_str(element->GetText().c_str(), wxConvUTF8);
 
-            if (style_str == _("slant"))
+            if (style_str == "slant")
                 font.SetStyle(wxFONTSTYLE_SLANT);
-            else if (style_str == _("italic"))
+            else if (style_str == "italic")
                 font.SetStyle(wxFONTSTYLE_ITALIC);
             else
                 font.SetStyle(wxFONTSTYLE_NORMAL);
@@ -792,9 +792,9 @@ void XrcToXfbFilter::ImportFontProperty(const wxString& xrcPropName,
             element = xrcProperty->FirstChildElement("weight");
             wxString weight_str(element->GetText().c_str(), wxConvUTF8);
 
-            if (weight_str == _("light"))
+            if (weight_str == "light")
                 font.SetWeight(wxFONTWEIGHT_LIGHT);
-            else if (weight_str == _("bold"))
+            else if (weight_str == "bold")
                 font.SetWeight(wxFONTWEIGHT_BOLD);
             else
                 font.SetWeight(wxFONTWEIGHT_NORMAL);
@@ -936,16 +936,16 @@ void XrcToXfbFilter::ImportStringListProperty(const wxString& xrcPropName,
 
 void XrcToXfbFilter::AddWindowProperties()
 {
-    AddProperty(_("pos"), _("pos"), XRC_TYPE_POINT);
-    AddProperty(_("size"), _("size"), XRC_TYPE_SIZE);
-    AddProperty(_("bg"), _("bg"), XRC_TYPE_COLOUR);
-    AddProperty(_("fg"), _("fg"), XRC_TYPE_COLOUR);
-    AddProperty(_("font"), _("font"), XRC_TYPE_FONT);
+    AddProperty("pos", "pos", XRC_TYPE_POINT);
+    AddProperty("size", "size", XRC_TYPE_SIZE);
+    AddProperty("bg", "bg", XRC_TYPE_COLOUR);
+    AddProperty("fg", "fg", XRC_TYPE_COLOUR);
+    AddProperty("font", "font", XRC_TYPE_FONT);
     if (m_xrcObj->FirstChildElement("enabled", false)) {
-        AddProperty(_("enabled"), _("enabled"), XRC_TYPE_BOOL);
+        AddProperty("enabled", "enabled", XRC_TYPE_BOOL);
     }
-    AddProperty(_("hidden"), _("hidden"), XRC_TYPE_BOOL);
-    AddProperty(_("tooltip"), _("tooltip"), XRC_TYPE_TEXT);
+    AddProperty("hidden", "hidden", XRC_TYPE_BOOL);
+    AddProperty("tooltip", "tooltip", XRC_TYPE_TEXT);
     AddStyleProperty();
     AddExtraStyleProperty();
 

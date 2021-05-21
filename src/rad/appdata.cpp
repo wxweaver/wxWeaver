@@ -1024,7 +1024,7 @@ void ApplicationData::MergeProject(PObjectBase project)
         value << " " << project->GetPropertyAsString("bitmaps");
         prop->SetValue(value);
     }
-    prop = thisProject->GetProperty(_("icons"));
+    prop = thisProject->GetProperty("icons");
     if (prop) {
         wxString value = prop->GetValue();
         value.Trim();
@@ -1279,14 +1279,19 @@ void ApplicationData::ConvertProjectProperties(ticpp::Element* project,
             msg += _("to a file so that you can distribute the headers among the \"precompiled_header\"\n");
             msg += _("and \"subclass\" properties\?");
 
-            if (wxYES == wxMessageBox(msg, _("The \"user_headers\" property has been removed"), wxICON_QUESTION | wxYES_NO | wxYES_DEFAULT, wxTheApp->GetTopWindow())) {
+            if (wxMessageBox(
+                    msg,
+                    _("The \"user_headers\" property has been removed"),
+                    wxICON_QUESTION | wxYES_NO | wxYES_DEFAULT,
+                    wxTheApp->GetTopWindow())
+                == wxYES) {
                 wxString name;
                 wxFileName::SplitPath(path, nullptr, nullptr, &name, nullptr);
                 wxFileDialog dialog(
                     wxTheApp->GetTopWindow(),
                     _("Save \"user_headers\""), ::wxPathOnly(path),
                     name + "_user_headers.txt",
-                    _("All files (*.*)|*.*"), wxFD_SAVE);
+                    _("All files") + " (*.*)|*.*", wxFD_SAVE);
 
                 if (dialog.ShowModal() == wxID_OK) {
                     wxString wxuser_headers = _WXSTR(user_headers);
@@ -2082,7 +2087,7 @@ void ApplicationData::GenerateInheritedClass(PObjectBase form, wxString classNam
                          inherFile.GetPath(wxPATH_GET_VOLUME).c_str());
             return;
         }
-        baseNameProp->SetValue(form->GetPropertyAsString(_("name")));
+        baseNameProp->SetValue(form->GetPropertyAsString("name"));
         nameProp->SetValue(className);
         fileProp->SetValue(inherFile.GetName());
         genfileProp->SetValue(genFile.GetFullPath());
@@ -2094,7 +2099,7 @@ void ApplicationData::GenerateInheritedClass(PObjectBase form, wxString classNam
 
         // Determine if Microsoft BOM should be used
         bool useMicrosoftBOM = false;
-        PProperty pUseMicrosoftBOM = project->GetProperty(_("use_microsoft_bom"));
+        PProperty pUseMicrosoftBOM = project->GetProperty("use_microsoft_bom");
         if (pUseMicrosoftBOM)
             useMicrosoftBOM = (pUseMicrosoftBOM->GetValueAsInteger());
 

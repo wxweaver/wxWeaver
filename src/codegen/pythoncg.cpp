@@ -977,7 +977,7 @@ void PythonCodeGenerator::GenDestructor(PObjectBase classObj,
                                         const EventVector& events)
 {
     m_source->WriteLn();
-    m_source->WriteLn("def __del__( self ):"); // generate function definition
+    m_source->WriteLn("def __del__(self):"); // generate function definition
     m_source->Indent();
 
     if (m_disconnectEvents && !events.empty())
@@ -1121,9 +1121,9 @@ void PythonCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
     } else if (type == "tool") {
         // If loading bitmap from ICON resource, and size is not set, set size to toolbars bitmapsize
         // So hacky, yet so useful ...
-        wxSize toolbarsize = obj->GetParent()->GetPropertyAsSize(_("bitmapsize"));
+        wxSize toolbarsize = obj->GetParent()->GetPropertyAsSize("bitmapsize");
         if (wxDefaultSize != toolbarsize) {
-            PProperty prop = obj->GetProperty(_("bitmap"));
+            PProperty prop = obj->GetProperty("bitmap");
             if (prop) {
                 wxString oldVal = prop->GetValueAsString();
                 wxString path, source;

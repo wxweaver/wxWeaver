@@ -848,7 +848,7 @@ void ObjectDatabase::LoadCodeGen(const wxString& file)
                          .insert(
                              LangTemplateMap::value_type(lang, codeInfo))
                          .second) {
-                    wxLogError(_("Found second template definition for property \"%s\" for language \"%s\""),
+                    wxLogError("Found second template definition for property \"%s\" for language \"%s\"",
                                propName.c_str(), lang.c_str());
                 }
             } else {
@@ -1387,7 +1387,7 @@ bool ObjectDatabase::LoadObjectTypes()
                 wxString childName = _WXSTR(child->GetAttribute("name"));
                 PObjectType childType = GetObjectType(childName);
                 if (!childType) {
-                    wxLogError(_("No Object Type found for \"%s\""), childName.c_str());
+                    wxLogError("No Object Type found for \"%s\"", childName.c_str());
                     continue;
                 }
                 objType->AddChildType(childType, max, auiMax);

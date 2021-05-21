@@ -73,10 +73,10 @@ void Palette::PopulateToolbar(PObjectPackage pkg, wxAuiToolBar* toolbar)
         }
         if (!info->GetComponent()) {
             LogDebug(
-                _("Missing Component for Class \""
-                  + info->GetClassName()
-                  + _("\" of Package \"")
-                  + pkg->GetPackageName() + "\"."));
+                "Missing Component for Class \""
+                + info->GetClassName()
+                + "\" of Package \""
+                + pkg->GetPackageName() + "\".");
         } else {
             wxString widget(info->GetClassName());
             wxBitmap icon = info->GetIconFile();

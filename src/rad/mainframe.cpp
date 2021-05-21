@@ -1135,7 +1135,7 @@ void MainFrame::OnGenInhertedClass(wxCommandEvent& WXUNUSED(e))
     }
     // Show the dialog
     PObjectBase project = AppData()->GetProjectData();
-    if (project->IsNull(_("file"))) {
+    if (project->IsNull("file")) {
         wxLogWarning("You must set the \"file\" property of the project before generating inherited classes.");
         return;
     }
@@ -1554,7 +1554,7 @@ void MainFrame::CreateWideGui()
     m_leftSplitter->SetMinimumPaneSize(2);
 
     //modified by tyysoft to restore the last layout.
-    if (m_rightSplitterType == _("editor")) {
+    if (m_rightSplitterType == "editor") {
         m_rightSplitter->SplitVertically(
             designer, objectInspector, m_rightSplitterWidth);
     } else {

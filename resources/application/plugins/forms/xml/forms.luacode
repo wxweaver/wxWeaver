@@ -74,7 +74,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 			@{ wx.Frame @}
 		</template>
 		<template name="cons_def">
-			def __init__( self, parent ):
+            def __init__(self, parent):
 		</template>
 		<template name="cons_call">
 			#ifnotnull $subclass/name
@@ -82,7 +82,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 			#ifnull $subclass/name
 			@{ wx.wxFrame@}
-			(wx.NULL, $id, $title, $pos, $size, $style #ifnotnull $window_style @{ +$window_style @} #ifnotnull $window_name @{, $window_name @} )
+            (wx.NULL, $id, $title, $pos, $size, $style #ifnotnull $window_style @{ +$window_style @} #ifnotnull $window_name @{, $window_name @})
 		</template>
 		<template name="destruction">
 			#ifequal $aui_managed "1"

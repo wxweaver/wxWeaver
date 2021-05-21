@@ -365,7 +365,7 @@ void CppCodeGenerator::GenerateInheritedClass(PObjectBase userClasses,
         wxLogError("This not a UserClasses object");
         return;
     }
-    m_inheritedCodeParser.ParseCFiles(userClasses->GetPropertyAsString(_("name")));
+    m_inheritedCodeParser.ParseCFiles(userClasses->GetPropertyAsString("name"));
 
     //(FileCodeWriter*)m_header->
     wxString type = userClasses->GetPropertyAsString("type");
@@ -1208,9 +1208,9 @@ void CppCodeGenerator::GenSubclassSets(PObjectBase obj,
 
             if (delimiter != wxNOT_FOUND || nameVal.empty()) {
                 wxLogError(
-                    _("Invalid Value for Property\n\tObject: %s\n\tProperty: %s\n\tValue: %s"),
+                    "Invalid Value for Property\n\tObject: %s\n\tProperty: %s\n\tValue: %s",
                     obj->GetPropertyAsString(_("name")).c_str(),
-                    _("subclass"),
+                    "subclass",
                     originalValue.c_str());
                 return;
             }
@@ -1565,9 +1565,9 @@ void CppCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
         // If loading bitmap from ICON resource, and size is not set,
         // set size to toolbars bitmapsize
         // TODO: So hacky, yet so useful ...
-        wxSize toolbarsize = obj->GetParent()->GetPropertyAsSize(_("bitmapsize"));
+        wxSize toolbarsize = obj->GetParent()->GetPropertyAsSize("bitmapsize");
         if (wxDefaultSize != toolbarsize) {
-            PProperty prop = obj->GetProperty(_("bitmap"));
+            PProperty prop = obj->GetProperty("bitmap");
             if (prop) {
                 wxString oldVal = prop->GetValueAsString();
                 wxString path, source;

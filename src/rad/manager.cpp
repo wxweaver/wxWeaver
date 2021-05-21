@@ -137,7 +137,7 @@ void wxWeaverManager::ModifyProperty(wxObject* wxobject, wxString property,
     PProperty prop = obj->GetProperty(property);
     if (!prop) {
         wxLogError(
-            _("%s has no property named %s"),
+            "%s has no property named %s",
             obj->GetClassName().c_str(), property.c_str());
         return;
     }

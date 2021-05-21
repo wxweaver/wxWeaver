@@ -301,7 +301,7 @@ void PHPPanel::OnCodeGeneration(wxWeaverEvent& event)
 
             // Determine if Utf8 or Ansi is to be created
             bool useUtf8 = false;
-            PProperty pUseUtf8 = project->GetProperty(_("encoding"));
+            PProperty pUseUtf8 = project->GetProperty("encoding");
 
             if (pUseUtf8)
                 useUtf8 = (pUseUtf8->GetValueAsString() != "ANSI");
