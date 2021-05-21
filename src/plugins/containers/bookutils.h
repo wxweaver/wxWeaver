@@ -34,10 +34,6 @@
 #include <vector>
 
 class SuppressEventHandlers {
-private:
-    std::vector<wxEvtHandler*> m_handlers;
-    wxWindow* m_window;
-
 public:
     SuppressEventHandlers(wxWindow* window)
         : m_window(window)
@@ -52,6 +48,10 @@ public:
         for (handler = m_handlers.rbegin(); handler != m_handlers.rend(); ++handler)
             m_window->PushEventHandler(*handler);
     }
+
+private:
+    std::vector<wxEvtHandler*> m_handlers;
+    wxWindow* m_window;
 };
 
 namespace BookUtils {
