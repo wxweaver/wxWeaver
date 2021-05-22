@@ -860,7 +860,7 @@ void CppCodeGenerator::GenVirtualEventHandlers(const EventVector& events,
 void CppCodeGenerator::GenAttributeDeclaration(PObjectBase obj, Permission perm,
                                                ArrayItems& arrays)
 {
-    wxString typeName = obj->GetObjectTypeName();
+    wxString typeName = obj->GetTypeName();
     if (ObjectDatabase::HasCppProperties(typeName)) {
         wxString permStr = obj->GetProperty("permission")->GetValue();
 
@@ -1377,7 +1377,7 @@ void CppCodeGenerator::GenConstructor(PObjectBase classObj,
     wxString afterAddChild = GetCode(classObj, "after_addchild");
     if (!afterAddChild.empty()) {
         m_source->WriteLn(afterAddChild);
-        if (classObj->GetObjectTypeName() == "wizard" && classObj->GetChildCount() > 0) {
+        if (classObj->GetTypeName() == "wizard" && classObj->GetChildCount() > 0) {
             m_source->WriteLn("for (size_t i = 1; i < m_pages.GetCount(); i++)");
             m_source->WriteLn("{");
             m_source->Indent();
@@ -1421,7 +1421,7 @@ void CppCodeGenerator::GenDestructor(PObjectBase classObj, const EventVector& ev
 void CppCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                                        ArrayItems& arrays)
 {
-    wxString type = obj->GetObjectTypeName();
+    wxString type = obj->GetTypeName();
     PObjectInfo info = obj->GetObjectInfo();
 
     if (ObjectDatabase::HasCppProperties(type)) {
@@ -1558,6 +1558,20 @@ void CppCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
         GenConstruction(obj->GetChild(0), false, arrays);
         m_source->WriteLn(GetCode(obj, "page_add"));
         GenSettings(obj->GetObjectInfo(), obj);
+    } else if (type == "treebookpage") {
+        GenConstruction(obj->GetChild(0), false, arrays);
+
+        int depth = obj->GetPropertyAsInteger("depth");
+        if (!depth) {
+            m_source->WriteLn(GetCode(obj, "page_add"));
+        } else if (depth > 0) {
+            m_source->WriteLn(GetCode(obj, "subpage_add"));
+        }
+        GenSettings(obj->GetObjectInfo(), obj);
+    } else if (type == "toolbookpage") {
+        GenConstruction(obj->GetChild(0), false, arrays);
+        GenSettings(obj->GetObjectInfo(), obj);
+        m_source->WriteLn(GetCode(obj, "page_add"));
     } else if (type == "treelistctrlcolumn") {
         m_source->WriteLn(GetCode(obj, "column_add"));
         GenSettings(obj->GetObjectInfo(), obj);

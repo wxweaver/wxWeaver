@@ -51,7 +51,7 @@ PObjectBase XrcLoader::GetObject(ticpp::Element* xrcObj, PObjectBase parent)
     if (className == "") {
         className = xrcObj->Value();
     }
-    if (parent->GetObjectTypeName() == "project") {
+    if (parent->GetTypeName() == "project") {
         if (className == "wxBitmap") {
             PProperty bitmapsProp = parent->GetProperty("bitmaps");
             if (bitmapsProp) {

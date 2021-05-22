@@ -26,13 +26,8 @@
 #include <ticpp.h>
 
 #include <wx/splitter.h>
-
 #ifdef wxUSE_COLLPANE
 #include <wx/collpane.h>
-#endif
-
-#ifndef __WXGTK__
-#include <wx/listctrl.h>
 #endif
 
 #if 0
@@ -239,13 +234,11 @@ class SplitterWindowComponent : public ComponentBase {
             minPaneSize = (minPaneSize < 1 ? 1 : minPaneSize);
             splitter->SetMinimumPaneSize(minPaneSize);
         }
-
         // Always have a child so it is drawn consistently
         splitter->Initialize(new wxPanel(splitter));
 
         // Used to ensure sash position is correct
         splitter->m_initialSashPos = obj->GetPropertyAsInteger("sashpos");
-
         splitter->Connect(wxEVT_IDLE, wxIdleEventHandler(wxCustomSplitterWindow::OnIdle));
 
         return splitter;
@@ -454,26 +447,31 @@ WINDOW_COMPONENT("wxPanel", PanelComponent)
 #ifdef wxUSE_COLLPANE
 WINDOW_COMPONENT("wxCollapsiblePane", CollapsiblePaneComponent)
 #endif
-
 WINDOW_COMPONENT("wxSplitterWindow", SplitterWindowComponent)
 ABSTRACT_COMPONENT("splitteritem", SplitterItemComponent)
 
 WINDOW_COMPONENT("wxScrolledWindow", ScrolledWindowComponent)
 
-WINDOW_COMPONENT("wxNotebook", NotebookComponent)
-ABSTRACT_COMPONENT("notebookpage", NotebookPageComponent)
-
-WINDOW_COMPONENT("wxListbook", ListbookComponent)
-ABSTRACT_COMPONENT("listbookpage", ListbookPageComponent)
+WINDOW_COMPONENT("wxAuiNotebook", AuiNotebookComponent)
+ABSTRACT_COMPONENT("auinotebookpage", AuiNotebookPageComponent)
 
 WINDOW_COMPONENT("wxChoicebook", ChoicebookComponent)
 ABSTRACT_COMPONENT("choicebookpage", ChoicebookPageComponent)
 
-WINDOW_COMPONENT("wxAuiNotebook", AuiNotebookComponent)
-ABSTRACT_COMPONENT("auinotebookpage", AuiNotebookPageComponent)
+WINDOW_COMPONENT("wxListbook", ListbookComponent)
+ABSTRACT_COMPONENT("listbookpage", ListbookPageComponent)
+
+WINDOW_COMPONENT("wxNotebook", NotebookComponent)
+ABSTRACT_COMPONENT("notebookpage", NotebookPageComponent)
 
 WINDOW_COMPONENT("wxSimplebook", SimplebookComponent)
 ABSTRACT_COMPONENT("simplebookpage", SimplebookPageComponent)
+
+WINDOW_COMPONENT("wxToolbook", ToolbookComponent)
+ABSTRACT_COMPONENT("toolbookpage", ToolbookPageComponent)
+
+WINDOW_COMPONENT("wxTreebook", TreebookComponent)
+ABSTRACT_COMPONENT("treebookpage", TreebookPageComponent)
 
 #ifdef wxUSE_COLLPANE
 // wxCollapsiblePane
@@ -500,29 +498,6 @@ MACRO(wxSPLIT_HORIZONTAL)
 MACRO(wxHSCROLL);
 MACRO(wxVSCROLL);
 
-// wxNotebook
-MACRO(wxNB_TOP)
-MACRO(wxNB_LEFT)
-MACRO(wxNB_RIGHT)
-MACRO(wxNB_BOTTOM)
-MACRO(wxNB_FIXEDWIDTH)
-MACRO(wxNB_MULTILINE)
-MACRO(wxNB_NOPAGETHEME)
-
-// wxListbook
-MACRO(wxLB_TOP)
-MACRO(wxLB_LEFT)
-MACRO(wxLB_RIGHT)
-MACRO(wxLB_BOTTOM)
-MACRO(wxLB_DEFAULT)
-
-// wxChoicebook
-MACRO(wxCHB_TOP)
-MACRO(wxCHB_LEFT)
-MACRO(wxCHB_RIGHT)
-MACRO(wxCHB_BOTTOM)
-MACRO(wxCHB_DEFAULT)
-
 // wxAuiNotebook
 MACRO(wxAUI_NB_DEFAULT_STYLE)
 MACRO(wxAUI_NB_TAB_SPLIT)
@@ -537,5 +512,35 @@ MACRO(wxAUI_NB_CLOSE_ON_ALL_TABS)
 MACRO(wxAUI_NB_MIDDLE_CLICK_CLOSE)
 MACRO(wxAUI_NB_TOP)
 MACRO(wxAUI_NB_BOTTOM)
+
+// wxChoicebook
+MACRO(wxCHB_TOP)
+MACRO(wxCHB_LEFT)
+MACRO(wxCHB_RIGHT)
+MACRO(wxCHB_BOTTOM)
+MACRO(wxCHB_DEFAULT)
+
+// wxListbook
+MACRO(wxLB_TOP)
+MACRO(wxLB_LEFT)
+MACRO(wxLB_RIGHT)
+MACRO(wxLB_BOTTOM)
+MACRO(wxLB_DEFAULT)
+
+// wxNotebook
+MACRO(wxNB_TOP)
+MACRO(wxNB_LEFT)
+MACRO(wxNB_RIGHT)
+MACRO(wxNB_BOTTOM)
+MACRO(wxNB_FIXEDWIDTH)
+MACRO(wxNB_MULTILINE)
+MACRO(wxNB_NOPAGETHEME)
+
+// wxToolbook
+#ifdef __WXCOCOA__
+MACRO(wxTBK_BUTTONBAR)
+#else
+MACRO(wxTBK_HORZ_LAYOUT)
+#endif
 
 END_LIBRARY()

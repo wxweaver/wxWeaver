@@ -958,7 +958,7 @@ void PythonCodeGenerator::GenConstructor(PObjectBase classObj,
     GenEvents(classObj, events);
     m_source->Unindent();
 
-    if (classObj->GetObjectTypeName() == "wizard"
+    if (classObj->GetTypeName() == "wizard"
         && classObj->GetChildCount() > 0) {
         m_source->WriteLn("def add_page(self, page):");
         m_source->Indent();
@@ -992,7 +992,7 @@ void PythonCodeGenerator::GenDestructor(PObjectBase classObj,
 void PythonCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                                           ArrayItems& arrays)
 {
-    wxString type = obj->GetObjectTypeName();
+    wxString type = obj->GetTypeName();
     PObjectInfo info = obj->GetObjectInfo();
     if (ObjectDatabase::HasCppProperties(type)) {
         m_source->WriteLn(GetConstruction(obj, false, arrays));
@@ -1114,6 +1114,20 @@ void PythonCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                || type == "auinotebookpage") {
         GenConstruction(obj->GetChild(0), false, arrays);
         m_source->WriteLn(GetCode(obj, "page_add"));
+        GenSettings(obj->GetObjectInfo(), obj);
+    } else if (type == "toolbookpage") {
+        GenConstruction(obj->GetChild(0), false, arrays);
+        GenSettings(obj->GetObjectInfo(), obj);
+        m_source->WriteLn(GetCode(obj, "page_add"));
+    } else if (type == "treebookpage") {
+        GenConstruction(obj->GetChild(0), false, arrays);
+
+        int depth = obj->GetPropertyAsInteger("depth");
+        if (!depth) {
+            m_source->WriteLn(GetCode(obj, "page_add"));
+        } else if (depth > 0) {
+            m_source->WriteLn(GetCode(obj, "subpage_add"));
+        }
         GenSettings(obj->GetObjectInfo(), obj);
     } else if (type == "treelistctrlcolumn") {
         m_source->WriteLn(GetCode(obj, "column_add"));

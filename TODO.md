@@ -37,6 +37,8 @@
 ## Controls
 
 - Check the controls returned by plugins with `OnCreated()` and its log errors.
+- Adding an expanded wxButton doesn't updates until hovering with mouse in
+  XRC preview.
 
 - Check components with:
     - no `public` access specifier
@@ -57,6 +59,7 @@
       format
     - reset to 0 all other `select` pages when setting to 1 one of them
     - wxTreebook and wxToolbook once fixed wxImageList
+    - wxAuiNotebook broken in XRC (wx 3.0.5.1)
 
 - wxWebView
 - Make a common base class for codeeditor panels

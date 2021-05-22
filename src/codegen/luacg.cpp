@@ -1031,7 +1031,7 @@ void LuaCodeGenerator::GenConstructor(PObjectBase classObj,
     if (!settings.IsEmpty())
         m_source->WriteLn(settings);
 
-    if (classObj->GetObjectTypeName() == "wizard"
+    if (classObj->GetTypeName() == "wizard"
         && classObj->GetChildCount() > 0) {
         m_source->WriteLn("function add_page(page)");
         m_source->Indent();
@@ -1090,7 +1090,7 @@ wxString GetParentWindow(PObjectBase obj)
 void LuaCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                                        wxString& strClassName, ArrayItems& arrays)
 {
-    wxString type = obj->GetObjectTypeName();
+    wxString type = obj->GetTypeName();
     PObjectInfo info = obj->GetObjectInfo();
 
     if (ObjectDatabase::HasCppProperties(type)) {

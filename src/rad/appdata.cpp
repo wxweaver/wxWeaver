@@ -227,7 +227,7 @@ void InsertObjectCmd::DoExecute()
         m_parent->ChangeChildPosition(m_object, m_pos);
 
     PObjectBase obj = m_object;
-    while (obj && obj->GetObjectInfo()->GetObjectType()->IsItem()) {
+    while (obj && obj->GetObjectInfo()->GetType()->IsItem()) {
         if (obj->GetChildCount() > 0)
             obj = obj->GetChild(0);
         else
@@ -500,10 +500,10 @@ PObjectBase ApplicationData::GetSelectedObject()
 
 PObjectBase ApplicationData::GetSelectedForm()
 {
-    if ((m_selObj->GetObjectTypeName() == "form")
-        || (m_selObj->GetObjectTypeName() == "wizard")
-        || (m_selObj->GetObjectTypeName() == "menubar_form")
-        || (m_selObj->GetObjectTypeName() == "toolbar_form"))
+    if ((m_selObj->GetTypeName() == "form")
+        || (m_selObj->GetTypeName() == "wizard")
+        || (m_selObj->GetTypeName() == "menubar_form")
+        || (m_selObj->GetTypeName() == "toolbar_form"))
         return m_selObj;
     else
         return m_selObj->FindParentForm();
@@ -528,7 +528,7 @@ void ApplicationData::BuildNameSet(PObjectBase obj, PObjectBase top,
 
 void ApplicationData::ResolveNameConflict(PObjectBase obj)
 {
-    while (obj && obj->GetObjectInfo()->GetObjectType()->IsItem()) {
+    while (obj && obj->GetObjectInfo()->GetType()->IsItem()) {
         if (obj->GetChildCount() > 0)
             obj = obj->GetChild(0);
         else
@@ -576,7 +576,7 @@ void ApplicationData::ResolveSubtreeNameConflicts(PObjectBase obj, PObjectBase t
             topObj = m_project; // object is the project
     }
     // Ignore item objects
-    while (obj && obj->GetObjectInfo()->GetObjectType()->IsItem()) {
+    while (obj && obj->GetObjectInfo()->GetType()->IsItem()) {
         if (obj->GetChildCount() > 0)
             obj = obj->GetChild(0);
         else
@@ -608,7 +608,7 @@ int ApplicationData::CalcPositionOfInsertion(PObjectBase selected, PObjectBase p
 
 void ApplicationData::RemoveEmptyItems(PObjectBase obj)
 {
-    if (!obj->GetObjectInfo()->GetObjectType()->IsItem()) {
+    if (!obj->GetObjectInfo()->GetType()->IsItem()) {
         bool emptyItem = true;
         // esto es un algoritmo ineficiente pero "seguro" con los índices
         while (emptyItem) {
@@ -617,7 +617,7 @@ void ApplicationData::RemoveEmptyItems(PObjectBase obj)
             for (size_t i = 0; !emptyItem && i < obj->GetChildCount(); i++) {
                 PObjectBase child = obj->GetChild(i);
 
-                if (child->GetObjectInfo()->GetObjectType()->IsItem()
+                if (child->GetObjectInfo()->GetType()->IsItem()
                     && !child->GetChildCount()) {
                     obj->RemoveChild(child); // borramos el item
                     child->SetParent(PObjectBase());
@@ -719,7 +719,7 @@ void ApplicationData::CreateObject(wxString name)
                         el padre no puede ser un item!
                     */
                     parent = parent->GetParent();
-                    while (parent && parent->GetObjectInfo()->GetObjectType()->IsItem())
+                    while (parent && parent->GetObjectInfo()->GetType()->IsItem())
                         parent = parent->GetParent();
                 }
             }
@@ -728,7 +728,7 @@ void ApplicationData::CreateObject(wxString name)
             Seleccionamos el objeto, si este es un item entonces se selecciona
             el objeto contenido. ¿Tiene sentido tener un item debajo de un item?
         */
-        while (obj && obj->GetObjectInfo()->GetObjectType()->IsItem())
+        while (obj && obj->GetObjectInfo()->GetType()->IsItem())
             obj = (obj->GetChildCount() > 0 ? obj->GetChild(0) : PObjectBase());
 
         NotifyObjectCreated(obj);
@@ -760,7 +760,7 @@ void ApplicationData::DoRemoveObject(PObjectBase obj, bool cutObject)
     PObjectBase deleted_obj = obj;
     if (parent) {
         // Get the top item
-        while (parent && parent->GetObjectInfo()->GetObjectType()->IsItem()) {
+        while (parent && parent->GetObjectInfo()->GetType()->IsItem()) {
             obj = parent;
             parent = obj->GetParent();
         }
@@ -775,7 +775,7 @@ void ApplicationData::DoRemoveObject(PObjectBase obj, bool cutObject)
         NotifyObjectRemoved(deleted_obj);
         SelectObject(GetSelectedObject(), true, true);
     } else {
-        if (obj->GetObjectTypeName() != "project")
+        if (obj->GetTypeName() != "project")
             assert(false);
     }
     CheckProjectTree(m_project);
@@ -792,7 +792,7 @@ void ApplicationData::DetermineObjectToSelect(PObjectBase parent, size_t pos)
         pos = (pos < count ? pos : count - 1);
         objToSelect = parent->GetChild(pos);
     }
-    while (objToSelect && objToSelect->GetObjectInfo()->GetObjectType()->IsItem())
+    while (objToSelect && objToSelect->GetObjectInfo()->GetType()->IsItem())
         objToSelect = objToSelect->GetChild(0);
 
     SelectObject(objToSelect);
@@ -908,7 +908,7 @@ bool ApplicationData::PasteObject(PObjectBase parent, PObjectBase objToPaste)
         // we may need to get the object out of the first item before pasting
         if (!obj) {
             PObjectBase tempItem = clipboard;
-            while (tempItem->GetObjectInfo()->GetObjectType()->IsItem()) {
+            while (tempItem->GetObjectInfo()->GetType()->IsItem()) {
                 tempItem = tempItem->GetChild(0);
                 if (!tempItem)
                     break;
@@ -930,7 +930,7 @@ bool ApplicationData::PasteObject(PObjectBase parent, PObjectBase objToPaste)
             PObjectBase selected = parent;
             parent = selected->GetParent();
 
-            while (parent && parent->GetObjectInfo()->GetObjectType()->IsItem()) {
+            while (parent && parent->GetObjectInfo()->GetType()->IsItem()) {
                 selected = parent;
                 parent = selected->GetParent();
             }
@@ -973,7 +973,7 @@ bool ApplicationData::PasteObject(PObjectBase parent, PObjectBase objToPaste)
         // vamos a mantener seleccionado el nuevo objeto creado
         // pero hay que tener en cuenta que es muy probable que el objeto creado
         // sea un "item"
-        while (obj && obj->GetObjectInfo()->GetObjectType()->IsItem()) {
+        while (obj && obj->GetObjectInfo()->GetType()->IsItem()) {
             assert(obj->GetChildCount() > 0);
             obj = obj->GetChild(0);
         }
@@ -991,8 +991,8 @@ void ApplicationData::InsertObject(PObjectBase obj, PObjectBase parent)
 {
 #if 0
     // FIXME! comprobar obj se puede colgar de parent
-    if (parent->GetObjectInfo()->GetObjectType()->FindChildType(
-            obj->GetObjectInfo()->GetObjectType())) {
+    if (parent->GetObjectInfo()->GetType()->FindChildType(
+            obj->GetObjectInfo()->GetType())) {
 #endif
     PCommand command(new InsertObjectCmd(this, obj, parent));
     Execute(command); //m_cmdProc.Execute(command);
@@ -1175,7 +1175,7 @@ bool ApplicationData::LoadProject(const wxString& file, bool justGenerate)
             wxLogError(ex.what());
             return false;
         }
-        if (proj && proj->GetObjectTypeName() == "project") {
+        if (proj && proj->GetTypeName() == "project") {
             PObjectBase old_proj = m_project;
             m_project = proj;
             m_selObj = m_project;
@@ -2162,7 +2162,7 @@ void ApplicationData::MovePosition(PObjectBase obj, bool right, size_t num)
 
     if (parent) {
         // Si el objeto está incluido dentro de un item hay que desplazar el item
-        while (parent && parent->GetObjectInfo()->GetObjectType()->IsItem()) {
+        while (parent && parent->GetObjectInfo()->GetType()->IsItem()) {
             obj = parent;
             parent = obj->GetParent();
         }
@@ -2272,8 +2272,8 @@ void ApplicationData::ToggleStretchLayout(PObjectBase obj)
     if (!parent)
         return;
 
-    if (parent->GetObjectTypeName() != "sizeritem"
-        && parent->GetObjectTypeName() != "gbsizeritem")
+    if (parent->GetTypeName() != "sizeritem"
+        && parent->GetTypeName() != "gbsizeritem")
         return;
 
     PProperty proportion = parent->GetProperty("proportion");
@@ -2452,7 +2452,7 @@ void ApplicationData::CreateBoxSizerWithObject(PObjectBase obj)
         PCommand cmd(new InsertObjectCmd(this, newSizer, parent, childPos));
         Execute(cmd);
 
-        if (newSizer->GetObjectTypeName() == "sizeritem")
+        if (newSizer->GetTypeName() == "sizeritem")
             newSizer = newSizer->GetChild(0);
 
         PasteObject(newSizer);
@@ -2485,7 +2485,7 @@ void ApplicationData::ShowXrcPreview()
 bool ApplicationData::CanPasteObject()
 {
     PObjectBase obj = GetSelectedObject();
-    if (obj && obj->GetObjectTypeName() != "project")
+    if (obj && obj->GetTypeName() != "project")
         return (m_clipboard != nullptr);
 
     return false;
@@ -2494,7 +2494,7 @@ bool ApplicationData::CanPasteObject()
 bool ApplicationData::CanCopyObject()
 {
     PObjectBase obj = GetSelectedObject();
-    if (obj && obj->GetObjectTypeName() != "project")
+    if (obj && obj->GetTypeName() != "project")
         return true;
 
     return false;

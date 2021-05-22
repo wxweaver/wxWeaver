@@ -134,7 +134,7 @@ PObjectBase ObjectDatabase::NewObject(PObjectInfo objInfo)
 
     // Llagados aquí el objeto se crea seguro...
     object = PObjectBase(new ObjectBase(objInfo->GetClassName()));
-    object->SetObjectTypeName(objInfo->GetObjectTypeName()); // FIXME
+    object->SetObjectTypeName(objInfo->GetTypeName()); // FIXME
     object->SetObjectInfo(objInfo);
 
     PPropertyInfo propertyInfo;
@@ -197,7 +197,7 @@ size_t ObjectDatabase::CountChildrenWithSameType(PObjectBase parent,
 {
     size_t count = 0, childCount = parent->GetChildCount();
     for (size_t i = 0; i < childCount; i++) {
-        if (type == parent->GetChild(i)->GetObjectInfo()->GetObjectType())
+        if (type == parent->GetChild(i)->GetObjectInfo()->GetType())
             count++;
     }
     return count;
@@ -208,7 +208,7 @@ size_t ObjectDatabase::CountChildrenWithSameType(PObjectBase parent,
 {
     size_t count = 0, childCount = parent->GetChildCount();
     for (size_t i = 0; i < childCount; ++i) {
-        if (types.find(parent->GetChild(i)->GetObjectInfo()->GetObjectType()) != types.end())
+        if (types.find(parent->GetChild(i)->GetObjectInfo()->GetType()) != types.end())
             ++count;
     }
     return count;
@@ -247,10 +247,10 @@ PObjectBase ObjectDatabase::CreateObject(std::string classname, PObjectBase pare
             classname);
         wxWEAVER_THROW_EX(message)
     }
-    PObjectType objType = objInfo->GetObjectType();
+    PObjectType objType = objInfo->GetType();
     if (parent) {
         // Type check
-        PObjectType parentType = parent->GetObjectInfo()->GetObjectType();
+        PObjectType parentType = parent->GetObjectInfo()->GetType();
 
         //AUI
         bool aui = false;
@@ -406,7 +406,7 @@ void ObjectDatabase::SetDefaultLayoutProperties(PObjectBase sizeritem)
     }
     PObjectBase child = sizeritem->GetChild(0);
     PObjectInfo childInfo = child->GetObjectInfo();
-    wxString objType = child->GetObjectTypeName();
+    wxString objType = child->GetTypeName();
     PProperty proportion = sizeritem->GetProperty("proportion");
 
     if (childInfo->IsSubclassOf("sizer")
@@ -430,6 +430,8 @@ void ObjectDatabase::SetDefaultLayoutProperties(PObjectBase sizeritem)
                || objType == "listbook"
                || objType == "simplebook"
                || objType == "choicebook"
+               || objType == "toolbook"
+               || objType == "treebook"
                || objType == "auinotebook"
                || objType == "treelistctrl"
                || objType == "expanded_widget"
@@ -734,7 +736,7 @@ void ObjectDatabase::SetupPackage(const wxString& file,
                 elemBase = elemBase->NextSiblingElement("inherits", false);
             }
             // Add the "C++" base class, predefined for the components and widgets
-            wxString typeName = classInfo->GetObjectTypeName();
+            wxString typeName = classInfo->GetTypeName();
             if (HasCppProperties(typeName)) {
                 PObjectInfo cpp_interface = GetObjectInfo("C++");
                 if (cpp_interface) {
@@ -763,6 +765,8 @@ bool ObjectDatabase::HasCppProperties(wxString type)
             || type == "listbook"
             || type == "simplebook"
             || type == "choicebook"
+            || type == "toolbook"
+            || type == "treebook"
             || type == "auinotebook"
             || type == "widget"
             || type == "expanded_widget"
@@ -961,7 +965,7 @@ PObjectPackage ObjectDatabase::LoadPackage(const wxString& file,
             m_objs.insert(ObjectInfoMap::value_type(_WXSTR(className), objInfo));
 
             // Add the object to the palette
-            if (ShowInPalette(objInfo->GetObjectTypeName()))
+            if (ShowInPalette(objInfo->GetTypeName()))
                 package->Add(objInfo);
 
             elemObj = elemObj->NextSiblingElement(OBJINFO_TAG, false);
@@ -1203,6 +1207,8 @@ bool ObjectDatabase::ShowInPalette(wxString type)
             || type == "listbook"
             || type == "simplebook"
             || type == "choicebook"
+            || type == "toolbook"
+            || type == "treebook"
             || type == "auinotebook"
             || type == "widget"
             || type == "expanded_widget"
@@ -1392,6 +1398,7 @@ bool ObjectDatabase::LoadObjectTypes()
                 PObjectType childType = GetObjectType(childName);
                 if (!childType) {
                     wxLogError("No Object Type found for \"%s\"", childName.c_str());
+                    child = child->NextSiblingElement("objtype", false);
                     continue;
                 }
                 objType->AddChildType(childType, max, auiMax);

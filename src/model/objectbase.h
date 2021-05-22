@@ -383,7 +383,7 @@ public:
 #endif
     bool IsContainer()
     {
-        return (GetObjectTypeName() == "container");
+        return (GetTypeName() == "container");
     }
 
     PObjectBase GetLayout();
@@ -392,7 +392,7 @@ public:
 
         Deberá ser redefinida en cada clase derivada.
     */
-    wxString GetObjectTypeName() override { return m_type; }
+    wxString GetTypeName() override { return m_type; }
 
     void SetObjectTypeName(wxString type) { m_type = type; }
 
@@ -524,9 +524,9 @@ public:
         Será util para que el constructor de objetos sepa la clase derivada
         de ObjectBase que ha de crear a partir del descriptor.
     */
-    wxString GetObjectTypeName() { return m_type->GetName(); }
+    wxString GetTypeName() { return m_type->GetName(); }
 
-    PObjectType GetObjectType() { return m_type; }
+    PObjectType GetType() { return m_type; }
 
     wxString GetClassName() { return m_class; }
 #if 0

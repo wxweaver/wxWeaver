@@ -21,75 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 -->
 <package name="Containers" lib="libcontainers" icon="containers.png" desc="wxWidgets container controls">
 
-  <objectinfo class="wxPanel" icon="panel.png" type="container">
-    <inherits class="Common Events"/>
-    <inherits class="wxWindow">
-      <property name="window_style">wxTAB_TRAVERSAL</property>
-    </inherits>
-    <inherits class="AUI"/>
-    <property name="name" type="text">m_panel</property>
-  </objectinfo>
-
-  <objectinfo class="wxCollapsiblePane" icon="collapsiblepane.png" type="container">
-    <inherits class="Common Events"/>
-    <inherits class="wxWindow"/>
-    <inherits class="AUI"/>
-    <inherits class="Validator"/>
-    <property name="name"      type="text">m_collapsiblePane</property>
-    <property name="label"     type="wxString_i18n">collapsible</property>
-    <property name="collapsed" type="bool">0</property>
-    <property name="style"     type="bitlist">
-      <option name="wxCP_DEFAULT_STYLE" help="The default style. It includes wxTAB_TRAVERSAL and wxBORDER_NONE."/>
-      <option name="wxCP_NO_TLW_RESIZE" help="By default wxCollapsiblePane resizes the top level window containing it when its own size changes. This allows to easily implement dialogs containing an optionally shown part, for example, and so is the default behaviour but can be inconvenient in some specific cases – use this flag to disable this automatic parent resizing then."/>
-      wxCP_DEFAULT_STYLE
-    </property>
-    <event name="OnCollapsiblePaneChanged" class="wxCollapsiblePaneEvent" help="The user expanded or collapsed the collapsible pane."/>
-  </objectinfo>
-
-  <objectinfo class="wxSplitterWindow" icon="splitterwindow.png" type="splitter" startgroup="1">
-    <inherits class="wxWindow"/>
-    <inherits class="AUI"/>
-    <property name="name"  type="text">m_splitter</property>
-    <property name="style" type="bitlist">
-      <option name="wxSP_3D"             help="Draws a 3D effect border and sash."/>
-      <option name="wxSP_3DSASH"         help="Draws a 3D effect sash (part of default style)."/>
-      <option name="wxSP_3DBORDER"       help="Synonym for wxSP_BORDER."/>
-      <option name="wxSP_BORDER"         help="Draws a standard border."/>
-      <option name="wxSP_NOBORDER"       help="No border (default)."/>
-      <option name="wxSP_NOSASH"         help="Sets the sash to be invisible, even when the window is split. This prevents the user to resize the windows."/>
-      <option name="wxSP_THIN_SASH"      help="Draws a thin sash."/>
-      <option name="wxSP_NO_XP_THEME"    help="Under Windows XP, switches off the attempt to draw the splitter using Windows XP theming, so the borders and sash will take on the pre-XP look."/>
-      <option name="wxSP_PERMIT_UNSPLIT" help="Always allow to unsplit, even with the minimum pane size other than zero. Note: The designer prevents un-splitting."/>
-      <option name="wxSP_LIVE_UPDATE"    help="Don't draw XOR line but resize the child windows immediately."/>
-      wxSP_3D
-    </property>
-    <property name="splitmode" type="option">
-      <option name="wxSPLIT_VERTICAL"   help="Specifies a vertical split window."/>
-      <option name="wxSPLIT_HORIZONTAL" help="Specifies a horizontal split window."/>
-      wxSPLIT_VERTICAL
-    </property>
-    <property name="sashpos"       type="int"   help="The initial sash position.">0</property>
-    <property name="sashsize"      type="int"   help="Overrides platform metrics if greater than -1">-1</property>
-    <property name="sashgravity"   type="float" help= "Sets the sash gravity. Remarks: Gravity is real factor which controls position of sash while resizing wxSplitterWindow. Gravity tells wxSplitterWindow how much will left/top window grow while resizing.">0.0</property>
-    <property name="min_pane_size" type="uint"  help="Minimum size for the panes. A minimum less than 1 is not allowed in the designer, because the designer prevents un-splitting.">0</property>
-    <event name="OnSplitterSashPosChanging" class="wxSplitterEvent" help="The sash position is in the process of being changed. May be used to modify the position of the tracking bar to properly reflect the position that would be set if the drag were to be completed at this point. Processes a wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGING event."/>
-    <event name="OnSplitterSashPosChanged"  class="wxSplitterEvent" help="The sash position was changed. May be used to modify the sash position before it is set, or to prevent the change from taking place. Processes a wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED event."/>
-    <event name="OnSplitterUnsplit"         class="wxSplitterEvent" help="The splitter has been just unsplit. Processes a wxEVT_COMMAND_SPLITTER_UNSPLIT event."/>
-    <event name="OnSplitterDClick"          class="wxSplitterEvent" help="The sash was double clicked. The default behaviour is to unsplit the window when this happens (unless the minimum pane size has been set to a value greater than zero). Processes a wxEVT_COMMAND_SPLITTER_DOUBLECLICKED event."/>
-  </objectinfo>
-
-  <objectinfo class="splitteritem" type="splitteritem"/>
-
-  <objectinfo class="wxScrolledWindow" icon="scrolledwindow.png" type="container">
-    <inherits class="wxWindow">
-      <property name="window_style">wxHSCROLL|wxVSCROLL</property>
-    </inherits>
-    <inherits class="AUI"/>
-    <property name="name" type="text">m_scrolledWindow</property>
-    <property name="scroll_rate_x" type="uint" help="Set the horizontal scrolling increment.">5</property>
-    <property name="scroll_rate_y" type="uint" help="Set the vertical scrolling increment.">5</property>
-  </objectinfo>
-
   <objectinfo class="wxNotebook" type="notebook" icon="notebook.png" startgroup="1">
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
@@ -115,7 +46,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <property name="select" type="bool"   help="Select Page when Adding">0</property>
   </objectinfo>
 
-  <objectinfo class="wxAuiNotebook" type="auinotebook" icon="notebookaui.png">
+  <objectinfo class="wxAuiNotebook" type="auinotebook" icon="auinotebook.png">
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
     <property name="name"  type="text">m_auinotebook</property>
@@ -135,8 +66,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
       <option name="wxAUI_NB_BOTTOM"              help="With this style, tabs are drawn along the bottom of the notebook."/>
       wxAUI_NB_DEFAULT_STYLE
     </property>
-    <property name="tab_ctrl_height"     type="int"    help="Sets the tab height. By default, the tab control height is calculated by measuring the text height and bitmap sizes on the tab captions. Calling this method will override that calculation and set the tab control to the specified height parameter. A call to this method will override any call to SetUniformBitmapSize(). Specifying -1 as the height will return the control to its default auto-sizing behaviour.">-1</property>
-    <property name="bitmapsize" type="wxSize" help="SetUniformBitmapSize() ensures that all tabs will have the same height, even if some tabs don't have bitmaps. Passing wxDefaultSize to this function will instruct the control to use dynamic tab height, which is the default behaviour. Under the default behaviour, when a tab with a large bitmap is added, the tab control's height will automatically increase to accommodate the larger bitmap."/>
+    <property name="tab_ctrl_height" type="int"    help="Sets the tab height. By default, the tab control height is calculated by measuring the text height and bitmap sizes on the tab captions. Calling this method will override that calculation and set the tab control to the specified height parameter. A call to this method will override any call to SetUniformBitmapSize(). Specifying -1 as the height will return the control to its default auto-sizing behaviour.">-1</property>
+    <property name="bitmapsize"      type="wxSize" help="SetUniformBitmapSize() ensures that all tabs will have the same height, even if some tabs don't have bitmaps. Passing wxDefaultSize to this function will instruct the control to use dynamic tab height, which is the default behaviour. Under the default behaviour, when a tab with a large bitmap is added, the tab control's height will automatically increase to accommodate the larger bitmap."/>
     <event name="OnAuiNotebookPageClose"     class="wxAuiNotebookEvent" help="A page is about to be closed. Processes a wxEVT_AUINOTEBOOK_PAGE_CLOSE event."/>
     <event name="OnAuiNotebookPageClosed"    class="wxAuiNotebookEvent" help="A page has been closed. Processes a wxEVT_AUINOTEBOOK_PAGE_CLOSED event."/>
     <event name="OnAuiNotebookPageChanged"   class="wxAuiNotebookEvent" help="The page selection was changed. Processes a wxEVT_AUINOTEBOOK_PAGE_CHANGED event."/>
@@ -185,6 +116,52 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <property name="select" type="bool"   help="Select Page when Adding">0</property>
   </objectinfo>
 
+  <objectinfo class="wxToolbook" type="toolbook" icon="toolbook.png">
+    <inherits class="wxWindow"/>
+    <property name="name"           type="text">m_toolbook</property>
+    <property name="bitmapsize"     type="wxSize" help="Size of page images"/>
+    <property name="style"          type="bitlist">
+      <option name="wxBK_DEFAULT" help="Choose the default location for the toolbar depending on the current platform"/>
+      <option name="wxBK_TOP"     help="Place labels above the page area."/>
+      <option name="wxBK_LEFT"    help="Place labels on the left side."/>
+      <option name="wxBK_RIGHT"   help="Place labels on the right side."/>
+      <option name="wxBK_BOTTOM"  help="Place labels below the page area."/>wxBK_DEFAULT</property>
+    <event name="OnToolbookPageChanged"  class="wxToolbookEvent" help="The page selection was changed. Processes a wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGED event."/>
+    <event name="OnToolbookPageChanging" class="wxToolbookEvent" help="The page selection is about to be changed. Processes a wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGING event. This event can be vetoed."/>
+  </objectinfo>
+
+  <objectinfo class="toolbookpage" type="toolbookpage" icon="panel.png">
+    <property name="label"  type="wxString_i18n">a page</property>
+    <property name="bitmap" type="bitmap" help="Page Image"/>
+    <property name="image"  type="int"    help="wxImageList Index"/>
+    <property name="select" type="bool"   help="Select Page when Adding">0</property>
+  </objectinfo>
+
+  <objectinfo class="wxTreebook" type="treebook" icon="treebook.png">
+    <inherits class="wxWindow"/>
+    <property name="name" type="text">m_treebook</property>
+    <property name="bitmapsize" type="wxSize" help="Size of page images"/>
+    <property name="style" type="bitlist">
+      <option name="wxBK_DEFAULT" help="Choose the default location for the tree depending on the current platform"/>
+      <option name="wxBK_TOP"     help="Place labels above the page area."/>
+      <option name="wxBK_LEFT"    help="Place labels on the left side."/>
+      <option name="wxBK_RIGHT"   help="Place labels on the right side."/>
+      <option name="wxBK_BOTTOM"  help="Place labels below the page area."/>wxBK_DEFAULT</property>
+    <event name="OnTreebookPageChanged" class="wxTreebookEvent" help="The page selection was changed. Processes a wxEVT_COMMAND_TREEBOOK_PAGE_CHANGED event."/>
+    <event name="OnTreebookPageChanging" class="wxTreebookEvent" help="The page selection is about to be changed. Processes a wxEVT_COMMAND_TREEBOOK_PAGE_CHANGING event. This event can be vetoed."/>
+    <event name="OnTreebookNodeCollapsed" class="wxTreebookEvent" help="The page node is going to be collapsed. Processes a wxEVT_COMMAND_TREEBOOK_NODE_COLLAPSED event."/>
+    <event name="OnTreebookNodeExpanded" class="wxTreebookEvent" help="The page node is going to be expanded. Processes a wxEVT_COMMAND_TREEBOOK_NODE_EXPANDED event."/>
+  </objectinfo>
+
+  <objectinfo class="treebookpage" type="treebookpage" icon="panel.png">
+    <property name="depth"    type="int"    help="Adds a new child-page to the last top-level page">0</property>
+    <property name="label"    type="wxString_i18n">a page</property>
+    <property name="bitmap"   type="bitmap" help="Page Image"/>
+    <property name="image"    type="int"    help="wxImageList Index"/>
+    <property name="expanded" type="bool"   help="Expands the current treebookpage node"/>
+    <property name="select"   type="bool"   help="Select Page when Adding">0</property>
+  </objectinfo>
+
   <objectinfo class="wxChoicebook" type="choicebook" icon="choicebook.png">
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
@@ -206,7 +183,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <property name="select" type="bool" help="Select Page when Adding">0</property>
   </objectinfo>
 
-  <objectinfo class="wxSimplebook" icon="panel.png" type="simplebook">
+  <objectinfo class="wxSimplebook" type="simplebook" icon="panel.png">
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
     <property name="name" type="text">m_simplebook</property>

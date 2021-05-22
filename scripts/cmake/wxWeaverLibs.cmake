@@ -5,6 +5,7 @@ set(additional_files
 )
 set(common_files
     src/plugins/common/common.cpp
+    src/plugins/common/imagelist.h
 )
 set(containers_files
     src/plugins/containers/bookutils.h

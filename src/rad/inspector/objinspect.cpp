@@ -178,7 +178,7 @@ void ObjectInspector::Create(bool force)
             PObjectBase parent = selectedObject->GetParent();
             if (parent) {
                 PObjectInfo parentDescription = parent->GetObjectInfo();
-                if (parentDescription->GetObjectType()->IsItem()) {
+                if (parentDescription->GetType()->IsItem()) {
                     CreateCategory(parentDescription->GetClassName(), parent,
                                    parentDescription, dummyPropMap, false);
 
@@ -877,7 +877,7 @@ void ObjectInspector::OnPropertyModified(wxWeaverPropertyEvent& event)
     bool shouldContinue = (prop->GetObject() == AppData()->GetSelectedObject());
     if (!shouldContinue) {
         // Item objects cannot be selected - their children are selected instead
-        if (propobj->GetObjectInfo()->GetObjectType()->IsItem()) {
+        if (propobj->GetObjectInfo()->GetType()->IsItem()) {
             if (propobj->GetChildCount() > 0)
                 shouldContinue = (appobj == propobj->GetChild(0));
         }

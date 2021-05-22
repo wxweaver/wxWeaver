@@ -18,13 +18,17 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
+#include "imagelist.h"
+
 #include <plugin.h>
 #include <ticpp.h>
 #include <xrcconv.h>
 
 #include <wx/animate.h>
 #include <wx/aui/auibar.h>
+#include <wx/aui/auibook.h>
 #include <wx/bmpcbox.h>
+#include <wx/bookctrl.h>
 #include <wx/imaglist.h>
 #include <wx/infobar.h>
 #include <wx/listctrl.h>
@@ -1171,7 +1175,7 @@ wxMenu* AuiToolBar::GetMenuFromObject(IObject* menuObj)
     wxMenu* menu = new wxMenu();
     for (size_t j = 0; j < menuObj->GetChildCount(); j++) {
         IObject* menuItem = menuObj->GetChildPtr(j);
-        if (menuItem->GetObjectTypeName() == "submenu") {
+        if (menuItem->GetTypeName() == "submenu") {
             menu->Append(
                 lastMenuId++,
                 menuItem->GetPropertyAsString("label"),
@@ -1709,60 +1713,39 @@ void ComponentEvtHandler::OnTimer(wxTimerEvent&)
 }
 
 class ImageListComponent : public ComponentBase {
-    wxObject* Create(IObject* obj, wxObject* /*parent*/)
+    wxObject* Create(IObject* obj, wxObject* parent)
     {
         wxSize size = obj->GetPropertyAsSize("size");
+        int imageListWidth = size.GetWidth();
+        int imageListHeight = size.GetHeight();
+#if 0
+        if (imageListWidth < 1 || imageListHeight < 1)
+            return nullptr;
+#endif
         bool mask = obj->GetPropertyAsInteger("mask");
-        return new wxImageList(size.GetWidth(), size.GetHeight(), mask);
+        IObject* parentObject = GetManager()->GetIObject(parent);
+        wxString parentTypeName = parentObject->GetTypeName();
+        wxImageList* imageList = new wxImageList(imageListWidth, imageListHeight, mask);
+
+        if (parentTypeName == "notebook"
+            || parentTypeName == "listbook"
+            || parentTypeName == "toolbook"
+            || parentTypeName == "treebook") {
+            wxBookCtrlBase* bookCtrl = wxDynamicCast(parent, wxBookCtrlBase);
+            if (bookCtrl)
+                bookCtrl->AssignImageList(imageList);
+        } else if (parentTypeName == "auinotebook") {
+            // TODO: Better workaround for v3.0.x
+            wxAuiNotebook* bookCtrl = wxDynamicCast(parent, wxAuiNotebook);
+            if (bookCtrl)
+                bookCtrl->AssignImageList(imageList);
+        }
+        return imageList;
     }
 
     void OnCreated(wxObject* wxobject, wxWindow* /*wxparent*/)
     {
-        wxImageList* imgList = wxDynamicCast(wxobject, wxImageList);
-#if 0
-        wxASSERT(imgList);
-#endif
-        if (!imgList)
-            return;
-
-        IObject* imgListObj = GetManager()->GetIObject(wxobject);
-        wxSize size = imgListObj->GetPropertyAsSize("size");
-        int width = size.GetWidth();
-        int height = size.GetHeight();
-        size_t count = GetManager()->GetChildCount(wxobject);
-
-        for (size_t i = 0; i < count; i++) {
-            wxObject* bmpItm = GetManager()->GetChild(wxobject, i);
-            IObject* bmpObj = GetManager()->GetIObject(bmpItm);
-
-            if (bmpObj->GetClassName() == "bitmapitem") {
-                wxBitmap bmp = bmpObj->GetPropertyAsBitmap("bitmap");
-                int tmpWdt = bmp.GetWidth();
-                int tmpHgt = bmp.GetHeight();
-
-                if (bmp.IsOk()) {
-                    if (tmpWdt > 0 && tmpHgt > 0) {
-                        if ((width < 1) || (height < 1)) {
-                            // FIXME! This returns always 21x21 because default.xpm
-                            width = tmpWdt;
-                            height = tmpHgt;
-                            GetManager()->ModifyProperty(
-                                imgList, "size",
-                                wxString::Format("%i,%i", width, height), false);
-                        }
-                        if ((tmpHgt != width) || (tmpHgt != height)) {
-                            wxImage image = bmp.ConvertToImage();
-                            bmp = wxBitmap(image.Scale(width, height));
-                        }
-                        imgList->Add(bmp);
-                    } else {
-                        wxLogDebug("bmp.IsOk() error");
-                    }
-                }
-            }
-        }
-        if (!count)
-            GetManager()->ModifyProperty(imgList, "size", "16,16", false);
+        ImageList::RestoreSize(wxobject, GetManager());
     }
 
     ticpp::Element* ExportToXrc(IObject* obj)
@@ -1788,41 +1771,14 @@ class ImageListComponent : public ComponentBase {
 };
 
 class BitmapItemComponent : public ComponentBase {
-    ticpp::Element* ExportToXrc(IObject* obj)
+    ticpp::Element* ExportToXrc(IObject* object)
     {
-        ObjectToXrcFilter xrc(obj, "bitmap",
-                              obj->GetPropertyAsString("name"), wxEmptyString, false);
+        ObjectToXrcFilter xrc(object, "bitmap",
+                              object->GetPropertyAsString("name"),
+                              wxEmptyString, false);
+        ticpp::Element* xrcObject = xrc.GetXrcObject();
 
-        ticpp::Element* bmpItem = xrc.GetXrcObject();
-        wxString bmpProp = obj->GetPropertyAsString("bitmap");
-
-        if (bmpProp.empty())
-            return bmpItem;
-
-        wxString filename = bmpProp.AfterFirst(';');
-        if (filename.empty())
-            return bmpItem;
-
-        if (bmpProp.size() < (filename.size() + 2))
-            return bmpItem;
-
-        // TODO: Load From (Icon) Resource
-        if (bmpProp.StartsWith(_("Load From File"))
-            || bmpProp.StartsWith(_("Load From Embedded File"))
-            || bmpProp.StartsWith(_("Load From XRC"))) {
-            bmpItem->SetText(filename.Trim().Trim(false));
-        } else if (bmpProp.StartsWith(_("Load From Art Provider"))) {
-            wxString stockId = filename.BeforeFirst(';').Trim().Trim(false).mb_str(wxConvUTF8);
-            wxString stockClient = filename.AfterFirst(';').Trim().Trim(false).mb_str(wxConvUTF8);
-
-            if (stockId.empty() || stockClient.empty())
-                return bmpItem;
-
-            bmpItem->SetAttribute("stock_id", stockId);
-            bmpItem->SetAttribute("stock_client", stockClient);
-            bmpItem->SetText("undefined.png"); // fallback image
-        }
-        return bmpItem;
+        return BitmapItem::ToXrc(object, xrcObject);
     }
 
     ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj)

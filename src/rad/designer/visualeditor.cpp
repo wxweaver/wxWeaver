@@ -200,7 +200,7 @@ void VisualEditor::ScanPanes(wxWindow* parent)
             continue;
 
         updateNeeded = false;
-        wxString objTypeName = obj->GetObjectInfo()->GetObjectType()->GetName();
+        wxString objTypeName = obj->GetObjectInfo()->GetType()->GetName();
         if (objTypeName == "widget"
             || objTypeName == "expanded_widget"
             || objTypeName == "ribbonbar"
@@ -455,7 +455,7 @@ void VisualEditor::Create()
                 m_designer->ShowTitleBar(false);
             }
             // --- AUI
-            if (m_form->GetObjectTypeName() == "form") {
+            if (m_form->GetTypeName() == "form") {
                 if (m_form->GetPropertyAsInteger("aui_managed")) {
                     m_auiPanel = new wxPanel(m_designer->GetFrameContentPanel());
                     m_auiMgr = new wxAuiManager(
@@ -490,13 +490,13 @@ void VisualEditor::Create()
             for (size_t i = 0; i < m_form->GetChildCount(); i++) {
                 PObjectBase child = m_form->GetChild(i);
 
-                if (!menubar && (m_form->GetObjectTypeName() == "menubar_form")) {
+                if (!menubar && (m_form->GetTypeName() == "menubar_form")) {
                     // main form acts as a menubar
                     menubar = m_form;
-                } else if (child->GetObjectTypeName() == "menubar") {
+                } else if (child->GetTypeName() == "menubar") {
                     // Create the menubar later
                     menubar = child;
-                } else if (!toolbar && m_form->GetObjectTypeName() == "toolbar_form") {
+                } else if (!toolbar && m_form->GetTypeName() == "toolbar_form") {
                     Generate(m_form,
                              m_designer->GetFrameContentPanel(),
                              m_designer->GetFrameContentPanel());
@@ -601,7 +601,7 @@ void VisualEditor::Generate(PObjectBase obj, wxWindow* wxparent,
     wxEvtHandler* vobjHandler = nullptr;
 
     switch (comp->GetComponentType()) {
-    case COMPONENT_TYPE_WINDOW:
+    case ComponentType::Window:
         createdWindow = wxDynamicCast(createdObject, wxWindow);
         if (!createdWindow) {
             wxWEAVER_THROW_EX(wxString::Format(
@@ -620,7 +620,7 @@ void VisualEditor::Generate(PObjectBase obj, wxWindow* wxparent,
         vobjHandler = new VObjEvtHandler(createdWindow, obj);
         break;
 
-    case COMPONENT_TYPE_SIZER: {
+    case ComponentType::Sizer: {
         wxStaticBoxSizer* staticBoxSizer = wxDynamicCast(createdObject, wxStaticBoxSizer);
         if (staticBoxSizer) {
             createdWindow = staticBoxSizer->GetStaticBox();
@@ -753,7 +753,7 @@ void VisualEditor::SetupWindow(PObjectBase obj, wxWindow* window)
 
     // AUI
     // clang-format off
-    wxString objTypeName = obj->GetObjectInfo()->GetObjectType()->GetName();
+    wxString objTypeName = obj->GetObjectInfo()->GetType()->GetName();
     if (m_auiMgr &&
           (objTypeName == "widget"
         || objTypeName == "expanded_widget"
@@ -772,10 +772,10 @@ void VisualEditor::SetupWindow(PObjectBase obj, wxWindow* window)
         || objTypeName == "propgridman"
         || objTypeName == "splitter"))
     {
-        if (obj->GetParent()->GetObjectTypeName() == "form")
+        if (obj->GetParent()->GetTypeName() == "form")
             SetupAui(obj, window);
     }
-    else if (obj->GetParent()->GetObjectTypeName() == "wizard")
+    else if (obj->GetParent()->GetTypeName() == "wizard")
     {
         SetupWizard(obj, window, true);
     }
@@ -956,7 +956,7 @@ void VisualEditor::OnObjectSelected(wxWeaverObjectEvent& event)
         return;
     }
     wxObject* item = it->second; // Save wxobject
-    int componentType = COMPONENT_TYPE_ABSTRACT;
+    ComponentType componentType = ComponentType::Abstract;
 
     IComponent* comp = obj->GetObjectInfo()->GetComponent();
     if (comp) {
@@ -965,13 +965,13 @@ void VisualEditor::OnObjectSelected(wxWeaverObjectEvent& event)
         if (!m_stopSelectedEvent)
             comp->OnSelected(item); // Fire selection event in plugin
     }
-    if (obj->GetObjectInfo()->GetObjectTypeName() == "wizardpagesimple") {
+    if (obj->GetObjectInfo()->GetTypeName() == "wizardpagesimple") {
         ObjectBaseMap::iterator pageIt = m_baseobjects.find(obj.get());
         WizardPageSimple* wizpage = wxDynamicCast(pageIt->second, WizardPageSimple);
         SetupWizard(obj, wizpage);
     }
-    if (componentType != COMPONENT_TYPE_WINDOW
-        && componentType != COMPONENT_TYPE_SIZER)
+    if (componentType != ComponentType::Window
+        && componentType != ComponentType::Sizer)
         item = nullptr;
 
     // Fire selection event in plugin for all parents
@@ -982,7 +982,7 @@ void VisualEditor::OnObjectSelected(wxWeaverObjectEvent& event)
             if (parentComp) {
                 ObjectBaseMap::iterator parentIt = m_baseobjects.find(parent.get());
                 if (parentIt != m_baseobjects.end()) {
-                    if (parent->GetObjectInfo()->GetObjectTypeName()
+                    if (parent->GetObjectInfo()->GetTypeName()
                         == "wizardpagesimple") {
                         WizardPageSimple* wizpage = wxDynamicCast(parentIt->second, WizardPageSimple);
                         SetupWizard(parent, wizpage);
@@ -994,7 +994,7 @@ void VisualEditor::OnObjectSelected(wxWeaverObjectEvent& event)
         }
     }
     // Look for the active panel - this is where the boxes will be drawn during OnPaint
-    // This is the closest parent of type COMPONENT_TYPE_WINDOW
+    // This is the closest parent of type ComponentType::Window
     PObjectBase nextParent = obj->GetParent();
     while (nextParent) {
         IComponent* parentComp = nextParent->GetObjectInfo()->GetComponent();
@@ -1002,7 +1002,7 @@ void VisualEditor::OnObjectSelected(wxWeaverObjectEvent& event)
             nextParent.reset();
             break;
         }
-        if (parentComp->GetComponentType() == COMPONENT_TYPE_WINDOW)
+        if (parentComp->GetComponentType() == ComponentType::Window)
             break;
 
         it = m_baseobjects.find(nextParent.get());
@@ -1027,7 +1027,7 @@ void VisualEditor::OnObjectSelected(wxWeaverObjectEvent& event)
     } else {
         selPanel = m_designer->GetFrameContentPanel();
     }
-    // Find the first COMPONENT_TYPE_WINDOW or COMPONENT_TYPE_SIZER
+    // Find the first ComponentType::Window or ComponentType::Sizer
     // If it is a sizer, save it
     wxSizer* sizer = nullptr;
     PObjectBase nextObj = obj->GetParent();
@@ -1036,13 +1036,13 @@ void VisualEditor::OnObjectSelected(wxWeaverObjectEvent& event)
         if (!nextComp)
             break;
 
-        if (nextComp->GetComponentType() == COMPONENT_TYPE_SIZER) {
+        if (nextComp->GetComponentType() == ComponentType::Sizer) {
             it = m_baseobjects.find(nextObj.get());
             if (it != m_baseobjects.end())
                 sizer = wxDynamicCast(it->second, wxSizer);
 
             break;
-        } else if (nextComp->GetComponentType() == COMPONENT_TYPE_WINDOW) {
+        } else if (nextComp->GetComponentType() == ComponentType::Window) {
             break;
         }
         nextObj = nextObj->GetParent();
@@ -1251,7 +1251,7 @@ wxMenu* DesignerWindow::GetMenuFromObject(PObjectBase menu)
     wxMenu* menuWidget = new wxMenu();
     for (size_t j = 0; j < menu->GetChildCount(); j++) {
         PObjectBase menuItem = menu->GetChild(j);
-        if (menuItem->GetObjectTypeName() == "submenu") {
+        if (menuItem->GetTypeName() == "submenu") {
             wxMenuItem* item = new wxMenuItem(menuWidget, lastMenuId++,
                                               menuItem->GetPropertyAsString("label"),
                                               menuItem->GetPropertyAsString("help"),

@@ -87,6 +87,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <childtype name="listbook"         nmax="0"/>
     <childtype name="simplebook"       nmax="0"/>
     <childtype name="choicebook"       nmax="0"/>
+    <childtype name="toolbook"         nmax="0" />
+    <childtype name="treebook"         nmax="0" />
     <childtype name="treelistctrl"     nmax="0"/>
     <childtype name="splitter"         nmax="0"/>
     <childtype name="nonvisual"/>
@@ -152,6 +154,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <childtype name="simplebook"       nmax="1" aui_nmax="1"/>
     <childtype name="choicebook"       nmax="1" aui_nmax="1"/>
     <childtype name="auinotebook"      nmax="1" aui_nmax="1"/>
+    <childtype name="toolbook"         nmax="1" aui_nmax="1"/>
+    <childtype name="treebook"         nmax="1" aui_nmax="1"/>
     <childtype name="splitter"         nmax="1" aui_nmax="1"/>
     <childtype name="toolbar"          nmax="1" aui_nmax="1"/>
     <childtype name="treelistctrl"     nmax="1" aui_nmax="1"/>
@@ -174,6 +178,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <childtype name="choicebook"       nmax="1" aui_nmax="1"/>
     <childtype name="simplebook"       nmax="1" aui_nmax="1"/>
     <childtype name="auinotebook"      nmax="1" aui_nmax="1"/>
+    <childtype name="toolbook"         nmax="1" aui_nmax="1"/>
+    <childtype name="treebook"         nmax="1" aui_nmax="1"/>
     <childtype name="splitter"         nmax="1" aui_nmax="1"/>
     <childtype name="toolbar"          nmax="1" aui_nmax="1"/>
     <childtype name="treelistctrl"     nmax="1" aui_nmax="1"/>
@@ -234,6 +240,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
   <objtype name="auinotebookpage" item="1">
     <childtype name="container" nmax="1" aui_nmax="1"/>
+  </objtype>
+
+  <objtype name="toolbook" >
+    <childtype name="toolbookpage" />
+    <childtype name="imagelist" nmax="1" aui_nmax="1" />
+  </objtype>
+
+  <objtype name="toolbookpage" item="1">
+    <childtype name="container" nmax="1" aui_nmax="1" />
+  </objtype>
+
+  <objtype name="treebook" >
+    <childtype name="treebookpage" />
+    <childtype name="imagelist" nmax="1" aui_nmax="1" />
+  </objtype>
+
+  <objtype name="treebookpage" item="1">
+    <childtype name="container" nmax="1" aui_nmax="1" />
   </objtype>
 
   <objtype name="imagelist">

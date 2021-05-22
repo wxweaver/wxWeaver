@@ -913,7 +913,7 @@ void PHPCodeGenerator::GenConstructor(PObjectBase classObj,
     m_source->WriteLn("}");
     m_source->WriteLn(wxEmptyString);
 
-    if (classObj->GetObjectTypeName() == "wizard"
+    if (classObj->GetTypeName() == "wizard"
         && classObj->GetChildCount() > 0) {
         m_source->WriteLn("function AddPage($page){");
         m_source->Indent();
@@ -948,7 +948,7 @@ void PHPCodeGenerator::GenDestructor(PObjectBase classObj, const EventVector& ev
 
 void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayItems& arrays)
 {
-    wxString type = obj->GetObjectTypeName();
+    wxString type = obj->GetTypeName();
     PObjectInfo info = obj->GetObjectInfo();
 
     if (ObjectDatabase::HasCppProperties(type)) {

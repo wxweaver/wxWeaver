@@ -172,7 +172,7 @@ ticpp::Element* XrcCodeGenerator::GetElement(PObjectBase obj, ticpp::Element* pa
             }
         }
     } else {
-        if (obj->GetObjectTypeName() != "nonvisual") {
+        if (obj->GetTypeName() != "nonvisual") {
             // The componenet does not XRC
             element = new ticpp::Element("object");
             element->SetAttribute("class", "unknown");

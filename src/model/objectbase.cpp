@@ -336,7 +336,7 @@ PObjectBase ObjectBase::FindNearAncestor(wxString type)
     PObjectBase result;
     PObjectBase parent = GetParent();
     if (parent) {
-        if (parent->GetObjectTypeName() == type)
+        if (parent->GetTypeName() == type)
             result = parent;
         else
             result = parent->FindNearAncestor(type);
@@ -375,9 +375,9 @@ bool ObjectBase::AddChild(PObjectBase obj)
 {
     bool result = false;
 #if 0
-    if (ChildTypeOk(obj->GetObjectTypeName()))
+    if (ChildTypeOk(obj->GetTypeName()))
 #else
-    if (ChildTypeOk(obj->GetObjectInfo()->GetObjectType()))
+    if (ChildTypeOk(obj->GetObjectInfo()->GetType()))
 #endif
     {
         m_children.push_back(obj);
@@ -390,9 +390,9 @@ bool ObjectBase::AddChild(size_t idx, PObjectBase obj)
 {
     bool result = false;
 #if 0
-    if (ChildTypeOk(obj->GetObjectTypeName()) && idx <= m_children.size())
+    if (ChildTypeOk(obj->GetTypeName()) && idx <= m_children.size())
 #else
-    if (ChildTypeOk(obj->GetObjectInfo()->GetObjectType()) && idx <= m_children.size())
+    if (ChildTypeOk(obj->GetObjectInfo()->GetType()) && idx <= m_children.size())
 #endif
     {
         m_children.insert(m_children.begin() + idx, obj);
@@ -408,11 +408,11 @@ bool ObjectBase::ChildTypeOk(PObjectType type)
     int nmax = 0;
 
     // check allowed child count
-    if (GetObjectInfo()->GetObjectType()->GetName() == "form") {
-        nmax = GetObjectInfo()->GetObjectType()->FindChildType(
+    if (GetObjectInfo()->GetType()->GetName() == "form") {
+        nmax = GetObjectInfo()->GetType()->FindChildType(
             type, this->GetPropertyAsInteger("aui_managed"));
     } else
-        nmax = GetObjectInfo()->GetObjectType()->FindChildType(type, false);
+        nmax = GetObjectInfo()->GetType()->FindChildType(type, false);
 
     if (!nmax)
         return false;
@@ -423,7 +423,7 @@ bool ObjectBase::ChildTypeOk(PObjectType type)
     // llegados aquí hay que comprobar el número de hijos del tipo pasado
     int count = 0;
     for (size_t i = 0; i < GetChildCount() && count <= nmax; i++) {
-        if (GetChild(i)->GetObjectInfo()->GetObjectType() == type)
+        if (GetChild(i)->GetObjectInfo()->GetType() == type)
             count++;
     }
     if (count > nmax)
@@ -475,7 +475,7 @@ PObjectBase ObjectBase::GetChild(size_t idx, const wxString& type)
     size_t count = 0;
     for (std::vector<PObjectBase>::iterator it = m_children.begin();
          it != m_children.end(); ++it) {
-        if ((*it)->GetObjectInfo()->GetObjectTypeName() == type && ++count == idx)
+        if ((*it)->GetObjectInfo()->GetTypeName() == type && ++count == idx)
             return *it;
     }
     return PObjectBase();
@@ -499,7 +499,7 @@ void ObjectBase::PrintOut(std::ostream& s, int indent)
 {
     wxString ind_str = GetIndentString(indent);
 
-    s << ind_str << "[ " << GetClassName() << " ] " << GetObjectType() << '\n';
+    s << ind_str << "[ " << GetClassName() << " ] " << GetType() << '\n';
     std::map<wxString, PProperty>::const_iterator itProp;
     for (itProp = m_properties.begin(); itProp != m_properties.end(); itProp++) {
         s << ind_str
@@ -910,7 +910,7 @@ void ObjectInfo::PrintOut(std::ostream& s, int indent)
     for (int i = 0; i < indent; i++)
         ind_str = ind_str + " ";
 
-    s << ind_str << "[ " << GetClassName() << " ] " << GetObjectType() << '\n';
+    s << ind_str << "[ " << GetClassName() << " ] " << GetType() << '\n';
     std::map<wxString, PPropertyInfo>::const_iterator it_prop;
     for (it_prop = m_properties.begin(); it_prop != m_properties.end(); it_prop++) {
         s << ind_str

@@ -660,10 +660,10 @@ void MainFrame::OnObjectSelected(wxWeaverObjectEvent& event)
                 if (m_visualEdit) {
                     // If selected object is not a Frame or a Panel or a dialog,
                     // we won't adjust the sash position
-                    if (obj->GetObjectTypeName() == "form"
-                        || obj->GetObjectTypeName() == "wizard"
-                        || obj->GetObjectTypeName() == "menubar_form"
-                        || obj->GetObjectTypeName() == "toolbar_form") {
+                    if (obj->GetTypeName() == "form"
+                        || obj->GetTypeName() == "wizard"
+                        || obj->GetTypeName() == "menubar_form"
+                        || obj->GetTypeName() == "toolbar_form") {
                         int sashPos = m_rightSplitter->GetSashPosition();
                         wxSize panelSize = m_visualEdit->GetVirtualSize();
                         LogDebug(

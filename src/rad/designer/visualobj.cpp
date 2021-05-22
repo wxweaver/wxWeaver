@@ -42,7 +42,7 @@ void VObjEvtHandler::OnLeftClick(wxMouseEvent& event)
     PObjectBase obj = m_object.lock();
 
     if (obj) {
-        if (obj->GetObjectTypeName() == "ribbonbar") {
+        if (obj->GetTypeName() == "ribbonbar") {
             if (AppData()->GetSelectedObject() != obj)
                 AppData()->SelectObject(obj);
 
@@ -56,8 +56,8 @@ void VObjEvtHandler::OnLeftClick(wxMouseEvent& event)
                 even if its tool was clicked so it is important to skip the event
                 to select clicked tool later in "common" plugin.
             */
-            if (obj->GetObjectTypeName() == "toolbar"
-                || obj->GetObjectTypeName() == "toolbar_form")
+            if (obj->GetTypeName() == "toolbar"
+                || obj->GetTypeName() == "toolbar_form")
                 event.Skip();
         } else {
             /*
@@ -81,7 +81,7 @@ void VObjEvtHandler::OnRightClick(wxMouseEvent& event)
         if (obj->GetPropertyAsInteger("context_menu")) {
             PObjectBase menu;
             for (size_t i = 0; i < obj->GetChildCount(); i++) {
-                if (obj->GetChild(i)->GetObjectTypeName() == "menu") {
+                if (obj->GetChild(i)->GetTypeName() == "menu") {
                     menu = obj->GetChild(i);
                     break;
                 }

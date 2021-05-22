@@ -255,7 +255,7 @@ void ObjectTree::OnExpansionChange(wxTreeEvent& event)
 
 void ObjectTree::AddChildren(PObjectBase obj, wxTreeItemId& parent, bool isRoot)
 {
-    if (obj->GetObjectInfo()->GetObjectType()->IsItem()) {
+    if (obj->GetObjectInfo()->GetType()->IsItem()) {
         if (obj->GetChildCount() > 0)
             AddChildren(obj->GetChild(0), parent);
         else {
@@ -280,7 +280,7 @@ void ObjectTree::AddChildren(PObjectBase obj, wxTreeItemId& parent, bool isRoot)
 
             PObjectBase parent_obj = obj->GetParent();
             // find a proper position where the added object should be displayed at
-            if (parent_obj->GetObjectInfo()->GetObjectType()->IsItem()) {
+            if (parent_obj->GetObjectInfo()->GetType()->IsItem()) {
                 parent_obj = parent_obj->GetParent();
                 pos = parent_obj->GetChildPosition(obj->GetParent());
             } else
@@ -379,7 +379,7 @@ void ObjectTree::AddItem(PObjectBase item, PObjectBase parent)
 {
     if (item && parent) {
         // find parent item displayed in the object tree
-        while (parent && parent->GetObjectInfo()->GetObjectType()->IsItem())
+        while (parent && parent->GetObjectInfo()->GetType()->IsItem())
             parent = parent->GetParent();
 
         // add new item to the object tree

@@ -289,6 +289,8 @@ PObjectBase TemplateParser::GetWxParent()
     candidates.push_back(m_obj->FindNearAncestor("listbook"));
     candidates.push_back(m_obj->FindNearAncestor("choicebook"));
     candidates.push_back(m_obj->FindNearAncestor("simplebook"));
+    candidates.push_back(m_obj->FindNearAncestor("toolbook"));
+    candidates.push_back(m_obj->FindNearAncestor("treebook"));
     candidates.push_back(m_obj->FindNearAncestor("auinotebook"));
     candidates.push_back(m_obj->FindNearAncestor("toolbar"));
     candidates.push_back(m_obj->FindNearAncestor("wizardpagesimple"));
@@ -701,7 +703,7 @@ bool TemplateParser::ParseIfParentTypeEqual()
     wxString inner_template = ExtractInnerTemplate();
 
     // compare give type name with type of the wx parent object
-    if (parent && IsEqual(parent->GetObjectTypeName(), type)) {
+    if (parent && IsEqual(parent->GetTypeName(), type)) {
         // generate the code
         PTemplateParser parser = CreateParser(this, inner_template);
         m_out << parser->ParseTemplate();
@@ -721,7 +723,7 @@ bool TemplateParser::ParseIfParentTypeNotEqual()
     wxString inner_template = ExtractInnerTemplate();
 
     // compare give type name with type of the wx parent object
-    if (parent && !IsEqual(parent->GetObjectTypeName(), type)) {
+    if (parent && !IsEqual(parent->GetTypeName(), type)) {
         // generate the code
         PTemplateParser parser = CreateParser(this, inner_template);
         m_out << parser->ParseTemplate();
@@ -780,7 +782,7 @@ bool TemplateParser::ParseIfTypeEqual()
     wxString inner_template = ExtractInnerTemplate();
 
     // compare give type name with type of the wx parent object
-    if (IsEqual(m_obj->GetObjectTypeName(), type)) {
+    if (IsEqual(m_obj->GetTypeName(), type)) {
         // generate the code
         PTemplateParser parser = CreateParser(this, inner_template);
         m_out << parser->ParseTemplate();
@@ -798,7 +800,7 @@ bool TemplateParser::ParseIfTypeNotEqual()
     wxString inner_template = ExtractInnerTemplate();
 
     // compare give type name with type of the wx parent object
-    if (!IsEqual(m_obj->GetObjectTypeName(), type)) {
+    if (!IsEqual(m_obj->GetTypeName(), type)) {
         // generate the code
         PTemplateParser parser = CreateParser(this, inner_template);
         m_out << parser->ParseTemplate();

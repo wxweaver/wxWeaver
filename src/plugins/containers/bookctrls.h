@@ -25,44 +25,50 @@
 
 #include <ticpp.h>
 
-#include <wx/listctrl.h>
+#include <functional>
 
 class AuiNotebookComponent : public ComponentBase {
 public:
-    wxObject* Create(IObject* obj, wxObject* parent) override
+    wxObject* Create(IObject* object, wxObject* parent) override
     {
         wxAuiNotebook* auiNotebook = new wxAuiNotebook(
             (wxWindow*)parent, wxID_ANY,
-            obj->GetPropertyAsPoint("pos"),
-            obj->GetPropertyAsSize("size"),
-            obj->GetPropertyAsInteger("style")
-                | obj->GetPropertyAsInteger("window_style"));
+            object->GetPropertyAsPoint("pos"),
+            object->GetPropertyAsSize("size"),
+            object->GetPropertyAsInteger("style")
+                | object->GetPropertyAsInteger("window_style"));
 
-        auiNotebook->SetTabCtrlHeight(obj->GetPropertyAsInteger("tab_ctrl_height"));
-        auiNotebook->SetUniformBitmapSize(obj->GetPropertyAsSize("bitmapsize"));
+        auiNotebook->SetTabCtrlHeight(object->GetPropertyAsInteger("tab_ctrl_height"));
+        auiNotebook->SetUniformBitmapSize(object->GetPropertyAsSize("bitmapsize"));
 
-        auiNotebook->PushEventHandler(new BooksEvtHandler(auiNotebook, GetManager()));
+        BookCtrl::AssignImageList(auiNotebook, object);
+
+        auiNotebook->Bind(wxEVT_AUINOTEBOOK_ALLOW_DND,
+                          &BookCtrl::OnAuiNotebookAllowDND);
+
+        auiNotebook->Bind(wxEVT_AUINOTEBOOK_PAGE_CLOSE,
+                          &BookCtrl::OnAuiNotebookPageClosed);
+
+        std::function<void(wxBookCtrlEvent&)> onPageChanged(
+            std::bind(&BookCtrl::OnPageChanged<wxAuiNotebook>,
+                      std::placeholders::_1, GetManager()));
+
+        auiNotebook->Bind(wxEVT_AUINOTEBOOK_PAGE_CHANGED, onPageChanged);
+
         return auiNotebook;
     }
 
-    void Cleanup(wxObject* obj) override
+    ticpp::Element* ExportToXrc(IObject* object) override
     {
-        wxAuiNotebook* auiNotebook = wxDynamicCast(obj, wxAuiNotebook);
-        if (auiNotebook)
-            auiNotebook->PopEventHandler(true);
-    }
-
-    ticpp::Element* ExportToXrc(IObject* obj) override
-    {
-        ObjectToXrcFilter xrc(obj, "wxAuiNotebook",
-                              obj->GetPropertyAsString("name"));
+        ObjectToXrcFilter xrc(object, "wxAuiNotebook",
+                              object->GetPropertyAsString("name"));
         xrc.AddWindowProperties();
         return xrc.GetXrcObject();
     }
 
-    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj) override
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
     {
-        XrcToXfbFilter filter(xrcObj, "wxAuiNotebook");
+        XrcToXfbFilter filter(xrcObject, "wxAuiNotebook");
         filter.AddWindowProperties();
         return filter.GetXfbObject();
     }
@@ -70,37 +76,35 @@ public:
 
 class ChoicebookComponent : public ComponentBase {
 public:
-    wxObject* Create(IObject* obj, wxObject* parent) override
+    wxObject* Create(IObject* object, wxObject* parent) override
     {
         wxChoicebook* choiceBook = new wxChoicebook(
             (wxWindow*)parent, wxID_ANY,
-            obj->GetPropertyAsPoint("pos"),
-            obj->GetPropertyAsSize("size"),
-            obj->GetPropertyAsInteger("style")
-                | obj->GetPropertyAsInteger("window_style"));
+            object->GetPropertyAsPoint("pos"),
+            object->GetPropertyAsSize("size"),
+            object->GetPropertyAsInteger("style")
+                | object->GetPropertyAsInteger("window_style"));
 
-        choiceBook->PushEventHandler(new BooksEvtHandler(choiceBook, GetManager()));
+        std::function<void(wxBookCtrlEvent&)> onPageChanged(
+            std::bind(&BookCtrl::OnPageChanged<wxChoicebook>,
+                      std::placeholders::_1, GetManager()));
+
+        choiceBook->Bind(wxEVT_CHOICEBOOK_PAGE_CHANGED, onPageChanged);
+
         return choiceBook;
     }
 
-    void Cleanup(wxObject* obj) override
+    ticpp::Element* ExportToXrc(IObject* object) override
     {
-        wxChoicebook* choiceBook = wxDynamicCast(obj, wxChoicebook);
-        if (choiceBook)
-            choiceBook->PopEventHandler(true);
-    }
-
-    ticpp::Element* ExportToXrc(IObject* obj) override
-    {
-        ObjectToXrcFilter xrc(obj, "wxChoicebook",
-                              obj->GetPropertyAsString("name"));
+        ObjectToXrcFilter xrc(object, "wxChoicebook",
+                              object->GetPropertyAsString("name"));
         xrc.AddWindowProperties();
         return xrc.GetXrcObject();
     }
 
-    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj) override
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
     {
-        XrcToXfbFilter filter(xrcObj, "wxChoicebook");
+        XrcToXfbFilter filter(xrcObject, "wxChoicebook");
         filter.AddWindowProperties();
         return filter.GetXfbObject();
     }
@@ -108,61 +112,44 @@ public:
 
 class ListbookComponent : public ComponentBase {
 public:
-    wxObject* Create(IObject* obj, wxObject* parent) override
+    wxObject* Create(IObject* object, wxObject* parent) override
     {
         wxListbook* listBook = new wxListbook(
             (wxWindow*)parent, wxID_ANY,
-            obj->GetPropertyAsPoint("pos"),
-            obj->GetPropertyAsSize("size"),
-            obj->GetPropertyAsInteger("style")
-                | obj->GetPropertyAsInteger("window_style"));
+            object->GetPropertyAsPoint("pos"),
+            object->GetPropertyAsSize("size"),
+            object->GetPropertyAsInteger("style")
+                | object->GetPropertyAsInteger("window_style"));
 
-        listBook->PushEventHandler(new BooksEvtHandler(listBook, GetManager()));
+        BookCtrl::AssignImageList(listBook, object);
+
+        std::function<void(wxBookCtrlEvent&)> onPageChanged(
+            std::bind(&BookCtrl::OnPageChanged<wxListbook>,
+                      std::placeholders::_1, GetManager()));
+
+        listBook->Bind(wxEVT_LISTBOOK_PAGE_CHANGED, onPageChanged);
+
         return listBook;
     }
 
-    void Cleanup(wxObject* obj) override
-    {
-        wxListbook* listBook = wxDynamicCast(obj, wxListbook);
-        if (listBook)
-            listBook->PopEventHandler(true);
-    }
 #ifndef __WXGTK__
-    // TODO: Check this on Windows, it crashes in wxGTK, try with suppress events in case
-
-    // Small icon style not supported by GTK
-    void OnCreated(wxObject* wxobject, wxWindow* wxparent) override
+    void OnCreated(wxObject* wxobject, wxWindow* wxparent)
     {
-        // TODO: cast works only against wxobject on wxGTK
-        wxListbook* book = wxDynamicCast(wxparent, wxListbook);
-        if (book) {
-            IObject* obj = GetManager()->GetIObject(wxobject);
-
-            wxSize bmpSize = obj->GetPropertyAsSize("bitmapsize");
-            int bmpWidth = bmpSize.GetWidth();
-            int bmpHeight = bmpSize.GetHeight();
-
-            // Small icon style if bitmapsize is not set
-            if (bmpWidth <= 0 && bmpHeight <= 0) {
-                wxListView* tmpListView = book->GetListView();
-                long flags = tmpListView->GetWindowStyleFlag();
-                flags = (flags & ~wxLC_ICON) | wxLC_SMALL_ICON;
-                tmpListView->SetWindowStyleFlag(flags);
-            }
-        }
+        BookCtrl::OnListbookCreated(wxobject, wxparent, GetManager());
     }
 #endif
-    ticpp::Element* ExportToXrc(IObject* obj) override
+
+    ticpp::Element* ExportToXrc(IObject* object) override
     {
-        ObjectToXrcFilter xrc(obj, "wxListbook",
-                              obj->GetPropertyAsString("name"));
+        ObjectToXrcFilter xrc(object, "wxListbook",
+                              object->GetPropertyAsString("name"));
         xrc.AddWindowProperties();
         return xrc.GetXrcObject();
     }
 
-    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj) override
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
     {
-        XrcToXfbFilter filter(xrcObj, "wxListbook");
+        XrcToXfbFilter filter(xrcObject, "wxListbook");
         filter.AddWindowProperties();
         return filter.GetXfbObject();
     }
@@ -200,37 +187,118 @@ typedef wxNotebook wxCustomNotebook;
 
 class NotebookComponent : public ComponentBase {
 public:
-    wxObject* Create(IObject* obj, wxObject* parent) override
+    wxObject* Create(IObject* object, wxObject* parent) override
     {
         wxNotebook* noteBook = new wxCustomNotebook(
             (wxWindow*)parent, wxID_ANY,
-            obj->GetPropertyAsPoint("pos"),
-            obj->GetPropertyAsSize("size"),
-            obj->GetPropertyAsInteger("style")
-                | obj->GetPropertyAsInteger("window_style"));
+            object->GetPropertyAsPoint("pos"),
+            object->GetPropertyAsSize("size"),
+            object->GetPropertyAsInteger("style")
+                | object->GetPropertyAsInteger("window_style"));
 
-        noteBook->PushEventHandler(new BooksEvtHandler(noteBook, GetManager()));
+        BookCtrl::AssignImageList(noteBook, object);
+
+        std::function<void(wxBookCtrlEvent&)> onPageChanged(
+            std::bind(&BookCtrl::OnPageChanged<wxNotebook>,
+                      std::placeholders::_1, GetManager()));
+
+        noteBook->Bind(wxEVT_NOTEBOOK_PAGE_CHANGED, onPageChanged);
+
         return noteBook;
     }
 
-    void Cleanup(wxObject* obj) override
+    ticpp::Element* ExportToXrc(IObject* object) override
     {
-        wxNotebook* noteBook = wxDynamicCast(obj, wxNotebook);
-        if (noteBook)
-            noteBook->PopEventHandler(true);
-    }
-
-    ticpp::Element* ExportToXrc(IObject* obj) override
-    {
-        ObjectToXrcFilter xrc(obj, "wxNotebook",
-                              obj->GetPropertyAsString("name"));
+        ObjectToXrcFilter xrc(object, "wxNotebook",
+                              object->GetPropertyAsString("name"));
         xrc.AddWindowProperties();
         return xrc.GetXrcObject();
     }
 
-    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj) override
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
     {
-        XrcToXfbFilter filter(xrcObj, "wxNotebook");
+        XrcToXfbFilter filter(xrcObject, "wxNotebook");
+        filter.AddWindowProperties();
+        return filter.GetXfbObject();
+    }
+};
+
+class ToolbookComponent : public ComponentBase {
+public:
+    wxObject* Create(IObject* object, wxObject* parent) override
+    {
+        wxToolbook* toolBook = new wxToolbook(
+            (wxWindow*)parent, wxID_ANY,
+            object->GetPropertyAsPoint("pos"),
+            object->GetPropertyAsSize("size"),
+            object->GetPropertyAsInteger("style")
+                | object->GetPropertyAsInteger("window_style"));
+
+        BookCtrl::AssignImageList(toolBook, object);
+
+        std::function<void(wxBookCtrlEvent&)> onPageChanged(
+            std::bind(&BookCtrl::OnPageChanged<wxToolbook>,
+                      std::placeholders::_1, GetManager()));
+
+        toolBook->Bind(wxEVT_TOOLBOOK_PAGE_CHANGED, onPageChanged);
+
+        return toolBook;
+    }
+
+    ticpp::Element* ExportToXrc(IObject* object) override
+    {
+        ObjectToXrcFilter xrc(object, "wxToolbook",
+                              object->GetPropertyAsString("name"));
+        xrc.AddWindowProperties();
+        return xrc.GetXrcObject();
+    }
+
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
+    {
+        XrcToXfbFilter filter(xrcObject, "wxToolbook");
+        filter.AddWindowProperties();
+        return filter.GetXfbObject();
+    }
+};
+
+class TreebookComponent : public ComponentBase {
+public:
+    wxObject* Create(IObject* object, wxObject* parent) override
+    {
+        wxTreebook* treeBook = new wxTreebook(
+            (wxWindow*)parent, wxID_ANY,
+            object->GetPropertyAsPoint("pos"),
+            object->GetPropertyAsSize("size"),
+            object->GetPropertyAsInteger("style")
+                | object->GetPropertyAsInteger("window_style"));
+
+        BookCtrl::AssignImageList(treeBook, object);
+
+        std::function<void(wxBookCtrlEvent&)> onPageChanged(
+            std::bind(&BookCtrl::OnPageChanged<wxTreebook>,
+                      std::placeholders::_1, GetManager()));
+
+        treeBook->Bind(wxEVT_TREEBOOK_PAGE_CHANGED, onPageChanged);
+
+        return treeBook;
+    }
+
+    void OnCreated(wxObject* wxobject, wxWindow* /*wxparent*/) override
+    {
+        BookCtrl::OnTreebookCreated(wxobject, GetManager());
+    }
+
+    ticpp::Element* ExportToXrc(IObject* object) override
+    {
+        ObjectToXrcFilter xrc(object, "wxTreebook",
+                              object->GetPropertyAsString("name"));
+        xrc.AddWindowProperties();
+        return xrc.GetXrcObject();
+    }
+
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
+    {
+        XrcToXfbFilter filter(xrcObject, "wxTreebook");
         filter.AddWindowProperties();
         return filter.GetXfbObject();
     }
@@ -238,26 +306,26 @@ public:
 
 class SimplebookComponent : public ComponentBase {
 public:
-    wxObject* Create(IObject* obj, wxObject* parent) override
+    wxObject* Create(IObject* object, wxObject* parent) override
     {
         return new wxSimplebook(
             (wxWindow*)parent, wxID_ANY,
-            obj->GetPropertyAsPoint("pos"),
-            obj->GetPropertyAsSize("size"),
-            obj->GetPropertyAsInteger("window_style"));
+            object->GetPropertyAsPoint("pos"),
+            object->GetPropertyAsSize("size"),
+            object->GetPropertyAsInteger("window_style"));
     }
 
-    ticpp::Element* ExportToXrc(IObject* obj) override
+    ticpp::Element* ExportToXrc(IObject* object) override
     {
-        ObjectToXrcFilter xrc(obj, "wxSimplebook",
-                              obj->GetPropertyAsString("name"));
+        ObjectToXrcFilter xrc(object, "wxSimplebook",
+                              object->GetPropertyAsString("name"));
         xrc.AddWindowProperties();
         return xrc.GetXrcObject();
     }
 
-    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj) override
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
     {
-        XrcToXfbFilter filter(xrcObj, "wxSimplebook");
+        XrcToXfbFilter filter(xrcObject, "wxSimplebook");
         filter.AddWindowProperties();
         return filter.GetXfbObject();
     }
@@ -267,23 +335,23 @@ class AuiNotebookPageComponent : public ComponentBase {
 public:
     void OnCreated(wxObject* wxobject, wxWindow* wxparent) override
     {
-        BookUtils::OnPageCreated<wxAuiNotebook>(
+        BookCtrl::OnPageCreated<wxAuiNotebook>(
             wxobject, wxparent, GetManager(), "AuiNotebookPageComponent");
     }
 
     void OnSelected(wxObject* wxobject) override
     {
-        BookUtils::OnPageSelected<wxAuiNotebook>(wxobject, GetManager());
+        BookCtrl::OnPageSelected<wxAuiNotebook>(wxobject, GetManager());
     }
 
-    ticpp::Element* ExportToXrc(IObject* obj) override
+    ticpp::Element* ExportToXrc(IObject* object) override
     {
-        return BookUtils::BookPageWithImagesXrcProperties(obj, "notebookpage");
+        return BookCtrl::PageToXrc(object, "auinotebookpage");
     }
 
-    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj) override
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
     {
-        return BookUtils::BookPageWithImagesPrjProperties(xrcObj, "notebookpage");
+        return BookCtrl::PageToProject(xrcObject, "auinotebookpage");
     }
 };
 
@@ -291,23 +359,23 @@ class ListbookPageComponent : public ComponentBase {
 public:
     void OnCreated(wxObject* wxobject, wxWindow* wxparent) override
     {
-        BookUtils::OnPageCreated<wxListbook>(
+        BookCtrl::OnPageCreated<wxListbook>(
             wxobject, wxparent, GetManager(), "ListbookPageComponent");
     }
 
     void OnSelected(wxObject* wxobject) override
     {
-        BookUtils::OnPageSelected<wxListbook>(wxobject, GetManager());
+        BookCtrl::OnPageSelected<wxListbook>(wxobject, GetManager());
     }
 
-    ticpp::Element* ExportToXrc(IObject* obj) override
+    ticpp::Element* ExportToXrc(IObject* object) override
     {
-        return BookUtils::BookPageWithImagesXrcProperties(obj, "listbookpage");
+        return BookCtrl::PageToXrc(object, "listbookpage");
     }
 
-    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj) override
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
     {
-        return BookUtils::BookPageWithImagesPrjProperties(xrcObj, "listbookpage");
+        return BookCtrl::PageToProject(xrcObject, "listbookpage");
     }
 };
 
@@ -315,23 +383,71 @@ class NotebookPageComponent : public ComponentBase {
 public:
     void OnCreated(wxObject* wxobject, wxWindow* wxparent) override
     {
-        BookUtils::OnPageCreated<wxNotebook>(
+        BookCtrl::OnPageCreated<wxNotebook>(
             wxobject, wxparent, GetManager(), "NotebookPageComponent");
     }
 
     void OnSelected(wxObject* wxobject) override
     {
-        BookUtils::OnPageSelected<wxNotebook>(wxobject, GetManager());
+        BookCtrl::OnPageSelected<wxNotebook>(wxobject, GetManager());
     }
 
-    ticpp::Element* ExportToXrc(IObject* obj) override
+    ticpp::Element* ExportToXrc(IObject* object) override
     {
-        return BookUtils::BookPageWithImagesXrcProperties(obj, "notebookpage");
+        return BookCtrl::PageToXrc(object, "notebookpage");
     }
 
-    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj) override
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
     {
-        return BookUtils::BookPageWithImagesPrjProperties(xrcObj, "notebookpage");
+        return BookCtrl::PageToProject(xrcObject, "notebookpage");
+    }
+};
+
+class ToolbookPageComponent : public ComponentBase {
+public:
+    void OnCreated(wxObject* wxobject, wxWindow* wxparent)
+    {
+        BookCtrl::OnPageCreated<wxToolbook>(
+            wxobject, wxparent, GetManager(), "ToolbookPageComponent");
+    }
+
+    void OnSelected(wxObject* wxobject)
+    {
+        BookCtrl::OnPageSelected<wxToolbook>(wxobject, GetManager());
+    }
+
+    ticpp::Element* ExportToXrc(IObject* object)
+    {
+        return BookCtrl::PageToXrc(object, "toolbookpage");
+    }
+
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject)
+    {
+        return BookCtrl::PageToProject(xrcObject, "toolbookpage");
+    }
+};
+
+class TreebookPageComponent : public ComponentBase {
+public:
+    void OnCreated(wxObject* wxobject, wxWindow* wxparent)
+    {
+        BookCtrl::OnPageCreated<wxTreebook>(
+            wxobject, wxparent, GetManager(), "TreebookPageComponent");
+    }
+
+    void OnSelected(wxObject* wxobject)
+    {
+        BookCtrl::OnPageSelected<wxTreebook>(wxobject, GetManager());
+    }
+
+    ticpp::Element* ExportToXrc(IObject* object)
+    {
+        return BookCtrl::PageToXrc(object, "treebookpage");
+    }
+
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject)
+    {
+        return BookCtrl::PageToProject(xrcObject, "treebookpage");
     }
 };
 
@@ -339,26 +455,26 @@ class ChoicebookPageComponent : public ComponentBase {
 public:
     void OnCreated(wxObject* wxobject, wxWindow* wxparent) override
     {
-        BookUtils::OnPageCreated<wxChoicebook>(
+        BookCtrl::OnPageCreated<wxChoicebook>(
             wxobject, wxparent, GetManager(), "ChoicebookPageComponent");
     }
 
     void OnSelected(wxObject* wxobject) override
     {
-        BookUtils::OnPageSelected<wxChoicebook>(wxobject, GetManager());
+        BookCtrl::OnPageSelected<wxChoicebook>(wxobject, GetManager());
     }
 
-    ticpp::Element* ExportToXrc(IObject* obj) override
+    ticpp::Element* ExportToXrc(IObject* object) override
     {
-        ObjectToXrcFilter xrc(obj, "choicebookpage");
+        ObjectToXrcFilter xrc(object, "choicebookpage");
         xrc.AddProperty("label", "label", XRC_TYPE_TEXT);
         xrc.AddProperty("select", "selected", XRC_TYPE_BOOL);
         return xrc.GetXrcObject();
     }
 
-    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj) override
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
     {
-        XrcToXfbFilter filter(xrcObj, "choicebookpage");
+        XrcToXfbFilter filter(xrcObject, "choicebookpage");
         filter.AddWindowProperties();
         filter.AddProperty("label", "label", XRC_TYPE_TEXT);
         filter.AddProperty("selected", "select", XRC_TYPE_BOOL);
@@ -370,26 +486,26 @@ class SimplebookPageComponent : public ComponentBase {
 public:
     void OnCreated(wxObject* wxobject, wxWindow* wxparent) override
     {
-        BookUtils::OnPageCreated<wxSimplebook>(
+        BookCtrl::OnPageCreated<wxSimplebook>(
             wxobject, wxparent, GetManager(), "SimplebookPageComponent");
     }
 
     void OnSelected(wxObject* wxobject) override
     {
-        BookUtils::OnPageSelected<wxSimplebook>(wxobject, GetManager());
+        BookCtrl::OnPageSelected<wxSimplebook>(wxobject, GetManager());
     }
 
-    ticpp::Element* ExportToXrc(IObject* obj) override
+    ticpp::Element* ExportToXrc(IObject* object) override
     {
-        ObjectToXrcFilter xrc(obj, "simplebookpage");
+        ObjectToXrcFilter xrc(object, "simplebookpage");
         xrc.AddProperty("label", "label", XRC_TYPE_TEXT);
         xrc.AddProperty("select", "selected", XRC_TYPE_BOOL);
         return xrc.GetXrcObject();
     }
 
-    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj) override
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
     {
-        XrcToXfbFilter filter(xrcObj, "simplebookpage");
+        XrcToXfbFilter filter(xrcObject, "simplebookpage");
         filter.AddWindowProperties();
         filter.AddProperty("label", "label", XRC_TYPE_TEXT);
         filter.AddProperty("selected", "select", XRC_TYPE_BOOL);
