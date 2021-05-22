@@ -536,7 +536,7 @@ void ObjectInspector::AddItems(const wxString& name, PObjectBase obj,
             = m_pg->AppendIn(category->GetName(),
                              new wxPropertyCategory(nextCat->GetName()));
 
-        catId->SetBackgroundColour(*wxYELLOW);
+        catId->SetTextColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT), 0);
 
         AddItems(name, obj, objInfo, nextCat, properties);
 
@@ -609,6 +609,8 @@ void ObjectInspector::AddItems(const wxString& name, PObjectBase obj,
 
         wxPGProperty* catId = m_eg->AppendIn(
             category->GetName(), new wxPropertyCategory(nextCat->GetName()));
+
+        catId->SetTextColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT), 0);
 
         AddItems(name, obj, objInfo, nextCat, events);
 

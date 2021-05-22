@@ -111,6 +111,7 @@ private:
         const wxString& catName = category->GetName();
 
         wxPGProperty* id = pg->Append(new wxPropertyCategory(catName));
+        id->SetTextColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT), 0);
 
         AddItems(name, obj, objInfo, category, itemMap);
 
