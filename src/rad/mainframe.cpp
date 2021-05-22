@@ -43,6 +43,7 @@
 #include "rad/xrcpanel/xrcpanel.h"
 #include "rad/debugwindow.h"
 
+#include <wx/artprov.h>
 #include <wx/config.h>
 #include <wx/panel.h>
 
@@ -1407,18 +1408,18 @@ wxToolBar* MainFrame::CreateWeaverToolBar()
     wxToolBar* toolbar = CreateToolBar();
     toolbar->SetToolBitmapSize(wxSize(TOOL_SIZE, TOOL_SIZE));
     toolbar->AddTool(wxID_NEW, _("New Project"), AppBitmaps::GetBitmap("document-new", TOOL_SIZE), wxNullBitmap, wxITEM_NORMAL, _("New Project (Ctrl+N)"), _("Start a new project."));
-    toolbar->AddTool(wxID_OPEN, _("Open Project"), AppBitmaps::GetBitmap("document-open", TOOL_SIZE), wxNullBitmap, wxITEM_NORMAL, _("Open Project (Ctrl+O)"), _("Open an existing project."));
-    toolbar->AddTool(wxID_SAVE, _("Save Project"), AppBitmaps::GetBitmap("document-save", TOOL_SIZE), wxNullBitmap, wxITEM_NORMAL, _("Save Project (Ctrl+S)"), _("Save the current project."));
+    toolbar->AddTool(wxID_OPEN, _("Open Project"), wxArtProvider::GetBitmap(wxART_FILE_OPEN, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Open Project (Ctrl+O)"), _("Open an existing project."));
+    toolbar->AddTool(wxID_SAVE, _("Save Project"), wxArtProvider::GetBitmap(wxART_FILE_SAVE, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Save Project (Ctrl+S)"), _("Save the current project."));
     toolbar->AddSeparator();
-    toolbar->AddTool(wxID_UNDO, _("Undo"), AppBitmaps::GetBitmap("edit-undo", TOOL_SIZE), wxNullBitmap, wxITEM_NORMAL, _("Undo (Ctrl+Z)"), _("Undo the last action."));
-    toolbar->AddTool(wxID_REDO, _("Redo"), AppBitmaps::GetBitmap("edit-redo", TOOL_SIZE), wxNullBitmap, wxITEM_NORMAL, _("Redo (Ctrl+Y)"), _("Redo the last action that was undone."));
+    toolbar->AddTool(wxID_UNDO, _("Undo"), wxArtProvider::GetBitmap(wxART_UNDO, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Undo (Ctrl+Z)"), _("Undo the last action."));
+    toolbar->AddTool(wxID_REDO, _("Redo"), wxArtProvider::GetBitmap(wxART_REDO, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Redo (Ctrl+Y)"), _("Redo the last action that was undone."));
     toolbar->AddSeparator();
-    toolbar->AddTool(wxID_CUT, _("Cut"), AppBitmaps::GetBitmap("edit-cut", TOOL_SIZE), wxNullBitmap, wxITEM_NORMAL, _("Cut (Ctrl+X)"), _("Remove the selected object and place it on the clipboard."));
-    toolbar->AddTool(wxID_COPY, _("Copy"), AppBitmaps::GetBitmap("edit-copy", TOOL_SIZE), wxNullBitmap, wxITEM_NORMAL, _("Copy (Ctrl+C)"), _("Copy the selected object to the clipboard."));
-    toolbar->AddTool(wxID_PASTE, _("Paste"), AppBitmaps::GetBitmap("edit-paste", TOOL_SIZE), wxNullBitmap, wxITEM_NORMAL, _("Paste (Ctrl+V)"), _("Insert an object from the clipboard."));
-    toolbar->AddTool(wxID_DELETE, _("Delete"), AppBitmaps::GetBitmap("edit-delete", TOOL_SIZE), wxNullBitmap, wxITEM_NORMAL, _("Delete (Ctrl+D)"), _("Remove the selected object."));
+    toolbar->AddTool(wxID_CUT, _("Cut"), wxArtProvider::GetBitmap(wxART_CUT, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Cut (Ctrl+X)"), _("Remove the selected object and place it on the clipboard."));
+    toolbar->AddTool(wxID_COPY, _("Copy"), wxArtProvider::GetBitmap(wxART_COPY, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Copy (Ctrl+C)"), _("Copy the selected object to the clipboard."));
+    toolbar->AddTool(wxID_PASTE, _("Paste"), wxArtProvider::GetBitmap(wxART_PASTE, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Paste (Ctrl+V)"), _("Insert an object from the clipboard."));
+    toolbar->AddTool(wxID_DELETE, _("Delete"), wxArtProvider::GetBitmap(wxART_DELETE, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Delete (Ctrl+D)"), _("Remove the selected object."));
     toolbar->AddSeparator();
-    toolbar->AddTool(wxID_EXECUTE, _("Generate Code"), AppBitmaps::GetBitmap("generate", TOOL_SIZE), wxNullBitmap, wxITEM_NORMAL, _("Generate Code (F8)"), _("Create code from the current project."));
+    toolbar->AddTool(wxID_EXECUTE, _("Generate Code"), wxArtProvider::GetBitmap(wxART_EXECUTABLE_FILE, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Generate Code (F8)"), _("Create code from the current project."));
     toolbar->AddSeparator();
     toolbar->AddTool(ID_ALIGN_LEFT, "", AppBitmaps::GetBitmap("align-horizontal-left", TOOL_SIZE), wxNullBitmap, wxITEM_CHECK, _("Align Left"), _("The item will be aligned to the left of the space alotted to it by the sizer."));
     toolbar->AddTool(ID_ALIGN_CENTER_H, "", AppBitmaps::GetBitmap("align-horizontal-center", TOOL_SIZE), wxNullBitmap, wxITEM_CHECK, _("Align Center Horizontally"), _("The item will be centered horizontally in the space alotted to it by the sizer."));
