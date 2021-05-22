@@ -7,7 +7,6 @@
 
 ## macOS
 
-- Replace `postbuild.sh` with a CMake script
 - Fix the build, see:
   https://github.com/wxFormBuilder/wxFormBuilder/issues/247
   https://github.com/wxFormBuilder/wxFormBuilder/issues/665
@@ -17,19 +16,21 @@
 
 - Rewrite wxWeaver.iss script.
 
+## CMake
+
+- wxWidgets custom script, find Arch wx-config-gtk3
+- Replace macOS `postbuild.sh`
+
 ## Misc
 
 - CI stuff.
 - Handle API and XRC based on wx version also in plugins.
-- Add removed names to copyright headers.
 - Use snake case instead camel case in some plugins properties
   (toolSeparator -> tool_separator)
 
 ## Controls
 
 - Check the controls returned by plugins with `OnCreated()` and its log errors.
-
-- Replace static event tables and `Connect()` with `Bind()`.
 
 - Check components with:
     - no `public` access specifier
