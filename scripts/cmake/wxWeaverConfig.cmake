@@ -20,6 +20,12 @@ else()
     list(APPEND wxLibsList all)
 endif()
 
+function(copy_resources)
+    file(REMOVE_RECURSE "${CMAKE_BINARY_DIR}/share")
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/resources/application/"
+         DESTINATION "${CMAKE_BINARY_DIR}/share/wxweaver")
+endfunction()
+
 find_package(wxWidgets 3.0.3 REQUIRED ${wxLibsList})
 if(${wxWidgets_FOUND})
     include(${wxWidgets_USE_FILE})

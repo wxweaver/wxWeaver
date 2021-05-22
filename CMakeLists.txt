@@ -20,6 +20,8 @@ if(${wxWidgets_FOUND})
     include(wxWeaverLibs)
     include(wxWeaver)
 
+    copy_resources()
+
     message(STATUS "
 CMake Generator:             ${CMAKE_GENERATOR}
 
