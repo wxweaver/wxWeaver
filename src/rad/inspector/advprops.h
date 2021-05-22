@@ -105,16 +105,11 @@ public:
     void CreateChildren();
     void UpdateChildValues(const wxString& value);
 
-    int prevSrc;
-
-protected:
+private:
     void GetChildValues(const wxString& parentValue, wxArrayString& childValues) const;
 
-    static wxArrayString m_ids;
-    static wxArrayString m_clients;
-    wxArrayString m_strings;
+    int prevSrc;
 
-private:
     WX_PG_DECLARE_PROPERTY_CLASS(wxWeaverBitmapProperty)
 };
 

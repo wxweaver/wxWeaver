@@ -200,7 +200,7 @@ void wxWeaverBitmapProperty::CreateChildren()
     else
         source = _("Load From File");
 
-    prevSrc = -1;
+    prevSrc = wxNOT_FOUND;
     if (source == wxString(_("Load From File")))
         childIndex = 0;
     else if (source == wxString(_("Load From Embedded File")))
@@ -502,7 +502,7 @@ wxWeaverBitmapProperty::~wxWeaverBitmapProperty()
 wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int childIndex,
                                                wxVariant& childValue) const
 {
-    auto* bp = const_cast<wxWeaverBitmapProperty*>(this);
+    wxWeaverBitmapProperty* bp = const_cast<wxWeaverBitmapProperty*>(this);
 
     const auto val = thisValue.GetString();
     wxArrayString childVals;
