@@ -26,6 +26,14 @@ function(copy_resources)
          DESTINATION "${CMAKE_BINARY_DIR}/share/wxweaver")
 endfunction()
 
+# https://cmake.org/pipermail/cmake/2008-January/019290.html
+function(set_plugin_directory PATH)
+    set(linkerOpt "-Wl,-rpath,$``ORIGIN/../${PATH}:$$``ORIGIN/../${PATH}")
+    message(STATUS "rpath is ${linkerOpt}")
+    set(CMAKE_EXE_LINKER_FLAGS
+        ${CMAKE_EXE_LINKER_FLAGS} "${linkerOpt}")
+endfunction()
+
 find_package(wxWidgets 3.0.3 REQUIRED ${wxLibsList})
 if(${wxWidgets_FOUND})
     include(${wxWidgets_USE_FILE})
@@ -34,6 +42,7 @@ if(${wxWidgets_FOUND})
     set(CMAKE_CXX_FLAGS_DEBUG "-DwxWEAVER_DEBUG ${CMAKE_CXX_FLAGS_DEBUG}")
     set(CMAKE_CXX_STANDARD 17)
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
     if(MSVC)
         add_definitions(-D_CRT_SECURE_NO_WARNINGS)
