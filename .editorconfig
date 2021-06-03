@@ -1,3 +1,4 @@
+# Top-most EditorConfig file
 root = true
 
 [*]
@@ -10,3 +11,8 @@ trim_trailing_whitespace = 1
 [*.{xml,*code}]
 indent_style = space
 indent_size = 2
+
+# Ignore files
+[*.diff]
+trim_trailing_whitespace = unset
+insert_final_newline = unset
