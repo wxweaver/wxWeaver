@@ -2745,6 +2745,7 @@ class RibbonGalleryItemComponent : public ComponentBase {
 };
 
 BEGIN_LIBRARY()
+
 WINDOW_COMPONENT("wxCalendarCtrl", CalendarCtrlComponent)
 WINDOW_COMPONENT("wxDatePickerCtrl", DatePickerCtrlComponent)
 WINDOW_COMPONENT("wxTimePickerCtrl", TimePickerCtrlComponent)
@@ -3016,4 +3017,5 @@ MACRO(wxCOL_RESIZABLE)
 MACRO(wxCOL_SORTABLE)
 MACRO(wxCOL_REORDERABLE)
 MACRO(wxCOL_HIDDEN)
+
 END_LIBRARY()

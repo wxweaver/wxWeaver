@@ -26,29 +26,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
   <icon name="app32" file="wxweaver-32.png"/>
 
   <!-- Toolbar Icons -->
-  <icon name="document-new" file="document-new.png"/>
-  <icon name="document-open" file="document-open.png"/>
-  <icon name="document-save" file="document-save.png"/>
-  <icon name="edit-undo" file="edit-undo.png"/>
-  <icon name="edit-redo" file="edit-redo.png"/>
-  <icon name="edit-copy" file="edit-copy.png"/>
-  <icon name="edit-paste" file="edit-paste.png"/>
-  <icon name="edit-cut" file="edit-cut.png"/>
-  <icon name="edit-delete" file="edit-delete.png"/>
-  <icon name="generate" file="generate.png"/>
-  <icon name="align-horizontal-left" file="align-horizontal-left.png"/>
+  <icon name="document-new"            file="document-new.png"/>
+  <icon name="document-open"           file="document-open.png"/>
+  <icon name="document-save"           file="document-save.png"/>
+  <icon name="edit-undo"               file="edit-undo.png"/>
+  <icon name="edit-redo"               file="edit-redo.png"/>
+  <icon name="edit-copy"               file="edit-copy.png"/>
+  <icon name="edit-paste"              file="edit-paste.png"/>
+  <icon name="edit-cut"                file="edit-cut.png"/>
+  <icon name="edit-delete"             file="edit-delete.png"/>
+  <icon name="generate"                file="generate.png"/>
+  <icon name="align-horizontal-left"   file="align-horizontal-left.png"/>
   <icon name="align-horizontal-center" file="align-horizontal-center.png"/>
-  <icon name="align-horizontal-right" file="align-horizontal-right.png"/>
-  <icon name="align-vertical-top" file="align-vertical-top.png"/>
-  <icon name="align-vertical-center" file="align-vertical-center.png"/>
-  <icon name="align-vertical-bottom" file="align-vertical-bottom.png"/>
-  <icon name="size-expand" file="size-expand.png"/>
-  <icon name="size-stretch" file="size-stretch.png"/>
-  <icon name="border-left" file="border-left.png"/>
-  <icon name="border-right" file="border-right.png"/>
-  <icon name="border-top" file="border-top.png"/>
-  <icon name="border-bottom" file="border-bottom.png"/>
-  <icon name="swap" file="swap.png"/>
+  <icon name="align-horizontal-right"  file="align-horizontal-right.png"/>
+  <icon name="align-vertical-top"      file="align-vertical-top.png"/>
+  <icon name="align-vertical-center"   file="align-vertical-center.png"/>
+  <icon name="align-vertical-bottom"   file="align-vertical-bottom.png"/>
+  <icon name="size-expand"             file="size-expand.png"/>
+  <icon name="size-stretch"            file="size-stretch.png"/>
+  <icon name="border-left"             file="border-left.png"/>
+  <icon name="border-right"            file="border-right.png"/>
+  <icon name="border-top"              file="border-top.png"/>
+  <icon name="border-bottom"           file="border-bottom.png"/>
+  <icon name="swap"                    file="swap.png"/>
 
   <!-- Object Tree -->
   <icon name="project" file="document-project.png"/>
@@ -57,17 +57,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
   <!-- <icon name="unknown" file="unknown.png"/> -->
 
   <!-- Visual Editor -->
-  <icon name="cpp" file="editor-cpp.png"/>
-  <icon name="h" file="editor-h.png"/>
+  <icon name="cpp"      file="editor-cpp.png"/>
+  <icon name="h"        file="editor-h.png"/>
   <icon name="designer" file="editor-designer.png"/>
-  <icon name="c++" file="editor-cpp.png"/>
-  <icon name="python" file="editor-python.png"/>
-  <icon name="php" file="editor-php.png"/>
-  <icon name="lua" file="editor-lua.png"/>
-  <icon name="xrc" file="editor-xrc.png"/>
+  <icon name="c++"      file="editor-cpp.png"/>
+  <icon name="python"   file="editor-python.png"/>
+  <icon name="php"      file="editor-php.png"/>
+  <icon name="lua"      file="editor-lua.png"/>
+  <icon name="xrc"      file="editor-xrc.png"/>
 
   <!-- Object Properties -->
   <icon name="properties" file="object-properties.png"/>
-  <icon name="events" file="object-events.png"/>
+  <icon name="events"     file="object-events.png"/>
 
 </icons>

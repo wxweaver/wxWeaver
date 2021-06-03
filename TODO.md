@@ -27,6 +27,8 @@
 - Handle API and XRC based on wx version also in plugins.
 - Use snake case instead camel case in some plugins properties
   (toolSeparator -> tool_separator)
+- Trailing newlines in codegen templates (e.g. additional plugin)
+- Deal with `wxversion` XML property
 
 ## Controls
 
