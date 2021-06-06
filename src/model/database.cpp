@@ -758,6 +758,8 @@ void ObjectDatabase::SetupPackage(const wxString& file,
 bool ObjectDatabase::HasCppProperties(wxString type)
 {
     return (type == "notebook"
+            || type == "imagelist"
+            || type == "bitmapitem"
             || type == "listbook"
             || type == "simplebook"
             || type == "choicebook"
@@ -1195,6 +1197,8 @@ bool ObjectDatabase::ShowInPalette(wxString type)
             || type == "dataviewlistctrl"
             || type == "dataviewlistcolumn"
             || type == "dataviewcolumn"
+            || type == "imagelist"
+            || type == "bitmapitem"
             || type == "notebook"
             || type == "listbook"
             || type == "simplebook"

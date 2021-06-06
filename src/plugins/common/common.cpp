@@ -25,9 +25,10 @@
 #include <wx/animate.h>
 #include <wx/aui/auibar.h>
 #include <wx/bmpcbox.h>
+#include <wx/imaglist.h>
+#include <wx/infobar.h>
 #include <wx/listctrl.h>
 #include <wx/statline.h>
-#include <wx/infobar.h>
 
 #include <unordered_map>
 
@@ -1707,6 +1708,131 @@ void ComponentEvtHandler::OnTimer(wxTimerEvent&)
         infoBar->ShowMessage(_("Message ..."));
 }
 
+class ImageListComponent : public ComponentBase {
+    wxObject* Create(IObject* obj, wxObject* /*parent*/)
+    {
+        wxSize size = obj->GetPropertyAsSize("size");
+        bool mask = obj->GetPropertyAsInteger("mask");
+        return new wxImageList(size.GetWidth(), size.GetHeight(), mask);
+    }
+
+    void OnCreated(wxObject* wxobject, wxWindow* /*wxparent*/)
+    {
+        wxImageList* imgList = wxDynamicCast(wxobject, wxImageList);
+#if 0
+        wxASSERT(imgList);
+#endif
+        if (!imgList)
+            return;
+
+        IObject* imgListObj = GetManager()->GetIObject(wxobject);
+        wxSize size = imgListObj->GetPropertyAsSize("size");
+        int width = size.GetWidth();
+        int height = size.GetHeight();
+        size_t count = GetManager()->GetChildCount(wxobject);
+
+        for (size_t i = 0; i < count; i++) {
+            wxObject* bmpItm = GetManager()->GetChild(wxobject, i);
+            IObject* bmpObj = GetManager()->GetIObject(bmpItm);
+
+            if (bmpObj->GetClassName() == "bitmapitem") {
+                wxBitmap bmp = bmpObj->GetPropertyAsBitmap("bitmap");
+                int tmpWdt = bmp.GetWidth();
+                int tmpHgt = bmp.GetHeight();
+
+                if (bmp.IsOk()) {
+                    if (tmpWdt > 0 && tmpHgt > 0) {
+                        if ((width < 1) || (height < 1)) {
+                            // FIXME! This returns always 21x21 because default.xpm
+                            width = tmpWdt;
+                            height = tmpHgt;
+                            GetManager()->ModifyProperty(
+                                imgList, "size",
+                                wxString::Format("%i,%i", width, height), false);
+                        }
+                        if ((tmpHgt != width) || (tmpHgt != height)) {
+                            wxImage image = bmp.ConvertToImage();
+                            bmp = wxBitmap(image.Scale(width, height));
+                        }
+                        imgList->Add(bmp);
+                    } else {
+                        wxLogDebug("bmp.IsOk() error");
+                    }
+                }
+            }
+        }
+        if (!count)
+            GetManager()->ModifyProperty(imgList, "size", "16,16", false);
+    }
+
+    ticpp::Element* ExportToXrc(IObject* obj)
+    {
+        wxString xrcPropName = "imagelist";
+        if (obj->GetPropertyAsString("type") == "wxIMAGE_LIST_SMALL")
+            xrcPropName = "imagelist-small";
+
+        ObjectToXrcFilter xrc(obj, xrcPropName,
+                              obj->GetPropertyAsString("name"), wxEmptyString, false);
+        xrc.AddProperty("size", "size", XRC_TYPE_SIZE);
+        xrc.AddProperty("mask", "mask", XRC_TYPE_BOOL);
+        return xrc.GetXrcObject();
+    }
+
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj)
+    {
+        XrcToXfbFilter filter(xrcObj, "wxImageList", false);
+        filter.AddProperty("size", "size", XRC_TYPE_SIZE);
+        filter.AddProperty("mask", "mask", XRC_TYPE_BOOL);
+        return filter.GetXfbObject();
+    }
+};
+
+class BitmapItemComponent : public ComponentBase {
+    ticpp::Element* ExportToXrc(IObject* obj)
+    {
+        ObjectToXrcFilter xrc(obj, "bitmap",
+                              obj->GetPropertyAsString("name"), wxEmptyString, false);
+
+        ticpp::Element* bmpItem = xrc.GetXrcObject();
+        wxString bmpProp = obj->GetPropertyAsString("bitmap");
+
+        if (bmpProp.empty())
+            return bmpItem;
+
+        wxString filename = bmpProp.AfterFirst(';');
+        if (filename.empty())
+            return bmpItem;
+
+        if (bmpProp.size() < (filename.size() + 2))
+            return bmpItem;
+
+        // TODO: Load From (Icon) Resource
+        if (bmpProp.StartsWith(_("Load From File"))
+            || bmpProp.StartsWith(_("Load From Embedded File"))
+            || bmpProp.StartsWith(_("Load From XRC"))) {
+            bmpItem->SetText(filename.Trim().Trim(false));
+        } else if (bmpProp.StartsWith(_("Load From Art Provider"))) {
+            wxString stockId = filename.BeforeFirst(';').Trim().Trim(false).mb_str(wxConvUTF8);
+            wxString stockClient = filename.AfterFirst(';').Trim().Trim(false).mb_str(wxConvUTF8);
+
+            if (stockId.empty() || stockClient.empty())
+                return bmpItem;
+
+            bmpItem->SetAttribute("stock_id", stockId);
+            bmpItem->SetAttribute("stock_client", stockClient);
+            bmpItem->SetText("undefined.png"); // fallback image
+        }
+        return bmpItem;
+    }
+
+    ticpp::Element* ImportFromXrc(ticpp::Element* xrcObj)
+    {
+        XrcToXfbFilter filter(xrcObj, "bitmapitem", false);
+        filter.AddProperty("bitmap", "bitmap", XRC_TYPE_BITMAP);
+        return filter.GetXfbObject();
+    }
+};
+
 BEGIN_LIBRARY()
 
 WINDOW_COMPONENT("wxMenuBar", MenuBarComponent)
@@ -1719,6 +1845,9 @@ WINDOW_COMPONENT("wxAuiToolBar", AuiToolBarComponent)
 WINDOW_COMPONENT("wxToolBar", ToolBarComponent)
 ABSTRACT_COMPONENT("tool", ToolComponent)
 ABSTRACT_COMPONENT("toolSeparator", ToolSeparatorComponent)
+
+ABSTRACT_COMPONENT("wxImageList", ImageListComponent)
+ABSTRACT_COMPONENT("bitmapitem", BitmapItemComponent)
 
 WINDOW_COMPONENT("wxAnimationCtrl", AnimCtrlComponent)
 WINDOW_COMPONENT("wxBitmapButton", BitmapButtonComponent)
@@ -1805,6 +1934,13 @@ MACRO(wxCB_SORT)
 MACRO(wxGA_HORIZONTAL)
 MACRO(wxGA_SMOOTH)
 MACRO(wxGA_VERTICAL)
+
+// wxImageList
+MACRO(wxIMAGE_LIST_NORMAL)
+MACRO(wxIMAGE_LIST_SMALL)
+#if 0 // not implemented
+MACRO(wxIMAGE_LIST_STATE)
+#endif
 
 // wxInfoBar
 MACRO(wxSHOW_EFFECT_NONE)

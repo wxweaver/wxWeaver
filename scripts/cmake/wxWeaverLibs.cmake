@@ -1,8 +1,26 @@
 # Plugins
 set(wxWeaverPlugins additional common containers forms layout)
+set(additional_files
+    src/plugins/additional/additional.cpp
+)
+set(common_files
+    src/plugins/common/common.cpp
+)
+set(containers_files
+    src/plugins/containers/bookutils.h
+    src/plugins/containers/bookctrls.h
+    src/plugins/containers/containers.cpp
+)
+set(forms_files
+    src/plugins/forms/forms.cpp
+)
+set(layout_files
+    src/plugins/layout/layout.cpp
+)
+
 function(_add_plugins)
     foreach(_plugin IN LISTS wxWeaverPlugins)
-        add_library(${_plugin} MODULE "src/plugins/${_plugin}/${_plugin}.cpp")
+        add_library(${_plugin} MODULE ${${_plugin}_files})
         add_library(wxweaver::${_plugin} ALIAS ${_plugin})
         if(WIN32)
             set_target_properties(${_plugin} PROPERTIES

@@ -90,7 +90,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <property name="scroll_rate_y" type="uint" help="Set the vertical scrolling increment.">5</property>
   </objectinfo>
 
-  <objectinfo class="wxNotebook" icon="notebook.png" type="notebook" startgroup="1">
+  <objectinfo class="wxNotebook" type="notebook" icon="notebook.png" startgroup="1">
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
     <property name="name"       type="text">m_notebook</property>
@@ -108,13 +108,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <event name="OnNotebookPageChanging" class="wxNotebookEvent" help="The page selection is about to be changed. Processes a wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING event. This event can be vetoed."/>
   </objectinfo>
 
-  <objectinfo class="notebookpage" icon="notebook.png" type="notebookpage">
+  <objectinfo class="notebookpage" type="notebookpage" icon="panel.png">
     <property name="label"  type="wxString_i18n">a page</property>
     <property name="bitmap" type="bitmap" help="Page Image"/>
+    <property name="image"  type="int"    help="wxImageList Index"/>
     <property name="select" type="bool"   help="Select Page when Adding">0</property>
   </objectinfo>
 
-  <objectinfo class="wxAuiNotebook" icon="notebookaui.png" type="auinotebook">
+  <objectinfo class="wxAuiNotebook" type="auinotebook" icon="notebookaui.png">
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
     <property name="name"  type="text">m_auinotebook</property>
@@ -135,7 +136,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
       wxAUI_NB_DEFAULT_STYLE
     </property>
     <property name="tab_ctrl_height"     type="int"    help="Sets the tab height. By default, the tab control height is calculated by measuring the text height and bitmap sizes on the tab captions. Calling this method will override that calculation and set the tab control to the specified height parameter. A call to this method will override any call to SetUniformBitmapSize(). Specifying -1 as the height will return the control to its default auto-sizing behaviour.">-1</property>
-    <property name="uniform_bitmap_size" type="wxSize" help="SetUniformBitmapSize() ensures that all tabs will have the same height, even if some tabs don't have bitmaps. Passing wxDefaultSize to this function will instruct the control to use dynamic tab height, which is the default behaviour. Under the default behaviour, when a tab with a large bitmap is added, the tab control's height will automatically increase to accommodate the larger bitmap."/>
+    <property name="bitmapsize" type="wxSize" help="SetUniformBitmapSize() ensures that all tabs will have the same height, even if some tabs don't have bitmaps. Passing wxDefaultSize to this function will instruct the control to use dynamic tab height, which is the default behaviour. Under the default behaviour, when a tab with a large bitmap is added, the tab control's height will automatically increase to accommodate the larger bitmap."/>
     <event name="OnAuiNotebookPageClose"     class="wxAuiNotebookEvent" help="A page is about to be closed. Processes a wxEVT_AUINOTEBOOK_PAGE_CLOSE event."/>
     <event name="OnAuiNotebookPageClosed"    class="wxAuiNotebookEvent" help="A page has been closed. Processes a wxEVT_AUINOTEBOOK_PAGE_CLOSED event."/>
     <event name="OnAuiNotebookPageChanged"   class="wxAuiNotebookEvent" help="The page selection was changed. Processes a wxEVT_AUINOTEBOOK_PAGE_CHANGED event."/>
@@ -153,13 +154,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <event name="OnAuiNotebookBGDClick"      class="wxAuiNotebookEvent" help="Double clicked on the tabs background area. Processes a wxEVT_AUINOTEBOOK_BG_DCLICK event."/>
   </objectinfo>
 
-  <objectinfo class="auinotebookpage" icon="panel.png" type="auinotebookpage">
+  <objectinfo class="auinotebookpage" type="auinotebookpage" icon="panel.png">
     <property name="label"  type="wxString_i18n">a page</property>
     <property name="bitmap" type="bitmap" help="Page Image"/>
+    <property name="image"  type="int"    help="wxImageList Index"/>
     <property name="select" type="bool"   help="Select Page when Adding">0</property>
   </objectinfo>
 
-  <objectinfo class="wxListbook" icon="listbook.png" type="listbook">
+  <objectinfo class="wxListbook" type="listbook" icon="listbook.png">
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
     <property name="name"       type="text">m_listbook</property>
@@ -176,13 +178,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <event name="OnListbookPageChanging" class="wxListbookEvent" help="The page selection is about to be changed. Processes a wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING event. This event can be vetoed."/>
   </objectinfo>
 
-  <objectinfo class="listbookpage" icon="panel.png" type="listbookpage">
+  <objectinfo class="listbookpage" type="listbookpage" icon="panel.png">
     <property name="label"  type="wxString_i18n">a page</property>
     <property name="bitmap" type="bitmap" help="Page Image"/>
+    <property name="image"  type="int"    help="wxImageList Index"/>
     <property name="select" type="bool"   help="Select Page when Adding">0</property>
   </objectinfo>
 
-  <objectinfo class="wxChoicebook" icon="choicebook.png" type="choicebook">
+  <objectinfo class="wxChoicebook" type="choicebook" icon="choicebook.png">
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
     <property name="name"  type="text">m_choicebook</property>
@@ -198,7 +201,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <event name="OnChoicebookPageChanging" class="wxChoicebookEvent" help="The page selection is about to be changed. Processes a wxEVT_CHOICEBOOK_PAGE_CHANGING event. This event can be vetoed (using wxNotifyEvent::Veto())."/>
   </objectinfo>
 
-  <objectinfo class="choicebookpage" icon="panel.png" type="choicebookpage">
+  <objectinfo class="choicebookpage" type="choicebookpage" icon="panel.png">
     <property name="label"  type="wxString_i18n">a page</property>
     <property name="select" type="bool" help="Select Page when Adding">0</property>
   </objectinfo>
@@ -211,7 +214,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <event name="OnSimplebookPageChanging" class="wxBookCtrlEvent" help="The page selection is about to be changed. Processes a wxEVT_BOOKCTRL_PAGE_CHANGING event. This event can be vetoed."/>
   </objectinfo>
 
-  <objectinfo class="simplebookpage" icon="panel.png" type="simplebookpage">
+  <objectinfo class="simplebookpage" type="simplebookpage" icon="panel.png">
     <property name="label"  type="wxString_i18n">a page</property>
     <property name="select" type="bool" help="Select Page when Adding">0</property>
   </objectinfo>

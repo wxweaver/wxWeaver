@@ -367,4 +367,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     </property>
   </objectinfo>
 
+  <objectinfo class="wxImageList" type="imagelist" icon="imagelist.png" startgroup="1">
+    <property name="name" type="text">m_imgLst</property>
+    <property name="size" type="wxSize"  help="The size of the images in the list (default: the size of the first bitmap)."/>
+    <property name="mask" type="bool"    help="If masks should be created for all images (default: true).">1</property>
+    <property name="type" type="option"  help="Sets the image list associated with the control and takes ownership of it (i.e. the control will, unlike when using SetImageList, delete the list when destroyed). which is one of wxIMAGE_LIST_NORMAL, wxIMAGE_LIST_SMALL, wxIMAGE_LIST_STATE (the last is unimplemented).">
+      <option name="wxIMAGE_LIST_NORMAL" help="The normal (large icon) image list."/>
+      <option name="wxIMAGE_LIST_SMALL"  help="The small icon image list."/>
+      <!--option name="wxIMAGE_LIST_STATE"  help="The user-defined state image list (unimplemented)."/-->
+      wxIMAGE_LIST_NORMAL
+    </property>
+  </objectinfo>
+
+  <objectinfo class="bitmapitem" type="bitmapitem" icon="bitmap.png">
+    <property name="name"   type="text">m_bitmap</property>
+    <property name="bitmap" type="bitmap" help="Adds a new image by keeping its optional mask bitmap."/>
+  </objectinfo>
+
 </package>

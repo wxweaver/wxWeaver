@@ -29,6 +29,10 @@
   (toolSeparator -> tool_separator)
 - Trailing newlines in codegen templates (e.g. additional plugin)
 - Deal with `wxversion` XML property
+- wxImageList
+    - Do some refactor to make work the XRC import,
+      see `src/model/xrcfilter.cpp` line 162
+    - Missing code generation
 
 ## Controls
 
@@ -48,7 +52,11 @@
     in additional component plugin (change it from widget type to a standalone)
     in order to use it to create custom wxWizardPages.
 
-- wxTreebook and wxToolbook
+- wxBookCtrls
+    - rename `select` property same as wxXRC `selected` and update the project
+      format
+    - reset to 0 all other `select` pages when setting to 1 one of them
+    - wxTreebook and wxToolbook once fixed wxImageList
+
 - wxWebView
-- wxImageList
 - Make a common base class for codeeditor panels

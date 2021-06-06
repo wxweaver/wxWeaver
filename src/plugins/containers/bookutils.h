@@ -23,16 +23,123 @@
 
 #include <component.h>
 #include <default.xpm>
+#include <xrcconv.h>
 
-#ifdef wxUSE_COLLPANE
-#include <wx/collpane.h>
-#endif
+#include <ticpp.h>
+
 #include <wx/listbook.h>
 #include <wx/choicebk.h>
 #include <wx/simplebook.h>
 #include <wx/aui/auibook.h>
 
 #include <vector>
+
+#if 0
+BEGIN_EVENT_TABLE(BooksEvtHandler, wxEvtHandler)
+EVT_NOTEBOOK_PAGE_CHANGED(wxID_ANY, BooksEvtHandler::OnNotebookPageChanged)
+EVT_LISTBOOK_PAGE_CHANGED(wxID_ANY, BooksEvtHandler::OnListbookPageChanged)
+EVT_CHOICEBOOK_PAGE_CHANGED(wxID_ANY, BooksEvtHandler::OnChoicebookPageChanged)
+EVT_AUINOTEBOOK_PAGE_CHANGED(wxID_ANY, BooksEvtHandler::OnAuiNotebookPageChanged)
+EVT_AUINOTEBOOK_PAGE_CLOSE(wxID_ANY, BooksEvtHandler::OnAuiNotebookPageClosed)
+EVT_AUINOTEBOOK_ALLOW_DND(wxID_ANY, BooksEvtHandler::OnAuiNotebookAllowDND)
+END_EVENT_TABLE()
+#endif
+
+class BooksEvtHandler : public wxEvtHandler {
+public:
+    BooksEvtHandler(wxWindow* win, IManager* manager)
+        : m_window(win)
+        , m_manager(manager)
+    {
+        Bind(wxEVT_NOTEBOOK_PAGE_CHANGED,
+             &BooksEvtHandler::OnBookPageChanged, this);
+
+        Bind(wxEVT_LISTBOOK_PAGE_CHANGED,
+             &BooksEvtHandler::OnBookPageChanged, this);
+
+        Bind(wxEVT_CHOICEBOOK_PAGE_CHANGED,
+             &BooksEvtHandler::OnBookPageChanged, this);
+
+        Bind(wxEVT_AUINOTEBOOK_PAGE_CHANGED,
+             &BooksEvtHandler::OnBookPageChanged, this);
+
+        Bind(wxEVT_AUINOTEBOOK_PAGE_CLOSE,
+             &BooksEvtHandler::OnAuiNotebookPageClosed, this);
+
+        Bind(wxEVT_AUINOTEBOOK_ALLOW_DND,
+             &BooksEvtHandler::OnAuiNotebookAllowDND, this);
+    }
+
+protected:
+    void OnNotebookPageChanged(wxBookCtrlEvent& event);
+    void OnListbookPageChanged(wxBookCtrlEvent& event);
+    void OnChoicebookPageChanged(wxBookCtrlEvent& event);
+    void OnAuiNotebookPageChanged(wxAuiNotebookEvent& event);
+
+    void OnBookPageChanged(wxBookCtrlEvent& event)
+    {
+        /*
+            TODO: Avoid this by using ids if possible.
+            Only handle events from this book: prevents problems with nested books,
+            because OnSelected is fired on an object and all of its parents
+        */
+        if (m_window != event.GetEventObject())
+            return;
+
+        int selPage = event.GetSelection();
+        if (selPage < 0)
+            return;
+
+        size_t count = m_manager->GetChildCount(m_window);
+        for (size_t i = 0; i < count; i++) {
+
+            // TODO: use wxobject and iobject variables for all components
+            wxObject* wxchild = m_manager->GetChild(m_window, i);
+            IObject* iChild = m_manager->GetIObject(wxchild);
+
+            if (iChild) {
+                if (selPage == (int)i && !iChild->GetPropertyAsInteger("select"))
+                    m_manager->ModifyProperty(wxchild, "select", "1", false);
+
+                else if ((int)i != selPage && iChild->GetPropertyAsInteger("select"))
+                    m_manager->ModifyProperty(wxchild, "select", "0", false);
+            }
+        }
+        // Select the corresponding panel in the object tree
+        wxBookCtrlBase* book = wxDynamicCast(m_window, wxBookCtrlBase);
+        if (book)
+            m_manager->SelectObject(book->GetPage(selPage));
+
+        event.Skip();
+    }
+
+    void OnAuiNotebookPageClosed(wxAuiNotebookEvent& event)
+    {
+        wxMessageBox(
+            "wxAuiNotebook pages can normally be closed.\n"
+            "However, it is difficult to design a page that has been closed,"
+            "so this action has been vetoed.",
+            "Page Close Vetoed!", wxICON_INFORMATION, nullptr);
+
+        event.Veto();
+    }
+
+    void OnAuiNotebookAllowDND(wxAuiNotebookEvent& event)
+    {
+        wxMessageBox(
+            "wxAuiNotebook pages can be dragged to other wxAuiNotebooks if the"
+            "wxEVT_COMMAND_AUINOTEBOOK_ALLOW_DND event is caught and allowed.\n"
+            "However, it is difficult to design a page that has been moved,"
+            "so this action was not allowed.",
+            "Page Move Not Allowed!", wxICON_INFORMATION, nullptr);
+
+        event.Veto();
+    }
+
+private:
+    wxWindow* m_window;
+    IManager* m_manager;
+};
 
 class SuppressEventHandlers {
 public:
@@ -56,36 +163,64 @@ private:
 };
 
 namespace BookUtils {
-template <class T>
-void AddImageList(IObject* obj, T* book)
+
+ticpp::Element* BookPageWithImagesXrcProperties(IObject* object,
+                                                const wxString& className)
 {
-    if (!obj->GetPropertyAsString("bitmapsize").empty()) {
-        wxSize imageSize = obj->GetPropertyAsSize("bitmapsize");
-        wxImageList* images = new wxImageList(imageSize.GetWidth(), imageSize.GetHeight());
-        wxImage image = wxBitmap(default_xpm).ConvertToImage();
-        images->Add(image.Scale(imageSize.GetWidth(), imageSize.GetHeight()));
-        book->AssignImageList(images);
-    }
+    ObjectToXrcFilter xrc(object, className);
+    xrc.AddProperty("label", "label", XRC_TYPE_TEXT);
+    xrc.AddProperty("select", "selected", XRC_TYPE_BOOL);
+
+    wxString bmpProp = object->GetPropertyAsString("bitmap");
+    wxString filename = bmpProp.AfterFirst(';');
+    bool haveBitmap = !bmpProp.empty() && !(filename.Trim() == "");
+    if (haveBitmap)
+        xrc.AddProperty("bitmap", "bitmap", XRC_TYPE_BITMAP);
+    else
+        xrc.AddProperty("image", "image", XRC_TYPE_INTEGER);
+
+    return xrc.GetXrcObject();
+}
+
+ticpp::Element* BookPageWithImagesPrjProperties(ticpp::Element* xrcObject,
+                                                const wxString& className)
+{
+    XrcToXfbFilter filter(xrcObject, className);
+    filter.AddWindowProperties();
+    filter.AddProperty("label", "label", XRC_TYPE_TEXT);
+    filter.AddProperty("selected", "select", XRC_TYPE_BOOL);
+#if 0
+        std::string text = xrcObject->GetText(false);
+        bool isArt = xrcObject->HasAttribute("stock_id");
+        if (text != "" || isArt)
+#endif
+    filter.AddProperty("bitmap", "bitmap", XRC_TYPE_BITMAP);
+#if 0
+        else
+#endif
+    filter.AddProperty("image", "image", XRC_TYPE_INTEGER);
+
+    return filter.GetXfbObject();
 }
 
 template <class T>
-void OnCreated(wxObject* wxobject, wxWindow* wxparent,
-               IManager* manager, wxString name)
+void OnPageCreated(wxObject* wxobject, wxWindow* wxparent,
+                   IManager* manager, wxString name)
 {
     // Easy read-only property access
     IObject* obj = manager->GetIObject(wxobject);
     T* book = wxDynamicCast(wxparent, T);
 #if 0
     // This wouldn't compile in MinGW - strange
-    wxWindow* page = wxDynamicCast(manager->GetChild( wxobject, 0 ), wxWindow);
+    wxWindow* page = wxDynamicCast(manager->GetChild(wxobject, 0), wxWindow);
 
     // Do this instead
-#endif
+#else
     wxObject* child = manager->GetChild(wxobject, 0);
     wxWindow* page = nullptr;
     if (child->IsKindOf(wxCLASSINFO(wxWindow)))
         page = (wxWindow*)child;
-
+#endif
     // Error checking
     if (!(obj && book && page)) {
         wxLogError(
@@ -97,7 +232,6 @@ void OnCreated(wxObject* wxobject, wxWindow* wxparent,
     // Prevent event handling by wxWeaver, these aren't user generated events
     SuppressEventHandlers suppress(book);
 
-    int selection = book->GetSelection(); // Save selection
     book->AddPage(page, obj->GetPropertyAsString("label"));
 
     IObject* parentObj = manager->GetIObject(wxparent);
@@ -105,33 +239,61 @@ void OnCreated(wxObject* wxobject, wxWindow* wxparent,
         wxLogError("%s's parent is missing its wxWeaver object", name.c_str());
         return;
     }
-    if (!parentObj->GetPropertyAsString("bitmapsize").empty()
-        && !obj->GetPropertyAsString("bitmap").empty()) {
+    // Stop here if not using bitmaps
+    if (parentObj->GetClassName() == "wxChoicebook"
+        || parentObj->GetClassName() == "wxSimplebook")
+        return;
 
-        wxSize imageSize = parentObj->GetPropertyAsSize("bitmapsize");
-        int width = imageSize.GetWidth();
-        int height = imageSize.GetHeight();
-        if (width > 0 && height > 0) {
-            wxImageList* imageList = book->GetImageList();
-            if (imageList) {
-                wxImage image
-                    = obj->GetPropertyAsBitmap("bitmap").ConvertToImage();
-                imageList->Add(image.Scale(width, height));
-                book->SetPageImage( // Apply image to page
-                    book->GetPageCount() - 1, imageList->GetImageCount() - 1);
-            }
+    // TODO: IManager::FindChildObjectByName(const wxString&)
+    // Using wxImageList object
+    wxImageList* imageList = nullptr;
+    for (int i = 0; i < manager->GetChildCount(book); i++) {
+        wxObject* childWxObj = manager->GetChild(book, i);
+        IObject* childIObj = manager->GetIObject(childWxObj);
+        if (!childWxObj || !childIObj)
+            continue;
+
+        if (childIObj->GetClassName() == "wxImageList") {
+            imageList = wxDynamicCast(childWxObj, wxImageList);
+            if (imageList)
+                break;
         }
     }
-    if (obj->GetPropertyAsString("select") == "0" && selection >= 0)
-        book->SetSelection(selection);
-    else
-        book->SetSelection(book->GetPageCount() - 1);
+    if (imageList) {
+        if (!book->GetImageList())
+            book->AssignImageList(imageList);
+
+        int imageIndex = obj->GetPropertyAsInteger("image");
+        if (imageIndex < imageList->GetImageCount())
+            book->SetPageImage(book->GetPageCount() - 1, imageIndex);
+
+        return;
+    }
+    // Using page bitmaps
+    wxSize bmpSize = parentObj->GetPropertyAsSize("bitmapsize");
+    int bmpWidth = bmpSize.GetWidth();
+    int bmpHeight = bmpSize.GetHeight();
+
+    if (bmpWidth > 0 && bmpHeight > 0
+        && !obj->GetPropertyAsString("bitmap").empty()) {
+
+        imageList = book->GetImageList();
+        if (!imageList) {
+            imageList = new wxImageList(bmpWidth, bmpHeight);
+            book->AssignImageList(imageList);
+        }
+        wxImage image = obj->GetPropertyAsBitmap("bitmap").ConvertToImage();
+        if (!image.Ok())
+            image = wxBitmap(default_xpm).ConvertToImage();
+
+        imageList->Add(image.Scale(bmpWidth, bmpHeight));
+        book->SetPageImage(book->GetPageCount() - 1, imageList->GetImageCount() - 1);
+    }
 }
 
 template <class T>
-void OnSelected(wxObject* wxobject, IManager* manager)
+void OnPageSelected(wxObject* wxobject, IManager* manager)
 {
-    // TODO: suspicious first page check and or condition
     wxObject* page = manager->GetChild(wxobject, 0); // Get actual page, first child
     T* book = wxDynamicCast(manager->GetParent(wxobject), T);
     if (!book || !page)

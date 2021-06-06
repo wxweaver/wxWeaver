@@ -48,6 +48,9 @@ PObjectBase XrcLoader::GetObject(ticpp::Element* xrcObj, PObjectBase parent)
 {
     // First, create the object by the name, the modify the properties
     std::string className = xrcObj->GetAttribute("class");
+    if (className == "") {
+        className = xrcObj->Value();
+    }
     if (parent->GetObjectTypeName() == "project") {
         if (className == "wxBitmap") {
             PProperty bitmapsProp = parent->GetProperty("bitmaps");
@@ -95,6 +98,10 @@ PObjectBase XrcLoader::GetObject(ticpp::Element* xrcObj, PObjectBase parent)
             className = "gbsizeritem";
         else
             className = "sizeritem";
+    } else if (className == "imagelist") {
+        className = "wxImageList";
+    } else if (className == "bitmap" && parent->GetClassName() == "wxImageList") {
+        className = "bitmapitem";
     }
     PObjectBase object;
     PObjectInfo objInfo = m_objDb->GetObjectInfo(_WXSTR(className));
@@ -151,7 +158,24 @@ PObjectBase XrcLoader::GetObject(ticpp::Element* xrcObj, PObjectBase parent)
 
                     if (object) {
                         // Recursively import the children
+#if 0
                         ticpp::Element* element = xrcObj->FirstChildElement("object", false);
+#else
+                        /*
+                            FIXME: Although this works for at least imagelists
+                            and 1 bitmap it's not correct and clearly bad,
+                            need to refactor some things
+                        */
+                        ticpp::Element* element = xrcObj->FirstChildElement("imagelist", false);
+                        if (!element)
+                            element = xrcObj->FirstChildElement("imagelist-small", false);
+
+                        if (!element)
+                            element = xrcObj->FirstChildElement("bitmap", false);
+
+                        if (!element)
+                            element = xrcObj->FirstChildElement("object", false);
+#endif
                         while (element) {
                             GetObject(element, object);
                             element = element->NextSiblingElement("object", false);

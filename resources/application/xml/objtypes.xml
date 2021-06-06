@@ -195,6 +195,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
   <objtype name="notebook" >
     <childtype name="notebookpage"/>
+    <childtype name="imagelist" nmax="1" aui_nmax="1" />
   </objtype>
 
   <objtype name="notebookpage" item="1">
@@ -203,6 +204,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
   <objtype name="listbook" >
     <childtype name="listbookpage"/>
+    <childtype name="imagelist" nmax="1" aui_nmax="1" />
   </objtype>
 
   <objtype name="listbookpage" item="1">
@@ -227,11 +229,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
   <objtype name="auinotebook" >
     <childtype name="auinotebookpage"/>
+    <childtype name="imagelist" nmax="1" aui_nmax="1" />
   </objtype>
 
   <objtype name="auinotebookpage" item="1">
     <childtype name="container" nmax="1" aui_nmax="1"/>
   </objtype>
+
+  <objtype name="imagelist">
+    <childtype name="bitmapitem"/>
+  </objtype>
+
+  <objtype name="bitmapitem"/>
 
   <objtype name="menubar">
     <childtype name="menu"/>
