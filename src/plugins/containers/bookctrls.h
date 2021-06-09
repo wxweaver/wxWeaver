@@ -346,7 +346,7 @@ public:
 
     ticpp::Element* ExportToXrc(IObject* object) override
     {
-        return BookCtrl::PageToXrc(object, "auinotebookpage");
+        return BookCtrl::PageToXrc(object, "notebookpage");
     }
 
     ticpp::Element* ImportFromXrc(ticpp::Element* xrcObject) override
