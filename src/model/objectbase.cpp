@@ -20,7 +20,7 @@
 */
 #include "model/objectbase.h"
 
-#include "rad/appdata.h"
+#include "appdata.h"
 #include "utils/debug.h"
 #include "utils/stringutils.h"
 #include "utils/typeconv.h"

@@ -1,4 +1,6 @@
 set(wxWEAVER_INCLUDE_FILES
+    external/stacktrace/stack.hpp
+    external/md5/md5.hh
     src/codegen/codegen.h
     src/codegen/codeparser.h
     src/codegen/codewriter.h
@@ -7,47 +9,45 @@ set(wxWEAVER_INCLUDE_FILES
     src/codegen/phpcg.h
     src/codegen/pythoncg.h
     src/codegen/xrccg.h
-    src/dbg_stack_trace/stack.hpp
-    src/md5/md5.hh
     src/model/database.h
     src/model/objectbase.h
     src/model/types.h
     src/model/xrcfilter.h
-    src/rad/codeeditor/codeeditor.h
-    src/rad/cpppanel/cpppanel.h
-    src/rad/dataobject/dataobject.h
-    src/rad/designer/innerframe.h
-    src/rad/designer/menubar.h
-#   src/rad/designer/resizablepanel.h
-    src/rad/designer/visualeditor.h
-    src/rad/designer/visualobj.h
-    src/rad/designer/window_buttons.h
-    src/rad/geninheritclass/geninhertclass.h
-    src/rad/geninheritclass/geninhertclass_gui.h
-    src/rad/inspector/advprops.h
-    src/rad/inspector/objinspect.h
-    src/rad/luapanel/luapanel.h
-    src/rad/objecttree/objecttree.h
-    src/rad/phppanel/phppanel.h
-    src/rad/pythonpanel/pythonpanel.h
-    src/rad/xrcpanel/xrcpanel.h
-    src/rad/xrcpreview/xrcpreview.h
-    src/rad/about.h
-    src/rad/appdata.h
-    src/rad/auibarart.h
-    src/rad/auidockart.h
-    src/rad/auitabart.h
-    src/rad/bitmaps.h
-    src/rad/cmdproc.h
-#   src/rad/customkeys.h
-    src/rad/debugwindow.h
-    src/rad/event.h
-    src/rad/mainframe.h
-    src/rad/manager.h
-    src/rad/menueditor.h
-    src/rad/palette.h
-    src/rad/title.h
-    src/utils/annoyingdialog.h
+    src/gui/panels/codeeditor/codeeditor.h
+    src/gui/panels/codeeditor/plugins/cpp.h
+    src/gui/panels/codeeditor/plugins/lua.h
+    src/gui/panels/codeeditor/plugins/php.h
+    src/gui/panels/codeeditor/plugins/python.h
+    src/gui/panels/codeeditor/plugins/xrc.h
+    src/dataobject.h
+    src/gui/panels/designer/innerframe.h
+    src/gui/panels/designer/menubar.h
+#   src/gui/panels/designer/unused/resizablepanel.h
+    src/gui/panels/designer/visualeditor.h
+    src/gui/panels/designer/visualobj.h
+    src/gui/panels/designer/window_buttons.h
+    src/gui/dialogs/geninheritclass/geninhertclass.h
+    src/gui/dialogs/geninheritclass/geninhertclass_gui.h
+    src/gui/panels/inspector/advprops.h
+    src/gui/panels/inspector/inspector.h
+    src/gui/panels/treeview.h
+    src/gui/dialogs/xrcpreview.h
+    src/gui/dialogs/about.h
+    src/appdata.h
+    src/gui/aui/barart.h
+    src/gui/aui/dockart.h
+    src/gui/aui/tabart.h
+    src/gui/bitmaps.h
+    src/cmdproc.h
+#   src/gui/unused/customkeys.h
+    src/gui/panels/debugwindow.h
+    src/event.h
+    src/gui/mainframe.h
+    src/manager.h
+    src/gui/dialogs/menueditor.h
+    src/gui/panels/palette.h
+    src/gui/panels/title.h
+    src/gui/dialogs/annoying.h
     src/utils/debug.h
     src/utils/defs.h
     src/utils/exception.h
@@ -55,11 +55,11 @@ set(wxWEAVER_INCLUDE_FILES
     src/utils/ipc.h
     src/utils/stringutils.h
     src/utils/typeconv.h
-    src/maingui.h
-    src/pch.h
-    src/rad/geninheritclass/GenInheritedDlg.fbp
+    src/gui/dialogs/geninheritclass/GenInheritedDlg.fbp
 )
 set(wxWEAVER_SOURCE_FILES
+    external/stacktrace/stack.cpp
+    external/md5/md5.cc
     src/codegen/codegen.cpp
     src/codegen/codeparser.cpp
     src/codegen/codewriter.cpp
@@ -68,52 +68,50 @@ set(wxWEAVER_SOURCE_FILES
     src/codegen/phpcg.cpp
     src/codegen/pythoncg.cpp
     src/codegen/xrccg.cpp
-    src/dbg_stack_trace/stack.cpp
-    src/md5/md5.cc
     src/model/database.cpp
     src/model/objectbase.cpp
     src/model/types.cpp
     src/model/xrcfilter.cpp
-    src/rad/codeeditor/codeeditor.cpp
-    src/rad/cpppanel/cpppanel.cpp
-    src/rad/dataobject/dataobject.cpp
-    src/rad/designer/innerframe.cpp
-    src/rad/designer/menubar.cpp
-#   src/rad/designer/resizablepanel.cpp TODO: ???
-    src/rad/designer/visualeditor.cpp
-    src/rad/designer/visualobj.cpp
-    src/rad/geninheritclass/geninhertclass.cpp
-    src/rad/geninheritclass/geninhertclass_gui.cpp
-    src/rad/inspector/advprops.cpp
-    src/rad/inspector/objinspect.cpp
-    src/rad/luapanel/luapanel.cpp
-    src/rad/objecttree/objecttree.cpp
-    src/rad/phppanel/phppanel.cpp
-    src/rad/pythonpanel/pythonpanel.cpp
-    src/rad/xrcpanel/xrcpanel.cpp
-    src/rad/xrcpreview/xrcpreview.cpp
-    src/rad/about.cpp
-    src/rad/appdata.cpp
-    src/rad/auibarart.cpp
-    src/rad/auidockart.cpp
-    src/rad/auitabart.cpp
-    src/rad/bitmaps.cpp
-    src/rad/cmdproc.cpp
-#   src/rad/customkeys.cpp
-    src/rad/debugwindow.cpp
-    src/rad/event.cpp
-    src/rad/mainframe.cpp
-    src/rad/manager.cpp
-    src/rad/menueditor.cpp
-    src/rad/palette.cpp
-    src/rad/title.cpp
-    src/utils/annoyingdialog.cpp
+    src/gui/panels/codeeditor/codeeditor.cpp
+    src/gui/panels/codeeditor/plugins/cpp.cpp
+    src/gui/panels/codeeditor/plugins/lua.cpp
+    src/gui/panels/codeeditor/plugins/php.cpp
+    src/gui/panels/codeeditor/plugins/python.cpp
+    src/gui/panels/codeeditor/plugins/xrc.cpp
+    src/dataobject.cpp
+    src/gui/panels/designer/innerframe.cpp
+    src/gui/panels/designer/menubar.cpp
+#   src/gui/panels/designer/unused/resizablepanel.cpp TODO: ???
+    src/gui/panels/designer/visualeditor.cpp
+    src/gui/panels/designer/visualobj.cpp
+    src/gui/dialogs/geninheritclass/geninhertclass.cpp
+    src/gui/dialogs/geninheritclass/geninhertclass_gui.cpp
+    src/gui/panels/inspector/advprops.cpp
+    src/gui/panels/inspector/inspector.cpp
+    src/gui/panels/treeview.cpp
+    src/gui/dialogs/xrcpreview.cpp
+    src/gui/dialogs/about.cpp
+    src/appdata.cpp
+    src/gui/aui/barart.cpp
+    src/gui/aui/dockart.cpp
+    src/gui/aui/tabart.cpp
+    src/gui/bitmaps.cpp
+    src/cmdproc.cpp
+#   src/gui/unused/customkeys.cpp
+    src/gui/panels/debugwindow.cpp
+    src/event.cpp
+    src/gui/mainframe.cpp
+    src/manager.cpp
+    src/gui/dialogs/menueditor.cpp
+    src/gui/panels/palette.cpp
+    src/gui/panels/title.cpp
+    src/gui/dialogs/annoying.cpp
     src/utils/filetocarray.cpp
     src/utils/ipc.cpp
     src/utils/m_wxweaver.cpp
     src/utils/stringutils.cpp
     src/utils/typeconv.cpp
-    src/maingui.cpp
+    src/wxweaver.cpp
 )
 if(APPLE)
     add_executable(${CMAKE_PROJECT_NAME}
@@ -173,8 +171,9 @@ if(MINGW)
 endif()
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
-    "src"
+    "external"
     "sdk/plugin_interface"
+    "src"
 )
 target_link_libraries(${CMAKE_PROJECT_NAME}
     ${wxWidgets_LIBRARIES}

@@ -2,6 +2,7 @@
     wxWeaver - A GUI Designer Editor for wxWidgets.
     Copyright (C) 2005 José Antonio Hurtado
     Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
+    Copyright (C) 2011-2021 Jefferson González <jgmdev@gmail.com>
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -18,36 +19,29 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "appdata.h"
+#include "debugwindow.h"
 
-#include <wx/html/forcelnk.h>
-#include <wx/html/m_templ.h>
+#include <wx/textctrl.h>
+#include <wx/tokenzr.h>
 
-FORCE_LINK_ME(m_wxweaver)
-
-TAG_HANDLER_BEGIN(wxWeaverVersion, "WXWEAVER-VERSION")
-TAG_HANDLER_PROC(WXUNUSED(tag))
+DebugWindow::DebugWindow(wxWindow* parent)
+    : wxTextCtrl(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize,
+                 wxTE_MULTILINE | wxTE_READONLY | wxTE_LEFT)
 {
-    auto* cell = new wxHtmlWordCell(VERSION, *m_WParser->GetDC());
-    m_WParser->ApplyStateToCell(cell);
-    m_WParser->GetContainer()->InsertCell(cell);
-
-    return false;
+    Bind(wxEVT_COMMAND_TEXT_UPDATED, &DebugWindow::OnTextUpdated, this);
 }
-TAG_HANDLER_END(wxWeaverVersion)
 
-TAG_HANDLER_BEGIN(wxWeaverRevision, "WXWEAVER-REVISION")
-TAG_HANDLER_PROC(WXUNUSED(tag))
+void DebugWindow::OnTextUpdated(wxCommandEvent& event)
 {
-    auto* cell = new wxHtmlWordCell(REVISION, *m_WParser->GetDC());
-    m_WParser->ApplyStateToCell(cell);
-    m_WParser->GetContainer()->InsertCell(cell);
+    wxString msg = event.GetString();
 
-    return false;
+    wxArrayString lines = wxStringTokenize(msg, "\n");
+    for (size_t i = 0; i < lines.GetCount(); i++) {
+        if (lines.Item(i).Contains(_("Error: ")))
+            SetDefaultStyle(wxTextAttr(wxColour(210, 0, 0)));
+        else if (lines.Item(i).Contains(_("Warning: ")))
+            SetDefaultStyle(wxTextAttr(wxColour(255, 150, 0)));
+        else
+            SetDefaultStyle(wxTextAttr(wxColour(0, 150, 0)));
+    }
 }
-TAG_HANDLER_END(wxWeaverRevision)
-
-TAGS_MODULE_BEGIN(wxWeaver)
-TAGS_MODULE_ADD(wxWeaverVersion)
-TAGS_MODULE_ADD(wxWeaverRevision)
-TAGS_MODULE_END(wxWeaver)

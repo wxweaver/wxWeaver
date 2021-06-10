@@ -21,7 +21,7 @@
 #include "codegen/codegen.h"
 
 #include "model/objectbase.h"
-#include "rad/appdata.h"
+#include "appdata.h"
 #include "utils/exception.h"
 
 #include <wx/tokenzr.h>

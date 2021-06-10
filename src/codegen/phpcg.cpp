@@ -24,7 +24,7 @@
 #include "codewriter.h"
 #include "utils/typeconv.h"
 #include "utils/debug.h"
-#include "rad/appdata.h"
+#include "appdata.h"
 #include "model/objectbase.h"
 #include "utils/exception.h"
 

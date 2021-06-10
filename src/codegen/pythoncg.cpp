@@ -22,7 +22,7 @@
 #include "codegen/pythoncg.h"
 
 #include "model/objectbase.h"
-#include "rad/appdata.h"
+#include "appdata.h"
 #include "utils/debug.h"
 #include "utils/typeconv.h"
 #include "utils/exception.h"

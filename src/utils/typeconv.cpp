@@ -19,9 +19,9 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 #include "utils/typeconv.h"
-#include "rad/appdata.h"
-#include "rad/bitmaps.h"
-#include "rad/inspector/objinspect.h"
+#include "appdata.h"
+#include "gui/bitmaps.h"
+#include "gui/panels/inspector/inspector.h"
 
 #include <wx/artprov.h>
 #include <wx/filesys.h>

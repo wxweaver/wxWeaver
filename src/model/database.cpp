@@ -20,7 +20,7 @@
 */
 #include "model/database.h"
 
-#include "rad/bitmaps.h"
+#include "gui/bitmaps.h"
 #include "utils/debug.h"
 #include "utils/stringutils.h"
 #include "utils/typeconv.h"

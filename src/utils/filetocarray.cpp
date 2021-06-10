@@ -20,7 +20,7 @@
 */
 #include "utils/filetocarray.h"
 
-#include "rad/appdata.h"
+#include "appdata.h"
 #include "model/objectbase.h"
 #include "codegen/codewriter.h"
 #include "codegen/cppcg.h"
