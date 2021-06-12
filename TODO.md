@@ -29,21 +29,39 @@
   (toolSeparator -> tool_separator)
 - Trailing newlines in codegen templates (e.g. additional plugin)
 - Deal with `wxversion` XML property
-- wxImageList
-    - Do some refactor to make work the XRC import,
-      see `src/model/xrcfilter.cpp` line 162
-    - Missing code generation
 
 ## Controls
 
 - Check the controls returned by plugins with `OnCreated()` and its log errors.
 - Adding an expanded wxButton doesn't updates until hovering with mouse in
   XRC preview.
+- Controls seems not to be in sync with the treeview, sizers are not highlighted
+  in red as usual, in some circumstances trying to make an operation on a widget
+  ends to switch to the parent, might cause segfaults.
 
 - Check components with:
-    - no `public` access specifier
-    - `CleanUp()` disabled
-    - exceptions "handling"
+    - No `public` access specifier.
+    - `CleanUp()` disabled.
+    - Exceptions "handling".
+
+- wxBookCtrls
+    - Rename `select` property same as wxXRC `selected` and update the project.
+      format
+    - Reset to 0 all other `select` pages when setting to 1 one of them.
+
+- wxImageList
+    - Refactor to make work the XRC import, see `src/model/xrcfilter.cpp` line 162.
+    - Missing code generation.
+
+- wxSizers
+    - wxBagGridSizer layout doesn't work correctly.
+    - Widgets are not added.
+
+- wxStyledTextCtrl
+    - Proper use of StyleClearAll().
+    - View always/only whitespaces for indenting doesn't work (Editor settings).
+
+- wxWebView
 
 - wxWizard
     - Add a wxWizard 2-steps creation (with Create() function) in Python code to add
@@ -53,10 +71,3 @@
     - Only wxWizardPageSimple class is supported: we need a change to customcontrol
     in additional component plugin (change it from widget type to a standalone)
     in order to use it to create custom wxWizardPages.
-
-- wxBookCtrls
-    - rename `select` property same as wxXRC `selected` and update the project
-      format
-    - reset to 0 all other `select` pages when setting to 1 one of them
-
-- wxWebView
