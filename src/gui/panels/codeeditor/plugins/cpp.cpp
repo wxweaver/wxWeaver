@@ -18,59 +18,45 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "gui/panels/codeeditor/plugins/cpp.h"
-
-#include "appdata.h"
-#include "gui/aui/tabart.h"
-#include "gui/bitmaps.h"
-#include "gui/panels/codeeditor/codeeditor.h"
-#include "event.h"
-#include "utils/typeconv.h"
-#include "utils/exception.h"
-#include "model/objectbase.h"
 #include "codegen/codewriter.h"
 #include "codegen/cppcg.h"
+#include "gui/aui/tabart.h"
+#include "gui/dialogs/preferences.h"
+#include "gui/panels/codeeditor/codeeditor.h"
+#include "gui/panels/codeeditor/plugins/cpp.h"
+#include "gui/bitmaps.h"
+#include "model/objectbase.h"
+#include "utils/exception.h"
+#include "utils/typeconv.h"
+#include "appdata.h"
+#include "event.h"
+#include "settings.h"
 
 #include <wx/fdrepdlg.h>
 #include <wx/stc/stc.h>
 #include <wx/aui/auibook.h>
 
-#if 0
-BEGIN_EVENT_TABLE(CppPanel, wxPanel)
-EVT_WVR_CODE_GENERATION(CppPanel::OnCodeGeneration)
-EVT_WVR_PROJECT_REFRESH(CppPanel::OnProjectRefresh)
-EVT_WVR_PROPERTY_MODIFIED(CppPanel::OnPropertyModified)
-EVT_WVR_OBJECT_CREATED(CppPanel::OnObjectChange)
-EVT_WVR_OBJECT_REMOVED(CppPanel::OnObjectChange)
-EVT_WVR_OBJECT_SELECTED(CppPanel::OnObjectChange)
-EVT_WVR_EVENT_HANDLER_MODIFIED(CppPanel::OnEventHandlerModified)
-
-EVT_FIND(wxID_ANY, CppPanel::OnFind)
-EVT_FIND_NEXT(wxID_ANY, CppPanel::OnFind)
-END_EVENT_TABLE()
-#endif
-
 CppPanel::CppPanel(wxWindow* parent, int id)
     : wxPanel(parent, id)
     , m_notebook(new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition,
                                    wxDefaultSize, wxAUI_NB_TOP))
-    , m_cppPanel(new CodeEditor(m_notebook, wxID_ANY))
-    , m_hPanel(new CodeEditor(m_notebook, wxID_ANY))
-    , m_hCW(PTCCodeWriter(new TCCodeWriter(m_hPanel->GetTextCtrl())))
-    , m_cppCW(PTCCodeWriter(new TCCodeWriter(m_cppPanel->GetTextCtrl())))
+    , m_editorCpp(new CodeEditor(m_notebook, wxID_ANY))
+    , m_editorH(new CodeEditor(m_notebook, wxID_ANY))
+    , m_codeWriterH(PTCCodeWriter(new TCCodeWriter(m_editorH->GetTextCtrl())))
+    , m_codeWriterCpp(PTCCodeWriter(new TCCodeWriter(m_editorCpp->GetTextCtrl())))
 {
     AppData()->AddHandler(this->GetEventHandler());
     wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
     SetSizer(topSizer);
 
-    InitStyledTextCtrl(m_cppPanel->GetTextCtrl());
-    InitStyledTextCtrl(m_hPanel->GetTextCtrl());
+    InitStyledTextCtrl(m_editorCpp->GetTextCtrl());
+    InitStyledTextCtrl(m_editorH->GetTextCtrl());
 
 #if wxVERSION_NUMBER < 3140
     m_notebook->SetArtProvider(new AuiTabArt());
 #endif
-    m_notebook->AddPage(m_cppPanel, "cpp", false, 0);
-    m_notebook->AddPage(m_hPanel, "h", false, 1);
+    m_notebook->AddPage(m_editorCpp, "cpp", false, 0);
+    m_notebook->AddPage(m_editorH, "h", false, 1);
     m_notebook->SetPageBitmap(0, AppBitmaps::GetBitmap("cpp", 16));
     m_notebook->SetPageBitmap(1, AppBitmaps::GetBitmap("h", 16));
 
@@ -117,66 +103,6 @@ void CppPanel::InitStyledTextCtrl(wxStyledTextCtrl* stc)
         1,
         "bool char char16_t char32_t char8_t double false float int long short"
         "struct true unsigned wchar_t");
-
-#ifdef __WXGTK__
-    // Debe haber un bug en wxGTK ya que la familia wxMODERN no es de ancho fijo.
-    wxFont font(8, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    font.SetFaceName("Monospace");
-#else
-    wxFont font(10, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-#endif
-    bool darkMode = AppData()->IsDarkMode();
-    if (darkMode) {
-        stc->StyleSetBackground(wxSTC_STYLE_DEFAULT, wxColour(30, 30, 30));
-        stc->StyleSetForeground(wxSTC_STYLE_DEFAULT, wxColour(170, 180, 190));
-    } else {
-        stc->StyleSetBackground(wxSTC_STYLE_DEFAULT,
-                                wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
-        stc->StyleSetForeground(wxSTC_STYLE_DEFAULT,
-                                wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-    }
-    stc->StyleSetFont(wxSTC_STYLE_DEFAULT, font);
-    stc->StyleClearAll();
-    stc->StyleSetBold(wxSTC_C_WORD, true);
-    if (!darkMode) {
-        stc->StyleSetForeground(wxSTC_C_WORD, wxColour(0, 0, 128));
-        stc->StyleSetForeground(wxSTC_C_STRING, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_STRINGEOL, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_PREPROCESSOR, wxColour(0, 0, 80));
-        stc->StyleSetForeground(wxSTC_C_COMMENT, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINE, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_COMMENTDOC, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINEDOC, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_NUMBER, wxColour(0, 0, 128));
-        stc->SetSelBackground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT));
-        stc->SetSelForeground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHTTEXT));
-    } else {
-        stc->StyleSetForeground(wxSTC_C_WORD, wxColour(200, 120, 230));
-        stc->StyleSetForeground(wxSTC_C_WORD2, wxColour(235, 100, 115));
-        stc->StyleSetForeground(wxSTC_C_GLOBALCLASS, wxColour(235, 100, 115));
-        //stc->StyleSetForeground(wxSTC_C_IDENTIFIER, wxColour(90, 180, 250));
-        stc->StyleSetForeground(wxSTC_C_CHARACTER, wxColour(150, 200, 120));
-        stc->StyleSetForeground(wxSTC_C_STRING, wxColour(150, 200, 120));
-        stc->StyleSetForeground(wxSTC_C_STRINGEOL, wxColour(150, 200, 120));
-        stc->StyleSetForeground(wxSTC_C_PREPROCESSOR, wxColour(200, 120, 230));
-        stc->StyleSetForeground(wxSTC_C_PREPROCESSORCOMMENT, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_COMMENT, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINE, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_COMMENTDOC, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINEDOC, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_NUMBER, wxColour(220, 160, 100));
-        stc->SetSelBackground(true, wxColour(45, 50, 60));
-    }
-    stc->SetCaretForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-    stc->SetCaretWidth(2);
-    stc->SetReadOnly(true);
-
-    // TODO: Make this configurable
-    stc->SetUseTabs(false);
-    stc->SetTabWidth(4);
-    stc->SetTabIndents(true);
-    stc->SetBackSpaceUnIndents(true);
-    stc->SetIndent(4);
 }
 
 void CppPanel::OnFind(wxFindDialogEvent& event)
@@ -193,7 +119,7 @@ void CppPanel::OnFind(wxFindDialogEvent& event)
     if (languageText != "C++")
         return;
 
-    wxAuiNotebook* notebook = wxDynamicCast(m_cppPanel->GetParent(), wxAuiNotebook);
+    wxAuiNotebook* notebook = wxDynamicCast(m_editorCpp->GetParent(), wxAuiNotebook);
     if (!notebook)
         return;
 
@@ -203,9 +129,9 @@ void CppPanel::OnFind(wxFindDialogEvent& event)
 
     wxString text = notebook->GetPageText(selection);
     if (text == "cpp")
-        m_cppPanel->GetEventHandler()->ProcessEvent(event);
+        m_editorCpp->GetEventHandler()->ProcessEvent(event);
     else if (text == "h")
-        m_hPanel->GetEventHandler()->ProcessEvent(event);
+        m_editorH->GetEventHandler()->ProcessEvent(event);
 }
 
 void CppPanel::OnPropertyModified(wxWeaverPropertyEvent& event)
@@ -318,13 +244,13 @@ void CppPanel::OnCodeGeneration(wxWeaverEvent& event)
         if (pFirstID)
             codegen.SetFirstID(firstID);
 
-        codegen.SetHeaderWriter(m_hCW);
-        codegen.SetSourceWriter(m_cppCW);
+        codegen.SetHeaderWriter(m_codeWriterH);
+        codegen.SetSourceWriter(m_codeWriterCpp);
 
         Freeze();
 
-        wxStyledTextCtrl* cppEditor = m_cppPanel->GetTextCtrl();
-        wxStyledTextCtrl* hEditor = m_hPanel->GetTextCtrl();
+        wxStyledTextCtrl* cppEditor = m_editorCpp->GetTextCtrl();
+        wxStyledTextCtrl* hEditor = m_editorH->GetTextCtrl();
         cppEditor->SetReadOnly(false);
         int cppLine = cppEditor->GetFirstVisibleLine()
             + cppEditor->LinesOnScreen() - 1;

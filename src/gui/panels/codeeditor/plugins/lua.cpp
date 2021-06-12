@@ -19,46 +19,31 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "gui/panels/codeeditor/plugins/lua.h"
-
-#include "appdata.h"
-#include "gui/panels/codeeditor/codeeditor.h"
-#include "event.h"
-#include "utils/typeconv.h"
-#include "utils/exception.h"
-#include "model/objectbase.h"
 #include "codegen/codewriter.h"
 #include "codegen/luacg.h"
+#include "gui/panels/codeeditor/codeeditor.h"
+#include "gui/panels/codeeditor/plugins/lua.h"
+#include "model/objectbase.h"
+#include "utils/exception.h"
+#include "utils/typeconv.h"
+#include "appdata.h"
+#include "event.h"
 
 #include <wx/fdrepdlg.h>
 #include <wx/stc/stc.h>
 
-#if 0
-BEGIN_EVENT_TABLE(LuaPanel, wxPanel)
-EVT_WVR_CODE_GENERATION(LuaPanel::OnCodeGeneration)
-EVT_WVR_PROJECT_REFRESH(LuaPanel::OnProjectRefresh)
-EVT_WVR_PROPERTY_MODIFIED(LuaPanel::OnPropertyModified)
-EVT_WVR_OBJECT_CREATED(LuaPanel::OnObjectChange)
-EVT_WVR_OBJECT_REMOVED(LuaPanel::OnObjectChange)
-EVT_WVR_OBJECT_SELECTED(LuaPanel::OnObjectChange)
-EVT_WVR_EVENT_HANDLER_MODIFIED(LuaPanel::OnEventHandlerModified)
-EVT_FIND(wxID_ANY, LuaPanel::OnFind)
-EVT_FIND_NEXT(wxID_ANY, LuaPanel::OnFind)
-END_EVENT_TABLE()
-#endif
-
 LuaPanel::LuaPanel(wxWindow* parent, int id)
     : wxPanel(parent, id)
-    , m_luaPanel(new CodeEditor(this, wxID_ANY))
-    , m_luaCW(PTCCodeWriter(new TCCodeWriter(m_luaPanel->GetTextCtrl())))
+    , m_editor(new CodeEditor(this, wxID_ANY))
+    , m_codeWriter(PTCCodeWriter(new TCCodeWriter(m_editor->GetTextCtrl())))
 {
     AppData()->AddHandler(this->GetEventHandler());
     wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
     SetSizer(topSizer);
 
-    InitStyledTextCtrl(m_luaPanel->GetTextCtrl());
+    InitStyledTextCtrl(m_editor->GetTextCtrl());
 
-    topSizer->Add(m_luaPanel, 1, wxEXPAND, 0);
+    topSizer->Add(m_editor, 1, wxEXPAND, 0);
     topSizer->Fit(this);
     topSizer->Layout();
 
@@ -78,7 +63,6 @@ LuaPanel::LuaPanel(wxWindow* parent, int id)
 
 LuaPanel::~LuaPanel()
 {
-    //delete m_icons;
     AppData()->RemoveHandler(this->GetEventHandler());
 }
 
@@ -90,69 +74,11 @@ void LuaPanel::InitStyledTextCtrl(wxStyledTextCtrl* stc)
         "and assert break class continue def del elif else "
         "except exec finally for from global if import in "
         "is lambda not or pass print raise return try while");
-#ifdef __WXGTK__
-    wxFont font(8, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    font.SetFaceName("Monospace");
-#else
-    wxFont font(10, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-#endif
-    bool darkMode = AppData()->IsDarkMode();
-    if (darkMode) {
-        stc->StyleSetBackground(wxSTC_STYLE_DEFAULT, wxColour(30, 30, 30));
-        stc->StyleSetForeground(wxSTC_STYLE_DEFAULT, wxColour(170, 180, 190));
-    } else {
-        stc->StyleSetBackground(wxSTC_STYLE_DEFAULT,
-                                wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
-        stc->StyleSetForeground(wxSTC_STYLE_DEFAULT,
-                                wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-    }
-    stc->StyleSetFont(wxSTC_STYLE_DEFAULT, font);
-    stc->StyleClearAll();
-    stc->StyleSetBold(wxSTC_C_WORD, true);
-    if (!darkMode) {
-        stc->StyleSetForeground(wxSTC_C_WORD, wxColour(0, 0, 128));
-        stc->StyleSetForeground(wxSTC_C_STRING, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_STRINGEOL, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_PREPROCESSOR, wxColour(0, 0, 80));
-        stc->StyleSetForeground(wxSTC_C_COMMENT, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINE, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_COMMENTDOC, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINEDOC, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_NUMBER, wxColour(0, 0, 128));
-        stc->SetSelBackground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT));
-        stc->SetSelForeground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHTTEXT));
-    } else {
-        stc->StyleSetForeground(wxSTC_C_WORD, wxColour(200, 120, 230));
-        stc->StyleSetForeground(wxSTC_C_WORD2, wxColour(235, 100, 115));
-        stc->StyleSetForeground(wxSTC_C_GLOBALCLASS, wxColour(235, 100, 115));
-        //stc->StyleSetForeground(wxSTC_C_IDENTIFIER, wxColour(90, 180, 250));
-        stc->StyleSetForeground(wxSTC_C_CHARACTER, wxColour(150, 200, 120));
-        stc->StyleSetForeground(wxSTC_C_STRING, wxColour(150, 200, 120));
-        stc->StyleSetForeground(wxSTC_C_STRINGEOL, wxColour(150, 200, 120));
-        stc->StyleSetForeground(wxSTC_C_PREPROCESSOR, wxColour(200, 120, 230));
-        stc->StyleSetForeground(wxSTC_C_PREPROCESSORCOMMENT, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_COMMENT, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINE, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_COMMENTDOC, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINEDOC, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_NUMBER, wxColour(220, 160, 100));
-        stc->SetSelBackground(true, wxColour(45, 50, 60));
-    }
-    stc->SetCaretForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-    stc->SetCaretWidth(2);
-    stc->SetReadOnly(true);
-
-    // TODO: Make this configurable
-    stc->SetUseTabs(false);
-    stc->SetTabWidth(4);
-    stc->SetTabIndents(true);
-    stc->SetBackSpaceUnIndents(true);
-    stc->SetIndent(4);
 }
 
 void LuaPanel::OnFind(wxFindDialogEvent& event)
 {
-    m_luaPanel->GetEventHandler()->ProcessEvent(event);
+    m_editor->GetEventHandler()->ProcessEvent(event);
 }
 
 void LuaPanel::OnPropertyModified(wxWeaverPropertyEvent& event)
@@ -236,8 +162,7 @@ void LuaPanel::OnCodeGeneration(wxWeaverEvent& event)
     if (pFirstID)
         firstID = pFirstID->GetValueAsInteger();
 
-    // Get the file name
-    wxString file;
+    wxString file; // Get the file name
     PProperty pfile = project->GetProperty("file");
     if (pfile)
         file = pfile->GetValue();
@@ -251,8 +176,7 @@ void LuaPanel::OnCodeGeneration(wxWeaverEvent& event)
     if (pRelPath)
         useRelativePath = (pRelPath->GetValueAsInteger() ? true : false);
 
-    // Get the output path
-    wxString path;
+    wxString path; // Get the output path
     try {
         path = AppData()->GetOutputPath();
     } catch (wxWeaverException& ex) {
@@ -262,19 +186,18 @@ void LuaPanel::OnCodeGeneration(wxWeaverEvent& event)
             return;
         }
     }
-    // Generate code in the panel
-    if (doPanel) {
+    if (doPanel) { // Generate code in the panel
         LuaCodeGenerator codegen;
         codegen.UseRelativePath(useRelativePath, path);
 
         if (pFirstID)
             codegen.SetFirstID(firstID);
 
-        codegen.SetSourceWriter(m_luaCW);
+        codegen.SetSourceWriter(m_codeWriter);
 
         Freeze();
 
-        wxStyledTextCtrl* luaEditor = m_luaPanel->GetTextCtrl();
+        wxStyledTextCtrl* luaEditor = m_editor->GetTextCtrl();
         luaEditor->SetReadOnly(false);
         int luaLine = luaEditor->GetFirstVisibleLine() + luaEditor->LinesOnScreen() - 1;
         int luaXOffset = luaEditor->GetXOffset();
@@ -289,9 +212,7 @@ void LuaPanel::OnCodeGeneration(wxWeaverEvent& event)
 
         Thaw();
     }
-
-    // Generate code in the file
-    if (doFile) {
+    if (doFile) { // Generate code in the file
         try {
             LuaCodeGenerator codegen;
             codegen.UseRelativePath(useRelativePath, path);
@@ -314,6 +235,7 @@ void LuaPanel::OnCodeGeneration(wxWeaverEvent& event)
                 useUtf8 = (pUseUtf8->GetValueAsString() != "ANSI");
 
             PCodeWriter lua_cw(new FileCodeWriter(path + file + ".lua", useMicrosoftBOM, useUtf8));
+
             codegen.SetSourceWriter(lua_cw);
             codegen.GenerateCode(project);
             wxLogStatus("Code generated on \'%s\'.", path.c_str());

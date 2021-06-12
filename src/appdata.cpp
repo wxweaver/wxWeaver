@@ -2041,6 +2041,11 @@ void ApplicationData::GenerateCode(bool panelOnly, bool noDelayed)
     NotifyCodeGeneration(panelOnly, !noDelayed);
 }
 
+void ApplicationData::NotifyEditorsPreferences(wxWeaverPrefsEditorEvent& event)
+{
+    NotifyEvent(event);
+}
+
 void ApplicationData::GenerateInheritedClass(PObjectBase form, wxString className,
                                              wxString path, wxString file)
 {

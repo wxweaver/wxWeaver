@@ -58,8 +58,5 @@
     - rename `select` property same as wxXRC `selected` and update the project
       format
     - reset to 0 all other `select` pages when setting to 1 one of them
-    - wxTreebook and wxToolbook once fixed wxImageList
-    - wxAuiNotebook broken in XRC (wx 3.0.5.1)
 
 - wxWebView
-- Make a common base class for codeeditor panels

@@ -497,6 +497,8 @@ bool LuaCodeGenerator::GenerateCode(PObjectBase project)
         "--[[\n"
         "    Lua code generated with wxWeaver (version %s%s " __DATE__ ")\n"
         "    https://wxweaver.github.io/\n"
+        "\n"
+        "    PLEASE DO *NOT* EDIT THIS FILE!\n"
         "--]]",
         VERSION, REVISION);
 

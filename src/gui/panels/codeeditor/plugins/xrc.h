@@ -21,29 +21,33 @@
 #pragma once
 
 #include "utils/defs.h"
-#include <wx/stc/stc.h>
+
 #include <wx/panel.h>
 
 class CodeEditor;
+
 class wxWeaverEvent;
 class wxWeaverObjectEvent;
 class wxWeaverPropertyEvent;
+
+class wxStyledTextCtrl;
 class wxFindDialogEvent;
 
 class XrcPanel : public wxPanel {
 public:
-    XrcPanel(wxWindow* parent, int id);
+    XrcPanel(wxWindow*, int);
     ~XrcPanel() override;
 
-    void OnPropertyModified(wxWeaverPropertyEvent& event);
-    void OnProjectRefresh(wxWeaverEvent& event);
-    void OnCodeGeneration(wxWeaverEvent& event);
-    void OnObjectChange(wxWeaverObjectEvent& event);
-    void OnFind(wxFindDialogEvent& event);
+    void OnCodeGeneration(wxWeaverEvent&);
+    void OnProjectRefresh(wxWeaverEvent&);
+    void OnObjectChange(wxWeaverObjectEvent&);
+    void OnPropertyModified(wxWeaverPropertyEvent&);
+
+    void OnFind(wxFindDialogEvent&);
 
 private:
-    void InitStyledTextCtrl(wxStyledTextCtrl* stc);
+    void InitStyledTextCtrl(wxStyledTextCtrl*);
 
-    CodeEditor* m_xrcPanel;
+    CodeEditor* m_editor;
     PTCCodeWriter m_codeWriter;
 };

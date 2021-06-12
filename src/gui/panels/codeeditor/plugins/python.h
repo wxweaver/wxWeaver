@@ -22,39 +22,35 @@
 #pragma once
 
 #include "utils/defs.h"
+
 #include <wx/panel.h>
 
 class CodeEditor;
 
+class wxWeaverEvent;
+class wxWeaverObjectEvent;
+class wxWeaverPropertyEvent;
+class wxWeaverEventHandlerEvent;
+
 class wxStyledTextCtrl;
 class wxFindDialogEvent;
 
-class wxWeaverEvent;
-class wxWeaverPropertyEvent;
-class wxWeaverObjectEvent;
-class wxWeaverEventHandlerEvent;
-
 class PythonPanel : public wxPanel {
 public:
-    PythonPanel(wxWindow* parent, int id);
-    PythonPanel(const PythonPanel&) = delete;
+    PythonPanel(wxWindow*, int);
     ~PythonPanel() override;
 
-    PythonPanel& operator=(const PythonPanel&) = delete;
-    PythonPanel(PythonPanel&&) = delete;
-    PythonPanel& operator=(PythonPanel&&) = delete;
+    void OnCodeGeneration(wxWeaverEvent&);
+    void OnProjectRefresh(wxWeaverEvent&);
+    void OnObjectChange(wxWeaverObjectEvent&);
+    void OnPropertyModified(wxWeaverPropertyEvent&);
+    void OnEventHandlerModified(wxWeaverEventHandlerEvent&);
 
-    void OnPropertyModified(wxWeaverPropertyEvent& event);
-    void OnProjectRefresh(wxWeaverEvent& event);
-    void OnCodeGeneration(wxWeaverEvent& event);
-    void OnObjectChange(wxWeaverObjectEvent& event);
-    void OnEventHandlerModified(wxWeaverEventHandlerEvent& event);
-
-    void OnFind(wxFindDialogEvent& event);
+    void OnFind(wxFindDialogEvent&);
 
 private:
-    void InitStyledTextCtrl(wxStyledTextCtrl* stc);
+    void InitStyledTextCtrl(wxStyledTextCtrl*);
 
-    CodeEditor* m_pythonPanel;
-    PTCCodeWriter m_pythonCW;
+    CodeEditor* m_editor;
+    PTCCodeWriter m_codeWriter;
 };

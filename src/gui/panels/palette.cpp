@@ -104,7 +104,7 @@ void Palette::SaveSettings()
 
         pageOrder.append(m_notebook->GetPageText(i));
     }
-    config->Write("/MainWindow/Palette/PluginTabsOrder", pageOrder);
+    config->Write("/Palette/PluginTabsOrder", pageOrder);
 }
 
 void Palette::Create()
@@ -129,7 +129,7 @@ void Palette::Create()
     wxConfigBase* config = wxConfigBase::Get();
     wxStringTokenizer pageOrder(
         config->Read(
-            "/MainWindow/Palette/PluginTabsOrder",
+            "/Palette/PluginTabsOrder",
             "Forms,Layout,Common,Additional,Containers,Bars,Data,Ribbon"),
         ",");
 

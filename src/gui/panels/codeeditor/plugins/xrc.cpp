@@ -18,45 +18,33 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "gui/panels/codeeditor/plugins/xrc.h"
 
 #include "codegen/codewriter.h"
 #include "codegen/xrccg.h"
-#include "model/objectbase.h"
-#include "utils/typeconv.h"
-#include "utils/exception.h"
-#include "appdata.h"
 #include "gui/panels/codeeditor/codeeditor.h"
+#include "gui/panels/codeeditor/plugins/xrc.h"
+#include "model/objectbase.h"
+#include "utils/exception.h"
+#include "utils/typeconv.h"
+#include "appdata.h"
 #include "event.h"
 
 #include <wx/fdrepdlg.h>
 #include <wx/aui/auibook.h>
-
-#if 0
-BEGIN_EVENT_TABLE(XrcPanel, wxPanel)
-EVT_WVR_CODE_GENERATION(XrcPanel::OnCodeGeneration)
-EVT_WVR_PROJECT_REFRESH(XrcPanel::OnProjectRefresh)
-EVT_WVR_PROPERTY_MODIFIED(XrcPanel::OnPropertyModified)
-EVT_WVR_OBJECT_CREATED(XrcPanel::OnObjectChange)
-EVT_WVR_OBJECT_REMOVED(XrcPanel::OnObjectChange)
-EVT_WVR_OBJECT_SELECTED(XrcPanel::OnObjectChange)
-EVT_FIND(wxID_ANY, XrcPanel::OnFind)
-EVT_FIND_NEXT(wxID_ANY, XrcPanel::OnFind)
-END_EVENT_TABLE()
-#endif
+#include <wx/stc/stc.h>
 
 XrcPanel::XrcPanel(wxWindow* parent, int id)
     : wxPanel(parent, id)
-    , m_xrcPanel(new CodeEditor(this, wxID_ANY))
-    , m_codeWriter(PTCCodeWriter(new TCCodeWriter(m_xrcPanel->GetTextCtrl())))
+    , m_editor(new CodeEditor(this, wxID_ANY))
+    , m_codeWriter(PTCCodeWriter(new TCCodeWriter(m_editor->GetTextCtrl())))
 {
     AppData()->AddHandler(this->GetEventHandler());
     wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
     SetSizer(topSizer);
 
-    InitStyledTextCtrl(m_xrcPanel->GetTextCtrl());
+    InitStyledTextCtrl(m_editor->GetTextCtrl());
 
-    topSizer->Add(m_xrcPanel, 1, wxEXPAND, 0);
+    topSizer->Add(m_editor, 1, wxEXPAND, 0);
     topSizer->Fit(this);
     topSizer->Layout();
 
@@ -81,44 +69,6 @@ XrcPanel::~XrcPanel()
 void XrcPanel::InitStyledTextCtrl(wxStyledTextCtrl* stc)
 {
     stc->SetLexer(wxSTC_LEX_XML);
-#ifdef __WXGTK__
-    // Debe haber un bug en wxGTK ya que la familia wxMODERN no es de ancho fijo.
-    wxFont font(8, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    font.SetFaceName("Monospace");
-#else
-    wxFont font(10, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-#endif
-    bool darkMode = AppData()->IsDarkMode();
-    if (darkMode) {
-        stc->StyleSetBackground(wxSTC_STYLE_DEFAULT, wxColour(30, 30, 30));
-        stc->StyleSetForeground(wxSTC_STYLE_DEFAULT, wxColour(170, 180, 190));
-    } else {
-        stc->StyleSetBackground(wxSTC_STYLE_DEFAULT,
-                                wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
-        stc->StyleSetForeground(wxSTC_STYLE_DEFAULT,
-                                wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-    }
-    stc->StyleSetFont(wxSTC_STYLE_DEFAULT, font);
-    stc->StyleClearAll();
-    if (!AppData()->IsDarkMode()) {
-        stc->StyleSetForeground(wxSTC_H_DOUBLESTRING, *wxRED);
-        stc->StyleSetForeground(wxSTC_H_TAG, wxColour(0, 0, 128));
-        stc->StyleSetForeground(wxSTC_H_ATTRIBUTE, wxColour(128, 0, 128));
-    } else {
-        stc->StyleSetForeground(wxSTC_H_DOUBLESTRING, wxColour(23, 198, 163));
-        stc->StyleSetForeground(wxSTC_H_TAG, wxColour(18, 144, 195));
-        stc->StyleSetForeground(wxSTC_H_ATTRIBUTE, wxColour(221, 40, 103));
-    }
-    stc->SetCaretForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-    stc->SetCaretWidth(2);
-    stc->SetReadOnly(true);
-
-    // TODO: Make this configurable
-    stc->SetUseTabs(false);
-    stc->SetTabWidth(4);
-    stc->SetTabIndents(true);
-    stc->SetBackSpaceUnIndents(true);
-    stc->SetIndent(4);
 }
 
 void XrcPanel::OnFind(wxFindDialogEvent& event)
@@ -133,7 +83,7 @@ void XrcPanel::OnFind(wxFindDialogEvent& event)
 
     wxString text = notebook->GetPageText(selection);
     if (text == "XRC")
-        m_xrcPanel->GetEventHandler()->ProcessEvent(event);
+        m_editor->GetEventHandler()->ProcessEvent(event);
 }
 
 void XrcPanel::OnPropertyModified(wxWeaverPropertyEvent& event)
@@ -182,7 +132,7 @@ void XrcPanel::OnCodeGeneration(wxWeaverEvent& event)
 
         Freeze();
 
-        wxStyledTextCtrl* editor = m_xrcPanel->GetTextCtrl();
+        wxStyledTextCtrl* editor = m_editor->GetTextCtrl();
 
         editor->SetReadOnly(false);
 

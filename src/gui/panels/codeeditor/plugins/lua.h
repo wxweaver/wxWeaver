@@ -27,30 +27,30 @@
 
 class CodeEditor;
 
+class wxWeaverEvent;
+class wxWeaverObjectEvent;
+class wxWeaverPropertyEvent;
+class wxWeaverEventHandlerEvent;
+
 class wxStyledTextCtrl;
 class wxFindDialogEvent;
 
-class wxWeaverEvent;
-class wxWeaverPropertyEvent;
-class wxWeaverObjectEvent;
-class wxWeaverEventHandlerEvent;
-
 class LuaPanel : public wxPanel {
 public:
-    LuaPanel(wxWindow* parent, int id);
+    LuaPanel(wxWindow*, int);
     ~LuaPanel() override;
 
-    void OnPropertyModified(wxWeaverPropertyEvent& event);
-    void OnProjectRefresh(wxWeaverEvent& event);
-    void OnCodeGeneration(wxWeaverEvent& event);
-    void OnObjectChange(wxWeaverObjectEvent& event);
-    void OnEventHandlerModified(wxWeaverEventHandlerEvent& event);
+    void OnCodeGeneration(wxWeaverEvent&);
+    void OnProjectRefresh(wxWeaverEvent&);
+    void OnObjectChange(wxWeaverObjectEvent&);
+    void OnPropertyModified(wxWeaverPropertyEvent&);
+    void OnEventHandlerModified(wxWeaverEventHandlerEvent&);
 
-    void OnFind(wxFindDialogEvent& event);
+    void OnFind(wxFindDialogEvent&);
 
 private:
-    void InitStyledTextCtrl(wxStyledTextCtrl* stc);
+    void InitStyledTextCtrl(wxStyledTextCtrl*);
 
-    CodeEditor* m_luaPanel;
-    PTCCodeWriter m_luaCW;
+    CodeEditor* m_editor;
+    PTCCodeWriter m_codeWriter;
 };

@@ -9,45 +9,42 @@ set(wxWEAVER_INCLUDE_FILES
     src/codegen/phpcg.h
     src/codegen/pythoncg.h
     src/codegen/xrccg.h
-    src/model/database.h
-    src/model/objectbase.h
-    src/model/types.h
-    src/model/xrcfilter.h
+    src/gui/aui/barart.h
+    src/gui/aui/dockart.h
+    src/gui/aui/tabart.h
+    src/gui/dialogs/about.h
+    src/gui/dialogs/annoying.h
+    src/gui/dialogs/geninheritclass/geninhertclass.h
+    src/gui/dialogs/geninheritclass/geninhertclass_gui.h
+    src/gui/dialogs/geninheritclass/GenInheritedDlg.fbp
+    src/gui/dialogs/menueditor.h
+    src/gui/dialogs/preferences.h
+    src/gui/dialogs/xrcpreview.h
     src/gui/panels/codeeditor/codeeditor.h
     src/gui/panels/codeeditor/plugins/cpp.h
     src/gui/panels/codeeditor/plugins/lua.h
     src/gui/panels/codeeditor/plugins/php.h
     src/gui/panels/codeeditor/plugins/python.h
     src/gui/panels/codeeditor/plugins/xrc.h
-    src/dataobject.h
+    src/gui/panels/debugwindow.h
     src/gui/panels/designer/innerframe.h
     src/gui/panels/designer/menubar.h
-#   src/gui/panels/designer/unused/resizablepanel.h
     src/gui/panels/designer/visualeditor.h
     src/gui/panels/designer/visualobj.h
     src/gui/panels/designer/window_buttons.h
-    src/gui/dialogs/geninheritclass/geninhertclass.h
-    src/gui/dialogs/geninheritclass/geninhertclass_gui.h
     src/gui/panels/inspector/advprops.h
     src/gui/panels/inspector/inspector.h
-    src/gui/panels/treeview.h
-    src/gui/dialogs/xrcpreview.h
-    src/gui/dialogs/about.h
-    src/appdata.h
-    src/gui/aui/barart.h
-    src/gui/aui/dockart.h
-    src/gui/aui/tabart.h
-    src/gui/bitmaps.h
-    src/cmdproc.h
-#   src/gui/unused/customkeys.h
-    src/gui/panels/debugwindow.h
-    src/event.h
-    src/gui/mainframe.h
-    src/manager.h
-    src/gui/dialogs/menueditor.h
     src/gui/panels/palette.h
     src/gui/panels/title.h
-    src/gui/dialogs/annoying.h
+    src/gui/panels/treeview.h
+#   src/gui/unused/customkeys.h
+#   src/gui/unused/resizablepanel.h
+    src/gui/bitmaps.h
+    src/gui/mainframe.h
+    src/model/database.h
+    src/model/objectbase.h
+    src/model/types.h
+    src/model/xrcfilter.h
     src/utils/debug.h
     src/utils/defs.h
     src/utils/exception.h
@@ -55,7 +52,12 @@ set(wxWEAVER_INCLUDE_FILES
     src/utils/ipc.h
     src/utils/stringutils.h
     src/utils/typeconv.h
-    src/gui/dialogs/geninheritclass/GenInheritedDlg.fbp
+    src/appdata.h
+    src/cmdproc.h
+    src/dataobject.h
+    src/event.h
+    src/manager.h
+    src/settings.h
 )
 set(wxWEAVER_SOURCE_FILES
     external/stacktrace/stack.cpp
@@ -68,49 +70,51 @@ set(wxWEAVER_SOURCE_FILES
     src/codegen/phpcg.cpp
     src/codegen/pythoncg.cpp
     src/codegen/xrccg.cpp
-    src/model/database.cpp
-    src/model/objectbase.cpp
-    src/model/types.cpp
-    src/model/xrcfilter.cpp
+    src/gui/aui/barart.cpp
+    src/gui/aui/dockart.cpp
+    src/gui/aui/tabart.cpp
+    src/gui/dialogs/about.cpp
+    src/gui/dialogs/annoying.cpp
+    src/gui/dialogs/geninheritclass/geninhertclass.cpp
+    src/gui/dialogs/geninheritclass/geninhertclass_gui.cpp
+    src/gui/dialogs/menueditor.cpp
+    src/gui/dialogs/preferences.cpp
+    src/gui/dialogs/xrcpreview.cpp
     src/gui/panels/codeeditor/codeeditor.cpp
     src/gui/panels/codeeditor/plugins/cpp.cpp
     src/gui/panels/codeeditor/plugins/lua.cpp
     src/gui/panels/codeeditor/plugins/php.cpp
     src/gui/panels/codeeditor/plugins/python.cpp
     src/gui/panels/codeeditor/plugins/xrc.cpp
-    src/dataobject.cpp
+    src/gui/panels/debugwindow.cpp
     src/gui/panels/designer/innerframe.cpp
     src/gui/panels/designer/menubar.cpp
-#   src/gui/panels/designer/unused/resizablepanel.cpp TODO: ???
     src/gui/panels/designer/visualeditor.cpp
     src/gui/panels/designer/visualobj.cpp
-    src/gui/dialogs/geninheritclass/geninhertclass.cpp
-    src/gui/dialogs/geninheritclass/geninhertclass_gui.cpp
     src/gui/panels/inspector/advprops.cpp
     src/gui/panels/inspector/inspector.cpp
-    src/gui/panels/treeview.cpp
-    src/gui/dialogs/xrcpreview.cpp
-    src/gui/dialogs/about.cpp
-    src/appdata.cpp
-    src/gui/aui/barart.cpp
-    src/gui/aui/dockart.cpp
-    src/gui/aui/tabart.cpp
-    src/gui/bitmaps.cpp
-    src/cmdproc.cpp
-#   src/gui/unused/customkeys.cpp
-    src/gui/panels/debugwindow.cpp
-    src/event.cpp
-    src/gui/mainframe.cpp
-    src/manager.cpp
-    src/gui/dialogs/menueditor.cpp
     src/gui/panels/palette.cpp
     src/gui/panels/title.cpp
-    src/gui/dialogs/annoying.cpp
+    src/gui/panels/treeview.cpp
+#   src/gui/unused/customkeys.cpp
+#   src/gui/unused/resizablepanel.cpp TODO: ???
+    src/gui/bitmaps.cpp
+    src/gui/mainframe.cpp
+    src/model/database.cpp
+    src/model/objectbase.cpp
+    src/model/types.cpp
+    src/model/xrcfilter.cpp
     src/utils/filetocarray.cpp
     src/utils/ipc.cpp
     src/utils/m_wxweaver.cpp
     src/utils/stringutils.cpp
     src/utils/typeconv.cpp
+    src/appdata.cpp
+    src/cmdproc.cpp
+    src/dataobject.cpp
+    src/event.cpp
+    src/manager.cpp
+    src/settings.cpp
     src/wxweaver.cpp
 )
 if(APPLE)

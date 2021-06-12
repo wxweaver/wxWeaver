@@ -26,33 +26,34 @@
 
 class CodeEditor;
 
-class wxStyledTextCtrl;
-class wxAuiNotebook;
-class wxFindDialogEvent;
-
 class wxWeaverEvent;
-class wxWeaverPropertyEvent;
 class wxWeaverObjectEvent;
+class wxWeaverPropertyEvent;
 class wxWeaverEventHandlerEvent;
+
+class wxAuiNotebook;
+class wxStyledTextCtrl;
+class wxFindDialogEvent;
 
 class CppPanel : public wxPanel {
 public:
-    CppPanel(wxWindow* parent, int id);
+    CppPanel(wxWindow*, int);
     ~CppPanel() override;
 
-    void OnPropertyModified(wxWeaverPropertyEvent& event);
-    void OnProjectRefresh(wxWeaverEvent& event);
-    void OnCodeGeneration(wxWeaverEvent& event);
-    void OnObjectChange(wxWeaverObjectEvent& event);
-    void OnEventHandlerModified(wxWeaverEventHandlerEvent& event);
-    void OnFind(wxFindDialogEvent& event);
+    void OnCodeGeneration(wxWeaverEvent&);
+    void OnProjectRefresh(wxWeaverEvent&);
+    void OnObjectChange(wxWeaverObjectEvent&);
+    void OnPropertyModified(wxWeaverPropertyEvent&);
+    void OnEventHandlerModified(wxWeaverEventHandlerEvent&);
+
+    void OnFind(wxFindDialogEvent&);
 
 private:
-    void InitStyledTextCtrl(wxStyledTextCtrl* stc);
+    void InitStyledTextCtrl(wxStyledTextCtrl*);
 
     wxAuiNotebook* m_notebook;
-    CodeEditor* m_cppPanel;
-    CodeEditor* m_hPanel;
-    PTCCodeWriter m_hCW;
-    PTCCodeWriter m_cppCW;
+    CodeEditor* m_editorCpp;
+    CodeEditor* m_editorH;
+    PTCCodeWriter m_codeWriterH;
+    PTCCodeWriter m_codeWriterCpp;
 };

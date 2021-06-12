@@ -19,32 +19,31 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "gui/panels/codeeditor/plugins/php.h"
-
-#include "appdata.h"
-#include "gui/panels/codeeditor/codeeditor.h"
-#include "event.h"
-#include "utils/typeconv.h"
-#include "utils/exception.h"
-#include "model/objectbase.h"
 #include "codegen/codewriter.h"
 #include "codegen/phpcg.h"
+#include "gui/panels/codeeditor/codeeditor.h"
+#include "gui/panels/codeeditor/plugins/php.h"
+#include "model/objectbase.h"
+#include "utils/exception.h"
+#include "utils/typeconv.h"
+#include "appdata.h"
+#include "event.h"
 
 #include <wx/fdrepdlg.h>
 #include <wx/stc/stc.h>
 
 PHPPanel::PHPPanel(wxWindow* parent, int id)
     : wxPanel(parent, id)
-    , m_phpPanel(new CodeEditor(this, wxID_ANY))
-    , m_phpCW(PTCCodeWriter(new TCCodeWriter(m_phpPanel->GetTextCtrl())))
+    , m_editor(new CodeEditor(this, wxID_ANY))
+    , m_codeWriter(PTCCodeWriter(new TCCodeWriter(m_editor->GetTextCtrl())))
 {
     AppData()->AddHandler(this->GetEventHandler());
     wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
     SetSizer(topSizer);
 
-    InitStyledTextCtrl(m_phpPanel->GetTextCtrl());
+    InitStyledTextCtrl(m_editor->GetTextCtrl());
 
-    topSizer->Add(m_phpPanel, 1, wxEXPAND, 0);
+    topSizer->Add(m_editor, 1, wxEXPAND, 0);
     topSizer->Fit(this);
     topSizer->Layout();
 
@@ -64,11 +63,9 @@ PHPPanel::PHPPanel(wxWindow* parent, int id)
 
 PHPPanel::~PHPPanel()
 {
-#if 0
-    delete m_icons; // TODO: where this comes from?
-#endif
     AppData()->RemoveHandler(this->GetEventHandler());
 }
+
 void PHPPanel::InitStyledTextCtrl(wxStyledTextCtrl* stc)
 {
     stc->SetLexer(wxSTC_LEX_CPP);
@@ -84,71 +81,11 @@ void PHPPanel::InitStyledTextCtrl(wxStyledTextCtrl* stc)
         __file__ __line__ __function__ __method__ __namespace__ \
         die echo empty eval exit include include_once isset list require \
         require_once return print unset null");
-
-#ifdef __WXGTK__
-    // Debe haber un bug en wxGTK ya que la familia wxMODERN no es de ancho fijo.
-    wxFont font(8, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    font.SetFaceName("Monospace");
-#else
-    wxFont font(10, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-#endif
-    bool darkMode = AppData()->IsDarkMode();
-    if (darkMode) {
-        stc->StyleSetBackground(wxSTC_STYLE_DEFAULT, wxColour(30, 30, 30));
-        stc->StyleSetForeground(wxSTC_STYLE_DEFAULT, wxColour(170, 180, 190));
-    } else {
-        stc->StyleSetBackground(wxSTC_STYLE_DEFAULT,
-                                wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
-        stc->StyleSetForeground(wxSTC_STYLE_DEFAULT,
-                                wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-    }
-    stc->StyleSetFont(wxSTC_STYLE_DEFAULT, font);
-    stc->StyleClearAll();
-    stc->StyleSetBold(wxSTC_C_WORD, true);
-    if (!darkMode) {
-        stc->StyleSetForeground(wxSTC_C_WORD, wxColour(0, 0, 128));
-        stc->StyleSetForeground(wxSTC_C_STRING, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_STRINGEOL, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_PREPROCESSOR, wxColour(0, 0, 80));
-        stc->StyleSetForeground(wxSTC_C_COMMENT, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINE, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_COMMENTDOC, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINEDOC, wxColour(0, 128, 0));
-        stc->StyleSetForeground(wxSTC_C_NUMBER, wxColour(0, 0, 128));
-        stc->SetSelBackground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT));
-        stc->SetSelForeground(true, wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHTTEXT));
-    } else {
-        stc->StyleSetForeground(wxSTC_C_WORD, wxColour(200, 120, 230));
-        stc->StyleSetForeground(wxSTC_C_WORD2, wxColour(235, 100, 115));
-        stc->StyleSetForeground(wxSTC_C_GLOBALCLASS, wxColour(235, 100, 115));
-        //stc->StyleSetForeground(wxSTC_C_IDENTIFIER, wxColour(90, 180, 250));
-        stc->StyleSetForeground(wxSTC_C_CHARACTER, wxColour(150, 200, 120));
-        stc->StyleSetForeground(wxSTC_C_STRING, wxColour(150, 200, 120));
-        stc->StyleSetForeground(wxSTC_C_STRINGEOL, wxColour(150, 200, 120));
-        stc->StyleSetForeground(wxSTC_C_PREPROCESSOR, wxColour(200, 120, 230));
-        stc->StyleSetForeground(wxSTC_C_PREPROCESSORCOMMENT, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_COMMENT, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINE, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_COMMENTDOC, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_COMMENTLINEDOC, wxColour(90, 100, 120));
-        stc->StyleSetForeground(wxSTC_C_NUMBER, wxColour(220, 160, 100));
-        stc->SetSelBackground(true, wxColour(45, 50, 60));
-    }
-    stc->SetCaretForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-    stc->SetCaretWidth(2);
-    stc->SetReadOnly(true);
-
-    // TODO: Make this configurable
-    stc->SetUseTabs(false);
-    stc->SetTabWidth(4);
-    stc->SetTabIndents(true);
-    stc->SetBackSpaceUnIndents(true);
-    stc->SetIndent(4);
 }
 
 void PHPPanel::OnFind(wxFindDialogEvent& event)
 {
-    m_phpPanel->GetEventHandler()->ProcessEvent(event);
+    m_editor->GetEventHandler()->ProcessEvent(event);
 }
 
 void PHPPanel::OnPropertyModified(wxWeaverPropertyEvent& event)
@@ -256,19 +193,18 @@ void PHPPanel::OnCodeGeneration(wxWeaverEvent& event)
             return;
         }
     }
-    // Generate code in the panel
-    if (doPanel) {
+    if (doPanel) { // Generate code in the panel
         PHPCodeGenerator codegen;
         codegen.UseRelativePath(useRelativePath, path);
 
         if (pFirstID)
             codegen.SetFirstID(firstID);
 
-        codegen.SetSourceWriter(m_phpCW);
+        codegen.SetSourceWriter(m_codeWriter);
 
         Freeze();
 
-        wxStyledTextCtrl* phpEditor = m_phpPanel->GetTextCtrl();
+        wxStyledTextCtrl* phpEditor = m_editor->GetTextCtrl();
         phpEditor->SetReadOnly(false);
         int phpLine = phpEditor->GetFirstVisibleLine() + phpEditor->LinesOnScreen() - 1;
         int phpXOffset = phpEditor->GetXOffset();
@@ -283,8 +219,7 @@ void PHPPanel::OnCodeGeneration(wxWeaverEvent& event)
 
         Thaw();
     }
-    // Generate code in the file
-    if (doFile) {
+    if (doFile) { // Generate code in the file
         try {
             PHPCodeGenerator codegen;
             codegen.UseRelativePath(useRelativePath, path);

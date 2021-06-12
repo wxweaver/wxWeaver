@@ -24,12 +24,29 @@ wxDEFINE_EVENT(wxEVT_WVR_PROJECT_LOADED, wxWeaverEvent);
 wxDEFINE_EVENT(wxEVT_WVR_PROJECT_SAVED, wxWeaverEvent);
 wxDEFINE_EVENT(wxEVT_WVR_PROJECT_REFRESH, wxWeaverEvent);
 wxDEFINE_EVENT(wxEVT_WVR_CODE_GENERATION, wxWeaverEvent);
-wxDEFINE_EVENT(wxEVT_WVR_EVENT_HANDLER_MODIFIED, wxWeaverEventHandlerEvent);
 wxDEFINE_EVENT(wxEVT_WVR_OBJECT_EXPANDED, wxWeaverObjectEvent);
 wxDEFINE_EVENT(wxEVT_WVR_OBJECT_SELECTED, wxWeaverObjectEvent);
 wxDEFINE_EVENT(wxEVT_WVR_OBJECT_CREATED, wxWeaverObjectEvent);
 wxDEFINE_EVENT(wxEVT_WVR_OBJECT_REMOVED, wxWeaverObjectEvent);
 wxDEFINE_EVENT(wxEVT_WVR_PROPERTY_MODIFIED, wxWeaverPropertyEvent);
+wxDEFINE_EVENT(wxEVT_WVR_EVENT_HANDLER_MODIFIED, wxWeaverEventHandlerEvent);
+wxDEFINE_EVENT(wxEVT_WVR_PREFS_EDITOR_CHANGED, wxWeaverPrefsEditorEvent);
+
+wxWeaverPrefsEditorEvent::wxWeaverPrefsEditorEvent(wxEventType eventType)
+    : wxWeaverEvent(eventType)
+{
+}
+
+wxWeaverPrefsEditorEvent::wxWeaverPrefsEditorEvent(const wxWeaverPrefsEditorEvent& event)
+    : wxWeaverEvent(event)
+    , m_prefsEditor(event.m_prefsEditor)
+{
+}
+
+wxEvent* wxWeaverPrefsEditorEvent::Clone() const
+{
+    return new wxWeaverPrefsEditorEvent(*this);
+}
 
 wxWeaverEvent::wxWeaverEvent(wxEventType commandType)
     : wxEvent(0, commandType)
@@ -51,25 +68,23 @@ wxWeaverEvent::~wxWeaverEvent()
 {
 }
 
-wxString wxWeaverEvent::GetEventName()
+wxString wxWeaverEvent::GetEventName() const
 {
 #define CASE(EVENT)           \
     if (EVENT == m_eventType) \
         return #EVENT;
-
     CASE(wxEVT_WVR_PROJECT_LOADED)
     CASE(wxEVT_WVR_PROJECT_SAVED)
+    CASE(wxEVT_WVR_PROJECT_REFRESH)
+    CASE(wxEVT_WVR_CODE_GENERATION)
     CASE(wxEVT_WVR_OBJECT_EXPANDED)
     CASE(wxEVT_WVR_OBJECT_SELECTED)
     CASE(wxEVT_WVR_OBJECT_CREATED)
     CASE(wxEVT_WVR_OBJECT_REMOVED)
     CASE(wxEVT_WVR_PROPERTY_MODIFIED)
     CASE(wxEVT_WVR_EVENT_HANDLER_MODIFIED)
-    CASE(wxEVT_WVR_PROJECT_REFRESH)
-    CASE(wxEVT_WVR_CODE_GENERATION)
-
+    CASE(wxEVT_WVR_PREFS_EDITOR_CHANGED)
 #undef CASE
-
     return "Unknown Type";
 }
 
@@ -78,7 +93,7 @@ void wxWeaverEvent::SetString(const wxString& newString)
     m_string = newString;
 }
 
-wxString wxWeaverEvent::GetString()
+wxString wxWeaverEvent::GetString() const
 {
     return m_string;
 }

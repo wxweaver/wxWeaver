@@ -1,7 +1,5 @@
 /*
     wxWeaver - A GUI Designer Editor for wxWidgets.
-    Copyright (C) 2005 José Antonio Hurtado
-    Copyright (C) 2005 Juan Antonio Ortega (as wxFormBuilder)
     Copyright (C) 2021 Andrea Zanellato <redtid3@gmail.com>
 
     This program is free software; you can redistribute it and/or
@@ -20,33 +18,33 @@
 */
 #pragma once
 
-#include <wx/panel.h>
+#include <wx/string.h>
 
-class wxWeaverPropertyEvent;
-class wxWeaverPrefsEditorEvent;
+namespace Default {
+constexpr bool showIndentationGuides { true };
+constexpr bool showEOL { false };
+constexpr bool tabIndents { false };
+constexpr bool useTabs { false };
+constexpr int showWhiteSpace { 1 };
+constexpr int tabsWidth { 4 };
+constexpr int indentSize { 4 };
+constexpr int caretWidth { 1 };
+constexpr int fontSize { 8 };
+} // namespace Default
 
-class wxStyledTextCtrl;
-class wxStyledTextEvent;
-class wxFindDialogEvent;
+struct PrefsEditor {
+    PrefsEditor();
 
-class CodeEditor : public wxPanel {
-public:
-    CodeEditor(wxWindow*, int);
-    virtual ~CodeEditor();
+    void load();
 
-    wxStyledTextCtrl* GetTextCtrl() const;
-    void LoadSettings();
-
-private:
-    void OnFind(wxFindDialogEvent&);
-
-    void OnMarginClick(wxStyledTextEvent&);
-
-    void OnPropertyModified(wxWeaverPropertyEvent&);
-    void OnPrefsEditorChanged(wxWeaverPrefsEditorEvent&);
-
-    void SetupTheme();
-
-    wxStyledTextCtrl* m_code;
-    wxFont m_font;
+    wxString fontFace;
+    bool showIndentationGuides;
+    bool showEOL;
+    bool tabIndents;
+    bool useTabs;
+    int showWhiteSpace;
+    int tabsWidth;
+    int indentSize;
+    int caretWidth;
+    int fontSize;
 };

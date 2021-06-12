@@ -20,32 +20,34 @@
 */
 #include "gui/mainframe.h"
 
-#include "model/xrcfilter.h"
-#include "utils/stringutils.h"
-#include "utils/exception.h"
-#include "gui/dialogs/about.h"
-#include "appdata.h"
 #include "gui/aui/dockart.h"
 #include "gui/aui/tabart.h"
 #include "gui/bitmaps.h"
-#include "gui/panels/codeeditor/plugins/cpp.h"
-#include "gui/panels/designer/visualeditor.h"
+#include "gui/dialogs/about.h"
+#include "gui/dialogs/preferences.h"
 #include "gui/dialogs/geninheritclass/geninhertclass.h"
-#include "gui/panels/inspector/inspector.h"
+#include "gui/panels/designer/visualeditor.h"
+#include "gui/panels/codeeditor/plugins/cpp.h"
 #include "gui/panels/codeeditor/plugins/lua.h"
-#include "gui/panels/treeview.h"
-#include "gui/panels/palette.h"
 #include "gui/panels/codeeditor/plugins/php.h"
 #include "gui/panels/codeeditor/plugins/python.h"
-#include "gui/panels/title.h"
-#include "event.h"
-#include "manager.h"
 #include "gui/panels/codeeditor/plugins/xrc.h"
 #include "gui/panels/debugwindow.h"
+#include "gui/panels/inspector/inspector.h"
+#include "gui/panels/palette.h"
+#include "gui/panels/title.h"
+#include "gui/panels/treeview.h"
+#include "model/xrcfilter.h"
+#include "utils/exception.h"
+#include "utils/stringutils.h"
+#include "appdata.h"
+#include "event.h"
+#include "manager.h"
 
 #include <wx/artprov.h>
 #include <wx/config.h>
 #include <wx/panel.h>
+#include <wx/stc/stc.h>
 
 namespace wxw {
 enum {
@@ -310,36 +312,34 @@ MainFrame::~MainFrame()
     delete m_findDialog;
 }
 
-void MainFrame::LoadSettings(const wxString& name)
+void MainFrame::LoadSettings()
 {
     wxConfigBase* config = wxConfigBase::Get();
-    config->SetPath(name);
-
     wxString perspective;
     wxSize bestSize = GetBestSize();
     bool maximized, iconized;
     int x, y, w, h;
 
     // disabled in default due to possible bug(?) in wxMSW
-    config->Read("AutoSash", &m_autoSash, false);
+    config->Read("/MainWindow/AutoSash", &m_autoSash, false);
 #if 0
-    config->Read("LeftSplitterWidth", &m_leftSplitterWidth, 300);
-    config->Read("RightSplitterWidth", &m_rightSplitterWidth, -300);
-    config->Read("RightSplitterType", &m_rightSplitterType, "editor");
+    config->Read("/MainWindow/LeftSplitterWidth", &m_leftSplitterWidth, 300);
+    config->Read("/MainWindow/RightSplitterWidth", &m_rightSplitterWidth, -300);
+    config->Read("/MainWindow/RightSplitterType", &m_rightSplitterType, "editor");
 #endif
-    config->Read("CurrentDirectory", &m_currentDir, "./projects");
-    config->Read("RecentFile0", &m_recentProjects[0]);
-    config->Read("RecentFile1", &m_recentProjects[1]);
-    config->Read("RecentFile2", &m_recentProjects[2]);
-    config->Read("RecentFile3", &m_recentProjects[3]);
-    config->Read("Style", &m_style, wxWEAVER_GUI_DOCKABLE);
-    config->Read("Perspective", &perspective);
-    config->Read("IsMaximized", &maximized, false);
-    config->Read("IsIconized", &iconized, false);
-    config->Read("Left", &x, 0);
-    config->Read("Top", &y, 0);
-    config->Read("Width", &w, bestSize.GetWidth());
-    config->Read("Height", &h, bestSize.GetHeight());
+    config->Read("/MainWindow/CurrentDirectory", &m_currentDir, "./projects");
+    config->Read("/MainWindow/RecentFile0", &m_recentProjects[0]);
+    config->Read("/MainWindow/RecentFile1", &m_recentProjects[1]);
+    config->Read("/MainWindow/RecentFile2", &m_recentProjects[2]);
+    config->Read("/MainWindow/RecentFile3", &m_recentProjects[3]);
+    config->Read("/MainWindow/Style", &m_style, wxWEAVER_GUI_DOCKABLE);
+    config->Read("/MainWindow/Perspective", &perspective);
+    config->Read("/MainWindow/IsMaximized", &maximized, false);
+    config->Read("/MainWindow/IsIconized", &iconized, false);
+    config->Read("/MainWindow/Left", &x, 0);
+    config->Read("/MainWindow/Top", &y, 0);
+    config->Read("/MainWindow/Width", &w, bestSize.GetWidth());
+    config->Read("/MainWindow/Height", &h, bestSize.GetHeight());
 
     SetSize(x, y, w, h);
 
@@ -357,39 +357,37 @@ void MainFrame::LoadSettings(const wxString& name)
     UpdateRecentProjects();
 }
 
-void MainFrame::SaveSettings(const wxString& name)
+void MainFrame::SaveSettings()
 {
     m_objInsp->SaveSettings();
     m_palette->SaveSettings();
 
     wxConfigBase* config = wxConfigBase::Get();
-    config->SetPath(name);
-
     bool isIconized = IsIconized();
     bool isMaximized = IsMaximized();
 
     if (m_style == wxWEAVER_GUI_DOCKABLE) {
         wxString perspective = m_mgr.SavePerspective();
-        config->Write("Perspective", perspective);
+        config->Write("/MainWindow/Perspective", perspective);
     }
     if (!isMaximized) {
-        config->Write("Left", isIconized ? -1 : GetPosition().x);
-        config->Write("Top", isIconized ? -1 : GetPosition().y);
-        config->Write("Width", isIconized ? -1 : GetSize().GetWidth());
-        config->Write("Height", isIconized ? -1 : GetSize().GetHeight());
+        config->Write("/MainWindow/Left", isIconized ? -1 : GetPosition().x);
+        config->Write("/MainWindow/Top", isIconized ? -1 : GetPosition().y);
+        config->Write("/MainWindow/Width", isIconized ? -1 : GetSize().GetWidth());
+        config->Write("/MainWindow/Height", isIconized ? -1 : GetSize().GetHeight());
     }
-    config->Write("IsMaximized", isMaximized);
-    config->Write("IsIconized", isIconized);
-    config->Write("CurrentDirectory", m_currentDir);
-    config->Write("RecentFile0", m_recentProjects[0]);
-    config->Write("RecentFile1", m_recentProjects[1]);
-    config->Write("RecentFile2", m_recentProjects[2]);
-    config->Write("RecentFile3", m_recentProjects[3]);
-    config->Write("Style", m_style);
+    config->Write("/MainWindow/IsMaximized", isMaximized);
+    config->Write("/MainWindow/IsIconized", isIconized);
+    config->Write("/MainWindow/CurrentDirectory", m_currentDir);
+    config->Write("/MainWindow/RecentFile0", m_recentProjects[0]);
+    config->Write("/MainWindow/RecentFile1", m_recentProjects[1]);
+    config->Write("/MainWindow/RecentFile2", m_recentProjects[2]);
+    config->Write("/MainWindow/RecentFile3", m_recentProjects[3]);
+    config->Write("/MainWindow/Style", m_style);
 
     if (m_leftSplitter) {
         int leftSashWidth = m_leftSplitter->GetSashPosition();
-        config->Write("LeftSplitterWidth", leftSashWidth);
+        config->Write("/MainWindow/LeftSplitterWidth", leftSashWidth);
     }
     if (m_rightSplitter) {
         switch (m_style) {
@@ -397,18 +395,18 @@ void MainFrame::SaveSettings(const wxString& name)
             int rightSash = -1
                 * (m_rightSplitter->GetSize().GetWidth()
                    - m_rightSplitter->GetSashPosition());
-            config->Write("RightSplitterWidth", rightSash);
+            config->Write("/MainWindow/RightSplitterWidth", rightSash);
 
             if (m_rightSplitter->GetWindow1()->GetChildren()[0]->GetChildren()[0]->GetLabel() == _("Editor")) {
-                config->Write("RightSplitterType", "editor");
+                config->Write("/MainWindow/RightSplitterType", "editor");
             } else {
-                config->Write("RightSplitterType", "prop");
+                config->Write("/MainWindow/RightSplitterType", "prop");
             }
             break;
         }
         case wxWEAVER_GUI_CLASSIC: {
             int rightSash = -1 * (m_rightSplitter->GetSize().GetHeight() - m_rightSplitter->GetSashPosition());
-            config->Write("RightSplitterWidth", rightSash);
+            config->Write("/MainWindow/RightSplitterWidth", rightSash);
             break;
         }
         default:
@@ -419,11 +417,11 @@ void MainFrame::SaveSettings(const wxString& name)
 
 void MainFrame::OnPreferences(wxCommandEvent&)
 {
-    wxDialog* dlg = AppData()->GetSettingsDialog(this);
-    if (dlg) {
-        dlg->ShowModal();
-        dlg->Destroy();
+    if (!m_prefsEditor) {
+        m_prefsEditor.reset(new wxPreferencesEditor);
+        m_prefsEditor->AddPage(new PageEditors());
     }
+    m_prefsEditor->Show(this);
 }
 
 void MainFrame::OnSaveProject(wxCommandEvent& event)
@@ -596,6 +594,9 @@ void MainFrame::OnClose(wxCloseEvent& event)
         return;
 
     SaveSettings();
+
+    if (m_prefsEditor)
+        m_prefsEditor->Dismiss();
 
     if (m_style != wxWEAVER_GUI_DOCKABLE) {
         m_rightSplitter->Unbind(
@@ -1376,6 +1377,8 @@ wxMenuBar* MainFrame::CreateWeaverMenuBar()
     menuEdit->Append(ID_ALIGN_TOP, _("&Align &Top\tAlt+Shift+Up"), _("Align item to the top"));
     menuEdit->Append(ID_ALIGN_CENTER_V, _("&Align Center &Vertical\tAlt+Shift+V"), _("Align item to the center vertically"));
     menuEdit->Append(ID_ALIGN_BOTTOM, _("&Align &Bottom\tAlt+Shift+Down"), _("Align item to the bottom"));
+    menuEdit->AppendSeparator();
+    menuEdit->Append(wxID_PREFERENCES, _("Preferences\tAlt+O"));
 
     wxMenu* menuView = new wxMenu;
     menuView->Append(ID_PREVIEW_XRC, _("&XRC Window\tF5"), _("Show a preview of the XRC window"));

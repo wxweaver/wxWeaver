@@ -427,10 +427,10 @@ bool PythonCodeGenerator::GenerateCode(PObjectBase project)
 
     code = wxString::Format(
         "#\n"
-        "# Python code generated with wxWeaver (version %s%s " __DATE__ ")\n"
-        "# https://wxweaver.github.io/\n"
+        "#    Python code generated with wxWeaver (version %s%s " __DATE__ ")\n"
+        "#    https://wxweaver.github.io/\n"
         "#\n"
-        "# PLEASE DO *NOT* EDIT THIS FILE!\n"
+        "#    PLEASE DO *NOT* EDIT THIS FILE!\n"
         "#",
         VERSION, REVISION);
 

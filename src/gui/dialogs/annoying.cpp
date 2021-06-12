@@ -45,7 +45,7 @@ AnnoyingDialog::AnnoyingDialog(const wxString& caption, const wxString& message,
 {
     wxConfigBase* config = wxConfigBase::Get();
     int defRet;
-    if (config->Read("AnnoyingDialog/" + caption, &defRet)) {
+    if (config->Read("/AnnoyingDialog/" + caption, &defRet)) {
         if (defRet != wxID_CANCEL) {
             m_dontAnnoy = true;
             m_defRet = defRet;
@@ -158,13 +158,13 @@ AnnoyingDialog::AnnoyingDialog(const wxString& caption, const wxString& message,
 void AnnoyingDialog::OnButton(wxCommandEvent& event)
 {
     if (!m_checkBox) {
-        wxLogError("Ow... null pointer.");
+        wxLogError("AnnoyingDialog checkbox is null!");
         return;
     }
     if (event.GetId() != wxID_CANCEL) {
         wxConfigBase* config = wxConfigBase::Get();
         if (m_checkBox->IsChecked())
-            config->Write("annoyingdialog/" + GetTitle(), event.GetId());
+            config->Write("/AnnoyingDialog/" + GetTitle(), event.GetId());
     }
     EndModal(event.GetId());
 }

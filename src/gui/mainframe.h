@@ -24,6 +24,8 @@
 #include <wx/aui/framemanager.h>
 #include <wx/fdrepdlg.h>
 #include <wx/frame.h>
+#include <wx/preferences.h>
+#include <wx/scopedptr.h>
 #include <wx/splitter.h>
 
 class wxWeaverEvent;
@@ -61,8 +63,8 @@ public:
               wxSize size = wxDefaultSize);
     ~MainFrame() override;
 
-    void LoadSettings(const wxString& name = "/MainWindow");
-    void SaveSettings(const wxString& name = "/MainWindow");
+    void LoadSettings();
+    void SaveSettings();
 
     void OnPreferences(wxCommandEvent&);
 
@@ -159,6 +161,8 @@ private:
     wxString m_rightSplitterType;
     wxString m_currentDir;
     wxString m_recentProjects[4];
+
+    wxScopedPtr<wxPreferencesEditor> m_prefsEditor;
 
     bool m_autoSash;            // Automatically update sash in splitter window base on user action
     int m_pageSelection;        // Save which page is selected
