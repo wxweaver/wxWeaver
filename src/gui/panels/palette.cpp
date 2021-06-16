@@ -117,7 +117,7 @@ void Palette::Create()
     std::vector<std::pair<wxString, PObjectPackage>> pages;
     pages.reserve(pkg_count);
 
-    LogDebug("[Palette] Pages %d", pkg_count);
+    LogDebug("[Palette] Pages %zd", pkg_count);
 
     // Fill lookup map of packages
     for (size_t i = 0; i < pkg_count; ++i) {
