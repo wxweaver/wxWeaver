@@ -20,31 +20,21 @@
 
 #include <wx/string.h>
 
-namespace Default {
-constexpr bool showIndentationGuides { true };
-constexpr bool showEOL { false };
-constexpr bool tabIndents { false };
-constexpr bool useTabs { false };
-constexpr int showWhiteSpace { 1 };
-constexpr int tabsWidth { 4 };
-constexpr int indentSize { 4 };
-constexpr int caretWidth { 1 };
-constexpr int fontSize { 8 };
-} // namespace Default
-
-struct PrefsEditor {
-    PrefsEditor();
-
-    void load();
+namespace wxw {
+struct Preferences {
+    Preferences();
 
     wxString fontFace;
     bool showIndentationGuides;
     bool showEOL;
     bool tabIndents;
     bool useTabs;
+    bool localeEnabled;
     int showWhiteSpace;
     int tabsWidth;
     int indentSize;
     int caretWidth;
     int fontSize;
+    int localeSelected;
 };
+} // namespace wxw

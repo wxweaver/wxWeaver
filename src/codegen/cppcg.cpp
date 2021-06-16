@@ -202,7 +202,7 @@ wxString CppTemplateParser::ValueToCode(PropertyType type, wxString value)
             result = "wxNullBitmap";
             break;
         }
-        if (source == _("Load From File")) {
+        if (source == "Load From File") {
             wxString absPath;
             try {
                 absPath = TypeConv::MakeAbsolutePath(path, AppData()->GetProjectPath());
@@ -228,7 +228,7 @@ wxString CppTemplateParser::ValueToCode(PropertyType type, wxString value)
                        << CppCodeGenerator::ConvertCppString(file)
                        << "\", wxBITMAP_TYPE_ANY)";
             }
-        } else if (source == _("Load From Embedded File")) {
+        } else if (source == "Load From Embedded File") {
             wxString absPath;
             try {
                 absPath = TypeConv::MakeAbsolutePath(
@@ -249,11 +249,11 @@ wxString CppTemplateParser::ValueToCode(PropertyType type, wxString value)
                 result << CppCodeGenerator::ConvertEmbeddedBitmapName(path)
                        << "_to_wx_bitmap()";
             }
-        } else if (source == _("Load From Resource")) {
+        } else if (source == "Load From Resource") {
             result << "wxBitmap(\""
                    << path
                    << "\", wxBITMAP_TYPE_RESOURCE)";
-        } else if (source == _("Load From Icon Resource")) {
+        } else if (source == "Load From Icon Resource") {
             if (wxDefaultSize == icoSize) {
                 result << "wxICON("
                        << path
@@ -264,11 +264,11 @@ wxString CppTemplateParser::ValueToCode(PropertyType type, wxString value)
                     path.c_str(), icoSize.GetWidth(),
                     icoSize.GetHeight();
             }
-        } else if (source == _("Load From XRC")) {
+        } else if (source == "Load From XRC") {
             result << "wxXmlResource::Get()->LoadBitmap(\""
                    << path
                    << "\")";
-        } else if (source == _("Load From Art Provider")) {
+        } else if (source == "Load From Art Provider") {
             wxString rid = path.BeforeFirst(':');
             if (rid.StartsWith("gtk-"))
                 rid = "\"" + rid + "\"";
@@ -1209,7 +1209,7 @@ void CppCodeGenerator::GenSubclassSets(PObjectBase obj,
             if (delimiter != wxNOT_FOUND || nameVal.empty()) {
                 wxLogError(
                     "Invalid Value for Property\n\tObject: %s\n\tProperty: %s\n\tValue: %s",
-                    obj->GetPropertyAsString(_("name")).c_str(),
+                    obj->GetPropertyAsString("name").c_str(),
                     "subclass",
                     originalValue.c_str());
                 return;
@@ -1587,7 +1587,7 @@ void CppCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                 wxString path, source;
                 wxSize toolsize;
                 TypeConv::ParseBitmapWithResource(oldVal, &path, &source, &toolsize);
-                if (_("Load From Icon Resource") == source
+                if (("Load From Icon Resource") == source
                     && wxDefaultSize == toolsize) {
                     prop->SetValue(wxString::Format("%s; %s [%i; %i]", path.c_str(),
                                                     source.c_str(),
@@ -1791,7 +1791,7 @@ void CppCodeGenerator::FindEmbeddedBitmapProperties(PObjectBase obj,
                 wxString inc;
                 inc << "#include \"" << relPath << "\"";
                 embedSet.insert(inc);
-            } else if (source == _("Load From Embedded File")) {
+            } else if (source == "Load From Embedded File") {
                 wxString absPath = TypeConv::MakeAbsolutePath(
                     path, AppData()->GetProjectPath());
                 wxString includePath = FileToCArray::Generate(absPath);
@@ -1806,7 +1806,7 @@ void CppCodeGenerator::FindEmbeddedBitmapProperties(PObjectBase obj,
                 Because the unique include filtering is not global
                 this cannot be enabled without creating a duplicate entry.
             */
-            else if (source == _("Load From XRC")) {
+            else if (source == "Load From XRC") {
                 embedSet.insert("#include <wx/xrc/xmlres.h>");
             }
 #endif
@@ -1835,9 +1835,9 @@ wxString CppCodeGenerator::ConvertToRelativePath(wxString path, wxString basePat
     wxString auxPath = path;
     if (basePath != "")
     {
-        wxFileName filename(_WXSTR(auxPath));
-        if (filename.MakeRelativeTo(_WXSTR(basePath)))
-            auxPath = _STDSTR(filename.GetFullPath());
+        wxFileName filename(auxPath);
+        if (filename.MakeRelativeTo(basePath))
+            auxPath = filename.GetFullPath();
     }
     return auxPath;
 }

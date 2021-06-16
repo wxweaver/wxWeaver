@@ -26,16 +26,14 @@
 #include "utils/typeconv.h"
 #include "utils/exception.h"
 #include "model/objectbase.h"
+#include "wxweaver.h"
 
 #include <ticpp.h>
 
+#include <wx/app.h>
 #include <wx/dir.h>
 #include <wx/filename.h>
 #include <wx/stdpaths.h>
-
-#if 0
-#define DEBUG_PRINT(x) cout << x
-#endif
 
 #define OBJINFO_TAG "objectinfo"
 #define CODEGEN_TAG "codegen"
@@ -237,7 +235,7 @@ size_t ObjectDatabase::CountChildrenWithSameType(PObjectBase parent,
 PObjectBase ObjectDatabase::CreateObject(std::string classname, PObjectBase parent)
 {
     PObjectBase object;
-    PObjectInfo objInfo = GetObjectInfo(_WXSTR(classname));
+    PObjectInfo objInfo = GetObjectInfo(classname);
     if (!objInfo) {
         wxString message = wxString::Format(
             "Unknown Object Type: %s\n"
@@ -474,11 +472,11 @@ PObjectBase ObjectDatabase::CreateObject(ticpp::Element* xmlObj, PObjectBase par
             while (xmlProp) {
                 std::string propName;
                 xmlProp->GetAttribute(NAME_TAG, &propName, false);
-                PProperty prop = object->GetProperty(_WXSTR(propName));
+                PProperty prop = object->GetProperty(propName);
                 if (prop) // does the property exist
                 {
                     // load the value
-                    prop->SetValue(_WXSTR(xmlProp->GetText(false)));
+                    prop->SetValue(xmlProp->GetText(false));
                 } else {
                     std::string value = xmlProp->GetText(false);
                     if (!value.empty()) {
@@ -498,9 +496,9 @@ PObjectBase ObjectDatabase::CreateObject(ticpp::Element* xmlObj, PObjectBase par
             while (xmlEvent) {
                 std::string eventName;
                 xmlEvent->GetAttribute(NAME_TAG, &eventName, false);
-                PEvent event = object->GetEvent(_WXSTR(eventName));
+                PEvent event = object->GetEvent(eventName);
                 if (event)
-                    event->SetValue(_WXSTR(xmlEvent->GetText(false)));
+                    event->SetValue(xmlEvent->GetText(false));
 
                 xmlEvent = xmlEvent->NextSiblingElement(EVENT_TAG, false);
             }
@@ -674,15 +672,24 @@ void ObjectDatabase::SetupPackage(const wxString& file,
         ticpp::Element* root = doc.FirstChildElement(PACKAGE_TAG);
 
         // get the library to import
-        std::string lib;
-        root->GetAttributeOrDefault("lib", &lib, "");
-        if (!lib.empty()) {
-            // Allows plugin dependency dlls to be next to plugin dll in windows
+        std::string libString;
+        root->GetAttributeOrDefault("lib", &libString, "");
+        if (!libString.empty()) {
+
             wxString workingDir = ::wxGetCwd();
+#if 1
+            // Add locale support the loaded plugin
+            if (!wxGetApp().AddPluginLocaleCatalog(libString))
+                wxLogWarning("Can't load wxLocale catalog %s", libString);
+#endif
+            wxLogTrace(wxTRACE_Messages, "AddPluginLocaleCatalog(): %s", libString);
+
+            // Allows plugin dependency dlls to be next to plugin dll in windows
             wxFileName::SetCwd(libPath);
+
             try {
                 wxString fullLibPath
-                    = libPath + wxFILE_SEP_PATH + _WXSTR(lib) + wxver;
+                    = libPath + wxFILE_SEP_PATH + libString + wxver;
                 if (m_importedLibraries.insert(fullLibPath).second) {
                     ImportComponentLibrary(fullLibPath, manager);
                 }
@@ -701,7 +708,7 @@ void ObjectDatabase::SetupPackage(const wxString& file,
             if (!wxverObj.empty()) {
                 long wxversion = 0;
                 // skip widgets supported by higher wxWidgets version than used for the build
-                if ((!_WXSTR(wxverObj).ToLong(&wxversion))
+                if ((!wxString(wxverObj).ToLong(&wxversion))
                     || (wxversion > wxVERSION_NUMBER)) {
                     elemObj = elemObj->NextSiblingElement(OBJINFO_TAG, false);
                     continue;
@@ -709,7 +716,7 @@ void ObjectDatabase::SetupPackage(const wxString& file,
             }
             std::string className;
             elemObj->GetAttribute(CLASS_TAG, &className);
-            PObjectInfo classInfo = GetObjectInfo(_WXSTR(className));
+            PObjectInfo classInfo = GetObjectInfo(className);
 
             ticpp::Element* elemBase = elemObj->FirstChildElement("inherits", false);
             while (elemBase) {
@@ -717,7 +724,7 @@ void ObjectDatabase::SetupPackage(const wxString& file,
                 elemBase->GetAttribute(CLASS_TAG, &baseName);
 
                 // Add a reference to its base class
-                PObjectInfo baseInfo = GetObjectInfo(_WXSTR(baseName));
+                PObjectInfo baseInfo = GetObjectInfo(baseName);
                 if (classInfo && baseInfo) {
                     size_t baseIndex = classInfo->AddBaseClass(baseInfo);
 
@@ -728,7 +735,7 @@ void ObjectDatabase::SetupPackage(const wxString& file,
                         inheritedProperty->GetAttribute(NAME_TAG, &propName);
                         value = inheritedProperty->GetText();
                         classInfo->AddBaseClassDefaultPropertyValue(
-                            baseIndex, _WXSTR(propName), _WXSTR(value));
+                            baseIndex, propName, value);
                         inheritedProperty
                             = inheritedProperty->NextSiblingElement("property", false);
                     }
@@ -752,7 +759,7 @@ void ObjectDatabase::SetupPackage(const wxString& file,
             elemObj = elemObj->NextSiblingElement(OBJINFO_TAG, false);
         }
     } catch (ticpp::Exception& ex) {
-        wxWEAVER_THROW_EX(_WXSTR(ex.m_details));
+        wxWEAVER_THROW_EX(ex.m_details);
     }
 }
 
@@ -822,7 +829,7 @@ void ObjectDatabase::LoadCodeGen(const wxString& file)
         ticpp::Element* elem_codegen = doc.FirstChildElement("codegen");
         std::string language;
         elem_codegen->GetAttribute("language", &language);
-        wxString lang = _WXSTR(language);
+        wxString lang = language;
 
         // read the templates
         ticpp::Element* elemTemplates
@@ -844,13 +851,13 @@ void ObjectDatabase::LoadCodeGen(const wxString& file)
                 elemTemplate->GetAttribute("name", &templateName);
 
                 std::string templateCode = elemTemplate->GetText(false);
-                codeInfo->AddTemplate(_WXSTR(templateName), _WXSTR(templateCode));
+                codeInfo->AddTemplate(templateName, templateCode);
 
                 elemTemplate = elemTemplate->NextSiblingElement("template", false);
             }
             if (hasProp) {
                 // store code info for properties
-                if (!m_propertyTypeTemplates[ParsePropertyType(_WXSTR(propName))]
+                if (!m_propertyTypeTemplates[ParsePropertyType(propName)]
                          .insert(
                              LangTemplateMap::value_type(lang, codeInfo))
                          .second) {
@@ -859,14 +866,14 @@ void ObjectDatabase::LoadCodeGen(const wxString& file)
                 }
             } else {
                 // store code info for objects
-                PObjectInfo objInfo = GetObjectInfo(_WXSTR(className));
+                PObjectInfo objInfo = GetObjectInfo(className);
                 if (objInfo)
                     objInfo->AddCodeInfo(lang, codeInfo);
             }
             elemTemplates = elemTemplates->NextSiblingElement("templates", false);
         }
     } catch (ticpp::Exception& ex) {
-        wxLogError(_WXSTR(ex.m_details));
+        wxLogError(wxString(ex.m_details));
     } catch (wxWeaverException& ex) {
         wxLogError(ex.what());
     }
@@ -892,7 +899,7 @@ PObjectPackage ObjectDatabase::LoadPackage(const wxString& file,
         // Icon Path Attribute
         std::string pkgIconName;
         root->GetAttributeOrDefault(ICON_TAG, &pkgIconName, "");
-        wxString pkgIconPath = iconPath + wxFILE_SEP_PATH + _WXSTR(pkgIconName);
+        wxString pkgIconPath = iconPath + wxFILE_SEP_PATH + pkgIconName;
 
         wxBitmap pkgIcon;
         if (!pkgIconName.empty() && wxFileName::FileExists(pkgIconPath)) {
@@ -902,9 +909,7 @@ PObjectPackage ObjectDatabase::LoadPackage(const wxString& file,
             pkgIcon = AppBitmaps::GetBitmap("unknown", 16);
         }
 
-        package = PObjectPackage(new ObjectPackage(
-            _WXSTR(pkgName), _WXSTR(pkgDesc), pkgIcon));
-
+        package = PObjectPackage(new ObjectPackage(pkgName, pkgDesc, pkgIcon));
         ticpp::Element* elemObj = root->FirstChildElement(OBJINFO_TAG, false);
 
         while (elemObj) {
@@ -916,19 +921,19 @@ PObjectPackage ObjectDatabase::LoadPackage(const wxString& file,
 
             std::string icon;
             elemObj->GetAttributeOrDefault("icon", &icon, "");
-            wxString iconFullPath = iconPath + wxFILE_SEP_PATH + _WXSTR(icon);
+            wxString iconFullPath = iconPath + wxFILE_SEP_PATH + icon;
 
             std::string smallIcon;
             elemObj->GetAttributeOrDefault("smallIcon", &smallIcon, "");
             wxString smallIconFullPath
-                = iconPath + wxFILE_SEP_PATH + _WXSTR(smallIcon);
+                = iconPath + wxFILE_SEP_PATH + smallIcon;
 
             std::string wxver;
             elemObj->GetAttributeOrDefault(WXVERSION_TAG, &wxver, "");
             if (wxver != "") {
                 long wxversion = 0;
                 // skip widgets supported by higher wxWidgets version than used for the build
-                if ((!_WXSTR(wxver).ToLong(&wxversion))
+                if ((!wxString(wxver).ToLong(&wxversion))
                     || (wxversion > wxVERSION_NUMBER)) {
                     elemObj = elemObj->NextSiblingElement(OBJINFO_TAG, false);
                     continue;
@@ -937,9 +942,8 @@ PObjectPackage ObjectDatabase::LoadPackage(const wxString& file,
             bool startGroup;
             elemObj->GetAttributeOrDefault("startgroup", &startGroup, false);
 
-            PObjectInfo objInfo(new ObjectInfo(
-                _WXSTR(className),
-                GetObjectType(_WXSTR(type)), package, startGroup));
+            PObjectInfo objInfo(
+                new ObjectInfo(className, GetObjectType(type), package, startGroup));
 
             if (!icon.empty() && wxFileName::FileExists(iconFullPath)) {
                 wxImage img(iconFullPath, wxBITMAP_TYPE_ANY);
@@ -962,7 +966,7 @@ PObjectPackage ObjectDatabase::LoadPackage(const wxString& file,
             ParseEvents(elemObj, objInfo, objInfo->GetCategory());
 
             // Add the ObjectInfo to the map
-            m_objs.insert(ObjectInfoMap::value_type(_WXSTR(className), objInfo));
+            m_objs.insert(ObjectInfoMap::value_type(className, objInfo));
 
             // Add the object to the palette
             if (ShowInPalette(objInfo->GetTypeName()))
@@ -971,7 +975,7 @@ PObjectPackage ObjectDatabase::LoadPackage(const wxString& file,
             elemObj = elemObj->NextSiblingElement(OBJINFO_TAG, false);
         }
     } catch (ticpp::Exception& ex) {
-        wxWEAVER_THROW_EX(_WXSTR(ex.m_details));
+        wxWEAVER_THROW_EX(ex.m_details);
     }
     return package;
 }
@@ -985,7 +989,7 @@ void ObjectDatabase::ParseProperties(ticpp::Element* elemObj, PObjectInfo objInf
         // Category name attribute
         std::string cname;
         elemCategory->GetAttribute(NAME_TAG, &cname);
-        PPropertyCategory newCat(new PropertyCategory(_WXSTR(cname)));
+        PPropertyCategory newCat(new PropertyCategory(cname));
 
         // Add category
         category->AddCategory(newCat);
@@ -999,7 +1003,7 @@ void ObjectDatabase::ParseProperties(ticpp::Element* elemObj, PObjectInfo objInf
         // Property Name Attribute
         std::string pname;
         elem_prop->GetAttribute(NAME_TAG, &pname);
-        category->AddProperty(_WXSTR(pname));
+        category->AddProperty(pname);
 
         std::string description;
         elem_prop->GetAttributeOrDefault(DESCRIPTION_TAG, &description, "");
@@ -1011,7 +1015,7 @@ void ObjectDatabase::ParseProperties(ticpp::Element* elemObj, PObjectInfo objInf
         elem_prop->GetAttribute("type", &propType);
         PropertyType ptype;
         try {
-            ptype = ParsePropertyType(_WXSTR(propType));
+            ptype = ParsePropertyType(propType);
         } catch (wxWeaverException& ex) {
             wxLogError(
                 "Error: %s\nWhile parsing property \"%s\" of class \"%s\"",
@@ -1043,8 +1047,8 @@ void ObjectDatabase::ParseProperties(ticpp::Element* elemObj, PObjectInfo objInf
 
                 std::string macroDescription;
                 elemOpt->GetAttributeOrDefault(DESCRIPTION_TAG, &macroDescription, "");
-                optList->AddOption(_WXSTR(macroName), _WXSTR(macroDescription));
-                m_macroSet.insert(_WXSTR(macroName));
+                optList->AddOption(macroName, _(macroDescription));
+                m_macroSet.insert(macroName);
                 elemOpt = elemOpt->NextSiblingElement("option", false);
             }
         } else if (ptype == PT_PARENT) {
@@ -1056,15 +1060,15 @@ void ObjectDatabase::ParseProperties(ticpp::Element* elemObj, PObjectInfo objInf
 
                 std::string child_name;
                 elemChild->GetAttribute(NAME_TAG, &child_name);
-                child.m_name = _WXSTR(child_name);
+                child.m_name = child_name;
 
                 std::string childDescription;
                 elemChild->GetAttributeOrDefault(DESCRIPTION_TAG, &childDescription, "");
-                child.m_description = _WXSTR(childDescription);
+                child.m_description = _(childDescription);
 
                 std::string childType;
                 elemChild->GetAttributeOrDefault("type", &childType, "wxString");
-                child.m_type = ParsePropertyType(_WXSTR(childType));
+                child.m_type = ParsePropertyType(childType);
 
                 // Get default value
                 // Empty tags don't contain any child so this will throw in that case
@@ -1079,7 +1083,7 @@ void ObjectDatabase::ParseProperties(ticpp::Element* elemObj, PObjectInfo objInf
                 } catch (ticpp::Exception& ex) {
                     wxLogDebug(ex.what());
                 }
-                child.m_defaultValue = _WXSTR(childValue);
+                child.m_defaultValue = childValue;
 
                 // build parent default value
                 if (children.size())
@@ -1092,8 +1096,7 @@ void ObjectDatabase::ParseProperties(ticpp::Element* elemObj, PObjectInfo objInf
         }
         // create an instance of PropertyInfo
         PPropertyInfo propertyInfo(new PropertyInfo(
-            _WXSTR(pname), ptype, _WXSTR(defValue), _WXSTR(description),
-            _WXSTR(customEditor), optList, children));
+            pname, ptype, defValue, description, customEditor, optList, children));
 
         // add the PropertyInfo to the property
         objInfo->AddPropertyInfo(propertyInfo);
@@ -1120,7 +1123,7 @@ void ObjectDatabase::ParseEvents(ticpp::Element* elemObj, PObjectInfo objInfo,
         // Category name attribute
         std::string cname;
         elemCategory->GetAttribute(NAME_TAG, &cname);
-        PPropertyCategory newCat(new PropertyCategory(_WXSTR(cname)));
+        PPropertyCategory newCat(new PropertyCategory(cname));
 
         category->AddCategory(newCat); // Add category
 
@@ -1133,7 +1136,7 @@ void ObjectDatabase::ParseEvents(ticpp::Element* elemObj, PObjectInfo objInfo,
         // Event Name Attribute
         std::string evtName;
         elemEvt->GetAttribute(NAME_TAG, &evtName);
-        category->AddEvent(_WXSTR(evtName));
+        category->AddEvent(evtName);
 
         // Event class
         std::string evtClass;
@@ -1157,8 +1160,7 @@ void ObjectDatabase::ParseEvents(ticpp::Element* elemObj, PObjectInfo objInfo,
         }
         // create an instance of EventInfo
         PEventInfo evt_info(
-            new EventInfo(_WXSTR(evtName), _WXSTR(evtClass),
-                          _WXSTR(defValue), _WXSTR(description)));
+            new EventInfo(evtName, evtClass, defValue, description));
 
         // add the EventInfo to the event
         objInfo->AddEventInfo(evt_info);
@@ -1329,9 +1331,9 @@ wxString ObjectDatabase::ParseObjectType(wxString str)
     return str;
 }
 
-#define PT(x, y) m_propTypes.insert(PTMap::value_type(x, y))
 void ObjectDatabase::InitPropertyTypes()
 {
+#define PT(x, y) m_propTypes.insert(PTMap::value_type(x, y))
     PT("bool", PT_BOOL);
     PT("text", PT_TEXT);
     PT("int", PT_INT);
@@ -1356,6 +1358,7 @@ void ObjectDatabase::InitPropertyTypes()
     PT("float", PT_FLOAT);
     PT("parent", PT_PARENT);
     PT("editoption", PT_EDIT_OPTION);
+#undef PT
 }
 
 bool ObjectDatabase::LoadObjectTypes()
@@ -1375,7 +1378,7 @@ bool ObjectDatabase::LoadObjectTypes()
             bool item;
             elem->GetAttributeOrDefault("item", &item, false);
 
-            wxString name = _WXSTR(elem->GetAttribute("name"));
+            wxString name = elem->GetAttribute("name");
 
             PObjectType objType(new ObjectType(name, (int)m_types.size(), hidden, item));
             m_types.insert(ObjectTypeMap::value_type(name, objType));
@@ -1385,7 +1388,7 @@ bool ObjectDatabase::LoadObjectTypes()
         // now load the children
         elem = root->FirstChildElement("objtype");
         while (elem) {
-            wxString name = _WXSTR(elem->GetAttribute("name"));
+            wxString name = elem->GetAttribute("name");
             PObjectType objType = GetObjectType(name); // get the objType
             ticpp::Element* child = elem->FirstChildElement("childtype", false);
             while (child) {
@@ -1394,7 +1397,7 @@ bool ObjectDatabase::LoadObjectTypes()
                 child->GetAttributeOrDefault("max", &max, -1);
                 child->GetAttributeOrDefault("auiMax", &auiMax, -1);
 
-                wxString childName = _WXSTR(child->GetAttribute("name"));
+                wxString childName = child->GetAttribute("name");
                 PObjectType childType = GetObjectType(childName);
                 if (!childType) {
                     wxLogError("No Object Type found for \"%s\"", childName.c_str());
@@ -1408,7 +1411,7 @@ bool ObjectDatabase::LoadObjectTypes()
             elem = elem->NextSiblingElement("objtype", false);
         }
     } catch (ticpp::Exception& ex) {
-        wxLogError(_WXSTR(ex.m_details));
+        wxLogError(wxString(ex.m_details));
         return false;
     }
     return true;

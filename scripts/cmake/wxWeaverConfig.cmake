@@ -44,6 +44,51 @@ if(UNIX)
     endif()
 endif()
 
+include(FindGettext)
+if(${GETTEXT_FOUND})
+    set(languages it)
+    set(translations wxweaver libadditional libcommon libcontainers libforms liblayout)
+    set(languagesDir "${CMAKE_CURRENT_SOURCE_DIR}/resources/i18n/locale")
+    foreach(language ${languages})
+        foreach(translation ${translations})
+            gettext_process_po_files(${language} ALL
+                INSTALL_DESTINATION "share/locale/wxweaver"
+                PO_FILES "${languagesDir}/${language}/${translation}.po"
+            )
+        endforeach()
+    endforeach()
+endif()
+
+# Copy translation files to the build directory when the application is not installed.
+# wxWidgets currently (v3.1.6) supports only .mo extension, not .gmo,
+# which is the one used by CMake.
+function(target_copy_translation target language)
+    if(NOT ${GETTEXT_FOUND})
+        message(STATUS "gettext not found, not copying files for target ${target}")
+        return()
+    endif()
+    set(translation ${target})
+    if(${target} STREQUAL "wxWeaver")
+        set(translation "wxweaver")
+    else()
+        set(translation "lib${target}")
+    endif()
+    set(sourceFileName "${CMAKE_BINARY_DIR}/${translation}.gmo")
+    set(destinationDir "${CMAKE_BINARY_DIR}/share/wxweaver/locale/${language}/LC_MESSAGES")
+    if(NOT EXISTS ${destinationDir})
+        add_custom_command(TARGET ${target} PRE_BUILD
+            COMMAND ${CMAKE_COMMAND} -E make_directory
+            "${destinationDir}"
+        )
+    endif()
+    add_custom_command(TARGET ${target} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        "${sourceFileName}"
+        "${destinationDir}/${translation}.mo"
+        COMMENT "Copying ${translation}.mo to ${destinationDir}"
+    )
+endfunction()
+
 find_package(wxWidgets 3.0.3 REQUIRED ${wxLibsList})
 if(${wxWidgets_FOUND})
     include(${wxWidgets_USE_FILE})

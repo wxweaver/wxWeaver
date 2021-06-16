@@ -18,17 +18,20 @@
 
 ## CMake
 
-- wxWidgets custom script, find Arch wx-config-gtk3
-- Replace macOS `postbuild.sh`
+- wxWidgets custom script, find Arch wx-config-gtk3.
+- Replace macOS `postbuild.sh`.
 
 ## Misc
 
 - CI stuff.
 - Handle API and XRC based on wx version also in plugins.
 - Use snake case instead camel case in some plugins properties
-  (toolSeparator -> tool_separator)
-- Trailing newlines in codegen templates (e.g. additional plugin)
-- Deal with `wxversion` XML property
+  (toolSeparator -> tool_separator).
+- Trailing newlines in codegen templates (e.g. additional plugin).
+- Deal with `wxversion` XML property.
+- Extract help strings from wxWidgets Doxygen comments in interface files,
+  to apply on XML files.
+  Auto (Google?) translate script, all eventually automated with CI.
 
 ## Controls
 
@@ -44,6 +47,13 @@
     - `CleanUp()` disabled.
     - Exceptions "handling".
 
+- wxAUI
+    - Replace current AUI properties management with new objects as
+      `wxAuiManager` and `wxAuiPaneInfo`.
+      This will break with wxFB compatibility, so a chance for adding wxFB
+      projects as imported and save with own new format.
+      See <https://github.com/wxWidgets/wxWidgets/blob/master/samples/xrc/rc/aui.xrc>.
+
 - wxBookCtrls
     - Rename `select` property same as wxXRC `selected` and update the project.
       format
@@ -52,6 +62,15 @@
 - wxImageList
     - Refactor to make work the XRC import, see `src/model/xrcfilter.cpp` line 162.
     - Missing code generation.
+
+- wxPropertyGrid
+    - Add and use values instead labels for `wxWeaverBitmapProperty` and all
+      other properties, with a snake case enum (E.g. `load_from_file`),
+      then update the project file version. This to enable translation.
+    - Replace the wxPropertyGridManager with a notebook with 2 splitters, each
+      containing wxPropertyGrid above and a wxHtmlWindow below.
+      This way will be possible to use a vertical scrollbar for the content and
+      enable hypertextual links.
 
 - wxSizers
     - wxBagGridSizer layout doesn't work correctly.

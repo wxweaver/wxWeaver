@@ -22,9 +22,7 @@
 #include "event.h"
 #include "settings.h"
 
-#if 0
 #include <wx/bmpcbox.h>
-#endif
 #include <wx/checkbox.h>
 #include <wx/choice.h>
 #include <wx/config.h>
@@ -37,10 +35,7 @@
 
 PanelEditors::PanelEditors(wxWindow* parent)
     : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL)
-#if 0
-    , m_bcbEditor(nullptr)
-#endif
-    , m_prefsEditor(new PrefsEditor)
+    , m_prefs(new wxw::Preferences)
 {
     wxStaticBoxSizer* sbsFont = new wxStaticBoxSizer(
         new wxStaticBox(this, wxID_ANY, _("Font")), wxHORIZONTAL);
@@ -197,27 +192,27 @@ void PanelEditors::OnPrefsChanged(wxCommandEvent&)
 {
     UpdateSettings();
     SaveSettingsIfNecessary();
-    wxWeaverPrefsEditorEvent* event = new wxWeaverPrefsEditorEvent;
-    event->SetPrefs(m_prefsEditor);
-    AppData()->NotifyEditorsPreferences(*event);
+    wxWeaverPreferencesEvent* event = new wxWeaverPreferencesEvent;
+    event->SetPrefs(m_prefs);
+    AppData()->NotifyPreferencesChanged(*event);
 }
 
 void PanelEditors::LoadSettings()
 {
     wxFont font;
     font.SetFamily(wxFONTFAMILY_MODERN);
-    font.SetPointSize(m_prefsEditor->fontSize);
-    font.SetFaceName(m_prefsEditor->fontFace);
+    font.SetPointSize(m_prefs->fontSize);
+    font.SetFaceName(m_prefs->fontFace);
 
-    m_chkGuides->SetValue(m_prefsEditor->showIndentationGuides);
-    m_chkEOL->SetValue(m_prefsEditor->showEOL);
-    m_chkTabIndents->SetValue(m_prefsEditor->tabIndents);
-    m_chkUseTabs->SetValue(m_prefsEditor->useTabs);
-    m_choWSpace->SetSelection(m_prefsEditor->showWhiteSpace);
+    m_chkGuides->SetValue(m_prefs->showIndentationGuides);
+    m_chkEOL->SetValue(m_prefs->showEOL);
+    m_chkTabIndents->SetValue(m_prefs->tabIndents);
+    m_chkUseTabs->SetValue(m_prefs->useTabs);
+    m_choWSpace->SetSelection(m_prefs->showWhiteSpace);
     m_fontPicker->SetSelectedFont(font);
-    m_spnTabsWidth->SetValue(m_prefsEditor->tabsWidth);
-    m_spnIndent->SetValue(m_prefsEditor->indentSize);
-    m_spnCaretW->SetValue(m_prefsEditor->caretWidth);
+    m_spnTabsWidth->SetValue(m_prefs->tabsWidth);
+    m_spnIndent->SetValue(m_prefs->indentSize);
+    m_spnCaretW->SetValue(m_prefs->caretWidth);
 }
 
 void PanelEditors::SaveSettings()
@@ -244,16 +239,102 @@ void PanelEditors::UpdateSettings()
 #if 0
     m_selectedEditor = m_bcbEditor->GetSelection();
 #endif
-    m_prefsEditor->showIndentationGuides = m_chkGuides->IsChecked();
-    m_prefsEditor->showWhiteSpace = m_choWSpace->GetSelection();
-    m_prefsEditor->showEOL = m_chkEOL->IsChecked();
-    m_prefsEditor->tabIndents = m_chkTabIndents->IsChecked();
-    m_prefsEditor->useTabs = m_chkUseTabs->IsChecked();
-    m_prefsEditor->tabsWidth = m_spnTabsWidth->GetValue();
-    m_prefsEditor->indentSize = m_spnIndent->GetValue();
-    m_prefsEditor->caretWidth = m_spnCaretW->GetValue();
-    m_prefsEditor->fontFace = font.GetFaceName();
-    m_prefsEditor->fontSize = font.GetPointSize();
+    m_prefs->showIndentationGuides = m_chkGuides->IsChecked();
+    m_prefs->showWhiteSpace = m_choWSpace->GetSelection();
+    m_prefs->showEOL = m_chkEOL->IsChecked();
+    m_prefs->tabIndents = m_chkTabIndents->IsChecked();
+    m_prefs->useTabs = m_chkUseTabs->IsChecked();
+    m_prefs->tabsWidth = m_spnTabsWidth->GetValue();
+    m_prefs->indentSize = m_spnIndent->GetValue();
+    m_prefs->caretWidth = m_spnCaretW->GetValue();
+    m_prefs->fontFace = font.GetFaceName();
+    m_prefs->fontSize = font.GetPointSize();
+}
+
+PanelLocale::PanelLocale(wxWindow* parent)
+    : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL)
+    , m_prefs(new wxw::Preferences)
+{
+    wxStaticBoxSizer* sbsLocale = new wxStaticBoxSizer(
+        new wxStaticBox(this, wxID_ANY, _("Locale")), wxVERTICAL);
+
+    m_chkLocale = new wxCheckBox(
+        sbsLocale->GetStaticBox(), wxID_ANY, _("Enable Localization"));
+
+    m_bcbLocale = new wxBitmapComboBox(
+        sbsLocale->GetStaticBox(), wxID_ANY, wxEmptyString,
+        wxDefaultPosition, wxDefaultSize, 0, nullptr, wxCB_READONLY);
+
+    m_bcbLocale->Append(_("System Default"), AppBitmaps::GetBitmap("locale/default"));
+    m_bcbLocale->Append(_("English"), AppBitmaps::GetBitmap("locale/gb"));
+    m_bcbLocale->Append(_("English (U.S.)"), AppBitmaps::GetBitmap("locale/us"));
+    m_bcbLocale->Append(_("German"), AppBitmaps::GetBitmap("locale/de"));
+    m_bcbLocale->Append(_("Italian"), AppBitmaps::GetBitmap("locale/it"));
+    m_bcbLocale->SetSelection(0);
+
+    sbsLocale->Add(m_chkLocale, 0, wxLEFT | wxRIGHT, 5);
+    sbsLocale->Add(m_bcbLocale, 0, wxEXPAND | wxBOTTOM | wxLEFT | wxRIGHT, 5);
+
+    wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+    sizer->Add(sbsLocale, 1, wxEXPAND | wxALL, 5);
+    this->SetSizer(sizer);
+    this->Layout();
+
+    LoadSettings();
+
+    m_chkLocale->Bind(wxEVT_CHECKBOX, &PanelLocale::OnPrefsChanged, this);
+    m_bcbLocale->Bind(wxEVT_COMBOBOX, &PanelLocale::OnPrefsChanged, this);
+
+    AppData()->AddHandler(this->GetEventHandler());
+}
+
+PanelLocale::~PanelLocale()
+{
+    m_chkLocale->Unbind(wxEVT_CHECKBOX, &PanelLocale::OnPrefsChanged, this);
+    m_bcbLocale->Unbind(wxEVT_COMBOBOX, &PanelLocale::OnPrefsChanged, this);
+
+    AppData()->RemoveHandler(this->GetEventHandler());
+}
+
+bool PanelLocale::TransferDataToWindow()
+{
+    LoadSettings();
+    return true;
+}
+
+bool PanelLocale::TransferDataFromWindow()
+{
+    SaveSettings();
+    return true;
+}
+
+void PanelLocale::OnPrefsChanged(wxCommandEvent&)
+{
+    UpdateSettings();
+    SaveSettingsIfNecessary();
+    wxWeaverPreferencesEvent* event = new wxWeaverPreferencesEvent;
+    event->SetPrefs(m_prefs);
+    AppData()->NotifyPreferencesChanged(*event);
+}
+
+void PanelLocale::LoadSettings()
+{
+    m_chkLocale->SetValue(m_prefs->localeEnabled);
+    m_bcbLocale->SetSelection(m_prefs->localeSelected);
+}
+
+void PanelLocale::SaveSettings()
+{
+    wxConfigBase* config = wxConfigBase::Get();
+    config->Write("/Locale/Enabled", m_chkLocale->GetValue());
+    config->Write("/Locale/Language", m_bcbLocale->GetSelection());
+    config->Flush();
+}
+
+void PanelLocale::UpdateSettings()
+{
+    m_prefs->localeEnabled = m_chkLocale->GetValue();
+    m_prefs->localeSelected = m_bcbLocale->GetSelection();
 }
 
 wxString PageEditors::GetName() const
@@ -269,4 +350,19 @@ wxBitmap PageEditors::GetLargeIcon() const
 wxWindow* PageEditors::CreateWindow(wxWindow* parent)
 {
     return new PanelEditors(parent);
+}
+
+wxString PageLocale::GetName() const
+{
+    return _("Locale");
+}
+
+wxBitmap PageLocale::GetLargeIcon() const
+{
+    return AppBitmaps::GetBitmap("preferences-desktop-locale");
+}
+
+wxWindow* PageLocale::CreateWindow(wxWindow* parent)
+{
+    return new PanelLocale(parent);
 }

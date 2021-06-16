@@ -24,7 +24,7 @@
 class GenInheritedClassDlgBase : public wxDialog {
 public:
     GenInheritedClassDlgBase(wxWindow* parent, wxWindowID id = wxID_ANY,
-                             const wxString& title = "Generate Inherited Class",
+                             const wxString& title = _("Generate Inherited Class"),
                              const wxPoint& pos = wxDefaultPosition,
                              const wxSize& size = wxDefaultSize,
                              long style = wxDEFAULT_DIALOG_STYLE);

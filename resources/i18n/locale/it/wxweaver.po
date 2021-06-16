@@ -1,0 +1,2524 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wxWeaver 0.1.0\n"
+"POT-Creation-Date: 2021-06-14 22:53+0200\n"
+"PO-Revision-Date: 2021-06-14 22:53+0200\n"
+"Last-Translator: Andrea Zanellato <redtid3@gmail.com>\n"
+"Language-Team: wxWeaver Team\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ../../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-SearchPath-0: src\n"
+"X-Poedit-SearchPath-1: sdk\n"
+"X-Poedit-SearchPath-2: resources/application/xml/resources/application/xml/default.xml\n"
+
+#: resources/application/xml/default.xml:26
+msgid "The path to generated files"
+msgstr "Il percorso per i file generati"
+
+#: resources/application/xml/default.xml:27
+msgid "The path to generated files for embedded files"
+msgstr "Il percorso dei file generati per i file incorporati"
+
+#: resources/application/xml/default.xml:28
+msgid "The filenames for generated files"
+msgstr "Nome per i file generati"
+
+#: resources/application/xml/default.xml:29
+msgid "Use relative paths for external files ( e.g. image files )"
+msgstr "Usa percorsi relativi per i file esterni (es. file di immagine)"
+
+#: resources/application/xml/default.xml:30
+msgid ""
+"All GUI controls have an interger ID, this is the value for the first "
+"control, each additional control with increment by 1."
+msgstr ""
+"Tutti i controlli hanno un valore numerico intero ID, quello impostato sarà "
+"utilizzato per il primo controllo, i seguenti otterranno un valore "
+"incrementato di 1 unità."
+
+#: resources/application/xml/default.xml:32
+msgid "Generate C++ Code"
+msgstr "Genera Codice C++"
+
+#: resources/application/xml/default.xml:33
+msgid "Generate Python Code"
+msgstr "Genera Codice Python"
+
+#: resources/application/xml/default.xml:34
+msgid "Generate PHP Code"
+msgstr "Genera Codice PHP"
+
+#: resources/application/xml/default.xml:35
+msgid "Generate XRC Code"
+msgstr "Genera Codice XRC"
+
+#: resources/application/xml/default.xml:36
+msgid "Generate Lua Code"
+msgstr "Genera Codice Lua"
+
+#: resources/application/xml/default.xml:39
+msgid "For C++ Only. Generate strings using _() macro for translation."
+msgstr "Solo per C++. Genera stringhe usando la macro _() per la traduzione."
+
+#: resources/application/xml/default.xml:41
+msgid ""
+"For C++ Only. Generate an enumeration for control IDs instead of a list of "
+"#defines"
+msgstr ""
+"Solo per C++. Genera un'enumerazione per gli ID dei controlli invece di una "
+"lista di #define"
+
+#: resources/application/xml/default.xml:42
+msgid "For C++ Only. Generate an enumeration for the dimensions of arrays"
+msgstr "Solo per C++. Genera un enumeratore per le dimensioni degli array"
+
+#: resources/application/xml/default.xml:43
+msgid ""
+"For C++ and WXMSW Only. Files are generated with UTF-8 encoding. Microsoft "
+"compiliers expect a specific byte sequence at the beginning of a file. GCC "
+"does NOT expect this. Only set this to true when using a Microsoft compiler."
+msgstr ""
+"Solo per C++ e wxMSW. I file vengono generati con la codifica UTF-8. I "
+"compilatori Microsoft prevedono una sequenza di byte specifica all'inizio di "
+"un file. GCC NON si aspetta questo. Impostalo su true solo quando usi un "
+"compilatore Microsoft."
+
+#: resources/application/xml/default.xml:44
+msgid ""
+"For C++ Only. The exact code to be generated at the top of the source file "
+"to support precompiled headers. For example, to include wxprec.h, the value "
+"of this property should be: #include &lt;wx/wxprec.h&gt;"
+msgstr ""
+"Solo per C++. Il codice esatto da generare nella parte superiore del file "
+"sorgente per supportare le intestazioni precompilate. Ad esempio, per "
+"includere wxprec.h, il valore di questa proprietà dovrebbe essere: #include "
+"&lt;wx/wxprec.h&gt;"
+
+#: resources/application/xml/default.xml:45
+msgid "For C++ Only. Used to decorate classes with DLL export macros."
+msgstr ""
+"Solo per C++. Utilizzato per decorare le classi con macro di esportazione "
+"DLL."
+
+#: resources/application/xml/default.xml:54
+msgid "For C++ Only. Namespaces to wrap class declarations in."
+msgstr ""
+"Solo per C++. Spazi dei nomi in cui racchiudere le dichiarazioni di classe."
+
+#: resources/application/xml/default.xml:55
+msgid "For C++ Only. Type of event connection to generate."
+msgstr "Solo per C++. Tipo di connessione evento da generare."
+
+#: resources/application/xml/default.xml:56
+msgid "Use the Connect() function to link event handlers to events."
+msgstr ""
+"Utilizza la funzione Connect() per collegare i gestori di eventi agli eventi."
+
+#: resources/application/xml/default.xml:57
+msgid "Use event macro tables to link event handlers to events."
+msgstr ""
+"Utilizza le tabelle delle macro di eventi per collegare i gestori di eventi "
+"agli eventi."
+
+#: resources/application/xml/default.xml:60
+msgid "For event_generation=connect Only. Disconnect events in the destructor."
+msgstr ""
+"Solo per event_generation=connect. Disconnetti gli eventi nel distruttore."
+
+#: resources/application/xml/default.xml:61
+msgid ""
+"For C++ Only. The class of help provider to use for context-sensitive help."
+msgstr ""
+"Solo per C++. La classe del provider della guida da utilizzare per la guida "
+"sensibile al contesto."
+
+#: resources/application/xml/default.xml:62
+msgid "No support for context-sensitive help."
+msgstr "Nessun supporto per la guida sensibile al contesto."
+
+#: resources/application/xml/default.xml:63
+msgid "Use wxSimpleHelpProvider to provide context-sensitive help."
+msgstr ""
+"Utilizza wxSimpleHelpProvider per fornire un aiuto sensibile al contesto."
+
+#: resources/application/xml/default.xml:64
+msgid "Use wxHelpControllerHelpProvider to provide context-sensitive help."
+msgstr ""
+"Utilizza wxHelpControllerHelpProvider per fornire un aiuto sensibile al "
+"contesto."
+
+#: resources/application/xml/default.xml:69
+msgid "For Lua Only. Call Skip() function in all generated event handlers."
+msgstr ""
+"Solo per Lua. Chiama la funzione Skip() in tutti i gestori di eventi "
+"generati."
+
+#: resources/application/xml/default.xml:70
+msgid ""
+"For Lua Only. Define a table which will store- all UI stuff you'll create."
+msgstr ""
+"Solo per Lua. Definisci una tabella che memorizzerà tutte le cose "
+"dell'interfaccia utente che creerai."
+
+#: resources/application/xml/default.xml:73
+msgid "For Python Only. Call Skip() function in all generated event handlers."
+msgstr ""
+"Solo per Python. Chiama la funzione Skip() in tutti i gestori di eventi "
+"generati."
+
+#: resources/application/xml/default.xml:74
+msgid "For Python Only. Disconnect events in the destructor."
+msgstr "Solo per Python. Disconnetti gli eventi nel distruttore."
+
+#: resources/application/xml/default.xml:75
+msgid ""
+"For Python Only. Choose which strategy will be used for disconnecting of "
+"events (due to different prototypes of Unbind() function in wxPython)."
+msgstr ""
+"Solo per Python. Scegli quale strategia verrà utilizzata per la "
+"disconnessione degli eventi (a causa dei diversi prototipi della funzione "
+"Unbind() in wxPython)."
+
+#: resources/application/xml/default.xml:76 resources/application/xml/default.xml:87
+msgid "Pass source widget name to Unbind() function."
+msgstr "Passa il nome del widget sorgente alla funzione Unbind()."
+
+#: resources/application/xml/default.xml:77 resources/application/xml/default.xml:88
+msgid "Pass event handler name to Unbind() function."
+msgstr "Passa il nome del gestore eventi alla funzione Unbind()."
+
+#: resources/application/xml/default.xml:80
+msgid "For Python only. Use 4-spaces for indentation instead of tabs"
+msgstr "Solo per Python. Usa 4 spazi per il rientro invece delle tabulazioni"
+
+#: resources/application/xml/default.xml:81
+msgid ""
+"For Python only. Wrap image paths into a function with this name. Useful for "
+"freezing the application."
+msgstr ""
+"Solo per Python. Avvolgi i percorsi dell'immagine in una funzione con questo "
+"nome. Utile per congelare l'applicazione."
+
+#: resources/application/xml/default.xml:84
+msgid "For PHP Only. Call Skip() function in all generated event handlers."
+msgstr ""
+"Solo per PHP. Chiama la funzione Skip() in tutti i gestori di eventi "
+"generati."
+
+#: resources/application/xml/default.xml:85
+msgid "For PHP Only. Disconnect events in the destructor."
+msgstr "Solo per PHP. Disconnetti gli eventi nel distruttore."
+
+#: resources/application/xml/default.xml:86
+msgid ""
+"For PHP Only. Choose which strategy will be used for disconnecting of events "
+"(due to different prototypes of Unbind() function in wxPHP)."
+msgstr ""
+"Solo per PHP. Scegli quale strategia verrà utilizzata per la disconnessione "
+"degli eventi (a causa dei diversi prototipi della funzione Unbind() in "
+"wxPHP)."
+
+#: resources/application/xml/default.xml:117
+msgid ""
+"Window position. The default is (-1, -1) which indicates that wxWidgets "
+"should generate a default position for the window."
+msgstr ""
+"Posizione della finestra. Il valore predefinito è (-1, -1) che indica che "
+"wxWidgets dovrebbe generare una posizione predefinita per la finestra."
+
+#: resources/application/xml/default.xml:118
+msgid ""
+"Window size. The default is (-1, -1) which indicates that wxWidgets should "
+"generate a default size for the window."
+msgstr ""
+"Dimensione della finestra. Il valore predefinito è (-1, -1) che indica che "
+"wxWidgets dovrebbe generare una dimensione predefinita per la finestra."
+
+#: resources/application/xml/default.xml:119
+msgid ""
+"Sets the minimum size of the window, to indicate to the sizer layout "
+"mechanism that this is the minimum required size."
+msgstr ""
+"Imposta la dimensione minima della finestra, per indicare al meccanismo di "
+"layout del sizer che questa è la dimensione minima richiesta."
+
+#: resources/application/xml/default.xml:120
+msgid ""
+"Sets the maximum size of the window, to indicate to the sizer layout "
+"mechanism that this is the maximum allowable size."
+msgstr ""
+"Imposta la dimensione massima della finestra, per indicare al meccanismo di "
+"layout del sizer che questa è la dimensione massima consentita."
+
+#: resources/application/xml/default.xml:121
+msgid ""
+"Sets the font for this window. This should not be use for a parent window if "
+"you don't want its font to be inherited by its children"
+msgstr ""
+"Imposta il carattere per questa finestra. Questo non dovrebbe essere usato "
+"per una finestra padre se non vuoi che il suo carattere venga ereditato dai "
+"suoi figli"
+
+#: resources/application/xml/default.xml:122
+msgid "Sets the foreground colour of the window."
+msgstr "Imposta il colore di primo piano della finestra."
+
+#: resources/application/xml/default.xml:123
+msgid "Sets the background colour of the window."
+msgstr "Imposta il colore di sfondo della finestra."
+
+#: resources/application/xml/default.xml:124
+msgid ""
+"The name of the window. This parameter is used to associate a name with the "
+"item, allowing the application user to set Motif resource values for "
+"individual windows."
+msgstr ""
+"Il nome della finestra. Questo parametro viene utilizzato per associare un "
+"nome all'elemento, consentendo all'utente dell'applicazione di impostare i "
+"valori delle risorse Motif per le singole finestre."
+
+#: resources/application/xml/default.xml:126
+msgid "The window class will decide the kind of border to show, if any."
+msgstr ""
+"La classe della finestra deciderà il tipo di bordo da mostrare, se presente."
+
+#: resources/application/xml/default.xml:127
+msgid ""
+"Displays a thin border around the window. wxSIMPLE_BORDER is the old name "
+"for this style."
+msgstr ""
+"Visualizza un bordo sottile intorno alla finestra. wxSIMPLE_BORDER è il "
+"vecchio nome di questo stile."
+
+#: resources/application/xml/default.xml:128
+msgid ""
+"Displays a sunken border. wxSUNKEN_BORDER is the old name for this style."
+msgstr ""
+"Visualizza un bordo incavato. wxSUNKEN_BORDER è il vecchio nome di questo "
+"stile."
+
+#: resources/application/xml/default.xml:129
+msgid ""
+"Displays a raised border. wxRAISED_BORDER is the old name for this style."
+msgstr ""
+"Visualizza un bordo rialzato. wxRAISED_BORDER è il vecchio nome di questo "
+"stile."
+
+#: resources/application/xml/default.xml:130
+msgid ""
+"Displays a border suitable for a static control. wxSTATIC_BORDER is the old "
+"name for this style. Windows only."
+msgstr ""
+"Solo per Windows. Visualizza un bordo adatto per un controllo statico. "
+"wxSTATIC_BORDER è il vecchio nome di questo stile."
+
+#: resources/application/xml/default.xml:131
+msgid ""
+"Displays a native border suitable for a control, on the current platform. On "
+"Windows XP or Vista, this will be a themed border; on most other platforms a "
+"sunken border will be used. For more information for themed borders on "
+"Windows, please see Themed borders on Windows."
+msgstr ""
+"Visualizza un bordo nativo adatto per un controllo, sulla piattaforma "
+"corrente. Su Windows XP o Vista, questo sarà un bordo a tema; sulla maggior "
+"parte delle altre piattaforme verrà utilizzato un bordo sommerso. Per "
+"ulteriori informazioni sui bordi a tema su Windows, vedere Bordi a tema su "
+"Windows."
+
+#: resources/application/xml/default.xml:132
+msgid ""
+"Displays no border, overriding the default border style for the window. "
+"wxNO_BORDER is the old name for this style."
+msgstr ""
+"Non visualizza alcun bordo, sovrascrivendo lo stile del bordo predefinito "
+"per la finestra. wxNO_BORDER è il vecchio nome di questo stile."
+
+#: resources/application/xml/default.xml:133
+msgid ""
+"The window is transparent, that is, it will not receive paint events. "
+"Windows only."
+msgstr ""
+"La finestra è trasparente, cioè non riceverà eventi di disegno. Solo "
+"finestre."
+
+#: resources/application/xml/default.xml:134
+msgid "Use this to enable tab traversal for non-dialog windows."
+msgstr ""
+"Usalo per abilitare l'attraversamento delle schede per le finestre non di "
+"dialogo."
+
+#: resources/application/xml/default.xml:135
+msgid ""
+"Use this to indicate that the window wants to get all char/key events for "
+"all keys - even for keys like TAB or ENTER which are usually used for dialog "
+"navigation and which wouldn't be generated without this style. If you need "
+"to use this style in order to get the arrows or etc., but would still like "
+"to have normal keyboard navigation take place, you should call Navigate in "
+"response to the key events for Tab and Shift-Tab."
+msgstr ""
+"Usa questo per indicare che la finestra vuole ottenere tutti gli eventi char/"
+"key per tutte le chiavi, anche per chiavi come TAB o ENTER che vengono "
+"solitamente utilizzate per la navigazione nelle finestre di dialogo e che "
+"non verrebbero generate senza questo stile. Se è necessario utilizzare "
+"questo stile per ottenere le frecce o altro, ma si desidera comunque che "
+"avvenga la normale navigazione da tastiera, è necessario chiamare Navigate "
+"in risposta agli eventi chiave per Tab e Maiusc-Tab."
+
+#: resources/application/xml/default.xml:136
+msgid ""
+"Use this style to enable a vertical scrollbar. Notice that this style cannot "
+"be used with native controls which don't support scrollbars nor with top-"
+"level windows in most ports."
+msgstr ""
+"Usa questo stile per abilitare una barra di scorrimento verticale. Nota che "
+"questo stile non può essere utilizzato con i controlli nativi che non "
+"supportano le barre di scorrimento né con le finestre di primo livello nella "
+"maggior parte delle porte."
+
+#: resources/application/xml/default.xml:137
+msgid ""
+"Use this style to enable a horizontal scrollbar. The same limitations as for "
+"wxVSCROLL apply to this style."
+msgstr ""
+"Usa questo stile per abilitare una barra di scorrimento orizzontale. Le "
+"stesse limitazioni di wxVSCROLL si applicano a questo stile."
+
+#: resources/application/xml/default.xml:138
+msgid ""
+"If a window has scrollbars, disable them instead of hiding them when they "
+"are not needed (i.e. when the size of the window is big enough to not "
+"require the scrollbars to navigate it). This style is currently implemented "
+"for wxMSW, wxGTK and wxUniversal and does nothing on the other platforms."
+msgstr ""
+"Se una finestra ha le barre di scorrimento, disabilitale invece di "
+"nasconderle quando non sono necessarie (cioè quando la dimensione della "
+"finestra è abbastanza grande da non richiedere le barre di scorrimento per "
+"navigare). Questo stile è attualmente implementato per wxMSW, wxGTK e "
+"wxUniversal e non fa nulla sulle altre piattaforme."
+
+#: resources/application/xml/default.xml:139
+msgid ""
+"Use this style to eliminate flicker caused by the background being "
+"repainted, then children being painted over them. Windows only."
+msgstr ""
+"Solo per Windows. Usa questo stile per eliminare lo sfarfallio causato dallo "
+"sfondo che viene ridipinto, quindi i bambini vengono dipinti su di esso."
+
+#: resources/application/xml/default.xml:140
+msgid ""
+"Use this style to force a complete redraw of the window whenever it is "
+"resized instead of redrawing just the part of the window affected by "
+"resizing. Note that this was the behaviour by default before 2.5.1 release "
+"and that if you experience redraw problems with code which previously used "
+"to work you may want to try this. Currently this style applies on GTK+ 2 and "
+"Windows only, and full repainting is always done on other platforms."
+msgstr ""
+"Usa questo stile per forzare un ridisegno completo della finestra ogni volta "
+"che viene ridimensionata invece di ridisegnare solo la parte della finestra "
+"interessata dal ridimensionamento. Nota che questo era il comportamento "
+"predefinito prima del rilascio 2.5.1 e che se riscontri problemi di "
+"ridisegno con il codice che in precedenza funzionava potresti provare "
+"questo. Attualmente questo stile si applica solo su wxGTK e Windows, il "
+"ridisegno completo viene sempre eseguita su altre piattaforme."
+
+#: resources/application/xml/default.xml:141
+msgid ""
+"On Windows, this style used to disable repainting the window completely when "
+"its size is changed. Since this behaviour is now the default, the style is "
+"now obsolete and no longer has an effect."
+msgstr ""
+"Su Windows, questo stile era utilizzato per disabilitare completamente il "
+"ridisegno della finestra quando le sue dimensioni venivano modificate. "
+"Poiché questo comportamento è ora l'impostazione predefinita, lo stile è ora "
+"obsoleto e non ha più effetto."
+
+#: resources/application/xml/default.xml:144
+msgid ""
+"By default, Validate/TransferDataTo/FromWindow() only work on direct "
+"children of the window (compatible behaviour). Set this flag to make them "
+"recursively descend into all subwindows."
+msgstr ""
+"Per impostazione predefinita, Validate/TransferDataTo/FromWindow() funziona "
+"solo sui controlli diretti discendenti della finestra (comportamento "
+"compatibile). Imposta questo flag per propagarlo ricorsivamente a tutte le "
+"sottofinestre."
+
+#: resources/application/xml/default.xml:145
+msgid ""
+"wxCommandEvents and the objects of the derived classes are forwarded to the "
+"parent window and so on recursively by default. Using this flag for the "
+"given window allows to block this propagation at this window, i.e. prevent "
+"the events from being propagated further upwards. Dialogs have this flag on "
+"by default."
+msgstr ""
+"wxCommandEvents e gli oggetti delle classi derivate vengono inoltrati alla "
+"finestra genitore e così via in modo ricorsivo per impostazione predefinita. "
+"L'utilizzo di questo flag per la data finestra consente di bloccare questa "
+"propagazione in questa finestra, ovvero impedire che gli eventi si "
+"propaghino ulteriormente verso l'alto. Le finestre di dialogo hanno questo "
+"flag attivo per impostazione predefinita."
+
+#: resources/application/xml/default.xml:146
+msgid ""
+"Don't use this window as an implicit parent for the other windows: this must "
+"be used with transient windows as otherwise there is the risk of creating a "
+"dialog/frame with this window as a parent which would lead to a crash if the "
+"parent is destroyed before the child."
+msgstr ""
+"Non usare questa finestra come genitore implicito per le altre finestre: "
+"deve essere usato con finestre transitorie altrimenti c'è il rischio di "
+"creare una finestra di dialogo/frame con questa finestra come genitore che "
+"porterebbe ad un crash se il widget genitore viene distrutto prima."
+
+#: resources/application/xml/default.xml:147
+msgid ""
+"Under Windows, puts a query button on the caption. When pressed, Windows "
+"will go into a context-sensitive help mode and wxWidgets will send a "
+"wxEVT_HELP event if the user clicked on an application window. This style "
+"cannot be used (because of the underlying native behaviour) together with "
+"wxMAXIMIZE_BOX or wxMINIMIZE_BOX, so these two styles are automatically "
+"turned off if this one is used."
+msgstr ""
+"In Windows, inserisce un pulsante di query sulla didascalia. Quando viene "
+"premuto, Windows entrerà in una modalità di aiuto sensibile al contesto e "
+"wxWidgets invierà un evento wxEVT_HELP se l'utente ha fatto clic su una "
+"finestra dell'applicazione. Questo stile non può essere utilizzato (a causa "
+"del comportamento nativo sottostante) insieme a wxMAXIMIZE_BOX o "
+"wxMINIMIZE_BOX, quindi questi due stili vengono automaticamente disattivati ​​"
+"se viene utilizzato questo."
+
+#: resources/application/xml/default.xml:148
+msgid ""
+"This window should always process idle events, even if the mode set by "
+"wxIdleEvent::SetMode is wxIDLE_PROCESS_SPECIFIED."
+msgstr ""
+"Questa finestra dovrebbe sempre elaborare gli eventi inattivi, anche se la "
+"modalità impostata da wxIdleEvent::SetMode è wxIDLE_PROCESS_SPECIFIED."
+
+#: resources/application/xml/default.xml:149
+msgid ""
+"This window should always process UI update events, even if the mode set by "
+"wxUpdateUIEvent::SetMode is wxUPDATE_UI_PROCESS_SPECIFIED."
+msgstr ""
+"Questa finestra dovrebbe sempre elaborare gli eventi di aggiornamento "
+"dell'interfaccia utente, anche se la modalità impostata da wxUpdateUIEvent::"
+"SetMode è wxUPDATE_UI_PROCESS_SPECIFIED."
+
+#: resources/application/xml/default.xml:151
+msgid "Attach a tooltip to the window."
+msgstr "Allega un tooltip alla finestra."
+
+#: resources/application/xml/default.xml:152
+msgid ""
+"Generates event handler for displaying of menu assigned to this widgets as a "
+"context menu."
+msgstr ""
+"Genera un gestore di eventi per la visualizzazione del menu assegnato a "
+"questo widget come menu contestuale."
+
+#: resources/application/xml/default.xml:153
+msgid ""
+"Attach context-sensitive help to the window. Note: The Project's &quot;"
+"help_provider&quot; property must be set for context-sensitive help to work."
+msgstr ""
+"Allega la guida sensibile al contesto alla finestra. Nota: l' &quot;"
+"help_provider&quot; del progetto La proprietà deve essere impostata affinché "
+"la guida sensibile al contesto funzioni."
+
+#: resources/application/xml/default.xml:154
+msgid ""
+"Enable or disable the window for user input. Note that when a parent window "
+"is disabled, all of its children are disabled as well and they are reenabled "
+"again when the parent is."
+msgstr ""
+"Abilita o disabilita la finestra per l'input dell'utente. Nota che quando "
+"una finestra padre è disabilitata, anche tutti i suoi figli sono "
+"disabilitati e vengono riabilitati di nuovo quando lo è il genitore."
+
+#: resources/application/xml/default.xml:155
+msgid "Shows or hides the window."
+msgstr "Mostra o nasconde la finestra."
+
+#: resources/application/xml/default.xml:156
+msgid ""
+"For easy use of custom widgets which are simple variations from standard "
+"ones, without requiring a new plugin for wxWeaver or a full xrc handler for "
+"wxWidgets. For C++, this replaces the name of the class. For XRC, this sets "
+"the subclass value on the object tag."
+msgstr ""
+"Per un facile utilizzo di widget personalizzati che sono semplici variazioni "
+"da quelli standard, senza richiedere un nuovo plugin per wxWeaver o un "
+"gestore xrc completo per wxWidgets. Per C++, sostituisce il nome della "
+"classe. Per XRC, imposta il valore della sottoclasse sul tag dell'oggetto."
+
+#: resources/application/xml/default.xml:168
+msgid "Process a wxEVT_CHAR event."
+msgstr "Elabora un evento wxEVT_CHAR."
+
+#: resources/application/xml/default.xml:169
+msgid ""
+"Process a wxEVT_CHAR_HOOK event. Unlike all the other key events, this event "
+"is propagated upwards the window hierarchy which allows intercepting it in "
+"the parent window of the focused window to which it is sent initially (if "
+"there is no focused window, this event is sent to the wxApp global object). "
+"It is also generated before any other key events and so gives the parent "
+"window an opportunity to modify the keyboard handling of its children, e.g. "
+"it is used internally by wxWidgets in some ports to intercept pressing Esc "
+"key in any child of a dialog to close the dialog itself when it's pressed. "
+"By default, if this event is handled, i.e. the handler doesn't call wxEvent::"
+"Skip(), neither wxEVT_KEY_DOWN nor wxEVT_CHAR events will be generated "
+"(although wxEVT_KEY_UP still will be), i.e. it replaces the normal key "
+"events. However by calling the special DoAllowNextEvent() method you can "
+"handle wxEVT_CHAR_HOOK and still allow normal events generation. This is "
+"something that is rarely useful but can be required if you need to prevent a "
+"parent wxEVT_CHAR_HOOK handler from running without suppressing the normal "
+"key events. Finally notice that this event is not generated when the mouse "
+"is captured as it is considered that the window which has the capture should "
+"receive all the keyboard events too without allowing its parent "
+"wxTopLevelWindow to interfere with their processing."
+msgstr ""
+"Elabora un evento wxEVT_CHAR_HOOK. A differenza di tutti gli altri eventi "
+"chiave, questo evento viene propagato verso l'alto nella gerarchia della "
+"finestra che permette di intercettarlo nella finestra madre della finestra "
+"focalizzata a cui viene inviato inizialmente (se non esiste una finestra "
+"focalizzata, questo evento viene inviato all'oggetto globale wxApp ). Viene "
+"anche generato prima di qualsiasi altro evento chiave e quindi offre alla "
+"finestra padre l'opportunità di modificare la gestione della tastiera dei "
+"suoi figli, ad es. è usato internamente da wxWidgets in alcune porte per "
+"intercettare la pressione del tasto Esc in qualsiasi figlio di una finestra "
+"di dialogo per chiudere la finestra stessa quando viene premuto. Per "
+"impostazione predefinita, se questo evento viene gestito, ovvero il gestore "
+"non chiama wxEvent::Skip(), non verranno generati né gli eventi "
+"wxEVT_KEY_DOWN né wxEVT_CHAR (sebbene wxEVT_KEY_UP lo sarà ancora), cioè "
+"sostituisce i normali eventi chiave. Tuttavia, chiamando il metodo speciale "
+"DoAllowNextEvent() è possibile gestire wxEVT_CHAR_HOOK e consentire comunque "
+"la normale generazione di eventi. Questo è qualcosa che è raramente utile ma "
+"può essere richiesto se è necessario impedire l'esecuzione di un gestore "
+"padre wxEVT_CHAR_HOOK senza sopprimere i normali eventi chiave. Si noti "
+"infine che questo evento non viene generato quando il mouse viene catturato "
+"in quanto si considera che la finestra che ha la cattura dovrebbe ricevere "
+"anche tutti gli eventi della tastiera senza consentire al suo genitore "
+"wxTopLevelWindow di interferire con la loro elaborazione."
+
+#: resources/application/xml/default.xml:170
+msgid ""
+"Process a wxEVT_KEY_DOWN event (any key has been pressed). If this event is "
+"handled and not skipped, wxEVT_CHAR will not be generated at all for this "
+"key press (but wxEVT_KEY_UP will be)."
+msgstr ""
+"Elabora un evento wxEVT_KEY_DOWN (è stato premuto un tasto qualsiasi). Se "
+"questo evento viene gestito e non saltato, wxEVT_CHAR non verrà generato "
+"affatto per questa pressione del tasto (ma lo sarà wxEVT_KEY_UP)."
+
+#: resources/application/xml/default.xml:171
+msgid "Process a wxEVT_KEY_UP event (any key has been released)."
+msgstr ""
+"Elabora un evento wxEVT_KEY_UP (un qualsiasi tasto è stato rilasciato)."
+
+#: resources/application/xml/default.xml:174
+msgid "Process a wxEVT_ENTER_WINDOW event."
+msgstr "Elabora un evento wxEVT_ENTER_WINDOW."
+
+#: resources/application/xml/default.xml:175
+msgid "Process a wxEVT_LEAVE_WINDOW event."
+msgstr "Elabora un evento wxEVT_LEAVE_WINDOW."
+
+#: resources/application/xml/default.xml:176
+msgid "Process a wxEVT_LEFT_DCLICK event."
+msgstr "Elabora un evento wxEVT_LEFT_DCLICK."
+
+#: resources/application/xml/default.xml:177
+msgid "Process a wxEVT_LEFT_DOWN event."
+msgstr "Elabora un evento wxEVT_LEFT_DOWN."
+
+#: resources/application/xml/default.xml:178
+msgid "Process a wxEVT_LEFT_UP event."
+msgstr "Elabora un evento wxEVT_LEFT_UP."
+
+#: resources/application/xml/default.xml:179
+msgid "Process a wxEVT_MIDDLE_DCLICK event."
+msgstr "Elabora un evento wxEVT_MIDDLE_DCLICK."
+
+#: resources/application/xml/default.xml:180
+msgid "Process a wxEVT_MIDDLE_DOWN event."
+msgstr "Elabora un evento wxEVT_MIDDLE_DOWN."
+
+#: resources/application/xml/default.xml:181
+msgid "Process a wxEVT_MIDDLE_UP event."
+msgstr "Elabora un evento wxEVT_MIDDLE_UP."
+
+#: resources/application/xml/default.xml:182
+msgid "Process a wxEVT_RIGHT_DCLICK event."
+msgstr "Elabora un evento wxEVT_RIGHT_DCLICK."
+
+#: resources/application/xml/default.xml:183
+msgid "Process a wxEVT_RIGHT_DOWN event."
+msgstr "Elabora un evento wxEVT_RIGHT_DOWN."
+
+#: resources/application/xml/default.xml:184
+msgid "Process a wxEVT_RIGHT_UP event."
+msgstr "Elabora un evento wxEVT_RIGHT_UP."
+
+#: resources/application/xml/default.xml:185
+msgid "Process a wxEVT_AUX1_DCLICK event."
+msgstr "Elabora un evento wxEVT_AUX1_DCLICK."
+
+#: resources/application/xml/default.xml:186
+msgid "Process a wxEVT_AUX1_DOWN event."
+msgstr "Elabora un evento wxEVT_AUX1_DOWN."
+
+#: resources/application/xml/default.xml:187
+msgid "Process a wxEVT_AUX1_UP event."
+msgstr "Elabora un evento wxEVT_AUX1_UP."
+
+#: resources/application/xml/default.xml:188
+msgid "Process a wxEVT_AUX2_DCLICK event."
+msgstr "Elabora un evento wxEVT_AUX2_DCLICK."
+
+#: resources/application/xml/default.xml:189
+msgid "Process a wxEVT_AUX2_DOWN event."
+msgstr "Elabora un evento wxEVT_AUX2_DOWN."
+
+#: resources/application/xml/default.xml:190
+msgid "Process a wxEVT_AUX2_UP event."
+msgstr "Elabora un evento wxEVT_AUX2_UP."
+
+#: resources/application/xml/default.xml:191
+msgid "Process a wxEVT_MOTION event."
+msgstr "Elabora un evento wxEVT_MOTION."
+
+#: resources/application/xml/default.xml:192
+msgid "Process a wxEVT_MOUSEWHEEL event."
+msgstr "Elabora un evento wxEVT_MOUSEWHEEL."
+
+#: resources/application/xml/default.xml:193
+msgid "Process all mouse events."
+msgstr "Elabora tutti gli eventi del mouse."
+
+#: resources/application/xml/default.xml:196
+msgid "Process a wxEVT_KILL_FOCUS event."
+msgstr "Elabora un evento wxEVT_KILL_FOCUS."
+
+#: resources/application/xml/default.xml:197
+msgid "Process a wxEVT_SET_FOCUS event."
+msgstr "Elabora un evento wxEVT_SET_FOCUS."
+
+#: resources/application/xml/default.xml:200
+msgid "Process a wxEVT_ERASE_BACKGROUND event."
+msgstr "Elabora un evento wxEVT_ERASE_BACKGROUND."
+
+#: resources/application/xml/default.xml:201
+msgid "Process a wxEVT_PAINT event."
+msgstr "Elabora un evento wxEVT_PAINT."
+
+#: resources/application/xml/default.xml:202
+msgid "Process a wxEVT_SIZE event."
+msgstr "Elabora un evento wxEVT_SIZE."
+
+#: resources/application/xml/default.xml:203
+msgid ""
+"Process a wxEVT_MOVE event, which is generated when a window is moved. Not "
+"generated in wxGTK"
+msgstr ""
+"Elabora un evento wxEVT_MOVE, che viene generato quando una finestra viene "
+"spostata. Non generato in wxGTK"
+
+#: resources/application/xml/default.xml:204
+msgid "Process a wxEVT_UPDATE_UI event."
+msgstr "Elabora un evento wxEVT_UPDATE_UI."
+
+#: resources/application/xml/default.xml:209
+msgid "Begin dragging with the left mouse button."
+msgstr "Inizia a trascinare con il tasto sinistro del mouse."
+
+#: resources/application/xml/default.xml:210
+msgid "Begin dragging with the right mouse button."
+msgstr "Inizia a trascinare con il tasto destro del mouse."
+
+#: resources/application/xml/default.xml:211
+msgid "End dragging with the left or right mouse button."
+msgstr "Termina il trascinamento con il tasto sinistro o destro del mouse."
+
+#: resources/application/xml/default.xml:212
+msgid "Begin editing a label. This can be prevented by calling Veto()."
+msgstr ""
+"Inizia a modificare un'etichetta. Questo può essere evitato chiamando Veto()."
+
+#: resources/application/xml/default.xml:213
+msgid "Finish editing a label. This can be prevented by calling Veto()."
+msgstr ""
+"Termina la modifica di un'etichetta. Questo può essere evitato chiamando "
+"Veto()."
+
+#: resources/application/xml/default.xml:214
+msgid "Delete an item."
+msgstr "Elimina un elemento."
+
+#: resources/application/xml/default.xml:215
+msgid ""
+"The item has been activated, i.e. chosen by double clicking it with mouse or "
+"from keyboard."
+msgstr ""
+"L'oggetto è stato attivato, cioè scelto facendo doppio click con il mouse o "
+"da tastiera."
+
+#: resources/application/xml/default.xml:216
+msgid "The item has been collapsed."
+msgstr "L'elemento è stato compresso."
+
+#: resources/application/xml/default.xml:217
+msgid "The item is being collapsed. This can be prevented by calling Veto()."
+msgstr ""
+"L'elemento viene compresso. Questo può essere evitato chiamando Veto()."
+
+#: resources/application/xml/default.xml:218
+msgid "The item has been expanded."
+msgstr "L'elemento è stato ampliato."
+
+#: resources/application/xml/default.xml:219
+msgid "The item is being expanded. This can be prevented by calling Veto()."
+msgstr ""
+"L'elemento è in fase di espansione. Questo può essere evitato chiamando "
+"Veto()."
+
+#: resources/application/xml/default.xml:220
+msgid "The user has clicked the item with the right mouse button"
+msgstr "L'utente ha cliccato sull'elemento con il tasto destro del mouse"
+
+#: resources/application/xml/default.xml:221
+msgid "The user has clicked the item with the middle mouse button."
+msgstr ""
+"L'utente ha fatto clic sull'elemento con il pulsante centrale del mouse."
+
+#: resources/application/xml/default.xml:222
+msgid "Selection has changed."
+msgstr "La selezione è cambiata."
+
+#: resources/application/xml/default.xml:223
+msgid "Selection is changing. This can be prevented by calling Veto()."
+msgstr ""
+"La selezione sta cambiando. Questo può essere evitato chiamando Veto()."
+
+#: resources/application/xml/default.xml:224
+msgid "A key has been pressed."
+msgstr "È stato premuto un tasto."
+
+#: resources/application/xml/default.xml:225
+msgid ""
+"The context menu for the selected item has been requested, either by a right "
+"click or by using the menu key."
+msgstr ""
+"Il menu contestuale per l'elemento selezionato è stato richiesto, con un "
+"clic destro o utilizzando il tasto menu."
+
+#: resources/application/xml/default.xml:230
+msgid ""
+"Simple markup can be used to apply different fonts or colours to different "
+"parts of the control label when supported. If markup is not supported by the "
+"control or platform, it is simply stripped and SetLabel() is used with the "
+"resulting string. Since 2.9.2."
+msgstr ""
+"Il markup semplice può essere utilizzato per applicare caratteri o colori "
+"diversi a parti diverse dell'etichetta di controllo, se supportato. Se il "
+"markup non è supportato dal controllo o dalla piattaforma, viene "
+"semplicemente rimosso e viene utilizzato SetLabel() con la stringa "
+"risultante. Dalla versione 2.9.2."
+
+#: resources/application/xml/default.xml:231
+msgid ""
+"This is the bitmap shown in the default state, it must be always valid while "
+"all the other bitmaps are optional and don't have to be set."
+msgstr ""
+"Questa è la bitmap mostrata nello stato di default, deve essere sempre "
+"valida mentre tutte le altre bitmap sono facoltative e non devono essere "
+"impostate."
+
+#: resources/application/xml/default.xml:232
+msgid "Bitmap shown when the button is disabled."
+msgstr "Bitmap mostrato quando il pulsante è disabilitato."
+
+#: resources/application/xml/default.xml:233
+msgid ""
+"Bitmap shown when the button is pushed (e.g. while the user keeps the mouse "
+"button pressed on it)."
+msgstr ""
+"Bitmap mostrata quando il pulsante viene premuto (ad esempio mentre l'utente "
+"tiene premuto il pulsante del mouse su di esso)."
+
+#: resources/application/xml/default.xml:234
+msgid "Bitmap shown when the button has keyboard focus but is not pressed."
+msgstr ""
+"Bitmap mostrato quando il pulsante ha lo stato attivo della tastiera ma non "
+"è premuto."
+
+#: resources/application/xml/default.xml:235
+msgid ""
+"Bitmap shown when the mouse is over the button (but it is not pressed). "
+"Notice that if hover bitmap is not specified but the current platform UI "
+"uses hover images for the buttons (such as Windows XP or GTK+), then the "
+"focus bitmap is used for hover state as well. This makes it possible to set "
+"focus bitmap only to get reasonably good behaviour on all platforms."
+msgstr ""
+"Bitmap mostrato quando il mouse è sopra il pulsante (ma non è premuto). "
+"Notare che se la bitmap al passaggio del mouse non è specificata ma "
+"l'interfaccia utente della piattaforma corrente utilizza immagini al "
+"passaggio del mouse per i pulsanti (come Windows XP o GTK), la bitmap di "
+"attivazione viene utilizzata anche per lo stato al passaggio del mouse. Ciò "
+"rende possibile impostare la bitmap di messa a fuoco solo per ottenere un "
+"comportamento ragionevolmente buono su tutte le piattaforme."
+
+#: resources/application/xml/default.xml:238
+msgid "Positions the bitmap at the left"
+msgstr "Posiziona la bitmap a sinistra"
+
+#: resources/application/xml/default.xml:239
+msgid "Positions the bitmap at the right"
+msgstr "Posiziona la bitmap a destra"
+
+#: resources/application/xml/default.xml:240
+msgid "Positions the bitmap at the top"
+msgstr "Posiziona la bitmap in alto"
+
+#: resources/application/xml/default.xml:241
+msgid "Positions the bitmap at the bottom"
+msgstr "Posiziona la bitmap in basso"
+
+#: resources/application/xml/default.xml:243
+msgid ""
+"The margins between the bitmap and the text of the button. This is currently "
+"only implemented under MSW. If it is not specified, default margin is used "
+"around the bitmap."
+msgstr ""
+"I margini tra la bitmap e il testo del pulsante. Questo è attualmente "
+"implementato solo sotto MSW. Se non è specificato, viene utilizzato il "
+"margine predefinito attorno alla bitmap."
+
+#: resources/application/xml/default.xml:258
+msgid "Sets the internal name of the pane."
+msgstr "Imposta il nome interno del riquadro."
+
+#: resources/application/xml/default.xml:259
+msgid "Indicates that a pane caption should be visible."
+msgstr "Indica che una didascalia del riquadro dovrebbe essere visibile."
+
+#: resources/application/xml/default.xml:260
+msgid "Sets the caption of the pane."
+msgstr "Imposta la didascalia del riquadro."
+
+#: resources/application/xml/default.xml:261
+msgid "Indicates that a close button should be drawn for the pane."
+msgstr ""
+"Indica che deve essere disegnato un pulsante di chiusura per il riquadro."
+
+#: resources/application/xml/default.xml:262
+msgid "Indicates that a maximize button should be drawn for the pane."
+msgstr ""
+"Indica che deve essere disegnato un pulsante di ingrandimento per il "
+"riquadro."
+
+#: resources/application/xml/default.xml:263
+msgid "Indicates that a minimize button should be drawn for the pane."
+msgstr ""
+"Indica che deve essere disegnato un pulsante di riduzione a icona per il "
+"riquadro."
+
+#: resources/application/xml/default.xml:264
+msgid "Indicates that a pin button should be drawn for the pane."
+msgstr ""
+"Indica che deve essere disegnato un pulsante a forma di puntina per il "
+"riquadro."
+
+#: resources/application/xml/default.xml:265
+msgid "Indicates that a border should be drawn for the pane."
+msgstr "Indica che deve essere disegnato un bordo per il riquadro."
+
+#: resources/application/xml/default.xml:266
+msgid "Indicates that a pane should be shown."
+msgstr "Indica che deve essere visualizzato un riquadro."
+
+#: resources/application/xml/default.xml:267
+msgid "Indicates that a gripper should be drawn for the pane."
+msgstr "Indica che deve essere disegnata una pinza per il riquadro."
+
+#: resources/application/xml/default.xml:269
+msgid ""
+"Specifies that the pane should adopt the default center pane settings. "
+"Centre panes usually do not have caption bars. This function provides an "
+"easy way of preparing a pane to be displayed in the center dock position."
+msgstr ""
+"Specifica che il riquadro deve adottare le impostazioni predefinite del "
+"riquadro centrale. I riquadri centrali di solito non hanno barre del titolo. "
+"Questa funzione fornisce un modo semplice per preparare un riquadro da "
+"visualizzare nella posizione di ancoraggio centrale."
+
+#: resources/application/xml/default.xml:270
+msgid "Specifies that the pane should adopt the default pane settings."
+msgstr ""
+"Specifica che il riquadro deve adottare le impostazioni del riquadro "
+"predefinite."
+
+#: resources/application/xml/default.xml:271
+msgid "Specifies that the pane should adopt the default toolbar pane settings."
+msgstr ""
+"Specifica che il riquadro deve adottare le impostazioni predefinite del "
+"riquadro della barra degli strumenti."
+
+#: resources/application/xml/default.xml:273
+msgid "Indicates whether a frame can be moved."
+msgstr "Indica se un frame può essere spostato."
+
+#: resources/application/xml/default.xml:275
+msgid ""
+"Allows a pane to be resized if the parameter is true, and forces it to be a "
+"fixed size if the parameter is false."
+msgstr ""
+"Consente il ridimensionamento di un riquadro se il parametro è vero e ne "
+"impone una dimensione fissa se il parametro è falso."
+
+#: resources/application/xml/default.xml:276
+msgid "Forces a pane to be fixed size so that it cannot be resized."
+msgstr ""
+"Impone la dimensione fissa di un riquadro in modo che non possa essere "
+"ridimensionato."
+
+#: resources/application/xml/default.xml:279
+msgid "Sets the size of the floating pane."
+msgstr "Imposta la dimensione del riquadro mobile."
+
+#: resources/application/xml/default.xml:280
+msgid "Sets the ideal size for the pane."
+msgstr "Imposta la dimensione ideale per il riquadro."
+
+#: resources/application/xml/default.xml:281
+msgid "Sets the minimum size of the pane."
+msgstr "Imposta la dimensione minima del riquadro."
+
+#: resources/application/xml/default.xml:282
+msgid "Sets the maximum size of the pane."
+msgstr "Imposta la dimensione massima del riquadro."
+
+#: resources/application/xml/default.xml:285
+msgid "Indicates that a pane should be docked."
+msgstr "Indica che un riquadro deve essere ancorato."
+
+#: resources/application/xml/default.xml:286
+msgid "Indicates that a pane should be floated."
+msgstr "Indica che un riquadro deve essere flottato."
+
+#: resources/application/xml/default.xml:289
+msgid ""
+"Causes the containing dock to have no resize sash. This is useful for "
+"creating panes that span the entire width or height of a dock, but should "
+"not be resizable in the other direction."
+msgstr ""
+"Fa in modo che il dock contenitore non abbia un'anta di ridimensionamento. "
+"Questo è utile per creare riquadri che coprono l'intera larghezza o altezza "
+"di un dock, ma non dovrebbero essere ridimensionabili nell'altra direzione."
+
+#: resources/application/xml/default.xml:290
+msgid ""
+"Sets whether the user will be able to undock a pane and turn it into a "
+"floating window."
+msgstr ""
+"Imposta se l'utente sarà in grado di sganciare un riquadro e trasformarlo in "
+"una finestra mobile."
+
+#: resources/application/xml/default.xml:291
+msgid "Indicates whether a pane can be docked at the bottom of the frame."
+msgstr ""
+"Indica se un riquadro può essere ancorato nella parte inferiore della "
+"cornice."
+
+#: resources/application/xml/default.xml:292
+msgid "Indicates whether a pane can be docked at the top of the frame."
+msgstr ""
+"Indica se un riquadro può essere ancorato nella parte superiore della "
+"cornice."
+
+#: resources/application/xml/default.xml:293
+msgid "Indicates whether a pane can be docked on the left of the frame."
+msgstr "Indica se un riquadro può essere ancorato a sinistra della cornice."
+
+#: resources/application/xml/default.xml:294
+msgid "Indicates whether a pane can be docked on the right of the frame."
+msgstr "Indica se un riquadro può essere ancorato a destra della cornice."
+
+#: resources/application/xml/default.xml:296
+msgid "Determines the direction of the docked pane."
+msgstr "Determina la direzione del riquadro ancorato."
+
+#: resources/application/xml/default.xml:304
+msgid "Sets the position of the floating pane."
+msgstr "Imposta la posizione del riquadro mobile."
+
+#: resources/application/xml/default.xml:305
+msgid "Determines the position of the docked pane."
+msgstr "Determina la posizione del riquadro ancorato."
+
+#: resources/application/xml/default.xml:306
+msgid "Determines the row of the docked pane."
+msgstr "Determina la riga del riquadro ancorato."
+
+#: resources/application/xml/default.xml:307
+msgid ""
+"Determines the layer of the docked pane. The dock layer is similar to an "
+"onion, the inner-most layer being layer 0. Each shell moving in the outward "
+"direction has a higher layer number. This allows for more complex docking "
+"layout formation."
+msgstr ""
+"Determina il livello del riquadro ancorato. Il livello dock è simile a una "
+"cipolla, il livello più interno è il livello 0. Ogni shell che si muove "
+"verso l'esterno ha un numero di livello più alto. Ciò consente una "
+"formazione del layout di attracco più complessa."
+
+#: resources/application/xml/default.xml:311
+msgid "For C++ Only. Type of a validator assigned to the window"
+msgstr "Solo per C++. Tipo di validatore assegnato alla finestra"
+
+#: resources/application/xml/default.xml:312
+msgid "Default validator (does nothing)"
+msgstr "Validatore predefinito (non fa nulla)"
+
+#: resources/application/xml/default.xml:313
+msgid "Generic validator. Transfers data from/to window ."
+msgstr "Validatore generico. Trasferisce dati da/a finestra."
+
+#: resources/application/xml/default.xml:314
+msgid ""
+"Text validator. Transfer data from/to window and allows basic data filtering."
+msgstr ""
+"Validatore di testo. Trasferisce dati da/a finestra e consente il filtraggio "
+"dei dati di base."
+
+#: resources/application/xml/default.xml:317
+msgid "For C++ Only. Data filtering style for wxTextValidator."
+msgstr "Solo per C++. Stile di filtraggio dei dati per wxTextValidator."
+
+#: resources/application/xml/default.xml:318
+msgid "No filtering takes place."
+msgstr "Non avviene alcun filtraggio."
+
+#: resources/application/xml/default.xml:319
+msgid "Non-ASCII characters are filtered out."
+msgstr "I caratteri non ASCII vengono filtrati."
+
+#: resources/application/xml/default.xml:320
+msgid "Non-alpha characters are filtered out."
+msgstr "I caratteri non alfabetici vengono filtrati."
+
+#: resources/application/xml/default.xml:321
+msgid "Non-alphanumeric characters are filtered out."
+msgstr "I caratteri non alfanumerici vengono filtrati."
+
+#: resources/application/xml/default.xml:322
+msgid "Non-numeric characters are filtered out."
+msgstr "I caratteri non numerici vengono filtrati."
+
+#: resources/application/xml/default.xml:323
+msgid ""
+"Use an include list. The validator checks if the user input is on the list, "
+"complaining if not. See wxTextValidator::SetIncludes."
+msgstr ""
+"Utilizzare un elenco di inclusione. Il validatore controlla se l'input "
+"dell'utente è nell'elenco, lamentandosi in caso contrario. Vedere "
+"wxTextValidator::SetIncludes."
+
+#: resources/application/xml/default.xml:324
+msgid ""
+"Use an exclude list. The validator checks if the user input is on the list, "
+"complaining if it is. See wxTextValidator::SetExcludes."
+msgstr ""
+"Usa un elenco di esclusione. Il validatore controlla se l'input dell'utente "
+"è nell'elenco, lamentandosi se lo è. Vedere wxTextValidator::SetExcludes."
+
+#: resources/application/xml/default.xml:325
+msgid ""
+"Use an include list. The validator checks if each input character is in the "
+"list (one character per list element), complaining if not. See "
+"wxTextValidator::SetIncludes."
+msgstr ""
+"Utilizzare un elenco di inclusione. Il validatore controlla se ogni "
+"carattere di input è nell'elenco (un carattere per elemento dell'elenco), "
+"lamentandosi in caso contrario. Vedi wxTextValid ator::SetIncludes."
+
+#: resources/application/xml/default.xml:326
+msgid ""
+"Use an include list. The validator checks if each input character is in the "
+"list (one character per list element), complaining if it is. See "
+"wxTextValidator::SetExcludes."
+msgstr ""
+"Utilizzare un elenco di inclusione. Il validatore controlla se ogni "
+"carattere di input è nella lista (un carattere per elemento della lista), "
+"lamentandosi se lo è. Vedere wxTextValidator::SetExcludes."
+
+#: resources/application/xml/default.xml:329
+msgid "For C++ Only. Name of a member variable associated with the validator"
+msgstr "Solo per C++. Nome di una variabile membro associata al validatore"
+
+#: resources/application/xml/default.xml:330
+msgid "For C++ Only. Data type of the member variable"
+msgstr "Solo per C++. Tipo di dati della variabile membro"
+
+#: resources/application/xml/default.xml:331
+msgid "Undefined data type."
+msgstr "Tipo di dati non definito."
+
+#: resources/application/xml/default.xml:332
+msgid "Logical value. This should be used for wxCheckBox and wxRadioButton."
+msgstr ""
+"Valore logico. Questo dovrebbe essere usato per wxCheckBox e wxRadioButton."
+
+#: resources/application/xml/default.xml:333
+msgid ""
+"Signed integer value. This should be used for wxGauge, wxScrollBar, "
+"wxRadioBox, wxSpinButton, wxChoice."
+msgstr ""
+"Valore intero con segno. Questo dovrebbe essere usato per wxGauge, "
+"wxScrollBar, wxRadioBox, wxSpinButton, wxChoice."
+
+#: resources/application/xml/default.xml:334
+msgid ""
+"String value. This should be used for wxButton, wxComboBox, wxStaticText, "
+"wxTextCtrl."
+msgstr ""
+"Valore stringa. Questo dovrebbe essere usato per wxButton, wxComboBox, "
+"wxStaticText, wxTextCtrl."
+
+#: resources/application/xml/default.xml:335
+msgid "Array of integers. This should be used for wxListBox, wxCheckListBox."
+msgstr ""
+"Matrice di interi. Questo dovrebbe essere usato per wxListBox, "
+"wxCheckListBox."
+
+#: sdk/plugin_interface/forms/wizard.cpp:40 src/gui/dialogs/annoying.cpp:86
+#: src/gui/dialogs/annoying.cpp:94
+msgid "&Cancel"
+msgstr "A&nnulla"
+
+#: sdk/plugin_interface/forms/wizard.cpp:41 src/gui/mainframe.cpp:1406
+msgid "&Help"
+msgstr "&Aiuto"
+
+#: sdk/plugin_interface/forms/wizard.cpp:42
+#: sdk/plugin_interface/forms/wizard.cpp:141
+msgid "&Next >"
+msgstr "&Successivo >"
+
+#: sdk/plugin_interface/forms/wizard.cpp:43
+msgid "< &Back"
+msgstr "< &Indietro"
+
+#: sdk/plugin_interface/forms/wizard.cpp:141
+#: sdk/plugin_interface/forms/wizard.cpp:223
+msgid "&Finish"
+msgstr "&Fine"
+
+#: src/appdata.cpp:1068
+msgid ""
+"You cannot save over a file that is currently open in another instance.\n"
+"Would you like to switch to that instance?"
+msgstr ""
+"Non puoi sovrascrivere un file aperto da un'altra istanza.\n"
+"Vuoi visualizzare tale istanza?"
+
+#: src/appdata.cpp:1070
+msgid "Open in Another Instance"
+msgstr "Apri in un'altra istanza"
+
+#: src/appdata.cpp:1141
+msgid ""
+"This project file is newer than this version of wxWeaver.\n"
+"It cannot be opened.\n"
+"\n"
+"Please download an updated version from https://wxweaver.github.io"
+msgstr ""
+"Il file di progetto appartiene a una versione aggiornata di wxWeaver.\n"
+"Non puo' essere aperto.\n"
+"\n"
+"Per favore scarica una versione più aggiornata da https://wxweaver.github.io"
+
+#: src/appdata.cpp:1144
+msgid "New Version"
+msgstr "Nuova Versione"
+
+#: src/appdata.cpp:1155
+msgid ""
+"This project file is using an older file format, it will be updated during "
+"loading.\n"
+"\n"
+"WARNING: Saving the project will update the format of the project file on "
+"disk!"
+msgstr ""
+"Questo progetto utilizza un formato di file di una versione precedente e "
+"verrà aggiornato durante il caricamento.\n"
+"\n"
+"ATTENZIONE: Salvando il progetto verrà sovrascritto con il nuovo formato!"
+
+#: src/appdata.cpp:1157
+msgid "Older file format"
+msgstr "Formato di file di una versione precedente"
+
+#: src/appdata.cpp:1271
+msgid "The \"user_headers\" property has been removed.\n"
+msgstr "La proprietà \"user_headers\" è stata rimossa.\n"
+
+#: src/appdata.cpp:1272
+msgid "Its purpose was to provide a place to include precompiled headers or\n"
+msgstr "Il suo scopo è di provvedere l'inclusione di header precompilati o\n"
+
+#: src/appdata.cpp:1273
+msgid "headers for subclasses.\n"
+msgstr "header per sottoclassi.\n"
+
+#: src/appdata.cpp:1274
+msgid ""
+"There is now a \"precompiled_header\" property and a \"header\" subitem\n"
+msgstr ""
+"Ora è presente una proprietà \"precompiled_header\" e una sottovoce \"header"
+"\"\n"
+
+#: src/appdata.cpp:1275
+msgid ""
+"on the subclass property.\n"
+"\n"
+msgstr "alla voce di proprietà subclass\n"
+
+#: src/appdata.cpp:1276
+msgid ""
+"Would you like the current value of the \"user_headers\" property to be "
+"saved\n"
+msgstr "Vuoi salvare i valori della proprietà \"user_headers\"\n"
+
+#: src/appdata.cpp:1277
+msgid ""
+"to a file so that you can distribute the headers among the "
+"\"precompiled_header\"\n"
+msgstr ""
+"in un file in modo da poter distribuire gli header fra le proprietà "
+"\"precompiled_header\"\n"
+
+#: src/appdata.cpp:1278
+msgid "and \"subclass\" properties?"
+msgstr "e \"subclass\"?"
+
+#: src/appdata.cpp:1282
+msgid "The \"user_headers\" property has been removed"
+msgstr "La proprietà \"user_headers\" è stata rimossa"
+
+#: src/appdata.cpp:1290
+msgid "Save \"user_headers\""
+msgstr "Salva \"user_headers\""
+
+#: src/appdata.cpp:1292 src/gui/mainframe.cpp:451 src/gui/mainframe.cpp:498
+msgid "All files"
+msgstr "Tutti i file"
+
+#: src/appdata.cpp:2476
+msgid "Please select a form and try again."
+msgstr "Per favore, scegli un form e riprova."
+
+#: src/appdata.cpp:2477 src/appdata.cpp:2482
+msgid "XRC Preview"
+msgstr "Anteprima XRC"
+
+#: src/appdata.cpp:2481
+msgid "XRC preview doesn't support AUI-managed frames."
+msgstr "XRC preview doesn't support AUI-managed frames."
+
+#: src/gui/dialogs/about.cpp:62
+msgid "About..."
+msgstr "Informazioni..."
+
+#: src/gui/dialogs/annoying.cpp:80 src/gui/dialogs/annoying.cpp:85
+msgid "&OK"
+msgstr "&OK"
+
+#: src/gui/dialogs/annoying.cpp:85 src/gui/dialogs/annoying.cpp:92
+msgid "&Yes"
+msgstr "&Sì"
+
+#: src/gui/dialogs/annoying.cpp:86 src/gui/dialogs/annoying.cpp:93
+msgid "&No"
+msgstr "&No"
+
+#: src/gui/dialogs/annoying.cpp:145
+msgid "Don't annoy me again!"
+msgstr "Non chiedermelo più!"
+
+#: src/gui/dialogs/geninheritclass/geninhertclass_gui.cpp:24
+msgid "Instructions"
+msgstr "Istruzioni"
+
+#: src/gui/dialogs/geninheritclass/geninhertclass_gui.cpp:28
+msgid ""
+"1. Check the forms you would like to create the inherited class for.\n"
+"2. You can edit individual class details by clicking on their names in the "
+"list\n"
+"and then:\n"
+"\t2a. Edit the 'Class Name:' as required.\n"
+"\t2b. Edit the 'File Names: (.h/.cpp)' as required.\n"
+"3. Click 'OK'."
+msgstr ""
+"1. Seleziona i form per i quali desideri creare le classi eredi.\n"
+"2. Puoi modificare le proprieta' di ciascuna classe selezionandole nella "
+"lista\n"
+"e poi:\n"
+"\t2a. Cambia 'Nome Classe:' come richiesto.\n"
+"\t2b. Cambia 'Nomi File: (.h/.cpp/.py)' come richiesto.\n"
+"3. Clicca 'OK'."
+
+#: src/gui/dialogs/geninheritclass/geninhertclass_gui.cpp:45
+msgid "Class Details"
+msgstr "Dettagli Classe"
+
+#: src/gui/dialogs/geninheritclass/geninhertclass_gui.cpp:48
+msgid "Class Name:"
+msgstr "Nome Classe:"
+
+#: src/gui/dialogs/geninheritclass/geninhertclass_gui.cpp:61
+msgid "File Names: (.cpp/.h)"
+msgstr "Nomi File: (.cpp/.h)"
+
+#: src/gui/dialogs/geninheritclass/geninhertclass_gui.h:27
+msgid "Generate Inherited Class"
+msgstr "Genera Classe Ereditata"
+
+#: src/gui/dialogs/menueditor.cpp:58
+msgid "Menu Editor"
+msgstr "Editor dei Menu"
+
+#: src/gui/dialogs/menueditor.cpp:75 src/gui/dialogs/menueditor.cpp:97
+#: src/plugins/additional/additional.cpp:1752
+msgid "Label"
+msgstr "Etichetta"
+
+#: src/gui/dialogs/menueditor.cpp:76 src/gui/dialogs/menueditor.cpp:103
+msgid "Shortcut"
+msgstr "Collegamento"
+
+#: src/gui/dialogs/menueditor.cpp:77 src/gui/dialogs/menueditor.cpp:109
+msgid "Id"
+msgstr "Id"
+
+#: src/gui/dialogs/menueditor.cpp:78 src/gui/dialogs/menueditor.cpp:115
+msgid "Name"
+msgstr "Nome"
+
+#: src/gui/dialogs/menueditor.cpp:79 src/gui/dialogs/menueditor.cpp:121
+msgid "Help String"
+msgstr "Stringa Aiuto"
+
+#: src/gui/dialogs/menueditor.cpp:80 src/gui/dialogs/menueditor.cpp:129
+msgid "Kind"
+msgstr "Tipo"
+
+#: src/gui/dialogs/menueditor.cpp:91
+msgid "Menu item"
+msgstr "Oggetto Menu"
+
+#: src/gui/dialogs/menueditor.cpp:137
+msgid "&Add"
+msgstr "&Aggiungi"
+
+#: src/gui/dialogs/menueditor.cpp:142
+msgid "&Modify"
+msgstr "&Modifica"
+
+#: src/gui/dialogs/menueditor.cpp:147
+msgid "&Remove"
+msgstr "&Elimina"
+
+#: src/gui/dialogs/menueditor.cpp:153
+msgid "Add &Separator"
+msgstr "Aggiungi &Separatore"
+
+#: src/gui/dialogs/menueditor.cpp:161
+msgid "&Up"
+msgstr "&Su"
+
+#: src/gui/dialogs/menueditor.cpp:166
+msgid "&Down"
+msgstr "&Giù"
+
+#: src/gui/dialogs/menueditor.cpp:507
+msgid ""
+"The children of the selected item will be eliminated too. Are you sure you "
+"want to continue?"
+msgstr ""
+"Gli oggetti figlio della voce selezionata verranno eliminati anch'essi. "
+"Sicuro di voler continuare?"
+
+#: src/gui/dialogs/preferences.cpp:41
+msgid "Font"
+msgstr "Carattere"
+
+#: src/gui/dialogs/preferences.cpp:50
+msgid "Invisible"
+msgstr "Invisibile"
+
+#: src/gui/dialogs/preferences.cpp:51
+msgid "Always"
+msgstr "Sempre"
+
+#: src/gui/dialogs/preferences.cpp:52
+msgid "After Indent"
+msgstr "Dopo Indentazione"
+
+#: src/gui/dialogs/preferences.cpp:53
+msgid "Only In Indent"
+msgstr "Solo In Indentazione"
+
+#: src/gui/dialogs/preferences.cpp:56
+msgid "Display"
+msgstr "Visualizza"
+
+#: src/gui/dialogs/preferences.cpp:59
+msgid "View Whitespace:"
+msgstr "Visualizza spazi bianchi:"
+
+#: src/gui/dialogs/preferences.cpp:65
+msgid "View EOL"
+msgstr "Visualizza Fine Linea"
+
+#: src/gui/dialogs/preferences.cpp:77
+msgid "Indentation"
+msgstr "Indentazione"
+
+#: src/gui/dialogs/preferences.cpp:80
+msgid "Use Tabs"
+msgstr "Usa Tabulazioni"
+
+#: src/gui/dialogs/preferences.cpp:83
+msgid "Tabs Indents"
+msgstr "Tab Indenta"
+
+#: src/gui/dialogs/preferences.cpp:86
+msgid "Show Indentation Guides"
+msgstr "Visualizza Guide Indentazione"
+
+#: src/gui/dialogs/preferences.cpp:97
+msgid "Indent Size:"
+msgstr "Dimensione Rientro:"
+
+#: src/gui/dialogs/preferences.cpp:100
+msgid "Tabs Width:"
+msgstr "Larghezza Tab:"
+
+#: src/gui/dialogs/preferences.cpp:119
+msgid "Misc"
+msgstr "Varie"
+
+#: src/gui/dialogs/preferences.cpp:122
+msgid "Caret Width:"
+msgstr "Larghezza Cursore:"
+
+#: src/gui/dialogs/preferences.cpp:259 src/gui/dialogs/preferences.cpp:357
+msgid "Locale"
+msgstr "Lingua"
+
+#: src/gui/dialogs/preferences.cpp:262
+msgid "Enable Localization"
+msgstr "Abilita Traduzioni"
+
+#: src/gui/dialogs/preferences.cpp:268
+msgid "System Default"
+msgstr "Predefinito Di Sistema"
+
+#: src/gui/dialogs/preferences.cpp:269
+msgid "English"
+msgstr "Inglese"
+
+#: src/gui/dialogs/preferences.cpp:270
+msgid "English (U.S.)"
+msgstr "Inglese (US)"
+
+#: src/gui/dialogs/preferences.cpp:271
+msgid "German"
+msgstr "Tedesco"
+
+#: src/gui/dialogs/preferences.cpp:272
+msgid "Italian"
+msgstr "Italiano"
+
+#: src/gui/dialogs/preferences.cpp:342 src/gui/mainframe.cpp:400
+#: src/gui/mainframe.cpp:1548 src/gui/mainframe.cpp:1601
+#: src/gui/mainframe.cpp:1649
+msgid "Editor"
+msgstr "Editor"
+
+#: src/gui/dialogs/xrcpreview.cpp:124
+msgid "WARNING - For XRC Developers ONLY!!"
+msgstr "ATTENZIONE: SOLO Per Sviluppatori XRC!!"
+
+#: src/gui/dialogs/xrcpreview.cpp:125
+msgid ""
+"The XRC language is not as powerful as C++.\n"
+"It has limitations that will affect the GUI\n"
+"layout. This preview will ONLY show how the\n"
+"generated XRC will look, and it will probably\n"
+"be different from the Designer.\n"
+"\n"
+"If you are not using XRC, do NOT use the XRC\n"
+"preview, it will only confuse you."
+msgstr ""
+"Il linguaggio XRC non è potente quanto C++.\n"
+"Presenta delle limitazioni che possono incidere sul layout della GUI\n"
+"Questa anteprima potrà SOLO visualizzare come\n"
+"il codice XRC generato apparirà, probabilmente\n"
+"differente da quello del Designer.\n"
+"\n"
+"Se non usi XRC, NON usare l'anteprima XRC,\n"
+"potrà solo confonderti."
+
+#: src/gui/mainframe.cpp:448 src/gui/mainframe.cpp:1416
+msgid "Save Project"
+msgstr "Salva Progetto"
+
+#: src/gui/mainframe.cpp:449 src/gui/mainframe.cpp:496
+msgid " wxWeaver Project File"
+msgstr " File Progetto wxWeaver"
+
+#: src/gui/mainframe.cpp:469
+msgid "The file already exists. Do you want to replace it?"
+msgstr "File già esistente. Vuoi sovrascriverlo?"
+
+#: src/gui/mainframe.cpp:470
+msgid "Overwrite the file"
+msgstr "Sovrascrivi file"
+
+#: src/gui/mainframe.cpp:495 src/gui/mainframe.cpp:1415
+msgid "Open Project"
+msgstr "Apri Progetto"
+
+#: src/gui/mainframe.cpp:529
+#, c-format
+msgid ""
+"The project file '%s' doesn't exist. Would you like to remove it from the "
+"recent files list?"
+msgstr ""
+"Il file di progetto '%s' non esiste. Vuoi eliminarlo dalla lista dei file "
+"recenti?"
+
+#: src/gui/mainframe.cpp:531
+msgid "Open recent project"
+msgstr "Apri progetto recente"
+
+#: src/gui/mainframe.cpp:542 src/gui/mainframe.cpp:1348
+msgid "Import XRC file"
+msgstr "Importa file XRC"
+
+#: src/gui/mainframe.cpp:612
+msgid "Project Loaded!"
+msgstr "Progetto Caricato!"
+
+#: src/gui/mainframe.cpp:617 src/gui/mainframe.cpp:699
+#: src/gui/mainframe.cpp:785
+#, c-format
+msgid "Name: %s | Class: %s"
+msgstr "Nome: %s | Classe: %s"
+
+#: src/gui/mainframe.cpp:627
+msgid "Project Saved!"
+msgstr "Progetto Salvato!"
+
+#: src/gui/mainframe.cpp:696
+msgid "Object "
+msgstr "Oggetto "
+
+#: src/gui/mainframe.cpp:696
+msgid " Selected!"
+msgstr " Selezionato!"
+
+#: src/gui/mainframe.cpp:711
+#, c-format
+msgid "Object '%s' of class '%s' created."
+msgstr "Oggetto '%s' della classe '%s' creato."
+
+#: src/gui/mainframe.cpp:727
+#, c-format
+msgid "Object '%s' removed."
+msgstr "Oggetto '%s' rimosso."
+
+#: src/gui/mainframe.cpp:750
+msgid "Property Modified!"
+msgstr "Proprietà Modificata!"
+
+#: src/gui/mainframe.cpp:815 src/gui/mainframe.cpp:885
+msgid "Edit"
+msgstr "Modifica"
+
+#: src/gui/mainframe.cpp:881 src/gui/mainframe.cpp:925
+msgid "File"
+msgstr "File"
+
+#: src/gui/mainframe.cpp:896 src/gui/mainframe.cpp:1464
+msgid "Designer"
+msgstr "Editor"
+
+#: src/gui/mainframe.cpp:1161
+#, c-format
+msgid "Class(es) generated to '%s'."
+msgstr "Classe(i) generata(e) in '%s'."
+
+#: src/gui/mainframe.cpp:1170
+msgid ""
+"Current project file has been modified...\n"
+"Do you want to save the changes?"
+msgstr ""
+"Il progetto corrente e' stato modificato.\n"
+"Vuoi salvare le modifiche?"
+
+#: src/gui/mainframe.cpp:1172
+msgid "Save project"
+msgstr "Salva progetto"
+
+#: src/gui/mainframe.cpp:1310
+msgid "Find"
+msgstr "Cerca"
+
+#: src/gui/mainframe.cpp:1342
+msgid "&New Project\tCtrl+N"
+msgstr "&Nuovo Progetto\tCtrl+N"
+
+#: src/gui/mainframe.cpp:1342
+msgid "Create an empty project"
+msgstr "Crea un progetto vuoto"
+
+#: src/gui/mainframe.cpp:1343
+msgid "&Open...\tCtrl+O"
+msgstr "&Apri Progetto (Ctrl+O)"
+
+#: src/gui/mainframe.cpp:1343
+msgid "Open a project"
+msgstr "Apri un progetto"
+
+#: src/gui/mainframe.cpp:1345
+msgid "&Save\tCtrl+S"
+msgstr "&Salva\tCtrl+S"
+
+#: src/gui/mainframe.cpp:1345
+msgid "Save current project"
+msgstr "Salva progetto corrente"
+
+#: src/gui/mainframe.cpp:1346
+msgid "Save &As...\tCtrl-Shift+S"
+msgstr "Salva &Come...\tCtrl-Shift+S"
+
+#: src/gui/mainframe.cpp:1346
+msgid "Save current project as..."
+msgstr "Salva progetto corrente come..."
+
+#: src/gui/mainframe.cpp:1348
+msgid "&Import XRC..."
+msgstr "&Importa XRC..."
+
+#: src/gui/mainframe.cpp:1350
+msgid "&Generate Code\tF8"
+msgstr "&Genera Codice\tF8"
+
+#: src/gui/mainframe.cpp:1350 src/gui/mainframe.cpp:1426
+msgid "Generate Code"
+msgstr "Genera Codice"
+
+#: src/gui/mainframe.cpp:1352
+msgid "E&xit\tAlt-F4"
+msgstr "Esci\tAlt+F4"
+
+#: src/gui/mainframe.cpp:1352
+msgid "Quit wxWeaver"
+msgstr "Chiudi wxWeaver"
+
+#: src/gui/mainframe.cpp:1355
+msgid "&Undo\tCtrl+Z"
+msgstr "&Annulla\tCtrl+Z"
+
+#: src/gui/mainframe.cpp:1355
+msgid "Undo changes"
+msgstr "Annulla modifiche"
+
+#: src/gui/mainframe.cpp:1356
+msgid "&Redo\tCtrl+Y"
+msgstr "&Ripeti\tCtrl+Y"
+
+#: src/gui/mainframe.cpp:1356
+msgid "Redo changes"
+msgstr "Ripeti modifiche"
+
+#: src/gui/mainframe.cpp:1358
+msgid "&Copy\tCtrl+C"
+msgstr "&Copia\tCtrl+C"
+
+#: src/gui/mainframe.cpp:1358
+msgid "Copy selected object"
+msgstr "Copia oggetto selezionato"
+
+#: src/gui/mainframe.cpp:1359 src/gui/panels/treeview.cpp:513
+msgid "Cut\tCtrl+X"
+msgstr "Taglia\tCtrl+X"
+
+#: src/gui/mainframe.cpp:1359
+msgid "Cut selected object"
+msgstr "Taglia oggetto selezionato"
+
+#: src/gui/mainframe.cpp:1360
+msgid "&Paste\tCtrl+V"
+msgstr "&Incolla\tCtrl+V"
+
+#: src/gui/mainframe.cpp:1360
+msgid "Paste on selected object"
+msgstr "Incolla oggetto selezionato"
+
+#: src/gui/mainframe.cpp:1361
+msgid "&Delete\tCtrl+D"
+msgstr "&Elimina\tCtrl+D"
+
+#: src/gui/mainframe.cpp:1361
+msgid "Delete selected object"
+msgstr "Elimina oggetto selezionato"
+
+#: src/gui/mainframe.cpp:1363
+msgid "Copy Object To Clipboard\tCtrl+Shift+C"
+msgstr "Copia Oggetto Nella Clipboard\tCtrl+Shift+C"
+
+#: src/gui/mainframe.cpp:1363
+msgid "Copy Object to Clipboard"
+msgstr "Copia Oggetto Nella Clipboard"
+
+#: src/gui/mainframe.cpp:1364
+msgid "Paste Object From Clipboard\tCtrl+Shift+V"
+msgstr "Incolla Oggetto Dalla Clipboard\tCtrl+Shift+V"
+
+#: src/gui/mainframe.cpp:1364
+msgid "Paste Object from Clipboard"
+msgstr "Incolla Oggetto Dalla Clipboard"
+
+#: src/gui/mainframe.cpp:1366
+msgid "Toggle &Expand\tAlt+W"
+msgstr "Scambia &Espandi\tAlt+W"
+
+#: src/gui/mainframe.cpp:1366
+msgid "Toggle wxEXPAND flag of sizeritem properties"
+msgstr "Scambia la proprieta' wxEXPAND di un sizeritem"
+
+#: src/gui/mainframe.cpp:1367
+msgid "Toggle &Stretch\tAlt+S"
+msgstr "Scambia Allunga\tAlt+S"
+
+#: src/gui/mainframe.cpp:1367
+msgid "Toggle option property of sizeritem properties"
+msgstr "Scambia la proprieta' proportion di un sizeritem"
+
+#: src/gui/mainframe.cpp:1368 src/gui/panels/treeview.cpp:519
+msgid "Move Up\tAlt+Up"
+msgstr "Sposta Su\tAlt+Up"
+
+#: src/gui/mainframe.cpp:1368
+msgid "Move Up selected object"
+msgstr "Sposta l'oggetto selezionato verso l'alto"
+
+#: src/gui/mainframe.cpp:1369 src/gui/panels/treeview.cpp:520
+msgid "Move Down\tAlt+Down"
+msgstr "Sposta Giù\tAlt+Down"
+
+#: src/gui/mainframe.cpp:1369
+msgid "Move Down selected object"
+msgstr "Sposta l'oggetto selezionato verso il basso"
+
+#: src/gui/mainframe.cpp:1370 src/gui/panels/treeview.cpp:521
+msgid "Move Left\tAlt+Left"
+msgstr "Sposta Sinistra\tAlt+Left"
+
+#: src/gui/mainframe.cpp:1370
+msgid "Move Left selected object"
+msgstr "Sposta a sinistra l'oggetto selezionato"
+
+#: src/gui/mainframe.cpp:1371 src/gui/panels/treeview.cpp:522
+msgid "Move Right\tAlt+Right"
+msgstr "Sposta Destra\tAlt+Right"
+
+#: src/gui/mainframe.cpp:1371
+msgid "Move Right selected object"
+msgstr "Sposta a destra l'oggetto selezionato"
+
+#: src/gui/mainframe.cpp:1373
+msgid "&Find\tCtrl+F"
+msgstr "&Cerca\tCtrl+F"
+
+#: src/gui/mainframe.cpp:1373
+msgid "Find text in the active code viewer"
+msgstr "Ricerca nel testo dell'editor di codice corrente"
+
+#: src/gui/mainframe.cpp:1375
+msgid "Align &Left\tAlt+Shift+Left"
+msgstr "Allinea &Sinistra\tAlt+Shift+Left"
+
+#: src/gui/mainframe.cpp:1375
+msgid "Align item to the left"
+msgstr "Allinea l'oggetto a sinistra"
+
+#: src/gui/mainframe.cpp:1376
+msgid "Align Center &Horizontal\tAlt+Shift+H"
+msgstr "Allinea Centrato &Orizzontalmente\tAlt+Shift+H"
+
+#: src/gui/mainframe.cpp:1376
+msgid "Align item to the center horizontally"
+msgstr "Allinea l'oggetto al centro orizzontalmente"
+
+#: src/gui/mainframe.cpp:1377
+msgid "Align &Right\tAlt+Shift+Right"
+msgstr "Allinea &Destra\tAlt+Shift+Right"
+
+#: src/gui/mainframe.cpp:1377
+msgid "Align item to the right"
+msgstr "Allinea l'oggetto a destra"
+
+#: src/gui/mainframe.cpp:1378
+msgid "Align &Top\tAlt+Shift+Up"
+msgstr "Allinea Sop&ra\tAlt+Shift+Up"
+
+#: src/gui/mainframe.cpp:1378
+msgid "Align item to the top"
+msgstr "Allinea l'oggetto nel punto superiore"
+
+#: src/gui/mainframe.cpp:1379
+msgid "Align Center &Vertical\tAlt+Shift+V"
+msgstr "Allinea Centrato &Verticalmente\tAlt+Shift+V"
+
+#: src/gui/mainframe.cpp:1379
+msgid "Align item to the center vertically"
+msgstr "Allinea l'oggetto al centro verticalmente"
+
+#: src/gui/mainframe.cpp:1380
+msgid "Align &Bottom\tAlt+Shift+Down"
+msgstr "Allinea So&tto\tAlt+Shift+Down"
+
+#: src/gui/mainframe.cpp:1380
+msgid "Align item to the bottom"
+msgstr "Allinea l'oggetto nel punto inferiore"
+
+#: src/gui/mainframe.cpp:1382
+msgid "Preferences\tAlt+O"
+msgstr "Preferenze\tAlt+O"
+
+#: src/gui/mainframe.cpp:1385
+msgid "&XRC Preview\tF5"
+msgstr "Anteprima &XRC\tF5"
+
+#: src/gui/mainframe.cpp:1385
+msgid "Show a preview of the XRC window"
+msgstr "Visualizza l'anteprima della finestra XRC"
+
+#: src/gui/mainframe.cpp:1391
+msgid "&Swap The Editor and Properties Window\tF12"
+msgstr "&Scambia Pannelli Editor e Proprietà\tF12"
+
+#: src/gui/mainframe.cpp:1392
+msgid "Swap The Editor and Properties Window"
+msgstr "Scambia i pannelli Editor e Proprietà"
+
+#: src/gui/mainframe.cpp:1395
+msgid "&Generate Inherited Class\tF6"
+msgstr "&Genera Classe Ereditata\tF6"
+
+#: src/gui/mainframe.cpp:1395
+msgid ""
+"Creates the needed files and class for proper inheritance of your designed "
+"GUI"
+msgstr ""
+"Crea i file delle classi eredi che verranno utilizzate nel tuo progetto GUI"
+
+#: src/gui/mainframe.cpp:1398
+msgid "&About...\tF1"
+msgstr "Informazioni\tF1"
+
+#: src/gui/mainframe.cpp:1398
+msgid "Show about dialog"
+msgstr "Mostra la finestra delle informazioni sul programma"
+
+#: src/gui/mainframe.cpp:1402
+msgid "&File"
+msgstr "&File"
+
+#: src/gui/mainframe.cpp:1403
+msgid "&Edit"
+msgstr "&Modifica"
+
+#: src/gui/mainframe.cpp:1404
+msgid "&View"
+msgstr "&Visualizza"
+
+#: src/gui/mainframe.cpp:1405
+msgid "&Tools"
+msgstr "&Strumenti"
+
+#: src/gui/mainframe.cpp:1414
+msgid "New Project"
+msgstr "Nuovo Progetto"
+
+#: src/gui/mainframe.cpp:1414
+msgid "New Project\t(Ctrl+N)"
+msgstr "Nuovo Progetto/t(Ctrl+N)"
+
+#: src/gui/mainframe.cpp:1414
+msgid "Start a new project."
+msgstr "Inizia un nuovo progetto."
+
+#: src/gui/mainframe.cpp:1415
+msgid "Open Project\t(Ctrl+O)"
+msgstr "Apri Progetto/t(Ctrl+N)"
+
+#: src/gui/mainframe.cpp:1415
+msgid "Open an existing project."
+msgstr "Apre un progetto esistente."
+
+#: src/gui/mainframe.cpp:1416
+msgid "Save Project\t(Ctrl+S)"
+msgstr "Salva Progetto/t(Ctrl+N)"
+
+#: src/gui/mainframe.cpp:1416
+msgid "Save the current project."
+msgstr "Salva il progetto corrente."
+
+#: src/gui/mainframe.cpp:1418
+msgid "Undo"
+msgstr "Annulla"
+
+#: src/gui/mainframe.cpp:1418
+msgid "Undo\t(Ctrl+Z)"
+msgstr "Annulla\tCtrl+Z"
+
+#: src/gui/mainframe.cpp:1418
+msgid "Undo the last action."
+msgstr "Annulla l'ultima operazione."
+
+#: src/gui/mainframe.cpp:1419
+msgid "Redo"
+msgstr "Ripeti"
+
+#: src/gui/mainframe.cpp:1419
+msgid "Redo\t(Ctrl+Y)"
+msgstr "&Ripeti\tCtrl+Y"
+
+#: src/gui/mainframe.cpp:1419
+msgid "Redo the last action that was undone."
+msgstr "Ripete l'ultima azione annullata."
+
+#: src/gui/mainframe.cpp:1421
+msgid "Cut"
+msgstr "Taglia"
+
+#: src/gui/mainframe.cpp:1421
+msgid "Cut\t(Ctrl+X)"
+msgstr "Taglia\t(Ctrl+X)"
+
+#: src/gui/mainframe.cpp:1421
+msgid "Remove the selected object and place it on the clipboard."
+msgstr "Rimuove l'oggetto selezionato e lo copia negli appunti."
+
+#: src/gui/mainframe.cpp:1422
+msgid "Copy"
+msgstr "Copia"
+
+#: src/gui/mainframe.cpp:1422
+msgid "Copy\t(Ctrl+C)"
+msgstr "Copia\t(Ctrl+C)"
+
+#: src/gui/mainframe.cpp:1422
+msgid "Copy the selected object to the clipboard."
+msgstr "Copia l'oggetto selezionato negli appunti."
+
+#: src/gui/mainframe.cpp:1423
+msgid "Paste"
+msgstr "Incolla"
+
+#: src/gui/mainframe.cpp:1423
+msgid "Paste\t(Ctrl+V)"
+msgstr "Incolla\t(Ctrl+V)"
+
+#: src/gui/mainframe.cpp:1423
+msgid "Insert an object from the clipboard."
+msgstr "Inserisce l'oggetto dagli appunti."
+
+#: src/gui/mainframe.cpp:1424
+msgid "Delete"
+msgstr "Elimina"
+
+#: src/gui/mainframe.cpp:1424
+msgid "Delete\t(Ctrl+D)"
+msgstr "Elimina\t(Ctrl+D)"
+
+#: src/gui/mainframe.cpp:1424
+msgid "Remove the selected object."
+msgstr "Elimina l'oggetto selezionato."
+
+#: src/gui/mainframe.cpp:1426
+msgid "Generate Code (F8)"
+msgstr "Genera Codice (F8)"
+
+#: src/gui/mainframe.cpp:1426
+msgid "Create code from the current project."
+msgstr "Crea il codice dal progetto corrente."
+
+#: src/gui/mainframe.cpp:1428
+msgid "Align Left"
+msgstr "Allinea Sinistra"
+
+#: src/gui/mainframe.cpp:1428
+msgid ""
+"The item will be aligned to the left of the space alotted to it by the sizer."
+msgstr ""
+"L'oggetto verra' allineato a sinistra nello spazio assegnato dal sizer."
+
+#: src/gui/mainframe.cpp:1429
+msgid "Align Center Horizontally"
+msgstr "Allinea Centrato Orizzontalmente"
+
+#: src/gui/mainframe.cpp:1429
+msgid ""
+"The item will be centered horizontally in the space alotted to it by the "
+"sizer."
+msgstr ""
+"L'oggetto verra' centrato orizzontalmente nello spazio assegnato dal sizer."
+
+#: src/gui/mainframe.cpp:1430
+msgid "Align Right"
+msgstr "Allinea Destra"
+
+#: src/gui/mainframe.cpp:1430
+msgid ""
+"The item will be aligned to the right of the space alotted to it by the "
+"sizer."
+msgstr "L'oggetto verra' allineato a destra nello spazio assegnato dal sizer."
+
+#: src/gui/mainframe.cpp:1432
+msgid "Align Top"
+msgstr "Allinea Sopra"
+
+#: src/gui/mainframe.cpp:1432
+msgid ""
+"The item will be aligned to the top of the space alotted to it by the sizer."
+msgstr "L'oggetto verra' allineato in alto nello spazio assegnato dal sizer."
+
+#: src/gui/mainframe.cpp:1433
+msgid "Align Center Vertically"
+msgstr "Allinea Centrato Verticalmente"
+
+#: src/gui/mainframe.cpp:1433
+msgid ""
+"The item will be centered vertically within space alotted to it by the sizer."
+msgstr ""
+"L'oggetto verra' centrato verticalmente nello spazio assegnato dal sizer."
+
+#: src/gui/mainframe.cpp:1434
+msgid "Align Bottom"
+msgstr "Allinea Sotto"
+
+#: src/gui/mainframe.cpp:1434
+msgid ""
+"The item will be aligned to the bottom of the space alotted to it by the "
+"sizer."
+msgstr "L'oggetto verra' allineato in basso nello spazio assegnato dal sizer."
+
+#: src/gui/mainframe.cpp:1436
+msgid "Expand (Alt+W)"
+msgstr "Espandi (Alt+W)"
+
+#: src/gui/mainframe.cpp:1436
+msgid "The item will be expanded to fill the space assigned to the item."
+msgstr "L'oggetto verra' espanso nel proprio spazio assegnato."
+
+#: src/gui/mainframe.cpp:1437
+msgid "Stretch (Alt+S)"
+msgstr "Allunga (Alt+S)"
+
+#: src/gui/mainframe.cpp:1437
+msgid "The item will grow and shrink with the sizer."
+msgstr "L'oggetto aumentera' e diminuira' la sua dimensione in base al sizer."
+
+#: src/gui/mainframe.cpp:1439
+msgid "Left Border"
+msgstr "Bordo Sinistro"
+
+#: src/gui/mainframe.cpp:1439
+msgid "A border will be added on the left side of the item."
+msgstr "Verra' aggiunto un bordo alla sinistra dell'oggetto."
+
+#: src/gui/mainframe.cpp:1440
+msgid "Right Border"
+msgstr "Bordo Destro"
+
+#: src/gui/mainframe.cpp:1440
+msgid "A border will be added on the right side of the item."
+msgstr "Verrà aggiunto un bordo alla destra dell'oggetto."
+
+#: src/gui/mainframe.cpp:1441
+msgid "Top Border"
+msgstr "Bordo Sopra"
+
+#: src/gui/mainframe.cpp:1441
+msgid "A border will be added on the top of the item."
+msgstr "Verrà aggiunto un bordo sul lato superiore dell'oggetto."
+
+#: src/gui/mainframe.cpp:1442
+msgid "Bottom Border"
+msgstr "Bordo Sotto"
+
+#: src/gui/mainframe.cpp:1442
+msgid "A border will be added on the bottom of the item."
+msgstr "Verrà aggiunto un bordo nel lato inferiore dell'oggetto."
+
+#: src/gui/mainframe.cpp:1449
+msgid "Swap The Editor and Properties Window (F12)"
+msgstr "Scambia Pannelli Editor e Proprietà (F12)"
+
+#: src/gui/mainframe.cpp:1450
+msgid "Swap the design window and properties window."
+msgstr "Scambia i pannelli Editor e Proprietà."
+
+#: src/gui/mainframe.cpp:1529 src/gui/mainframe.cpp:1588
+#: src/gui/mainframe.cpp:1659
+msgid "Project"
+msgstr "Progetto"
+
+#: src/gui/mainframe.cpp:1535 src/gui/mainframe.cpp:1598
+#: src/gui/mainframe.cpp:1653 src/gui/panels/palette.cpp:196
+msgid "Widgets"
+msgstr "Widget"
+
+#: src/gui/mainframe.cpp:1551 src/gui/mainframe.cpp:1592
+#: src/gui/mainframe.cpp:1665 src/gui/panels/inspector/inspector.cpp:92
+#: src/gui/panels/inspector/inspector.cpp:1123
+#: src/gui/panels/inspector/inspector.cpp:1133
+msgid "Properties"
+msgstr "Proprietà"
+
+#: src/gui/mainframe.cpp:1642
+msgid "Logger"
+msgstr "Registro"
+
+#: src/gui/panels/codeeditor/codeeditor.cpp:156
+#, c-format
+msgid "\"%s\" not found!"
+msgstr "\"%s\" non trovato!"
+
+#: src/gui/panels/codeeditor/codeeditor.cpp:157
+msgid "Not Found!"
+msgstr "Non Trovato!"
+
+#: src/gui/panels/codeeditor/plugins/xrc.cpp:178
+#, c-format
+msgid "Code generated on '%s'."
+msgstr "Codice generato in '%s'."
+
+#: src/gui/panels/debugwindow.cpp:40
+msgid "Error: "
+msgstr "Errore: "
+
+#: src/gui/panels/debugwindow.cpp:42
+msgid "Warning: "
+msgstr "Avviso: "
+
+#: src/gui/panels/inspector/advprops.cpp:240
+msgid ""
+"Load From File:\n"
+"Load the image from a file on disk.\n"
+"\n"
+"Load From Embedded File:\n"
+"C++ Only. Embed the image file in the exe and load it.\n"
+"For other languages, behaves like \"Load From File\".\n"
+"\n"
+"Load From Resource:\n"
+"Windows Only. Load the image from a BITMAP resource in a .rc file\n"
+"\n"
+"Load From Icon Resource:\n"
+"Windows Only. Load the image from a ICON resource in a .rc file\n"
+"\n"
+"Load From XRC:\n"
+"Load the image from XRC resources. The XRC resources must be initialized by "
+"the application code.\n"
+"\n"
+"Load From Art Provider:\n"
+"Query registered providers for bitmap with given ID.\n"
+"\n"
+msgstr ""
+"Carica Da File:\n"
+"Carica l'immagine da un file su disco.\n"
+"\n"
+"Carica Da File Incorporato:\n"
+"Solo per C++. Incorpora il file immagine all'interno dell'eseguibile "
+"caricandolo.n\n"
+"Per gli altri linguaggi si comporta come \"Carica Da File\".\n"
+"\n"
+"Carica Da Risorsa:\n"
+"Solo per Windows. Carica l'immagine da una risorsa BITMAP contenuta in un "
+"file .rc.\n"
+"\n"
+"Carica Da Risorsa Icona:\n"
+"Solo per Windows. Carica l'immagine da una risorsa ICON contenuta in un "
+"file .rc.\n"
+"\n"
+"Carica Da Art Provider:\n"
+"Interroga i provider registrati per un bitmap di un dato ID.\n"
+"\n"
+
+#: src/gui/panels/inspector/advprops.cpp:264
+msgid "Path to the image file."
+msgstr "Percorso del file immagine."
+
+#: src/gui/panels/inspector/advprops.cpp:282
+msgid "Windows Only. Name of the resource in the .rc file."
+msgstr "Solo per Windows. Nome della risorsa contenuta in un file .rc."
+
+#: src/gui/panels/inspector/advprops.cpp:294
+msgid ""
+"The size of the icon to use from a ICON resource with multiple icons in it."
+msgstr ""
+"La grandezza dell'icona da usare da una risorsa ICON contenente multiple "
+"icone."
+
+#: src/gui/panels/inspector/advprops.cpp:303
+msgid "Name of the item in the XRC resources."
+msgstr "Nome dell'oggetto nelle risorse XRC."
+
+#: src/gui/panels/inspector/advprops.cpp:472
+msgid ""
+"Choose a wxArtID unique identifier of the bitmap or enter a wxArtID for your "
+"custom wxArtProvider. IDs with prefix 'gtk-' are available under wxGTK only."
+msgstr ""
+"Scegli un identificatore univoco wxArtID per l'immagine bitmap o inserisci "
+"un wxArtID per il tuo wxArtProvider personalizzato."
+
+#: src/gui/panels/inspector/advprops.cpp:494
+msgid ""
+"Choose a wxArtClient identifier of the client (i.e. who is asking for the "
+"bitmap) or enter a wxArtClient for your custom wxArtProvider."
+msgstr ""
+"Scegli un identificatore wxArtClient per il client, ovvero il contesto dove "
+"verrà usato per visualizzare l'immagine bitmap, o inseriscine uno per il tuo "
+"wxArtProvider personalizzato."
+
+#: src/gui/panels/inspector/advprops.cpp:922
+msgid "Point Size"
+msgstr "Dimensione"
+
+#: src/gui/panels/inspector/advprops.cpp:925
+msgid "Family"
+msgstr "Famiglia"
+
+#: src/gui/panels/inspector/advprops.cpp:936
+msgid "Face Name"
+msgstr "Nome"
+
+#: src/gui/panels/inspector/advprops.cpp:941
+msgid "Style"
+msgstr "Stile"
+
+#: src/gui/panels/inspector/advprops.cpp:945
+msgid "Weight"
+msgstr "Peso"
+
+#: src/gui/panels/inspector/advprops.cpp:949
+msgid "Underlined"
+msgstr "Sottolineato"
+
+#: src/gui/panels/inspector/inspector.cpp:93
+#: src/gui/panels/inspector/inspector.cpp:1126
+#: src/gui/panels/inspector/inspector.cpp:1139
+msgid "Events"
+msgstr "Eventi"
+
+#: src/gui/panels/inspector/inspector.cpp:717
+msgid "You have to remove all child widgets first."
+msgstr "Devi prima rimuovere tutti i controlli inseriti."
+
+#: src/gui/panels/title.h:27
+msgid "No title"
+msgstr "Nessun titolo"
+
+#: src/gui/panels/treeview.cpp:514
+msgid "Copy\tCtrl+C"
+msgstr "Copia\tCtrl+C"
+
+#: src/gui/panels/treeview.cpp:515
+msgid "Paste\tCtrl+V"
+msgstr "Incolla\tCtrl+V"
+
+#: src/gui/panels/treeview.cpp:517
+msgid "Delete\tCtrl+D"
+msgstr "Elimina\tCtrl+D"
+
+#: src/gui/panels/treeview.cpp:524
+msgid "Move into a new wxBoxSizer"
+msgstr "Sposta in un nuovo wxBoxSizer"
+
+#: src/gui/panels/treeview.cpp:526
+msgid "Menu Editor..."
+msgstr "Editor dei Menu..."
+
+#: src/plugins/additional/additional.cpp:1746
+msgid "First Page"
+msgstr "Prima Pagina"
+
+#: src/plugins/additional/additional.cpp:1748
+msgid "Sample Category"
+msgstr "Categoria Di Prova"
+
+#: src/plugins/additional/additional.cpp:1752
+msgid "Initial Value"
+msgstr "Valore Iniziale"
+
+#: src/plugins/additional/additional.cpp:1754
+msgid "A string property"
+msgstr "Proprietà di stringa"
+
+#: src/plugins/additional/additional.cpp:1770
+msgid "Herbivore"
+msgstr "Erbivoro"
+
+#: src/plugins/additional/additional.cpp:1771
+msgid "Carnivore"
+msgstr "Carnivoro"
+
+#: src/plugins/additional/additional.cpp:1772
+msgid "Omnivore"
+msgstr "Onnivoro"
+
+#: src/plugins/additional/additional.cpp:1783
+msgid "Low Priority Properties"
+msgstr "Proprietà Bassa Priorità"
+
+#: src/plugins/additional/additional.cpp:1789
+msgid "This is much longer string than the "
+msgstr "Questa è una stringa più lunga della "
+
+#: src/plugins/additional/additional.cpp:1790
+msgid "first one. Edit it by clicking the button."
+msgstr "prima. Modificala premendo il pulsante."
+
+#: src/plugins/common/common.cpp:1712
+msgid "Message ..."
+msgstr "Messaggio ..."
+
+#: src/utils/stringutils.cpp:68
+msgid "Choose an Encoding"
+msgstr "Scegli una Codifica"
+
+#: src/utils/stringutils.cpp:83
+msgid "This xml file has no declaration.\n"
+msgstr "Questo file XML non contiene una dichiarazione.\n"
+
+#: src/utils/stringutils.cpp:84 src/utils/stringutils.cpp:121
+#: src/utils/stringutils.cpp:200 src/utils/stringutils.cpp:245
+msgid "Would you like wxWeaver to backup the file and convert it to UTF-8?\n"
+msgstr "Creo un file di backup e converto questo in UTF-8?\n"
+
+#: src/utils/stringutils.cpp:85 src/utils/stringutils.cpp:122
+msgid ""
+"You will be prompted for an encoding.\n"
+"\n"
+msgstr ""
+"Ti verra' richiesta una scelta di codifica.\n"
+"\n"
+
+#: src/utils/stringutils.cpp:86 src/utils/stringutils.cpp:123
+#: src/utils/stringutils.cpp:164 src/utils/stringutils.cpp:202
+#: src/utils/stringutils.cpp:247
+msgid "Path: "
+msgstr "Percorso: "
+
+#: src/utils/stringutils.cpp:88
+msgid "Missing Declaration"
+msgstr "Dichiarazione Mancante"
+
+#: src/utils/stringutils.cpp:96 src/utils/stringutils.cpp:134
+#: src/utils/stringutils.cpp:213 src/utils/stringutils.cpp:259
+msgid "Please choose the original encoding."
+msgstr "Per favore, scegli la codifica originaria."
+
+#: src/utils/stringutils.cpp:120
+msgid "This xml file has no encoding specified.\n"
+msgstr "Questo file XML non ha una codifica specificata.\n"
+
+#: src/utils/stringutils.cpp:126
+msgid "Unknown Encoding"
+msgstr "Codifica Sconosciuta"
+
+#: src/utils/stringutils.cpp:152
+#, c-format
+msgid ""
+"The encoding of this xml file is not supported.\n"
+"\n"
+"File: %s\n"
+"Encoding: %s\n"
+"Supported Encodings:\n"
+"\n"
+"%s"
+msgstr ""
+"La codifica di questo file XML non è supportata.\n"
+"\n"
+"File: %s\n"
+"Codifica: %s\n"
+"Codifiche supportate:\n"
+"\n"
+"%s"
+
+#: src/utils/stringutils.cpp:157
+#, c-format
+msgid "Unsupported Encoding: %s"
+msgstr "Codifica non supportata: %s"
+
+#: src/utils/stringutils.cpp:161
+#, c-format
+msgid ""
+"This xml file has specified encoding %s. wxWeaver only works with UTF-8.\n"
+msgstr ""
+"Questo file XML usa la codifica %s: wxWeaver supporta solamente UTF-8.\n"
+
+#: src/utils/stringutils.cpp:163
+msgid ""
+"Would you like wxWeaver to backup the file and convert it to UTF-8?\n"
+"\n"
+msgstr ""
+"Vuoi che esagua un backup del file e lo converta in UTF-8?\n"
+"\n"
+
+#: src/utils/stringutils.cpp:167
+msgid "Not UTF-8"
+msgstr "Non UTF-8"
+
+#: src/utils/stringutils.cpp:199 src/utils/stringutils.cpp:244
+msgid ""
+"This xml file could not be loaded. This could be the result of an "
+"unsupported encoding.\n"
+msgstr ""
+"Impossibile caricare questo file XML. Probabile codifica non supportata.\n"
+
+#: src/utils/stringutils.cpp:201 src/utils/stringutils.cpp:246
+msgid ""
+"You will be prompted for the original encoding.\n"
+"\n"
+msgstr ""
+"Ti verrà richiesta la codifica originale.\n"
+"\n"
+
+#: src/utils/stringutils.cpp:205 src/utils/stringutils.cpp:250
+msgid "Unable to load file"
+msgstr "Impossibile caricare il file"
+
+#: src/utils/typeconv.cpp:788
+msgid "Before: "
+msgstr "Prima: "
+
+#: src/utils/typeconv.cpp:805
+msgid "After: "
+msgstr "Dopo: "
+
+#~ msgid "&XRC Window\tF5"
+#~ msgstr "Anteprima &XRC\tF5"

@@ -59,7 +59,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <inherits class="wxWindow"/>
     <property name="name"   type="text">m_ribbonPage</property>
     <property name="label"  type="wxString_i18n">MyRibbonPage</property>
-    <property name="bitmap" type="bitmap" help="wxRibbonPage bitmap."/>
+    <property name="bitmap" type="bitmap"/>
     <property name="select" type="bool"   help="Select this ribbon page when adding.">0</property>
   </objectinfo>
 
@@ -67,7 +67,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <inherits class="wxWindow"/>
     <property name="name"   type="text">m_ribbonPanel</property>
     <property name="label"  type="wxString_i18n">MyRibbonPanel</property>
-    <property name="bitmap" type="bitmap" help="wxRibbonPanel bitmap."/>
+    <property name="bitmap" type="bitmap"/>
     <property name="style"  type="bitlist">
       <option name="wxRIBBON_PANEL_DEFAULT_STYLE"    help="Defined as no other flags set."/>
       <option name="wxRIBBON_PANEL_NO_AUTO_MINIMISE" help="Prevents the panel from automatically minimising to conserve screen space."/>
@@ -89,8 +89,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <inherits class="wxWindow"/>
     <property name="name"   type="text">m_ribbonButton</property>
     <property name="label"  type="wxString_i18n">MyRibbonButton</property>
-    <property name="bitmap" type="bitmap"        help="ribbonButton bitmap."/>
-    <property name="help"   type="wxString_i18n" help="ribbonButton"/>
+    <property name="bitmap" type="bitmap"/>
+    <property name="help"   type="wxString_i18n"/>
     <event name="OnRibbonButtonClicked" class="wxRibbonButtonBarEvent" help="Triggered when the normal (non-dropdown) region of a button on the button bar is clicked."/>
   </objectinfo>
 
@@ -98,8 +98,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <inherits class="wxWindow"/>
     <property name="name"   type="text">m_ribbonDropdownButton</property>
     <property name="label"  type="wxString_i18n">MyRibbonDropdownButton</property>
-    <property name="bitmap" type="bitmap"        help="ribbonDropdownButton bitmap."/>
-    <property name="help"   type="wxString_i18n" help="ribbonDropdownButton"/>
+    <property name="bitmap" type="bitmap"/>
+    <property name="help"   type="wxString_i18n"/>
     <event name="OnRibbonButtonDropdownClicked" class="wxRibbonButtonBarEvent" help="Triggered when the dropdown region of a button on the button bar is clicked. wxRibbonButtonBarEvent::PopupMenu() should be called by the event handler if it wants to display a popup menu (which is what most dropdown buttons should be doing)."/>
   </objectinfo>
 
@@ -117,8 +117,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <inherits class="wxWindow"/>
     <property name="name"   type="text">m_ribbonToggleButton</property>
     <property name="label"  type="wxString_i18n">MyRibbonToggleButton</property>
-    <property name="bitmap" type="bitmap"        help="ribbonToggleButton bitmap."/>
-    <property name="help"   type="wxString_i18n" help="ribbonToggleButton"/>
+    <property name="bitmap" type="bitmap"/>
+    <property name="help"   type="wxString_i18n"/>
     <event name="OnRibbonButtonClicked" class="wxCommandEvent" help="Triggered when the normal (non-dropdown) region of a button on the button bar is clicked."/>
   </objectinfo>
 
@@ -131,8 +131,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <inherits class="wxWindow"/>
     <property name="name"   type="text">m_ribbonTool</property>
     <property name="label"  type="wxString_i18n">MyRibbonTool</property>
-    <property name="bitmap" type="bitmap"        help="ribbonTool bitmap."/>
-    <property name="help"   type="wxString_i18n" help="ribbonTool"/>
+    <property name="bitmap" type="bitmap"/>
+    <property name="help"   type="wxString_i18n"/>
     <event name="OnRibbonToolClicked" class="wxRibbonToolBarEvent" help="Triggered when the normal (non-dropdown) region of a tool on the tool bar is clicked."/>
   </objectinfo>
 
@@ -140,8 +140,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <inherits class="wxWindow"/>
     <property name="name"   type="text">m_ribbonDropdownTool</property>
     <property name="label"  type="wxString_i18n">MyRibbonDropdownTool</property>
-    <property name="bitmap" type="bitmap"        help="ribbonDropdownTool bitmap."/>
-    <property name="help"   type="wxString_i18n" help="ribbonDropdownTool"/>
+    <property name="bitmap" type="bitmap"/>
+    <property name="help"   type="wxString_i18n"/>
     <event name="OnRibbonToolDropdownClicked" class="wxRibbonToolBarEvent" help="Triggered when the dropdown region of a tool on the tool bar is clicked. wxRibbonToolBarEvent::PopupMenu() should be called by the event handler if it wants to display a popup menu (which is what most dropdown tools should be doing)."/>
   </objectinfo>
 
@@ -149,8 +149,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <inherits class="wxWindow"/>
     <property name="name"   type="text">m_ribbonHybridTool</property>
     <property name="label"  type="wxString_i18n">MyRibbonHybridTool</property>
-    <property name="bitmap" type="bitmap"        help="ribbonHybridTool bitmap."/>
-    <property name="help"   type="wxString_i18n" help="ribbonHybridTool"/>
+    <property name="bitmap" type="bitmap"/>
+    <property name="help"   type="wxString_i18n"/>
     <event name="OnRibbonToolClicked"         class="wxRibbonToolBarEvent" help="Triggered when the normal (non-dropdown) region of a tool on the tool bar is clicked."/>
     <event name="OnRibbonToolDropdownClicked" class="wxRibbonToolBarEvent" help="Triggered when the dropdown region of a tool on the tool bar is clicked. wxRibbonToolBarEvent::PopupMenu() should be called by the event handler if it wants to display a popup menu (which is what most dropdown tools should be doing)."/>
   </objectinfo>
@@ -159,8 +159,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <inherits class="wxWindow"/>
     <property name="name"   type="text">m_ribbonToggleTool</property>
     <property name="label"  type="wxString_i18n">MyRibbonToggleTool</property>
-    <property name="bitmap" type="bitmap"        help="ribbonToggleTool bitmap."/>
-    <property name="help"   type="wxString_i18n" help="ribbonToggleTool"/>
+    <property name="bitmap" type="bitmap"/>
+    <property name="help"   type="wxString_i18n"/>
     <event name="OnRibbonToolClicked" class="wxRibbonToolBarEvent" help="Triggered when the normal (non-dropdown) region of a tool on the tool bar is clicked."/>
   </objectinfo>
 
@@ -176,7 +176,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
   <objectinfo class="ribbonGalleryItem" icon="ribbonbutton.png" type="ribbongalleryitem" startgroup="0" wxversion="2904">
     <inherits class="wxWindow"/>
     <property name="name"   type="text">m_ribbonGalleryItem</property>
-    <property name="bitmap" type="bitmap" help="ribbonGalleryItem bitmap."/>
+    <property name="bitmap" type="bitmap"/>
   </objectinfo>
 
 </package>

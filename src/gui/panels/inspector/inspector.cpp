@@ -421,6 +421,7 @@ void ObjectInspector::AddItems(const wxString& name, PObjectBase obj,
             wxPGProperty* id = m_pg->Append(GetProperty(prop));
             int propType = prop->GetType();
             if (propType != PT_OPTION) {
+
                 m_pg->SetPropertyHelpString(id, propInfo->GetDescription());
 
                 if (propType == PT_BITMAP) {
@@ -570,8 +571,7 @@ void ObjectInspector::AddItems(const wxString& name, PObjectBase obj,
                 eventInfo->GetName(), wxPG_LABEL, event->GetValue());
             wxPGProperty* id = m_eg->Append(pgProp);
 
-            m_eg->SetPropertyHelpString(
-                id, wxGetTranslation(eventInfo->GetDescription()));
+            m_eg->SetPropertyHelpString(id, eventInfo->GetDescription());
 
             if (m_style != wxWEAVER_OI_MULTIPAGE_STYLE) {
                 if (!AppData()->IsDarkMode()) {
@@ -690,9 +690,8 @@ void ObjectInspector::OnPropertyGridChanged(wxPropertyGridEvent& event)
                     }
                 }
             }
-            wxString localized = wxGetTranslation(helpString);
-            m_pg->SetPropertyHelpString(propPtr, localized);
-            m_pg->SetDescription(propPtr->GetLabel(), localized);
+            m_pg->SetPropertyHelpString(propPtr, helpString);
+            m_pg->SetDescription(propPtr->GetLabel(), helpString);
             break;
         }
         case PT_PARENT: {

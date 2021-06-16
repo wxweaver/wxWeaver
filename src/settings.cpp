@@ -21,12 +21,21 @@
 #include <wx/config.h>
 #include <wx/font.h>
 
-PrefsEditor::PrefsEditor()
-{
-    load();
-}
+namespace Default {
+constexpr bool showIndentationGuides { true };
+constexpr bool showEOL { false };
+constexpr bool tabIndents { false };
+constexpr bool useTabs { false };
+constexpr bool localeEnabled { false };
+constexpr int showWhiteSpace { 1 };
+constexpr int tabsWidth { 4 };
+constexpr int indentSize { 4 };
+constexpr int caretWidth { 1 };
+constexpr int fontSize { 8 };
+constexpr int locale { 0 };
+} // namespace Default
 
-void PrefsEditor::load()
+wxw::Preferences::Preferences()
 {
     wxFont font(Default::fontSize, wxFONTFAMILY_MODERN, // Default font
                 wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
@@ -42,6 +51,8 @@ void PrefsEditor::load()
     config->Read("/Editors/CaretWidth", &caretWidth, Default::caretWidth);
     config->Read("/Editors/FontFace", &fontFace, font.GetFaceName());
     config->Read("/Editors/FontSize", &fontSize, Default::fontSize);
+    config->Read("/Locale/Enabled", &localeEnabled, Default::localeEnabled);
+    config->Read("/Locale/Language", &localeSelected, Default::locale);
 
     if (showWhiteSpace < 0 || showWhiteSpace > 3)
         showWhiteSpace = Default::showWhiteSpace;
@@ -57,4 +68,7 @@ void PrefsEditor::load()
 
     if (fontSize < 4 || fontSize > 100)
         fontSize = Default::fontSize;
+
+    if (localeSelected < 0 || localeSelected > 1)
+        localeSelected = Default::locale;
 }

@@ -7,7 +7,7 @@
 - Removed wx version checks for old 2.9 wxWidgets development version;
   support only wxWidgets 3.0.5.1+.
 - Replaced `NULL` with `nullptr`, `unsigned int` with `size_t`.
-- Minimized the use of `wxString` helpers in TypeConv (`_STDSTR`, `_WXSTR`).
+- Removed `wxString` helpers in TypeConv (`_STDSTR`, `_WXSTR`).
 - Replaced almost all `Connect()` functions and static event tables with `Bind()`,
   this should avoid some conflicts between plugins and editor event handlers.
 - Fixed dark mode when using `wxGTK` < v3.1.4.

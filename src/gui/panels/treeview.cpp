@@ -506,12 +506,7 @@ enum {
     MENU_MOVE_NEW_BOXSIZER,
     MENU_DELETE,
 };
-#if 0
-BEGIN_EVENT_TABLE(ItemPopupMenu, wxMenu)
-EVT_MENU(wxID_ANY, ItemPopupMenu::OnMenuEvent)
-EVT_UPDATE_UI(wxID_ANY, ItemPopupMenu::OnUpdateEvent)
-END_EVENT_TABLE()
-#endif
+
 ItemPopupMenu::ItemPopupMenu(PObjectBase obj)
     : m_object(obj)
 {
@@ -529,6 +524,9 @@ ItemPopupMenu::ItemPopupMenu(PObjectBase obj)
     Append(MENU_MOVE_NEW_BOXSIZER, _("Move into a new wxBoxSizer"));
     AppendSeparator();
     Append(MENU_EDIT_MENUS, _("Menu Editor..."));
+
+    Bind(wxEVT_MENU, &ItemPopupMenu::OnMenuEvent, this);
+    Bind(wxEVT_UPDATE_UI, &ItemPopupMenu::OnUpdateEvent, this);
 }
 
 void ItemPopupMenu::OnMenuEvent(wxCommandEvent& event)

@@ -86,11 +86,11 @@ ticpp::Element* ToXrc(IObject* obj, ticpp::Element* bmpItem)
         return bmpItem;
 
     // TODO: Load From (Icon) Resource
-    if (bmpProp.StartsWith(_("Load From File"))
-        || bmpProp.StartsWith(_("Load From Embedded File"))
-        || bmpProp.StartsWith(_("Load From XRC"))) {
+    if (bmpProp.StartsWith("Load From File")
+        || bmpProp.StartsWith("Load From Embedded File")
+        || bmpProp.StartsWith("Load From XRC")) {
         bmpItem->SetText(filename.Trim().Trim(false));
-    } else if (bmpProp.StartsWith(_("Load From Art Provider"))) {
+    } else if (bmpProp.StartsWith("Load From Art Provider")) {
         wxString stockId = filename.BeforeFirst(';').Trim().Trim(false).mb_str(wxConvUTF8);
         wxString stockClient = filename.AfterFirst(';').Trim().Trim(false).mb_str(wxConvUTF8);
 

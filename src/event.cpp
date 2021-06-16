@@ -30,22 +30,22 @@ wxDEFINE_EVENT(wxEVT_WVR_OBJECT_CREATED, wxWeaverObjectEvent);
 wxDEFINE_EVENT(wxEVT_WVR_OBJECT_REMOVED, wxWeaverObjectEvent);
 wxDEFINE_EVENT(wxEVT_WVR_PROPERTY_MODIFIED, wxWeaverPropertyEvent);
 wxDEFINE_EVENT(wxEVT_WVR_EVENT_HANDLER_MODIFIED, wxWeaverEventHandlerEvent);
-wxDEFINE_EVENT(wxEVT_WVR_PREFS_EDITOR_CHANGED, wxWeaverPrefsEditorEvent);
+wxDEFINE_EVENT(wxEVT_WVR_PREFS_EDITOR_CHANGED, wxWeaverPreferencesEvent);
 
-wxWeaverPrefsEditorEvent::wxWeaverPrefsEditorEvent(wxEventType eventType)
+wxWeaverPreferencesEvent::wxWeaverPreferencesEvent(wxEventType eventType)
     : wxWeaverEvent(eventType)
 {
 }
 
-wxWeaverPrefsEditorEvent::wxWeaverPrefsEditorEvent(const wxWeaverPrefsEditorEvent& event)
+wxWeaverPreferencesEvent::wxWeaverPreferencesEvent(const wxWeaverPreferencesEvent& event)
     : wxWeaverEvent(event)
-    , m_prefsEditor(event.m_prefsEditor)
+    , m_prefs(event.m_prefs)
 {
 }
 
-wxEvent* wxWeaverPrefsEditorEvent::Clone() const
+wxEvent* wxWeaverPreferencesEvent::Clone() const
 {
-    return new wxWeaverPrefsEditorEvent(*this);
+    return new wxWeaverPreferencesEvent(*this);
 }
 
 wxWeaverEvent::wxWeaverEvent(wxEventType commandType)

@@ -95,38 +95,6 @@ private:
     const char* m_locale;
 };
 
-using namespace TypeConv;
-
-wxString TypeConv::_StringToWxString(const std::string& str)
-{
-    return _StringToWxString(str.c_str());
-}
-
-wxString TypeConv::_StringToWxString(const char* str)
-{
-    wxString newstr(str, wxConvUTF8);
-    return newstr;
-}
-
-std::string TypeConv::_WxStringToString(const wxString& str)
-{
-    std::string newstr(str.mb_str(wxConvUTF8));
-    return newstr;
-}
-
-std::string TypeConv::_WxStringToAnsiString(const wxString& str)
-{
-    std::string newstr(str.mb_str(wxConvISO8859_1));
-    return newstr;
-#if 0
-    setlocale(LC_ALL, "");
-    size_t len = wcstombs(nullptr, str.char_str(), 0);
-    std::vector<char> buf(len + 1);
-    wcstombs(&buf[0], str.char_str(), len);
-    return std::string(&buf[0]);
-#endif
-}
-
 bool TypeConv::StringToPoint(const wxString& val, wxPoint* point)
 {
     wxPoint result;
@@ -365,7 +333,7 @@ wxBitmap TypeConv::StringToBitmap(const wxString& filename)
     wxLogNull stopLogging;
 #endif
     // Get bitmap from art provider
-    if (filename.Contains(_("Load From Art Provider"))) {
+    if (filename.Contains("Load From Art Provider")) {
         wxString image = filename.AfterFirst(';').Trim(false);
         wxString rid = image.BeforeFirst(';').Trim(false);
         wxString cid = image.AfterFirst(';').Trim(false);
@@ -440,7 +408,7 @@ void TypeConv::ParseBitmapWithResource(const wxString& value, wxString* image,
     // Splitting bitmap resource property value
     // it is of the form "path; source [width; height]"
     *image = value;
-    *source = _("Load From File");
+    *source = "Load From File";
     *icoSize = wxDefaultSize;
 
     wxArrayString children;
@@ -451,7 +419,7 @@ void TypeConv::ParseBitmapWithResource(const wxString& value, wxString* image,
         child.Trim(true);
         children.Add(child);
     }
-    if (children.Index(_("Load From Art Provider")) == wxNOT_FOUND) {
+    if (children.Index("Load From Art Provider") == wxNOT_FOUND) {
         long temp;
         switch (children.size()) {
         case 5:

@@ -76,7 +76,7 @@ bool XrcCodeGenerator::GenerateCode(PObjectBase project)
     doc.Accept(&printer);
     const std::string& xrcFile = printer.Str();
 
-    m_codeWriter->Write(_WXSTR(xrcFile));
+    m_codeWriter->Write(xrcFile);
     return true;
 }
 

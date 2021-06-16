@@ -56,7 +56,7 @@ PObjectBase XrcLoader::GetObject(ticpp::Element* xrcObj, PObjectBase parent)
             PProperty bitmapsProp = parent->GetProperty("bitmaps");
             if (bitmapsProp) {
                 wxString value = bitmapsProp->GetValue();
-                wxString text = _WXSTR(xrcObj->GetText());
+                wxString text = xrcObj->GetText();
                 text.Replace("\'", "\'\'", true);
                 value << "\'" << text << "\' ";
                 bitmapsProp->SetValue(value);
@@ -67,7 +67,7 @@ PObjectBase XrcLoader::GetObject(ticpp::Element* xrcObj, PObjectBase parent)
             PProperty iconsProp = parent->GetProperty("icons");
             if (iconsProp) {
                 wxString value = iconsProp->GetValue();
-                wxString text = _WXSTR(xrcObj->GetText());
+                wxString text = xrcObj->GetText();
                 text.Replace("\'", "\'\'", true);
                 value << "\'" << text << "\' ";
                 iconsProp->SetValue(value);
@@ -104,19 +104,19 @@ PObjectBase XrcLoader::GetObject(ticpp::Element* xrcObj, PObjectBase parent)
         className = "bitmapitem";
     }
     PObjectBase object;
-    PObjectInfo objInfo = m_objDb->GetObjectInfo(_WXSTR(className));
+    PObjectInfo objInfo = m_objDb->GetObjectInfo(className);
     if (objInfo) {
         IComponent* comp = objInfo->GetComponent();
         if (!comp) {
             wxLogError(
                 "No component found for class \"%s\", found on line %i.",
-                _WXSTR(className).c_str(), xrcObj->Row());
+                className, xrcObj->Row());
         } else {
             ticpp::Element* fbObj = comp->ImportFromXrc(xrcObj);
             if (!fbObj) {
                 wxLogError(
                     "ImportFromXrc returned nullptr for class \"%s\", found on line %i.",
-                    _WXSTR(className).c_str(), xrcObj->Row());
+                    className, xrcObj->Row());
             } else {
                 object = m_objDb->CreateObject(fbObj, parent);
                 if (!object) {
@@ -145,7 +145,7 @@ PObjectBase XrcLoader::GetObject(ticpp::Element* xrcObj, PObjectBase parent)
                 if (!object) {
                     wxLogError(
                         "CreateObject failed for class \"%s\", with parent \"%s\", found on line %i",
-                        _WXSTR(className).c_str(),
+                        className,
                         parent->GetClassName().c_str(), xrcObj->Row());
                 } else {
                     /*
@@ -190,12 +190,12 @@ PObjectBase XrcLoader::GetObject(ticpp::Element* xrcObj, PObjectBase parent)
         if (object) {
             parent->AddChild(object);
             object->SetParent(parent);
-            wxLogError("Unknown class \"%s\" found on line %i, replaced with a wxPanel"),
-                _WXSTR(className).c_str(), xrcObj->Row();
+            wxLogError("Unknown class \"%s\" found on line %i, replaced with a wxPanel",
+                       className, xrcObj->Row());
         } else {
             wxString msg(wxString::Format(
                              "Unknown class \"%s\" found on line %i, and could not replace with a wxPanel as child of \"%s:%s\"",
-                             _WXSTR(className).c_str(),
+                             className,
                              xrcObj->Row(),
                              parent->GetPropertyAsString("name"))
                              .c_str(),

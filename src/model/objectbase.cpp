@@ -34,7 +34,7 @@ PropertyInfo::PropertyInfo(wxString name, PropertyType type, wxString defValue,
                            POptionList optList, const std::list<PropertyChild>& children)
     : m_name(name)
     , m_defValue(defValue)
-    , m_description(description)
+    , m_description(_(description))
     , m_customEditor(customEditor)
     , m_children(children)
     , m_type(type)
@@ -51,7 +51,7 @@ EventInfo::EventInfo(const wxString& name, const wxString& eventClass,
     : m_name(name)
     , m_eventClass(eventClass)
     , m_defaultValue(defValue)
-    , m_description(description)
+    , m_description(_(description))
 {
 }
 
@@ -523,14 +523,14 @@ std::ostream& operator<<(std::ostream& s, PObjectBase obj)
 void ObjectBase::SerializeObject(ticpp::Element* serializedElement)
 {
     ticpp::Element element("object");
-    element.SetAttribute("class", _STDSTR(GetClassName()));
+    element.SetAttribute("class", GetClassName().ToStdString());
     element.SetAttribute("expanded", GetExpanded());
 
     for (size_t i = 0; i < GetPropertyCount(); i++) {
         PProperty prop = GetProperty(i);
         ticpp::Element prop_element("property");
-        prop_element.SetAttribute("name", _STDSTR(prop->GetName()));
-        prop_element.SetText(_STDSTR(prop->GetValue()));
+        prop_element.SetAttribute("name", prop->GetName().ToStdString());
+        prop_element.SetText(prop->GetValue().ToStdString());
         element.LinkEndChild(&prop_element);
     }
 
@@ -541,7 +541,7 @@ void ObjectBase::SerializeObject(ticpp::Element* serializedElement)
             continue; // skip, because there's no event attached (see issue #467)
 
         ticpp::Element event_element("event");
-        event_element.SetAttribute("name", _STDSTR(event->GetName()));
+        event_element.SetAttribute("name", event->GetName().ToStdString());
         event_element.SetText(callback);
         element.LinkEndChild(&event_element);
     }

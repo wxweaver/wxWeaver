@@ -36,13 +36,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <event name="OnIdle"        class="wxIdleEvent"     help="Process a wxEVT_IDLE event."/>
   </objectinfo>
 
-  <objectinfo class="AUI Events" type="interface" smallIcon="wxwindow.png">
-    <event name="OnAuiPaneButton"    class="wxAuiManagerEvent" help="Event is emmited under AUI-managed form only."/>
-    <event name="OnAuiPaneClose"     class="wxAuiManagerEvent" help="Event is emmited under AUI-managed form only."/>
-    <event name="OnAuiPaneMaximize"  class="wxAuiManagerEvent" help="Event is emmited under AUI-managed form only."/>
-    <event name="OnAuiPaneRestore"   class="wxAuiManagerEvent" help="Event is emmited under AUI-managed form only."/>
-    <event name="OnAuiPaneActivated" class="wxAuiManagerEvent" help="Event is emmited under AUI-managed form only."/>
-    <event name="OnAuiRender"        class="wxAuiManagerEvent" help="Event is emmited under AUI-managed form only."/>
+  <objectinfo class="AUI Events" type="interface">
+    <event name="OnAuiPaneButton"    class="wxAuiManagerEvent" help="Triggered when any button is pressed for any docked panes."/>
+    <event name="OnAuiPaneClose"     class="wxAuiManagerEvent" help="Triggered when a docked or floating pane is closed."/>
+    <event name="OnAuiPaneMaximize"  class="wxAuiManagerEvent" help="Triggered when a pane is maximized."/>
+    <event name="OnAuiPaneRestore"   class="wxAuiManagerEvent" help="Triggered when a pane is restored."/>
+    <event name="OnAuiPaneActivated" class="wxAuiManagerEvent" help="Triggered when a pane is made 'active'. This event is new since wxWidgets 2.9.4."/>
+    <event name="OnAuiRender"        class="wxAuiManagerEvent" help="This event can be caught to override the default renderer in order to custom draw your wxAuiManager window (not recommended)."/>
   </objectinfo>
 
   <objectinfo class="Frame" type="form" icon="frame.png">
@@ -73,7 +73,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
       wxDEFAULT_FRAME_STYLE
     </property>
     <property name="extra_style" type="bitlist">
-      <option name="wxFRAME_EX_CONTEXTHELP" help="Under Windows, puts a query button on the caption. When pressed, Windows will go into a context-sensitive help mode and wxWidgets will send a wxEVT_HELP event if the user clicked on an application window. You cannot use this style together with wxMAXIMIZE_BOX or wxMINIMIZE_BOX, so you should use wxDEFAULT_FRAME_STYLE & ~ (wxMINIMIZE_BOX | wxMAXIMIZE_BOX) for the frames having this style (the dialogs don't have a minimize or a maximize box by default). Note: The Project's &quot;help_provider&quot; property must be set for context-sensitive help to work."/>
+      <option name="wxFRAME_EX_CONTEXTHELP" help="Under Windows, puts a query button on the caption. When pressed, Windows will go into a context-sensitive help mode and wxWidgets will send a wxEVT_HELP event if the user clicked on an application window. You cannot use this style together with wxMAXIMIZE_BOX or wxMINIMIZE_BOX, so you should use wxDEFAULT_FRAME_STYLE &amp; ~ (wxMINIMIZE_BOX | wxMAXIMIZE_BOX) for the frames having this style (the dialogs don't have a minimize or a maximize box by default). Note: The Project's &quot;help_provider&quot; property must be set for context-sensitive help to work."/>
       <option name="wxFRAME_EX_METAL"       help="On Mac OS X, frames with this style will be shown with a metallic look. This is an extra style."/>
     </property>
     <property name="center" type="option" help="Centers the dialog box on the display in the chosen direction.">

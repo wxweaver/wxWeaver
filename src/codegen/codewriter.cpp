@@ -185,7 +185,12 @@ void FileCodeWriter::WriteBuffer()
 {
     static const unsigned char MICROSOFT_BOM[3] = { 0xEF, 0xBB, 0xBF };
 
-    const std::string& data = (m_useUtf8 ? _STDSTR(m_buffer) : _ANSISTR(m_buffer));
+    // TODO: Check this
+    std::string data;
+    if (m_useUtf8)
+        data = m_buffer.ToStdString();
+    else
+        data = m_buffer.mb_str(wxConvISO8859_1);
 
     // Compare buffer with existing file (if any) to determine if
     // writing the file is necessary

@@ -47,6 +47,7 @@ function(_add_plugins)
             sdk::plugin_interface
             ${wxWidgets_LIBRARIES}
         )
+        target_copy_translation(${_plugin} "it")
     endforeach()
 endfunction()
 _add_plugins()

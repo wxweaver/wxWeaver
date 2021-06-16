@@ -24,10 +24,10 @@
 
 #include <memory>
 
-class PrefsEditor;
-#if 0
+namespace wxw {
+class Preferences;
+}
 class wxBitmapComboBox;
-#endif
 class wxCheckBox;
 class wxChoice;
 class wxFontPickerCtrl;
@@ -68,10 +68,41 @@ private:
 #if 0
     int  m_selectedEditor;
 #endif
-    std::shared_ptr<PrefsEditor> m_prefsEditor;
+    std::shared_ptr<wxw::Preferences> m_prefs;
 };
 
 class PageEditors : public wxPreferencesPage {
+public:
+    virtual wxString GetName() const override;
+    virtual wxBitmap GetLargeIcon() const override; // TODO: Supported only on macOS
+    virtual wxWindow* CreateWindow(wxWindow* parent) override;
+};
+
+class PanelLocale : public wxPanel {
+public:
+    PanelLocale(wxWindow*);
+    ~PanelLocale();
+
+    virtual bool TransferDataToWindow() override;
+    virtual bool TransferDataFromWindow() override;
+
+private:
+    void OnPrefsChanged(wxCommandEvent&);
+
+    void LoadSettings();
+    void UpdateSettings();
+    void SaveSettings();
+    void SaveSettingsIfNecessary()
+    {
+        if (wxPreferencesEditor::ShouldApplyChangesImmediately())
+            SaveSettings();
+    }
+    wxCheckBox* m_chkLocale;
+    wxBitmapComboBox* m_bcbLocale;
+    std::shared_ptr<wxw::Preferences> m_prefs;
+};
+
+class PageLocale : public wxPreferencesPage {
 public:
     virtual wxString GetName() const override;
     virtual wxBitmap GetLargeIcon() const override; // TODO: Supported only on macOS

@@ -135,7 +135,7 @@ PObjectBase wxWeaverDataObject::GetObj()
         PObjectDatabase db = AppData()->GetObjectDatabase();
         return db->CreateObject(element);
     } catch (ticpp::Exception& ex) {
-        wxLogError(_WXSTR(ex.m_details));
+        wxLogError(wxString(ex.m_details));
         return PObjectBase();
     }
 }

@@ -113,7 +113,7 @@ wxStyledTextCtrl* CodeEditor::GetTextCtrl() const
 
 void CodeEditor::LoadSettings()
 {
-    PrefsEditor prefs;
+    wxw::Preferences prefs;
 
     wxFont font(prefs.fontSize, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL,
                 wxFONTWEIGHT_NORMAL, false, prefs.fontFace); // Default font
@@ -160,7 +160,7 @@ void CodeEditor::OnFind(wxFindDialogEvent& event)
     }
 }
 
-void CodeEditor::OnPrefsEditorChanged(wxWeaverPrefsEditorEvent&)
+void CodeEditor::OnPrefsEditorChanged(wxWeaverPreferencesEvent&)
 {
     LoadSettings();
 }

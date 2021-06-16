@@ -18,35 +18,33 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#pragma once
+#include <wx/app.h>
+#include <wx/intl.h>
 
-#include <wx/panel.h>
+class MainFrame;
 
-class wxWeaverPropertyEvent;
-class wxWeaverPreferencesEvent;
-
-class wxStyledTextCtrl;
-class wxStyledTextEvent;
-class wxFindDialogEvent;
-
-class CodeEditor : public wxPanel {
+class wxWeaver : public wxApp {
 public:
-    CodeEditor(wxWindow*, int);
-    virtual ~CodeEditor();
+    bool OnInit() override;
+#if wxUSE_ON_FATAL_EXCEPTION && wxUSE_STACKWALKER
+    void OnFatalException() override;
+#endif
+    int OnRun() override;
+    int OnExit() override;
 
-    wxStyledTextCtrl* GetTextCtrl() const;
-    void LoadSettings();
+#ifdef __WXOSX__
+    wxString m_mac_file_name;
+    void MacOpenFile(const wxString& fileName) override;
+#endif
+    /** Add locale support from a component
+    */
+    bool AddPluginLocaleCatalog(const wxString&);
 
 private:
-    void OnFind(wxFindDialogEvent&);
+    void SelectLanguage(int language);
 
-    void OnMarginClick(wxStyledTextEvent&);
-
-    void OnPropertyModified(wxWeaverPropertyEvent&);
-    void OnPrefsEditorChanged(wxWeaverPreferencesEvent&);
-
-    void SetupTheme();
-
-    wxStyledTextCtrl* m_code;
-    wxFont m_font;
+    MainFrame* m_frame;
+    wxLocale m_locale;
 };
+
+wxDECLARE_APP(wxWeaver);

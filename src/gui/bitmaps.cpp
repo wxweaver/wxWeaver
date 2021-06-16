@@ -59,14 +59,14 @@ void AppBitmaps::LoadBitmaps(wxString filepath, wxString iconpath)
         ticpp::Element* root = doc.FirstChildElement("icons");
         ticpp::Element* elem = root->FirstChildElement("icon", false);
         while (elem) {
-            wxString name = _WXSTR(elem->GetAttribute("name"));
-            wxString file = _WXSTR(elem->GetAttribute("file"));
+            wxString name = elem->GetAttribute("name");
+            wxString file = elem->GetAttribute("file");
             m_bitmaps[name] = wxBitmap(iconpath + file, wxBITMAP_TYPE_ANY);
 
             elem = elem->NextSiblingElement("icon", false);
         }
     } catch (ticpp::Exception& ex) {
-        wxLogError("Error loading images: %s", _WXSTR(ex.m_details).c_str());
+        wxLogError("Error loading images: %s", ex.m_details);
     } catch (wxWeaverException& ex) {
         wxLogError("Error loading images: %s", ex.what());
     }

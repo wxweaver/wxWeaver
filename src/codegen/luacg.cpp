@@ -245,7 +245,7 @@ wxString LuaTemplateParser::ValueToCode(PropertyType type, wxString value)
             result = "wx.wxNullBitmap";
             break;
         }
-        if (source == _("Load From File") || source == _("Load From Embedded File")) {
+        if (source == "Load From File" || source == "Load From Embedded File") {
             wxString absPath;
             try {
                 absPath = TypeConv::MakeAbsolutePath(path, AppData()->GetProjectPath());
@@ -261,10 +261,10 @@ wxString LuaTemplateParser::ValueToCode(PropertyType type, wxString value)
 
             result << "wx.wxBitmap(\"" << LuaCodeGenerator::ConvertLuaString(file)
                    << "\", wx.wxBITMAP_TYPE_ANY)";
-        } else if (source == _("Load From Resource")) {
+        } else if (source == "Load From Resource") {
             result << "wx.wxBitmap(\"" << path
                    << "\", wx.wxBITMAP_TYPE_RESOURCE)";
-        } else if (source == _("Load From Icon Resource")) {
+        } else if (source == "Load From Icon Resource") {
             result << "wx.wxBitmap(\"" << path << "\")";
 #if 0
             // TODO: load from icon isn't supported by wxLua
@@ -275,10 +275,10 @@ wxString LuaTemplateParser::ValueToCode(PropertyType type, wxString value)
                     "wx.Icon( u\"%s\", wx.wxBITMAP_TYPE_ICO_RESOURCE, %i, %i )",
                     path.c_str(), icoSize.GetWidth(), icoSize.GetHeight() );
 #endif
-        } else if (source == _("Load From XRC")) {
+        } else if (source == "Load From XRC") {
             // This requires that the global wxXmlResource object is set
             result << "wx.wxXmlResource.Get():LoadBitmap(\"" << path << "\")";
-        } else if (source == _("Load From Art Provider")) {
+        } else if (source == "Load From Art Provider") {
             wxString rid = path.BeforeFirst(':');
 
             if (rid.StartsWith("gtk-"))
@@ -1261,7 +1261,7 @@ void LuaCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                 wxString path, source;
                 wxSize toolsize;
                 TypeConv::ParseBitmapWithResource(oldVal, &path, &source, &toolsize);
-                if (_("Load From Icon Resource") == source && wxDefaultSize == toolsize) {
+                if (source == "Load From Icon Resource" && toolsize == wxDefaultSize) {
                     prop->SetValue(wxString::Format(
                         "%s; %s [%i; %i]", path.c_str(), source.c_str(),
                         toolbarsize.GetWidth(), toolbarsize.GetHeight()));

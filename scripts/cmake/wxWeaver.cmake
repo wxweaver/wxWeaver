@@ -194,6 +194,8 @@ if(UNIX AND NOT APPLE)
     target_link_libraries(${CMAKE_PROJECT_NAME} dl)
 endif()
 
+target_copy_translation(${CMAKE_PROJECT_NAME} "it")
+
 # Installation
 if (UNIX AND NOT APPLE)
     include(GNUInstallDirs)

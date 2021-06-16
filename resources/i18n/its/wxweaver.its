@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<its:rules xmlns:its="http://www.w3.org/2005/11/its" version="1.0">
+  <its:translateRule selector="/package" translate="no"/>
+  <its:translateRule selector="///event/@help" translate="yes"/>
+  <its:translateRule selector="///property/@help" translate="yes"/>
+  <its:translateRule selector="////option/@help" translate="yes"/>
+</its:rules>

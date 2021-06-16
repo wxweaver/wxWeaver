@@ -419,7 +419,8 @@ void MainFrame::OnPreferences(wxCommandEvent&)
 {
     if (!m_prefsEditor) {
         m_prefsEditor.reset(new wxPreferencesEditor);
-        m_prefsEditor->AddPage(new PageEditors());
+        m_prefsEditor->AddPage(new PageEditors);
+        m_prefsEditor->AddPage(new PageLocale);
     }
     m_prefsEditor->Show(this);
 }
@@ -445,7 +446,7 @@ void MainFrame::OnSaveAsProject(wxCommandEvent&)
     wxFileDialog* dialog
         = new wxFileDialog(
             this, _("Save Project"), m_currentDir, "",
-            _("wxWeaver Project File")
+            _(" wxWeaver Project File")
                 + " (*.fbp)|*.fbp|"
                 + _("All files")
                 + " (*.*)|*.*",
@@ -492,7 +493,7 @@ void MainFrame::OnOpenProject(wxCommandEvent&)
     wxFileDialog* dialog
         = new wxFileDialog(
             this, _("Open Project"), m_currentDir, "",
-            _("wxWeaver Project File")
+            _(" wxWeaver Project File")
                 + " (*.fbp)|*.fbp|"
                 + _("All files")
                 + " (*.*)|*.*",
@@ -1125,7 +1126,7 @@ void MainFrame::OnXrcPreview(wxCommandEvent& WXUNUSED(e))
 #endif
 }
 
-void MainFrame::OnGenInhertedClass(wxCommandEvent& WXUNUSED(e))
+void MainFrame::OnGenInhertedClass(wxCommandEvent&)
 {
     wxString filePath;
     try {
@@ -1351,13 +1352,13 @@ wxMenuBar* MainFrame::CreateWeaverMenuBar()
     menuFile->Append(wxID_EXIT, _("E&xit\tAlt-F4"), _("Quit wxWeaver"));
 
     wxMenu* menuEdit = new wxMenu;
-    menuEdit->Append(wxID_UNDO, _("&Undo \tCtrl+Z"), _("Undo changes"));
-    menuEdit->Append(wxID_REDO, _("&Redo \tCtrl+Y"), _("Redo changes"));
+    menuEdit->Append(wxID_UNDO, _("&Undo\tCtrl+Z"), _("Undo changes"));
+    menuEdit->Append(wxID_REDO, _("&Redo\tCtrl+Y"), _("Redo changes"));
     menuEdit->AppendSeparator();
-    menuEdit->Append(wxID_COPY, _("&Copy \tCtrl+C"), _("Copy selected object"));
-    menuEdit->Append(wxID_CUT, _("Cut \tCtrl+X"), _("Cut selected object"));
-    menuEdit->Append(wxID_PASTE, _("&Paste \tCtrl+V"), _("Paste on selected object"));
-    menuEdit->Append(wxID_DELETE, _("&Delete \tCtrl+D"), _("Delete selected object"));
+    menuEdit->Append(wxID_COPY, _("&Copy\tCtrl+C"), _("Copy selected object"));
+    menuEdit->Append(wxID_CUT, _("Cut\tCtrl+X"), _("Cut selected object"));
+    menuEdit->Append(wxID_PASTE, _("&Paste\tCtrl+V"), _("Paste on selected object"));
+    menuEdit->Append(wxID_DELETE, _("&Delete\tCtrl+D"), _("Delete selected object"));
     menuEdit->AppendSeparator();
     menuEdit->Append(ID_CLIPBOARD_COPY, _("Copy Object To Clipboard\tCtrl+Shift+C"), _("Copy Object to Clipboard"));
     menuEdit->Append(ID_CLIPBOARD_PASTE, _("Paste Object From Clipboard\tCtrl+Shift+V"), _("Paste Object from Clipboard"));
@@ -1371,17 +1372,17 @@ wxMenuBar* MainFrame::CreateWeaverMenuBar()
     menuEdit->AppendSeparator();
     menuEdit->Append(wxID_FIND, _("&Find\tCtrl+F"), _("Find text in the active code viewer"));
     menuEdit->AppendSeparator();
-    menuEdit->Append(ID_ALIGN_LEFT, _("&Align &Left\tAlt+Shift+Left"), _("Align item to the left"));
-    menuEdit->Append(ID_ALIGN_CENTER_H, _("&Align Center &Horizontal\tAlt+Shift+H"), _("Align item to the center horizontally"));
-    menuEdit->Append(ID_ALIGN_RIGHT, _("&Align &Right\tAlt+Shift+Right"), _("Align item to the right"));
-    menuEdit->Append(ID_ALIGN_TOP, _("&Align &Top\tAlt+Shift+Up"), _("Align item to the top"));
-    menuEdit->Append(ID_ALIGN_CENTER_V, _("&Align Center &Vertical\tAlt+Shift+V"), _("Align item to the center vertically"));
-    menuEdit->Append(ID_ALIGN_BOTTOM, _("&Align &Bottom\tAlt+Shift+Down"), _("Align item to the bottom"));
+    menuEdit->Append(ID_ALIGN_LEFT, _("Align &Left\tAlt+Shift+Left"), _("Align item to the left"));
+    menuEdit->Append(ID_ALIGN_CENTER_H, _("Align Center &Horizontal\tAlt+Shift+H"), _("Align item to the center horizontally"));
+    menuEdit->Append(ID_ALIGN_RIGHT, _("Align &Right\tAlt+Shift+Right"), _("Align item to the right"));
+    menuEdit->Append(ID_ALIGN_TOP, _("Align &Top\tAlt+Shift+Up"), _("Align item to the top"));
+    menuEdit->Append(ID_ALIGN_CENTER_V, _("Align Center &Vertical\tAlt+Shift+V"), _("Align item to the center vertically"));
+    menuEdit->Append(ID_ALIGN_BOTTOM, _("Align &Bottom\tAlt+Shift+Down"), _("Align item to the bottom"));
     menuEdit->AppendSeparator();
     menuEdit->Append(wxID_PREFERENCES, _("Preferences\tAlt+O"));
 
     wxMenu* menuView = new wxMenu;
-    menuView->Append(ID_PREVIEW_XRC, _("&XRC Window\tF5"), _("Show a preview of the XRC window"));
+    menuView->Append(ID_PREVIEW_XRC, _("&XRC Preview\tF5"), _("Show a preview of the XRC window"));
     menuView->AppendSeparator();
 
     if (m_style != wxWEAVER_GUI_DOCKABLE) {
@@ -1410,17 +1411,17 @@ wxToolBar* MainFrame::CreateWeaverToolBar()
 {
     wxToolBar* toolbar = CreateToolBar();
     toolbar->SetToolBitmapSize(wxSize(TOOL_SIZE, TOOL_SIZE));
-    toolbar->AddTool(wxID_NEW, _("New Project"), AppBitmaps::GetBitmap("document-new", TOOL_SIZE), wxNullBitmap, wxITEM_NORMAL, _("New Project (Ctrl+N)"), _("Start a new project."));
-    toolbar->AddTool(wxID_OPEN, _("Open Project"), wxArtProvider::GetBitmap(wxART_FILE_OPEN, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Open Project (Ctrl+O)"), _("Open an existing project."));
-    toolbar->AddTool(wxID_SAVE, _("Save Project"), wxArtProvider::GetBitmap(wxART_FILE_SAVE, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Save Project (Ctrl+S)"), _("Save the current project."));
+    toolbar->AddTool(wxID_NEW, _("New Project"), AppBitmaps::GetBitmap("document-new", TOOL_SIZE), wxNullBitmap, wxITEM_NORMAL, _("New Project\t(Ctrl+N)"), _("Start a new project."));
+    toolbar->AddTool(wxID_OPEN, _("Open Project"), wxArtProvider::GetBitmap(wxART_FILE_OPEN, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Open Project\t(Ctrl+O)"), _("Open an existing project."));
+    toolbar->AddTool(wxID_SAVE, _("Save Project"), wxArtProvider::GetBitmap(wxART_FILE_SAVE, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Save Project\t(Ctrl+S)"), _("Save the current project."));
     toolbar->AddSeparator();
-    toolbar->AddTool(wxID_UNDO, _("Undo"), wxArtProvider::GetBitmap(wxART_UNDO, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Undo (Ctrl+Z)"), _("Undo the last action."));
-    toolbar->AddTool(wxID_REDO, _("Redo"), wxArtProvider::GetBitmap(wxART_REDO, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Redo (Ctrl+Y)"), _("Redo the last action that was undone."));
+    toolbar->AddTool(wxID_UNDO, _("Undo"), wxArtProvider::GetBitmap(wxART_UNDO, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Undo\t(Ctrl+Z)"), _("Undo the last action."));
+    toolbar->AddTool(wxID_REDO, _("Redo"), wxArtProvider::GetBitmap(wxART_REDO, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Redo\t(Ctrl+Y)"), _("Redo the last action that was undone."));
     toolbar->AddSeparator();
-    toolbar->AddTool(wxID_CUT, _("Cut"), wxArtProvider::GetBitmap(wxART_CUT, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Cut (Ctrl+X)"), _("Remove the selected object and place it on the clipboard."));
-    toolbar->AddTool(wxID_COPY, _("Copy"), wxArtProvider::GetBitmap(wxART_COPY, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Copy (Ctrl+C)"), _("Copy the selected object to the clipboard."));
-    toolbar->AddTool(wxID_PASTE, _("Paste"), wxArtProvider::GetBitmap(wxART_PASTE, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Paste (Ctrl+V)"), _("Insert an object from the clipboard."));
-    toolbar->AddTool(wxID_DELETE, _("Delete"), wxArtProvider::GetBitmap(wxART_DELETE, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Delete (Ctrl+D)"), _("Remove the selected object."));
+    toolbar->AddTool(wxID_CUT, _("Cut"), wxArtProvider::GetBitmap(wxART_CUT, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Cut\t(Ctrl+X)"), _("Remove the selected object and place it on the clipboard."));
+    toolbar->AddTool(wxID_COPY, _("Copy"), wxArtProvider::GetBitmap(wxART_COPY, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Copy\t(Ctrl+C)"), _("Copy the selected object to the clipboard."));
+    toolbar->AddTool(wxID_PASTE, _("Paste"), wxArtProvider::GetBitmap(wxART_PASTE, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Paste\t(Ctrl+V)"), _("Insert an object from the clipboard."));
+    toolbar->AddTool(wxID_DELETE, _("Delete"), wxArtProvider::GetBitmap(wxART_DELETE, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Delete\t(Ctrl+D)"), _("Remove the selected object."));
     toolbar->AddSeparator();
     toolbar->AddTool(wxID_EXECUTE, _("Generate Code"), wxArtProvider::GetBitmap(wxART_EXECUTABLE_FILE, wxART_TOOLBAR), wxNullBitmap, wxITEM_NORMAL, _("Generate Code (F8)"), _("Create code from the current project."));
     toolbar->AddSeparator();
@@ -1436,9 +1437,9 @@ wxToolBar* MainFrame::CreateWeaverToolBar()
     toolbar->AddTool(ID_STRETCH, "", AppBitmaps::GetBitmap("size-stretch", TOOL_SIZE), wxNullBitmap, wxITEM_CHECK, _("Stretch (Alt+S)"), _("The item will grow and shrink with the sizer."));
     toolbar->AddSeparator();
     toolbar->AddTool(ID_BORDER_LEFT, "", AppBitmaps::GetBitmap("border-left", TOOL_SIZE), wxNullBitmap, wxITEM_CHECK, _("Left Border"), _("A border will be added on the left side of the item."));
-    toolbar->AddTool(ID_BORDER_RIGHT, "", AppBitmaps::GetBitmap("border-right", TOOL_SIZE), wxNullBitmap, wxITEM_CHECK, _("Right Border"), _("A border will be  added on the right side of the item."));
-    toolbar->AddTool(ID_BORDER_TOP, "", AppBitmaps::GetBitmap("border-top", TOOL_SIZE), wxNullBitmap, wxITEM_CHECK, _("Top Border"), _("A border will be  added on the top of the item."));
-    toolbar->AddTool(ID_BORDER_BOTTOM, "", AppBitmaps::GetBitmap("border-bottom", TOOL_SIZE), wxNullBitmap, wxITEM_CHECK, _("Bottom Border"), _("A border will be  added on the bottom of the item."));
+    toolbar->AddTool(ID_BORDER_RIGHT, "", AppBitmaps::GetBitmap("border-right", TOOL_SIZE), wxNullBitmap, wxITEM_CHECK, _("Right Border"), _("A border will be added on the right side of the item."));
+    toolbar->AddTool(ID_BORDER_TOP, "", AppBitmaps::GetBitmap("border-top", TOOL_SIZE), wxNullBitmap, wxITEM_CHECK, _("Top Border"), _("A border will be added on the top of the item."));
+    toolbar->AddTool(ID_BORDER_BOTTOM, "", AppBitmaps::GetBitmap("border-bottom", TOOL_SIZE), wxNullBitmap, wxITEM_CHECK, _("Bottom Border"), _("A border will be added on the bottom of the item."));
 
     if (m_style != wxWEAVER_GUI_DOCKABLE) {
         toolbar->AddSeparator();

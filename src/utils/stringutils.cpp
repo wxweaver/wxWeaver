@@ -106,15 +106,15 @@ void LoadXMLFileImp(T& doc, bool condenseWhiteSpace, const wxString& path,
     }
 
     // The file will have a declaration at this point
-    wxString version = _WXSTR(declaration->Version());
+    wxString version = declaration->Version();
     if (version.empty())
         version = "1.0";
 
-    wxString standalone = _WXSTR(declaration->Standalone());
+    wxString standalone = declaration->Standalone();
     if (standalone.empty())
         standalone = "yes";
 
-    wxString encodingName = _WXSTR(declaration->Encoding());
+    wxString encodingName = declaration->Encoding();
     if (encodingName.empty()) {
         // Ask user to all wxWeaver to convert the file to UTF-8 and add the XML declaration
         wxString msg = _("This xml file has no encoding specified.\n");

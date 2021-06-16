@@ -1,0 +1,641 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wxWeaver Containers Plugin\n"
+"POT-Creation-Date: 2021-06-15 00:16+0200\n"
+"PO-Revision-Date: 2021-06-15 00:34+0200\n"
+"Last-Translator: Andrea Zanellato <redtid3@gmail.com>\n"
+"Language-Team: wxWeaver Team\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ../../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-SearchPath-0: src/plugins/containers\n"
+"X-Poedit-SearchPath-1: resources/application/plugins/containers/"
+"xml/1_containers.xml\n"
+"X-Poedit-SearchPath-2: resources/application/plugins/containers/"
+"xml/2_bookctrls.xml\n"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:42
+msgid "The default style. It includes wxTAB_TRAVERSAL and wxBORDER_NONE."
+msgstr "Lo stile predefinito. Include wxTAB_TRAVERSAL e wxBORDER_NONE."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:43
+msgid ""
+"By default wxCollapsiblePane resizes the top level window containing it when "
+"its own size changes. This allows to easily implement dialogs containing an "
+"optionally shown part, for example, and so is the default behaviour but can "
+"be inconvenient in some specific cases – use this flag to disable this "
+"automatic parent resizing then."
+msgstr ""
+"Per impostazione predefinita, wxCollapsiblePane ridimensiona la finestra di "
+"livello superiore che la contiene quando le sue dimensioni cambiano. Ciò "
+"consente di implementare facilmente finestre di dialogo contenenti una parte "
+"mostrata facoltativamente, ad esempio, e quindi è il comportamento "
+"predefinito, ma può essere scomodo in alcuni casi specifici: utilizzare "
+"questo flag per disabilitare il ridimensionamento automatico del genitore."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:46
+msgid "The user expanded or collapsed the collapsible pane."
+msgstr "L'utente ha espanso o compresso il riquadro comprimibile."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:54
+msgid "Draws a 3D effect border and sash."
+msgstr "Disegna un bordo e una fascia con effetto 3D."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:55
+msgid "Draws a 3D effect sash (part of default style)."
+msgstr "Disegna una fascia effetto 3D (parte dello stile predefinito)."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:56
+msgid "Synonym for wxSP_BORDER."
+msgstr "Sinonimo di wxSP_BORDER."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:57
+msgid "Draws a standard border."
+msgstr "Disegna un bordo standard."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:58
+msgid "No border (default)."
+msgstr "Nessun bordo (impostazione predefinita)."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:59
+msgid ""
+"Sets the sash to be invisible, even when the window is split. This prevents "
+"the user to resize the windows."
+msgstr ""
+"Imposta l'anta in modo che sia invisibile, anche quando la finestra è "
+"divisa. Ciò impedisce all'utente di ridimensionare le finestre."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:60
+msgid "Draws a thin sash."
+msgstr "Disegna una fascia sottile."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:61
+msgid ""
+"Under Windows XP, switches off the attempt to draw the splitter using "
+"Windows XP theming, so the borders and sash will take on the pre-XP look."
+msgstr ""
+"In Windows XP, disattiva il tentativo di disegnare lo splitter utilizzando i "
+"temi di Windows XP, quindi i bordi e la fascia assumeranno l'aspetto pre-XP."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:62
+msgid ""
+"Always allow to unsplit, even with the minimum pane size other than zero. "
+"Note: The designer prevents un-splitting."
+msgstr ""
+"Consenti sempre di non dividere, anche con la dimensione minima del riquadro "
+"diversa da zero. Nota: il designer impedisce la divisione."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:63
+msgid "Don't draw XOR line but resize the child windows immediately."
+msgstr ""
+"Non disegnare una linea XOR ma ridimensiona immediatamente le finestre "
+"figlio."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:67
+msgid "Specifies a vertical split window."
+msgstr "Specifica una finestra divisa in verticale."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:68
+msgid "Specifies a horizontal split window."
+msgstr "Specifica una finestra divisa orizzontalmente."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:71
+msgid "The initial sash position."
+msgstr "La posizione iniziale dell'anta."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:72
+msgid "Overrides platform metrics if greater than -1"
+msgstr "Sostituisce le metriche della piattaforma se maggiore di -1"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:73
+msgid ""
+"Sets the sash gravity. Remarks: Gravity is real factor which controls "
+"position of sash while resizing wxSplitterWindow. Gravity tells "
+"wxSplitterWindow how much will left/top window grow while resizing."
+msgstr ""
+"Imposta la gravità dell'anta. Note: La gravità è un fattore reale che "
+"controlla la posizione dell'anta durante il ridimensionamento di "
+"wxSplitterWindow. Gravity dice a wxSplitterWindow quanto crescerà la "
+"finestra sinistra/superiore durante il ridimensionamento."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:74
+msgid ""
+"Minimum size for the panes. A minimum less than 1 is not allowed in the "
+"designer, because the designer prevents un-splitting."
+msgstr ""
+"Dimensioni minime per i riquadri. Un minimo inferiore a 1 non è consentito "
+"nel progettista, perché il progettista impedisce la non scissione."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:75
+msgid ""
+"The sash position is in the process of being changed. May be used to modify "
+"the position of the tracking bar to properly reflect the position that would "
+"be set if the drag were to be completed at this point. Processes a "
+"wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGING event."
+msgstr ""
+"La posizione dell'anta è in fase di modifica. Può essere utilizzato per "
+"modificare la posizione della barra di tracciamento in modo che rifletta "
+"correttamente la posizione che verrebbe impostata se il trascinamento "
+"dovesse essere completato a questo punto. Elabora un evento "
+"wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGING."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:76
+msgid ""
+"The sash position was changed. May be used to modify the sash position "
+"before it is set, or to prevent the change from taking place. Processes a "
+"wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED event."
+msgstr ""
+"La posizione della fascia è stata cambiata. Può essere utilizzato per "
+"modificare la posizione dell'anta prima che venga impostata o per impedire "
+"che avvenga il cambiamento. Elabora un evento "
+"wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:77
+msgid ""
+"The splitter has been just unsplit. Processes a "
+"wxEVT_COMMAND_SPLITTER_UNSPLIT event."
+msgstr ""
+"Lo splitter è stato semplicemente non diviso. Elabora un evento "
+"wxEVT_COMMAND_SPLITTER_UNSPLIT."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:78
+msgid ""
+"The sash was double clicked. The default behaviour is to unsplit the window "
+"when this happens (unless the minimum pane size has been set to a value "
+"greater than zero). Processes a wxEVT_COMMAND_SPLITTER_DOUBLECLICKED event."
+msgstr ""
+"La fascia è stata cliccata due volte. Il comportamento predefinito consiste "
+"nel separare la finestra quando ciò accade (a meno che la dimensione minima "
+"del riquadro non sia stata impostata su un valore maggiore di zero). Elabora "
+"un evento wxEVT_COMMAND_SPLITTER_DOUBLECLICKED."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:89
+msgid "Set the horizontal scrolling increment."
+msgstr "Imposta l'incremento di scorrimento orizzontale."
+
+#: resources/application/plugins/containers/xml/1_containers.xml:90
+msgid "Set the vertical scrolling increment."
+msgstr "Imposta l'incremento di scorrimento verticale."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:28
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:99
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:122
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:143
+msgid "Size of page images"
+msgstr "Dimensione delle immagini della pagina"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:30
+msgid "Place tabs on the top side."
+msgstr "Posiziona le linguette sul lato superiore."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:31
+msgid "Place tabs on the left side."
+msgstr "Posiziona le schede sul lato sinistro."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:32
+msgid "Place tabs on the right side."
+msgstr "Posiziona le linguette sul lato destro."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:33
+msgid "Place tabs under instead of above the notebook pages."
+msgstr "Posiziona le schede sotto anziché sopra le pagine del notebook."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:34
+msgid "All tabs will have same width. (Windows only)"
+msgstr "Tutte le schede avranno la stessa larghezza. (solo Windows)"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:35
+msgid "There can be several rows of tabs. (Windows only)"
+msgstr "Possono essere presenti diverse righe di schede. (Solo Windows)"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:36
+msgid ""
+"Display a solid colour on notebook pages, and not a gradient, which can "
+"reduce performance. (Windows only)"
+msgstr ""
+"Visualizza un colore a tinta unita sulle pagine del notebook e non una "
+"sfumatura, che può ridurre le prestazioni. (solo Windows)"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:38
+msgid ""
+"The page selection was changed. Processes a "
+"wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED event."
+msgstr ""
+"La selezione della pagina è stata modificata. Elabora un evento "
+"wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:39
+msgid ""
+"The page selection is about to be changed. Processes a "
+"wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING event. This event can be vetoed."
+msgstr ""
+"La selezione della pagina sta per essere modificata. Elabora un evento "
+"wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING. Questo evento può essere posto il veto."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:44
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:90
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:114
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:135
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:159
+msgid "Page Image"
+msgstr "Immagine della pagina"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:45
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:91
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:115
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:136
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:160
+msgid "wxImageList Index"
+msgstr "Indice dell'immagine nella wxImageList"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:46
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:92
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:116
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:137
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:162
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:183
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:196
+msgid "Select Page when Adding"
+msgstr "Seleziona la pagina durante l'aggiunta"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:54
+msgid ""
+"Defined as wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | "
+"wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_CLOSE_ON_ACTIVE_TAB | "
+"wxAUI_NB_MIDDLE_CLICK_CLOSE."
+msgstr ""
+"Definito come wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | "
+"wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_CLOSE_ON_ACTIVE_TAB | "
+"wxAUI_NB_MIDDLE_CLICK_CLOSE."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:55
+msgid "Allows the tab control to be split by dragging a tab."
+msgstr ""
+"Consente di dividere il controllo struttura a schede trascinando una scheda."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:56
+msgid "Allows a tab to be moved horizontally by dragging."
+msgstr "Consente di spostare orizzontalmente una scheda trascinandola."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:57
+msgid "Allows a tab to be moved to another tab control."
+msgstr ""
+"Consente di spostare una scheda in un altro controllo struttura a schede."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:58
+msgid "With this style, all tabs have the same width."
+msgstr "Con questo stile, tutte le schede hanno la stessa larghezza."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:59
+msgid "With this style, left and right scroll buttons are displayed."
+msgstr ""
+"Con questo stile vengono visualizzati i pulsanti di scorrimento sinistro e "
+"destro."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:60
+msgid "With this style, a drop-down list of windows is available."
+msgstr "Con questo stile è disponibile un elenco a discesa di finestre."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:61
+msgid "With this style, a close button is available on the tab bar."
+msgstr ""
+"Con questo stile, è disponibile un pulsante di chiusura sulla barra delle "
+"schede."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:62
+msgid "With this style, the close button is visible on the active tab."
+msgstr ""
+"Con questo stile, il pulsante di chiusura è visibile nella scheda attiva."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:63
+msgid "With this style, the close button is visible on all tabs."
+msgstr ""
+"Con questo stile, il pulsante di chiusura è visibile su tutte le schede."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:64
+msgid "With this style, middle click on a tab closes the tab."
+msgstr "Con questo stile, il clic centrale su una scheda chiude la scheda."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:65
+msgid "With this style, tabs are drawn along the top of the notebook."
+msgstr ""
+"Con questo stile, le schede vengono disegnate lungo la parte superiore del "
+"notebook."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:66
+msgid "With this style, tabs are drawn along the bottom of the notebook."
+msgstr ""
+"Con questo stile, le schede vengono disegnate lungo la parte inferiore del "
+"notebook."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:69
+msgid ""
+"Sets the tab height. By default, the tab control height is calculated by "
+"measuring the text height and bitmap sizes on the tab captions. Calling this "
+"method will override that calculation and set the tab control to the "
+"specified height parameter. A call to this method will override any call to "
+"SetUniformBitmapSize(). Specifying -1 as the height will return the control "
+"to its default auto-sizing behaviour."
+msgstr ""
+"Imposta l'altezza della scheda. Per impostazione predefinita, l'altezza del "
+"controllo struttura a schede viene calcolata misurando l'altezza del testo e "
+"le dimensioni della bitmap nelle didascalie delle schede. La chiamata a "
+"questo metodo sovrascriverà tale calcolo e imposterà il controllo struttura "
+"a schede sul parametro di altezza specificato. Una chiamata a questo metodo "
+"sovrascriverà qualsiasi chiamata a SetUniformBitmapSize(). Specificando -1 "
+"come altezza, il controllo tornerà al suo comportamento di ridimensionamento "
+"automatico predefinito."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:70
+msgid ""
+"SetUniformBitmapSize() ensures that all tabs will have the same height, even "
+"if some tabs don't have bitmaps. Passing wxDefaultSize to this function will "
+"instruct the control to use dynamic tab height, which is the default "
+"behaviour. Under the default behaviour, when a tab with a large bitmap is "
+"added, the tab control's height will automatically increase to accommodate "
+"the larger bitmap."
+msgstr ""
+"SetUniformBitmapSize() garantisce che tutte le schede abbiano la stessa "
+"altezza, anche se alcune schede non hanno bitmap. Il passaggio di "
+"wxDefaultSize a questa funzione indicherà al controllo di utilizzare "
+"l'altezza di tabulazione dinamica, che è il comportamento predefinito. Con "
+"il comportamento predefinito, quando viene aggiunta una scheda con una "
+"bitmap grande, l'altezza del controllo struttura a schede aumenterà "
+"automaticamente per adattarsi alla bitmap più grande."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:71
+msgid ""
+"A page is about to be closed. Processes a wxEVT_AUINOTEBOOK_PAGE_CLOSE event."
+msgstr ""
+"Una pagina sta per essere chiusa. Elabora un evento "
+"wxEVT_AUINOTEBOOK_PAGE_CLOSE."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:72
+msgid ""
+"A page has been closed. Processes a wxEVT_AUINOTEBOOK_PAGE_CLOSED event."
+msgstr ""
+"Una pagina è stata chiusa. Elabora un evento wxEVT_AUINOTEBOOK_PAGE_CLOSED."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:73
+msgid ""
+"The page selection was changed. Processes a wxEVT_AUINOTEBOOK_PAGE_CHANGED "
+"event."
+msgstr ""
+"La selezione della pagina è stata modificata. Elabora un evento "
+"wxEVT_AUINOTEBOOK_PAGE_CHANGED."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:74
+msgid ""
+"The page selection is about to be changed. Processes a "
+"wxEVT_AUINOTEBOOK_PAGE_CHANGING event. This event can be vetoed."
+msgstr ""
+"La selezione della pagina sta per essere modificata. Elabora un evento "
+"wxEVT_AUINOTEBOOK_PAGE_CHANGING. Questo evento può essere posto il veto."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:75
+msgid ""
+"The window list button has been pressed. Processes a "
+"wxEVT_AUINOTEBOOK_BUTTON event."
+msgstr ""
+"Il pulsante dell'elenco delle finestre è stato premuto. Elabora un evento "
+"wxEVT_AUINOTEBOOK_BUTTON."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:76
+msgid ""
+"Dragging is about to begin. Processes a wxEVT_AUINOTEBOOK_BEGIN_DRAG event."
+msgstr ""
+"Il trascinamento sta per iniziare. Elabora un evento "
+"wxEVT_AUINOTEBOOK_BEGIN_DRAG."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:77
+msgid "Dragging has ended. Processes a wxEVT_AUINOTEBOOK_END_DRAG event."
+msgstr ""
+"Il trascinamento è terminato. Elabora un evento wxEVT_AUINOTEBOOK_END_DRAG."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:78
+msgid ""
+"Emitted during a drag and drop operation. Processes a "
+"wxEVT_AUINOTEBOOK_DRAG_MOTION event."
+msgstr ""
+"Emesso durante un'operazione di trascinamento della selezione. Elabora un "
+"evento wxEVT_AUINOTEBOOK_DRAG_MOTION."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:79
+msgid ""
+"Whether to allow a tab to be dropped. Processes a "
+"wxEVT_AUINOTEBOOK_ALLOW_DND event. This event must be specially allowed."
+msgstr ""
+"Se consentire l'eliminazione di una scheda. Elabora un evento "
+"wxEVT_AUINOTEBOOK_ALLOW_DND. Questo evento deve essere appositamente "
+"consentito."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:80
+msgid ""
+"Notify that the tab has been dragged. Processes a "
+"wxEVT_AUINOTEBOOK_DRAG_DONE event."
+msgstr ""
+"Notifica che la scheda è stata trascinata. Elabora un evento "
+"wxEVT_AUINOTEBOOK_DRAG_DONE."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:81
+msgid ""
+"The middle mouse button is pressed on a tab. Processes a "
+"wxEVT_AUINOTEBOOK_TAB_MIDDLE_DOWN event."
+msgstr ""
+"Il pulsante centrale del mouse viene premuto su una scheda. Elabora un "
+"evento wxEVT_AUINOTEBOOK_TAB_MIDDLE_DOWN."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:82
+msgid ""
+"The middle mouse button is released on a tab. Processes a "
+"wxEVT_AUINOTEBOOK_TAB_MIDDLE_UP event."
+msgstr ""
+"Il pulsante centrale del mouse viene rilasciato su una scheda. Elabora un "
+"evento wxEVT_AUINOTEBOOK_TAB_MIDDLE_UP."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:83
+msgid ""
+"The right mouse button is pressed on a tab. Processes a "
+"wxEVT_AUINOTEBOOK_TAB_RIGHT_DOWN event."
+msgstr ""
+"Il pulsante destro del mouse viene premuto su una scheda. Elabora un evento "
+"wxEVT_AUINOTEBOOK_TAB_RIGHT_DOWN."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:84
+msgid ""
+"The right mouse button is released on a tab. Processes a "
+"wxEVT_AUINOTEBOOK_TAB_RIGHT_UP event."
+msgstr ""
+"Il pulsante destro del mouse viene rilasciato su una scheda. Elabora un "
+"evento wxEVT_AUINOTEBOOK_TAB_RIGHT_UP."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:85
+msgid ""
+"Double clicked on the tabs background area. Processes a "
+"wxEVT_AUINOTEBOOK_BG_DCLICK event."
+msgstr ""
+"Fare doppio clic sull'area di sfondo delle schede. Elabora un evento "
+"wxEVT_AUINOTEBOOK_BG_DCLICK."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:101
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:170
+msgid ""
+"Choose the default location for the labels depending on the current platform "
+"(left everywhere except Mac where it is top)."
+msgstr ""
+"Scegli la posizione predefinita per le etichette in base alla piattaforma "
+"corrente (a sinistra ovunque tranne che nel Mac dove è in alto)."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:102
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:125
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:146
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:171
+msgid "Place labels above the page area."
+msgstr "Posiziona le etichette sopra l'area della pagina."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:103
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:126
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:147
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:172
+msgid "Place labels on the left side."
+msgstr "Posiziona le etichette sul lato sinistro."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:104
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:127
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:148
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:173
+msgid "Place labels on the right side."
+msgstr "Posiziona le etichette sul lato destro."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:105
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:128
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:149
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:174
+msgid "Place labels below the page area."
+msgstr "Posiziona le etichette sotto l'area della pagina."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:108
+msgid ""
+"The page selection was changed. Processes a "
+"wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED event."
+msgstr ""
+"La selezione della pagina è stata modificata. Elabora un evento "
+"wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:109
+msgid ""
+"The page selection is about to be changed. Processes a "
+"wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING event. This event can be vetoed."
+msgstr ""
+"La selezione della pagina sta per essere modificata. Elabora un evento "
+"wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING. Questo evento può essere posto il veto."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:124
+msgid ""
+"Choose the default location for the toolbar depending on the current platform"
+msgstr ""
+"Scegli la posizione predefinita per la barra degli strumenti a seconda della "
+"piattaforma corrente"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:129
+msgid ""
+"The page selection was changed. Processes a "
+"wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGED event."
+msgstr ""
+"La selezione della pagina è stata modificata. Elabora un evento "
+"wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGED."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:130
+msgid ""
+"The page selection is about to be changed. Processes a "
+"wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGING event. This event can be vetoed."
+msgstr ""
+"La selezione della pagina sta per essere modificata. Elabora un evento "
+"wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGING. Questo evento può essere posto il veto."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:145
+msgid ""
+"Choose the default location for the tree depending on the current platform"
+msgstr ""
+"Scegli la posizione predefinita per l'albero a seconda della piattaforma "
+"corrente"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:150
+msgid ""
+"The page selection was changed. Processes a "
+"wxEVT_COMMAND_TREEBOOK_PAGE_CHANGED event."
+msgstr ""
+"La selezione della pagina è stata modificata. Elabora un evento "
+"wxEVT_COMMAND_TREEBOOK_PAGE_CHANGED."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:151
+msgid ""
+"The page selection is about to be changed. Processes a "
+"wxEVT_COMMAND_TREEBOOK_PAGE_CHANGING event. This event can be vetoed."
+msgstr ""
+"La selezione della pagina sta per essere modificata. Elabora un evento "
+"wxEVT_COMMAND_TREEBOOK_PAGE_CHANGING. Questo evento può essere posto il veto."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:152
+msgid ""
+"The page node is going to be collapsed. Processes a "
+"wxEVT_COMMAND_TREEBOOK_NODE_COLLAPSED event."
+msgstr ""
+"Il nodo della pagina verrà compresso. Elabora un evento "
+"wxEVT_COMMAND_TREEBOOK_NODE_COLLAPSED."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:153
+msgid ""
+"The page node is going to be expanded. Processes a "
+"wxEVT_COMMAND_TREEBOOK_NODE_EXPANDED event."
+msgstr ""
+"Il nodo della pagina verrà espanso. Elabora un evento "
+"wxEVT_COMMAND_TREEBOOK_NODE_EXPANDED."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:157
+msgid "Adds a new child-page to the last top-level page"
+msgstr "Aggiunge una nuova pagina figlio all'ultima pagina di primo livello"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:161
+msgid "Expands the current treebookpage node"
+msgstr "Espande il nodo treebookpage corrente"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:177
+msgid ""
+"The page selection was changed. Processes a wxEVT_CHOICEBOOK_PAGE_CHANGED "
+"event."
+msgstr ""
+"La selezione della pagina è stata modificata. Elabora un evento "
+"wxEVT_CHOICEBOOK_PAGE_CHANGED."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:178
+msgid ""
+"The page selection is about to be changed. Processes a "
+"wxEVT_CHOICEBOOK_PAGE_CHANGING event. This event can be vetoed (using "
+"wxNotifyEvent::Veto())."
+msgstr ""
+"La selezione della pagina sta per essere modificata. Elabora un evento "
+"wxEVT_CHOICEBOOK_PAGE_CHANGING. Questo evento può essere posto il veto "
+"(usando wxNotifyEvent::Veto())."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:190
+msgid ""
+"The page selection was changed. Processes a wxEVT_BOOKCTRL_PAGE_CHANGED "
+"event."
+msgstr ""
+"La selezione della pagina è stata modificata. Elabora un evento "
+"wxEVT_BOOKCTRL_PAGE_CHANGED."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:191
+msgid ""
+"The page selection is about to be changed. Processes a "
+"wxEVT_BOOKCTRL_PAGE_CHANGING event. This event can be vetoed."
+msgstr ""
+"La selezione della pagina sta per essere modificata. Elabora un evento "
+"wxEVT_BOOKCTRL_PAGE_CHANGING. Questo evento può essere posto il veto."

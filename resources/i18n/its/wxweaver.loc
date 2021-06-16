@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<locatingRules>
+  <locatingRule name="wxWeaver" pattern="*.xml">
+    <documentRule localName="package" target="wxweaver.its"/>
+  </locatingRule>
+  <locatingRule name="wxWeaver" pattern="*.msg" target="wxweaver.its"/>
+</locatingRules>

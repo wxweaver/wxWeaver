@@ -23,6 +23,8 @@
 #include "utils/typeconv.h"
 #include "appdata.h"
 
+#include <wx/fontdlg.h>
+#include <wx/fontenum.h>
 #include <wx/regex.h>
 /*
     TODO: API changes after 2015: in between 3.0.2 (2014) and 3.0.3rc1 (2017)
@@ -198,20 +200,20 @@ void wxWeaverBitmapProperty::CreateChildren()
     if (childVals.Count() > 0)
         source = childVals.Item(0);
     else
-        source = _("Load From File");
+        source = "Load From File";
 
     prevSrc = wxNOT_FOUND;
-    if (source == wxString(_("Load From File")))
+    if (source == "Load From File")
         childIndex = 0;
-    else if (source == wxString(_("Load From Embedded File")))
+    else if (source == "Load From Embedded File")
         childIndex = 1;
-    else if (source == wxString(_("Load From Resource")))
+    else if (source == "Load From Resource")
         childIndex = 2;
-    else if (source == wxString(_("Load From Icon Resource")))
+    else if (source == "Load From Icon Resource")
         childIndex = 3;
-    else if (source == wxString(_("Load From XRC")))
+    else if (source == "Load From XRC")
         childIndex = 4;
-    else if (source == wxString(_("Load From Art Provider")))
+    else if (source == "Load From Art Provider")
         childIndex = 5;
 
     childValue = WXVARIANT(childIndex);
@@ -224,30 +226,29 @@ wxPGProperty* wxWeaverBitmapProperty::CreatePropertySource(int sourceIndex)
     wxPGChoices sourceChoices;
 
     // Add 'source' property (common for all other children)
-    sourceChoices.Add(_("Load From File"));
-    sourceChoices.Add(_("Load From Embedded File"));
-    sourceChoices.Add(_("Load From Resource"));
-    sourceChoices.Add(_("Load From Icon Resource"));
-    sourceChoices.Add(_("Load From XRC"));
-    sourceChoices.Add(_("Load From Art Provider"));
+    sourceChoices.Add("Load From File");
+    sourceChoices.Add("Load From Embedded File");
+    sourceChoices.Add("Load From Resource");
+    sourceChoices.Add("Load From Icon Resource");
+    sourceChoices.Add("Load From XRC");
+    sourceChoices.Add("Load From Art Provider");
 
     wxPGProperty* srcProp
         = new wxEnumProperty("source", wxPG_LABEL, sourceChoices, sourceIndex);
 
-    srcProp->SetHelpString(
-        wxString(
-            _("Load From File:\n"))
-        + wxString(_("Load the image from a file on disk.\n\n"))
-        + wxString(_("Load From Embedded File:\n"))
-        + wxString(_("C++ Only. Embed the image file in the exe and load it.\nFor other languages, behaves like \"Load From File\".\n\n"))
-        + wxString(_("Load From Resource:\n"))
-        + wxString(_("Windows Only. Load the image from a BITMAP resource in a .rc file\n\n"))
-        + wxString(_("Load From Icon Resource:\n"))
-        + wxString(_("Windows Only. Load the image from a ICON resource in a .rc file\n\n"))
-        + wxString(_("Load From XRC:\n"))
-        + wxString(_("Load the image from XRC ressources. The XRC ressources must be initialized by the application code.\n\n"))
-        + wxString(_("Load From Art Provider:\n"))
-        + wxString(_("Query registered providers for bitmap with given ID.\n\n")));
+    srcProp->SetHelpString(_(
+        "Load From File:\n"
+        "Load the image from a file on disk.\n\n"
+        "Load From Embedded File:\n"
+        "C++ Only. Embed the image file in the exe and load it.\nFor other languages, behaves like \"Load From File\".\n\n"
+        "Load From Resource:\n"
+        "Windows Only. Load the image from a BITMAP resource in a .rc file\n\n"
+        "Load From Icon Resource:\n"
+        "Windows Only. Load the image from a ICON resource in a .rc file\n\n"
+        "Load From XRC:\n"
+        "Load the image from XRC resources. The XRC resources must be initialized by the application code.\n\n"
+        "Load From Art Provider:\n"
+        "Query registered providers for bitmap with given ID.\n\n"));
 
     AppendChild(srcProp);
     return srcProp;
@@ -299,7 +300,7 @@ wxPGProperty* wxWeaverBitmapProperty::CreatePropertyXrcName()
 {
     // Create 'xrc_name' property ('Load From XRC' only)
     wxPGProperty* propXRCName = new wxStringProperty("xrc_name", wxPG_LABEL);
-    propXRCName->SetHelpString(_("Name of the item in the XRC ressources."));
+    propXRCName->SetHelpString(_("Name of the item in the XRC resources."));
     return propXRCName;
 }
 
@@ -634,7 +635,7 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
     }
     // file_path || id || resource_name || xrc_name
     case 1: {
-        if ((Item(0)->GetValueAsString() == _("Load From File")) || (Item(0)->GetValueAsString() == _("Load From Embedded File"))) {
+        if ((Item(0)->GetValueAsString() == "Load From File") || (Item(0)->GetValueAsString() == "Load From Embedded File")) {
             // Save the initial file path TODO: Save the image filter index
             if (Item(1)) {
                 wxString img = childValue.GetString();
@@ -669,8 +670,8 @@ void wxWeaverBitmapProperty::UpdateChildValues(const wxString& value)
     wxArrayString childVals;
     GetChildValues(value, childVals);
 
-    if (childVals[0].Contains(_("Load From File"))
-        || childVals[0].Contains(_("Load From Embedded File"))) {
+    if (childVals[0].Contains("Load From File")
+        || childVals[0].Contains("Load From Embedded File")) {
         if (childVals.Count() > 1) {
             wxString img = childVals[1];
             img = SetupImage(img);
@@ -682,11 +683,11 @@ void wxWeaverBitmapProperty::UpdateChildValues(const wxString& value)
             else
                 Item(1)->SetValueToUnspecified();
         }
-    } else if (childVals[0].Contains(_("Load From Resource"))) {
+    } else if (childVals[0].Contains("Load From Resource")) {
         if (childVals.Count() > 1)
             Item(1)->SetValue(childVals[1]);
 
-    } else if (childVals[0].Contains(_("Load From Icon Resource"))) {
+    } else if (childVals[0].Contains("Load From Icon Resource")) {
         if (childVals.Count() > 1)
             Item(1)->SetValue(childVals[1]);
 
@@ -698,11 +699,11 @@ void wxWeaverBitmapProperty::UpdateChildValues(const wxString& value)
             aux.Replace(";", ",");
             Item(2)->SetValue(WXVARIANT(TypeConv::StringToSize(aux)));
         }
-    } else if (childVals[0].Contains(_("Load From XRC"))) {
+    } else if (childVals[0].Contains("Load From XRC")) {
         if (childVals.Count() > 1)
             Item(1)->SetValue(childVals[1]);
 
-    } else if (childVals[0].Contains(_("Load From Art Provider"))) {
+    } else if (childVals[0].Contains("Load From Art Provider")) {
         if (childVals.Count() > 1)
             Item(1)->SetValue(childVals[1]);
 
@@ -850,9 +851,6 @@ void wxPGSliderEditor::SetValueToUnspecified(wxPGProperty* WXUNUSED(property),
 // -----------------------------------------------------------------------
 // wxWeaverFontProperty
 // -----------------------------------------------------------------------
-
-#include <wx/fontdlg.h>
-#include <wx/fontenum.h>
 
 static const wxChar* gs_fp_es_family_labels[] = {
     wxS("Default"), wxS("Decorative"),

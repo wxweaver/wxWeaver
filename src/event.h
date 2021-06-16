@@ -23,13 +23,14 @@
 #include "utils/defs.h"
 #include <wx/event.h>
 
-struct PrefsEditor;
-
+namespace wxw {
+struct Preferences;
+}
 class wxWeaverEvent;
 class wxWeaverObjectEvent;
 class wxWeaverPropertyEvent;
 class wxWeaverEventHandlerEvent;
-class wxWeaverPrefsEditorEvent;
+class wxWeaverPreferencesEvent;
 
 wxDECLARE_EVENT(wxEVT_WVR_PROJECT_LOADED, wxWeaverEvent);
 wxDECLARE_EVENT(wxEVT_WVR_PROJECT_SAVED, wxWeaverEvent);
@@ -41,7 +42,7 @@ wxDECLARE_EVENT(wxEVT_WVR_OBJECT_CREATED, wxWeaverObjectEvent);
 wxDECLARE_EVENT(wxEVT_WVR_OBJECT_REMOVED, wxWeaverObjectEvent);
 wxDECLARE_EVENT(wxEVT_WVR_PROPERTY_MODIFIED, wxWeaverPropertyEvent);
 wxDECLARE_EVENT(wxEVT_WVR_EVENT_HANDLER_MODIFIED, wxWeaverEventHandlerEvent);
-wxDECLARE_EVENT(wxEVT_WVR_PREFS_EDITOR_CHANGED, wxWeaverPrefsEditorEvent);
+wxDECLARE_EVENT(wxEVT_WVR_PREFS_EDITOR_CHANGED, wxWeaverPreferencesEvent);
 
 class wxWeaverEvent : public wxEvent {
 public:
@@ -94,17 +95,17 @@ private:
     PObjectBase m_object;
 };
 
-class wxWeaverPrefsEditorEvent : public wxWeaverEvent {
+class wxWeaverPreferencesEvent : public wxWeaverEvent {
 public:
-    wxWeaverPrefsEditorEvent(wxEventType eventType = wxEVT_WVR_PREFS_EDITOR_CHANGED);
-    wxWeaverPrefsEditorEvent(const wxWeaverPrefsEditorEvent& event);
+    wxWeaverPreferencesEvent(wxEventType eventType = wxEVT_WVR_PREFS_EDITOR_CHANGED);
+    wxWeaverPreferencesEvent(const wxWeaverPreferencesEvent& event);
 
     wxEvent* Clone() const override;
-    std::shared_ptr<PrefsEditor> GetPrefs() const { return m_prefsEditor; }
-    void SetPrefs(std::shared_ptr<PrefsEditor> prefs) { m_prefsEditor = prefs; }
+    std::shared_ptr<wxw::Preferences> GetPrefs() const { return m_prefs; }
+    void SetPrefs(std::shared_ptr<wxw::Preferences> prefs) { m_prefs = prefs; }
 
 private:
-    std::shared_ptr<PrefsEditor> m_prefsEditor;
+    std::shared_ptr<wxw::Preferences> m_prefs;
 };
 
 #define wxWeaverEventHandler(func) (&func)

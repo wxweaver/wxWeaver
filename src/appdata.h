@@ -31,7 +31,7 @@ class Element;
 
 class Property;
 class wxWeaverEvent;
-class wxWeaverPrefsEditorEvent;
+class wxWeaverPreferencesEvent;
 class wxWeaverManager;
 class wxWeaverIPC;
 
@@ -129,7 +129,7 @@ public:
 
     void GenerateCode(bool panelOnly = false, bool noDelayed = false);
 
-    void NotifyEditorsPreferences(wxWeaverPrefsEditorEvent&);
+    void NotifyPreferencesChanged(wxWeaverPreferencesEvent&);
 
     void GenerateInheritedClass(PObjectBase form, wxString className,
                                 wxString path, wxString file);

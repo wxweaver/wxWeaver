@@ -18,13 +18,14 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "model/objectbase.h"
-#include "appdata.h"
-#include "gui/mainframe.h"
-#include "utils/typeconv.h"
-#include "utils/exception.h"
+#include "wxweaver.h"
 
-#include <wx/app.h>
+#include "gui/mainframe.h"
+#include "model/objectbase.h"
+#include "utils/exception.h"
+#include "utils/typeconv.h"
+#include "appdata.h"
+
 #include <wx/clipbrd.h>
 #include <wx/cmdline.h>
 #include <wx/config.h>
@@ -75,27 +76,6 @@ static const wxCmdLineEntryDesc s_cmdLineDesc[] = {
     { wxCMD_LINE_NONE, nullptr, nullptr, nullptr, wxCMD_LINE_VAL_NONE, 0 }
 };
 
-class MainFrame;
-
-class wxWeaver : public wxApp {
-private:
-    MainFrame* m_frame;
-
-public:
-    bool OnInit() override;
-#if wxUSE_ON_FATAL_EXCEPTION && wxUSE_STACKWALKER
-    void OnFatalException() override;
-#endif
-    int OnRun() override;
-    int OnExit() override;
-
-#ifdef __WXOSX__
-    wxString m_mac_file_name;
-    void MacOpenFile(const wxString& fileName) override;
-#endif
-};
-
-wxDECLARE_APP(wxWeaver);
 wxIMPLEMENT_APP(wxWeaver);
 
 int wxWeaver::OnRun()
@@ -124,7 +104,7 @@ int wxWeaver::OnRun()
                  : "r"(&ex));
 #endif
 #endif
-    // Using a space so the initial 'w' will not be capitalized in wxLogGUI dialogs
+    // Using a space so the initial 'w' will not be capitalized in dialogs
     wxApp::SetAppName(" wxWeaver");
 
     // Creating the wxConfig manually so there will be no space
@@ -138,10 +118,42 @@ int wxWeaver::OnRun()
 
     // Log to stderr while working on the command line
     delete wxLog::SetActiveTarget(new wxLogStderr);
-
+#if 0
     // Message output to the same as the log target
     delete wxMessageOutput::Set(new wxMessageOutputLog);
+#endif
+    // Help to load locale if wxWeaver is not installed in system
+    ::wxSetWorkingDirectory(dataDir);
 
+    bool enabled;
+    int selection;
+    int language = 0;
+    wxConfigBase* config = wxConfigBase::Get();
+
+    config->Read("/Locale/Enabled", &enabled, 0);
+    config->Read("/Locale/Language", &selection, 0);
+
+    if (enabled) {
+        switch (selection) {
+        default:
+        case 0:
+            language = wxLANGUAGE_DEFAULT;
+            break;
+        case 1:
+            language = wxLANGUAGE_ENGLISH;
+            break;
+        case 2:
+            language = wxLANGUAGE_ENGLISH_US;
+            break;
+        case 3:
+            language = wxLANGUAGE_GERMAN;
+            break;
+        case 4:
+            language = wxLANGUAGE_ITALIAN;
+            break;
+        }
+        SelectLanguage(language);
+    }
     // Parse command line
     wxCmdLineParser parser(s_cmdLineDesc, argc, argv);
     if (parser.Parse())
@@ -158,24 +170,26 @@ int wxWeaver::OnRun()
         projectToLoad = parser.GetParam();
 
     bool justGenerate = false;
-    wxString language;
-    bool hasLanguage = parser.Found("l", &language);
+    wxString codeLanguage;
+    bool hasLanguage = parser.Found("l", &codeLanguage);
     if (parser.Found("g")) {
         if (projectToLoad.empty()) {
             wxLogError("You must pass a path to a project file. Nothing to generate.");
             return 2;
         }
         if (hasLanguage) {
-            if (language.empty()) {
+            if (codeLanguage.empty()) {
                 wxLogError("Empty language option. Nothing generated.");
                 return 3;
             }
-            language.Replace(",", "|", true);
+            codeLanguage.Replace(",", "|", true);
         }
         // generate code
         justGenerate = true;
+#if 0
     } else {
         delete wxLog::SetActiveTarget(new wxLogGui);
+#endif
     }
     // Create singleton AppData, wait to initialize until sure
     // that this is not the second instance of a project file.
@@ -285,6 +299,11 @@ bool wxWeaver::OnInit()
     return true;
 }
 
+bool wxWeaver::AddPluginLocaleCatalog(const wxString& catalog)
+{
+    return m_locale.AddCatalog(catalog);
+}
+
 int wxWeaver::OnExit()
 {
     MacroDictionary::Destroy();
@@ -299,6 +318,35 @@ int wxWeaver::OnExit()
     wxTheClipboard->Close();
 
     return wxApp::OnExit();
+}
+
+void wxWeaver::SelectLanguage(int language)
+{
+    if (!m_locale.Init(language))
+        wxLogWarning("This language is not supported by the system.");
+
+    wxString workingDir = ::wxGetCwd();
+
+    wxLocale::AddCatalogLookupPathPrefix("locale");
+    if (!m_locale.AddCatalog("wxweaver"))
+        wxLogWarning("Can't load wxLocale main catalog");
+#if 0
+    m_locale.AddCatalog("libadditional");
+    m_locale.AddCatalog("libcommon");
+    m_locale.AddCatalog("libcontainers");
+    m_locale.AddCatalog("libforms");
+    m_locale.AddCatalog("liblayout");
+#endif
+
+#ifdef __LINUX__
+    /*
+        This catalog is installed in standard location on Linux systems and
+        shows that you may make use of the standard message catalogs as well.
+        If it's not installed on your system, it is just silently ignored,
+    */
+    if (!m_locale.AddCatalog("coreutils"))
+        wxLogWarning("Can't load wxLocale coreutils catalog");
+#endif
 }
 
 #ifdef __WXOSX__

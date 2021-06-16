@@ -224,12 +224,12 @@ wxString PHPTemplateParser::ValueToCode(PropertyType type, wxString value)
             result << "new wxBitmap(\""
                    << PHPCodeGenerator::ConvertPHPString(file)
                    << "\", wxBITMAP_TYPE_ANY)";
-        } else if (source == _("Load From Embedded File")) {
+        } else if (source == "Load From Embedded File") {
             result << "wxNullBitmap /* embedded files aren't supported */";
-        } else if (source == _("Load From Resource")) {
+        } else if (source == "Load From Resource") {
             result << "new wxBitmap(\"" << path
                    << "\", wxBITMAP_TYPE_RESOURCE)";
-        } else if (source == _("Load From Icon Resource")) {
+        } else if (source == "Load From Icon Resource") {
             if (wxDefaultSize == icoSize) {
                 result << "new wxICON(" << path << ")";
             } else {
@@ -238,11 +238,11 @@ wxString PHPTemplateParser::ValueToCode(PropertyType type, wxString value)
                     path.c_str(),
                     icoSize.GetWidth(), icoSize.GetHeight());
             }
-        } else if (source == _("Load From XRC")) {
+        } else if (source == "Load From XRC") {
             // This requires that the global wxXmlResource object is set
             result << "wxXmlResource::Get()->LoadBitmap(\"" << path
                    << "\")";
-        } else if (source == _("Load From Art Provider")) {
+        } else if (source == "Load From Art Provider") {
             wxString rid = path.BeforeFirst(':');
             if (rid.StartsWith("gtk-"))
                 rid = "\"" + rid + "\"";
@@ -1089,8 +1089,8 @@ void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayIte
                 wxString path, source;
                 wxSize toolsize;
                 TypeConv::ParseBitmapWithResource(oldVal, &path, &source, &toolsize);
-                if (_("Load From Icon Resource") == source
-                    && wxDefaultSize == toolsize) {
+                if (source == "Load From Icon Resource"
+                    && toolsize == wxDefaultSize) {
                     prop->SetValue(wxString::Format(
                         "%s; %s [%i; %i]", path.c_str(), source.c_str(),
                         toolbarsize.GetWidth(), toolbarsize.GetHeight()));

@@ -2,6 +2,7 @@
 *build*
 *cache*
 *.diff
+*.mo
 *.user
 compile_commands.json
 /sdk/lib

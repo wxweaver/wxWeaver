@@ -416,8 +416,8 @@ void ApplicationData::Initialize()
         TODO: Depending on the used theme it is not clear which color that is,
         using the window text has given the best results so far.
     */
-    const auto col = wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT);
-    const auto lightness = (col.Red() * 299 + col.Green() * 587 + col.Blue() * 114) / 1000;
+    const wxColour col = wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT);
+    const int lightness = (col.Red() * 299 + col.Green() * 587 + col.Blue() * 114) / 1000;
     appData->SetDarkMode(lightness > 127);
 }
 
@@ -706,7 +706,7 @@ void ApplicationData::CreateObject(wxString name)
             */
             while (parent && !created) {
                 // además, el objeto se insertará a continuación del objeto seleccionado
-                obj = m_objDb->CreateObject(_STDSTR(name), parent);
+                obj = m_objDb->CreateObject(name.ToStdString(), parent);
                 if (obj) {
                     int pos = CalcPositionOfInsertion(GetSelectedObject(), parent);
                     PCommand command(new InsertObjectCmd(this, obj, parent, pos));
@@ -902,7 +902,7 @@ bool ApplicationData::PasteObject(PObjectBase parent, PObjectBase objToPaste)
         */
         PObjectBase old_parent = parent;
         PObjectBase obj = m_objDb->CreateObject(
-            _STDSTR(clipboard->GetObjectInfo()->GetClassName()), parent);
+            clipboard->GetObjectInfo()->GetClassName().ToStdString(), parent);
 
         // If the object is already contained in an item,
         // we may need to get the object out of the first item before pasting
@@ -914,7 +914,7 @@ bool ApplicationData::PasteObject(PObjectBase parent, PObjectBase objToPaste)
                     break;
 
                 obj = m_objDb->CreateObject(
-                    _STDSTR(tempItem->GetObjectInfo()->GetClassName()), parent);
+                    tempItem->GetObjectInfo()->GetClassName().ToStdString(), parent);
 
                 if (obj) {
                     clipboard = tempItem;
@@ -935,7 +935,9 @@ bool ApplicationData::PasteObject(PObjectBase parent, PObjectBase objToPaste)
                 parent = selected->GetParent();
             }
             if (parent) {
-                obj = m_objDb->CreateObject(_STDSTR(clipboard->GetObjectInfo()->GetClassName()), parent);
+                obj = m_objDb->CreateObject(
+                    clipboard->GetObjectInfo()->GetClassName().ToStdString(), parent);
+
                 if (obj)
                     pos = CalcPositionOfInsertion(selected, parent);
             }
@@ -1083,11 +1085,7 @@ void ApplicationData::SaveProject(const wxString& filename)
         m_cmdProc.SetSavePoint();
         NotifyProjectSaved();
     } catch (ticpp::Exception& ex) {
-        wxString message = _WXSTR(ex.m_details);
-
-        if (message.empty())
-            message = wxString(ex.m_details.c_str(), wxConvFile);
-
+        wxString message = ex.m_details;
         wxWEAVER_THROW_EX(message)
     }
 }
@@ -1142,7 +1140,7 @@ bool ApplicationData::LoadProject(const wxString& file, bool justGenerate)
                 wxMessageBox(
                     _("This project file is newer than this version of wxWeaver.\n"
                       "It cannot be opened.\n\n"
-                      "Please download an updated version from http://www.wxWeaver.org"),
+                      "Please download an updated version from https://wxweaver.github.io"),
                     _("New Version"), wxICON_ERROR);
             }
             return false;
@@ -1188,7 +1186,7 @@ bool ApplicationData::LoadProject(const wxString& file, bool justGenerate)
             NotifyProjectRefresh();
         }
     } catch (ticpp::Exception& ex) {
-        wxLogError(_WXSTR(ex.m_details));
+        wxLogError(wxString(ex.m_details));
         return false;
     }
     return true;
@@ -1237,7 +1235,7 @@ bool ApplicationData::ConvertProject(ticpp::Document& doc, const wxString& path,
             fileVersion->SetAttribute("minor", m_fbpVerMinor);
         }
     } catch (ticpp::Exception& ex) {
-        wxLogError(_WXSTR(ex.m_details));
+        wxLogError(wxString(ex.m_details));
         return false;
     }
     return true;
@@ -1294,7 +1292,7 @@ void ApplicationData::ConvertProjectProperties(ticpp::Element* project,
                     _("All files") + " (*.*)|*.*", wxFD_SAVE);
 
                 if (dialog.ShowModal() == wxID_OK) {
-                    wxString wxuser_headers = _WXSTR(user_headers);
+                    wxString wxuser_headers = user_headers;
                     wxString filename = dialog.GetPath();
                     bool success = false;
                     wxFFile output(filename, "w");
@@ -1369,8 +1367,8 @@ void ApplicationData::ConvertProjectProperties(ticpp::Element* project,
         for (prop = newProps.begin(); prop != newProps.end(); ++prop) {
             std::string value = (*prop)->GetText(false);
             if (!value.empty()) {
-                wxArrayString array = TypeConv::OldStringToArrayString(_WXSTR(value));
-                (*prop)->SetText(_STDSTR(TypeConv::ArrayStringToString(array)));
+                wxArrayString array = TypeConv::OldStringToArrayString(value);
+                (*prop)->SetText(TypeConv::ArrayStringToString(array).ToStdString());
             }
         }
     }
@@ -1548,14 +1546,14 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
 
             if (!newProps.empty()) {
                 ticpp::Element* style = *newProps.begin();
-                wxString styles = _WXSTR(style->GetText(false));
+                wxString styles = style->GetText(false);
                 if (!styles.empty()) {
                     if (TypeConv::FlagSet("wxTHICK_FRAME", styles)) {
                         styles = TypeConv::ClearFlag("wxTHICK_FRAME", styles);
                         styles = TypeConv::SetFlag("wxRESIZE_BORDER", styles);
                     }
                     styles = TypeConv::ClearFlag("wxNO_3D", styles);
-                    style->SetText(_STDSTR(styles));
+                    style->SetText(styles.ToStdString());
                 }
             }
         }
@@ -1588,8 +1586,8 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
             for (prop = newProps.begin(); prop != newProps.end(); ++prop) {
                 std::string value = (*prop)->GetText(false);
                 if (!value.empty()) {
-                    wxArrayString array = TypeConv::OldStringToArrayString(_WXSTR(value));
-                    (*prop)->SetText(_STDSTR(TypeConv::ArrayStringToString(array)));
+                    wxArrayString array = TypeConv::OldStringToArrayString(value);
+                    (*prop)->SetText(TypeConv::ArrayStringToString(array).ToStdString());
                 }
             }
         }
@@ -1608,12 +1606,12 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
         std::set<ticpp::Element*>::iterator prop;
         for (prop = newProps.begin(); prop != newProps.end(); ++prop) {
             ticpp::Element* bitmap = *prop;
-            wxString image = _WXSTR(bitmap->GetText(false));
+            wxString image = bitmap->GetText(false);
             if (!image.empty()) {
-                if (image.AfterLast(';').Contains(_("Load From"))) {
+                if (image.AfterLast(';').Contains("Load From")) {
                     wxString source = image.AfterLast(';').Trim().Trim(false);
                     wxString data = image.BeforeLast(';').Trim().Trim(false);
-                    bitmap->SetText(_STDSTR(source + "; " + data));
+                    bitmap->SetText(wxString(source + "; " + data).ToStdString());
                 }
             }
         }
@@ -1624,11 +1622,11 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
         GetPropertiesToConvert(parent, oldProps, &newProps);
         for (prop = newProps.begin(); prop != newProps.end(); ++prop) {
             ticpp::Element* choices = *prop;
-            wxString content = _WXSTR(choices->GetText(false));
+            wxString content = choices->GetText(false);
             if (!content.empty()) {
                 content.Replace("\" \"", ";");
                 content.Replace("\"", "");
-                choices->SetText(_STDSTR(content));
+                choices->SetText(content.ToStdString());
             }
         }
 #endif
@@ -1690,7 +1688,7 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
         GetPropertiesToConvert(parent, oldProps, &newProps);
 
         for (newProp = newProps.begin(); newProp != newProps.end(); ++newProp) {
-            wxString styles = _WXSTR((*newProp)->GetText(false));
+            wxString styles = (*newProp)->GetText(false);
             if (!styles.empty()) {
                 if (TypeConv::FlagSet("wxSIMPLE_BORDER", styles)) {
                     styles = TypeConv::ClearFlag("wxSIMPLE_BORDER", styles);
@@ -1715,7 +1713,7 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
                     styles = TypeConv::ClearFlag("wxNO_BORDER", styles);
                     styles = TypeConv::SetFlag("wxBORDER_NONE", styles);
                 }
-                (*newProp)->SetText(_STDSTR(styles));
+                (*newProp)->SetText(styles.ToStdString());
             }
         }
         // wxBitmapButton: Remove wxBU_AUTODRAW and rename properties
@@ -1728,12 +1726,12 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
 
             if (!newProps.empty()) {
                 ticpp::Element* style = *newProps.begin();
-                wxString styles = _WXSTR(style->GetText(false));
+                wxString styles = style->GetText(false);
                 if (!styles.empty()) {
                     if (TypeConv::FlagSet("wxBU_AUTODRAW", styles))
                         styles = TypeConv::ClearFlag("wxBU_AUTODRAW", styles);
 
-                    style->SetText(_STDSTR(styles));
+                    style->SetText(styles.ToStdString());
                 }
             }
             oldProps.clear();
@@ -1761,13 +1759,13 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
 
             if (!newProps.empty()) {
                 ticpp::Element* style = *newProps.begin();
-                wxString styles = _WXSTR(style->GetText(false));
+                wxString styles = style->GetText(false);
                 if (!styles.empty()) {
                     if (TypeConv::FlagSet("wxALIGN_CENTRE", styles)) {
                         styles = TypeConv::ClearFlag("wxALIGN_CENTRE", styles);
                         styles = TypeConv::SetFlag("wxALIGN_CENTER_HORIZONTAL", styles);
                     }
-                    style->SetText(_STDSTR(styles));
+                    style->SetText(styles.ToStdString());
                 }
             }
         }
@@ -1780,12 +1778,12 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
 
             if (!newProps.empty()) {
                 ticpp::Element* style = *newProps.begin();
-                wxString styles = _WXSTR(style->GetText(false));
+                wxString styles = style->GetText(false);
                 if (!styles.empty()) {
                     if (TypeConv::FlagSet("wxRA_USE_CHECKBOX", styles))
                         styles = TypeConv::ClearFlag("wxRA_USE_CHECKBOX", styles);
 
-                    style->SetText(_STDSTR(styles));
+                    style->SetText(styles.ToStdString());
                 }
             }
         }
@@ -1799,12 +1797,12 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
 
             if (!newProps.empty()) {
                 ticpp::Element* style = *newProps.begin();
-                wxString styles = _WXSTR(style->GetText(false));
+                wxString styles = style->GetText(false);
                 if (!styles.empty()) {
                     if (TypeConv::FlagSet("wxRB_USE_CHECKBOX", styles))
                         styles = TypeConv::ClearFlag("wxRB_USE_CHECKBOX", styles);
 
-                    style->SetText(_STDSTR(styles));
+                    style->SetText(styles.ToStdString());
                 }
             }
         }
@@ -1817,13 +1815,13 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
 
             if (!newProps.empty()) {
                 ticpp::Element* style = *newProps.begin();
-                wxString styles = _WXSTR(style->GetText(false));
+                wxString styles = style->GetText(false);
                 if (!styles.empty()) {
                     if (TypeConv::FlagSet("wxST_SIZEGRIP", styles)) {
                         styles = TypeConv::ClearFlag("wxST_SIZEGRIP", styles);
                         styles = TypeConv::SetFlag("wxSTB_SIZEGRIP", styles);
                     }
-                    style->SetText(_STDSTR(styles));
+                    style->SetText(styles.ToStdString());
                 }
             }
         }
@@ -1836,12 +1834,12 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
 
             if (!newProps.empty()) {
                 ticpp::Element* style = *newProps.begin();
-                wxString styles = _WXSTR(style->GetText(false));
+                wxString styles = style->GetText(false);
                 if (!styles.empty()) {
                     if (TypeConv::FlagSet("wxMB_DOCKABLE", styles))
                         styles = TypeConv::ClearFlag("wxMB_DOCKABLE", styles);
 
-                    style->SetText(_STDSTR(styles));
+                    style->SetText(styles.ToStdString());
                 }
             }
         }
@@ -1856,14 +1854,14 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
             GetPropertiesToConvert(parent, oldProps, &newProps);
 
             if (!newProps.empty()) {
-                auto* style = *newProps.begin();
-                auto styles = _WXSTR(style->GetText(false));
+                ticpp::Element* style = *newProps.begin();
+                wxString styles = style->GetText(false);
                 if (!styles.empty()) {
                     if (TypeConv::FlagSet("wxTE_CENTRE", styles)) {
                         styles = TypeConv::ClearFlag("wxTE_CENTRE", styles);
                         styles = TypeConv::SetFlag("wxTE_CENTER", styles);
                     }
-                    style->SetText(_STDSTR(styles));
+                    style->SetText(styles.ToStdString());
                 }
             }
         }
@@ -1880,13 +1878,13 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
             GetPropertiesToConvert(parent, oldProps, &newProps);
 
             for (newProp = newProps.begin(); newProp != newProps.end(); ++newProp) {
-                auto styles = _WXSTR((*newProp)->GetText(false));
+                wxString styles = (*newProp)->GetText(false);
                 if (!styles.empty()) {
                     if (TypeConv::FlagSet("wxALIGN_CENTRE", styles)) {
                         styles = TypeConv::ClearFlag("wxALIGN_CENTRE", styles);
                         styles = TypeConv::SetFlag("wxALIGN_CENTER", styles);
                     }
-                    (*newProp)->SetText(_STDSTR(styles));
+                    (*newProp)->SetText(styles.ToStdString());
                 }
             }
         }
@@ -1898,13 +1896,13 @@ void ApplicationData::ConvertObject(ticpp::Element* parent, int fileMajor, int f
             GetPropertiesToConvert(parent, oldProps, &newProps);
 
             if (!newProps.empty()) {
-                auto* style = *newProps.begin();
-                auto styles = _WXSTR(style->GetText(false));
+                ticpp::Element* style = *newProps.begin();
+                wxString styles = style->GetText(false);
                 if (!styles.empty()) {
                     if (TypeConv::FlagSet("wxNB_FLAT", styles))
                         styles = TypeConv::ClearFlag("wxNB_FLAT", styles);
 
-                    style->SetText(_STDSTR(styles));
+                    style->SetText(styles.ToStdString());
                 }
             }
         }
@@ -1959,7 +1957,7 @@ void ApplicationData::TransferOptionList(ticpp::Element* prop,
                                          std::set<wxString>* options,
                                          const std::string& newPropName)
 {
-    wxString value = _WXSTR(prop->GetText(false));
+    wxString value = prop->GetText(false);
     std::set<wxString> transfer;
     std::set<wxString> keep;
 
@@ -1995,7 +1993,7 @@ void ApplicationData::TransferOptionList(ticpp::Element* prop,
         std::unique_ptr<ticpp::Element> tmpProp;
         if (!newProps.empty()) {
             newProp = *newProps.begin();
-            newOptionList << "|" << _WXSTR(newProp->GetText(false));
+            newOptionList << "|" << newProp->GetText(false);
         } else {
             tmpProp = std::make_unique<ticpp::Element>("property");
             newProp = tmpProp.get();
@@ -2005,7 +2003,7 @@ void ApplicationData::TransferOptionList(ticpp::Element* prop,
         for (option = transfer.begin(); option != transfer.end(); ++option)
             newOptionList << "|" << *option;
 
-        newProp->SetText(_STDSTR(newOptionList.substr(1)));
+        newProp->SetText(newOptionList.substr(1).ToStdString());
 
         if (newProps.empty())
             parent->InsertBeforeChild(prop, *newProp);
@@ -2019,7 +2017,7 @@ void ApplicationData::TransferOptionList(ticpp::Element* prop,
         for (option = keep.begin(); option != keep.end(); ++option)
             newOptionList << "|" << *option;
 
-        prop->SetText(_STDSTR(newOptionList.substr(1)));
+        prop->SetText(newOptionList.substr(1).ToStdString());
     }
 }
 
@@ -2041,7 +2039,7 @@ void ApplicationData::GenerateCode(bool panelOnly, bool noDelayed)
     NotifyCodeGeneration(panelOnly, !noDelayed);
 }
 
-void ApplicationData::NotifyEditorsPreferences(wxWeaverPrefsEditorEvent& event)
+void ApplicationData::NotifyPreferencesChanged(wxWeaverPreferencesEvent& event)
 {
     NotifyEvent(event);
 }
@@ -2098,7 +2096,7 @@ void ApplicationData::GenerateInheritedClass(PObjectBase form, wxString classNam
         genfileProp->SetValue(genFile.GetFullPath());
         typeProp->SetValue(form->GetClassName());
 
-        auto pchValue = project->GetProperty("precompiled_header");
+        PProperty pchValue = project->GetProperty("precompiled_header");
         if (pchValue)
             pchProp->SetValue(pchValue->GetValue());
 

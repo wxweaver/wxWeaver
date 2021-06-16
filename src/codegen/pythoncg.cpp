@@ -233,7 +233,7 @@ wxString PythonTemplateParser::ValueToCode(PropertyType type, wxString value)
             result = "wx.NullBitmap";
             break;
         }
-        if (source == _("Load From File") || source == _("Load From Embedded File")) {
+        if (source == "Load From File" || source == "Load From Embedded File") {
             wxString absPath;
             try {
                 absPath = TypeConv::MakeAbsolutePath(path, AppData()->GetProjectPath());
@@ -258,9 +258,9 @@ wxString PythonTemplateParser::ValueToCode(PropertyType type, wxString value)
             }
             result << ", wx.BITMAP_TYPE_ANY)";
 
-        } else if (source == _("Load From Resource")) {
+        } else if (source == "Load From Resource") {
             result << "wx.Bitmap(u\"" << path << "\", wx.BITMAP_TYPE_RESOURCE)";
-        } else if (source == _("Load From Icon Resource")) {
+        } else if (source == "Load From Icon Resource") {
             if (wxDefaultSize == icoSize) {
                 result << "wx.ICON(" << path << ")";
             } else {
@@ -269,10 +269,10 @@ wxString PythonTemplateParser::ValueToCode(PropertyType type, wxString value)
                     path.c_str(), icoSize.GetWidth(),
                     icoSize.GetHeight());
             }
-        } else if (source == _("Load From XRC")) {
+        } else if (source == "Load From XRC") {
             // NOTE: The module wx.xrc is part of the default code template
             result << "wx.xrc.XmlResource.Get().LoadBitmap(u\"" << path << "\")";
-        } else if (source == _("Load From Art Provider")) {
+        } else if (source == "Load From Art Provider") {
             wxString rid = path.BeforeFirst(':');
 
             if (rid.StartsWith("gtk-"))
@@ -1143,7 +1143,7 @@ void PythonCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                 wxString path, source;
                 wxSize toolsize;
                 TypeConv::ParseBitmapWithResource(oldVal, &path, &source, &toolsize);
-                if (_("Load From Icon Resource") == source
+                if ("Load From Icon Resource" == source
                     && wxDefaultSize == toolsize) {
                     prop->SetValue(wxString::Format(
                         "%s; %s [%i; %i]",
