@@ -118,11 +118,17 @@ set(wxWEAVER_SOURCE_FILES
     src/wxweaver.cpp
 )
 if(APPLE)
+   set(MACOSX_BUNDLE_ICON_FILE icon.icns)
+   set(wxWEAVER_APP_ICON "${CMAKE_CURRENT_SOURCE_DIR}/resources/macos/icon.icns")
+   set_source_files_properties(${wxWEAVER_APP_ICON} PROPERTIES
+      MACOSX_PACKAGE_LOCATION "Resources"
+   )
     add_executable(${CMAKE_PROJECT_NAME}
         MACOSX_BUNDLE
         ${wxWEAVER_INCLUDE_FILES}
         ${wxWEAVER_SOURCE_FILES}
         ${wxWEAVER_RESOURCE_FILES}
+        ${wxWEAVER_APP_ICON}
     )
 elseif(WIN32)
     list(APPEND wxWEAVER_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/windows/wxWeaver.rc")
@@ -184,7 +190,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
     sdk::ticpp
     sdk::plugin_interface
 )
-if(NOT WIN32)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${CMAKE_PROJECT_NAME} dl)
 endif()
 

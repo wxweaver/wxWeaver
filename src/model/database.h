@@ -211,7 +211,7 @@ private:
     // Map the property type string to the property type number
     typedef std::map<wxString, PropertyType> PTMap;
     typedef std::map<wxString, PObjectType> ObjectTypeMap;
-#ifdef __WXMAC__
+#ifdef __WXOSX__
     typedef std::vector<void*> LibraryVector;
 #else
     typedef std::vector<wxDynamicLibrary*> LibraryVector;

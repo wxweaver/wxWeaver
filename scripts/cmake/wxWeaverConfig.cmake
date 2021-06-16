@@ -20,19 +20,29 @@ else()
     list(APPEND wxLibsList all)
 endif()
 
-function(copy_resources)
-    file(REMOVE_RECURSE "${CMAKE_BINARY_DIR}/share")
-    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/resources/application/"
-         DESTINATION "${CMAKE_BINARY_DIR}/share/wxweaver")
-endfunction()
+if(UNIX)
+    if(APPLE)
+        function(copy_resources)
+            file(REMOVE_RECURSE "${CMAKE_BINARY_DIR}/wxWeaver.app/Contents/SharedSupport")
+            file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/resources/application/"
+                 DESTINATION "${CMAKE_BINARY_DIR}/wxWeaver.app/Contents/SharedSupport")
+        endfunction()
+    else()
+        function(copy_resources)
+            file(REMOVE_RECURSE "${CMAKE_BINARY_DIR}/share")
+            file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/resources/application/"
+                 DESTINATION "${CMAKE_BINARY_DIR}/share/wxweaver")
+        endfunction()
 
-# https://cmake.org/pipermail/cmake/2008-January/019290.html
-function(set_plugin_directory PATH)
-    set(linkerOpt "-Wl,-rpath,$``ORIGIN/../${PATH}:$$``ORIGIN/../${PATH}")
-    message(STATUS "rpath is ${linkerOpt}")
-    set(CMAKE_EXE_LINKER_FLAGS
-        ${CMAKE_EXE_LINKER_FLAGS} "${linkerOpt}")
-endfunction()
+        # https://cmake.org/pipermail/cmake/2008-January/019290.html
+        function(set_plugin_directory PATH)
+            set(linkerOpt "-Wl,-rpath,$``ORIGIN/../${PATH}:$$``ORIGIN/../${PATH}")
+            message(STATUS "rpath is ${linkerOpt}")
+            set(CMAKE_EXE_LINKER_FLAGS
+                ${CMAKE_EXE_LINKER_FLAGS} "${linkerOpt}")
+        endfunction()
+    endif()
+endif()
 
 find_package(wxWidgets 3.0.3 REQUIRED ${wxLibsList})
 if(${wxWidgets_FOUND})

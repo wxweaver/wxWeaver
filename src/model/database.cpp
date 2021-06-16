@@ -58,7 +58,7 @@
 #define EXPANDED_TAG "expanded"
 #define WXVERSION_TAG "wxversion"
 
-#ifdef __WXMAC__
+#ifdef __WXOSX__
 #include <dlfcn.h>
 #endif
 
@@ -98,13 +98,13 @@ ObjectDatabase::~ObjectDatabase()
     for (LibraryVector::iterator lib = m_libs.begin(); lib != m_libs.end(); ++lib) {
 #ifdef wxWEAVER_DEBUG
 // TODO: Only unload in release, can't get a good stack trace if the library is unloaded
-#ifdef __WXMAC__
+#ifdef __WXOSX__
         dlclose(*lib);
 #else
         (*lib)->Detach();
 #endif
 #endif
-#ifndef __WXMAC__
+#ifndef __WXOSX__
         delete *lib;
 #endif
     }
@@ -1234,7 +1234,7 @@ void ObjectDatabase::ImportComponentLibrary(wxString libfile, PwxWeaverManager m
     // Find the GetComponentLibrary function - all plugins must implement this
     typedef IComponentLibrary* (*PFGetComponentLibrary)(IManager * manager);
 
-#ifdef __WXMAC__
+#ifdef __WXOSX__
     path += ".dylib";
 
     // open the library

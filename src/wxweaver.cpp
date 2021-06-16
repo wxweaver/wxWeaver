@@ -89,7 +89,7 @@ public:
     int OnRun() override;
     int OnExit() override;
 
-#ifdef __WXMAC__
+#ifdef __WXOSX__
     wxString m_mac_file_name;
     void MacOpenFile(const wxString& fileName) override;
 #endif
@@ -267,7 +267,7 @@ int wxWeaver::OnRun()
 
     AppData()->NewProject();
 
-#ifdef __WXMAC__
+#ifdef __WXOSX__
     // document to open on startup
     if (!m_mac_file_name.IsEmpty()) {
         if (AppData()->LoadProject(m_mac_file_name))
@@ -301,7 +301,7 @@ int wxWeaver::OnExit()
     return wxApp::OnExit();
 }
 
-#ifdef __WXMAC__
+#ifdef __WXOSX__
 void wxWeaver::MacOpenFile(const wxString& fileName)
 {
     if (!m_frame)

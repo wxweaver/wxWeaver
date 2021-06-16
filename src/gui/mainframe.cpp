@@ -294,7 +294,7 @@ MainFrame::~MainFrame()
         wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED,
         &MainFrame::OnAuiNotebookPageChanged, this);
 
-#ifdef __WXMAC__
+#ifdef __WXOSX__
     // work around problem on wxMac
     if (m_style != wxWEAVER_GUI_DOCKABLE) {
         m_rightSplitter->GetWindow1()->GetSizer()->Detach(m_notebook);

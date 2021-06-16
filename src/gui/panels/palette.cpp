@@ -32,7 +32,7 @@
 #include <map>
 #include <vector>
 
-#ifdef __WXMAC__
+#ifdef __WXOSX__
 #include <wx/tooltip.h>
 #endif
 
@@ -40,7 +40,7 @@ wxWindowID Palette::nextId = wxID_HIGHEST + 3000;
 
 #if 0
 BEGIN_EVENT_TABLE(Palette, wxPanel)
-#ifdef __WXMAC__
+#ifdef __WXOSX__
 EVT_BUTTON(wxID_ANY, Palette::OnButtonClick)
 #else
 EVT_TOOL(wxID_ANY, Palette::OnButtonClick)
@@ -54,7 +54,7 @@ Palette::Palette(wxWindow* parent, int id)
     : wxPanel(parent, id)
     , m_notebook(nullptr)
 {
-#ifdef __WXMAC__
+#ifdef __WXOSX__
     Bind(wxEVT_BUTTON, &Palette::OnButtonClick, this);
 #else
     Bind(wxEVT_TOOL, &Palette::OnButtonClick, this);
@@ -80,7 +80,7 @@ void Palette::PopulateToolbar(PObjectPackage pkg, wxAuiToolBar* toolbar)
         } else {
             wxString widget(info->GetClassName());
             wxBitmap icon = info->GetIconFile();
-#ifdef __WXMAC__
+#ifdef __WXOSX__
             wxBitmapButton* button = new wxBitmapButton(toolbar, nextId++, icon);
             button->SetToolTip(widget);
             toolbar->AddControl(button);
@@ -214,7 +214,7 @@ void Palette::OnSpinDown(wxSpinEvent&)
 
 void Palette::OnButtonClick(wxCommandEvent& event)
 {
-#ifdef __WXMAC__
+#ifdef __WXOSX__
     wxWindow* win = dynamic_cast<wxWindow*>(event.GetEventObject());
     if (win != 0) {
         AppData()->CreateObject(win->GetToolTip()->GetTip());

@@ -24,6 +24,10 @@
 #include <wx/renderer.h>
 #include <wx/settings.h>
 
+#ifdef __WXOSX__
+#include <wx/osx/private.h>
+#endif
+
 namespace wxw {
 static bool IsDark(const wxColour& colour)
 {
@@ -97,13 +101,12 @@ wxString DockArt::EllipsizeText(wxDC& dc, const wxString& text, int maxSize)
 DockArt::DockArt()
 {
     UpdateColoursFromSystem();
-#ifdef __WXMAC__
-    m_captionFont = *wxSMALL_FONT;
-#else
+#ifndef __WXOSX__
     m_captionFont = wxFont(8, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL,
                            wxFONTWEIGHT_NORMAL);
 #endif
-#if defined(__WXMAC__) && wxOSX_USE_COCOA_OR_CARBON
+#ifdef __WXOSX__
+    m_captionFont = *wxSMALL_FONT;
     SInt32 height;
     GetThemeMetric(kThemeMetricSmallPaneSplitterHeight, &height);
     m_sashSize = height;
@@ -151,7 +154,7 @@ void DockArt::UpdateColoursFromSystem()
 
 void DockArt::InitBitmaps()
 {
-#if defined(__WXMAC__)
+#if defined(__WXOSX__)
     static const unsigned char close_bits[] = {
         0xFF, 0xFF, 0xFF, 0xFF, 0x0F, 0xFE, 0x03, 0xF8, 0x01, 0xF0, 0x19, 0xF3,
         0xB8, 0xE3, 0xF0, 0xE1, 0xE0, 0xE0, 0xF0, 0xE1, 0xB8, 0xE3, 0x19, 0xF3,
@@ -192,7 +195,7 @@ void DockArt::InitBitmaps()
         0xdf, 0xfc, 0xdf, 0xfc, 0xdf, 0xfc, 0x0f, 0xf8, 0x7f, 0xff, 0x7f, 0xff,
         0x7f, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
     };
-#ifdef __WXMAC__
+#ifdef __WXOSX__
     const wxColour inactive = wxSystemSettings::GetColour(wxSYS_COLOUR_INACTIVECAPTION);
     const wxColour active = wxSystemSettings::GetColour(wxSYS_COLOUR_CAPTIONTEXT);
 #else

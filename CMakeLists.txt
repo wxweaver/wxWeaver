@@ -20,9 +20,13 @@ if(${wxWidgets_FOUND})
     include(wxWeaverLibs)
     include(wxWeaver)
 
-    # Local resources setup
-    set_plugin_directory("lib/wxweaver")
-    copy_resources()
+    if(UNIX)
+        if(NOT APPLE)
+            # Local resources setup
+            set_plugin_directory("lib/wxweaver")
+        endif()
+        copy_resources()
+    endif()
 
     message(STATUS "
 CMake Generator:             ${CMAKE_GENERATOR}

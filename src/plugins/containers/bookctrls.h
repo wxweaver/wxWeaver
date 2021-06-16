@@ -133,7 +133,7 @@ public:
     }
 
 #ifndef __WXGTK__
-    void OnCreated(wxObject* wxobject, wxWindow* wxparent)
+    void OnCreated(wxObject* wxobject, wxWindow* wxparent) override
     {
         BookCtrl::OnListbookCreated(wxobject, wxparent, GetManager());
     }

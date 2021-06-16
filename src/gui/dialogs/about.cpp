@@ -72,7 +72,7 @@ AboutDialog::AboutDialog(wxWindow* parent, int id)
     htmlWin->LoadFile(wxFileName(
         AppData()->GetApplicationPath() + wxFILE_SEP_PATH
         + "resources/about.html"));
-#ifdef __WXMAC__
+#ifdef __WXOSX__
     // work around a wxMac bug
     htmlWin->SetSize(360, 400);
 #else

@@ -29,6 +29,12 @@ function(_add_plugins)
                 SUFFIX ".dll"
                 LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/plugins/${_plugin}/$<0:>"
             )
+        elseif(APPLE)
+            set_target_properties(${_plugin} PROPERTIES
+                PREFIX "lib"
+                SUFFIX ".dylib"
+                LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/wxWeaver.app/Contents/PlugIns"
+            )
         else()
             set_target_properties(${_plugin} PROPERTIES
                 LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/wxweaver"
