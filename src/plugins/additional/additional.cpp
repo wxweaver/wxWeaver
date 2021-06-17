@@ -2468,7 +2468,7 @@ class RibbonBarComponent : public ComponentBase {
     void OnCreated(wxObject* wxobject, wxWindow* /*wxparent*/) override
     {
         wxRibbonBar* ribbonBar = wxDynamicCast(wxobject, wxRibbonBar);
-        if (!ribbonBar)
+        if (ribbonBar)
             ribbonBar->Realize();
     }
 };
