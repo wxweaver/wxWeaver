@@ -254,20 +254,7 @@ void DockArt::DrawCaption(wxDC& dc, wxWindow*, const wxString& text,
     dc.GradientFillLinear(gradientRect, topStart, topEnd, wxSOUTH);
     gradientRect.Offset(0, gradientRect.GetHeight());
     dc.GradientFillLinear(gradientRect, bottomStart, bottomEnd, wxSOUTH);
-#if 0
-    // Draw the caption border
-    // TODO: in some circumstances this draws weird artifacts on the titlebar,
-    // like small rectangles, could be a refresh problem?
-    dc.SetPen(wxPen(bottomStart));
-    dc.SetBrush(*wxTRANSPARENT_BRUSH);
-    dc.DrawRectangle(1, 1, rect.GetWidth() - 1, rect.GetHeight() - 1);
-#endif
-    // Draw Icon
-    int captionOffset = 0;
-    if (pane.icon.IsOk()) {
-        DrawIcon(dc, rect, pane);
-        captionOffset += pane.icon.GetWidth() + 3;
-    }
+
     // Draw caption label
     wxCoord w, h;
     wxColour labelColour = wxw::IsDark(bottomStart) ? *wxWHITE : *wxBLACK;
@@ -285,8 +272,7 @@ void DockArt::DrawCaption(wxDC& dc, wxWindow*, const wxString& text,
         clipRect.width -= m_buttonSize;
     wxString drawText = EllipsizeText(dc, text, clipRect.width);
     dc.SetClippingRegion(clipRect);
-    dc.DrawText(drawText, rect.x + 3 + captionOffset,
-                rect.y + (rect.height / 2) - (h / 2) - 1);
+    dc.DrawText(drawText, rect.x + 3, rect.y + (rect.height / 2) - (h / 2) - 1);
     dc.DestroyClippingRegion();
 }
 
