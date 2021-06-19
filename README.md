@@ -11,4 +11,4 @@ Building instructions in the dedicated [website page].
 
 
 ## What has changed
-Gor now nothing major is changed on the project, just added, so if you use wxFB features it should work, using new ones will not, like wxToolbook, wxTreebook and wxImageList/bitmap objects.
+For now nothing major is changed on the project, just added, so if you use wxFB features it should work, using new ones will not, like wxToolbook, wxTreebook and wxImageList/bitmap objects.
