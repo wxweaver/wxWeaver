@@ -1,0 +1,2675 @@
+msgid ""
+msgstr "Project-Id-Version: wxWeaver Additional Plugin\n"
+"POT-Creation-Date: 2021-06-19 11:33+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ../../../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-SearchPath-0: src/plugins/additional\n"
+"X-Poedit-SearchPath-1: resources/application/plugins/additional/xml/additional.xml\n"
+"X-Poedit-SearchPath-2: resources/application/plugins/additional/xml/data.xml\n"
+"X-Poedit-SearchPath-3: resources/application/plugins/additional/xml/ribbon.xml\n"
+""
+
+#: resources/application/plugins/additional/xml/additional.xml:22
+msgid "Additional"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:22
+msgid "wxWidgets additional controls"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:27
+#: resources/application/plugins/additional/xml/additional.xml:45
+#: resources/application/plugins/additional/xml/additional.xml:71
+#: resources/application/plugins/additional/xml/additional.xml:89
+#: resources/application/plugins/additional/xml/additional.xml:96
+#: resources/application/plugins/additional/xml/additional.xml:104
+#: resources/application/plugins/additional/xml/additional.xml:127
+#: resources/application/plugins/additional/xml/additional.xml:142
+#: resources/application/plugins/additional/xml/additional.xml:159
+#: resources/application/plugins/additional/xml/additional.xml:181
+#: resources/application/plugins/additional/xml/additional.xml:199
+#: resources/application/plugins/additional/xml/additional.xml:215
+#: resources/application/plugins/additional/xml/additional.xml:227
+#: resources/application/plugins/additional/xml/additional.xml:253
+#: resources/application/plugins/additional/xml/additional.xml:288
+#: resources/application/plugins/additional/xml/additional.xml:310
+#: resources/application/plugins/additional/xml/additional.xml:334
+#: resources/application/plugins/additional/xml/additional.xml:349
+#: resources/application/plugins/additional/xml/additional.xml:372
+#: resources/application/plugins/additional/xml/additional.xml:394
+#: resources/application/plugins/additional/xml/additional.xml:410
+#: resources/application/plugins/additional/xml/additional.xml:419
+#: resources/application/plugins/additional/xml/data.xml:28
+#: resources/application/plugins/additional/xml/data.xml:54
+#: resources/application/plugins/additional/xml/data.xml:168
+#: resources/application/plugins/additional/xml/data.xml:187
+#: resources/application/plugins/additional/xml/data.xml:207
+#: resources/application/plugins/additional/xml/data.xml:231
+#: resources/application/plugins/additional/xml/data.xml:265
+#: resources/application/plugins/additional/xml/data.xml:299
+#: resources/application/plugins/additional/xml/data.xml:331
+#: resources/application/plugins/additional/xml/data.xml:377
+#: resources/application/plugins/additional/xml/data.xml:447
+#: resources/application/plugins/additional/xml/data.xml:490
+#: resources/application/plugins/additional/xml/data.xml:497
+#: resources/application/plugins/additional/xml/data.xml:503
+#: resources/application/plugins/additional/xml/ribbon.xml:27
+#: resources/application/plugins/additional/xml/ribbon.xml:60
+#: resources/application/plugins/additional/xml/ribbon.xml:68
+#: resources/application/plugins/additional/xml/ribbon.xml:85
+#: resources/application/plugins/additional/xml/ribbon.xml:90
+#: resources/application/plugins/additional/xml/ribbon.xml:99
+#: resources/application/plugins/additional/xml/ribbon.xml:108
+#: resources/application/plugins/additional/xml/ribbon.xml:118
+#: resources/application/plugins/additional/xml/ribbon.xml:127
+#: resources/application/plugins/additional/xml/ribbon.xml:132
+#: resources/application/plugins/additional/xml/ribbon.xml:141
+#: resources/application/plugins/additional/xml/ribbon.xml:150
+#: resources/application/plugins/additional/xml/ribbon.xml:160
+#: resources/application/plugins/additional/xml/ribbon.xml:169
+#: resources/application/plugins/additional/xml/ribbon.xml:178
+msgid "name"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:28
+#: resources/application/plugins/additional/xml/additional.xml:46
+#: resources/application/plugins/additional/xml/additional.xml:105
+#: resources/application/plugins/additional/xml/additional.xml:128
+#: resources/application/plugins/additional/xml/additional.xml:143
+#: resources/application/plugins/additional/xml/additional.xml:160
+#: resources/application/plugins/additional/xml/additional.xml:182
+#: resources/application/plugins/additional/xml/additional.xml:200
+#: resources/application/plugins/additional/xml/additional.xml:216
+#: resources/application/plugins/additional/xml/additional.xml:228
+#: resources/application/plugins/additional/xml/additional.xml:258
+#: resources/application/plugins/additional/xml/additional.xml:293
+#: resources/application/plugins/additional/xml/additional.xml:317
+#: resources/application/plugins/additional/xml/additional.xml:335
+#: resources/application/plugins/additional/xml/additional.xml:355
+#: resources/application/plugins/additional/xml/additional.xml:377
+#: resources/application/plugins/additional/xml/data.xml:29
+#: resources/application/plugins/additional/xml/data.xml:169
+#: resources/application/plugins/additional/xml/data.xml:188
+#: resources/application/plugins/additional/xml/data.xml:232
+#: resources/application/plugins/additional/xml/data.xml:266
+#: resources/application/plugins/additional/xml/data.xml:300
+#: resources/application/plugins/additional/xml/data.xml:423
+#: resources/application/plugins/additional/xml/data.xml:456
+#: resources/application/plugins/additional/xml/ribbon.xml:28
+#: resources/application/plugins/additional/xml/ribbon.xml:71
+msgid "style"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:29
+msgid "Never display scrollbars, not even when the page is larger than the window."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:30
+msgid "Display scrollbars only if page's size exceeds window's size."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:31
+msgid "Don't allow the user to select text."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:34
+msgid "A wxHtmlCell was clicked."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:35
+msgid "The mouse passed over a wxHtmlCell."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:36
+msgid "A wxHtmlCell which contains an hyperlink was clicked."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:41
+#: resources/application/plugins/additional/xml/additional.xml:369
+msgid "window_style"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:47
+#: resources/application/plugins/additional/xml/additional.xml:106
+#: resources/application/plugins/additional/xml/additional.xml:296
+#: resources/application/plugins/additional/xml/additional.xml:320
+msgid "The control will generate the event wxEVT_COMMAND_TEXT_ENTER (otherwise pressing Enter key is either processed internally by the control or used for navigation between dialog controls)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:48
+#: resources/application/plugins/additional/xml/additional.xml:107
+msgid "The control will receive wxEVT_CHAR events for TAB pressed - normally, TAB is used for passing to the next control in a dialog instead. For the control created with this style, you can still use Ctrl-Enter to pass to the next control from the keyboard."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:49
+msgid "The text will not be user-editable."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:50
+msgid "Highlight the URLs and generate the wxTextUrl events when mouse events occur over them."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:52
+#: resources/application/plugins/additional/xml/additional.xml:90
+#: resources/application/plugins/additional/xml/additional.xml:114
+#: resources/application/plugins/additional/xml/additional.xml:150
+#: resources/application/plugins/additional/xml/additional.xml:171
+#: resources/application/plugins/additional/xml/additional.xml:190
+#: resources/application/plugins/additional/xml/additional.xml:254
+#: resources/application/plugins/additional/xml/additional.xml:289
+#: resources/application/plugins/additional/xml/additional.xml:311
+msgid "value"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:53
+#: resources/application/plugins/additional/xml/additional.xml:117
+msgid "Respond to a wxEVT_COMMAND_TEXT_UPDATED event, generated when the text changes. Notice that this event will always be sent when the text controls contents changes - whether this is due to user input or comes from the program itself (for example, if SetValue() is called)"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:54
+#: resources/application/plugins/additional/xml/additional.xml:118
+msgid "Respond to a wxEVT_COMMAND_TEXT_ENTER event, generated when enter is pressed in a text control (which must have wxTE_PROCESS_ENTER style for this event to be generated)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:55
+msgid "A mouse event occurred over an URL in the text control (wxMSW and wxGTK2 only)"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:56
+msgid "User tried to enter more text into the control than the limit set by SetMaxLength."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:57
+msgid "Process a wxEVT_COMMAND_RICHTEXT_CHARACTER event, generated when the user presses a character key. Valid event functions: GetFlags, GetPosition, GetCharacter."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:58
+msgid "Process a wxEVT_COMMAND_RICHTEXT_DELETE event, generated when the user presses the backspace or delete key. Valid event functions: GetFlags, GetPosition."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:59
+msgid "Process a wxEVT_COMMAND_RICHTEXT_RETURN event, generated when the user presses the return key. Valid event functions: GetFlags, GetPosition."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:60
+msgid "Process a wxEVT_COMMAND_RICHTEXT_STYLE_CHANGED event, generated when styling has been applied to the control. Valid event functions: GetPosition, GetRange."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:61
+msgid "Process a wxEVT_COMMAND_RICHTEXT_STYLESHEET_CHANGING event, generated when the control's stylesheet has changed, for example the user added, edited or deleted a style. Valid event functions: GetRange, GetPosition."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:62
+msgid "Process a wxEVT_COMMAND_RICHTEXT_STYLESHEET_REPLACING event, generated when the control's stylesheet is about to be replaced, for example when a file is loaded into the control. Valid event functions: Veto, GetOldStyleSheet, GetNewStyleSheet."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:63
+msgid "Process a wxEVT_COMMAND_RICHTEXT_STYLESHEET_REPLACED event, generated when the control's stylesheet has been replaced, for example when a file is loaded into the control. Valid event functions: GetOldStyleSheet, GetNewStyleSheet."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:64
+msgid "Process a wxEVT_COMMAND_RICHTEXT_CONTENT_INSERTED event, generated when content has been inserted into the control. Valid event functions: GetPosition, GetRange."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:65
+msgid "Process a wxEVT_COMMAND_RICHTEXT_CONTENT_DELETED event, generated when content has been deleted from the control. Valid event functions: GetPosition, GetRange."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:72
+#| msgid "Enable folding."
+msgid "folding"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:72
+msgid "Enable folding."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:73
+#| msgid "Show line numbers."
+msgid "line_numbers"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:73
+msgid "Show line numbers."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:74
+#| msgid "Show indentation guides."
+msgid "indentation_guides"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:74
+msgid "Show indentation guides."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:75
+msgid "tab_indents"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:75
+msgid "The tab key always indents, use tabs or spaces, instead of always inserting a tab character."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:76
+msgid "backspace_unindents"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:76
+msgid "The backspace key unindents, instead of just deleting one space."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:77
+msgid "view_eol"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:77
+msgid "Show end of line characters."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:78
+msgid "view_whitespace"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:78
+msgid "Show whitespace characters."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:79
+msgid "use_tabs"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:79
+msgid "Use tabs for indenting, instead of spaces."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:80
+msgid "tab_width"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:80
+msgid "The number of spaces per tab character."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:81
+msgid "read_only"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:81
+msgid "Set ReadOnly Mode. Disable editing."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:91
+msgid "Handles a wxEVT_TOGGLEBUTTON event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:108
+msgid "By default, the Windows text control doesn't show the selection when it doesn't have focus - use this style to force it to always show it. It doesn't do anything under other platforms."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:109
+msgid "The text in the control will be left-justified (default)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:110
+msgid "The text in the control will be centered (currently wxMSW and wxGTK2 only)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:111
+msgid "The text in the control will be right-justified (currently wxMSW and wxGTK2 only)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:112
+msgid "On PocketPC and Smartphone, causes the first letter to be capitalized."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:115
+msgid "search_button"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:115
+msgid "Shows or hides the search button."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:116
+msgid "cancel_button"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:116
+msgid "Shows or hides the cancel button."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:119
+msgid "Respond to a wxEVT_SEARCHCTRL_SEARCH_BTN event, generated when the search button is clicked. Note that this does not initiate a search on its own, you need to perform the appropriate action in your event handler. You may use event.GetString() to retrieve the string to search for in the event handler code."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:120
+msgid "Respond to a wxEVT_SEARCHCTRL_CANCEL_BTN event, generated when the cancel button is clicked."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:129
+msgid "The default style: 0."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:130
+msgid "Creates a text control to the left of the picker button which is completely managed by the wxColourPickerCtrl and which can be used by the user to specify a colour. The text control is automatically synchronized with button's value. Use functions defined in wxPickerBase to modify the text control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:131
+msgid "Shows the colour in HTML form (AABBCC) as colour button label (instead of no label at all)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:134
+msgid "colour"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:135
+msgid "The user changed the colour selected in the control either using the button or using text control (see wxCLRP_USE_TEXTCTRL; note that in this case the event is fired only if the user's input is valid, i.e. recognizable)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:144
+msgid "The default style: wxFNTP_FONTDESC_AS_LABEL | wxFNTP_USEFONT_FOR_LABEL."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:145
+msgid "Creates a text control to the left of the picker button which is completely managed by the wxFontPickerCtrl and which can be used by the user to specify a font (see SetSelectedFont). The text control is automatically synchronized with button's value. Use functions defined in wxPickerBase to modify the text control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:146
+msgid "Keeps the label of the button updated with the fontface name and the font size. E.g. choosing &quot;Times New Roman bold, italic with size 10&quot; from the fontdialog, will update the label (overwriting any previous label) with the &quot;Times New Roman, 10&quot; text."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:147
+msgid "Uses the currently selected font to draw the label of the button."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:151
+msgid "max_point_size"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:151
+msgid "Sets the maximum point size value allowed for the user-chosen font. The default value is 100. Note that big fonts can require a lot of memory and CPU time both for creation and for rendering; thus, specially because the user has the option to specify the fontsize through a text control (see wxFNTP_USE_TEXTCTRL), it's a good idea to put a limit to the maximum font size when huge fonts do not make much sense."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:152
+msgid "The user changed the font selected in the control either using the button or using text control (see wxFNTP_USE_TEXTCTRL; note that in this case the event is fired only if the user's input is valid, i.e. recognizable)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:161
+msgid "The default style: includes wxFLP_OPEN | wxFLP_FILE_MUST_EXIST and, under wxMSW only, wxFLP_USE_TEXTCTRL."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:162
+msgid "Creates a text control to the left of the picker button which is completely managed by the wxFilePickerCtrl and which can be used by the user to specify a path (see SetPath). The text control is automatically synchronized with button's value. Use functions defined in wxPickerBase to modify the text control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:163
+msgid "Creates a picker which allows the user to select a file to open."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:164
+msgid "Creates a picker which allows the user to select a file to save."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:165
+msgid "Can be combined with wxFLP_SAVE only: ask confirmation to the user before selecting a file."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:166
+msgid "Can be combined with wxFLP_OPEN only: the selected file must be an existing file."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:167
+msgid "Change current working directory on each user file selection change."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:168
+#: resources/application/plugins/additional/xml/additional.xml:187
+msgid "Use smaller version of the control with a small &quot;...&quot; button instead of the normal &quot;Browse&quot; one. This flag is new since wxWidgets 2.9.3."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:172
+#: resources/application/plugins/additional/xml/additional.xml:191
+msgid "message"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:173
+msgid "wildcard"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:174
+msgid "The user changed the file selected in the control either using the button or using text control (see wxFLP_USE_TEXTCTRL; note that in this case the event is fired only if the user's input is valid, e.g. an existing file path if wxFLP_FILE_MUST_EXIST was given)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:183
+msgid "The default style: includes wxDIRP_DIR_MUST_EXIST and, under wxMSW only, wxDIRP_USE_TEXTCTRL."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:184
+msgid "Creates a text control to the left of the picker button which is completely managed by the wxDirPickerCtrl and which can be used by the user to specify a path (see SetPath). The text control is automatically synchronized with button's value. Use functions defined in wxPickerBase to modify the text control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:185
+msgid "Creates a picker which allows to select only existing directories. wxGTK control always adds this flag internally as it does not support its absence."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:186
+msgid "Change current working directory on each user directory selection change."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:192
+msgid "The user changed the directory selected in the control either using the button or using text control (see wxDIRP_USE_TEXTCTRL; note that in this case the event is fired only if the user's input is valid, e.g. an existing directory path)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:201
+msgid "Creates a control without a month calendar drop down but with spin-control-like arrows to change individual date components. This style is not supported by the generic version."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:202
+msgid "Creates a control with a month calendar drop-down part from which the user can select a date. This style is not supported in OSX/Cocoa native version."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:203
+msgid "Forces display of the century in the default date format. Without this style the century could be displayed, or not, depending on the default date representation in the system. This style is not supported in OSX/Cocoa native version currently."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:204
+msgid "With this style, the control allows the user to not enter any valid date at all. Without it - the default - the control always has some valid date. This style is not supported in OSX/Cocoa native version."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:205
+msgid "Creates a control with the style that is best supported for the current platform (currently wxDP_SPIN under Windows and OSX/Cocoa and wxDP_DROPDOWN elsewhere)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:208
+#: resources/application/plugins/additional/xml/additional.xml:220
+msgid "This event fires when the user changes the current selection in the control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:217
+msgid "Creates a control with the style that is best supported for the current platform (currently wxDP_SPIN under Windows and wxDP_DROPDOWN elsewhere)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:229
+msgid "Show Sunday as the first day in the week (not in wxGTK)"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:230
+msgid "Show Monday as the first day in the week (not in wxGTK)"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:231
+msgid "Highlight holidays in the calendar (only generic)"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:232
+msgid "Disable the year changing (deprecated, only generic)"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:233
+msgid "Disable the month (and, implicitly, the year) changing"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:234
+msgid "Show the neighbouring weeks in the previous and next months (only generic, always on for the native controls)"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:235
+msgid "Use alternative, more compact, style for the month and year selection controls (only generic)"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:236
+msgid "Show week numbers on the left side of the calendar (not in generic)"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:239
+msgid "A day was double clicked in the calendar."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:240
+msgid "The selected date changed."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:241
+msgid "The selected month (and/or year) changed."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:242
+msgid "The selected day changed."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:243
+msgid "The selected month changed."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:244
+msgid "The selected year changed."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:245
+msgid "User clicked on the week day header (only generic)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:246
+msgid "User clicked on the week of the year number (only generic)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:254
+msgid "The position of the scrollbar in scroll units."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:255
+msgid "range"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:255
+msgid "The maximum position of the scrollbar."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:256
+msgid "thumbsize"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:256
+msgid "The size of the thumb, or visible portion of the scrollbar, in scroll units."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:257
+msgid "pagesize"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:257
+msgid "This is the number of scroll units that will be scrolled when the user pages up or down."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:259
+msgid "Specifies a horizontal scrollbar."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:260
+msgid "Specifies a vertical scrollbar."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:263
+msgid "Process all scroll events."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:264
+msgid "Process wxEVT_SCROLL_TOP scroll-to-top events (minimum position)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:265
+msgid "Process wxEVT_SCROLL_BOTTOM scroll-to-bottom events (maximum position)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:266
+msgid "Process wxEVT_SCROLL_LINEUP line up events."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:267
+msgid "Process wxEVT_SCROLL_LINEDOWN line down events."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:268
+msgid "Process wxEVT_SCROLL_PAGEUP page up events."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:269
+msgid "Process wxEVT_SCROLL_PAGEDOWN page down events."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:270
+msgid "Process wxEVT_SCROLL_THUMBTRACK thumbtrack events (frequent events sent as the user drags the thumbtrack)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:271
+msgid "Process wxEVT_SCROLL_THUMBRELEASE thumb release events."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:272
+msgid "Process wxEVT_SCROLL_CHANGED end of scrolling events (MSW only)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:273
+msgid "Process all scroll events. Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:274
+msgid "Process wxEVT_SCROLL_TOP scroll-to-top events (minimum position). Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:275
+msgid "Process wxEVT_SCROLL_BOTTOM scroll-to-bottom events (maximum position). Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:276
+msgid "Process wxEVT_SCROLL_LINEUP line up events. Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:277
+msgid "Process wxEVT_SCROLL_LINEDOWN line down events. Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:278
+msgid "Process wxEVT_SCROLL_PAGEUP page up events. Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:279
+msgid "Process wxEVT_SCROLL_PAGEDOWN page down events. Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:280
+msgid "Process wxEVT_SCROLL_THUMBTRACK thumbtrack events (frequent events sent as the user drags the thumbtrack). Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:281
+msgid "Process wxEVT_SCROLL_THUMBRELEASE thumb release events. Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:282
+msgid "Process wxEVT_SCROLL_CHANGED end of scrolling events (MSW only). Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:290
+#: resources/application/plugins/additional/xml/additional.xml:312
+msgid "min"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:290
+#: resources/application/plugins/additional/xml/additional.xml:312
+msgid "Minimal value."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:291
+#: resources/application/plugins/additional/xml/additional.xml:313
+msgid "max"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:291
+#: resources/application/plugins/additional/xml/additional.xml:313
+msgid "Maximal value."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:292
+#: resources/application/plugins/additional/xml/additional.xml:314
+#| msgid "Initial Value"
+msgid "initial"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:292
+#: resources/application/plugins/additional/xml/additional.xml:314
+msgid "Initial value."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:294
+#: resources/application/plugins/additional/xml/additional.xml:318
+#: resources/application/plugins/additional/xml/additional.xml:338
+msgid "The user can use arrow keys to change the value."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:295
+#: resources/application/plugins/additional/xml/additional.xml:319
+#: resources/application/plugins/additional/xml/additional.xml:339
+msgid "The value wraps at the minimum and maximum."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:297
+#: resources/application/plugins/additional/xml/additional.xml:321
+msgid "Same as wxTE_LEFT for wxTextCtrl: the text is left aligned."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:298
+#: resources/application/plugins/additional/xml/additional.xml:322
+msgid "Same as wxTE_CENTER for wxTextCtrl: the text is centered."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:299
+#: resources/application/plugins/additional/xml/additional.xml:323
+msgid "Same as wxTE_RIGHT for wxTextCtrl: the text is right aligned (this is the default)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:302
+msgid "Generated whenever the numeric value of the spinctrl is updated."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:303
+#: resources/application/plugins/additional/xml/additional.xml:327
+msgid "Generated whenever the user modifies the text in the edit part of the spin control directly."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:304
+#: resources/application/plugins/additional/xml/additional.xml:328
+msgid "Respond to a wxEVT_COMMAND_TEXT_ENTER event, generated when enter is pressed in the edit part of the spin control (which must have wxTE_PROCESS_ENTER style for this event to be generated)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:315
+msgid "inc"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:315
+msgid "Increment value."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:316
+msgid "digits"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:316
+msgid "The number of digits in the display."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:326
+msgid "Generated whenever the numeric value of the control is updated."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:336
+msgid "Specifies a horizontal spin button (note that this style is not supported in wxGTK)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:337
+msgid "Specifies a vertical spin button."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:341
+msgid "Generated whenever an arrow is pressed."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:342
+msgid "Generated when left/up arrow is pressed."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:343
+msgid "Generated when right/down arrow is pressed."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:350
+#: resources/application/plugins/additional/xml/data.xml:332
+#: resources/application/plugins/additional/xml/data.xml:378
+#: resources/application/plugins/additional/xml/data.xml:498
+#: resources/application/plugins/additional/xml/data.xml:504
+#: resources/application/plugins/additional/xml/ribbon.xml:61
+#: resources/application/plugins/additional/xml/ribbon.xml:69
+#: resources/application/plugins/additional/xml/ribbon.xml:91
+#: resources/application/plugins/additional/xml/ribbon.xml:100
+#: resources/application/plugins/additional/xml/ribbon.xml:109
+#: resources/application/plugins/additional/xml/ribbon.xml:119
+#: resources/application/plugins/additional/xml/ribbon.xml:133
+#: resources/application/plugins/additional/xml/ribbon.xml:142
+#: resources/application/plugins/additional/xml/ribbon.xml:151
+#: resources/application/plugins/additional/xml/ribbon.xml:161
+#| msgid "Label"
+msgid "label"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:350
+msgid "Text of the hyperlink"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:351
+msgid "url"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:351
+msgid "Target of the hyperlink"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:352
+msgid "hover_color"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:352
+msgid "The colour used to print the label of the hyperlink when the mouse is over the control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:353
+msgid "normal_color"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:353
+msgid "The colour used to print the label when the link has never been clicked before (i.e. the link has not been visited) and the mouse is not over the control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:354
+msgid "visited_color"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:354
+msgid "The colour used to print the label when the mouse is not over the control and the link has already been clicked before (i.e. the link has been visited)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:356
+msgid "Align the text to the left."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:357
+msgid "Align the text to the right."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:358
+msgid "Center the text (horizontally)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:359
+msgid "Pop up a context menu when the hyperlink is right-clicked. The context menu contains a &quot;Copy URL&quot; menu item which is automatically handled by the hyperlink and which just copies in the clipboard the URL (not the label) of the control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:360
+msgid "The default style for wxHyperlinkCtrl: wxNO_BORDER|wxHL_CONTEXTMENU|wxHL_ALIGN_CENTRE."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:363
+msgid "The hyperlink was (left) clicked. If this event is not handled in user's code (or it's skipped; see wxEvent::Skip), then a call to wxLaunchDefaultBrowser is done with the hyperlink's URL."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:373
+msgid "defaultfolder"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:373
+msgid "Initial Directory."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:374
+msgid "filter"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:374
+msgid "A filter string, using the same syntax as that for wxFileDialog. This may be empty if filters are not being used. Example: &quot;All files (*.*)|*.*|JPEG files (*.jpg)|*.jpg&quot;."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:375
+msgid "defaultfilter"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:375
+msgid "The zero-indexed default filter setting."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:376
+#| msgid "Show hidden files"
+msgid "show_hidden"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:376
+msgid "Show hidden files"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:378
+msgid "Only show directories, and not files."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:379
+msgid "Use 3D borders for internal controls."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:380
+msgid "When setting the default path, select the first file in the directory."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:381
+msgid "Show the drop-down filter list."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:382
+msgid "Allow the folder and file labels to be editable."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:383
+msgid "Allows multiple files and folders to be selected simultaneously"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:386
+msgid "Selected directory has changed. Processes a wxEVT_DIRCTRL_SELECTIONCHANGED event type. Notice that this event is generated even for the changes done by the program itself and not only those done by the user. Available since wxWidgets 2.9.5."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:387
+msgid "The user activated a file by double-clicking or pressing Enter. Available since wxWidgets 2.9.5."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:395
+msgid "file"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:395
+msgid "The path to media file."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:396
+msgid "play"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:396
+msgid "Play the media file."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:397
+msgid "playback_rate"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:397
+msgid "Sets the playback rate, or speed of the media, to that referred by dRate. 1.0 represents normal speed, while 2.0 represents twice the normal speed of the media, for example. Not supported on the GStreamer (Unix) backend."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:398
+msgid "volume"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:398
+msgid "Sets the volume of the media from a 0.0 to 1.0 range to that referred by dVolume. 1.0 represents full volume, while 0.5 represents half (50 percent) volume, for example. Note that this may not be exact due to conversion and rounding errors, although setting the volume to full or none is always exact."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:399
+msgid "player_controls"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:400
+msgid "wxMEDIACTRLPLAYERCONTROLS_STEP, Step controls like fastfoward, step one frame etc."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:401
+msgid "wxMEDIACTRLPLAYERCONTROLS_VOLUME, Volume controls like the speaker icon, volume slider, etc."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:402
+msgid "wxMEDIACTRLPLAYERCONTROLS_DEFAULT, Default controls for the toolkit. Currently a typedef for wxMEDIACTRLPLAYERCONTROLS_STEP and wxMEDIACTRLPLAYERCONTROLS_VOLUME."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:403
+msgid "wxMEDIACTRLPLAYERCONTROLS_NONE, No controls. return wxMediaCtrl to it's default state."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:410
+msgid "The control is added to a sizer using this name."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:411
+msgid "class"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:411
+msgid "The control is generated to XRC with this class."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:412
+msgid "declaration"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:412
+msgid "Code to generate for the declaration of this control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:413
+msgid "construction"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:413
+msgid "Code to generate for the construction of this control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:414
+msgid "include"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:414
+msgid "Code to generate for the include statements for this control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:415
+msgid "settings"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:415
+msgid "Code to generate for the settings of this control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:419
+msgid "wxTimer object name."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:420
+msgid "id"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:420
+msgid "Timer identifier."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:421
+msgid "period"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:421
+msgid "Timer period in milliseconds."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:422
+msgid "enabled"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:422
+msgid "Enable timer on startup."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:423
+msgid "oneshot"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:423
+msgid "Produce timer event just once."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/additional.xml:424
+msgid "Process a wxEVT_TIMER event, when the timer ticks."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:22
+msgid "Data"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:22
+msgid "Data manipulation controls"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:30
+msgid "Use this style if you wish the user to be able to edit labels in the tree control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:31
+msgid "For convenience to document that no buttons are to be drawn."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:32
+msgid "Use this style to show + and - buttons to the left of parent items."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:33
+msgid "Selects alternative style of +/- buttons and shows rotating (&quot;twisting&quot;) arrows instead. Currently this style is only implemented under Microsoft Windows Vista and later Windows versions and is ignored under the other platforms. Notice that under Vista this style results in the same appearance as used by the tree control in Explorer and other built-in programs and so using it may be preferable to the default style."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:34
+msgid "Use this style to hide vertical level connectors."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:35
+msgid "Use this style to have the background colour and the selection highlight extend over the entire horizontal row of the tree control window. (This flag is ignored under Windows unless you specify wxTR_NO_LINES as well.)"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:36
+msgid "Use this style to show lines between root nodes. Only applicable if wxTR_HIDE_ROOT is set and wxTR_NO_LINES is not set."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:37
+msgid "Use this style to suppress the display of the root node, effectively causing the first-level nodes to appear as a series of root nodes."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:38
+msgid "Use this style to draw a contrasting border between displayed rows."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:39
+msgid "Use this style to cause row heights to be just big enough to fit the content. If not set, all rows use the largest row height. The default is that this flag is unset. Generic only."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:40
+msgid "For convenience to document that only one item may be selected at a time. Selecting another item causes the current selection, if any, to be deselected. This is the default."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:41
+msgid "Use this style to allow a range of items to be selected. If a second range is selected, the current range, if any, is deselected."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:42
+msgid "The set of flags that are closest to the defaults for the native control for a particular toolkit."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:45
+msgid "Request information from the application."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:46
+msgid "Information is being supplied."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:47
+msgid "The opportunity to set the item tooltip is being given to the application (call wxTreeEvent::SetToolTip). Windows only."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:48
+msgid "The state image has been clicked. Windows only."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:55
+msgid "Grid"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:56
+msgid "rows"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:56
+msgid "Number of Rows."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:57
+msgid "cols"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:57
+msgid "Number of Columns."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:58
+msgid "editing"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:58
+msgid "Allow editing grid contents."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:59
+msgid "grid_lines"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:59
+msgid "Show grid lines."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:60
+msgid "grid_line_color"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:60
+msgid "The colour used to draw grid lines."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:61
+msgid "drag_grid_size"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:61
+msgid "Allow sizing rows and columns by dragging gridlines."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:62
+msgid "margin_width"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:62
+msgid "A grid may occupy more space than needed for its columns. This function allows to set how big this extra space is."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:63
+msgid "margin_height"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:63
+msgid "A grid may occupy more space than needed for its rows. This function allows to set how big this extra space is."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:65
+msgid "Columns"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:66
+msgid "column_sizes"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:66
+msgid "Comma separated list of column sizes. Note: wxGrid sets up arrays to store individual row and column sizes when non-default sizes are used. The memory requirements for this could become prohibitive if your grid is very large."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:67
+msgid "autosize_cols"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:67
+msgid "Automatically sizes all columns to fit their contents. wxGrid sets up arrays to store individual row and column sizes when non-default sizes are used. The memory requirements for this could become prohibitive if your grid is very large."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:68
+msgid "drag_col_move"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:68
+msgid "Allow moving columns by dragging."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:69
+msgid "drag_col_size"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:69
+msgid "Allow sizing columns by dragging."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:70
+msgid "col_label_size"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:70
+msgid "Height of column labels"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:71
+msgid "If height equals to wxGRID_AUTOSIZE then height is calculated automatically so that no label is truncated. Note that this could be slow for a large table."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:73
+msgid "col_label_values"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:73
+msgid "List of column labels."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:74
+msgid "col_label_horiz_alignment"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:74
+msgid "Horizontal alignment of column label text."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:75
+#: resources/application/plugins/additional/xml/data.xml:96
+msgid "Align labels left."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:76
+#: resources/application/plugins/additional/xml/data.xml:82
+#: resources/application/plugins/additional/xml/data.xml:97
+#: resources/application/plugins/additional/xml/data.xml:103
+msgid "Align labels centered."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:77
+#: resources/application/plugins/additional/xml/data.xml:98
+msgid "Align labels right."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:80
+msgid "col_label_vert_alignment"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:80
+msgid "Vertical alignment of column label text."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:81
+#: resources/application/plugins/additional/xml/data.xml:102
+msgid "Align labels top."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:83
+#: resources/application/plugins/additional/xml/data.xml:104
+msgid "Align labels bottom."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:87
+msgid "Rows"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:88
+msgid "row_sizes"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:88
+msgid "Comma separated list of row sizes. Note: wxGrid sets up arrays to store individual row and column sizes when non-default sizes are used. The memory requirements for this could become prohibitive if your grid is very large."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:89
+msgid "autosize_rows"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:89
+msgid "Automatically sizes all rows to fit their contents. wxGrid sets up arrays to store individual row and column sizes when non-default sizes are used. The memory requirements for this could become prohibitive if your grid is very large."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:90
+msgid "drag_row_size"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:90
+msgid "Allow sizing rows by dragging."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:91
+msgid "row_label_size"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:91
+msgid "Width of row labels"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:92
+msgid "If height equals to wxGRID_AUTOSIZE then width is calculated automatically so that no label is truncated. Note that this could be slow for a large table."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:94
+msgid "row_label_values"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:94
+msgid "List of row labels."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:95
+msgid "row_label_horiz_alignment"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:95
+msgid "Horizontal alignment of row label text."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:101
+msgid "row_label_vert_alignment"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:101
+msgid "Vertical alignment of row label text."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:108
+msgid "Label Appearance"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:109
+#| msgid "Label"
+msgid "label_bg"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:109
+msgid "Background color for row and column labels."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:110
+msgid "label_font"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:110
+msgid "Font for row and column labels."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:111
+msgid "label_text"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:111
+msgid "Colour for row and column label text."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:113
+msgid "Cell Defaults"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:114
+msgid "cell_bg"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:114
+msgid "Default cell background color."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:115
+msgid "cell_font"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:115
+msgid "Default cell font."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:116
+msgid "cell_text"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:116
+msgid "Default cell text color."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:117
+msgid "cell_horiz_alignment"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:117
+msgid "Default horizontal alignment of cell values."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:118
+msgid "Align left."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:119
+#: resources/application/plugins/additional/xml/data.xml:125
+msgid "Align centered."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:120
+msgid "Align right."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:123
+msgid "cell_vert_alignment"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:123
+msgid "Default vertical alignment of cell values."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:124
+msgid "Align top."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:126
+msgid "Align bottom."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:130
+msgid "The user clicked a cell with the left mouse button. Processes a wxEVT_GRID_CELL_LEFT_CLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:131
+msgid "The user clicked a cell with the right mouse button. Processes a wxEVT_GRID_CELL_RIGHT_CLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:132
+msgid "The user double-clicked a cell with the left mouse button. Processes a wxEVT_GRID_CELL_LEFT_DCLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:133
+msgid "The user double-clicked a cell with the right mouse button. Processes a wxEVT_GRID_CELL_RIGHT_DCLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:134
+msgid "The user clicked a label with the left mouse button. Processes a wxEVT_GRID_LABEL_LEFT_CLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:135
+msgid "The user clicked a label with the right mouse button. Processes a wxEVT_GRID_LABEL_RIGHT_CLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:136
+msgid "The user double-clicked a label with the left mouse button. Processes a wxEVT_GRID_LABEL_LEFT_DCLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:137
+msgid "The user double-clicked a label with the right mouse button. Processes a wxEVT_GRID_LABEL_RIGHT_DCLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:138
+msgid "The user changed the data in a cell. Processes a wxEVT_GRID_CELL_CHANGED."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:139
+msgid "The user moved to, and selected a cell. Processes a wxEVT_GRID_SELECT_CELL."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:140
+msgid "The editor for a cell was hidden. Processes a wxEVT_GRID_EDITOR_HIDDEN."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:141
+msgid "The editor for a cell was shown. Processes a wxEVT_GRID_EDITOR_SHOWN."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:142
+msgid "The user clicked a cell with the left mouse button; variant taking a window identifier. Processes a wxEVT_GRID_CELL_LEFT_CLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:143
+msgid "The user clicked a cell with the right mouse button; variant taking a window identifier. Processes a wxEVT_GRID_CELL_RIGHT_CLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:144
+msgid "The user double-clicked a cell with the left mouse button; variant taking a window identifier. Processes a wxEVT_GRID_CELL_LEFT_DCLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:145
+msgid "The user double-clicked a cell with the right mouse button; variant taking a window identifier. Processes a wxEVT_GRID_CELL_RIGHT_DCLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:146
+msgid "The user clicked a label with the left mouse button; variant taking a window identifier. Processes a wxEVT_GRID_LABEL_LEFT_CLICK"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:147
+msgid "The user clicked a label with the right mouse button; variant taking a window identifier. Processes a wxEVT_GRID_LABEL_RIGHT_CLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:148
+msgid "The user double-clicked a label with the left mouse button; variant taking a window identifier. Processes a wxEVT_GRID_LABEL_LEFT_DCLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:149
+msgid "The user double-clicked a label with the right mouse button; variant taking a window identifier. Processes a wxEVT_GRID_LABEL_RIGHT_DCLICK."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:150
+msgid "The user changed the data in a cell; variant taking a window identifier. Processes a wxEVT_GRID_CELL_CHANGED."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:151
+msgid "The user moved to, and selected a cell; variant taking a window identifier. Processes a wxEVT_GRID_SELECT_CELL."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:152
+msgid "The editor for a cell was hidden; variant taking a window identifier. Processes a wxEVT_GRID_EDITOR_HIDDEN."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:153
+msgid "The editor for a cell was shown; variant taking a window identifier. Processes a wxEVT_GRID_EDITOR_SHOWN."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:154
+msgid "The user resized a column by dragging it. Processes a wxEVT_GRID_COL_SIZE."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:155
+msgid "The user resized a row by dragging it. Processes a wxEVT_GRID_ROW_SIZE."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:156
+msgid "The user resized a column by dragging it; variant taking a window identifier. Processes a wxEVT_GRID_COL_SIZE."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:157
+msgid "The user resized a row by dragging it; variant taking a window identifier. Processes a wxEVT_GRID_ROW_SIZE."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:158
+msgid "The user selected a group of contiguous cells. Processes a wxEVT_GRID_RANGE_SELECT."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:159
+msgid "The user selected a group of contiguous cells; variant taking a window identifier. Processes a wxEVT_GRID_RANGE_SELECT."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:160
+msgid "The editor for a cell was created. Processes a wxEVT_GRID_EDITOR_CREATED."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:161
+msgid "The editor for a cell was created; variant taking a window identifier. Processes a wxEVT_GRID_EDITOR_CREATED."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:170
+msgid "Single-selection list."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:171
+msgid "Multiple-selection list: the user can toggle multiple items on and off."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:172
+msgid "Extended-selection list: the user can select multiple items using the SHIFT key and the mouse or special key combinations."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:173
+msgid "Create horizontal scrollbar if contents are too wide (Windows only)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:174
+msgid "Always show a vertical scrollbar."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:175
+msgid "Only create a vertical scrollbar if needed."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:176
+msgid "Don't create vertical scrollbar (wxMSW only)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:177
+msgid "The listbox contents are sorted in alphabetical order."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:178
+msgid "choices"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:178
+msgid "List of default values."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:179
+msgid "Process a wxEVT_COMMAND_CHECKLISTBOX_TOGGLED event, when an item in the check list box is checked or unchecked."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:180
+msgid "Process a wxEVT_COMMAND_LISTBOX_SELECTED event, when an item on the list is selected."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:181
+msgid "Process a wxEVT_COMMAND_LISTBOX_DOUBLECLICKED event, when the listbox is double-clicked."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:189
+msgid "Single selection, this is the default."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:190
+msgid "Allow multiple selection."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:191
+msgid "Show the usual, 2 state, checkboxes for the items in the first column."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:192
+msgid "Show the checkboxes that can possibly be set by the program, but not the user, to a third, undetermined, state, for the items in the first column. Implies wxTL_CHECKBOX."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:193
+msgid "Same as wxTL_3STATE but the user can also set the checkboxes to the undetermined state. Implies wxTL_3STATE."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:194
+msgid "Style used by the control by default, just wxTL_SINGLE currently."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:197
+msgid "Process wxEVT_TREELIST_SELECTION_CHANGED event and notifies about the selection change in the control. In the single selection case the item indicated by the event has been selected and previously selected item, if any, was deselected. In multiple selection case, the selection of this item has just changed (it may have been either selected or deselected) but notice that the selection of other items could have changed as well, use wxTreeListCtrl::GetSelections() to retrieve the new selection if necessary."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:198
+msgid "Process wxEVT_TREELIST_ITEM_EXPANDING event notifying about the given branch being expanded. This event is sent before the expansion occurs and can be vetoed to prevent it from happening."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:199
+msgid "Process wxEVT_TREELIST_ITEM_EXPANDED event notifying about the expansion of the given branch. This event is sent after the expansion occurs and can't be vetoed."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:200
+msgid "Process wxEVT_TREELIST_ITEM_CHECKED event notifying about the user checking or unchecking the item. You can use wxTreeListCtrl::GetCheckedState() to retrieve the new item state and wxTreeListEvent::GetOldCheckedState() to get the previous one."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:201
+msgid "Process wxEVT_TREELIST_ITEM_ACTIVATED event notifying about the user double clicking the item or activating it from keyboard."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:202
+msgid "Process wxEVT_TREELIST_ITEM_CONTEXT_MENU event indicating that the popup menu for the given item should be displayed."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:203
+msgid "Process wxEVT_TREELIST_COLUMN_SORTED event indicating that the control contents has just been resorted using the specified column. The event doesn't carry the sort direction, use GetSortColumn() method if you need to know it."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:207
+msgid "The column label."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:208
+#: resources/application/plugins/additional/xml/data.xml:349
+#: resources/application/plugins/additional/xml/data.xml:392
+msgid "width"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:208
+msgid "The width of the column in pixels or the special wxCOL_WIDTH_AUTOSIZE value indicating that the column should adjust to its contents. Notice that the first column is special and will be always resized to fill all the space not taken by the other columns, i.e. the width specified here is ignored for it."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:209
+msgid "Special value used for column width meaning unspecified or default."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:210
+msgid "Size the column automatically to fit all values. Note: On OS X, this style is only implemented in the Cocoa build on OS X &gt;= 10.5; it behaves identically to wxCOL_WIDTH_DEFAULT otherwise."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:213
+msgid "alignment"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:213
+msgid "Alignment of both the column header and its items."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:214
+#: resources/application/plugins/additional/xml/data.xml:351
+#: resources/application/plugins/additional/xml/data.xml:394
+msgid "Align the item to the left."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:215
+#: resources/application/plugins/additional/xml/data.xml:353
+#: resources/application/plugins/additional/xml/data.xml:396
+msgid "Align the item to the right."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:216
+#: resources/application/plugins/additional/xml/data.xml:355
+#: resources/application/plugins/additional/xml/data.xml:398
+msgid "Align the item to the center."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:219
+msgid "flag"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:220
+msgid "Column can be resized (included in default flags)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:221
+#: resources/application/plugins/additional/xml/data.xml:362
+#: resources/application/plugins/additional/xml/data.xml:405
+msgid "Column can be clicked to toggle the sort order by its contents."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:222
+msgid "Column can be dragged to change its order (included in default)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:223
+#: resources/application/plugins/additional/xml/data.xml:364
+#: resources/application/plugins/additional/xml/data.xml:407
+msgid "Column is not shown at all."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:233
+#: resources/application/plugins/additional/xml/data.xml:267
+#: resources/application/plugins/additional/xml/data.xml:301
+msgid "Single selection mode. This is the default."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:234
+#: resources/application/plugins/additional/xml/data.xml:268
+#: resources/application/plugins/additional/xml/data.xml:302
+msgid "Multiple selection mode."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:235
+#: resources/application/plugins/additional/xml/data.xml:269
+#: resources/application/plugins/additional/xml/data.xml:303
+msgid "Use alternating colours for rows if supported by platform and theme. Currently only supported by the native GTK and OS X implementations but not by the generic one."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:236
+#: resources/application/plugins/additional/xml/data.xml:270
+#: resources/application/plugins/additional/xml/data.xml:304
+msgid "Display the separator lines between rows"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:237
+#: resources/application/plugins/additional/xml/data.xml:271
+#: resources/application/plugins/additional/xml/data.xml:305
+msgid "Display the separator lines between columns."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:238
+#: resources/application/plugins/additional/xml/data.xml:272
+#: resources/application/plugins/additional/xml/data.xml:306
+msgid "Allow variable line heights. This can be inefficient when displaying large number of items."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:239
+#: resources/application/plugins/additional/xml/data.xml:273
+#: resources/application/plugins/additional/xml/data.xml:307
+msgid "Do not show column headers (which are shown by default)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:242
+#: resources/application/plugins/additional/xml/data.xml:276
+#: resources/application/plugins/additional/xml/data.xml:310
+msgid "Process a wxEVT_DATAVIEW_SELECTION_CHANGED event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:243
+#: resources/application/plugins/additional/xml/data.xml:277
+#: resources/application/plugins/additional/xml/data.xml:311
+msgid "Process a wxEVT_DATAVIEW_ITEM_ACTIVATED event. This event is triggered by double clicking an item or pressing some special key (usually 'Enter') when it is focused."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:244
+#: resources/application/plugins/additional/xml/data.xml:278
+#: resources/application/plugins/additional/xml/data.xml:312
+msgid "Process a wxEVT_DATAVIEW_ITEM_START_EDITING event. This event can be vetoed in order to prevent editing on an item by item basis."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:245
+#: resources/application/plugins/additional/xml/data.xml:279
+#: resources/application/plugins/additional/xml/data.xml:313
+msgid "Process a wxEVT_DATAVIEW_ITEM_EDITING_STARTED event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:246
+#: resources/application/plugins/additional/xml/data.xml:280
+#: resources/application/plugins/additional/xml/data.xml:314
+msgid "Process a wxEVT_DATAVIEW_ITEM_EDITING_DONE event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:247
+#: resources/application/plugins/additional/xml/data.xml:281
+#: resources/application/plugins/additional/xml/data.xml:315
+msgid "Process a wxEVT_DATAVIEW_ITEM_COLLAPSING event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:248
+#: resources/application/plugins/additional/xml/data.xml:282
+#: resources/application/plugins/additional/xml/data.xml:316
+msgid "Process a wxEVT_DATAVIEW_ITEM_COLLAPSED event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:249
+#: resources/application/plugins/additional/xml/data.xml:283
+#: resources/application/plugins/additional/xml/data.xml:317
+msgid "Process a wxEVT_DATAVIEW_ITEM_EXPANDING event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:250
+#: resources/application/plugins/additional/xml/data.xml:284
+#: resources/application/plugins/additional/xml/data.xml:318
+msgid "Process a wxEVT_DATAVIEW_ITEM_EXPANDED event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:251
+#: resources/application/plugins/additional/xml/data.xml:285
+#: resources/application/plugins/additional/xml/data.xml:319
+msgid "Process a wxEVT_DATAVIEW_ITEM_VALUE_CHANGED event"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:252
+#: resources/application/plugins/additional/xml/data.xml:286
+#: resources/application/plugins/additional/xml/data.xml:320
+msgid "Process a wxEVT_DATAVIEW_ITEM_CONTEXT_MENU event generated when the user right clicks inside the control. Notice that this menu is generated even if the click didn't occur on any valid item, in this case wxDataViewEvent::GetItem() simply returns an invalid item."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:253
+#: resources/application/plugins/additional/xml/data.xml:287
+#: resources/application/plugins/additional/xml/data.xml:321
+msgid "Process a wxEVT_DATAVIEW_COLUMN_HEADER_CLICK event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:254
+#: resources/application/plugins/additional/xml/data.xml:288
+#: resources/application/plugins/additional/xml/data.xml:322
+msgid "Process a wxEVT_DATAVIEW_COLUMN_HEADER_RIGHT_CLICK event. Notice that currently this event is not generated in the native OS X versions of the control."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:255
+#: resources/application/plugins/additional/xml/data.xml:289
+#: resources/application/plugins/additional/xml/data.xml:323
+msgid "Process a wxEVT_DATAVIEW_COLUMN_SORTED event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:256
+#: resources/application/plugins/additional/xml/data.xml:290
+#: resources/application/plugins/additional/xml/data.xml:324
+msgid "Process a wxEVT_DATAVIEW_COLUMN_REORDERED event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:257
+#: resources/application/plugins/additional/xml/data.xml:291
+#: resources/application/plugins/additional/xml/data.xml:325
+msgid "Process a wxEVT_DATAVIEW_ITEM_BEGIN_DRAG event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:258
+#: resources/application/plugins/additional/xml/data.xml:292
+#: resources/application/plugins/additional/xml/data.xml:326
+msgid "Process a wxEVT_DATAVIEW_ITEM_DROP_POSSIBLE event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:259
+#: resources/application/plugins/additional/xml/data.xml:293
+#: resources/application/plugins/additional/xml/data.xml:327
+msgid "Process a wxEVT_DATAVIEW_ITEM_DROP event."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:333
+msgid "model_column"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:334
+#: resources/application/plugins/additional/xml/data.xml:379
+#: resources/application/plugins/additional/xml/data.xml:505
+msgid "type"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:335
+#: resources/application/plugins/additional/xml/data.xml:380
+msgid "Text"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:335
+#: resources/application/plugins/additional/xml/data.xml:380
+msgid "Appends a text column to the control and the store."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:336
+msgid "Bitmap"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:336
+msgid "Appends a column for rendering a bitmap."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:337
+#: resources/application/plugins/additional/xml/data.xml:510
+msgid "Date"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:337
+msgid "Appends a column for rendering a date."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:338
+#: resources/application/plugins/additional/xml/data.xml:381
+msgid "Toggle"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:338
+#: resources/application/plugins/additional/xml/data.xml:381
+msgid "Appends a toggle column to the control and the store."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:339
+#: resources/application/plugins/additional/xml/data.xml:382
+msgid "Progress"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:339
+#: resources/application/plugins/additional/xml/data.xml:382
+msgid "Appends a progress column to the control and the store."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:340
+#: resources/application/plugins/additional/xml/data.xml:383
+msgid "IconText"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:340
+#: resources/application/plugins/additional/xml/data.xml:383
+msgid "Appends an icon-and-text column to the control and the store."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:343
+#: resources/application/plugins/additional/xml/data.xml:386
+msgid "mode"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:344
+#: resources/application/plugins/additional/xml/data.xml:387
+msgid "The cell only displays information and cannot be manipulated or otherwise interacted with in any way."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:345
+#: resources/application/plugins/additional/xml/data.xml:388
+msgid "Indicates that the cell can be activated by clicking it or using keyboard."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:346
+#: resources/application/plugins/additional/xml/data.xml:389
+msgid "Indicates that the user can edit the data in-place in an inline editor control that will show up when the user wants to edit the cell."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:350
+#: resources/application/plugins/additional/xml/data.xml:393
+msgid "align"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:352
+#: resources/application/plugins/additional/xml/data.xml:395
+msgid "Align the item to the top."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:354
+#: resources/application/plugins/additional/xml/data.xml:397
+msgid "Align the item to the bottom."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:356
+#: resources/application/plugins/additional/xml/data.xml:399
+msgid "Align the item to the horizontal center."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:357
+#: resources/application/plugins/additional/xml/data.xml:400
+msgid "Align the item to the vertical."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:360
+#: resources/application/plugins/additional/xml/data.xml:403
+msgid "flags"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:361
+#: resources/application/plugins/additional/xml/data.xml:404
+msgid "Column can be resized."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:363
+#: resources/application/plugins/additional/xml/data.xml:406
+msgid "Column can be dragged to change its order."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:367
+#: resources/application/plugins/additional/xml/data.xml:410
+msgid "ellipsize"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:369
+#: resources/application/plugins/additional/xml/data.xml:412
+msgid "Don't ellipsize the text at all."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:370
+#: resources/application/plugins/additional/xml/data.xml:413
+msgid "Put the ellipsis at the start of the string, if the string needs ellipsization."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:371
+#: resources/application/plugins/additional/xml/data.xml:414
+msgid "Put the ellipsis in the middle of the string, if the string needs ellipsization."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:372
+#: resources/application/plugins/additional/xml/data.xml:415
+msgid "Put the ellipsis at the end of the string, if the string needs ellipsization."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:422
+#: resources/application/plugins/additional/xml/data.xml:499
+#: resources/application/plugins/additional/xml/ribbon.xml:62
+#: resources/application/plugins/additional/xml/ribbon.xml:70
+#: resources/application/plugins/additional/xml/ribbon.xml:92
+#: resources/application/plugins/additional/xml/ribbon.xml:101
+#: resources/application/plugins/additional/xml/ribbon.xml:110
+#: resources/application/plugins/additional/xml/ribbon.xml:120
+#: resources/application/plugins/additional/xml/ribbon.xml:134
+#: resources/application/plugins/additional/xml/ribbon.xml:143
+#: resources/application/plugins/additional/xml/ribbon.xml:152
+#: resources/application/plugins/additional/xml/ribbon.xml:162
+#: resources/application/plugins/additional/xml/ribbon.xml:179
+msgid "bitmap"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:422
+msgid "This is the bitmap shown in the default state, it must be always valid while all the other bitmaps are optional and don't have to be set."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:424
+#: resources/application/plugins/additional/xml/data.xml:457
+msgid "This will cause Sort() automatically after an item is added. When inserting a lot of items in this mode, it may make sense to use Freeze() before operations and Thaw() afterwards to increase performance."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:425
+#: resources/application/plugins/additional/xml/data.xml:458
+msgid "Categories are not initially shown (even if added)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:426
+#: resources/application/plugins/additional/xml/data.xml:459
+msgid "This style combines non-categoric mode and automatic sorting."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:427
+#: resources/application/plugins/additional/xml/data.xml:460
+msgid "Modified values are shown in bold font."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:428
+#: resources/application/plugins/additional/xml/data.xml:461
+msgid "When wxPropertyGrid is resized, splitter moves to the center. This behaviour stops once the user manually moves the splitter."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:429
+#: resources/application/plugins/additional/xml/data.xml:462
+msgid "Display tooltips for cell text that cannot be shown completely. If wxUSE_TOOLTIPS is 0, then this doesn't have any effect."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:430
+#: resources/application/plugins/additional/xml/data.xml:463
+msgid "Disables margin and hides all expand/collapse buttons that would appear outside the margin (for sub-properties). Toggling this style automatically expands all collapsed items."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:431
+#: resources/application/plugins/additional/xml/data.xml:464
+msgid "This style prevents user from moving the splitter."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:432
+#: resources/application/plugins/additional/xml/data.xml:465
+msgid "Combination of other styles that make it impossible for user to modify the layout."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:433
+#: resources/application/plugins/additional/xml/data.xml:466
+msgid "Disables wxTextCtrl based editors for properties which can be edited in another way."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:434
+#: resources/application/plugins/additional/xml/data.xml:469
+msgid "Combines various styles."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:435
+#: resources/application/plugins/additional/xml/data.xml:467
+msgid "wxTAB_TRAVERSAL allows using Tab/Shift-Tab to travel between properties in grid. Travelling forwards from last property will navigate to the next control, and backwards from first will navigate to the previous one."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:438
+#: resources/application/plugins/additional/xml/data.xml:475
+msgid "extra_style"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:439
+#: resources/application/plugins/additional/xml/data.xml:476
+msgid "Speeds up switching to wxPG_HIDE_CATEGORIES mode. Initially, if wxPG_HIDE_CATEGORIES is not defined, the non-categorized data storage is not activated, and switching the mode first time becomes somewhat slower. wxPG_EX_INIT_NOCAT activates the non-categorized data storage right away. IMPORTANT NOTE: If you do plan not switching to non-categoric mode, or if you don't plan to use categories at all, then using this style will result in waste of resources."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:440
+#: resources/application/plugins/additional/xml/data.xml:479
+msgid "Show property help strings as tool tips instead as text on the status bar."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:441
+#: resources/application/plugins/additional/xml/data.xml:480
+msgid "Allows relying on native double-buffering."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:442
+#: resources/application/plugins/additional/xml/data.xml:481
+msgid "Set this style to let user have ability to set values of properties to unspecified state. Same as setting wxPG_PROP_AUTO_UNSPECIFIED for all properties."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:443
+#: resources/application/plugins/additional/xml/data.xml:482
+msgid "If this style is used, built-in attributes (such as wxPG_FLOAT_PRECISION and wxPG_STRING_PASSWORD) are not stored into property's attribute storage (thus they are not readable). Note that this option is global, and applies to all wxPG property containers."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:444
+#: resources/application/plugins/additional/xml/data.xml:484
+msgid "Allows multiple properties to be selected by user (by pressing SHIFT when clicking on a property, or by dragging with left mouse button down)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:445
+#: resources/application/plugins/additional/xml/data.xml:485
+msgid "This enables top-level window tracking which allows wxPropertyGrid to notify the application of last-minute property value changes by user. This style is not enabled by default because it may cause crashes when wxPropertyGrid is used in with wxAUI or similar system. If you are not in fact using any system that may change wxPropertyGrid's top-level parent window on its own, then you are recommended to enable this style."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:448
+#: resources/application/plugins/additional/xml/data.xml:491
+msgid "include_advanced"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:448
+#: resources/application/plugins/additional/xml/data.xml:491
+msgid "Include Advanced Properties"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:449
+#: resources/application/plugins/additional/xml/data.xml:492
+msgid "Property value is about to be changed. Use wxPropertyGridEvent::GetValue() to take a peek at the pending value, and wxPropertyGridEvent::Veto() to prevent change from taking place, if necessary."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:450
+#: resources/application/plugins/additional/xml/data.xml:493
+msgid "Property value is modified."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:468
+msgid "Show compactor button that toggles hidden state of low-priority properties."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:470
+msgid "Show adjustable text box showing description or help text, if available, for currently selected property."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:471
+msgid "Show toolbar for mode and page selection."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:472
+msgid "Don't show an internal border around the property grid. Recommended if you use a header."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:477
+msgid "Extended window style that sets wxPropertyGridManager toolbar to not use flat style."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:478
+msgid "Shows alphabetic/categoric mode buttons from toolbar."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:483
+msgid "Hides page selection buttons from tool bar."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:486
+msgid "Don't show divider above toolbar, on Windows."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:487
+msgid "Show a separator below the toolbar."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:497
+msgid "Instance name."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:498
+msgid "Label shown as a tooltip of the manager's tool button."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:499
+msgid "Bitmap shown in the property manager's header."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:503
+msgid "Instance name and an internal name of the property item."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:504
+msgid "Label shown in parent property grid/page."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:505
+msgid "Type of the property item."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:506
+#| msgid "Sample Category"
+msgid "Category"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:506
+msgid "Append properties category."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:507
+msgid "Bool"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:507
+msgid "Append Boolean property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:508
+msgid "Colour"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:508
+msgid "Append Colour property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:509
+msgid "Cursor"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:509
+msgid "Append Cursor property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:510
+msgid "Append Date property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:511
+msgid "Dir"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:511
+msgid "Append Dir property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:512
+msgid "EditEnum"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:512
+msgid "Append EditEnum property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:513
+msgid "Enum"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:513
+msgid "Append Enum property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:514
+msgid "File"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:514
+msgid "Append File property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:515
+msgid "Flags"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:515
+msgid "Append Flags property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:516
+msgid "Float"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:516
+msgid "Append Float property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:517
+msgid "Font"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:517
+msgid "Append Font property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:518
+msgid "ImageFile"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:518
+msgid "Append ImageFile property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:519
+msgid "Int"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:519
+msgid "Append Int property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:520
+msgid "LongString"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:520
+msgid "Append LongString property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:521
+msgid "MultiChoice"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:521
+msgid "Append MultiChoice property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:522
+msgid "String"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:522
+msgid "Append String property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:523
+msgid "SystemColour"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:523
+msgid "Append SystemColour property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:524
+msgid "UInt"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:524
+msgid "Append UInt property to the parent property grid (page)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:527
+#: resources/application/plugins/additional/xml/ribbon.xml:93
+#: resources/application/plugins/additional/xml/ribbon.xml:102
+#: resources/application/plugins/additional/xml/ribbon.xml:111
+#: resources/application/plugins/additional/xml/ribbon.xml:121
+#: resources/application/plugins/additional/xml/ribbon.xml:135
+#: resources/application/plugins/additional/xml/ribbon.xml:144
+#: resources/application/plugins/additional/xml/ribbon.xml:153
+#: resources/application/plugins/additional/xml/ribbon.xml:163
+msgid "help"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/data.xml:527
+msgid "Property item's name."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:22
+msgid "Ribbon"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:22
+msgid "wxWidgets Ribbon"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:29
+msgid "Defined as wxRIBBON_BAR_FLOW_HORIZONTAL | wxRIBBON_BAR_SHOW_PAGE_LABELS | wxRIBBON_BAR_SHOW_PANEL_EXT_BUTTONS | wxRIBBON_BAR_SHOW_TOGGLE_BUTTON | wxRIBBON_BAR_SHOW_HELP_BUTTON."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:30
+msgid "Defined as wxRIBBON_BAR_FLOW_VERTICAL | wxRIBBON_BAR_SHOW_PAGE_ICONS | wxRIBBON_BAR_SHOW_PANEL_EXT_BUTTONS | wxRIBBON_BAR_SHOW_PANEL_MINIMISE_BUTTONS."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:31
+msgid "Causes labels to be shown on the tabs in the ribbon bar."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:32
+msgid "Causes icons to be shown on the tabs in the ribbon bar."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:33
+msgid "Causes panels within pages to stack horizontally."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:34
+msgid "Causes panels within pages to stack vertically."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:35
+msgid "Causes extension buttons to be shown on panels (where the panel has such a button)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:36
+msgid "Causes minimise buttons to be shown on panels (where the panel has such a button)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:37
+msgid "Causes a toggle button to appear on the ribbon bar at top-right corner."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:38
+msgid "Causes a help button to appear on the ribbon bar at the top-right corner."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:41
+msgid "theme"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:41
+msgid "Select the RibbonBar theme."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:42
+#| msgid "defaultfolder"
+msgid "Default"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:42
+msgid "Use Default theme."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:43
+msgid "Generic"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:43
+msgid "Use Generic theme."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:44
+msgid "Use MSW theme."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:47
+msgid "Triggered after the transition from one page being active to a different page being active."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:48
+msgid "Triggered prior to the transition from one page being active to a different page being active, and can veto the change."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:49
+msgid "Triggered when the middle mouse button is pressed on a tab."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:50
+msgid "Triggered when the middle mouse button is released on a tab."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:51
+msgid "Triggered when the right mouse button is pressed on a tab."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:52
+msgid "Triggered when the right mouse button is released on a tab."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:53
+msgid "Triggered when the left mouse button is double clicked on a tab."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:54
+msgid "Triggered when the button triggering the ribbon bar is clicked."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:55
+msgid "Triggered when the help button is clicked."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:63
+msgid "select"
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:63
+msgid "Select this ribbon page when adding."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:72
+msgid "Defined as no other flags set."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:73
+msgid "Prevents the panel from automatically minimising to conserve screen space."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:74
+msgid "Causes an extension button to be shown in the panel's chrome (if the bar in which it is contained has wxRIBBON_BAR_SHOW_PANEL_EXT_BUTTONS set). The behaviour of this button is application controlled, but typically will show an extended drop-down menu relating to the panel."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:75
+msgid "Causes a (de)minimise button to be shown in the panel's chrome (if the bar in which it is contained has the wxRIBBON_BAR_SHOW_PANEL_MINIMISE_BUTTONS style set). This flag is typically combined with wxRIBBON_PANEL_NO_AUTO_MINIMISE to make a panel which the user always has manual control over when it minimises."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:76
+msgid "Stretches a single panel to fit the parent page."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:77
+msgid "Allows the panel to size in both directions; currently only useful when a single wxRibbonToolBar is the child of the panel, particularly in vertical orientation where the number of rows is dependent on the amount of horizontal space available. Set the minimum and maximum toolbar rows to take full advantage of this wrapping behaviour."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:80
+msgid "Triggered when the user activate the panel extension button."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:94
+#: resources/application/plugins/additional/xml/ribbon.xml:112
+#: resources/application/plugins/additional/xml/ribbon.xml:122
+msgid "Triggered when the normal (non-dropdown) region of a button on the button bar is clicked."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:103
+#: resources/application/plugins/additional/xml/ribbon.xml:113
+msgid "Triggered when the dropdown region of a button on the button bar is clicked. wxRibbonButtonBarEvent::PopupMenu() should be called by the event handler if it wants to display a popup menu (which is what most dropdown buttons should be doing)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:136
+#: resources/application/plugins/additional/xml/ribbon.xml:154
+#: resources/application/plugins/additional/xml/ribbon.xml:164
+msgid "Triggered when the normal (non-dropdown) region of a tool on the tool bar is clicked."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:145
+#: resources/application/plugins/additional/xml/ribbon.xml:155
+msgid "Triggered when the dropdown region of a tool on the tool bar is clicked. wxRibbonToolBarEvent::PopupMenu() should be called by the event handler if it wants to display a popup menu (which is what most dropdown tools should be doing)."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:170
+msgid "Triggered when the user selects an item from the gallery."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:171
+msgid "Similar to EVT_RIBBONGALLERY_SELECTED but triggered every time a gallery item is clicked, even if it is already selected."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:172
+msgid "Triggered when the item being hovered over by the user changes. The item in the event will be the new item being hovered, or nullptr if there is no longer an item being hovered."
+msgstr ""
+
+#: resources/application/plugins/additional/xml/ribbon.xml:173
+msgid "Triggered when the extension button of the gallery is pressed."
+msgstr ""
+
+#: src/plugins/additional/additional.cpp:1746
+msgid "First Page"
+msgstr ""
+
+#: src/plugins/additional/additional.cpp:1748
+msgid "Sample Category"
+msgstr ""
+
+#: src/plugins/additional/additional.cpp:1752
+msgid "Label"
+msgstr ""
+
+#: src/plugins/additional/additional.cpp:1752
+msgid "Initial Value"
+msgstr ""
+
+#: src/plugins/additional/additional.cpp:1754
+msgid "A string property"
+msgstr ""
+
+#: src/plugins/additional/additional.cpp:1770
+msgid "Herbivore"
+msgstr ""
+
+#: src/plugins/additional/additional.cpp:1771
+msgid "Carnivore"
+msgstr ""
+
+#: src/plugins/additional/additional.cpp:1772
+msgid "Omnivore"
+msgstr ""
+
+#: src/plugins/additional/additional.cpp:1783
+msgid "Low Priority Properties"
+msgstr ""
+
+#: src/plugins/additional/additional.cpp:1789
+msgid "This is much longer string than the "
+msgstr ""
+
+#: src/plugins/additional/additional.cpp:1790
+msgid "first one. Edit it by clicking the button."
+msgstr ""

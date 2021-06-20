@@ -1,0 +1,1339 @@
+msgid ""
+msgstr "Project-Id-Version: wxWeaver Common Plugin\n"
+"POT-Creation-Date: 2021-06-20 11:36+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ../../../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-SearchPath-0: src/plugins/common\n"
+"X-Poedit-SearchPath-1: resources/application/plugins/common/xml/common.xml\n"
+"X-Poedit-SearchPath-2: resources/application/plugins/common/xml/menutoolbar.xml\n"
+""
+
+#: resources/application/plugins/common/xml/common.xml:22
+msgid "Common"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:22
+msgid "wxWidgets common controls"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:29
+#: resources/application/plugins/common/xml/common.xml:46
+#: resources/application/plugins/common/xml/common.xml:60
+#: resources/application/plugins/common/xml/common.xml:79
+#: resources/application/plugins/common/xml/common.xml:112
+#: resources/application/plugins/common/xml/common.xml:119
+#: resources/application/plugins/common/xml/common.xml:134
+#: resources/application/plugins/common/xml/common.xml:156
+#: resources/application/plugins/common/xml/common.xml:174
+#: resources/application/plugins/common/xml/common.xml:187
+#: resources/application/plugins/common/xml/common.xml:207
+#: resources/application/plugins/common/xml/common.xml:254
+#: resources/application/plugins/common/xml/common.xml:270
+#: resources/application/plugins/common/xml/common.xml:287
+#: resources/application/plugins/common/xml/common.xml:300
+#: resources/application/plugins/common/xml/common.xml:312
+#: resources/application/plugins/common/xml/common.xml:359
+#: resources/application/plugins/common/xml/common.xml:371
+#: resources/application/plugins/common/xml/common.xml:383
+#: resources/application/plugins/common/xml/menutoolbar.xml:26
+#: resources/application/plugins/common/xml/menutoolbar.xml:41
+#: resources/application/plugins/common/xml/menutoolbar.xml:48
+#: resources/application/plugins/common/xml/menutoolbar.xml:53
+#: resources/application/plugins/common/xml/menutoolbar.xml:59
+#: resources/application/plugins/common/xml/menutoolbar.xml:79
+#: resources/application/plugins/common/xml/menutoolbar.xml:85
+#: resources/application/plugins/common/xml/menutoolbar.xml:112
+#: resources/application/plugins/common/xml/menutoolbar.xml:137
+#: resources/application/plugins/common/xml/menutoolbar.xml:168
+msgid "name"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:30
+#: resources/application/plugins/common/xml/common.xml:48
+#: resources/application/plugins/common/xml/common.xml:61
+#: resources/application/plugins/common/xml/common.xml:80
+#: resources/application/plugins/common/xml/common.xml:120
+#: resources/application/plugins/common/xml/common.xml:138
+#: resources/application/plugins/common/xml/common.xml:160
+#: resources/application/plugins/common/xml/common.xml:177
+#: resources/application/plugins/common/xml/common.xml:189
+#: resources/application/plugins/common/xml/common.xml:208
+#: resources/application/plugins/common/xml/common.xml:256
+#: resources/application/plugins/common/xml/common.xml:275
+#: resources/application/plugins/common/xml/common.xml:289
+#: resources/application/plugins/common/xml/common.xml:301
+#: resources/application/plugins/common/xml/common.xml:316
+#: resources/application/plugins/common/xml/common.xml:362
+#: resources/application/plugins/common/xml/menutoolbar.xml:28
+#: resources/application/plugins/common/xml/menutoolbar.xml:42
+#: resources/application/plugins/common/xml/menutoolbar.xml:90
+#: resources/application/plugins/common/xml/menutoolbar.xml:117
+msgid "style"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:31
+msgid "Left-justifies the label. Windows and GTK+ only."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:32
+msgid "Aligns the label to the top of the button. Windows and GTK+ only."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:33
+msgid "Right-justifies the bitmap label. Windows and GTK+ only."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:34
+msgid "Aligns the label to the bottom of the button. Windows and GTK+ only."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:35
+msgid "By default, all buttons are made of at least the standard button size, even if their contents is small enough to fit into a smaller size. This is done for consistency as most platforms use buttons of the same size in the native dialogs, but can be overridden by specifying this flag. If it is given, the button will be made just big enough for its contents. Notice that under MSW the button will still have at least the standard height, even with this style, if it has a non-empty label."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:36
+msgid "Disables the display of the text label in the button even if it has one or its id is one of the standard stock ids with an associated label: without using this style a button which is only supposed to show a bitmap but uses a standard id would display a label too."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:37
+#: resources/application/plugins/common/xml/common.xml:53
+msgid "Creates a button without border. This is currently implemented in MSW, GTK2 and OSX/Cocoa and OSX/Carbon ports but in the latter only applies to buttons with bitmaps and using bitmap of one of the standard sizes only, namely 128*128, 48*48, 24*24 or 16*16. In all the other cases wxBORDER_NONE is ignored under OSX/Carbon (these restrictions don't exist in OSX/Cocoa however)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:39
+msgid "default"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:40
+msgid "auth_needed"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:40
+msgid "Sets whether an authentication needed symbol should be displayed on the button. This method doesn't do anything if the platform is not Windows Vista or newer."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:41
+msgid "Process a wxEVT_COMMAND_BUTTON_CLICKED event, when the button is clicked"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:49
+msgid "Left-justifies the bitmap label."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:50
+msgid "Aligns the bitmap label to the top of the button."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:51
+msgid "Right-justifies the bitmap label."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:52
+msgid "Aligns the bitmap label to the bottom of the button."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:62
+msgid "Align the text to the left."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:63
+msgid "Align the text to the right."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:64
+msgid "Center the text (horizontally)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:65
+msgid "By default, the control will adjust its size to exactly fit to the size of the text when SetLabel() is called. If this style flag is given, the control will not change its size (this style is especially useful with controls which also have the wxALIGN_RIGHT or the wxALIGN_CENTER_HORIZONTAL style because otherwise they won't make sense any longer after a call to SetLabel())."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:66
+msgid "If the labeltext width exceeds the control width, replace the beginning of the label with an ellipsis; uses wxControl::Ellipsize."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:67
+msgid "If the label text width exceeds the control width, replace the middle of the label with an ellipsis; uses wxControl::Ellipsize."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:68
+msgid "If the label text width exceeds the control width, replace the end of the label with an ellipsis; uses wxControl::Ellipsize."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:70
+#: resources/application/plugins/common/xml/common.xml:255
+#: resources/application/plugins/common/xml/common.xml:271
+#: resources/application/plugins/common/xml/common.xml:288
+#: resources/application/plugins/common/xml/menutoolbar.xml:49
+#: resources/application/plugins/common/xml/menutoolbar.xml:55
+#: resources/application/plugins/common/xml/menutoolbar.xml:60
+#: resources/application/plugins/common/xml/menutoolbar.xml:138
+msgid "label"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:71
+msgid "markup"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:71
+msgid "Simple markup can be used to apply different fonts or colours to different parts of the control label when supported. If markup is not supported by the control or platform, it is simply stripped and SetLabel() is used with the resulting string. Since 2.9.2."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:72
+msgid "wrap"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:72
+msgid "Wraps the control's label so that each of its lines becomes at most this many pixels wide if possible (the lines are broken at words boundaries so it might not be the case if words are too long). If width is negative, no wrapping is done."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:81
+#: resources/application/plugins/common/xml/common.xml:143
+msgid "The control will generate the event wxEVT_COMMAND_TEXT_ENTER (otherwise pressing Enter key is either processed internally by the control or used for navigation between dialog controls)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:82
+msgid "The control will receive wxEVT_CHAR events for TAB pressed - normally, TAB is used for passing to the next control in a dialog instead. For the control created with this style, you can still use Ctrl-Enter to pass to the next control from the keyboard."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:83
+msgid "The text control allows multiple lines."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:84
+msgid "The text will be echoed as asterisks."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:85
+msgid "The text will not be user-editable."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:86
+msgid "Use rich text control under Windows, this allows to have more than 64KB of text in the control even under Win9x. This style is ignored under other platforms."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:87
+msgid "Use rich text control version 2.0 or 3.0 under Windows, this style is ignored under other platforms."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:88
+msgid "Highlight the URLs and generate the wxTextUrlEvents when mouse events occur over them. This style is only supported for wxTE_RICH Win32 and multi-line wxGTK2 text controls."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:89
+msgid "By default, the Windows text control doesn't show the selection when it doesn't have focus - use this style to force it to always show it. It doesn't do anything under other platforms."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:90
+msgid "A horizontal scrollbar will be created and used, so that text won't be wrapped. No effect under wxGTK1."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:91
+msgid "For multiline controls only: vertical scrollbar will never be created. This limits the amount of text which can be entered into the control to what can be displayed in it under MSW but not under GTK2. Currently not implemented for the other platforms."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:92
+msgid "The text in the control will be left-justified (default)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:93
+msgid "The text in the control will be centered (currently wxMSW and wxGTK2 only)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:94
+msgid "The text in the control will be right-justified (currently wxMSW and wxGTK2 only)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:95
+msgid "Same as wxHSCROLL style: don't wrap at all, show horizontal scrollbar instead."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:96
+msgid "Wrap the lines too long to be shown entirely at any position (wxUniv and wxGTK2 only)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:97
+msgid "Wrap the lines too long to be shown entirely at word boundaries (wxUniv and wxGTK2 only)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:98
+msgid "Wrap the lines at word boundaries or at any other character if there are words longer than the window width (this is the default)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:99
+msgid "On PocketPC and Smartphone, causes the first letter to be capitalized."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:101
+#: resources/application/plugins/common/xml/common.xml:135
+#: resources/application/plugins/common/xml/common.xml:157
+#: resources/application/plugins/common/xml/common.xml:293
+#: resources/application/plugins/common/xml/common.xml:313
+#: resources/application/plugins/common/xml/common.xml:361
+msgid "value"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:102
+msgid "maxlength"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:102
+msgid "The maximum length of user-entered text. 0 means no limit. Note that in wxGTK this function may only be used with single line text controls."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:103
+msgid "Respond to a wxEVT_COMMAND_TEXT_UPDATED event, generated when the text changes. Notice that this event will always be sent when the text controls contents changes - whether this is due to user input or comes from the program itself (for example, if SetValue() is called.)"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:104
+msgid "Respond to a wxEVT_COMMAND_TEXT_ENTER event, generated when enter is pressed in a text control (which must have wxTE_PROCESS_ENTER style for this event to be generated)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:105
+msgid "A mouse event occurred over an URL in the text control (wxMSW and wxGTK2 only)"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:106
+msgid "User tried to enter more text into the control than the limit set by SetMaxLength."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:113
+#: resources/application/plugins/common/xml/common.xml:384
+#: resources/application/plugins/common/xml/menutoolbar.xml:54
+#: resources/application/plugins/common/xml/menutoolbar.xml:64
+#: resources/application/plugins/common/xml/menutoolbar.xml:139
+msgid "bitmap"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:121
+msgid "The default style: wxNO_BORDER."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:122
+msgid "By default, the control will adjust its size to exactly fit to the size of the animation when SetAnimation is called. If this style flag is given, the control will not change its size."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:125
+msgid "animation"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:125
+msgid "Full file path (only *.gif and *.ani files are supported)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:126
+msgid "inactive_bitmap"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:127
+msgid "play"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:136
+#: resources/application/plugins/common/xml/common.xml:158
+#: resources/application/plugins/common/xml/common.xml:175
+#: resources/application/plugins/common/xml/common.xml:188
+#: resources/application/plugins/common/xml/common.xml:272
+msgid "choices"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:136
+msgid "Contents of the Combo Box"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:137
+#: resources/application/plugins/common/xml/common.xml:159
+#: resources/application/plugins/common/xml/common.xml:176
+#: resources/application/plugins/common/xml/common.xml:273
+msgid "selection"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:137
+#: resources/application/plugins/common/xml/common.xml:159
+#: resources/application/plugins/common/xml/common.xml:176
+msgid "Zero-based position of the selected choice."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:139
+msgid "Creates a combobox with a permanently displayed list. Windows only."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:140
+msgid "Creates a combobox with a drop-down list. MSW and Motif only."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:141
+msgid "A combobox with this style behaves like a wxChoice (and may look in the same way as well, although this is platform-dependent), i.e. it allows the user to choose from the list of options but doesn't allow to enter a value not present in the list."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:142
+#: resources/application/plugins/common/xml/common.xml:162
+#: resources/application/plugins/common/xml/common.xml:178
+msgid "Sorts the entries in the list alphabetically."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:145
+#: resources/application/plugins/common/xml/common.xml:165
+msgid "Process a wxEVT_COMMAND_COMBOBOX_SELECTED event, when an item on the list is selected. Note that calling GetValue returns the new value of selection."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:146
+#: resources/application/plugins/common/xml/common.xml:166
+msgid "Process a wxEVT_COMMAND_TEXT_UPDATED event, when the combobox text changes."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:147
+#: resources/application/plugins/common/xml/common.xml:167
+msgid "Process a wxEVT_COMMAND_TEXT_ENTER event, when &lt;RETURN&gt; is pressed in the combobox."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:148
+msgid "Process a wxEVT_COMBOBOX_DROPDOWN event, which is generated when the list box part of the combo box is shown (drops down). Notice that this event is only supported by wxMSW, wxGTK with GTK+ 2.10 or later, and wxOSX/Cocoa."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:149
+msgid "Process a wxEVT_COMBOBOX_CLOSEUP event, which is generated when the list box of the combo box disappears (closes up). This event is only generated for the same platforms as wxEVT_COMBOBOX_DROPDOWN above. Also note that only wxMSW and wxOSX/Cocoa support adding or deleting items in this event."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:158
+msgid "Contents of the Combo Box. Use format bitmap:choice"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:161
+msgid "Creates a combobox without a text editor. On some platforms the control may appear very different when this style is used."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:163
+msgid "The control will generate the event wxEVT_TEXT_ENTER (otherwise pressing Enter key is either processed internally by the control or used for navigation between dialog controls). Windows only."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:175
+msgid "An array of strings with which to initialise the choice control."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:180
+msgid "Process a wxEVT_COMMAND_CHOICE_SELECTED event, when an item on the list is selected."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:188
+msgid "Contents of the List Box."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:189
+msgid "Note that wxLB_SINGLE, wxLB_MULTIPLE and wxLB_EXTENDED styles are mutually exclusive and you can specify at most one of them (single selection is the default)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:190
+msgid "Single-selection list."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:191
+msgid "Multiple-selection list: the user can toggle multiple items on and off. This is the same as wxLB_EXTENDED in wxGTK2 port."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:192
+msgid "Extended-selection list: the user can extend the selection by using SHIFT or CTRL keys together with the cursor movement keys or the mouse."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:193
+msgid "Create horizontal scrollbar if contents are too wide (Windows only)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:194
+msgid "Always show a vertical scrollbar."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:195
+msgid "Only create a vertical scrollbar if needed."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:196
+msgid "Don't create vertical scrollbar (wxMSW only)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:197
+msgid "The listbox contents are sorted in alphabetical order."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:199
+msgid "Process a wxEVT_COMMAND_LISTBOX_SELECTED event, when an item on the list is selected."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:200
+msgid "Process a wxEVT_COMMAND_LISTBOX_DOUBLECLICKED event, when the listbox is double-clicked."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:209
+msgid "Multicolumn list view, with optional small icons. Columns are computed automatically, i.e. you don't set columns as in wxLC_REPORT. In other words, the list wraps, unlike a wxListBox."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:210
+msgid "Single or multicolumn report view, with optional header."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:211
+msgid "The application provides items text on demand. May only be used with wxLC_REPORT."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:212
+msgid "Large icon view, with optional labels."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:213
+msgid "Small icon view, with optional labels."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:214
+msgid "Icons align to the top. Win32 default, Win32 only."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:215
+msgid "Icons align to the left."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:216
+msgid "Icons arrange themselves. Win32 only."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:217
+msgid "Labels are editable: the application will be notified when editing starts."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:218
+msgid "No header in report mode."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:219
+msgid "Single selection (default is multiple)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:220
+msgid "Sort in ascending order. (You must still supply a comparison callback in wxListCtrl::SortItems.)"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:221
+msgid "Sort in descending order. (You must still supply a comparison callback in wxListCtrl::SortItems.)"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:222
+msgid "Draws light horizontal rules between rows in report mode."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:223
+msgid "Draws light vertical rules between columns in report mode."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:226
+msgid "Begin dragging with the left mouse button."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:227
+msgid "Begin dragging with the right mouse button."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:228
+msgid "Begin editing a label. This can be prevented by calling Veto()."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:229
+msgid "Finish editing a label. This can be prevented by calling Veto()."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:230
+msgid "Delete an item."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:231
+msgid "Delete all items."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:232
+msgid "The item has been selected."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:233
+msgid "The item has been deselected."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:234
+msgid "The item has been activated (ENTER or double click)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:235
+msgid "The currently focused item has changed."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:236
+msgid "The middle mouse button has been clicked on an item."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:237
+msgid "The right mouse button has been clicked on an item."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:238
+msgid "A key has been pressed."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:239
+msgid "An item has been inserted."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:240
+msgid "A column (m_col) has been left-clicked."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:241
+msgid "A column (m_col) has been right-clicked."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:242
+msgid "The user started resizing a column - can be vetoed."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:243
+msgid "The divider between columns is being dragged."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:244
+msgid "A column has been resized by the user."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:245
+msgid "Prepare cache for a virtual list control."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:246
+msgid "The item has been checked."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:247
+msgid "The item has been unchecked."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:257
+msgid "Create a 2-state checkbox. This is the default."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:258
+msgid "Create a 3-state checkbox. Not implemented in wxOS2 and wxGTK built against GTK+ 1.2."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:259
+msgid "By default a user can't set a 3-state checkbox to the third state. It can only be done from code. Using this flags allows the user to set the checkbox to the third state by clicking."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:260
+msgid "Makes the text appear on the left of the checkbox."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:262
+#: resources/application/plugins/common/xml/menutoolbar.xml:66
+msgid "checked"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:263
+msgid "Process a wxEVT_COMMAND_CHECKBOX_CLICKED event, when the checkbox is clicked."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:272
+msgid "Contents of the Radio Box."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:273
+msgid "Zero-based position of the selected button."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:274
+msgid "majorDimension"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:274
+msgid "Specifies the maximum number of rows (if style contains wxRA_SPECIFY_ROWS) or columns (if style contains wxRA_SPECIFY_COLS) for a two-dimensional radiobox."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:276
+msgid "The major dimension parameter refers to the maximum number of rows."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:277
+msgid "The major dimension parameter refers to the maximum number of columns."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:280
+msgid "Process a wxEVT_COMMAND_RADIOBOX_SELECTED event, when a radiobutton is clicked."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:290
+msgid "Marks the beginning of a new group of radio buttons."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:291
+msgid "In some circumstances, radio buttons that are not consecutive siblings trigger a hang bug in Windows (only). If this happens, add this style to mark the button as not belonging to a group, and implement the mutually-exclusive group behaviour yourself."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:294
+msgid "Handles a toggle button click event."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:302
+msgid "Creates a horizontal line."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:303
+msgid "Creates a vertical line."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:313
+msgid "Initial position for the slider."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:314
+msgid "minValue"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:314
+msgid "Minimum slider position."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:315
+msgid "maxValue"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:315
+msgid "Maximum slider position."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:317
+msgid "Displays the slider horizontally (this is the default)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:318
+msgid "Displays the slider vertically."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:319
+msgid "Displays tick marks."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:320
+msgid "Displays minimum, maximum labels (new since wxWidgets 2.9.1)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:321
+msgid "Displays value label (new since wxWidgets 2.9.1)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:322
+msgid "Displays minimum, maximum and value labels (same as wxSL_VALUE_LABEL and wxSL_MIN_MAX_LABELS together)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:323
+msgid "Displays ticks on the left and forces the slider to be vertical."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:324
+msgid "Displays ticks on the right and forces the slider to be vertical."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:325
+msgid "Displays ticks on the top."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:326
+msgid "Displays ticks on the bottom (this is the default)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:327
+msgid "Displays ticks on both sides."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:328
+msgid "Allows the user to select a range on the slider. Windows only."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:329
+msgid "Inverses the mininum and maximum endpoints on the slider. Not compatible with wxSL_SELRANGE."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:332
+msgid "Process all scroll events."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:333
+msgid "Process wxEVT_SCROLL_TOP scroll-to-top events (minimum position)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:334
+msgid "Process wxEVT_SCROLL_BOTTOM scroll-to-bottom events (maximum position)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:335
+msgid "Process wxEVT_SCROLL_LINEUP line up events."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:336
+msgid "Process wxEVT_SCROLL_LINEDOWN line down events."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:337
+msgid "Process wxEVT_SCROLL_PAGEUP page up events."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:338
+msgid "Process wxEVT_SCROLL_PAGEDOWN page down events."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:339
+msgid "Process wxEVT_SCROLL_THUMBTRACK thumbtrack events (frequent events sent as the user drags the thumbtrack)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:340
+msgid "Process wxEVT_SCROLL_THUMBRELEASE thumb release events."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:341
+msgid "Process wxEVT_SCROLL_CHANGED end of scrolling events (MSW only)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:342
+msgid "Process all scroll events. Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:343
+msgid "Process wxEVT_SCROLL_TOP scroll-to-top events (minimum position). Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:344
+msgid "Process wxEVT_SCROLL_BOTTOM scroll-to-bottom events (maximum position). Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:345
+msgid "Process wxEVT_SCROLL_LINEUP line up events. Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:346
+msgid "Process wxEVT_SCROLL_LINEDOWN line down events. Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:347
+msgid "Process wxEVT_SCROLL_PAGEUP page up events. Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:348
+msgid "Process wxEVT_SCROLL_PAGEDOWN page down events. Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:349
+msgid "Process wxEVT_SCROLL_THUMBTRACK thumbtrack events (frequent events sent as the user drags the thumbtrack). Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:350
+msgid "Process wxEVT_SCROLL_THUMBRELEASE thumb release events. Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:351
+msgid "Process wxEVT_SCROLL_CHANGED end of scrolling events (MSW only). Variant taking a window identifier."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:352
+msgid "Process wxEVT_SLIDER which is generated after any change of wxSlider position in addition to one of the events above. Notice that the handler of this event receives a wxCommandEvent as argument and not wxScrollEvent, as all the other handlers."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:360
+msgid "range"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:360
+msgid "Integer range (maximum value) of the gauge."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:361
+msgid "Initial position for the gauge."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:363
+msgid "Creates a horizontal gauge."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:364
+msgid "Creates a vertical gauge."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:365
+msgid "Creates smooth progress bar with one pixel wide update step (not supported by all platforms)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:372
+msgid "size"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:372
+msgid "The size of the images in the list (default: the size of the first bitmap)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:373
+msgid "mask"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:373
+msgid "If masks should be created for all images (default: true)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:374
+msgid "type"
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:374
+msgid "Sets the image list associated with the control and takes ownership of it (i.e. the control will, unlike when using SetImageList, delete the list when destroyed). which is one of wxIMAGE_LIST_NORMAL, wxIMAGE_LIST_SMALL, wxIMAGE_LIST_STATE (the last is unimplemented)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:375
+msgid "The normal (large icon) image list."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:376
+msgid "The small icon image list."
+msgstr ""
+
+#: resources/application/plugins/common/xml/common.xml:384
+msgid "Adds a new image by keeping its optional mask bitmap."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:22
+msgid "Bars"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:22
+msgid "wxWidgets Bar Controls"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:27
+msgid "fields"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:27
+msgid "Number of fields in the statusbar."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:29
+msgid "Displays a gripper at the right-hand side of the status bar which can be used to resize the parent window."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:30
+msgid "Displays tooltips for those panes whose status text has been ellipsized/truncated because the status text doesn't fit the pane width. Note that this style has effect only on wxGTK (with GTK+ &gt;= 2.12) currently."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:31
+msgid "Replace the beginning of the status texts with an ellipsis when the status text widths exceed the status bar pane's widths (uses wxControl::Ellipsize)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:32
+msgid "Replace the middle of the status texts with an ellipsis when the status text widths exceed the status bar pane's widths (uses wxControl::Ellipsize)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:33
+msgid "Replace the end of the status texts with an ellipsis when the status text widths exceed the status bar pane's widths (uses wxControl::Ellipsize)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:34
+msgid "The default style: includes wxSTB_SIZEGRIP|wxSTB_SHOW_TIPS|wxSTB_ELLIPSIZE_END|wxFULL_REPAINT_ON_RESIZE"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:43
+msgid "Allows the menu bar to be detached (wxGTK only)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:54
+#: resources/application/plugins/common/xml/menutoolbar.xml:64
+msgid "Bitmap for the menu item. (Windows, GTK+, and OSX only) This doubles as the checked bitmap is the menu item is wxITEM_CHECK."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:60
+msgid "Text for the menu item, as shown on the menu. An accelerator key can be specified using the ampersand &quot;&amp;&quot; character."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:61
+msgid "shortcut"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:61
+msgid "Optional shortcut keyboard shortcut. Remarks: The general syntax is any combination of &quot;CTRL&quot;, &quot;ALT&quot; and &quot;SHIFT&quot; strings (case doesn't matter) separated by either '-' or '+' characters and followed by the accelerator itself. The accelerator may be any alphanumeric character, any function key (from F1 to F12)"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:62
+msgid "help"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:62
+msgid "Optional help string that will be shown on the status bar."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:63
+#: resources/application/plugins/common/xml/menutoolbar.xml:149
+msgid "id"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:65
+#| msgid "inactive_bitmap"
+msgid "unchecked_bitmap"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:65
+msgid "Unchecked bitmap for the menu item. This will be shown if the menu item is wxITEM_CHECK and it is currently unchecked. (Windows only)"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:67
+msgid "enabled"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:68
+#: resources/application/plugins/common/xml/menutoolbar.xml:140
+msgid "kind"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:69
+#| msgid "Creates a horizontal line."
+msgid "Creates a normal menu item."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:70
+#| msgid "Creates a vertical line."
+msgid "Creates a checkable menu item."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:71
+msgid "radio item to the end of the menu. All consequent radio items form a group and when an item in the group is checked, all the others are automatically unchecked. (Only on Windows and GTK)"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:74
+#| msgid "Process all scroll events."
+msgid "Process a menu selection event."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:75
+#: resources/application/plugins/common/xml/menutoolbar.xml:154
+#| msgid "Process wxEVT_SCROLL_PAGEUP page up events."
+msgid "Process a wxEVT_UPDATE_UI event."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:86
+#: resources/application/plugins/common/xml/menutoolbar.xml:113
+#| msgid "bitmap"
+msgid "bitmapsize"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:86
+#: resources/application/plugins/common/xml/menutoolbar.xml:113
+msgid "Default size of each tool bitmap. The default bitmap size is 16 by 15 pixels."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:87
+#: resources/application/plugins/common/xml/menutoolbar.xml:114
+msgid "margins"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:87
+#: resources/application/plugins/common/xml/menutoolbar.xml:114
+msgid "Values to be used as margins for the toolbar."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:88
+#: resources/application/plugins/common/xml/menutoolbar.xml:115
+msgid "packing"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:88
+#: resources/application/plugins/common/xml/menutoolbar.xml:115
+msgid "Value used for spacing tools. Remarks: The packing is used for spacing in the vertical direction if the toolbar is horizontal, and for spacing in the horizontal direction if the toolbar is vertical."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:89
+#: resources/application/plugins/common/xml/menutoolbar.xml:116
+#| msgid "animation"
+msgid "separation"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:89
+#: resources/application/plugins/common/xml/menutoolbar.xml:116
+msgid "The default separator size. Remarks: This is the size between each toolbar tool."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:91
+#| msgid "Right-justifies the bitmap label. Windows and GTK+ only."
+msgid "Gives the toolbar a flat look (Windows and GTK only)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:92
+msgid "Makes the toolbar floatable and dockable (GTK only)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:93
+#| msgid "Displays the slider horizontally (this is the default)."
+msgid "Specifies horizontal layout (default)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:94
+#| msgid "Creates a vertical gauge."
+msgid "Specifies vertical layout."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:95
+msgid "Shows the text in the toolbar buttons; by default only icons are shown."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:96
+msgid "Specifies no icons in the toolbar buttons; by default they are shown."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:97
+msgid "Specifies no divider (border) above the toolbar (Windows only)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:98
+msgid "Specifies no alignment with the parent window (Windows only, not very useful)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:99
+msgid "Shows the text and the icons alongside, not vertically stacked (Windows and GTK 2 only). This style must be used with wxTB_TEXT."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:100
+msgid "Combination of wxTB_HORZ_LAYOUT and wxTB_TEXT."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:101
+msgid "Don't show the short help tooltips for the tools when the mouse hovers over them."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:102
+#| msgid "Aligns the bitmap label to the bottom of the button."
+msgid "Align the toolbar at the bottom of parent window."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:103
+msgid "Align the toolbar at the right side of parent window."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:104
+msgid "Combination of wxTB_HORIZONTAL and wxTB_FLAT. This style is new since wxWidgets 2.9.5."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:123
+msgid "Using this style forces the toolbar to be vertical and be only dockable to the left or right sides of the window whereas by default it can be horizontal or vertical and be docked anywhere."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:125
+msgid "Analogous to wxAUI_TB_VERTICAL, but forces the toolbar to be horizontal."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:126
+msgid "Draw a plain background (based on parent) instead of the default gradient background."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:127
+msgid "Equivalent to wxAUI_TB_HORZ_LAYOUT | wxAUI_TB_TEXT"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:128
+msgid "The default is to have no styles."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:131
+msgid "label_visible"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:132
+msgid "toolbar_label"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:133
+msgid "use_explicit_ids"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:133
+msgid "Use user-specified tool IDs instead of automatically assigned ones (needed for old wxAuiToolBar implementation)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:139
+msgid "The primary tool bitmap."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:141
+msgid "A normal toolbar button."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:142
+msgid "A checkable tool (stays pressed after it has been toggled)."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:143
+msgid "A checkable tool which makes part of a radio group of tools each of which is automatically unchecked whenever another button in the group is checked."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:146
+msgid "context_menu"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:146
+msgid "Specifies that a drop-down menu button will appear next to the tool button. Used only with wxAuiToolBar."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:147
+msgid "tooltip"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:147
+msgid "Help string used in the tooltip."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:148
+msgid "statusbar"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:148
+msgid "This string is shown in the statusbar (if any) of the parent frame when the mouse pointer is inside the tool."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:150
+msgid "Process a wxEVT_COMMAND_TOOL_CLICKED event (a synonym for wxEVT_COMMAND_MENU_SELECTED). Pass the id of the tool."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:151
+msgid "The same as OnToolClicked. (EVT_TOOL)"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:152
+#| msgid ""
+#| "Process a wxEVT_COMMAND_BUTTON_CLICKED event, when the button is clicked"
+msgid "Process a wxEVT_COMMAND_TOOL_RCLICKED event."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:153
+msgid "Process a wxEVT_COMMAND_TOOL_ENTER event. This uses the tools parent ID, the ToolBar, so be sure you set it to something that is not the default. The value of wxCommandEvent::GetSelection is the tool id, or -1 if the mouse cursor has moved off a tool."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:155
+#| msgid "Process wxEVT_SCROLL_PAGEDOWN page down events."
+msgid "Process a wxEVT_COMMAND_AUITOOLBAR_TOOL_DROPDOWN event."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:156
+#| msgid ""
+#| "Process a wxEVT_COMMAND_BUTTON_CLICKED event, when the button is clicked"
+msgid "Process a wxEVT_COMMAND_AUITOOLBAR_OVERFLOW_CLICK event."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:157
+#| msgid ""
+#| "Process a wxEVT_COMMAND_BUTTON_CLICKED event, when the button is clicked"
+msgid "Process a wxEVT_COMMAND_AUITOOLBAR_RIGHT_CLICK event."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:158
+#| msgid ""
+#| "Process a wxEVT_COMMAND_BUTTON_CLICKED event, when the button is clicked"
+msgid "Process a wxEVT_COMMAND_AUITOOLBAR_MIDDLE_CLICK event."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:159
+msgid "Process a wxEVT_COMMAND_AUITOOLBAR_BEGIN_DRAG event."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:169
+msgid "show_effect"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:169
+msgid "Set the effects to use when showing the bar."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:170
+#: resources/application/plugins/common/xml/menutoolbar.xml:184
+msgid "No effect, equivalent to normal wxWindow::Show() or Hide() call."
+msgstr ""
+
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:171
+#: resources/application/plugins/common/xml/menutoolbar.xml:185
+#| msgid "Icons align to the left."
+msgid "Roll window to the left."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:172
+#: resources/application/plugins/common/xml/menutoolbar.xml:186
+#| msgid "Align the text to the right."
+msgid "Roll window to the right."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:173
+#: resources/application/plugins/common/xml/menutoolbar.xml:187
+msgid "Roll window to the top."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:174
+#: resources/application/plugins/common/xml/menutoolbar.xml:188
+msgid "Roll window to the bottom."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:175
+#: resources/application/plugins/common/xml/menutoolbar.xml:189
+#| msgid "Align the text to the left."
+msgid "Slide window to the left."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:176
+#: resources/application/plugins/common/xml/menutoolbar.xml:190
+#| msgid "Align the text to the right."
+msgid "Slide window to the right."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:177
+#: resources/application/plugins/common/xml/menutoolbar.xml:191
+msgid "Slide window to the top."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:178
+#: resources/application/plugins/common/xml/menutoolbar.xml:192
+msgid "Slide window to the bottom."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:179
+#: resources/application/plugins/common/xml/menutoolbar.xml:193
+msgid "Fade in or out effect."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:180
+#: resources/application/plugins/common/xml/menutoolbar.xml:194
+msgid "Expanding or collapsing effect."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:183
+msgid "hide_effect"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:183
+msgid "Set the effects to use when hiding the bar."
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:197
+msgid "duration"
+msgstr ""
+
+#: resources/application/plugins/common/xml/menutoolbar.xml:197
+msgid "Set the duration of the animation (in milliseconds) used when showing or hiding the bar."
+msgstr ""
+
+#: src/plugins/common/common.cpp:1712
+msgid "Message ..."
+msgstr ""

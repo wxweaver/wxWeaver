@@ -505,16 +505,16 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
 {
     wxWeaverBitmapProperty* bp = const_cast<wxWeaverBitmapProperty*>(this);
 
-    const auto val = thisValue.GetString();
+    wxString val = thisValue.GetString();
     wxArrayString childVals;
     GetChildValues(val, childVals);
-    auto newVal = val;
+    wxString newVal = val;
 
     // Find the appropriate new state
     switch (childIndex) {
     // source
     case 0: {
-        const auto count = GetChildCount();
+        unsigned int count = GetChildCount();
 
         // childValue.GetInteger() returns the chosen item index
         switch (childValue.GetInteger()) {
@@ -523,7 +523,7 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
         case 1: {
             if (prevSrc != 0 && prevSrc != 1) {
                 for (size_t i = 1; i < count; ++i) {
-                    if (auto* p = Item(i)) {
+                    if (wxPGProperty* p = Item(i)) {
                         wxLogDebug(
                             "wxWeaverBP::ChildChanged: Removing:%s",
                             p->GetLabel().c_str());
@@ -544,7 +544,7 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
         case 2: {
             if (prevSrc != 2) {
                 for (size_t i = 1; i < count; ++i) {
-                    if (auto* p = Item(i)) {
+                    if (wxPGProperty* p = Item(i)) {
                         wxLogDebug(
                             "wxWeaverBP::ChildChanged: Removing:%s",
                             p->GetLabel().c_str());
@@ -565,7 +565,7 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
         case 3: {
             if (prevSrc != 3) {
                 for (size_t i = 1; i < count; ++i) {
-                    if (auto* p = Item(i)) {
+                    if (wxPGProperty* p = Item(i)) {
                         wxLogDebug(
                             "wxWeaverBP::ChildChanged: Removing:%s",
                             p->GetLabel().c_str());
@@ -589,7 +589,7 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
         case 4: {
             if (prevSrc != 4) {
                 for (size_t i = 1; i < count; ++i) {
-                    if (auto* p = Item(i)) {
+                    if (wxPGProperty* p = Item(i)) {
                         wxLogDebug(
                             "wxWeaverBP::ChildChanged: Removing:%s",
                             p->GetLabel().c_str());
@@ -610,7 +610,7 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
         case 5: {
             if (prevSrc != 5) {
                 for (size_t i = 1; i < count; ++i) {
-                    if (auto* p = Item(i)) {
+                    if (wxPGProperty* p = Item(i)) {
                         wxLogDebug(
                             "wxWeaverBP::ChildChanged: Removing:%s",
                             p->GetLabel().c_str());
@@ -635,7 +635,8 @@ wxVariant wxWeaverBitmapProperty::ChildChanged(wxVariant& thisValue, const int c
     }
     // file_path || id || resource_name || xrc_name
     case 1: {
-        if ((Item(0)->GetValueAsString() == "Load From File") || (Item(0)->GetValueAsString() == "Load From Embedded File")) {
+        if ((Item(0)->GetValueAsString() == "Load From File")
+            || (Item(0)->GetValueAsString() == "Load From Embedded File")) {
             // Save the initial file path TODO: Save the image filter index
             if (Item(1)) {
                 wxString img = childValue.GetString();

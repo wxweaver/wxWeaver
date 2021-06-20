@@ -1,0 +1,534 @@
+msgid ""
+msgstr "Project-Id-Version: wxWeaver Containers Plugin\n"
+"POT-Creation-Date: 2021-06-19 13:46+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ../../../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-SearchPath-0: src/plugins/containers\n"
+"X-Poedit-SearchPath-1: resources/application/plugins/containers/xml/1_containers.xml\n"
+"X-Poedit-SearchPath-2: resources/application/plugins/containers/xml/2_bookctrls.xml\n"
+""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:22
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:22
+msgid "Containers"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:22
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:22
+msgid "wxWidgets container controls"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:26
+#: resources/application/plugins/containers/xml/1_containers.xml:83
+msgid "window_style"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:29
+#: resources/application/plugins/containers/xml/1_containers.xml:36
+#: resources/application/plugins/containers/xml/1_containers.xml:50
+#: resources/application/plugins/containers/xml/1_containers.xml:86
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:27
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:52
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:98
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:121
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:142
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:168
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:189
+msgid "name"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:37
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:43
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:89
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:113
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:134
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:158
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:182
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:195
+msgid "label"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:38
+msgid "collapsed"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:39
+#: resources/application/plugins/containers/xml/1_containers.xml:51
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:29
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:53
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:100
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:123
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:144
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:169
+msgid "style"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:40
+msgid "The default style. It includes wxTAB_TRAVERSAL and wxBORDER_NONE."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:41
+msgid "By default wxCollapsiblePane resizes the top level window containing it when its own size changes. This allows to easily implement dialogs containing an optionally shown part, for example, and so is the default behaviour but can be inconvenient in some specific cases – use this flag to disable this automatic parent resizing then."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:44
+msgid "The user expanded or collapsed the collapsible pane."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:52
+msgid "Draws a 3D effect border and sash."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:53
+msgid "Draws a 3D effect sash (part of default style)."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:54
+msgid "Synonym for wxSP_BORDER."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:55
+msgid "Draws a standard border."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:56
+msgid "No border (default)."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:57
+msgid "Sets the sash to be invisible, even when the window is split. This prevents the user to resize the windows."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:58
+msgid "Draws a thin sash."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:59
+msgid "Under Windows XP, switches off the attempt to draw the splitter using Windows XP theming, so the borders and sash will take on the pre-XP look."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:60
+msgid "Always allow to unsplit, even with the minimum pane size other than zero. Note: The designer prevents un-splitting."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:61
+msgid "Don't draw XOR line but resize the child windows immediately."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:64
+msgid "splitmode"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:65
+msgid "Specifies a vertical split window."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:66
+msgid "Specifies a horizontal split window."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:69
+msgid "sashpos"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:69
+msgid "The initial sash position."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:70
+msgid "sashsize"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:70
+msgid "Overrides platform metrics if greater than -1"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:71
+msgid "sashgravity"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:71
+msgid "Sets the sash gravity. Remarks: Gravity is real factor which controls position of sash while resizing wxSplitterWindow. Gravity tells wxSplitterWindow how much will left/top window grow while resizing."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:72
+msgid "min_pane_size"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:72
+msgid "Minimum size for the panes. A minimum less than 1 is not allowed in the designer, because the designer prevents un-splitting."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:73
+msgid "The sash position is in the process of being changed. May be used to modify the position of the tracking bar to properly reflect the position that would be set if the drag were to be completed at this point. Processes a wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGING event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:74
+msgid "The sash position was changed. May be used to modify the sash position before it is set, or to prevent the change from taking place. Processes a wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:75
+msgid "The splitter has been just unsplit. Processes a wxEVT_COMMAND_SPLITTER_UNSPLIT event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:76
+msgid "The sash was double clicked. The default behaviour is to unsplit the window when this happens (unless the minimum pane size has been set to a value greater than zero). Processes a wxEVT_COMMAND_SPLITTER_DOUBLECLICKED event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:87
+msgid "scroll_rate_x"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:87
+msgid "Set the horizontal scrolling increment."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:88
+msgid "scroll_rate_y"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/1_containers.xml:88
+msgid "Set the vertical scrolling increment."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:28
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:70
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:99
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:122
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:143
+msgid "bitmapsize"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:28
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:99
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:122
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:143
+msgid "Size of page images"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:30
+msgid "Place tabs on the top side."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:31
+msgid "Place tabs on the left side."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:32
+msgid "Place tabs on the right side."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:33
+msgid "Place tabs under instead of above the notebook pages."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:34
+msgid "All tabs will have same width. (Windows only)"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:35
+msgid "There can be several rows of tabs. (Windows only)"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:36
+msgid "Display a solid colour on notebook pages, and not a gradient, which can reduce performance. (Windows only)"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:38
+msgid "The page selection was changed. Processes a wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:39
+msgid "The page selection is about to be changed. Processes a wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING event. This event can be vetoed."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:44
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:90
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:114
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:135
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:159
+msgid "bitmap"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:44
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:90
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:114
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:135
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:159
+msgid "Page Image"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:45
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:91
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:115
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:136
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:160
+msgid "image"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:45
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:91
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:115
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:136
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:160
+msgid "wxImageList Index"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:46
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:92
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:116
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:137
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:162
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:183
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:196
+msgid "select"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:46
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:92
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:116
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:137
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:162
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:183
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:196
+msgid "Select Page when Adding"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:54
+msgid "Defined as wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_CLOSE_ON_ACTIVE_TAB | wxAUI_NB_MIDDLE_CLICK_CLOSE."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:55
+msgid "Allows the tab control to be split by dragging a tab."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:56
+msgid "Allows a tab to be moved horizontally by dragging."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:57
+msgid "Allows a tab to be moved to another tab control."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:58
+msgid "With this style, all tabs have the same width."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:59
+msgid "With this style, left and right scroll buttons are displayed."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:60
+msgid "With this style, a drop-down list of windows is available."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:61
+msgid "With this style, a close button is available on the tab bar."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:62
+msgid "With this style, the close button is visible on the active tab."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:63
+msgid "With this style, the close button is visible on all tabs."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:64
+msgid "With this style, middle click on a tab closes the tab."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:65
+msgid "With this style, tabs are drawn along the top of the notebook."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:66
+msgid "With this style, tabs are drawn along the bottom of the notebook."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:69
+msgid "tab_ctrl_height"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:69
+msgid "Sets the tab height. By default, the tab control height is calculated by measuring the text height and bitmap sizes on the tab captions. Calling this method will override that calculation and set the tab control to the specified height parameter. A call to this method will override any call to SetUniformBitmapSize(). Specifying -1 as the height will return the control to its default auto-sizing behaviour."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:70
+msgid "SetUniformBitmapSize() ensures that all tabs will have the same height, even if some tabs don't have bitmaps. Passing wxDefaultSize to this function will instruct the control to use dynamic tab height, which is the default behaviour. Under the default behaviour, when a tab with a large bitmap is added, the tab control's height will automatically increase to accommodate the larger bitmap."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:71
+msgid "A page is about to be closed. Processes a wxEVT_AUINOTEBOOK_PAGE_CLOSE event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:72
+msgid "A page has been closed. Processes a wxEVT_AUINOTEBOOK_PAGE_CLOSED event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:73
+msgid "The page selection was changed. Processes a wxEVT_AUINOTEBOOK_PAGE_CHANGED event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:74
+msgid "The page selection is about to be changed. Processes a wxEVT_AUINOTEBOOK_PAGE_CHANGING event. This event can be vetoed."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:75
+msgid "The window list button has been pressed. Processes a wxEVT_AUINOTEBOOK_BUTTON event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:76
+msgid "Dragging is about to begin. Processes a wxEVT_AUINOTEBOOK_BEGIN_DRAG event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:77
+msgid "Dragging has ended. Processes a wxEVT_AUINOTEBOOK_END_DRAG event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:78
+msgid "Emitted during a drag and drop operation. Processes a wxEVT_AUINOTEBOOK_DRAG_MOTION event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:79
+msgid "Whether to allow a tab to be dropped. Processes a wxEVT_AUINOTEBOOK_ALLOW_DND event. This event must be specially allowed."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:80
+msgid "Notify that the tab has been dragged. Processes a wxEVT_AUINOTEBOOK_DRAG_DONE event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:81
+msgid "The middle mouse button is pressed on a tab. Processes a wxEVT_AUINOTEBOOK_TAB_MIDDLE_DOWN event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:82
+msgid "The middle mouse button is released on a tab. Processes a wxEVT_AUINOTEBOOK_TAB_MIDDLE_UP event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:83
+msgid "The right mouse button is pressed on a tab. Processes a wxEVT_AUINOTEBOOK_TAB_RIGHT_DOWN event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:84
+msgid "The right mouse button is released on a tab. Processes a wxEVT_AUINOTEBOOK_TAB_RIGHT_UP event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:85
+msgid "Double clicked on the tabs background area. Processes a wxEVT_AUINOTEBOOK_BG_DCLICK event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:101
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:170
+msgid "Choose the default location for the labels depending on the current platform (left everywhere except Mac where it is top)."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:102
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:125
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:146
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:171
+msgid "Place labels above the page area."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:103
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:126
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:147
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:172
+msgid "Place labels on the left side."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:104
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:127
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:148
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:173
+msgid "Place labels on the right side."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:105
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:128
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:149
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:174
+msgid "Place labels below the page area."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:108
+msgid "The page selection was changed. Processes a wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:109
+msgid "The page selection is about to be changed. Processes a wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING event. This event can be vetoed."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:124
+msgid "Choose the default location for the toolbar depending on the current platform"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:129
+msgid "The page selection was changed. Processes a wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGED event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:130
+msgid "The page selection is about to be changed. Processes a wxEVT_COMMAND_TOOLBOOK_PAGE_CHANGING event. This event can be vetoed."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:145
+msgid "Choose the default location for the tree depending on the current platform"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:150
+msgid "The page selection was changed. Processes a wxEVT_COMMAND_TREEBOOK_PAGE_CHANGED event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:151
+msgid "The page selection is about to be changed. Processes a wxEVT_COMMAND_TREEBOOK_PAGE_CHANGING event. This event can be vetoed."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:152
+msgid "The page node is going to be collapsed. Processes a wxEVT_COMMAND_TREEBOOK_NODE_COLLAPSED event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:153
+msgid "The page node is going to be expanded. Processes a wxEVT_COMMAND_TREEBOOK_NODE_EXPANDED event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:157
+msgid "depth"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:157
+msgid "Adds a new child-page to the last top-level page"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:161
+msgid "expanded"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:161
+msgid "Expands the current treebookpage node"
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:177
+msgid "The page selection was changed. Processes a wxEVT_CHOICEBOOK_PAGE_CHANGED event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:178
+msgid "The page selection is about to be changed. Processes a wxEVT_CHOICEBOOK_PAGE_CHANGING event. This event can be vetoed (using wxNotifyEvent::Veto())."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:190
+msgid "The page selection was changed. Processes a wxEVT_BOOKCTRL_PAGE_CHANGED event."
+msgstr ""
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:191
+msgid "The page selection is about to be changed. Processes a wxEVT_BOOKCTRL_PAGE_CHANGING event. This event can be vetoed."
+msgstr ""

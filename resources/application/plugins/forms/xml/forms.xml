@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 -->
-<package name="Forms" lib="libforms" icon="forms.png" desc="wxWidgets windows">
+<package name="Forms" lib="libforms" icon="forms.png" help="wxWidgets windows">
 
   <objectinfo class="wxTopLevelWindow" type="interface" smallIcon="wxwindow.png">
     <event name="OnActivate"    class="wxActivateEvent" help="Process a wxEVT_ACTIVATE event."/>

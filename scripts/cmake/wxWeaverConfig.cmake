@@ -1,4 +1,5 @@
 # wxWEAVER_DISABLE_MEDIACTRL
+# TODO: Check macOS brew if has wxMediaCtrl.
 if(UNIX AND NOT wxWEAVER_DISABLE_MEDIACTRL)
     execute_process(
         COMMAND wx-config --libs all
@@ -21,6 +22,8 @@ else()
 endif()
 
 if(UNIX)
+    # Copy the resources in the shared application folder.
+    # On Linux set rpath linker path. TODO: use dlopen() instead.
     if(APPLE)
         function(copy_resources)
             file(REMOVE_RECURSE "${CMAKE_BINARY_DIR}/wxWeaver.app/Contents/SharedSupport")
@@ -44,6 +47,8 @@ if(UNIX)
     endif()
 endif()
 
+# Compile translations and setup the install destination.
+# The resulting installed files will have .mo extension.
 include(FindGettext)
 if(${GETTEXT_FOUND})
     set(languages it)
@@ -52,7 +57,7 @@ if(${GETTEXT_FOUND})
     foreach(language ${languages})
         foreach(translation ${translations})
             gettext_process_po_files(${language} ALL
-                INSTALL_DESTINATION "share/locale/wxweaver"
+                INSTALL_DESTINATION "share/wxweaver/locale"
                 PO_FILES "${languagesDir}/${language}/${translation}.po"
             )
         endforeach()

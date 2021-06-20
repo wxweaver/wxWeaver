@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 -->
-<package name="Layout" lib="liblayout" icon="layout.png" desc="wxWidgets sizer layouts">
+<package name="Layout" lib="liblayout" icon="layout.png" help="wxWidgets sizer layouts">
 
   <objectinfo class="sizer" type="interface" icon="sizer.png">
     <property name="minimum_size" type="wxSize" help="Give the sizer a minimal size. Normally, the sizer will calculate its minimal size based purely on how much space its children need. After setting the minimal size, 'GetMinSize' will return either the minimal size as requested by its children or the minimal size set here, depending on which is bigger."/>

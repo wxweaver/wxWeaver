@@ -1,0 +1,430 @@
+msgid ""
+msgstr "Project-Id-Version: wxWeaver Layout Plugin\n"
+"POT-Creation-Date: 2021-06-19 13:47+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ../../../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-SearchPath-0: src/plugins/layout\n"
+"X-Poedit-SearchPath-1: resources/application/plugins/layout/xml/layout.xml\n"
+""
+
+#: resources/application/plugins/layout/xml/layout.xml:22
+msgid "Layout"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:22
+msgid "wxWidgets sizer layouts"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:25
+msgid "minimum_size"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:25
+msgid "Give the sizer a minimal size. Normally, the sizer will calculate its minimal size based purely on how much space its children need. After setting the minimal size, 'GetMinSize' will return either the minimal size as requested by its children or the minimal size set here, depending on which is bigger."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:29
+msgid "border"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:29
+msgid "Determines the border width, if the flag parameter is set to include any border flag."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:30
+msgid "flag"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:31
+msgid "Enable all borders"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:32
+msgid "Enable the left border"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:33
+msgid "Enable the right border"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:34
+msgid "Enable the top border"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:35
+msgid "Enable the bottom border"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:36
+msgid "The item will be expanded to fill the space assigned to the item."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:37
+msgid "The item will be expanded as much as possible while also maintaining its aspect ratio."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:38
+msgid "Normally wxSizers will use GetAdjustedBestSize to determine what the minimal size of window items should be, and will use that size to calculate the layout. This allows layouts to adjust when an item changes and its best size becomes different. If you would rather have a window item stay the size it started with then use wxFIXED_MINSIZE."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:39
+msgid "Normally wxSizers don't allocate space for hidden windows or other items. This flag overrides this behaviour so that sufficient space is allocated for the window even if it isn't visible. This makes it possible to dynamically show and hide controls without resizing parent dialog, for example. (Available since 2.8.8.)"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:40
+msgid "Align the item to the left of the space allotted to it by the sizer, adjusted for the border if any."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:41
+msgid "Align the item to the top of the space allotted to it by the sizer, adjusted for the border if any."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:42
+msgid "Align the item to the right of the space allotted to it by the sizer, adjusted for the border if any."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:43
+msgid "Align the item to the bottom of the space allotted to it by the sizer, adjusted for the border if any."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:44
+msgid "Align the item to the center of the space allotted to it by the sizer, adjusted for the border if any."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:45
+msgid "Align the item to the horizontal center of the space allotted to it by the sizer, adjusted for the border if any."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:46
+msgid "Align the item to the vertical center of the space allotted to it by the sizer, adjusted for the border if any."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:53
+msgid "proportion"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:53
+msgid "How much this control will stretch in proportion to the other controls in the same sizer. Set to 0 to prevent stretching."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:58
+msgid "row"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:58
+msgid "Row for the item."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:59
+msgid "column"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:59
+msgid "Column for the item."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:60
+msgid "rowspan"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:60
+msgid "The number of rows that the item spans."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:61
+msgid "colspan"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:61
+msgid "The number of columns that the item spans."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:66
+#: resources/application/plugins/layout/xml/layout.xml:76
+#: resources/application/plugins/layout/xml/layout.xml:90
+#: resources/application/plugins/layout/xml/layout.xml:106
+#: resources/application/plugins/layout/xml/layout.xml:135
+#: resources/application/plugins/layout/xml/layout.xml:143
+#: resources/application/plugins/layout/xml/layout.xml:149
+msgid "name"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:67
+#: resources/application/plugins/layout/xml/layout.xml:77
+#: resources/application/plugins/layout/xml/layout.xml:91
+msgid "orient"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:68
+#: resources/application/plugins/layout/xml/layout.xml:78
+#: resources/application/plugins/layout/xml/layout.xml:92
+msgid "Align items vertically"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:69
+#: resources/application/plugins/layout/xml/layout.xml:79
+#: resources/application/plugins/layout/xml/layout.xml:93
+msgid "Align items horizontally"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:82
+msgid "label"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:83
+msgid "id"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:84
+msgid "parent"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:84
+msgid "Use encapsulated wxStaticBox as a parent of managed children (recommended for wxWidgets 2.9.1 and later)."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:85
+msgid "Process a wxEVT_UPDATE_UI event."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:96
+msgid "flags"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:97
+msgid "The last item on each line will use any remaining space on that line"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:98
+msgid "Removes any spacer elements from the beginning of a row"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:99
+msgid "A combination of wxEXTEND_LAST_ON_EACH_LINE and wxREMOVE_LEADING_SPACES"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:107
+#: resources/application/plugins/layout/xml/layout.xml:136
+msgid "rows"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:107
+#: resources/application/plugins/layout/xml/layout.xml:136
+msgid "Number of Rows. '0' tells wxWidgets to calculate the number of rows required to hold the supplied items. If you choose to fix the row number, set the 'cols' figure to zero instead."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:108
+#: resources/application/plugins/layout/xml/layout.xml:137
+msgid "cols"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:108
+#: resources/application/plugins/layout/xml/layout.xml:137
+msgid "Number of Columns"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:109
+#: resources/application/plugins/layout/xml/layout.xml:114
+msgid "vgap"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:109
+#: resources/application/plugins/layout/xml/layout.xml:114
+msgid "The vertical gap (in pixels) between the cells in the sizer."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:110
+#: resources/application/plugins/layout/xml/layout.xml:115
+msgid "hgap"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:110
+#: resources/application/plugins/layout/xml/layout.xml:115
+msgid "The horizontal gap (in pixels) between cells in the sizer."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:116
+msgid "growablerows"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:116
+msgid "Comma separated list of row indices (starting from zero, optional proportion appended after a colon) that should be grown if there is extra space available to the sizer."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:117
+msgid "growablecols"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:117
+msgid "Comma separated list of column indices (starting from zero, optional proportion appended after a colon) that should be grown if there is extra space available to the sizer."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:118
+msgid "flexible_direction"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:118
+msgid "Since wxWidgets 2.5.0, wxFlexGridSizer can size items equally in one direction but unequally ('flexibly') in the other"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:119
+msgid "Rows are flexibly sized."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:120
+msgid "Columns are flexibly sized."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:121
+msgid "Both rows and columns are flexibly sized (this is the default value)."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:124
+msgid "non_flexible_grow_mode"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:124
+msgid "If the sizer is only flexible in one direction (this can be changed using 'flexible_direction'), it needs to be decided how the sizer should grow in the other ('non flexible') direction in order to fill the available space."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:125
+msgid "Sizer doesn't grow in the non flexible direction."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:126
+msgid "Sizer honors growable columns/rows set with AddGrowableCol and AddGrowableRow. In this case equal sizing applies to minimum sizes of columns or rows (this is the default value)."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:127
+msgid "Sizer equally stretches all columns or rows in the non flexible direction, whether they are growable or not in the flexible direction."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:144
+msgid "empty_cell_size"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:144
+msgid "The size used for cells in the grid with no item."
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:150
+msgid "OK"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:150
+msgid "Include the 'OK' button"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:151
+msgid "Yes"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:151
+msgid "Include the 'Yes' button"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:152
+msgid "Save"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:152
+msgid "Include the 'Save' button"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:153
+msgid "Apply"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:153
+msgid "Include the 'Apply' button"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:154
+msgid "No"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:154
+msgid "Include the 'No' button"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:155
+msgid "Cancel"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:155
+msgid "Include the 'Cancel' button"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:156
+msgid "Help"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:156
+msgid "Include the 'Help' button"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:157
+msgid "ContextHelp"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:157
+msgid "Include the 'ContextHelp' button"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:158
+msgid "Process a wxEVT_COMMAND_BUTTON_CLICKED event, for the ID wxID_OK, when the button is clicked"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:159
+msgid "Process a wxEVT_COMMAND_BUTTON_CLICKED event, for the ID wxID_YES, when the button is clicked"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:160
+msgid "Process a wxEVT_COMMAND_BUTTON_CLICKED event, for the ID wxID_SAVE, when the button is clicked"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:161
+msgid "Process a wxEVT_COMMAND_BUTTON_CLICKED event, for the ID wxID_APPLY, when the button is clicked"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:162
+msgid "Process a wxEVT_COMMAND_BUTTON_CLICKED event, for the ID wxID_NO, when the button is clicked"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:163
+msgid "Process a wxEVT_COMMAND_BUTTON_CLICKED event, for the ID wxID_CANCEL, when the button is clicked"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:164
+msgid "Process a wxEVT_COMMAND_BUTTON_CLICKED event, for the ID wxID_HELP, when the button is clicked"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:165
+msgid "Process a wxEVT_COMMAND_BUTTON_CLICKED event, for the ID wxID_CONTEXT_HELP, when the button is clicked"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:169
+msgid "width"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:169
+msgid "The width of the spacer"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:170
+msgid "height"
+msgstr ""
+
+#: resources/application/plugins/layout/xml/layout.xml:170
+msgid "The height of the spacer"
+msgstr ""

@@ -67,6 +67,7 @@ public:
     wxString GetDefaultValue() { return m_defValue; }
     PropertyType GetType() { return m_type; }
     wxString GetName() { return m_name; }
+    wxString GetLabel() { return _(m_name); }
     POptionList GetOptionList() { return m_optList; }
     std::list<PropertyChild>* GetChildren() { return &m_children; }
     wxString GetDescription() { return m_description; }
@@ -92,6 +93,7 @@ public:
               const wxString& description);
 
     wxString GetName() { return m_name; }
+    wxString GetLabel() { return _(m_name); }
     wxString GetEventClassName() { return m_eventClass; }
     wxString GetDefaultValue() { return m_defaultValue; }
     wxString GetDescription() { return m_description; }
@@ -173,12 +175,6 @@ private:
 };
 
 class PropertyCategory {
-private:
-    wxString m_name;
-    std::vector<wxString> m_properties;
-    std::vector<wxString> m_events;
-    std::vector<PPropertyCategory> m_categories;
-
 public:
     PropertyCategory(wxString name)
         : m_name(name)
@@ -188,6 +184,7 @@ public:
     void AddEvent(wxString name) { m_events.push_back(name); }
     void AddCategory(PPropertyCategory category) { m_categories.push_back(category); }
     wxString GetName() { return m_name; }
+    wxString GetLabel() { return _(m_name); }
     wxString GetPropertyName(size_t index)
     {
         if (index < m_properties.size())
@@ -214,6 +211,12 @@ public:
     size_t GetPropertyCount() { return m_properties.size(); }
     size_t GetEventCount() { return m_events.size(); }
     size_t GetCategoryCount() { return m_categories.size(); }
+
+private:
+    wxString m_name;
+    std::vector<wxString> m_properties;
+    std::vector<wxString> m_events;
+    std::vector<PPropertyCategory> m_categories;
 };
 
 namespace ticpp {

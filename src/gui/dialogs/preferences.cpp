@@ -267,8 +267,10 @@ PanelLocale::PanelLocale(wxWindow* parent)
 
     m_bcbLocale->Append(_("System Default"), AppBitmaps::GetBitmap("locale/default"));
     m_bcbLocale->Append(_("English"), AppBitmaps::GetBitmap("locale/gb"));
+#if 0
     m_bcbLocale->Append(_("English (U.S.)"), AppBitmaps::GetBitmap("locale/us"));
     m_bcbLocale->Append(_("German"), AppBitmaps::GetBitmap("locale/de"));
+#endif
     m_bcbLocale->Append(_("Italian"), AppBitmaps::GetBitmap("locale/it"));
     m_bcbLocale->SetSelection(0);
 

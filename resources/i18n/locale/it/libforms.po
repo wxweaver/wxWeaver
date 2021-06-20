@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wxWeaver Forms Plugin\n"
-"POT-Creation-Date: 2021-06-14 23:16+0200\n"
-"PO-Revision-Date: 2021-06-14 23:51+0200\n"
+"POT-Creation-Date: 2021-06-19 13:46+0200\n"
+"PO-Revision-Date: 2021-06-20 10:54+0200\n"
 "Last-Translator: Andrea Zanellato <redtid3@gmail.com>\n"
 "Language-Team: wxWeaver Team\n"
 "Language: it\n"
@@ -16,6 +16,14 @@ msgstr ""
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-SearchPath-0: src/plugins/forms\n"
 "X-Poedit-SearchPath-1: resources/application/plugins/forms/xml/forms.xml\n"
+
+#: resources/application/plugins/forms/xml/forms.xml:22
+msgid "Forms"
+msgstr "Finestre"
+
+#: resources/application/plugins/forms/xml/forms.xml:22
+msgid "wxWidgets windows"
+msgstr "Finestre wxWidgets"
 
 #: resources/application/plugins/forms/xml/forms.xml:25
 msgid "Process a wxEVT_ACTIVATE event."
@@ -134,6 +142,40 @@ msgstr ""
 "al fine di disegnare in modo personalizzato la finestra wxAuiManager (non "
 "consigliato)."
 
+#: resources/application/plugins/forms/xml/forms.xml:52
+#: resources/application/plugins/forms/xml/forms.xml:112
+msgid "window_style"
+msgstr "Stile"
+
+#: resources/application/plugins/forms/xml/forms.xml:53
+#: resources/application/plugins/forms/xml/forms.xml:113
+msgid "size"
+msgstr "Dimensione"
+
+#: resources/application/plugins/forms/xml/forms.xml:55
+#: resources/application/plugins/forms/xml/forms.xml:115
+#: resources/application/plugins/forms/xml/forms.xml:143
+#: resources/application/plugins/forms/xml/forms.xml:194
+#: resources/application/plugins/forms/xml/forms.xml:237
+#: resources/application/plugins/forms/xml/forms.xml:243
+#: resources/application/plugins/forms/xml/forms.xml:252
+msgid "name"
+msgstr "Nome"
+
+#: resources/application/plugins/forms/xml/forms.xml:56
+#: resources/application/plugins/forms/xml/forms.xml:144
+#: resources/application/plugins/forms/xml/forms.xml:195
+msgid "title"
+msgstr "Titolo"
+
+#: resources/application/plugins/forms/xml/forms.xml:57
+#: resources/application/plugins/forms/xml/forms.xml:145
+#: resources/application/plugins/forms/xml/forms.xml:197
+#: resources/application/plugins/forms/xml/forms.xml:245
+#: resources/application/plugins/forms/xml/forms.xml:257
+msgid "style"
+msgstr "Stile"
+
 #: resources/application/plugins/forms/xml/forms.xml:58
 msgid ""
 "Defined as wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxRESIZE_BORDER | wxSYSTEM_MENU "
@@ -225,6 +267,12 @@ msgstr ""
 "Le finestre con questo stile possono modificare la loro forma con il metodo "
 "SetShape."
 
+#: resources/application/plugins/forms/xml/forms.xml:75
+#: resources/application/plugins/forms/xml/forms.xml:157
+#: resources/application/plugins/forms/xml/forms.xml:209
+msgid "extra_style"
+msgstr "Stile Extra"
+
 #: resources/application/plugins/forms/xml/forms.xml:76
 msgid ""
 "Under Windows, puts a query button on the caption. When pressed, Windows "
@@ -259,8 +307,18 @@ msgstr ""
 #: resources/application/plugins/forms/xml/forms.xml:79
 #: resources/application/plugins/forms/xml/forms.xml:161
 #: resources/application/plugins/forms/xml/forms.xml:212
+msgid "center"
+msgstr "Centrato"
+
+#: resources/application/plugins/forms/xml/forms.xml:79
+#: resources/application/plugins/forms/xml/forms.xml:161
+#: resources/application/plugins/forms/xml/forms.xml:212
 msgid "Centers the dialog box on the display in the chosen direction."
 msgstr "Centra la finestra di dialogo sul display nella direzione scelta."
+
+#: resources/application/plugins/forms/xml/forms.xml:86
+msgid "xrc_skip_sizer"
+msgstr "Ometti XRC Sizer"
 
 #: resources/application/plugins/forms/xml/forms.xml:86
 msgid ""
@@ -271,9 +329,24 @@ msgstr "Solo per XRC. Non generare il primo misuratore se c'è un solo figlio."
 #: resources/application/plugins/forms/xml/forms.xml:116
 #: resources/application/plugins/forms/xml/forms.xml:168
 #: resources/application/plugins/forms/xml/forms.xml:219
+msgid "event_handler"
+msgstr "Gestore Evento"
+
+#: resources/application/plugins/forms/xml/forms.xml:87
+#: resources/application/plugins/forms/xml/forms.xml:116
+#: resources/application/plugins/forms/xml/forms.xml:168
+#: resources/application/plugins/forms/xml/forms.xml:219
 msgid "For C++ Only. The way how to declare and implement event handlers."
 msgstr ""
-"Solo per C++. Il modo in cui dichiarare e implementare gestori di eventi."
+"Solo per C++.\n"
+"Il modo in cui dichiarare e implementare gestori di eventi."
+
+#: resources/application/plugins/forms/xml/forms.xml:88
+#: resources/application/plugins/forms/xml/forms.xml:117
+#: resources/application/plugins/forms/xml/forms.xml:169
+#: resources/application/plugins/forms/xml/forms.xml:220
+msgid "decl_pure_virtual"
+msgstr "Dichiarazione Virtuale Pura"
 
 #: resources/application/plugins/forms/xml/forms.xml:88
 #: resources/application/plugins/forms/xml/forms.xml:117
@@ -281,6 +354,13 @@ msgstr ""
 #: resources/application/plugins/forms/xml/forms.xml:220
 msgid "Only declare event handlers as pure virtual methods."
 msgstr "Dichiarare i gestori di eventi solo come metodi virtuali puri."
+
+#: resources/application/plugins/forms/xml/forms.xml:89
+#: resources/application/plugins/forms/xml/forms.xml:118
+#: resources/application/plugins/forms/xml/forms.xml:170
+#: resources/application/plugins/forms/xml/forms.xml:221
+msgid "decl"
+msgstr "Dichiarazione"
 
 #: resources/application/plugins/forms/xml/forms.xml:89
 #: resources/application/plugins/forms/xml/forms.xml:118
@@ -298,6 +378,13 @@ msgstr ""
 #: resources/application/plugins/forms/xml/forms.xml:119
 #: resources/application/plugins/forms/xml/forms.xml:171
 #: resources/application/plugins/forms/xml/forms.xml:222
+msgid "impl_virtual"
+msgstr "Implementazione Virtuale"
+
+#: resources/application/plugins/forms/xml/forms.xml:90
+#: resources/application/plugins/forms/xml/forms.xml:119
+#: resources/application/plugins/forms/xml/forms.xml:171
+#: resources/application/plugins/forms/xml/forms.xml:222
 msgid ""
 "Declare event handlers as virtual methods and generate default "
 "implementation."
@@ -306,8 +393,20 @@ msgstr ""
 "predefinita."
 
 #: resources/application/plugins/forms/xml/forms.xml:93
+#: resources/application/plugins/forms/xml/forms.xml:123
+#: resources/application/plugins/forms/xml/forms.xml:175
+msgid "aui_managed"
+msgstr "Gestore AUI"
+
+#: resources/application/plugins/forms/xml/forms.xml:93
 msgid "Manage this frame by AUI manager."
 msgstr "Gestisce questo frame dal gestore AUI."
+
+#: resources/application/plugins/forms/xml/forms.xml:94
+#: resources/application/plugins/forms/xml/forms.xml:124
+#: resources/application/plugins/forms/xml/forms.xml:176
+msgid "aui_manager_style"
+msgstr "Stile Gestore AUI"
 
 #: resources/application/plugins/forms/xml/forms.xml:94
 #: resources/application/plugins/forms/xml/forms.xml:124
@@ -503,6 +602,11 @@ msgid "Manage this dialog by AUI manager."
 msgstr "Gestisce questa finestra di dialogo dal gestore AUI."
 
 #: resources/application/plugins/forms/xml/forms.xml:196
+#: resources/application/plugins/forms/xml/forms.xml:238
+msgid "bitmap"
+msgstr "Bitmap"
+
+#: resources/application/plugins/forms/xml/forms.xml:196
 msgid "Bitmap to display on the left side of the wizard (default: none)."
 msgstr ""
 "Bitmap da visualizzare sul lato sinistro della procedura guidata "
@@ -559,9 +663,17 @@ msgstr "È stato premuto il pulsante Fine procedura guidata."
 msgid "Page-specific bitmap (default: none)."
 msgstr "Bitmap specifica della pagina (impostazione predefinita: nessuna)."
 
+#: resources/application/plugins/forms/xml/forms.xml:244
+msgid "label"
+msgstr "Etichetta"
+
 #: resources/application/plugins/forms/xml/forms.xml:246
 msgid "Allows the menu bar to be detached (wxGTK only)."
 msgstr "Consente di scollegare la barra dei menu (solo wxGTK)."
+
+#: resources/application/plugins/forms/xml/forms.xml:253
+msgid "bitmapsize"
+msgstr "Dimensione Bitmap"
 
 #: resources/application/plugins/forms/xml/forms.xml:253
 msgid ""
@@ -571,8 +683,16 @@ msgstr ""
 "bitmap predefinita è 16 per 15 pixel."
 
 #: resources/application/plugins/forms/xml/forms.xml:254
+msgid "margins"
+msgstr "Margini"
+
+#: resources/application/plugins/forms/xml/forms.xml:254
 msgid "Values to be used as margins for the toolbar."
 msgstr "Valori da utilizzare come margini per la barra degli strumenti."
+
+#: resources/application/plugins/forms/xml/forms.xml:255
+msgid "packing"
+msgstr "Imballaggio"
 
 #: resources/application/plugins/forms/xml/forms.xml:255
 msgid ""
@@ -584,6 +704,10 @@ msgstr ""
 "utilizzata per la spaziatura in direzione verticale se la barra degli "
 "strumenti è orizzontale e per la spaziatura in direzione orizzontale se la "
 "barra degli strumenti è verticale."
+
+#: resources/application/plugins/forms/xml/forms.xml:256
+msgid "separation"
+msgstr "Separazione"
 
 #: resources/application/plugins/forms/xml/forms.xml:256
 msgid ""

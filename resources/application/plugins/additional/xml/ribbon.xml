@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 -->
-<package name="Ribbon" lib="libadditional" icon="ribbon.png" desc="wxWidgets Ribbon">
+<package name="Ribbon" lib="libadditional" icon="ribbon.png" help="wxWidgets Ribbon">
 
   <objectinfo class="wxRibbonBar" icon="ribbonbar.png" type="ribbonbar" startgroup="0" wxversion="2904">
     <inherits class="wxWindow"/>
@@ -107,8 +107,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     <inherits class="wxWindow"/>
     <property name="name"   type="text">m_ribbonHybridButton</property>
     <property name="label"  type="wxString_i18n">MyRibbonHybridButton</property>
-    <property name="bitmap" type="bitmap"        help="ribbonHybridButton bitmap."/>
-    <property name="help"   type="wxString_i18n" help="ribbonHybridButton"/>
+    <property name="bitmap" type="bitmap"/>
+    <property name="help"   type="wxString_i18n"/>
     <event name="OnRibbonButtonClicked"         class="wxRibbonButtonBarEvent" help="Triggered when the normal (non-dropdown) region of a button on the button bar is clicked."/>
     <event name="OnRibbonButtonDropdownClicked" class="wxRibbonButtonBarEvent" help="Triggered when the dropdown region of a button on the button bar is clicked. wxRibbonButtonBarEvent::PopupMenu() should be called by the event handler if it wants to display a popup menu (which is what most dropdown buttons should be doing)."/>
   </objectinfo>

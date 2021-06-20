@@ -105,12 +105,12 @@ private:
 
         wxPropertyGridManager* pg = (addingEvents ? m_eg : m_pg);
         int pageIndex = pg->GetPageByName(pageName);
-        if (wxNOT_FOUND == pageIndex)
+        if (pageIndex == wxNOT_FOUND)
             pg->AddPage(pageName, objInfo->GetSmallIconFile());
 
-        const wxString& catName = category->GetName();
+        wxString catName = category->GetName();
 
-        wxPGProperty* id = pg->Append(new wxPropertyCategory(catName));
+        wxPGProperty* id = pg->Append(new wxPropertyCategory(_(catName), catName));
         id->SetTextColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT), 0);
 
         AddItems(name, obj, objInfo, category, itemMap);

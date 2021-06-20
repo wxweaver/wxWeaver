@@ -49,7 +49,6 @@
 #define OBJECT_TAG "object"
 #define CLASS_TAG "class"
 #define PACKAGE_TAG "package"
-#define PKGDESC_TAG "desc"
 #define PRGLANG_TAG "language"
 #define ICON_TAG "icon"
 #define SMALL_ICON_TAG "smallIcon"
@@ -894,7 +893,7 @@ PObjectPackage ObjectDatabase::LoadPackage(const wxString& file,
 
         // Description Attribute
         std::string pkgDesc;
-        root->GetAttributeOrDefault(PKGDESC_TAG, &pkgDesc, "");
+        root->GetAttributeOrDefault(DESCRIPTION_TAG, &pkgDesc, "");
 
         // Icon Path Attribute
         std::string pkgIconName;
@@ -1003,6 +1002,7 @@ void ObjectDatabase::ParseProperties(ticpp::Element* elemObj, PObjectInfo objInf
         // Property Name Attribute
         std::string pname;
         elem_prop->GetAttribute(NAME_TAG, &pname);
+
         category->AddProperty(pname);
 
         std::string description;
@@ -1096,7 +1096,7 @@ void ObjectDatabase::ParseProperties(ticpp::Element* elemObj, PObjectInfo objInf
         }
         // create an instance of PropertyInfo
         PPropertyInfo propertyInfo(new PropertyInfo(
-            pname, ptype, defValue, description, customEditor, optList, children));
+            pname, ptype, defValue, _(description), customEditor, optList, children));
 
         // add the PropertyInfo to the property
         objInfo->AddPropertyInfo(propertyInfo);
@@ -1160,7 +1160,7 @@ void ObjectDatabase::ParseEvents(ticpp::Element* elemObj, PObjectInfo objInfo,
         }
         // create an instance of EventInfo
         PEventInfo evt_info(
-            new EventInfo(evtName, evtClass, defValue, description));
+            new EventInfo(evtName, evtClass, defValue, _(description)));
 
         // add the EventInfo to the event
         objInfo->AddEventInfo(evt_info);

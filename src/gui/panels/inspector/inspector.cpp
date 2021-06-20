@@ -239,25 +239,26 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
     wxPGProperty* result = nullptr;
     PropertyType type = prop->GetType();
     wxString name = prop->GetName();
+    wxString label = _(name);
     wxVariant vTrue = wxVariant(true, "true");
 
     if (type == PT_MACRO) {
-        result = new wxStringProperty(name, wxPG_LABEL,
+        result = new wxStringProperty(label, name,
                                       prop->GetValueAsString());
     } else if (type == PT_INT) {
-        result = new wxIntProperty(name, wxPG_LABEL,
+        result = new wxIntProperty(label, name,
                                    prop->GetValueAsInteger());
     } else if (type == PT_UINT) {
-        result = new wxUIntProperty(name, wxPG_LABEL,
+        result = new wxUIntProperty(label, name,
                                     (unsigned)prop->GetValueAsInteger());
     } else if (type == PT_WXSTRING || type == PT_WXSTRING_I18N) {
-        result = new wxLongStringProperty(name, wxPG_LABEL,
+        result = new wxLongStringProperty(label, name,
                                           prop->GetValueAsText());
     } else if (type == PT_TEXT) {
-        result = new wxLongStringProperty(name, wxPG_LABEL,
+        result = new wxLongStringProperty(label, name,
                                           prop->GetValueAsString());
     } else if (type == PT_BOOL) {
-        result = new wxBoolProperty(name, wxPG_LABEL,
+        result = new wxBoolProperty(label, name,
                                     prop->GetValue() == "1");
     } else if (type == PT_BITLIST) {
         PPropertyInfo propDesc = prop->GetPropertyInfo();
@@ -273,7 +274,7 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
             constants.Add(it->first, 1 << index++);
 
         int val = StringToBits(prop->GetValueAsString(), constants);
-        result = new wxFlagsProperty(name, wxPG_LABEL, constants, val);
+        result = new wxFlagsProperty(label, name, constants, val);
 
         // Workaround to set the help strings for individual members of a wxFlagsProperty
         wxFlagsProperty* flagsProp = dynamic_cast<wxFlagsProperty*>(result);
@@ -291,7 +292,7 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
                || type == PT_INTPAIRLIST
                || type == PT_UINTPAIRLIST) {
         result = new wxStringProperty(
-            name, wxPG_LABEL,
+            label, name,
             IntList(prop->GetValueAsString(),
                     type == PT_UINTLIST, (PT_INTPAIRLIST == type || PT_UINTPAIRLIST == type))
                 .ToString(true));
@@ -314,9 +315,9 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
                 help = it->second; // Save help
         }
         if (type == PT_EDIT_OPTION)
-            result = new wxEditEnumProperty(name, wxPG_LABEL, constants);
+            result = new wxEditEnumProperty(label, name, constants);
         else
-            result = new wxEnumProperty(name, wxPG_LABEL, constants);
+            result = new wxEnumProperty(label, name, constants);
         result->SetValueFromString(value, 0);
 
         wxString desc = propDesc->GetDescription();
@@ -328,13 +329,13 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
         result->SetHelpString(wxGetTranslation(desc));
 
     } else if (type == PT_WXPOINT) {
-        result = new wxWeaverPointProperty(name, wxPG_LABEL,
+        result = new wxWeaverPointProperty(label, name,
                                            prop->GetValueAsPoint());
     } else if (type == PT_WXSIZE) {
-        result = new wxWeaverSizeProperty(name, wxPG_LABEL,
+        result = new wxWeaverSizeProperty(label, name,
                                           prop->GetValueAsSize());
     } else if (type == PT_WXFONT) {
-        result = new wxWeaverFontProperty(name, wxPG_LABEL,
+        result = new wxWeaverFontProperty(label, name,
                                           TypeConv::StringToFont(prop->GetValueAsString()));
     } else if (type == PT_WXCOLOUR) {
         wxString value = prop->GetValueAsString();
@@ -343,42 +344,42 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
             wxColourPropertyValue colProp;
             colProp.m_type = wxSYS_COLOUR_WINDOW;
             colProp.m_colour = TypeConv::StringToSystemColour("wxSYS_COLOUR_WINDOW");
-            result = new wxSystemColourProperty(name, wxPG_LABEL, colProp);
+            result = new wxSystemColourProperty(label, name, colProp);
         } else {
             if (!value.find_first_of("wx")) {
                 wxColourPropertyValue def; // System Colour
                 def.m_type = TypeConv::StringToSystemColour(value);
-                result = new wxSystemColourProperty(name, wxPG_LABEL, def);
+                result = new wxSystemColourProperty(label, name, def);
             } else {
-                result = new wxSystemColourProperty(name, wxPG_LABEL,
+                result = new wxSystemColourProperty(label, name,
                                                     prop->GetValueAsColour());
             }
         }
     } else if (type == PT_PATH) {
-        result = new wxDirProperty(name, wxPG_LABEL, prop->GetValueAsString());
+        result = new wxDirProperty(label, name, prop->GetValueAsString());
     } else if (type == PT_FILE) {
-        result = new wxFileProperty(name, wxPG_LABEL, prop->GetValueAsString());
+        result = new wxFileProperty(label, name, prop->GetValueAsString());
     } else if (type == PT_BITMAP) {
         wxLogDebug("OI::GetProperty: prop:%s", prop->GetValueAsString().c_str());
 
-        result = new wxWeaverBitmapProperty(name, wxPG_LABEL, prop->GetValueAsString());
+        result = new wxWeaverBitmapProperty(label, name, prop->GetValueAsString());
     } else if (type == PT_STRINGLIST) {
-        result = new wxArrayStringProperty(name, wxPG_LABEL, prop->GetValueAsArrayString());
+        result = new wxArrayStringProperty(label, name, prop->GetValueAsArrayString());
 #if wxVERSION_NUMBER >= 2901
         wxVariant v("\"");
         result->DoSetAttribute(wxPG_ARRAY_DELIMITER, v);
 #endif
     } else if (type == PT_FLOAT) {
-        result = new wxFloatProperty(name, wxPG_LABEL, prop->GetValueAsFloat());
+        result = new wxFloatProperty(label, name, prop->GetValueAsFloat());
     } else if (type == PT_PARENT) {
-        result = new wxStringProperty(name, wxPG_LABEL);
+        result = new wxStringProperty(label, name);
         result->ChangeFlag(wxPG_PROP_READONLY, true);
 #if 0
 #if 1
-        wxPGProperty* parent = new wxPGProperty(name, wxPG_LABEL);
+        wxPGProperty* parent = new wxPGProperty(label, name);
         parent->SetValueFromString(prop->GetValueAsString(), wxPG_FULL_VALUE);
 #else
-        wxPGProperty* parent = new wxStringProperty(name, wxPG_LABEL, "<composed>");
+        wxPGProperty* parent = new wxStringProperty(label, name, "<composed>");
         parent->SetValueFromString(prop->GetValueAsString());
 #endif
         PPropertyInfo propDesc = prop->GetPropertyInfo();
@@ -386,7 +387,7 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
         std::list<PropertyChild>::iterator it;
         for (it = children->begin(); it != children->end(); ++it) {
             wxPGProperty* child = new wxStringProperty(
-                it->m_name, wxPG_LABEL, wxEmptyString);
+                _(it->m_name), it->m_name, wxEmptyString);
 
             parent->AppendChild(child);
             m_pg->SetPropertyHelpString(child, it->m_description);
@@ -395,7 +396,7 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
 #endif
     } else // Unknown property
     {
-        result = new wxStringProperty(name, wxPG_LABEL, prop->GetValueAsString());
+        result = new wxStringProperty(label, name, prop->GetValueAsString());
         result->SetAttribute(wxPG_BOOL_USE_DOUBLE_CLICK_CYCLING, vTrue);
         wxLogError("Property type Unknown");
     }
@@ -468,11 +469,11 @@ void ObjectInspector::AddItems(const wxString& name, PObjectBase obj,
     interpreted as true
 */
                             child = new wxBoolProperty(
-                                it->m_name, wxPG_LABEL,
+                                _(it->m_name), it->m_name,
                                 value.empty() || value == it->m_name);
                         } else if (PT_WXSTRING == it->m_type) {
                             child = new wxStringProperty(
-                                it->m_name, wxPG_LABEL, value);
+                                _(it->m_name), it->m_name, value);
                         } else {
                             wxWEAVER_THROW_EX(
                                 "Invalid Child Property Type: " << it->m_type);
@@ -533,15 +534,17 @@ void ObjectInspector::AddItems(const wxString& name, PObjectBase obj,
         if (!nextCat->GetCategoryCount() && !nextCat->GetPropertyCount())
             continue;
 
+        wxString catNameName = nextCat->GetName();
+
         wxPGProperty* catId
             = m_pg->AppendIn(category->GetName(),
-                             new wxPropertyCategory(nextCat->GetName()));
+                             new wxPropertyCategory(_(catNameName), catNameName));
 
         catId->SetTextColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT), 0);
 
         AddItems(name, obj, objInfo, nextCat, properties);
 
-        ExpandMap::iterator it = m_isExpanded.find(nextCat->GetName());
+        ExpandMap::iterator it = m_isExpanded.find(catNameName);
         if (it != m_isExpanded.end()) {
             if (it->second)
                 m_pg->Expand(catId);
@@ -567,8 +570,11 @@ void ObjectInspector::AddItems(const wxString& name, PObjectBase obj,
 
         // We do not want to duplicate inherited events
         if (events.find(eventName) == events.end()) {
+
+            wxString eventInfoName = eventInfo->GetName();
             wxPGProperty* pgProp = new wxStringProperty(
-                eventInfo->GetName(), wxPG_LABEL, event->GetValue());
+                _(eventInfoName), eventInfoName, event->GetValue());
+
             wxPGProperty* id = m_eg->Append(pgProp);
 
             m_eg->SetPropertyHelpString(id, eventInfo->GetDescription());
@@ -607,14 +613,17 @@ void ObjectInspector::AddItems(const wxString& name, PObjectBase obj,
         if (!nextCat->GetCategoryCount() && !nextCat->GetEventCount())
             continue;
 
+        wxString nextCatName = nextCat->GetName();
+
         wxPGProperty* catId = m_eg->AppendIn(
-            category->GetName(), new wxPropertyCategory(nextCat->GetName()));
+            category->GetName(),
+            new wxPropertyCategory(_(nextCatName), nextCatName));
 
         catId->SetTextColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT), 0);
 
         AddItems(name, obj, objInfo, nextCat, events);
 
-        ExpandMap::iterator it = m_isExpanded.find(nextCat->GetName());
+        ExpandMap::iterator it = m_isExpanded.find(nextCatName);
         if (it != m_isExpanded.end()) {
             if (it->second)
                 m_eg->Expand(catId);
@@ -884,7 +893,7 @@ void ObjectInspector::OnPropertyModified(wxWeaverPropertyEvent& event)
     if (!shouldContinue)
         return;
 
-    wxPGProperty* pgProp = m_pg->GetPropertyByLabel(prop->GetName());
+    wxPGProperty* pgProp = m_pg->GetPropertyByName(prop->GetName());
     if (!pgProp)
         return; // Maybe now isn't showing this page
 
@@ -1015,7 +1024,7 @@ void ObjectInspector::OnPropertyGridDblClick(wxPropertyGridEvent& event)
 {
     PObjectBase obj = AppData()->GetSelectedObject();
     if (obj) {
-        wxString propName = event.GetProperty()->GetLabel();
+        wxString propName = event.GetProperty()->GetName();
         AutoGenerateId(obj, obj->GetProperty(propName), "DblClk");
         m_pg->Refresh();
     }
@@ -1023,13 +1032,13 @@ void ObjectInspector::OnPropertyGridDblClick(wxPropertyGridEvent& event)
 
 void ObjectInspector::OnEventGridDblClick(wxPropertyGridEvent& event)
 {
-    wxPGProperty* pgProp = m_pg->GetPropertyByLabel("name");
+    wxPGProperty* pgProp = m_pg->GetPropertyByName("name");
     if (!pgProp)
         return;
 
     wxPGProperty* p = event.GetProperty();
     p->SetValueFromString(
-        pgProp->GetDisplayedString() + event.GetProperty()->GetLabel());
+        pgProp->GetValueAsString() + event.GetProperty()->GetName());
 
     ObjInspectorEventMap::iterator it = m_eventMap.find(p);
     if (it != m_eventMap.end()) {
@@ -1048,9 +1057,7 @@ void ObjectInspector::AutoGenerateId(PObjectBase objectChanged,
         PProperty prop;
         if ((propChanged->GetName() == "name" && reason == "PropChange")
             || (propChanged->GetName() == "id" && reason == "DblClk")) {
-#if 0
-            wxPGId pgid = m_pg->GetPropertyByLabel(""); // Old code
-#endif
+
             prop = AppData()->GetProjectData()->GetProperty("event_generation");
             if (prop) {
                 if (prop->GetValueAsString() == "table") {
@@ -1064,7 +1071,7 @@ void ObjectInspector::AutoGenerateId(PObjectBase objectChanged,
                             idString << name->GetValueAsString().Upper();
                             ModifyProperty(prop, idString);
 
-                            wxPGProperty* pgid = m_pg->GetPropertyByLabel("id");
+                            wxPGProperty* pgid = m_pg->GetPropertyByName("id");
                             if (!pgid)
                                 return;
 
@@ -1075,7 +1082,7 @@ void ObjectInspector::AutoGenerateId(PObjectBase objectChanged,
                     prop = objectChanged->GetProperty("id");
                     if (prop) {
                         ModifyProperty(prop, "wxID_ANY");
-                        wxPGProperty* pgid = m_pg->GetPropertyByLabel("id");
+                        wxPGProperty* pgid = m_pg->GetPropertyByName("id");
                         if (!pgid)
                             return;
                         m_pg->SetPropertyValue(pgid, "wxID_ANY");
@@ -1096,7 +1103,7 @@ void ObjectInspector::OnBitmapPropertyChanged(wxCommandEvent& event)
 
     if (!propVal.IsEmpty()) {
         wxWeaverBitmapProperty* bp
-            = wxDynamicCast(m_pg->GetPropertyByLabel(propName), wxWeaverBitmapProperty);
+            = wxDynamicCast(m_pg->GetPropertyByName(propName), wxWeaverBitmapProperty);
         if (bp)
             bp->UpdateChildValues(propVal);
     }

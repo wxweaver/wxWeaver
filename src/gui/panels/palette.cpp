@@ -36,20 +36,6 @@
 #include <wx/tooltip.h>
 #endif
 
-wxWindowID Palette::nextId = wxID_HIGHEST + 3000;
-
-#if 0
-BEGIN_EVENT_TABLE(Palette, wxPanel)
-#ifdef __WXOSX__
-EVT_BUTTON(wxID_ANY, Palette::OnButtonClick)
-#else
-EVT_TOOL(wxID_ANY, Palette::OnButtonClick)
-#endif
-EVT_SPIN_UP(wxID_ANY, Palette::OnSpinUp)
-EVT_SPIN_DOWN(wxID_ANY, Palette::OnSpinDown)
-END_EVENT_TABLE()
-#endif
-
 Palette::Palette(wxWindow* parent, int id)
     : wxPanel(parent, id)
     , m_notebook(nullptr)
@@ -81,11 +67,11 @@ void Palette::PopulateToolbar(PObjectPackage pkg, wxAuiToolBar* toolbar)
             wxString widget(info->GetClassName());
             wxBitmap icon = info->GetIconFile();
 #ifdef __WXOSX__
-            wxBitmapButton* button = new wxBitmapButton(toolbar, nextId++, icon);
+            wxBitmapButton* button = new wxBitmapButton(toolbar, wxID_ANY, icon);
             button->SetToolTip(widget);
             toolbar->AddControl(button);
 #else
-            toolbar->AddTool(nextId++, widget, icon, widget);
+            toolbar->AddTool(wxID_ANY, widget, icon, widget);
 #endif
             toolbar->Realize();
         }
@@ -95,87 +81,97 @@ void Palette::PopulateToolbar(PObjectPackage pkg, wxAuiToolBar* toolbar)
 
 void Palette::SaveSettings()
 {
-    wxConfigBase* config = wxConfigBase::Get();
     wxString pageOrder;
 
-    for (size_t i = 0; i < m_notebook->GetPageCount(); ++i) {
-        if (!pageOrder.empty())
-            pageOrder.append(",");
+    for (size_t index = 0; index < m_notebook->GetPageCount(); ++index) {
+        wxString translated = m_notebook->GetPageText(index);
+        wxString untranslated;
 
-        pageOrder.append(m_notebook->GetPageText(i));
+        for (auto it = m_pkgNames.begin(); it != m_pkgNames.end(); ++it) {
+            untranslated = *it;
+            if (translated == _(untranslated)) {
+                if (!pageOrder.empty())
+                    pageOrder.append(',');
+
+                pageOrder.append(untranslated);
+                break;
+            }
+        }
     }
-    config->Write("/Palette/PluginTabsOrder", pageOrder);
+    wxConfigBase::Get()->Write("/Palette/TabOrder", pageOrder);
 }
 
 void Palette::Create()
 {
-    // Package count
-    size_t pkg_count = AppData()->GetPackageCount();
-    // Lookup map of all packages
-    std::map<wxString, PObjectPackage> packages;
-    // List of pages to add to the notebook in desired order
-    std::vector<std::pair<wxString, PObjectPackage>> pages;
-    pages.reserve(pkg_count);
+    size_t pkgCount = AppData()->GetPackageCount();
+    typedef std::map<wxString, PObjectPackage> PackageMap;
+    typedef std::pair<wxString, PObjectPackage> PackagePair;
 
-    LogDebug("[Palette] Pages %zd", pkg_count);
+    PackageMap packages;
+    // List of pages to add to the notebook in desired order
+    std::vector<PackagePair> pages;
+
+    pages.reserve(pkgCount);
+
+    LogDebug("[Palette] Pages %zd", pkgCount);
 
     // Fill lookup map of packages
-    for (size_t i = 0; i < pkg_count; ++i) {
-        auto pkg = AppData()->GetPackage(i);
+    for (size_t i = 0; i < pkgCount; ++i) {
+        PObjectPackage pkg = AppData()->GetPackage(i);
         packages.insert(std::make_pair(pkg->GetPackageName(), pkg));
     }
 
     // Read the page order from settings and build the list of pages from it
-    wxConfigBase* config = wxConfigBase::Get();
     wxStringTokenizer pageOrder(
-        config->Read(
-            "/Palette/PluginTabsOrder",
-            "Forms,Layout,Common,Additional,Containers,Bars,Data,Ribbon"),
-        ",");
+        wxConfigBase::Get()->Read("/Palette/TabOrder"), ',');
 
     while (pageOrder.HasMoreTokens()) {
-        const auto packageName = pageOrder.GetNextToken();
-        auto package = packages.find(packageName);
+        wxString packageName = pageOrder.GetNextToken();
+        PackageMap::const_iterator package = packages.find(packageName);
         if (packages.end() == package) {
             // Plugin missing - move on
             continue;
         }
         // Add package to pages list and remove from lookup map
-        pages.push_back(std::make_pair(package->first, package->second));
+        pages.emplace_back(std::make_pair(package->first, package->second));
         packages.erase(package);
     }
     // The remaining packages from the lookup map need to be added to the page list
-    for (auto& package : packages)
-        pages.push_back(std::make_pair(package.first, package.second));
+    for (PackagePair package : packages)
+        pages.emplace_back(std::make_pair(package.first, package.second));
 
     packages.clear();
-
-    wxBoxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 
     m_notebook = new wxAuiNotebook(
         this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
         wxAUI_NB_TOP | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_TAB_MOVE);
+
     m_notebook->SetArtProvider(new AuiTabArt());
 
     wxSize minsize;
     for (size_t i = 0; i < pages.size(); ++i) {
-        const auto& page = pages[i];
 
         wxPanel* panel = new wxPanel(m_notebook, wxID_ANY);
 #if 0
         panel->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_3DFACE));
 #endif
-        wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-
         wxAuiToolBar* toolbar = new wxAuiToolBar(
             panel, wxID_ANY, wxDefaultPosition, wxDefaultSize,
             wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_OVERFLOW | wxNO_BORDER);
 
         toolbar->SetArtProvider(new ToolBarArt());
         toolbar->SetToolBitmapSize(wxSize(22, 22));
-        PopulateToolbar(page.second, toolbar);
-        m_tv.push_back(toolbar);
 
+        PackagePair& page = pages[i];
+        wxString pageName = page.first;
+        PObjectPackage pkg = page.second;
+
+        PopulateToolbar(pkg, toolbar);
+
+        m_toolbars.push_back(toolbar);
+        m_pkgNames.insert(pageName);
+
+        wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
         sizer->Add(toolbar, 1, wxEXPAND, 0);
 
         panel->SetAutoLayout(true);
@@ -186,18 +182,20 @@ void Palette::Create()
         wxSize cursize = panel->GetSize();
         if (cursize.x > minsize.x)
             minsize.x = cursize.x;
+
         if (cursize.y > minsize.y)
             minsize.y = cursize.y + 30;
 
-        m_notebook->AddPage(panel, page.first, false, i);
-        m_notebook->SetPageBitmap(i, page.second->GetPackageIcon());
+        m_notebook->AddPage(panel, _(pageName), false, i);
+        m_notebook->SetPageBitmap(i, pkg->GetPackageIcon());
     }
 #if 0
     Title* title = new Title(this, _("Widgets"));
     top_sizer->Add(title, 0, wxEXPAND, 0);
 #endif
-    top_sizer->Add(m_notebook, 1, wxEXPAND, 0);
-    SetSizer(top_sizer);
+    wxBoxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
+    topSizer->Add(m_notebook, 1, wxEXPAND, 0);
+    SetSizer(topSizer);
     SetSize(minsize);
     SetMinSize(minsize);
     Layout();
@@ -220,9 +218,9 @@ void Palette::OnButtonClick(wxCommandEvent& event)
         AppData()->CreateObject(win->GetToolTip()->GetTip());
     }
 #else
-    for (size_t i = 0; i < m_tv.size(); i++) {
-        if (m_tv[i]->GetToolIndex(event.GetId()) != wxNOT_FOUND) {
-            wxString name = m_tv[i]->GetToolShortHelp(event.GetId());
+    for (size_t i = 0; i < m_toolbars.size(); i++) {
+        if (m_toolbars[i]->GetToolIndex(event.GetId()) != wxNOT_FOUND) {
+            wxString name = m_toolbars[i]->GetToolShortHelp(event.GetId());
             AppData()->CreateObject(name);
             return;
         }

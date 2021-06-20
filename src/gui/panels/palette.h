@@ -25,17 +25,15 @@
 #include <wx/aui/auibook.h>
 #include <wx/spinbutt.h>
 
-typedef std::vector<wxAuiToolBar*> ToolbarVector;
+#include <set>
 
 class Palette : public wxPanel {
 public:
     Palette(wxWindow* parent, int id);
 
+    void Create();
     void SaveSettings();
 
-    /** Crea la paleta, previamente se ha debido configurar el objeto DataObservable.
-    */
-    void Create();
     void OnSpinUp(wxSpinEvent& e);
     void OnSpinDown(wxSpinEvent& e);
     void OnButtonClick(wxCommandEvent& event);
@@ -43,10 +41,10 @@ public:
 private:
     void PopulateToolbar(PObjectPackage pkg, wxAuiToolBar* toolbar);
 
-    ToolbarVector m_tv;
+    typedef std::vector<wxAuiToolBar*> ToolbarVector;
+    ToolbarVector m_toolbars;
     wxAuiNotebook* m_notebook;
-    static wxWindowID nextId;
-    std::vector<int> m_posVector;
+    std::set<wxString> m_pkgNames;
 };
 #if 0
 class PaletteButton : public wxBitmapButton {

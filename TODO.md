@@ -29,9 +29,16 @@
   (toolSeparator -> tool_separator).
 - Trailing newlines in codegen templates (e.g. additional plugin).
 - Deal with `wxversion` XML property.
+- Some click event on a palette tab is ignored, is it an AuiTabArt issue?
+
+## i18n
+
 - Extract help strings from wxWidgets Doxygen comments in interface files,
   to apply on XML files.
   Auto (Google?) translate script, all eventually automated with CI.
+- Rewrite XML files to use Text nodes instead `help` attributes to have more
+  control on translation filters and avoid missing translations due a problem
+  with new lines.
 
 ## Controls
 

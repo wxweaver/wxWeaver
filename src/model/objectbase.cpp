@@ -34,7 +34,7 @@ PropertyInfo::PropertyInfo(wxString name, PropertyType type, wxString defValue,
                            POptionList optList, const std::list<PropertyChild>& children)
     : m_name(name)
     , m_defValue(defValue)
-    , m_description(_(description))
+    , m_description(description)
     , m_customEditor(customEditor)
     , m_children(children)
     , m_type(type)
@@ -51,7 +51,7 @@ EventInfo::EventInfo(const wxString& name, const wxString& eventClass,
     : m_name(name)
     , m_eventClass(eventClass)
     , m_defaultValue(defValue)
-    , m_description(_(description))
+    , m_description(description)
 {
 }
 
@@ -745,7 +745,7 @@ ObjectInfo::ObjectInfo(wxString className, PObjectType type,
     : m_class(className)
     , m_type(type)
     , m_package(package)
-    , m_category(PPropertyCategory(new PropertyCategory(m_class)))
+    , m_category(PPropertyCategory(new PropertyCategory(className)))
     , m_component(nullptr)
     , m_startGroup(startGroup)
     , m_numIns(0)

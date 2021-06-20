@@ -19,10 +19,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 -->
-<package name="Containers" lib="libcontainers" icon="containers.png" desc="wxWidgets container controls">
+<package name="Containers" lib="libcontainers" icon="containers.png" help="wxWidgets container controls">
 
   <objectinfo class="wxPanel" type="container" icon="panel.png">
-    <inherits class="Common Events"/>
     <inherits class="wxWindow">
       <property name="window_style">wxTAB_TRAVERSAL</property>
     </inherits>
@@ -31,7 +30,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
   </objectinfo>
 
   <objectinfo class="wxCollapsiblePane" type="container" icon="collapsiblepane.png" startgroup="1">
-    <inherits class="Common Events"/>
     <inherits class="wxWindow"/>
     <inherits class="AUI"/>
     <inherits class="Validator"/>

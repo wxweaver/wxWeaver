@@ -142,6 +142,7 @@ int wxWeaver::OnRun()
         case 1:
             language = wxLANGUAGE_ENGLISH;
             break;
+#if 0
         case 2:
             language = wxLANGUAGE_ENGLISH_US;
             break;
@@ -149,6 +150,9 @@ int wxWeaver::OnRun()
             language = wxLANGUAGE_GERMAN;
             break;
         case 4:
+#else
+        case 2:
+#endif
             language = wxLANGUAGE_ITALIAN;
             break;
         }
@@ -325,19 +329,24 @@ void wxWeaver::SelectLanguage(int language)
     if (!m_locale.Init(language))
         wxLogWarning("This language is not supported by the system.");
 
-    wxString workingDir = ::wxGetCwd();
+#ifdef __WXGTK__
+    wxString prefix = wxStandardPaths::Get().GetInstallPrefix() + "/share/wxweaver/locale";
+    m_locale.AddCatalogLookupPathPrefix(prefix);
 
-    wxLocale::AddCatalogLookupPathPrefix("locale");
+#elif defined(__WXMSW__)
+    wxLocale::AddCatalogLookupPathPrefix(
+        wxStandardPaths::Get().GetDataDir() + "\\locale");
+#endif
     if (!m_locale.AddCatalog("wxweaver"))
         wxLogWarning("Can't load wxLocale main catalog");
-#if 0
+#if 1
+    // FIXME: Plugin catalogs should be added dynamically on database.cpp@680
     m_locale.AddCatalog("libadditional");
     m_locale.AddCatalog("libcommon");
     m_locale.AddCatalog("libcontainers");
     m_locale.AddCatalog("libforms");
     m_locale.AddCatalog("liblayout");
 #endif
-
 #ifdef __LINUX__
     /*
         This catalog is installed in standard location on Linux systems and

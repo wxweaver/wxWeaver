@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: wxWeaver Containers Plugin\n"
-"POT-Creation-Date: 2021-06-15 00:16+0200\n"
-"PO-Revision-Date: 2021-06-15 00:34+0200\n"
+"POT-Creation-Date: 2021-06-19 13:46+0200\n"
+"PO-Revision-Date: 2021-06-19 15:16+0200\n"
 "Last-Translator: Andrea Zanellato <redtid3@gmail.com>\n"
 "Language-Team: wxWeaver Team\n"
 "Language: it\n"
@@ -20,11 +20,66 @@ msgstr ""
 "X-Poedit-SearchPath-2: resources/application/plugins/containers/"
 "xml/2_bookctrls.xml\n"
 
-#: resources/application/plugins/containers/xml/1_containers.xml:42
+#: resources/application/plugins/containers/xml/1_containers.xml:22
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:22
+msgid "Containers"
+msgstr "Contenitori"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:22
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:22
+msgid "wxWidgets container controls"
+msgstr "Controlli Contenitori Di wxWidgets"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:26
+#: resources/application/plugins/containers/xml/1_containers.xml:83
+msgid "window_style"
+msgstr "Stile"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:29
+#: resources/application/plugins/containers/xml/1_containers.xml:36
+#: resources/application/plugins/containers/xml/1_containers.xml:50
+#: resources/application/plugins/containers/xml/1_containers.xml:86
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:27
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:52
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:98
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:121
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:142
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:168
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:189
+msgid "name"
+msgstr "Nome"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:37
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:43
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:89
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:113
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:134
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:158
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:182
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:195
+msgid "label"
+msgstr "Etichetta"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:38
+msgid "collapsed"
+msgstr "Contratto"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:39
+#: resources/application/plugins/containers/xml/1_containers.xml:51
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:29
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:53
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:100
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:123
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:144
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:169
+msgid "style"
+msgstr "Stile"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:40
 msgid "The default style. It includes wxTAB_TRAVERSAL and wxBORDER_NONE."
 msgstr "Lo stile predefinito. Include wxTAB_TRAVERSAL e wxBORDER_NONE."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:43
+#: resources/application/plugins/containers/xml/1_containers.xml:41
 msgid ""
 "By default wxCollapsiblePane resizes the top level window containing it when "
 "its own size changes. This allows to easily implement dialogs containing an "
@@ -39,31 +94,31 @@ msgstr ""
 "predefinito, ma può essere scomodo in alcuni casi specifici: utilizzare "
 "questo flag per disabilitare il ridimensionamento automatico del genitore."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:46
+#: resources/application/plugins/containers/xml/1_containers.xml:44
 msgid "The user expanded or collapsed the collapsible pane."
 msgstr "L'utente ha espanso o compresso il riquadro comprimibile."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:54
+#: resources/application/plugins/containers/xml/1_containers.xml:52
 msgid "Draws a 3D effect border and sash."
 msgstr "Disegna un bordo e una fascia con effetto 3D."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:55
+#: resources/application/plugins/containers/xml/1_containers.xml:53
 msgid "Draws a 3D effect sash (part of default style)."
 msgstr "Disegna una fascia effetto 3D (parte dello stile predefinito)."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:56
+#: resources/application/plugins/containers/xml/1_containers.xml:54
 msgid "Synonym for wxSP_BORDER."
 msgstr "Sinonimo di wxSP_BORDER."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:57
+#: resources/application/plugins/containers/xml/1_containers.xml:55
 msgid "Draws a standard border."
 msgstr "Disegna un bordo standard."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:58
+#: resources/application/plugins/containers/xml/1_containers.xml:56
 msgid "No border (default)."
 msgstr "Nessun bordo (impostazione predefinita)."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:59
+#: resources/application/plugins/containers/xml/1_containers.xml:57
 msgid ""
 "Sets the sash to be invisible, even when the window is split. This prevents "
 "the user to resize the windows."
@@ -71,11 +126,11 @@ msgstr ""
 "Imposta l'anta in modo che sia invisibile, anche quando la finestra è "
 "divisa. Ciò impedisce all'utente di ridimensionare le finestre."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:60
+#: resources/application/plugins/containers/xml/1_containers.xml:58
 msgid "Draws a thin sash."
 msgstr "Disegna una fascia sottile."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:61
+#: resources/application/plugins/containers/xml/1_containers.xml:59
 msgid ""
 "Under Windows XP, switches off the attempt to draw the splitter using "
 "Windows XP theming, so the borders and sash will take on the pre-XP look."
@@ -83,7 +138,7 @@ msgstr ""
 "In Windows XP, disattiva il tentativo di disegnare lo splitter utilizzando i "
 "temi di Windows XP, quindi i bordi e la fascia assumeranno l'aspetto pre-XP."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:62
+#: resources/application/plugins/containers/xml/1_containers.xml:60
 msgid ""
 "Always allow to unsplit, even with the minimum pane size other than zero. "
 "Note: The designer prevents un-splitting."
@@ -91,29 +146,45 @@ msgstr ""
 "Consenti sempre di non dividere, anche con la dimensione minima del riquadro "
 "diversa da zero. Nota: il designer impedisce la divisione."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:63
+#: resources/application/plugins/containers/xml/1_containers.xml:61
 msgid "Don't draw XOR line but resize the child windows immediately."
 msgstr ""
 "Non disegnare una linea XOR ma ridimensiona immediatamente le finestre "
 "figlio."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:67
+#: resources/application/plugins/containers/xml/1_containers.xml:64
+msgid "splitmode"
+msgstr "Modalità Divisione"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:65
 msgid "Specifies a vertical split window."
 msgstr "Specifica una finestra divisa in verticale."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:68
+#: resources/application/plugins/containers/xml/1_containers.xml:66
 msgid "Specifies a horizontal split window."
 msgstr "Specifica una finestra divisa orizzontalmente."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:71
+#: resources/application/plugins/containers/xml/1_containers.xml:69
+msgid "sashpos"
+msgstr "Posizione Fascia"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:69
 msgid "The initial sash position."
 msgstr "La posizione iniziale dell'anta."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:72
+#: resources/application/plugins/containers/xml/1_containers.xml:70
+msgid "sashsize"
+msgstr "Dimensione Fascia"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:70
 msgid "Overrides platform metrics if greater than -1"
 msgstr "Sostituisce le metriche della piattaforma se maggiore di -1"
 
-#: resources/application/plugins/containers/xml/1_containers.xml:73
+#: resources/application/plugins/containers/xml/1_containers.xml:71
+msgid "sashgravity"
+msgstr "Gravità Fascia"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:71
 msgid ""
 "Sets the sash gravity. Remarks: Gravity is real factor which controls "
 "position of sash while resizing wxSplitterWindow. Gravity tells "
@@ -124,7 +195,11 @@ msgstr ""
 "wxSplitterWindow. Gravity dice a wxSplitterWindow quanto crescerà la "
 "finestra sinistra/superiore durante il ridimensionamento."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:74
+#: resources/application/plugins/containers/xml/1_containers.xml:72
+msgid "min_pane_size"
+msgstr "Dimensione Minima Riquadro"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:72
 msgid ""
 "Minimum size for the panes. A minimum less than 1 is not allowed in the "
 "designer, because the designer prevents un-splitting."
@@ -132,7 +207,7 @@ msgstr ""
 "Dimensioni minime per i riquadri. Un minimo inferiore a 1 non è consentito "
 "nel progettista, perché il progettista impedisce la non scissione."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:75
+#: resources/application/plugins/containers/xml/1_containers.xml:73
 msgid ""
 "The sash position is in the process of being changed. May be used to modify "
 "the position of the tracking bar to properly reflect the position that would "
@@ -145,7 +220,7 @@ msgstr ""
 "dovesse essere completato a questo punto. Elabora un evento "
 "wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGING."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:76
+#: resources/application/plugins/containers/xml/1_containers.xml:74
 msgid ""
 "The sash position was changed. May be used to modify the sash position "
 "before it is set, or to prevent the change from taking place. Processes a "
@@ -156,7 +231,7 @@ msgstr ""
 "che avvenga il cambiamento. Elabora un evento "
 "wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:77
+#: resources/application/plugins/containers/xml/1_containers.xml:75
 msgid ""
 "The splitter has been just unsplit. Processes a "
 "wxEVT_COMMAND_SPLITTER_UNSPLIT event."
@@ -164,7 +239,7 @@ msgstr ""
 "Lo splitter è stato semplicemente non diviso. Elabora un evento "
 "wxEVT_COMMAND_SPLITTER_UNSPLIT."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:78
+#: resources/application/plugins/containers/xml/1_containers.xml:76
 msgid ""
 "The sash was double clicked. The default behaviour is to unsplit the window "
 "when this happens (unless the minimum pane size has been set to a value "
@@ -175,13 +250,29 @@ msgstr ""
 "del riquadro non sia stata impostata su un valore maggiore di zero). Elabora "
 "un evento wxEVT_COMMAND_SPLITTER_DOUBLECLICKED."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:89
+#: resources/application/plugins/containers/xml/1_containers.xml:87
+msgid "scroll_rate_x"
+msgstr "Velocità Scorrimento X"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:87
 msgid "Set the horizontal scrolling increment."
 msgstr "Imposta l'incremento di scorrimento orizzontale."
 
-#: resources/application/plugins/containers/xml/1_containers.xml:90
+#: resources/application/plugins/containers/xml/1_containers.xml:88
+msgid "scroll_rate_y"
+msgstr "Velocità Scorrimento Y"
+
+#: resources/application/plugins/containers/xml/1_containers.xml:88
 msgid "Set the vertical scrolling increment."
 msgstr "Imposta l'incremento di scorrimento verticale."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:28
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:70
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:99
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:122
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:143
+msgid "bitmapsize"
+msgstr "Dimensione Bitmap"
 
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:28
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:99
@@ -243,6 +334,14 @@ msgstr ""
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:114
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:135
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:159
+msgid "bitmap"
+msgstr "Bitmap"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:44
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:90
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:114
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:135
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:159
 msgid "Page Image"
 msgstr "Immagine della pagina"
 
@@ -251,8 +350,26 @@ msgstr "Immagine della pagina"
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:115
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:136
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:160
+msgid "image"
+msgstr "Indice Immagine"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:45
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:91
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:115
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:136
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:160
 msgid "wxImageList Index"
 msgstr "Indice dell'immagine nella wxImageList"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:46
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:92
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:116
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:137
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:162
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:183
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:196
+msgid "select"
+msgstr "Selezionato"
 
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:46
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:92
@@ -333,6 +450,10 @@ msgid "With this style, tabs are drawn along the bottom of the notebook."
 msgstr ""
 "Con questo stile, le schede vengono disegnate lungo la parte inferiore del "
 "notebook."
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:69
+msgid "tab_ctrl_height"
+msgstr "Altezza Scheda"
 
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:69
 msgid ""
@@ -599,8 +720,16 @@ msgstr ""
 "wxEVT_COMMAND_TREEBOOK_NODE_EXPANDED."
 
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:157
+msgid "depth"
+msgstr "Profondità"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:157
 msgid "Adds a new child-page to the last top-level page"
 msgstr "Aggiunge una nuova pagina figlio all'ultima pagina di primo livello"
+
+#: resources/application/plugins/containers/xml/2_bookctrls.xml:161
+msgid "expanded"
+msgstr "Espanso"
 
 #: resources/application/plugins/containers/xml/2_bookctrls.xml:161
 msgid "Expands the current treebookpage node"
@@ -639,3 +768,8 @@ msgid ""
 msgstr ""
 "La selezione della pagina sta per essere modificata. Elabora un evento "
 "wxEVT_BOOKCTRL_PAGE_CHANGING. Questo evento può essere posto il veto."
+
+#, fuzzy
+#~| msgid "Synonym for wxSP_BORDER."
+#~ msgid "wxSP_BORDER"
+#~ msgstr "Sinonimo di wxSP_BORDER."

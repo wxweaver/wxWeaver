@@ -962,13 +962,13 @@ wxString CppCodeGenerator::GetDeclaration(PObjectBase obj,
                                           ArrayItems& arrays, bool useEnum)
 {
     // Get the name
-    const auto& propName = obj->GetProperty("name");
+    PProperty propName = obj->GetProperty("name");
     if (!propName) {
         // Object has no name, just get its code
         return GetCode(obj, "declaration");
     }
     // Object has a name, check if its an array
-    const auto& name = propName->GetValue();
+    wxString name = propName->GetValue();
     wxString baseName;
     ArrayItem unused;
     if (!ParseArrayName(name, baseName, unused)) {
@@ -976,7 +976,7 @@ wxString CppCodeGenerator::GetDeclaration(PObjectBase obj,
         return GetCode(obj, "declaration");
     }
     // Object is an array, check if it needs to be declared
-    auto& item = arrays[baseName];
+    ArrayItem& item = arrays[baseName];
     if (item.isDeclared) {
         // Object is already declared, return empty result
         return wxEmptyString;
@@ -1005,9 +1005,9 @@ wxString CppCodeGenerator::GetDeclaration(PObjectBase obj,
         }
     }
     // Construct proper name for declaration
-    auto targetName = baseName;
-    for (const auto& index : item.maxIndex)
-        targetName.append(wxString::Format("[%z]", index + 1));
+    wxString targetName = baseName;
+    for (size_t index : item.maxIndex)
+        targetName.append(wxString::Format("[%zd]", index + 1));
 
     propName->SetValue(targetName);           // Set declaration name
     code.append(GetCode(obj, "declaration")); // Get the Code
@@ -1417,7 +1417,7 @@ void CppCodeGenerator::GenDestructor(PObjectBase classObj, const EventVector& ev
     m_source->WriteLn("}");
 }
 
-// TODO: 2 variables "isWidgets"
+// TODO: 2 variables "isWidget"
 void CppCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                                        ArrayItems& arrays)
 {

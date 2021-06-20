@@ -169,7 +169,7 @@ else()
     )
     set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
         OUTPUT_NAME "wxweaver"
-       RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     )
 endif()
 

@@ -270,7 +270,7 @@ void DockArt::DrawCaption(wxDC& dc, wxWindow*, const wxString& text,
         clipRect.width -= m_buttonSize;
     if (pane.HasMaximizeButton())
         clipRect.width -= m_buttonSize;
-    wxString drawText = EllipsizeText(dc, text, clipRect.width);
+    wxString drawText = EllipsizeText(dc, _(text), clipRect.width);
     dc.SetClippingRegion(clipRect);
     dc.DrawText(drawText, rect.x + 3, rect.y + (rect.height / 2) - (h / 2) - 1);
     dc.DestroyClippingRegion();
