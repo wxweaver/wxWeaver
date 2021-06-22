@@ -114,7 +114,7 @@ bool wxWeaverIPC::VerifySingleInstance(const wxString& file, bool switchTo)
         // Create the connection
         std::unique_ptr<wxConnectionBase> connection;
 #ifdef __WXMSW__
-        connection.reset(client->MakeConnection("localhost"), name, name));
+        connection.reset(client->MakeConnection("localhost", name, name));
 #else
         bool connected = false;
         for (int i = m_port; i < m_port + 20; ++i) {

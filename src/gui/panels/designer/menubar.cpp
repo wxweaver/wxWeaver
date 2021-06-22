@@ -21,6 +21,7 @@
 
 #include "menubar.h"
 
+#include <wx/menu.h>
 #include <wx/sizer.h>
 #include <wx/stattext.h>
 #include <wx/settings.h>
@@ -63,7 +64,7 @@ Menubar::~Menubar()
     }
 }
 
-void Menubar::AppendMenu(const wxString& name, wxMenu* menu)
+void Menubar::appendMenu(const wxString& name, wxMenu* menu)
 {
     wxStaticText* st = new wxStaticText(this, wxID_ANY, name);
     st->PushEventHandler(new MenuEvtHandler(st, menu));

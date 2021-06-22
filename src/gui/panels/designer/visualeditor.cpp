@@ -20,13 +20,13 @@
 */
 #include "gui/panels/designer/visualeditor.h"
 
+#include "gui/panels/designer/menubar.h"
 #include "model/objectbase.h"
 #include "utils/typeconv.h"
 #include "utils/exception.h"
 #include "appdata.h"
 #include "event.h"
 #include "manager.h"
-#include "gui/panels/designer/menubar.h"
 
 #include <wx/collpane.h>
 
@@ -1309,7 +1309,7 @@ void DesignerWindow::SetFrameWidgets(PObjectBase menubar, wxWindow* toolbar,
         for (size_t i = 0; i < menubar->GetChildCount(); i++) {
             PObjectBase menu = menubar->GetChild(i);
             wxMenu* menuWidget = GetMenuFromObject(menu);
-            mbWidget->AppendMenu(menu->GetPropertyAsString("label"), menuWidget);
+            mbWidget->appendMenu(menu->GetPropertyAsString("label"), menuWidget);
         }
     }
     wxSizer* mainSizer = contentPanel->GetSizer();

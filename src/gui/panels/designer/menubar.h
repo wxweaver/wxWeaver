@@ -38,7 +38,7 @@ public:
             const wxString& name = "wxwMenubar");
     ~Menubar() override;
 
-    void AppendMenu(const wxString& name, wxMenu* menu);
+    void appendMenu(const wxString& name, wxMenu* menu);
     wxMenu* GetMenu(int index);
     wxMenu* Remove(int index);
     size_t GetMenuCount() const;

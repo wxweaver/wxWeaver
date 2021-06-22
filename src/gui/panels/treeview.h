@@ -26,10 +26,12 @@
 #endif
 #include <wx/menu.h>
 #include <wx/treectrl.h>
+#include <wx/panel.h>
 
 class wxWeaverEvent;
 class wxWeaverPropertyEvent;
 class wxWeaverObjectEvent;
+class wxImageList;
 
 class ObjectTree : public wxPanel {
 public:

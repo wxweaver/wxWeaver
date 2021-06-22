@@ -259,7 +259,7 @@ void DockArt::DrawCaption(wxDC& dc, wxWindow*, const wxString& text,
     wxCoord w, h;
     wxColour labelColour = wxw::IsDark(bottomStart) ? *wxWHITE : *wxBLACK;
     dc.GetTextExtent("ABCDEFHXfgkj", &w, &h);
-    dc.SetFont(wxFont(9, 70, 90, 90, false, wxEmptyString));
+    dc.SetFont(wxFont(8, wxDEFAULT, wxNORMAL, wxNORMAL, false, wxEmptyString));
     dc.SetTextForeground(labelColour);
     wxRect clipRect = rect;
     clipRect.width -= 3; // Text offset
