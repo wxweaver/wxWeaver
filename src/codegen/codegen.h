@@ -20,7 +20,7 @@
 */
 #pragma once
 
-#include "model/types.h"
+#include "rtti/types.h"
 #include "utils/defs.h"
 
 #include <wx/sstream.h>

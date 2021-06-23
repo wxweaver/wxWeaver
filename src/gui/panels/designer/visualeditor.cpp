@@ -21,7 +21,7 @@
 #include "gui/panels/designer/visualeditor.h"
 
 #include "gui/panels/designer/menubar.h"
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "utils/typeconv.h"
 #include "utils/exception.h"
 #include "appdata.h"

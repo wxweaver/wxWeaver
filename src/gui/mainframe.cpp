@@ -37,12 +37,12 @@
 #include "gui/panels/palette.h"
 #include "gui/panels/title.h"
 #include "gui/panels/treeview.h"
-#include "model/xrcfilter.h"
 #include "utils/exception.h"
 #include "utils/stringutils.h"
 #include "appdata.h"
 #include "event.h"
 #include "manager.h"
+#include "xrcloader.h"
 
 #include <wx/artprov.h>
 #include <wx/config.h>

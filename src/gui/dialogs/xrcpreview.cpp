@@ -23,7 +23,7 @@
 
 #include "codegen/codewriter.h"
 #include "codegen/xrccg.h"
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "gui/dialogs/annoying.h"
 #include "utils/typeconv.h"
 #include "utils/exception.h"

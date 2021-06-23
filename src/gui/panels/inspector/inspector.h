@@ -20,7 +20,7 @@
 */
 #pragma once
 
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 
 #include <wx/aui/auibook.h>
 #include <wx/propgrid/manager.h>

@@ -20,7 +20,7 @@
 */
 #include "gui/panels/treeview.h"
 
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "appdata.h"
 #include "gui/bitmaps.h"
 #include "gui/dialogs/menueditor.h"

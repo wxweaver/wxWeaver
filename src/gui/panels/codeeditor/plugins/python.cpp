@@ -23,7 +23,7 @@
 #include "codegen/pythoncg.h"
 #include "gui/panels/codeeditor/codeeditor.h"
 #include "gui/panels/codeeditor/plugins/python.h"
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "utils/exception.h"
 #include "utils/typeconv.h"
 #include "appdata.h"

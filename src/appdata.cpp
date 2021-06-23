@@ -29,7 +29,7 @@
 #include "codegen/luacg.h"
 #include "codegen/phpcg.h"
 #include "codegen/pythoncg.h"
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "utils/stringutils.h"
 #include "utils/typeconv.h"
 #include "utils/exception.h"

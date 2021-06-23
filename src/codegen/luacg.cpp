@@ -21,7 +21,7 @@
 */
 #include "codegen/luacg.h"
 
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "appdata.h"
 #include "utils/debug.h"
 #include "utils/typeconv.h"

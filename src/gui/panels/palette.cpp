@@ -20,7 +20,7 @@
 */
 #include "gui/panels/palette.h"
 
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "utils/debug.h"
 #include "appdata.h"
 #include "gui/aui/barart.h"

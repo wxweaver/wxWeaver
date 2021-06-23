@@ -41,10 +41,9 @@ set(wxWEAVER_INCLUDE_FILES
 #   src/gui/unused/resizablepanel.h
     src/gui/bitmaps.h
     src/gui/mainframe.h
-    src/model/database.h
-    src/model/objectbase.h
-    src/model/types.h
-    src/model/xrcfilter.h
+    src/rtti/database.h
+    src/rtti/objectbase.h
+    src/rtti/types.h
     src/utils/debug.h
     src/utils/defs.h
     src/utils/exception.h
@@ -58,6 +57,7 @@ set(wxWEAVER_INCLUDE_FILES
     src/event.h
     src/manager.h
     src/settings.h
+    src/xrcloader.h
 )
 set(wxWEAVER_SOURCE_FILES
     external/stacktrace/stack.cpp
@@ -100,10 +100,9 @@ set(wxWEAVER_SOURCE_FILES
 #   src/gui/unused/resizablepanel.cpp TODO: ???
     src/gui/bitmaps.cpp
     src/gui/mainframe.cpp
-    src/model/database.cpp
-    src/model/objectbase.cpp
-    src/model/types.cpp
-    src/model/xrcfilter.cpp
+    src/rtti/database.cpp
+    src/rtti/objectbase.cpp
+    src/rtti/types.cpp
     src/utils/filetocarray.cpp
     src/utils/ipc.cpp
     src/utils/m_wxweaver.cpp
@@ -116,6 +115,7 @@ set(wxWEAVER_SOURCE_FILES
     src/manager.cpp
     src/settings.cpp
     src/wxweaver.cpp
+    src/xrcloader.cpp
 )
 if(APPLE)
    set(MACOSX_BUNDLE_ICON_FILE icon.icns)

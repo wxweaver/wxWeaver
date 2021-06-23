@@ -18,11 +18,11 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-#include "model/xrcfilter.h"
+#include "xrcloader.h"
 
 #include "utils/debug.h"
 #include "utils/typeconv.h"
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 
 PObjectBase XrcLoader::GetProject(ticpp::Document* xrcDoc)
 {

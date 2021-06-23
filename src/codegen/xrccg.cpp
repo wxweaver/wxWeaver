@@ -20,7 +20,7 @@
 */
 
 #include "codegen/xrccg.h"
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "codegen/codewriter.h"
 #include "utils/typeconv.h"
 

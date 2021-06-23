@@ -20,7 +20,7 @@
 */
 #include "codegen/cppcg.h"
 
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "appdata.h"
 #include "utils/filetocarray.h"
 #include "utils/typeconv.h"

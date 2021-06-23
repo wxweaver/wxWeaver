@@ -21,7 +21,7 @@
 #include "utils/filetocarray.h"
 
 #include "appdata.h"
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "codegen/codewriter.h"
 #include "codegen/cppcg.h"
 #include "utils/typeconv.h"

@@ -20,7 +20,7 @@
 */
 #include "geninhertclass.h"
 
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 
 GenInheritedClassDlg::GenInheritedClassDlg(wxWindow* parent, PObjectBase project)
     : GenInheritedClassDlgBase(parent)

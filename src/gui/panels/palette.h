@@ -20,7 +20,7 @@
 */
 #pragma once
 
-#include "model/database.h"
+#include "rtti/database.h"
 #include <wx/aui/auibar.h>
 #include <wx/aui/auibook.h>
 #include <wx/spinbutt.h>

@@ -21,7 +21,7 @@
 */
 #include "dataobject.h"
 
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "utils/typeconv.h"
 #include "appdata.h"
 

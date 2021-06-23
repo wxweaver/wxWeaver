@@ -19,7 +19,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 #include "gui/dialogs/menueditor.h"
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 
 namespace wxw {
 constexpr int IDENTATION = 4;

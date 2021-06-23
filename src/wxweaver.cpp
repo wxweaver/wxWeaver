@@ -21,7 +21,7 @@
 #include "wxweaver.h"
 
 #include "gui/mainframe.h"
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "utils/exception.h"
 #include "utils/typeconv.h"
 #include "appdata.h"

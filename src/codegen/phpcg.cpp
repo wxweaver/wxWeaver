@@ -25,7 +25,7 @@
 #include "utils/typeconv.h"
 #include "utils/debug.h"
 #include "appdata.h"
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "utils/exception.h"
 
 #include <algorithm>

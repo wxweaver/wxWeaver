@@ -20,7 +20,7 @@
 */
 #include "codegen/codegen.h"
 
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "appdata.h"
 #include "utils/exception.h"
 

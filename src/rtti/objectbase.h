@@ -29,7 +29,7 @@
 #pragma once
 
 #include "utils/defs.h"
-#include "model/types.h"
+#include "rtti/types.h"
 
 #include <component.h>
 

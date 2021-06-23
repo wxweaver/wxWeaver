@@ -146,27 +146,6 @@ typedef enum {
     PT_EDIT_OPTION
 } PropertyType;
 
-#if 0
-typedef enum {
-    W_NO_WIDGET,
-    W_GENERIC, // para el caso de que nuestro widget no esté incluido
-    W_BUTTON,
-    W_COMBO_BOX,
-    W_TEXT_CTRL,
-    W_STATIC_TEXT,
-    W_PANEL,
-    W_BOX_SIZER,
-    W_GRID_SIZER,
-    W_FLEX_GRID_SIZER,
-    W_CHECK_BOX,
-    W_SPACER,
-    W_SIZERITEM,
-    W_GRID,
-    W_STATIC_BITMAP
-    //W_PLUGIN
-} WidgetType;
-#endif
-
 /** Int list.
  */
 class IntList {

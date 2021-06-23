@@ -67,7 +67,7 @@
     - Reset to 0 all other `select` pages when setting to 1 one of them.
 
 - wxImageList
-    - Refactor to make work the XRC import, see `src/model/xrcfilter.cpp` line 162.
+    - Refactor to make work the XRC import, see `src/xrcloader.cpp` line 162.
     - Missing code generation.
 
 - wxPropertyGrid

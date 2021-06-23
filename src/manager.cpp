@@ -21,7 +21,7 @@
 */
 #include "manager.h"
 
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "appdata.h"
 #include "gui/panels/designer/visualeditor.h"
 

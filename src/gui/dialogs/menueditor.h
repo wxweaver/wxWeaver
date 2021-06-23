@@ -20,7 +20,7 @@
 */
 #pragma once
 
-#include "model/database.h"
+#include "rtti/database.h"
 #include <wx/listctrl.h>
 
 /** Class MenuEditor

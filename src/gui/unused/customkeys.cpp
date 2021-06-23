@@ -21,7 +21,7 @@
 #include "customkeys.h"
 #include "utils/debug.h"
 #include "codegen/cppcg.h"
-#include "model/objectbase.h"
+#include "rtti/objectbase.h"
 #include "appdata.h"
 
 CustomKeysEvtHandler::CustomKeysEvtHandler()
