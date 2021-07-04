@@ -118,11 +118,11 @@ set(wxWEAVER_SOURCE_FILES
     src/xrcloader.cpp
 )
 if(APPLE)
-   set(MACOSX_BUNDLE_ICON_FILE icon.icns)
-   set(wxWEAVER_APP_ICON "${CMAKE_CURRENT_SOURCE_DIR}/resources/macos/icon.icns")
-   set_source_files_properties(${wxWEAVER_APP_ICON} PROPERTIES
-      MACOSX_PACKAGE_LOCATION "Resources"
-   )
+    set(MACOSX_BUNDLE_ICON_FILE icon.icns)
+    set(wxWEAVER_APP_ICON "${CMAKE_CURRENT_SOURCE_DIR}/resources/macos/icon.icns")
+    set_source_files_properties(${wxWEAVER_APP_ICON} PROPERTIES
+        MACOSX_PACKAGE_LOCATION "Resources"
+    )
     add_executable(${CMAKE_PROJECT_NAME}
         MACOSX_BUNDLE
         ${wxWEAVER_INCLUDE_FILES}

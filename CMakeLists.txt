@@ -3,7 +3,7 @@ project(wxWeaver
     VERSION 0.1.0
     LANGUAGES CXX C
     DESCRIPTION "GUI Designer for wxWidgets"
-    HOMEPAGE_URL "http://wxweaver.github.io.org"
+    HOMEPAGE_URL "http://wxweaver.github.io"
 )
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/scripts/cmake)
 
