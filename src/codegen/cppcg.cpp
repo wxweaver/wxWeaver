@@ -545,7 +545,7 @@ bool CppCodeGenerator::GenerateCode(PObjectBase project)
         wxLogError("Missing \"file\" property on Project Object");
         return false;
     }
-    wxString file = propFile->GetValue();
+    wxString file = propFile->GetValueAsString();
     if (file.empty())
         file = "noname";
 
@@ -711,7 +711,7 @@ void CppCodeGenerator::GenEvents(PObjectBase classObj, const EventVector& events
             classObj->GetClassName().c_str());
         return;
     }
-    wxString className = propName->GetValue();
+    wxString className = propName->GetValueAsString();
     if (className.empty()) {
         wxLogError("Object name cannot be null");
         return;
@@ -862,7 +862,7 @@ void CppCodeGenerator::GenAttributeDeclaration(PObjectBase obj, Permission perm,
 {
     wxString typeName = obj->GetTypeName();
     if (ObjectDatabase::HasCppProperties(typeName)) {
-        wxString permStr = obj->GetProperty("permission")->GetValue();
+        wxString permStr = obj->GetProperty("permission")->GetValueAsString();
 
         if ((perm == P_PUBLIC && permStr == "public")
             || (perm == P_PROTECTED && permStr == "protected")
@@ -968,7 +968,7 @@ wxString CppCodeGenerator::GetDeclaration(PObjectBase obj,
         return GetCode(obj, "declaration");
     }
     // Object has a name, check if its an array
-    wxString name = propName->GetValue();
+    wxString name = propName->GetValueAsString();
     wxString baseName;
     ArrayItem unused;
     if (!ParseArrayName(name, baseName, unused)) {
@@ -1029,7 +1029,7 @@ void CppCodeGenerator::GenClassDeclaration(PObjectBase classObj, bool useEnum,
             classObj->GetClassName().c_str());
         return;
     }
-    wxString className = propName->GetValue();
+    wxString className = propName->GetValueAsString();
     if (className.empty()) {
         wxLogError("Object name can not be null");
         return;
@@ -1428,7 +1428,7 @@ void CppCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
         // Checking if it has not been declared as class attribute
         // so that, we will declare it inside the constructor
 
-        wxString permStr = obj->GetProperty("permission")->GetValue();
+        wxString permStr = obj->GetProperty("permission")->GetValueAsString();
         if (permStr == "none") {
             const auto& decl = GetDeclaration(obj, arrays, false);
             if (!decl.empty())
@@ -1477,8 +1477,8 @@ void CppCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
             switch (obj->GetChildCount()) {
             case 1: {
                 PObjectBase sub1 = obj->GetChild(0)->GetChild(0);
-                wxString _template = "$name->Initialize(";
-                _template = _template + sub1->GetProperty("name")->GetValue() + ");";
+                wxString _template = "$name->Initialize("
+                    + sub1->GetProperty("name")->GetValueAsString() + ");";
 
                 CppTemplateParser parser(obj, _template,
                                          m_useI18n, m_useRelativePath, m_basePath);
@@ -1491,14 +1491,15 @@ void CppCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                 sub2 = obj->GetChild(1)->GetChild(0);
 
                 wxString _template;
-                if (obj->GetProperty("splitmode")->GetValue() == "wxSPLIT_VERTICAL")
+                if (obj->GetProperty("splitmode")->GetValueAsString()
+                    == "wxSPLIT_VERTICAL")
                     _template = "$name->SplitVertically(";
                 else
                     _template = "$name->SplitHorizontally(";
 
                 _template = _template
-                    + sub1->GetProperty("name")->GetValue() + ", "
-                    + sub2->GetProperty("name")->GetValue()
+                    + sub1->GetProperty("name")->GetValueAsString() + ", "
+                    + sub2->GetProperty("name")->GetValueAsString()
                     + ", $sashpos);";
 
                 CppTemplateParser parser(obj, _template,
@@ -1615,7 +1616,7 @@ void CppCodeGenerator::FindMacros(PObjectBase obj, std::vector<wxString>* macros
     for (size_t i = 0; i < obj->GetPropertyCount(); i++) {
         PProperty prop = obj->GetProperty(i);
         if (prop->GetType() == PT_MACRO) {
-            wxString value = prop->GetValue();
+            wxString value = prop->GetValueAsString();
             // Skip wx IDs
             if ((!value.Contains("XRCID"))
                 && (m_predMacros.end() == m_predMacros.find(value))) {
@@ -1771,7 +1772,7 @@ void CppCodeGenerator::FindEmbeddedBitmapProperties(PObjectBase obj,
     for (i = 0; i < count; i++) {
         PProperty property = obj->GetProperty(i);
         if (property->GetType() == PT_BITMAP) {
-            wxString propValue = property->GetValue();
+            wxString propValue = property->GetValueAsString();
             wxString path;
             wxString source;
             wxSize icoSize;

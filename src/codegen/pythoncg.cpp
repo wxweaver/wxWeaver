@@ -441,7 +441,7 @@ bool PythonCodeGenerator::GenerateCode(PObjectBase project)
         wxLogError("Missing \"file\" property on Project Object");
         return false;
     }
-    wxString file = propFile->GetValue();
+    wxString file = propFile->GetValueAsString();
     if (file.empty()) {
         file = "noname";
     }
@@ -522,7 +522,7 @@ void PythonCodeGenerator::GenEvents(PObjectBase classObj, const EventVector& eve
             classObj->GetClassName().c_str());
         return;
     }
-    wxString className = propName->GetValue();
+    wxString className = propName->GetValueAsString();
     if (className.empty()) {
         wxLogError("Object name cannot be null");
         return;
@@ -696,7 +696,7 @@ wxString PythonCodeGenerator::GetConstruction(PObjectBase obj, bool silent,
         return GetCode(obj, "construction", silent);
     }
     // Object has a name, check if its an array
-    const auto& name = propName->GetValue();
+    const auto& name = propName->GetValueAsString();
     wxString baseName;
     ArrayItem unused;
     if (!ParseArrayName(name, baseName, unused)) {
@@ -761,7 +761,7 @@ void PythonCodeGenerator::GenClassDeclaration(PObjectBase classObj, bool /*useEn
                    classObj->GetClassName().c_str());
         return;
     }
-    wxString className = propName->GetValue();
+    wxString className = propName->GetValueAsString();
     if (className.empty()) {
         wxLogError("Object name can not be null");
         return;
@@ -1036,7 +1036,7 @@ void PythonCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                 PObjectBase sub1 = obj->GetChild(0)->GetChild(0);
                 wxString _template = "self.$name.Initialize(";
                 _template = _template + "self."
-                    + sub1->GetProperty("name")->GetValue() + ")";
+                    + sub1->GetProperty("name")->GetValueAsString() + ")";
 
                 PythonTemplateParser parser(obj, _template, m_useI18n,
                                             m_useRelativePath, m_basePath,
@@ -1050,14 +1050,14 @@ void PythonCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                 sub2 = obj->GetChild(1)->GetChild(0);
 
                 wxString _template;
-                if (obj->GetProperty("splitmode")->GetValue() == "wxSPLIT_VERTICAL")
+                if (obj->GetProperty("splitmode")->GetValueAsString() == "wxSPLIT_VERTICAL")
                     _template = "self.$name.SplitVertically(";
                 else
                     _template = "self.$name.SplitHorizontally(";
 
                 _template = _template + "self."
-                    + sub1->GetProperty("name")->GetValue()
-                    + ", self." + sub2->GetProperty("name")->GetValue()
+                    + sub1->GetProperty("name")->GetValueAsString()
+                    + ", self." + sub2->GetProperty("name")->GetValueAsString()
                     + ", $sashpos)";
 
                 PythonTemplateParser parser(obj, _template, m_useI18n,
@@ -1191,7 +1191,7 @@ void PythonCodeGenerator::FindMacros(PObjectBase obj, std::vector<wxString>* mac
     for (size_t i = 0; i < obj->GetPropertyCount(); i++) {
         PProperty prop = obj->GetProperty(i);
         if (prop->GetType() == PT_MACRO) {
-            wxString value = prop->GetValue();
+            wxString value = prop->GetValueAsString();
             if (value.IsEmpty())
                 continue;
 #if 0

@@ -244,7 +244,7 @@ void VisualEditor::ScanPanes(wxWindow* parent)
                             break;
                         }
                         PProperty pdock = obj->GetProperty("docking");
-                        if (pdock->GetValue() != dockDir) {
+                        if (pdock->GetValueAsString() != dockDir) {
                             pdock->SetValue(dockDir);
                             updateNeeded = true;
                         }
@@ -253,7 +253,7 @@ void VisualEditor::ScanPanes(wxWindow* parent)
                         wxPoint pos = inf.floating_pos;
                         if (pos.x != -1 && pos.y != -1) {
                             PProperty pposition = obj->GetProperty("pane_position");
-                            if (pposition->GetValue() != TypeConv::PointToString(pos)) {
+                            if (pposition->GetValueAsString() != TypeConv::PointToString(pos)) {
                                 pposition->SetValue(TypeConv::PointToString(pos));
                                 updateNeeded = true;
                             }
@@ -261,7 +261,7 @@ void VisualEditor::ScanPanes(wxWindow* parent)
                         wxSize paneSize = inf.floating_size;
                         if (paneSize.x != -1 && paneSize.y != -1) {
                             PProperty psize = obj->GetProperty("pane_size");
-                            if (psize->GetValue() != TypeConv::SizeToString(paneSize)) {
+                            if (psize->GetValueAsString() != TypeConv::SizeToString(paneSize)) {
                                 psize->SetValue(TypeConv::SizeToString(paneSize));
                                 obj->GetProperty("resize")->SetValue(wxS("Resizable"));
                                 updateNeeded = true;
@@ -270,7 +270,7 @@ void VisualEditor::ScanPanes(wxWindow* parent)
                         dock = "Float";
                     }
                     PProperty pfloat = obj->GetProperty("dock");
-                    if (pfloat->GetValue() != dock) {
+                    if (pfloat->GetValueAsString() != dock) {
                         pfloat->SetValue(dock);
                         updateNeeded = true;
                     }
@@ -279,7 +279,7 @@ void VisualEditor::ScanPanes(wxWindow* parent)
                     wxSize bestSize = inf.best_size;
                     if (bestSize.x != -1 && bestSize.y != -1) {
                         PProperty psize = obj->GetProperty("best_size");
-                        if (psize->GetValue() != TypeConv::SizeToString(bestSize)) {
+                        if (psize->GetValueAsString() != TypeConv::SizeToString(bestSize)) {
                             psize->SetValue(TypeConv::SizeToString(bestSize));
                             obj->GetProperty("resize")->SetValue(wxS("Resizable"));
                             updateNeeded = true;
@@ -425,9 +425,9 @@ void VisualEditor::Create()
             // --- [2] Set the color of the form -------------------------------
 
             PProperty background(m_form->GetProperty("bg"));
-            if (background && !background->GetValue().empty()) {
+            if (background && !background->GetValueAsString().empty()) {
                 m_designer->GetFrameContentPanel()->SetBackgroundColour(
-                    TypeConv::StringToColour(background->GetValue()));
+                    TypeConv::StringToColour(background->GetValueAsString()));
             } else {
                 if (m_form->GetClassName() == "Frame") {
                     m_designer->GetFrameContentPanel()->SetOwnBackgroundColour(
@@ -470,7 +470,7 @@ void VisualEditor::Create()
                 bool showbutton = false;
                 PProperty extraStyle = m_form->GetProperty("extra_style");
                 if (extraStyle)
-                    showbutton = extraStyle->GetValue().Contains("wxWIZARD_EX_HELPBUTTON");
+                    showbutton = extraStyle->GetValueAsString().Contains("wxWIZARD_EX_HELPBUTTON");
 
                 m_wizard->ShowHelpButton(showbutton);
 
@@ -561,11 +561,11 @@ void VisualEditor::Create()
 
             PProperty enabled(m_form->GetProperty("enabled"));
             if (enabled)
-                m_designer->Enable(TypeConv::StringToInt(enabled->GetValue()));
+                m_designer->Enable(TypeConv::StringToInt(enabled->GetValueAsString()));
 
             PProperty hidden(m_form->GetProperty("hidden"));
             if (hidden)
-                m_designer->Show(!TypeConv::StringToInt(hidden->GetValue()));
+                m_designer->Show(!TypeConv::StringToInt(hidden->GetValueAsString()));
 
             if (m_auiMgr)
                 m_auiMgr->Update();
@@ -699,7 +699,7 @@ void VisualEditor::SetupWindow(PObjectBase obj, wxWindow* window)
     wxPoint pos;
     PProperty posProperty = obj->GetProperty("pos");
     if (posProperty)
-        pos = TypeConv::StringToPoint(posProperty->GetValue());
+        pos = TypeConv::StringToPoint(posProperty->GetValueAsString());
 #endif
     // Size
     wxSize size = obj->GetPropertyAsSize("size");
@@ -718,23 +718,23 @@ void VisualEditor::SetupWindow(PObjectBase obj, wxWindow* window)
 
     // Font
     PProperty fontProperty = obj->GetProperty("font");
-    if (fontProperty && !fontProperty->GetValue().empty())
-        window->SetFont(TypeConv::StringToFont(fontProperty->GetValue()));
+    if (fontProperty && !fontProperty->GetValueAsString().empty())
+        window->SetFont(TypeConv::StringToFont(fontProperty->GetValueAsString()));
 
     // Foreground
     PProperty fgProperty = obj->GetProperty("fg");
-    if (fgProperty && !fgProperty->GetValue().empty())
-        window->SetForegroundColour(TypeConv::StringToColour(fgProperty->GetValue()));
+    if (fgProperty && !fgProperty->GetValueAsString().empty())
+        window->SetForegroundColour(TypeConv::StringToColour(fgProperty->GetValueAsString()));
 
     // Background
     PProperty bgProperty = obj->GetProperty("bg");
-    if (bgProperty && !bgProperty->GetValue().empty())
-        window->SetBackgroundColour(TypeConv::StringToColour(bgProperty->GetValue()));
+    if (bgProperty && !bgProperty->GetValueAsString().empty())
+        window->SetBackgroundColour(TypeConv::StringToColour(bgProperty->GetValueAsString()));
 
     // Extra Style
     PProperty exStyleProperty = obj->GetProperty("window_extra_style");
     if (exStyleProperty)
-        window->SetExtraStyle(TypeConv::StringToInt(exStyleProperty->GetValue()));
+        window->SetExtraStyle(TypeConv::StringToInt(exStyleProperty->GetValueAsString()));
 
     // Enabled
     PProperty enabledProperty = obj->GetProperty("enabled");

@@ -158,7 +158,7 @@ void PHPPanel::OnCodeGeneration(wxWeaverEvent& event)
     bool doFile = false;
     PProperty pCodeGen = project->GetProperty("code_generation");
     if (pCodeGen)
-        doFile = TypeConv::FlagSet("PHP", pCodeGen->GetValue()) && !panelOnly;
+        doFile = TypeConv::FlagSet("PHP", pCodeGen->GetValueAsString()) && !panelOnly;
 
     if (!(doPanel || doFile))
         return;
@@ -172,7 +172,7 @@ void PHPPanel::OnCodeGeneration(wxWeaverEvent& event)
     wxString file; // Get the file name
     PProperty pfile = project->GetProperty("file");
     if (pfile)
-        file = pfile->GetValue();
+        file = pfile->GetValueAsString();
 
     if (file.empty())
         file = "noname";

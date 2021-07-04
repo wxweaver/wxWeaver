@@ -405,7 +405,7 @@ bool PHPCodeGenerator::GenerateCode(PObjectBase project)
         wxLogError("Missing \"file\" property on Project Object");
         return false;
     }
-    wxString file = propFile->GetValue();
+    wxString file = propFile->GetValueAsString();
     if (file.empty())
         file = "noname";
 
@@ -491,7 +491,7 @@ void PHPCodeGenerator::GenEvents(PObjectBase classObj,
             classObj->GetClassName().c_str());
         return;
     }
-    wxString class_name = propName->GetValue();
+    wxString class_name = propName->GetValueAsString();
     if (class_name.empty()) {
         wxLogError("Object name cannot be null");
         return;
@@ -663,7 +663,7 @@ wxString PHPCodeGenerator::GetConstruction(PObjectBase obj, ArrayItems& arrays)
         return GetCode(obj, "construction");
     }
     // Object has a name, check if its an array
-    const auto& name = propName->GetValue();
+    const auto& name = propName->GetValueAsString();
     wxString baseName;
     ArrayItem unused;
     if (!ParseArrayName(name, baseName, unused)) {
@@ -709,7 +709,7 @@ void PHPCodeGenerator::GenClassDeclaration(PObjectBase classObj, bool /*use_enum
             classObj->GetClassName().c_str());
         return;
     }
-    wxString class_name = propName->GetValue();
+    wxString class_name = propName->GetValueAsString();
     if (class_name.empty()) {
         wxLogError("Object name can not be null");
         return;
@@ -996,7 +996,7 @@ void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayIte
             case 1: {
                 PObjectBase sub1 = obj->GetChild(0)->GetChild(0);
                 wxString _template = "@$this->$name->Initialize(@$this->"
-                    + sub1->GetProperty("name")->GetValue() + ");";
+                    + sub1->GetProperty("name")->GetValueAsString() + ");";
 
                 PHPTemplateParser parser(obj, _template, m_useI18n,
                                          m_useRelativePath, m_basePath);
@@ -1009,15 +1009,15 @@ void PHPCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget, ArrayIte
                 sub2 = obj->GetChild(1)->GetChild(0);
 
                 wxString _template;
-                if (obj->GetProperty("splitmode")->GetValue() == "wxSPLIT_VERTICAL")
+                if (obj->GetProperty("splitmode")->GetValueAsString() == "wxSPLIT_VERTICAL")
                     _template = "@$this->$name->SplitVertically(";
                 else
                     _template = "@$this->$name->SplitHorizontally(";
 
                 _template = _template + "@$this->"
-                    + sub1->GetProperty("name")->GetValue()
+                    + sub1->GetProperty("name")->GetValueAsString()
                     + ", @$this->"
-                    + sub2->GetProperty("name")->GetValue()
+                    + sub2->GetProperty("name")->GetValueAsString()
                     + ", $sashpos);";
 
                 PHPTemplateParser parser(obj, _template, m_useI18n,
@@ -1135,7 +1135,7 @@ void PHPCodeGenerator::FindMacros(PObjectBase obj, std::vector<wxString>* macros
     for (size_t i = 0; i < obj->GetPropertyCount(); i++) {
         PProperty prop = obj->GetProperty(i);
         if (prop->GetType() == PT_MACRO) {
-            wxString value = prop->GetValue();
+            wxString value = prop->GetValueAsString();
             if (value.IsEmpty())
                 continue;
 

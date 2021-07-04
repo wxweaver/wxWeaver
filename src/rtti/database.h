@@ -44,7 +44,8 @@ class ObjectPackage {
 public:
     /** Constructor.
     */
-    ObjectPackage(wxString name, wxString desc, wxBitmap icon);
+    ObjectPackage(const wxString& name, const wxString& description,
+                  const wxBitmap& icon);
 
     /** Adds an object information into the package.
     */
@@ -99,7 +100,7 @@ public:
 
     /** Gets the information of an object from the name of the class.
     */
-    PObjectInfo GetObjectInfo(wxString class_name);
+    PObjectInfo GetObjectInfo(const wxString& class_name);
 
     /** Sets the path where the files with the description are located.
     */
@@ -113,9 +114,9 @@ public:
 
     /** Obtains the path where the files with the object description are located.
     */
-    wxString GetXmlPath() { return m_xmlPath; }
-    wxString GetIconPath() { return m_iconPath; }
-    wxString GetPluginPath() { return m_pluginPath; }
+    wxString GetXmlPath() const { return m_xmlPath; }
+    wxString GetIconPath() const { return m_iconPath; }
+    wxString GetPluginPath() const { return m_pluginPath; }
 
     /** Loads the object type definitions.
     */
@@ -129,7 +130,7 @@ public:
 
         A new instance of an object is created from the class name.
     */
-    PObjectBase CreateObject(std::string class_name, PObjectBase parent = PObjectBase());
+    PObjectBase CreateObject(const std::string& class_name, PObjectBase parent = PObjectBase());
 
     /** Factory of objects from an XML object.
 
@@ -158,7 +159,7 @@ public:
    */
     void ResetObjectCounters();
 
-    static bool HasCppProperties(wxString type);
+    static bool HasCppProperties(const wxString& type);
 
 private:
     /** Initialize the property type map.
@@ -182,7 +183,7 @@ private:
 
         @throw wxWeaverException If the library could not be imported.
     */
-    void ImportComponentLibrary(wxString libfile, PwxWeaverManager manager);
+    void ImportComponentLibrary(const wxString& libfile, PwxWeaverManager manager);
 
     /** Includes information inherited from objects in a package.
 
@@ -190,16 +191,13 @@ private:
     */
     void SetupPackage(const wxString& file, const wxString& path, PwxWeaverManager manager);
 
-    /** Determines whether the object type should be included in the components.
+    /** Determines whether the object type should be exposed in the palette.
     */
-    bool ShowInPalette(wxString type);
+    bool ShowInPalette(const wxString& type) const;
 
-    // conversion routines
-    PropertyType ParsePropertyType(wxString str);
+    PropertyType ParsePropertyType(const wxString& name);
 
-    wxString ParseObjectType(wxString str);
-
-    PObjectType GetObjectType(wxString name);
+    PObjectType GetObjectType(const wxString& name);
 
     size_t CountChildrenWithSameType(PObjectBase parent, PObjectType type);
     size_t CountChildrenWithSameType(PObjectBase parent, const std::set<PObjectType>& types);

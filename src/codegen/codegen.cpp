@@ -326,14 +326,14 @@ bool TemplateParser::ParseWxParent()
             // We got a wxStaticBoxSizer as parent,
             // use the special PT_WXPARENT_SB type to generate code
             // to get its static box
-            m_out << ValueToCode(PT_WXPARENT_SB, property->GetValue());
+            m_out << ValueToCode(PT_WXPARENT_SB, property->GetValueAsString());
         } else if (classname == "wxCollapsiblePane") {
             // We got a wxCollapsiblePane as parent,
             // use the special PT_WXPARENT_CP type to generate code
             // to get its pane
-            m_out << ValueToCode(PT_WXPARENT_CP, property->GetValue());
+            m_out << ValueToCode(PT_WXPARENT_CP, property->GetValueAsString());
         } else {
-            m_out << ValueToCode(PT_WXPARENT, property->GetValue());
+            m_out << ValueToCode(PT_WXPARENT, property->GetValueAsString());
         }
     } else {
         ignoreLeadingWhitespaces();
@@ -422,7 +422,7 @@ bool TemplateParser::ParseForEach()
         wxString inner_template = ExtractInnerTemplate();
 
         PProperty property = m_obj->GetProperty(propname);
-        wxString propvalue = property->GetValue();
+        wxString propvalue = property->GetValueAsString();
 
         // Property value must be an string using ',' as separator.
         // The template will be generated nesting as many times as
@@ -642,7 +642,7 @@ bool TemplateParser::ParseIfEqual()
         // Get the value of the property
         wxString propValue;
         if (childName.empty())
-            propValue = property->GetValue();
+            propValue = property->GetValueAsString();
         else
             propValue = property->GetChildFromParent(childName);
 
@@ -675,7 +675,7 @@ bool TemplateParser::ParseIfNotEqual()
         // Get the value of the property
         wxString propValue;
         if (childName.empty()) {
-            propValue = property->GetValue();
+            propValue = property->GetValueAsString();
         } else {
             propValue = property->GetChildFromParent(childName);
         }
@@ -1025,9 +1025,9 @@ void TemplateParser::ParseUnindent()
 wxString TemplateParser::PropertyToCode(PProperty property)
 {
     if (property)
-        return ValueToCode(property->GetType(), property->GetValue());
-    else
-        return wxEmptyString;
+        return ValueToCode(property->GetType(), property->GetValueAsString());
+
+    return wxEmptyString;
 }
 
 bool TemplateParser::IsEqual(const wxString& value, const wxString& set)
@@ -1051,9 +1051,9 @@ CodeGenerator::~CodeGenerator() = default;
 void CodeGenerator::FindArrayObjects(PObjectBase obj, ArrayItems& arrays, bool skipRoot)
 {
     if (!skipRoot) {
-        const auto& propName = obj->GetProperty("name");
+        PProperty propName = obj->GetProperty("name");
         if (propName) {
-            const auto& name = propName->GetValue();
+            wxString name = propName->GetValueAsString();
             wxString baseName;
             ArrayItem item;
             if (ParseArrayName(name, baseName, item)) {

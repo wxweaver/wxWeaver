@@ -203,7 +203,7 @@ void CppPanel::OnCodeGeneration(wxWeaverEvent& event)
     bool doFile = false;
     PProperty pCodeGen = project->GetProperty("code_generation");
     if (pCodeGen)
-        doFile = TypeConv::FlagSet("C++", pCodeGen->GetValue()) && !panelOnly;
+        doFile = TypeConv::FlagSet("C++", pCodeGen->GetValueAsString()) && !panelOnly;
 
     if (!(doPanel || doFile))
         return;
@@ -216,7 +216,7 @@ void CppPanel::OnCodeGeneration(wxWeaverEvent& event)
     wxString file; // Get the file name
     PProperty pfile = project->GetProperty("file");
     if (pfile)
-        file = pfile->GetValue();
+        file = pfile->GetValueAsString();
 
     if (file.empty())
         file = "noname";

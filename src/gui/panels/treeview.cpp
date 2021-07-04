@@ -329,7 +329,7 @@ void ObjectTree::UpdateItem(wxTreeItemId id, PObjectBase obj)
     PProperty prop = obj->GetProperty("name");
     wxString objName;
     if (prop)
-        objName = prop->GetValue();
+        objName = prop->GetValueAsString();
 
     wxString text = objName + " : " + className;
     m_tcObjects->SetItemText(id, text); // actualizamos el item

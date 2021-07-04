@@ -259,7 +259,7 @@ wxPGProperty* ObjectInspector::GetProperty(PProperty prop)
                                           prop->GetValueAsString());
     } else if (type == PT_BOOL) {
         result = new wxBoolProperty(label, name,
-                                    prop->GetValue() == "1");
+                                    prop->GetValueAsString() == "1");
     } else if (type == PT_BITLIST) {
         PPropertyInfo propDesc = prop->GetPropertyInfo();
         POptionList optList = propDesc->GetOptionList();
@@ -432,7 +432,7 @@ void ObjectInspector::AddItems(const wxString& name, PObjectBase obj,
 
                         // perform delayed child properties update
                         wxCommandEvent e(wxEVT_WVR_PROP_BITMAP_CHANGED);
-                        e.SetString(bp->GetName() + ":" + prop->GetValue());
+                        e.SetString(bp->GetName() + ":" + prop->GetValueAsString());
                         GetEventHandler()->AddPendingEvent(e);
 #if 0
                         AppData()->ModifyProperty(prop, bp->GetValueAsString());

@@ -149,7 +149,7 @@ void PythonPanel::OnCodeGeneration(wxWeaverEvent& event)
     bool doFile = false;
     PProperty pCodeGen = project->GetProperty("code_generation");
     if (pCodeGen)
-        doFile = TypeConv::FlagSet("Python", pCodeGen->GetValue()) && !panelOnly;
+        doFile = TypeConv::FlagSet("Python", pCodeGen->GetValueAsString()) && !panelOnly;
 
     if (!(doPanel || doFile))
         return;
@@ -164,7 +164,7 @@ void PythonPanel::OnCodeGeneration(wxWeaverEvent& event)
     wxString file;
     PProperty pfile = project->GetProperty("file");
     if (pfile)
-        file = pfile->GetValue();
+        file = pfile->GetValueAsString();
 
     if (file.empty())
         file = "noname";

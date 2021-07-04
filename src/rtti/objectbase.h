@@ -37,12 +37,12 @@
 
 class OptionList {
 public:
-    void AddOption(wxString option, wxString description = wxString())
+    void AddOption(const wxString& option, const wxString& description = wxString())
     {
         m_options[option] = description;
     }
-    size_t GetOptionCount() { return (size_t)m_options.size(); }
-    const std::map<wxString, wxString>& GetOptions() { return m_options; }
+    size_t GetOptionCount() const { return m_options.size(); }
+    std::map<wxString, wxString> GetOptions() const { return m_options; }
 
 private:
     std::map<wxString, wxString> m_options;
@@ -59,19 +59,20 @@ struct PropertyChild {
 
 class PropertyInfo {
 public:
-    PropertyInfo(wxString name, PropertyType type, wxString defValue,
-                 wxString description, wxString customEditor,
+    PropertyInfo(const wxString& name, PropertyType type, const wxString& defValue,
+                 const wxString& description, const wxString& customEditor,
                  POptionList optList, const std::list<PropertyChild>& children);
     ~PropertyInfo();
 
-    wxString GetDefaultValue() { return m_defValue; }
-    PropertyType GetType() { return m_type; }
-    wxString GetName() { return m_name; }
-    wxString GetLabel() { return _(m_name); }
-    POptionList GetOptionList() { return m_optList; }
+    wxString GetCustomEditor() const { return m_customEditor; }
+    wxString GetDefaultValue() const { return m_defValue; }
+    wxString GetDescription() const { return m_description; }
+    wxString GetName() const { return m_name; }
+    wxString GetLabel() const { return _(m_name); }
+
+    POptionList GetOptionList() const { return m_optList; }
+    PropertyType GetType() const { return m_type; }
     std::list<PropertyChild>* GetChildren() { return &m_children; }
-    wxString GetDescription() { return m_description; }
-    wxString GetCustomEditor() { return m_customEditor; }
 
 private:
     friend class Property;
@@ -87,16 +88,14 @@ private:
 
 class EventInfo {
 public:
-    EventInfo(const wxString& name,
-              const wxString& eventClass,
-              const wxString& defValue,
-              const wxString& description);
+    EventInfo(const wxString& name, const wxString& eventClass,
+              const wxString& defValue, const wxString& description);
 
-    wxString GetName() { return m_name; }
-    wxString GetLabel() { return _(m_name); }
-    wxString GetEventClassName() { return m_eventClass; }
-    wxString GetDefaultValue() { return m_defaultValue; }
-    wxString GetDescription() { return m_description; }
+    wxString GetDefaultValue() const { return m_defaultValue; }
+    wxString GetDescription() const { return m_description; }
+    wxString GetEventClassName() const { return m_eventClass; }
+    wxString GetLabel() const { return _(m_name); }
+    wxString GetName() const { return m_name; }
 
 private:
     wxString m_name;
@@ -114,40 +113,38 @@ public:
     }
 
     PObjectBase GetObject() { return m_object.lock(); }
-    wxString GetName() { return m_info->GetName(); }
-    wxString GetValue() { return m_value; }
-    void SetValue(wxString& val) { m_value = val; }
-    void SetValue(const wxChar* val) { m_value = val; }
-
     PPropertyInfo GetPropertyInfo() { return m_info; }
-    PropertyType GetType() { return m_info->GetType(); }
+    PropertyType GetType() const { return m_info->GetType(); }
 
-    bool IsDefaultValue();
-    bool IsNull();
-    void SetDefaultValue();
-    void ChangeDefaultValue(const wxString& value) { m_info->m_defValue = value; }
+    bool IsDefaultValue() const;
+    bool IsNull() const;
 
-    void SetValue(const wxFontContainer& font);
-    void SetValue(const wxColour& colour);
-    void SetValue(const wxString& str, bool format = false);
-    void SetValue(const wxPoint& point);
-    void SetValue(const wxSize& size);
-    void SetValue(const int integer);
-    void SetValue(const double val);
-
-    wxFontContainer GetValueAsFont();
-    wxColour GetValueAsColour();
-    wxPoint GetValueAsPoint();
-    wxSize GetValueAsSize();
-    int GetValueAsInteger();
-    wxString GetValueAsString();
-    wxBitmap GetValueAsBitmap();
-    wxString GetValueAsText(); // sustituye los ('\n',...) por ("\\n",...)
-
-    wxArrayString GetValueAsArrayString();
-    double GetValueAsFloat();
-    void SplitParentProperty(std::map<wxString, wxString>* children);
+    // TODO: const, probably needs to be renamed
     wxString GetChildFromParent(const wxString& childName);
+    wxString GetName() const { return m_info->GetName(); }
+
+    wxArrayString GetValueAsArrayString() const;
+    wxBitmap GetValueAsBitmap() const;
+    wxColour GetValueAsColour() const;
+    wxFontContainer GetValueAsFont() const;
+    wxPoint GetValueAsPoint() const;
+    wxSize GetValueAsSize() const;
+    wxString GetValueAsString() const;
+    wxString GetValueAsText() const; // replaces ('\n',...) with ("\\n",...)
+    double GetValueAsFloat() const;
+    int GetValueAsInteger() const;
+
+    void SetValue(const wxChar* value) { m_value = value; }
+    void SetValue(const wxColour& value);
+    void SetValue(const wxFontContainer& value);
+    void SetValue(const wxSize& value);
+    void SetValue(const wxString& value, bool format = false);
+    void SetValue(const wxPoint& value);
+    void SetValue(const double value);
+    void SetValue(const int value);
+
+    // TODO: Return a value instead using an output parameter
+    void SplitParentProperty(std::map<wxString, wxString>* children);
 
 private:
     PPropertyInfo m_info;  // pointer to its descriptor
@@ -162,11 +159,14 @@ public:
         , m_object(obj)
     {
     }
-    void SetValue(const wxString& value) { m_value = value; }
-    wxString GetValue() { return m_value; }
-    wxString GetName() { return m_info->GetName(); }
+
     PObjectBase GetObject() { return m_object.lock(); }
     PEventInfo GetEventInfo() { return m_info; }
+
+    wxString GetName() const { return m_info->GetName(); }
+    wxString GetValue() const { return m_value; }
+
+    void SetValue(const wxString& value) { m_value = value; }
 
 private:
     PEventInfo m_info;     // pointer to its descriptor
@@ -180,37 +180,22 @@ public:
         : m_name(name)
     {
     }
-    void AddProperty(wxString name) { m_properties.push_back(name); }
-    void AddEvent(wxString name) { m_events.push_back(name); }
+
+    PPropertyCategory GetCategory(size_t index) const;
+
+    wxString GetName() const { return m_name; }
+    wxString GetLabel() const { return _(m_name); }
+
+    wxString GetEventName(size_t index) const;
+    wxString GetPropertyName(size_t index) const;
+
+    size_t GetCategoryCount() const { return m_categories.size(); }
+    size_t GetEventCount() const { return m_events.size(); }
+    size_t GetPropertyCount() const { return m_properties.size(); }
+
     void AddCategory(PPropertyCategory category) { m_categories.push_back(category); }
-    wxString GetName() { return m_name; }
-    wxString GetLabel() { return _(m_name); }
-    wxString GetPropertyName(size_t index)
-    {
-        if (index < m_properties.size())
-            return m_properties[index];
-        else
-            return wxEmptyString;
-    }
-
-    wxString GetEventName(size_t index)
-    {
-        if (index < m_events.size())
-            return m_events[index];
-        else
-            return wxEmptyString;
-    }
-
-    PPropertyCategory GetCategory(size_t index)
-    {
-        if (index < m_categories.size())
-            return m_categories[index];
-        else
-            return PPropertyCategory();
-    }
-    size_t GetPropertyCount() { return m_properties.size(); }
-    size_t GetEventCount() { return m_events.size(); }
-    size_t GetCategoryCount() { return m_categories.size(); }
+    void AddEvent(const wxString& name) { m_events.push_back(name); }
+    void AddProperty(const wxString& name) { m_properties.push_back(name); }
 
 private:
     wxString m_name;
@@ -237,7 +222,7 @@ public:
 
     /** Gets whether the object is expanded in the object tree or not.
     */
-    bool GetExpanded() { return m_expanded; }
+    bool GetExpanded() const { return m_expanded; }
 
     /** Gets the object name.
 
@@ -245,7 +230,7 @@ public:
               Cada objeto tiene un nombre, el cual será el mismo que el usado
               como clave en el registro de descriptores.
     */
-    wxString GetClassName() override { return m_class; }
+    wxString GetClassName() const override { return m_class; }
 
     /** Gets the parent object
     */
@@ -262,9 +247,9 @@ public:
         @note Notar que no existe el método SetProperty, ya que la modificación
               se hace a través de la referencia.
     */
-    PProperty GetProperty(wxString name);
+    PProperty GetProperty(const wxString& name) const;
 
-    PEvent GetEvent(wxString name);
+    PEvent GetEvent(const wxString& name);
 
     /** Añade una propiedad al objeto.
 
@@ -278,9 +263,9 @@ public:
 
     /** Gets the object' property count.
     */
-    size_t GetPropertyCount() { return m_properties.size(); }
+    size_t GetPropertyCount() const { return m_properties.size(); }
 
-    size_t GetEventCount() { return m_events.size(); }
+    size_t GetEventCount() const { return m_events.size(); }
 
     /** Obtiene una propiedad del objeto.
         @todo esta función deberá lanzar una excepción en caso de no encontrarse
@@ -323,17 +308,17 @@ public:
     }
      @endcode
     */
-    PProperty GetProperty(size_t idx); // throws ...;
+    PProperty GetProperty(size_t index) const; // throws ...;
 
-    PEvent GetEvent(size_t idx); // throws ...;
+    PEvent GetEvent(size_t index); // throws ...;
 
     /** Devuelve el primer antecesor cuyo tipo coincida con el que se pasa
         como parámetro.
 
         Será útil para encontrar el widget padre.
     */
-    PObjectBase FindNearAncestor(wxString type);
-    PObjectBase FindNearAncestorByBaseClass(wxString type);
+    PObjectBase FindNearAncestor(const wxString& type);
+    PObjectBase FindNearAncestorByBaseClass(const wxString& type);
     PObjectBase FindParentForm();
 
     /** Obtiene el documento xml del arbol tomando como raíz el nodo actual.
@@ -374,7 +359,7 @@ public:
 
     /** Returns the child objects count.
     */
-    size_t GetChildCount() override { return m_children.size(); }
+    size_t GetChildCount() const override { return m_children.size(); }
 
     /** Comprueba si el tipo de objeto pasado es válido como hijo del objeto.
 
@@ -395,7 +380,7 @@ public:
 
         Deberá ser redefinida en cada clase derivada.
     */
-    wxString GetTypeName() override { return m_type; }
+    wxString GetTypeName() const override { return m_type; }
 
     void SetObjectTypeName(wxString type) { m_type = type; }
 
@@ -418,36 +403,36 @@ public:
     friend std::ostream& operator<<(std::ostream& s, PObjectBase obj);
 #endif
     // Implementación de la interfaz IObject para su uso dentro de los plugins
-    bool IsNull(const wxString& name) override;
-    int GetPropertyAsInteger(const wxString& name) override;
-    wxFontContainer GetPropertyAsFont(const wxString& name) override;
-    wxColour GetPropertyAsColour(const wxString& name) override;
-    wxString GetPropertyAsString(const wxString& name) override;
-    wxPoint GetPropertyAsPoint(const wxString& name) override;
-    wxSize GetPropertyAsSize(const wxString& name) override;
-    wxBitmap GetPropertyAsBitmap(const wxString& name) override;
-    double GetPropertyAsFloat(const wxString& name) override;
+    bool IsNull(const wxString& name) const override;
+    int GetPropertyAsInteger(const wxString& name) const override;
+    wxFontContainer GetPropertyAsFont(const wxString& name) const override;
+    wxColour GetPropertyAsColour(const wxString& name) const override;
+    wxString GetPropertyAsString(const wxString& name) const override;
+    wxPoint GetPropertyAsPoint(const wxString& name) const override;
+    wxSize GetPropertyAsSize(const wxString& name) const override;
+    wxBitmap GetPropertyAsBitmap(const wxString& name) const override;
+    double GetPropertyAsFloat(const wxString& name) const override;
 
-    wxArrayInt GetPropertyAsArrayInt(const wxString& name) override;
-    wxArrayString GetPropertyAsArrayString(const wxString& name) override;
+    wxArrayInt GetPropertyAsArrayInt(const wxString& name) const override;
+    wxArrayString GetPropertyAsArrayString(const wxString& name) const override;
     std::vector<std::pair<int, int>> GetPropertyAsVectorIntPair(const wxString& name) override;
     wxString GetChildFromParentProperty(const wxString& parentName,
-                                        const wxString& childName) override;
+                                        const wxString& childName) const override;
 
     IObject* GetChildPtr(size_t idx) override { return GetChild(idx).get(); }
 
 protected:
-    // utilites for implementing the tree
+    // Utilites for implementing the tree
     static const int INDENT;              // size of indent
     wxString GetIndentString(int indent); // obtiene la cadena con el indentado
 
     ObjectBaseVector& GetChildren() { return m_children; }
     PropertyMap& GetProperties() { return m_properties; }
 
-    // Crea un elemento del objeto
+    // Create an object element
     void SerializeObject(ticpp::Element* serializedElement);
 
-    // devuelve el puntero "this"
+    // Returns the "this" pointer
     PObjectBase GetThis() { return shared_from_this(); }
 
 private:
@@ -457,26 +442,26 @@ private:
     PropertyMap m_properties;
     EventMap m_events;
     PObjectInfo m_info;
-    WPObjectBase m_parent; // weak pointer, no reference loops please!
+    WPObjectBase m_parent; // weak pointer
     wxString m_class;      // class name
-    wxString m_type;       // type of object
+    wxString m_type;       // object type
     bool m_expanded;       // is expanded in the object tree, allows for saving to file
 };
 
-/** Clase que guarda un conjunto de plantillas de código.
+/** Class that stores a set of code templates.
 */
 class CodeInfo {
+public:
+    wxString GetTemplate(const wxString& name);
+    void AddTemplate(const wxString& name, const wxString& template_);
+    void Merge(PCodeInfo merger);
+
 private:
     typedef std::map<wxString, wxString> TemplateMap;
     TemplateMap m_templates;
-
-public:
-    wxString GetTemplate(wxString name);
-    void AddTemplate(wxString name, wxString _template);
-    void Merge(PCodeInfo merger);
 };
 
-/** Información de objeto o MetaObjeto.
+/** Object or MetaObject information.
 */
 class ObjectInfo {
 public:
@@ -520,18 +505,18 @@ public:
         @param propertName Name of the property to get the default value for
         @return The default value for the property
     */
-    wxString GetBaseClassDefaultPropertyValue(size_t baseIndex, const wxString& propertyName);
+    wxString GetBaseClassDefaultPropertyValue(size_t baseIndex, const wxString& propertyName) const;
 
     /** Devuelve el tipo de objeto.
 
         Será util para que el constructor de objetos sepa la clase derivada
         de ObjectBase que ha de crear a partir del descriptor.
     */
-    wxString GetTypeName() { return m_type->GetName(); }
+    wxString GetTypeName() const { return m_type->GetName(); }
 
     PObjectType GetType() { return m_type; }
 
-    wxString GetClassName() { return m_class; }
+    wxString GetClassName() const { return m_class; }
 #if 0
     /** Imprime el descriptor en un stream.
     */
@@ -542,7 +527,7 @@ public:
     friend std::ostream& operator<<(std::ostream& s, PObjectInfo obj);
 #endif
     // nos serán utiles para generar el nombre del objeto
-    size_t GetInstanceCount() { return m_numIns; }
+    size_t GetInstanceCount() const { return m_numIns; }
     void IncrementInstanceCount() { m_numIns++; }
     void ResetInstanceCount() { m_numIns = 0; }
 
@@ -554,13 +539,14 @@ public:
         return m_base.size() - 1;
     }
 
-    /** Comprueba si el tipo es derivado del que se pasa como parámetro.
+    // TODO: Rewrite these 4 functions with constness
+    /** Checks if the class is derived from the one passed as a parameter.
     */
-    bool IsSubclassOf(wxString classname);
+    bool IsSubclassOf(const wxString& classname) const;
 
-    PObjectInfo GetBaseClass(size_t idx, bool inherited = true);
-    void GetBaseClasses(std::vector<PObjectInfo>& classes, bool inherited = true);
-    size_t GetBaseClassCount(bool inherited = true);
+    PObjectInfo GetBaseClass(size_t index, bool inherited = true) const;
+    std::vector<PObjectInfo> GetBaseClasses(bool inherited = true) const;
+    size_t GetBaseClassCount(bool inherited = true) const;
 
     void SetIconFile(wxBitmap icon) { m_icon = icon; }
     wxBitmap GetIconFile() { return m_icon; }
@@ -568,27 +554,27 @@ public:
     void SetSmallIconFile(wxBitmap icon) { m_smallIcon = icon; }
     wxBitmap GetSmallIconFile() { return m_smallIcon; }
 
-    void AddCodeInfo(wxString lang, PCodeInfo codeinfo);
-    PCodeInfo GetCodeInfo(wxString lang);
+    void AddCodeInfo(const wxString& lang, PCodeInfo codeinfo);
+    PCodeInfo GetCodeInfo(const wxString& language);
 
     PObjectPackage GetPackage();
 
-    bool IsStartOfGroup() { return m_startGroup; }
+    bool IsStartOfGroup() const { return m_startGroup; }
 
     /** Le asigna un componente a la clase.
     */
-    void SetComponent(IComponent* c) { m_component = c; }
+    void SetComponent(IComponent* component) { m_component = component; }
     IComponent* GetComponent() { return m_component; }
 
 private:
-    wxString m_class;          // nombre de la clase (tipo de objeto)
-    PObjectType m_type;        // tipo del objeto
+    wxString m_class;          // Class name
+    PObjectType m_type;        // Object type
     WPObjectPackage m_package; // Package that the object comes from
     PPropertyCategory m_category;
-    IComponent* m_component; // componente asociado a la clase los objetos del designer
+    IComponent* m_component; // Component associated with the designer objects class
 
-    std::vector<PObjectInfo> m_base;          // base classes
-    std::map<wxString, PCodeInfo> m_codeTemp; // plantillas de codigo K=language_name T=PCodeInfo
+    std::vector<PObjectInfo> m_base;          // Base classes
+    std::map<wxString, PCodeInfo> m_codeTemp; // Code templates
     std::map<wxString, PPropertyInfo> m_properties;
     std::map<wxString, PEventInfo> m_events;
     std::map<size_t, std::map<wxString, wxString>> m_baseClassDefaultPropertyValues;
@@ -597,5 +583,5 @@ private:
     wxBitmap m_smallIcon; // The icon for the property grid toolbar
 
     bool m_startGroup; // Place a separator in the palette toolbar just before this widget
-    size_t m_numIns;   // número de instancias del objeto
+    size_t m_numIns;   // Number of instances of the object
 };

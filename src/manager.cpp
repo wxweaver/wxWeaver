@@ -80,7 +80,7 @@ IObject* wxWeaverManager::GetIObject(wxObject* wxobject)
     return obj.get();
 }
 
-size_t wxWeaverManager::GetChildCount(wxObject* wxobject)
+size_t wxWeaverManager::GetChildCount(wxObject* wxobject) const
 {
     CHECK_VISUAL_EDITOR(0)
     CHECK_WX_OBJECT(0)
@@ -125,8 +125,8 @@ wxObject* wxWeaverManager::GetWxObject(PObjectBase obj)
     return m_visualEdit->GetWxObject(obj);
 }
 
-void wxWeaverManager::ModifyProperty(wxObject* wxobject, wxString property,
-                                     wxString value, bool allowUndo)
+void wxWeaverManager::ModifyProperty(wxObject* wxobject, const wxString& property,
+                                     const wxString& value, bool allowUndo)
 {
     CHECK_VISUAL_EDITOR()
     // Prevent modified event in visual editor
@@ -148,7 +148,7 @@ void wxWeaverManager::ModifyProperty(wxObject* wxobject, wxString property,
         prop->SetValue(value);
 }
 
-bool wxWeaverManager::SelectObject(wxObject* wxobject)
+bool wxWeaverManager::SelectObject(wxObject* wxobject) const
 {
     CHECK_VISUAL_EDITOR(false)
     // Prevent loop of selection events

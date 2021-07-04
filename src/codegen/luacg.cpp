@@ -418,7 +418,7 @@ void LuaCodeGenerator::GenerateInheritedClass(PObjectBase userClasses,
             bool bAddCaption = false;
             PProperty propName = obj->GetProperty("name");
             if (propName) {
-                strClassName = propName->GetValue();
+                strClassName = propName->GetValueAsString();
                 if (strPrevClassName != strClassName) {
                     strPrevClassName = strClassName;
                     bAddCaption = true;
@@ -509,7 +509,7 @@ bool LuaCodeGenerator::GenerateCode(PObjectBase project)
         wxLogError("Missing \"file\" property on Project Object");
         return false;
     }
-    wxString file = propFile->GetValue();
+    wxString file = propFile->GetValueAsString();
     if (file.empty())
         file = "noname";
 
@@ -591,7 +591,7 @@ void LuaCodeGenerator::GenEvents(PObjectBase classObj, const EventVector& events
                    classObj->GetClassName().c_str());
         return;
     }
-    wxString className = propName->GetValue();
+    wxString className = propName->GetValueAsString();
     if (className.empty()) {
         wxLogError("Object name cannot be null");
         return;
@@ -788,7 +788,7 @@ wxString LuaCodeGenerator::GetConstruction(PObjectBase obj, bool silent,
         return GetCode(obj, "construction", silent, strSelf);
     }
     // Object has a name, check if its an array
-    const auto& name = propName->GetValue();
+    const auto& name = propName->GetValueAsString();
     wxString baseName;
     ArrayItem unused;
     if (!ParseArrayName(name, baseName, unused)) {
@@ -861,7 +861,7 @@ void LuaCodeGenerator::GenClassDeclaration(PObjectBase classObj, bool /*useEnum*
             strClassName.c_str());
         return;
     }
-    wxString strName = propName->GetValue();
+    wxString strName = propName->GetValueAsString();
     if (strName.empty()) {
         wxLogError("Object name can not be null");
         return;
@@ -1020,7 +1020,7 @@ void LuaCodeGenerator::GenConstructor(PObjectBase classObj,
             classObj->GetClassName().c_str());
         return;
     }
-    wxString strName = propName->GetValue();
+    wxString strName = propName->GetValueAsString();
     if (m_strUITable.length() > 0)
         strName = m_strUITable + "." + strName;
 
@@ -1100,7 +1100,7 @@ void LuaCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
         wxString strName;
         PProperty propName = obj->GetProperty("name");
         if (propName)
-            strName = propName->GetValue();
+            strName = propName->GetValueAsString();
 
         wxString strClass = obj->GetClassName();
 
@@ -1162,7 +1162,7 @@ void LuaCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
             case 1: {
                 PObjectBase sub1 = obj->GetChild(0)->GetChild(0);
                 wxString _template = "#utbl$name:Initialize(#utbl"
-                    + sub1->GetProperty("name")->GetValue() + ")";
+                    + sub1->GetProperty("name")->GetValueAsString() + ")";
                 _template.Replace("#utbl", m_strUITable + ".");
 
                 LuaTemplateParser parser(obj, _template, m_useI18n, m_useRelativePath,
@@ -1176,7 +1176,7 @@ void LuaCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                 sub2 = obj->GetChild(1)->GetChild(0);
 
                 wxString _template;
-                wxString strMode = obj->GetProperty("splitmode")->GetValue();
+                wxString strMode = obj->GetProperty("splitmode")->GetValueAsString();
                 bool bSplitVertical = (strMode == "wxSPLIT_VERTICAL");
                 if (bSplitVertical)
                     _template = "#utbl$name:SplitVertically(";
@@ -1184,8 +1184,8 @@ void LuaCodeGenerator::GenConstruction(PObjectBase obj, bool is_widget,
                     _template = "#utbl$name:SplitHorizontally(";
 
                 _template = _template + "#utbl"
-                    + sub1->GetProperty("name")->GetValue() + ", #utbl"
-                    + sub2->GetProperty("name")->GetValue() + ", $sashpos)";
+                    + sub1->GetProperty("name")->GetValueAsString() + ", #utbl"
+                    + sub2->GetProperty("name")->GetValueAsString() + ", $sashpos)";
                 _template = _template + "#nl #utbl$name"
                     + ":SetSplitMode("
                     + wxString::Format("%d", (bSplitVertical ? 1 : 0)) + ")";
@@ -1307,7 +1307,7 @@ void LuaCodeGenerator::FindMacros(PObjectBase obj, std::vector<wxString>* macros
     for (size_t i = 0; i < obj->GetPropertyCount(); i++) {
         PProperty prop = obj->GetProperty(i);
         if (prop->GetType() == PT_MACRO) {
-            wxString value = prop->GetValue();
+            wxString value = prop->GetValueAsString();
             if (value.IsEmpty())
                 continue;
 

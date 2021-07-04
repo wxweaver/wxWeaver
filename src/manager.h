@@ -31,7 +31,7 @@ class wxWeaverManager : public IManager {
 public:
     wxWeaverManager();
     void SetVisualEditor(VisualEditor* visualEdit);
-    size_t GetChildCount(wxObject* wxobject) override;
+    size_t GetChildCount(wxObject* wxobject) const override;
     wxObject* GetChild(wxObject* wxobject, size_t childIndex) override;
     wxObject* GetParent(wxObject* wxobject) override;
     IObject* GetIParent(wxObject* wxobject) override;
@@ -39,12 +39,12 @@ public:
     wxObject* GetWxObject(PObjectBase obj);
     wxNoObject* NewNoObject() override;
 
-    void ModifyProperty(wxObject* wxobject, wxString property, wxString value,
-                        bool allowUndo = true) override;
+    void ModifyProperty(wxObject* wxobject, const wxString& property,
+                        const wxString& value, bool allowUndo = true) override;
 
     /** Returns @true if selection changed, @false if already selected
     */
-    bool SelectObject(wxObject* wxobject) override;
+    bool SelectObject(wxObject* wxobject) const override;
 
 private:
     VisualEditor* m_visualEdit;

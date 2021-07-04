@@ -55,7 +55,7 @@ PObjectBase XrcLoader::GetObject(ticpp::Element* xrcObj, PObjectBase parent)
         if (className == "wxBitmap") {
             PProperty bitmapsProp = parent->GetProperty("bitmaps");
             if (bitmapsProp) {
-                wxString value = bitmapsProp->GetValue();
+                wxString value = bitmapsProp->GetValueAsString();
                 wxString text = xrcObj->GetText();
                 text.Replace("\'", "\'\'", true);
                 value << "\'" << text << "\' ";
@@ -66,7 +66,7 @@ PObjectBase XrcLoader::GetObject(ticpp::Element* xrcObj, PObjectBase parent)
         if (className == "wxIcon") {
             PProperty iconsProp = parent->GetProperty("icons");
             if (iconsProp) {
-                wxString value = iconsProp->GetValue();
+                wxString value = iconsProp->GetValueAsString();
                 wxString text = xrcObj->GetText();
                 text.Replace("\'", "\'\'", true);
                 value << "\'" << text << "\' ";

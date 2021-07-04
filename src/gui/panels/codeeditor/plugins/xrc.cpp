@@ -154,7 +154,7 @@ void XrcPanel::OnCodeGeneration(wxWeaverEvent& event)
         return;
 
     PProperty pCodeGen = project->GetProperty("code_generation");
-    if (!pCodeGen || !TypeConv::FlagSet("XRC", pCodeGen->GetValue()))
+    if (!pCodeGen || !TypeConv::FlagSet("XRC", pCodeGen->GetValueAsString()))
         return;
 
     { // And now in the file.
@@ -163,7 +163,7 @@ void XrcPanel::OnCodeGeneration(wxWeaverEvent& event)
             wxString file;
             PProperty pfile = project->GetProperty("file");
             if (pfile)
-                file = pfile->GetValue();
+                file = pfile->GetValueAsString();
 
             if (file.empty())
                 file = "noname";

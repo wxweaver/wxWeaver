@@ -273,7 +273,7 @@ ModifyPropertyCmd::ModifyPropertyCmd(PProperty prop, wxString value)
     : m_property(prop)
     , m_newValue(value)
 {
-    m_oldValue = prop->GetValue();
+    m_oldValue = prop->GetValueAsString();
 }
 
 void ModifyPropertyCmd::DoExecute()
@@ -520,7 +520,7 @@ void ApplicationData::BuildNameSet(PObjectBase obj, PObjectBase top,
     if (obj != top) {
         PProperty nameProp = top->GetProperty("name");
         if (nameProp)
-            nameSet.insert(nameProp->GetValue());
+            nameSet.insert(nameProp->GetValueAsString());
     }
     for (size_t i = 0; i < top->GetChildCount(); i++)
         BuildNameSet(obj, top->GetChild(i), nameSet);
@@ -539,7 +539,7 @@ void ApplicationData::ResolveNameConflict(PObjectBase obj)
         return;
 
     // Save the original name for use later.
-    wxString originalName = nameProp->GetValue();
+    wxString originalName = nameProp->GetValueAsString();
 
     // el nombre no puede estar repetido dentro del mismo form
 #if 0
@@ -1021,14 +1021,14 @@ void ApplicationData::MergeProject(PObjectBase project)
     PObjectBase thisProject = GetProjectData();
     PProperty prop = thisProject->GetProperty("bitmaps");
     if (prop) {
-        wxString value = prop->GetValue();
+        wxString value = prop->GetValueAsString();
         value.Trim();
         value << " " << project->GetPropertyAsString("bitmaps");
         prop->SetValue(value);
     }
     prop = thisProject->GetProperty("icons");
     if (prop) {
-        wxString value = prop->GetValue();
+        wxString value = prop->GetValueAsString();
         value.Trim();
         value << " " << project->GetPropertyAsString("icons");
         prop->SetValue(value);
@@ -1038,9 +1038,11 @@ void ApplicationData::MergeProject(PObjectBase project)
 
 void ApplicationData::ModifyProperty(PProperty prop, wxString str)
 {
-    PObjectBase object = prop->GetObject();
-
-    if (str != prop->GetValue()) {
+#if 0
+    // TODO: what is this for?
+    ObjectBase object = prop->GetObject();
+#endif
+    if (str != prop->GetValueAsString()) {
         PCommand command(new ModifyPropertyCmd(prop, str));
         Execute(command); //m_cmdProc.Execute(command);
 
@@ -1050,8 +1052,10 @@ void ApplicationData::ModifyProperty(PProperty prop, wxString str)
 
 void ApplicationData::ModifyEventHandler(PEvent evt, wxString value)
 {
+#if 0
+    // TODO: what is this for?
     PObjectBase object = evt->GetObject();
-
+#endif
     if (value != evt->GetValue()) {
         PCommand command(new ModifyEventHandlerCmd(evt, value));
         Execute(command); //m_cmdProc.Execute(command);
@@ -2098,7 +2102,7 @@ void ApplicationData::GenerateInheritedClass(PObjectBase form, wxString classNam
 
         PProperty pchValue = project->GetProperty("precompiled_header");
         if (pchValue)
-            pchProp->SetValue(pchValue->GetValue());
+            pchProp->SetValue(pchValue->GetValueAsString());
 
         // Determine if Microsoft BOM should be used
         bool useMicrosoftBOM = false;
@@ -2113,7 +2117,7 @@ void ApplicationData::GenerateInheritedClass(PObjectBase form, wxString classNam
             useUtf8 = (pUseUtf8->GetValueAsString() != "ANSI");
 
         PProperty pCodeGen = project->GetProperty("code_generation");
-        if (pCodeGen && TypeConv::FlagSet("C++", pCodeGen->GetValue())) {
+        if (pCodeGen && TypeConv::FlagSet("C++", pCodeGen->GetValueAsString())) {
             CppCodeGenerator codegen;
             const wxString& fullPath = inherFile.GetFullPath();
             codegen.ParseFiles(fullPath + ".h", fullPath + ".cpp");
@@ -2127,14 +2131,14 @@ void ApplicationData::GenerateInheritedClass(PObjectBase form, wxString classNam
             codegen.SetHeaderWriter(h_cw);
             codegen.SetSourceWriter(cpp_cw);
             codegen.GenerateInheritedClass(obj, form);
-        } else if (pCodeGen && TypeConv::FlagSet("Python", pCodeGen->GetValue())) {
+        } else if (pCodeGen && TypeConv::FlagSet("Python", pCodeGen->GetValueAsString())) {
             PythonCodeGenerator codegen;
             const wxString& fullPath = inherFile.GetFullPath();
             PCodeWriter python_cw(new FileCodeWriter(fullPath + ".py",
                                                      useMicrosoftBOM, useUtf8));
             codegen.SetSourceWriter(python_cw);
             codegen.GenerateInheritedClass(obj, form);
-        } else if (pCodeGen && TypeConv::FlagSet("PHP", pCodeGen->GetValue())) {
+        } else if (pCodeGen && TypeConv::FlagSet("PHP", pCodeGen->GetValueAsString())) {
             PHPCodeGenerator codegen;
             const wxString& fullPath = inherFile.GetFullPath();
             PCodeWriter php_cw(
@@ -2142,7 +2146,7 @@ void ApplicationData::GenerateInheritedClass(PObjectBase form, wxString classNam
 
             codegen.SetSourceWriter(php_cw);
             codegen.GenerateInheritedClass(obj, form);
-        } else if (pCodeGen && TypeConv::FlagSet("Lua", pCodeGen->GetValue())) {
+        } else if (pCodeGen && TypeConv::FlagSet("Lua", pCodeGen->GetValueAsString())) {
             LuaCodeGenerator codegen;
             const wxString& fullPath = inherFile.GetFullPath();
             PCodeWriter lua_cw(
@@ -2283,7 +2287,7 @@ void ApplicationData::ToggleStretchLayout(PObjectBase obj)
     if (!proportion)
         return;
 
-    wxString value = (proportion->GetValue() != "0" ? "0" : "1");
+    wxString value = (proportion->GetValueAsString() != "0" ? "0" : "1");
     ModifyProperty(proportion, value);
 }
 
@@ -2636,7 +2640,7 @@ wxString ApplicationData::GetPathProperty(const wxString& pathName)
     PProperty ppath = project->GetProperty(pathName);
 
     if (ppath) {
-        wxString pathEntry = ppath->GetValue();
+        wxString pathEntry = ppath->GetValueAsString();
 
         if (pathEntry.empty()) {
             wxWEAVER_THROW_EX(

@@ -59,9 +59,10 @@
 #include <dlfcn.h>
 #endif
 
-ObjectPackage::ObjectPackage(wxString name, wxString desc, wxBitmap icon)
+ObjectPackage::ObjectPackage(const wxString& name, const wxString& description,
+                             const wxBitmap& icon)
     : m_name(name)
-    , m_desc(desc)
+    , m_desc(description)
     , m_icon(icon)
 {
 }
@@ -107,7 +108,7 @@ ObjectDatabase::~ObjectDatabase()
     }
 }
 
-PObjectInfo ObjectDatabase::GetObjectInfo(wxString className)
+PObjectInfo ObjectDatabase::GetObjectInfo(const wxString& className)
 {
     PObjectInfo info;
     ObjectInfoMap::iterator it = m_objs.find(className);
@@ -127,10 +128,7 @@ PObjectPackage ObjectDatabase::GetPackage(size_t idx)
 // TODO: The inheritance of properties must be recursive.
 PObjectBase ObjectDatabase::NewObject(PObjectInfo objInfo)
 {
-    PObjectBase object;
-
-    // Llagados aquí el objeto se crea seguro...
-    object = PObjectBase(new ObjectBase(objInfo->GetClassName()));
+    PObjectBase object(new ObjectBase(objInfo->GetClassName()));
     object->SetObjectTypeName(objInfo->GetTypeName()); // FIXME
     object->SetObjectInfo(objInfo);
 
@@ -184,7 +182,7 @@ PObjectBase ObjectDatabase::NewObject(PObjectInfo objInfo)
     size_t ins = objInfo->GetInstanceCount();
     PProperty pname = object->GetProperty(NAME_TAG);
     if (pname)
-        pname->SetValue(pname->GetValue() + StringUtils::IntToStr(ins));
+        pname->SetValue(pname->GetValueAsString() + StringUtils::IntToStr(ins));
 
     return object;
 }
@@ -231,7 +229,7 @@ size_t ObjectDatabase::CountChildrenWithSameType(PObjectBase parent,
     Note: The method might want to create the object without linking it
     with the tree, to facilitate undo-redo.
 */
-PObjectBase ObjectDatabase::CreateObject(std::string classname, PObjectBase parent)
+PObjectBase ObjectDatabase::CreateObject(const std::string& classname, PObjectBase parent)
 {
     PObjectBase object;
     PObjectInfo objInfo = GetObjectInfo(classname);
@@ -375,7 +373,7 @@ PObjectBase ObjectDatabase::CopyObject(PObjectBase obj)
         PProperty copyProp = copyObj->GetProperty(objProp->GetName());
         assert(copyProp);
 
-        wxString propValue = objProp->GetValue();
+        wxString propValue = objProp->GetValueAsString();
         copyProp->SetValue(propValue);
     }
     // ...and the event handlers
@@ -763,7 +761,7 @@ void ObjectDatabase::SetupPackage(const wxString& file,
 }
 
 // TODO: Replace this horror with a vector or something
-bool ObjectDatabase::HasCppProperties(wxString type)
+bool ObjectDatabase::HasCppProperties(const wxString& type)
 {
     return (type == "notebook"
             || type == "imagelist"
@@ -1170,7 +1168,7 @@ void ObjectDatabase::ParseEvents(ticpp::Element* elemObj, PObjectInfo objInfo,
 }
 
 // TODO: Replace this horror with a vector or something
-bool ObjectDatabase::ShowInPalette(wxString type)
+bool ObjectDatabase::ShowInPalette(const wxString& type) const
 {
     return (type == "form"
             || type == "wizard"
@@ -1229,7 +1227,8 @@ bool ObjectDatabase::ShowInPalette(wxString type)
             || type == "splitter");
 }
 
-void ObjectDatabase::ImportComponentLibrary(wxString libfile, PwxWeaverManager manager)
+void ObjectDatabase::ImportComponentLibrary(const wxString& libfile,
+                                            PwxWeaverManager manager)
 {
     wxString path = libfile;
 
@@ -1312,23 +1311,17 @@ void ObjectDatabase::ImportComponentLibrary(wxString libfile, PwxWeaverManager m
     }
 }
 
-PropertyType ObjectDatabase::ParsePropertyType(wxString str)
+PropertyType ObjectDatabase::ParsePropertyType(const wxString& name)
 {
     PropertyType result;
-    PTMap::iterator it = m_propTypes.find(str);
+    PTMap::iterator it = m_propTypes.find(name);
     if (it != m_propTypes.end())
         result = it->second;
-    else {
+    else
         wxWEAVER_THROW_EX(wxString::Format(
-            "Unknown property type \"%s\"",
-            str.c_str()));
-    }
-    return result;
-}
+            "Unknown property type \"%s\"", name.c_str()));
 
-wxString ObjectDatabase::ParseObjectType(wxString str)
-{
-    return str;
+    return result;
 }
 
 void ObjectDatabase::InitPropertyTypes()
@@ -1417,7 +1410,7 @@ bool ObjectDatabase::LoadObjectTypes()
     return true;
 }
 
-PObjectType ObjectDatabase::GetObjectType(wxString name)
+PObjectType ObjectDatabase::GetObjectType(const wxString& name)
 {
     PObjectType type;
     ObjectTypeMap::iterator it = m_types.find(name);
