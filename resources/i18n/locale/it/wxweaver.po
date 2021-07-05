@@ -71,7 +71,7 @@ msgstr "Primo ID"
 
 #: resources/application/xml/default.xml:30
 msgid ""
-"All GUI controls have an interger ID, this is the value for the first "
+"All GUI controls have an integer ID, this is the value for the first "
 "control, each additional control with increment by 1."
 msgstr ""
 "Tutti i controlli hanno un valore numerico intero ID, quello impostato sarà "
@@ -146,7 +146,7 @@ msgstr "Usa Microsoft BOM"
 #: resources/application/xml/default.xml:43
 msgid ""
 "For C++ and WXMSW Only. Files are generated with UTF-8 encoding. Microsoft "
-"compiliers expect a specific byte sequence at the beginning of a file. GCC "
+"compilers expect a specific byte sequence at the beginning of a file. GCC "
 "does NOT expect this. Only set this to true when using a Microsoft compiler."
 msgstr ""
 "Solo per C++ e wxMSW.\n"
@@ -2612,7 +2612,7 @@ msgstr "Allinea Sinistra"
 
 #: src/gui/mainframe.cpp:1428
 msgid ""
-"The item will be aligned to the left of the space alotted to it by the sizer."
+"The item will be aligned to the left of the space allotted to it by the sizer."
 msgstr "L'oggetto verra' allineato a sinistra nello spazio assegnato dal sizer."
 
 #: src/gui/mainframe.cpp:1429
@@ -2621,7 +2621,7 @@ msgstr "Allinea Centrato Orizzontalmente"
 
 #: src/gui/mainframe.cpp:1429
 msgid ""
-"The item will be centered horizontally in the space alotted to it by the "
+"The item will be centered horizontally in the space allotted to it by the "
 "sizer."
 msgstr ""
 "L'oggetto verra' centrato orizzontalmente nello spazio assegnato dal sizer."
@@ -2632,7 +2632,7 @@ msgstr "Allinea Destra"
 
 #: src/gui/mainframe.cpp:1430
 msgid ""
-"The item will be aligned to the right of the space alotted to it by the sizer."
+"The item will be aligned to the right of the space allotted to it by the sizer."
 msgstr "L'oggetto verra' allineato a destra nello spazio assegnato dal sizer."
 
 #: src/gui/mainframe.cpp:1432
@@ -2641,7 +2641,7 @@ msgstr "Allinea Sopra"
 
 #: src/gui/mainframe.cpp:1432
 msgid ""
-"The item will be aligned to the top of the space alotted to it by the sizer."
+"The item will be aligned to the top of the space allotted to it by the sizer."
 msgstr "L'oggetto verra' allineato in alto nello spazio assegnato dal sizer."
 
 #: src/gui/mainframe.cpp:1433
@@ -2650,7 +2650,7 @@ msgstr "Allinea Centrato Verticalmente"
 
 #: src/gui/mainframe.cpp:1433
 msgid ""
-"The item will be centered vertically within space alotted to it by the sizer."
+"The item will be centered vertically within space allotted to it by the sizer."
 msgstr ""
 "L'oggetto verra' centrato verticalmente nello spazio assegnato dal sizer."
 
@@ -2660,7 +2660,7 @@ msgstr "Allinea Sotto"
 
 #: src/gui/mainframe.cpp:1434
 msgid ""
-"The item will be aligned to the bottom of the space alotted to it by the "
+"The item will be aligned to the bottom of the space allotted to it by the "
 "sizer."
 msgstr "L'oggetto verra' allineato in basso nello spazio assegnato dal sizer."
 

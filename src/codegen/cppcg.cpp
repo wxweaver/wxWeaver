@@ -1120,7 +1120,7 @@ void CppCodeGenerator::GenEnumIds(PObjectBase classObj)
         m_header->WriteLn("{");
         m_header->Indent();
 
-        // Remove the default macro from the set, for backward compatiblity
+        // Remove the default macro from the set, for backward compatibility
         it = std::find(macros.begin(), macros.end(), "ID_DEFAULT");
         if (it != macros.end()) {
             // TODO: The default macro is defined to wxID_ANY
@@ -1647,7 +1647,7 @@ void CppCodeGenerator::GenDefines(PObjectBase project)
     std::vector<wxString> macros;
     FindMacros(project, &macros);
 
-    // Remove the default macro from the set, for backward compatiblity
+    // Remove the default macro from the set, for backward compatibility
     std::vector<wxString>::iterator it;
     it = std::find(macros.begin(), macros.end(), "ID_DEFAULT");
     if (it != macros.end()) {
@@ -1783,7 +1783,7 @@ void CppCodeGenerator::FindEmbeddedBitmapProperties(PObjectBase obj,
                 wxString absPath = TypeConv::MakeAbsolutePath(
                     path, AppData()->GetProjectPath());
 
-                // It's supposed that "path" contains an absolut path to the file
+                // It's supposed that "path" contains an absolute path to the file
                 // and not a relative one.
                 wxString relPath
                     = (m_useRelativePath

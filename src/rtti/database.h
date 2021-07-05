@@ -100,7 +100,7 @@ public:
 
     /** Gets the information of an object from the name of the class.
     */
-    PObjectInfo GetObjectInfo(const wxString& class_name);
+    PObjectInfo GetObjectInfo(const wxString& className);
 
     /** Sets the path where the files with the description are located.
     */
@@ -130,7 +130,7 @@ public:
 
         A new instance of an object is created from the class name.
     */
-    PObjectBase CreateObject(const std::string& class_name, PObjectBase parent = PObjectBase());
+    PObjectBase CreateObject(const std::string& className, PObjectBase parent = PObjectBase());
 
     /** Factory of objects from an XML object.
 

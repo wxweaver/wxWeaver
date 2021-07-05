@@ -1120,7 +1120,7 @@ msgstr ""
 
 #: resources/application/plugins/common/xml/common.xml:329
 msgid ""
-"Inverses the mininum and maximum endpoints on the slider. Not compatible "
+"Inverses the minimum and maximum endpoints on the slider. Not compatible "
 "with wxSL_SELRANGE."
 msgstr ""
 "Inverte gli estremi minimo e massimo sullo slider. Non compatibile con "

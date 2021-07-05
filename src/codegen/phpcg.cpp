@@ -491,8 +491,8 @@ void PHPCodeGenerator::GenEvents(PObjectBase classObj,
             classObj->GetClassName().c_str());
         return;
     }
-    wxString class_name = propName->GetValueAsString();
-    if (class_name.empty()) {
+    wxString className = propName->GetValueAsString();
+    if (className.empty()) {
         wxLogError("Object name cannot be null");
         return;
     }
@@ -521,7 +521,7 @@ void PHPCodeGenerator::GenEvents(PObjectBase classObj,
                                templateName, handlerName, disconnect)) {
                 wxLogError(
                     "Missing \"evt_%s\" template for \"%s\" class. Review your XML object description",
-                    templateName.c_str(), class_name.c_str());
+                    templateName.c_str(), className.c_str());
             }
         }
     }
@@ -709,17 +709,17 @@ void PHPCodeGenerator::GenClassDeclaration(PObjectBase classObj, bool /*use_enum
             classObj->GetClassName().c_str());
         return;
     }
-    wxString class_name = propName->GetValueAsString();
-    if (class_name.empty()) {
+    wxString className = propName->GetValueAsString();
+    if (className.empty()) {
         wxLogError("Object name can not be null");
         return;
     }
     m_source->WriteLn("/*");
-    m_source->WriteLn(" * Class " + class_name);
+    m_source->WriteLn(" * Class " + className);
     m_source->WriteLn(" */");
     m_source->WriteLn();
     m_source->WriteLn(
-        "class " + classDecoration + class_name
+        "class " + classDecoration + className
         + " extends " + GetCode(classObj, "base").Trim() + " {");
     m_source->Indent();
 
@@ -1169,7 +1169,7 @@ void PHPCodeGenerator::GenDefines(PObjectBase project)
     std::vector<wxString> macros;
     FindMacros(project, &macros);
 
-    // Remove the default macro from the set, for backward compatiblity
+    // Remove the default macro from the set, for backward compatibility
     std::vector<wxString>::iterator it
         = std::find(macros.begin(), macros.end(), "ID_DEFAULT");
     if (it != macros.end()) {

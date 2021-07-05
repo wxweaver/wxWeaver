@@ -213,7 +213,7 @@ class ObjectBase : public IObject, public std::enable_shared_from_this<ObjectBas
 public:
     /** Constructor.
     */
-    ObjectBase(wxString class_name);
+    ObjectBase(const wxString& className);
     ~ObjectBase() override;
 
     /** Sets whether the object is expanded in the object tree or not.
@@ -234,7 +234,7 @@ public:
 
     /** Gets the parent object
     */
-    PObjectBase GetParent() { return m_parent.lock(); }
+    PObjectBase GetParent() const { return m_parent.lock(); }
 
     PObjectBase GetNonSizerParent();
 
@@ -390,9 +390,9 @@ public:
 
     void SetObjectInfo(PObjectInfo info) { m_info = info; }
 
-    /** Devuelve la profundidad  del objeto en el arbol.
+    /** Returns the depth of the object in the tree.
     */
-    int Deep();
+    int Depth() const;
 #if 0
     /** Imprime el arbol en un stream.
     */
@@ -424,7 +424,7 @@ public:
 protected:
     // Utilites for implementing the tree
     static const int INDENT;              // size of indent
-    wxString GetIndentString(int indent); // obtiene la cadena con el indentado
+    wxString GetIndentString(int indent); // get the string with indentation
 
     ObjectBaseVector& GetChildren() { return m_children; }
     PropertyMap& GetProperties() { return m_properties; }
@@ -507,10 +507,10 @@ public:
     */
     wxString GetBaseClassDefaultPropertyValue(size_t baseIndex, const wxString& propertyName) const;
 
-    /** Devuelve el tipo de objeto.
+    /** Returns the name of the object type.
 
-        Será util para que el constructor de objetos sepa la clase derivada
-        de ObjectBase que ha de crear a partir del descriptor.
+        It will be useful for the object constructor to know the class derived
+        from ObjectBase to create from the descriptor.
     */
     wxString GetTypeName() const { return m_type->GetName(); }
 
@@ -526,7 +526,7 @@ public:
     */
     friend std::ostream& operator<<(std::ostream& s, PObjectInfo obj);
 #endif
-    // nos serán utiles para generar el nombre del objeto
+    // These will help to generate the name of the object
     size_t GetInstanceCount() const { return m_numIns; }
     void IncrementInstanceCount() { m_numIns++; }
     void ResetInstanceCount() { m_numIns = 0; }
@@ -542,7 +542,7 @@ public:
     // TODO: Rewrite these 4 functions with constness
     /** Checks if the class is derived from the one passed as a parameter.
     */
-    bool IsSubclassOf(const wxString& classname) const;
+    bool IsSubclassOf(const wxString& className) const;
 
     PObjectInfo GetBaseClass(size_t index, bool inherited = true) const;
     std::vector<PObjectInfo> GetBaseClasses(bool inherited = true) const;

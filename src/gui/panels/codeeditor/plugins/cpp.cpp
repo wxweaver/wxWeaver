@@ -287,7 +287,7 @@ void CppPanel::OnCodeGeneration(wxWeaverEvent& event)
         if (pFirstID)
             codegen.SetFirstID(firstID);
 
-        // Determin if Microsoft BOM should be used
+        // Determine if Microsoft BOM should be used
         bool useMicrosoftBOM = false;
 
         PProperty pUseMicrosoftBOM = project->GetProperty("use_microsoft_bom");

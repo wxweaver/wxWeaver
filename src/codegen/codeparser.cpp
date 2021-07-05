@@ -120,7 +120,7 @@ void CCodeParser::ParseCInclude(wxString code)
     int userIncludeEnd;
     m_userInclude = "";
 
-    // find the begining of the user include
+    // find the beginning of the user include
     int userIncludeStart = code.Find("//// end generated include");
     if (userIncludeStart != wxNOT_FOUND) {
         userIncludeStart = code.find('\n', userIncludeStart);
@@ -174,7 +174,7 @@ void CCodeParser::ParseSourceFunctions(wxString code)
 
     int loop = 0;
     while (1) {
-        // find the begining of the function name
+        // find the beginning of the function name
         Str = m_className + "::";
         functionStart = code.find(Str, previousFunctionEnd);
         if (functionStart == wxNOT_FOUND) {
@@ -183,10 +183,10 @@ void CCodeParser::ParseSourceFunctions(wxString code)
             m_trailingCode.RemoveLast();
             return;
         }
-        // found a function now creat a new function class
+        // found a function now create a new function class
         func = new Function();
 
-        // find the begining of the line on which the function name resides
+        // find the beginning of the line on which the function name resides
         functionStart = code.rfind('\n', functionStart);
         func->SetDocumentation(code.Mid(previousFunctionEnd,
                                         functionStart - previousFunctionEnd));

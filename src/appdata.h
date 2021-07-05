@@ -330,7 +330,7 @@ private:
 
         @param prop Property containing the options to transfer.
         @param options Set of options to search for and transfer.
-        @param newPropName Name of property to transfer to, will be created if non-existant.
+        @param newPropName Name of property to transfer to, will be created if non-existent.
     */
     void TransferOptionList(ticpp::Element* prop, std::set<wxString>* options,
                             const std::string& newPropName);

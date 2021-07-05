@@ -603,7 +603,7 @@ void PythonCodeGenerator::GenVirtualEventHandlers(const EventVector& events,
             So we create a default handler which will skip the event.
         */
         m_source->WriteLn(wxEmptyString);
-        m_source->WriteLn("# Virtual event handlers, overide them in your derived class");
+        m_source->WriteLn("# Virtual event handlers, override them in your derived class");
 
         std::set<wxString> generatedHandlers;
         for (size_t i = 0; i < events.size(); i++) {
@@ -1230,7 +1230,7 @@ void PythonCodeGenerator::GenDefines(PObjectBase project)
     std::vector<wxString> macros;
     FindMacros(project, &macros);
 
-    // Remove the default macro from the set, for backward compatiblity
+    // Remove the default macro from the set, for backward compatibility
     std::vector<wxString>::iterator it
         = std::find(macros.begin(), macros.end(), "ID_DEFAULT");
     if (it != macros.end()) {

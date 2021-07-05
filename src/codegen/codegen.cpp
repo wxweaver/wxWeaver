@@ -300,7 +300,7 @@ PObjectBase TemplateParser::GetWxParent()
         if (!wxparent) {
             wxparent = candidates[i];
         } else {
-            if (candidates[i] && candidates[i]->Deep() > wxparent->Deep())
+            if (candidates[i] && candidates[i]->Depth() > wxparent->Depth())
                 wxparent = candidates[i];
         }
         if (wxparent && wxparent->GetClassName() == "wxStaticBoxSizer"
@@ -321,13 +321,13 @@ bool TemplateParser::ParseWxParent()
 #if 0
         m_out << PropertyToCode(property);
 #endif
-        const auto& classname = wxparent->GetClassName();
-        if (classname == "wxStaticBoxSizer") {
+        wxString className = wxparent->GetClassName();
+        if (className == "wxStaticBoxSizer") {
             // We got a wxStaticBoxSizer as parent,
             // use the special PT_WXPARENT_SB type to generate code
             // to get its static box
             m_out << ValueToCode(PT_WXPARENT_SB, property->GetValueAsString());
-        } else if (classname == "wxCollapsiblePane") {
+        } else if (className == "wxCollapsiblePane") {
             // We got a wxCollapsiblePane as parent,
             // use the special PT_WXPARENT_CP type to generate code
             // to get its pane
@@ -976,7 +976,7 @@ void TemplateParser::ParseAppend()
           to create another unique name.
           If the name contains array brackets the resulting name is not a valid identifier.
           You cannot simply replace all brackets, depending on how many times
-          #append is used in a template there might be preceeding brackets that
+          #append is used in a template there might be preceding brackets that
           need to be preserved. Here we assume #append is used directly after
           an array name to attach something to it, we have to search for the last
           delimiter or start of line and replace all brackets after this one, not before.

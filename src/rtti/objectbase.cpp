@@ -218,11 +218,10 @@ wxString Property::GetChildFromParent(const wxString& childName)
 
 const int ObjectBase::INDENT = 2;
 
-ObjectBase::ObjectBase(wxString class_name)
-    : m_expanded(true)
+ObjectBase::ObjectBase(const wxString& className)
+    : m_class(className)
+    , m_expanded(true)
 {
-    m_class = class_name;
-
     LogDebug("new ObjectBase");
 }
 
@@ -476,18 +475,18 @@ PObjectBase ObjectBase::GetChild(size_t idx, const wxString& type)
     return PObjectBase();
 }
 
-int ObjectBase::Deep()
+int ObjectBase::Depth() const
 {
-    int deep = 0;
+    int depth = 0;
     PObjectBase obj(GetParent());
     while (obj) {
         obj = obj->GetParent();
-        deep++;
+        depth++;
 
-        if (deep > 1000)
+        if (depth > 1000)
             assert(false);
     }
-    return deep;
+    return depth;
 }
 #if 0
 void ObjectBase::PrintOut(std::ostream& s, int indent)
@@ -890,15 +889,15 @@ std::vector<PObjectInfo> ObjectInfo::GetBaseClasses(bool inherited) const
     return classes;
 }
 
-bool ObjectInfo::IsSubclassOf(const wxString& classname) const
+bool ObjectInfo::IsSubclassOf(const wxString& className) const
 {
     bool found = false;
-    if (GetClassName() == classname) {
+    if (GetClassName() == className) {
         found = true;
     } else {
         for (size_t i = 0; !found && i < GetBaseClassCount(); i++) {
             PObjectInfo base = GetBaseClass(i);
-            found = base->IsSubclassOf(classname);
+            found = base->IsSubclassOf(className);
         }
     }
     return found;

@@ -210,7 +210,7 @@ size_t ObjectDatabase::CountChildrenWithSameType(PObjectBase parent,
 }
 
 /*
-    Creates an instance of classname below parent.
+    Creates an instance of `className` below parent.
     The function performs type checking to create the object:
 
     - Checks if the type is a valid child-type for the "parent", in which case
@@ -229,17 +229,17 @@ size_t ObjectDatabase::CountChildrenWithSameType(PObjectBase parent,
     Note: The method might want to create the object without linking it
     with the tree, to facilitate undo-redo.
 */
-PObjectBase ObjectDatabase::CreateObject(const std::string& classname, PObjectBase parent)
+PObjectBase ObjectDatabase::CreateObject(const std::string& className, PObjectBase parent)
 {
     PObjectBase object;
-    PObjectInfo objInfo = GetObjectInfo(classname);
+    PObjectInfo objInfo = GetObjectInfo(className);
     if (!objInfo) {
         wxString message = wxString::Format(
             "Unknown Object Type: %s\n"
             "The most likely causes are that this copy of wxWeaver is out of date,\n"
             "or that there is a plugin missing.\n"
             "Please check at http://wxweaver.github.io\n",
-            classname);
+            className);
         wxWEAVER_THROW_EX(message)
     }
     PObjectType objType = objInfo->GetType();
@@ -316,7 +316,7 @@ PObjectBase ObjectDatabase::CreateObject(const std::string& classname, PObjectBa
                         // No hay problemas para crear el item debajo de parent
                         PObjectBase item = NewObject(GetObjectInfo(childType->GetName()));
 
-                        //PObjectBase obj = CreateObject(classname,item);
+                        //PObjectBase obj = CreateObject(className,item);
                         PObjectBase obj = NewObject(objInfo);
 
                         // la siguiente condición debe cumplirse siempre
@@ -598,19 +598,19 @@ void ObjectDatabase::LoadPlugins(PwxWeaverManager manager)
                             SetupPackage(xmlFileName.GetFullPath(),
                                          fullNextPluginPath.GetFullPath(), manager);
 
-                            // Load the C++ code tempates
+                            // Load the C++ code templates
                             xmlFileName.SetExt("cppcode");
                             LoadCodeGen(xmlFileName.GetFullPath());
 
-                            // Load the Python code tempates
+                            // Load the Python code templates
                             xmlFileName.SetExt("pythoncode");
                             LoadCodeGen(xmlFileName.GetFullPath());
 
-                            // Load the PHP code tempates
+                            // Load the PHP code templates
                             xmlFileName.SetExt("phpcode");
                             LoadCodeGen(xmlFileName.GetFullPath());
 
-                            // Load the Lua code tempates
+                            // Load the Lua code templates
                             xmlFileName.SetExt("luacode");
                             LoadCodeGen(xmlFileName.GetFullPath());
 

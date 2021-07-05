@@ -1342,7 +1342,7 @@ void LuaCodeGenerator::GenDefines(PObjectBase project)
     FindMacros(project, &macros);
     m_strUserIDsVec.erase(m_strUserIDsVec.begin(), m_strUserIDsVec.end());
 
-    // Remove the default macro from the set, for backward compatiblity
+    // Remove the default macro from the set, for backward compatibility
     std::vector<wxString>::iterator it
         = std::find(macros.begin(), macros.end(), "ID_DEFAULT");
     if (it != macros.end()) {

@@ -420,7 +420,7 @@ public:
 
     void OnCreated(wxObject* wxobject, wxWindow* /*wxparent*/) override
     {
-        // For storing objects whose postion needs to be determined
+        // For storing objects whose position needs to be determined
         std::vector<std::pair<wxObject*, wxGBSizerItem*>> newObjects;
         wxGBPosition lastPosition(0, 0);
 

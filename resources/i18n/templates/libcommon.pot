@@ -763,7 +763,7 @@ msgid "Allows the user to select a range on the slider. Windows only."
 msgstr ""
 
 #: resources/application/plugins/common/xml/common.xml:329
-msgid "Inverses the mininum and maximum endpoints on the slider. Not compatible with wxSL_SELRANGE."
+msgid "Inverses the minimum and maximum endpoints on the slider. Not compatible with wxSL_SELRANGE."
 msgstr ""
 
 #: resources/application/plugins/common/xml/common.xml:332
