@@ -7,6 +7,9 @@ project(wxWeaver
 )
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/scripts/cmake)
 
+set(CMAKE_CXX_STANDARD 14 CACHE STRING "C++ standard to be used")
+set(CMAKE_C_STANDARD 99 CACHE STRING "C standard to be used")
+
 option(wxWEAVER_DISABLE_MEDIACTRL "Disable wxMediaCtrl / wxMedia library. [Default: OFF]" OFF)
 
 # TODO: Custom wxWidgets build

@@ -41,6 +41,7 @@ based on:
 
 #include <cstdio>
 #include <istream>
+#include <stdint.h>
 
 class MD5 {
 public:

@@ -133,7 +133,7 @@ void DockArt::UpdateColoursFromSystem()
     wxColor darker1Colour = baseColour.ChangeLightness(85);
     wxColor darker2Colour = baseColour.ChangeLightness(75);
     wxColor darker3Colour = baseColour.ChangeLightness(60);
-    //wxColor darker4Colour = baseColour.ChangeLightness(50);
+    // wxColor darker4Colour = baseColour.ChangeLightness(50);
     wxColor darker5Colour = baseColour.ChangeLightness(40);
     m_activeCaptionColour = wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT);
     m_activeCaptionGradientColour = wxw::LightContrastColour(wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT));
@@ -276,43 +276,44 @@ void DockArt::DrawCaption(wxDC& dc, wxWindow*, const wxString& text,
     dc.DestroyClippingRegion();
 }
 
-void DockArt::DrawButton(wxDC& dc, wxWindow*, int button, int button_state,
-                         const wxRect& _rect, wxAuiPaneInfo& pane)
+void DockArt::DrawPaneButton(wxDC& dc, wxWindow* window, int button, int button_state,
+                             const wxRect& _rect, wxAuiPaneInfo& pane)
 {
-    wxBitmap bmp;
+    wxBitmapBundle bb;
     switch (button) {
     default:
     case wxAUI_BUTTON_CLOSE:
         if (pane.state & wxAuiPaneInfo::optionActive)
-            bmp = m_activeCloseBitmap;
+            bb = m_activeCloseBitmap;
         else
-            bmp = m_inactiveCloseBitmap;
+            bb = m_inactiveCloseBitmap;
         break;
     case wxAUI_BUTTON_PIN:
         if (pane.state & wxAuiPaneInfo::optionActive)
-            bmp = m_activePinBitmap;
+            bb = m_activePinBitmap;
         else
-            bmp = m_inactivePinBitmap;
+            bb = m_inactivePinBitmap;
         break;
     case wxAUI_BUTTON_MAXIMIZE_RESTORE:
         if (pane.IsMaximized()) {
             if (pane.state & wxAuiPaneInfo::optionActive)
-                bmp = m_activeRestoreBitmap;
+                bb = m_activeRestoreBitmap;
             else
-                bmp = m_inactiveRestoreBitmap;
+                bb = m_inactiveRestoreBitmap;
         } else {
             if (pane.state & wxAuiPaneInfo::optionActive)
-                bmp = m_activeMaximizeBitmap;
+                bb = m_activeMaximizeBitmap;
             else
-                bmp = m_inactiveMaximizeBitmap;
+                bb = m_inactiveMaximizeBitmap;
         }
         break;
     }
+    const wxBitmap& bmp = bb.GetBitmapFor(window);
     wxRect rect = _rect;
     rect.y = rect.y + (rect.height / 2) - (bmp.GetScaledHeight() / 2);
     if (button_state == wxAUI_BUTTON_STATE_PRESSED) {
-        rect.x += 1;
-        rect.y += 1;
+        rect.x += window->FromDIP(1);
+        rect.y += window->FromDIP(1);
     }
     if (button_state == wxAUI_BUTTON_STATE_HOVER
         || button_state == wxAUI_BUTTON_STATE_PRESSED) {
@@ -323,9 +324,11 @@ void DockArt::DrawButton(wxDC& dc, wxWindow*, int button, int button_state,
             dc.SetBrush(wxBrush(m_inactiveCaptionColour.ChangeLightness(120)));
             dc.SetPen(wxPen(m_inactiveCaptionColour.ChangeLightness(70)));
         }
-        dc.DrawRectangle(rect.x, rect.y, // button background
-                         bmp.GetScaledWidth() - 1,
-                         bmp.GetScaledHeight() - 1);
+        // draw the background behind the button
+        dc.DrawRectangle(rect.x, rect.y,
+                         bmp.GetLogicalWidth() - window->FromDIP(1),
+                         bmp.GetLogicalHeight() - window->FromDIP(1));
     }
+    // draw the button itself
     dc.DrawBitmap(bmp, rect.x, rect.y, true);
 }

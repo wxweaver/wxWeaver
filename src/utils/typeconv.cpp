@@ -778,9 +778,7 @@ wxArrayString TypeConv::StringToArrayString(const wxString& str)
 
 wxString TypeConv::ArrayStringToString(const wxArrayString& arrayStr)
 {
-    wxString result;
-    wxArrayStringProperty::ArrayStringToString(result, arrayStr, '"', 1);
-    return result;
+    return wxArrayStringProperty::ArrayStringToString(arrayStr, '"', 1);
 }
 
 wxString TypeConv::ReplaceSynonymous(const wxString& bitlist)

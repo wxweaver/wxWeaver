@@ -24,7 +24,7 @@ class AuiTabArt : public wxAuiGenericTabArt {
 public:
     AuiTabArt() { UpdateColoursFromSystem(); }
 
-    AuiTabArt* Clone() override { return new AuiTabArt(*this); }
+    AuiTabArt* Clone() { return new AuiTabArt(*this); }
 
     void UpdateColoursFromSystem();
 
@@ -35,13 +35,13 @@ public:
                  int close_button_state,
                  wxRect* out_tab_rect,
                  wxRect* out_button_rect,
-                 int* x_extent) override;
+                 int* x_extent);
 
     wxSize GetTabSize(wxDC& dc,
                       wxWindow* wnd,
                       const wxString& caption,
-                      const wxBitmap& bitmap,
+                      const wxBitmapBundle &bitmap,
                       bool active,
                       int close_button_state,
-                      int* x_extent) override;
+                      int* x_extent);
 };

@@ -30,8 +30,8 @@ public:
     void DrawCaption(wxDC& dc, wxWindow* window, const wxString& text,
                      const wxRect& rect, wxAuiPaneInfo& pane);
 
-    void DrawButton(wxDC& dc, wxWindow* window, int button, int button_state,
-                    const wxRect& _rect, wxAuiPaneInfo& pane);
+    void DrawPaneButton(wxDC& dc, wxWindow* window, int button, int button_state,
+                        const wxRect& _rect, wxAuiPaneInfo& pane);
 
     void UpdateColoursFromSystem();
 
